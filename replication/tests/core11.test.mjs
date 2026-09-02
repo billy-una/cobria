@@ -53,6 +53,27 @@ test("publicador cambia versión y permite rollback sin aceptar candidata corrup
   await adapter.close();
 });
 
+test("fallo al publicar conserva la versión activa anterior", async () => {
+  class FailingCatalogAdapter extends LokiJsAdapter {
+    constructor() { super(); this.failCatalog = false; }
+    async put(kind, scope, id, value) {
+      if (this.failCatalog && kind === "publication-catalog") throw new Error("injected publication failure");
+      return super.put(kind, scope, id, value);
+    }
+  }
+  const adapter = new FailingCatalogAdapter();
+  const publisher = new PublicadorVersionado(adapter, { name: "busqueda" });
+  await adapter.put("candidate-v1", "sur", "a", { id: "a", scope: "sur", revision: 1, value: 1 });
+  const hash = huella(await adapter.list("candidate-v1", "sur"));
+  await publisher.publicar("sur", "candidate-v1", { version: "v1", expectedHash: hash });
+  await adapter.put("candidate-v2", "sur", "a", { id: "a", scope: "sur", revision: 2, value: 2 });
+  const hash2 = huella(await adapter.list("candidate-v2", "sur"));
+  adapter.failCatalog = true;
+  await assert.rejects(() => publisher.publicar("sur", "candidate-v2", { version: "v2", expectedHash: hash2 }), /publication failure/);
+  assert.equal(await publisher.active("sur"), "v1");
+  await adapter.close();
+});
+
 test("autorizador separa permisos de lectura y escritura por ámbito", () => {
   const auth = new AutorizadorAmbito({ lector: ["read:sur"], escritor: ["write:sur"] });
   assert.equal(auth.exigir("lector", "sur", "read"), true);

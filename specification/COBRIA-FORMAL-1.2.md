@@ -40,6 +40,7 @@ Una transformación versionada `T_v` produce cero o una representación derivada
 - Precondiciones: construcción completa, equivalencia superada y revisión de fuentes vigente.
 - Poscondiciones: los lectores resuelven una única versión activa; el cambio deja evidencia; un fallo previo conserva la versión anterior.
 - La prueba mínima local exige que una huella incorrecta sea rechazada, que el catálogo cambie de versión y que el rollback restaure la versión previa. Esto no equivale todavía a un intercambio atómico entre nodos.
+- Una inyección de fallo durante la escritura del catálogo debe dejar visible la versión activa previa; la garantía local no cubre carreras entre escritores ni consenso distribuido.
 
 ## 4. Máquina de estados
 

@@ -13,7 +13,7 @@
 | IDM-001 | Procesamiento idempotente | clave compuesta | entrega duplicada | banco de fallos 30/30 | al menos una vez en red | Core 1.1 | cubierta local |
 | REC-001 | Reconstrucción total | candidato separado | R1 + eliminación total | conformidad y banco de fallos | recuperación física | Core 1.1 | cubierta funcional |
 | EQV-001 | Reparación verificable | normalización y huella | candidata corrupta | R1 + prueba mutante | oráculo incompleto | modelo formal §6 | cubierta funcional |
-| PUB-001 | Publicación por versión | `PublicadorVersionado` | huella incorrecta + rollback | `core11.test.mjs` | intercambio atómico distribuido | Core 1.1 | cubierta local, atomicidad distribuida pendiente |
+| PUB-001 | Publicación por versión | `PublicadorVersionado` | huella incorrecta + rollback + fallo de catálogo | `core11.test.mjs` | carreras, intercambio atómico distribuido | Core 1.1 | cubierta local bajo fallo, atomicidad distribuida pendiente |
 | OBS-001 | Auditoría narrativa | métricas del adaptador | presencia de métricas | resultados JSON | alertas operativas | Core 1.1 | parcial |
 | RET-001 | Retiro de proyección | reconstruibilidad declarada | eliminación total | banco de fallos | retención y borrado legal | Core 1.1 | parcial |
 | ANA-001 | Conjunto reproducible | materialización A1 | reconstrucción analítica | A1 | fuente externa mutable | Core 1.1 | cubierta funcional |
