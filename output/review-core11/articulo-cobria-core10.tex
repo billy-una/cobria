@@ -1,0 +1,133 @@
+\documentclass[11pt]{article}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[a4paper,margin=2.4cm]{geometry}
+\usepackage{booktabs,tabularx,amsmath,amssymb,microtype,hyperref}
+\usepackage{newtxtext,newtxmath}
+\hypersetup{colorlinks=false,pdfauthor={Billy Jak Cordero Porras},pdftitle={COBRIA Core 1.1}}
+\title{COBRIA: contratos reconstruibles y verificables para sistemas NoSQL documentales}
+\author{Billy Jak Cordero Porras\\Investigador independiente, Coto Brus, Costa Rica}
+\date{Agosto de 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+La flexibilidad de los sistemas NoSQL documentales permite adaptar representaciones a sus patrones de acceso, pero también puede producir copias derivadas sin autoridad, aislamiento o reparación verificable. Este artículo presenta COBRIA, una síntesis arquitectónica normativa que reúne fuente canónica, transformación versionada, ámbito obligatorio, frescura, equivalencia, reconstrucción y responsabilidad operacional. Core 1.0 se mantiene congelado y Core 1.1 añade requisitos trazables, modelo de amenazas, núcleo independiente del proveedor y adaptadores para MongoDB y CouchDB. La evaluación confirmatoria disponible comprende 180 corridas locales con PouchDB y LokiJS. P1, P2, R1, S1 y A1 se superaron conjuntamente: equivalencia lógica completa, reconstrucción idempotente, rechazo sin ámbito, cero documentos cruzados y manifiestos reproducibles. Se informan p50, p95, p99, desviación absoluta mediana e intervalos bootstrap. Los adaptadores distribuidos se publican como implementación preparada, sin atribuirles resultados todavía.
+\end{abstract}
+\textbf{Palabras clave:} NoSQL documental; datos canónicos; proyecciones reconstruibles; multiinquilinato; procedencia; inteligencia artificial.
+
+\section{Introducción}
+Una aplicación documental rara vez conserva una sola forma de cada hecho. Las reglas necesitan documentos completos; las interfaces, respuestas estrechas; la analítica, cortes estables; y la inteligencia artificial, fragmentos con evidencia y autorización. Duplicar puede ser correcto, pero una copia se vuelve peligrosa cuando nadie puede explicar de dónde provino, qué versión representa, a qué ámbito pertenece o cómo se repara.
+
+COBRIA no reclama como nuevos la separación de lectura y escritura, las vistas materializadas, los eventos, la procedencia o los productos de datos. Tampoco es una estructura de datos, un motor o un ORM. Su contribución es composicional y normativa: hacer que autoridad, ámbito, equivalencia, reconstrucción y retiro acompañen a cada representación derivada. La pregunta es: \emph{¿qué contrato permite optimizar lecturas documentales sin crear una autoridad paralela ni debilitar aislamiento, trazabilidad y reparación?}
+
+Las contribuciones son: (1) una especificación congelada y una extensión compatible; (2) quince requisitos trazables y tres niveles de conformidad; (3) una implementación de referencia desacoplada del proveedor; (4) cuatro adaptadores NoSQL, dos evaluados y dos preparados; (5) pruebas ejecutables y un modelo de amenazas; y (6) una réplica local con resultados generados automáticamente.
+
+\section{Trabajo relacionado y vacío}
+Bigtable mostró la relación entre forma de almacenamiento y patrones de acceso \cite{chang}; Dynamo formalizó decisiones de partición, disponibilidad y consistencia \cite{dynamo}. Las vistas materializadas e incrementales explican cómo mantener resultados derivados \cite{gupta}; CQRS separa modelos de lectura y escritura \cite{fowler}; y la procedencia describe el origen de resultados \cite{buneman}.
+
+Estos trabajos no obligan, en una sola ficha verificable, a declarar simultáneamente autoridad, ámbito, equivalencia, reconstrucción, frescura, propiedad y retiro. COBRIA cubre ese vacío de integración sin presentar sus componentes como invenciones aisladas.
+
+\section{Especificación COBRIA Core 1.0}
+Sea $C$ una colección canónica. Una proyección $P_i$ se describe por:
+\[
+K_i=\langle C,f_i,\theta_i,s,v,\phi_i,e_i,r_i,o_i\rangle,
+\]
+donde $f_i$ es la transformación; $\theta_i$, catálogos y políticas; $s$, ámbito; $v$, versión; $\phi_i$, frescura; $e_i$, equivalencia; $r_i$, reconstrucción; y $o_i$, propiedad operacional.
+
+La especificación exige diez invariantes: autoridad canónica, ámbito obligatorio, procedencia, reconstrucción, equivalencia, idempotencia, revisión monotónica, publicación segura, operabilidad y fallo cerrado. Una candidata atraviesa los estados propuesta, construcción, verificación, activa y retirada. Una construcción fallida no modifica la versión activa.
+
+\subsection{Niveles de conformidad}
+\begin{table}[h]
+\centering
+\caption{Niveles normativos de COBRIA Core 1.0.}
+\begin{tabularx}{\textwidth}{lX}
+\toprule Nivel & Obligaciones \\ \midrule
+C1 Fundamental & Autoridad, ámbito, identidad estable, revisión y frontera de escritura.\\
+C2 Reconstruible & C1 más transformación versionada, idempotencia, equivalencia, reconstrucción y publicación segura.\\
+C3 Gobernado & C2 más procedencia, frescura, observabilidad, responsable y retiro.\\ \bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Extensión Core 1.1}
+Core 1.1 no reescribe la línea base. Asigna identificadores estables a las obligaciones (por ejemplo, COBRIA-AUT-001, COBRIA-SCP-001 y COBRIA-REC-001), enlaza cada requisito con una prueba, un ejemplo y un contraejemplo, y separa cinco capas: núcleo, patrones, mecanismos, método de adopción e implementaciones. Esta separación evita confundir una recomendación pedagógica con una condición de conformidad.
+
+\section{Modelo de amenazas}
+El análisis considera confusión entre organizaciones, edición directa de derivados, repetición de eventos, regresión de revisiones, manipulación de proyecciones, fallos durante publicación, envenenamiento analítico, recuperación vectorial no autorizada, evidencia insuficiente, herramientas de agentes excesivas, eliminación incompleta y dependencia del proveedor. Los controles COBRIA se prueban en las fronteras de entrada, proyección, ámbito, recuperación y publicación. El modelo no sustituye autenticación, cifrado, respaldo ni consenso del motor.
+
+\section{Método}
+La investigación sigue ciencia del diseño: identificación, objetivos, construcción, demostración, evaluación y comunicación. La implementación neutral se adaptó a PouchDB 9.0.0 y LokiJS 1.5.12. Son motores documentales embebidos con modelos de persistencia distintos; permiten replicación local, pero no sustituyen servicios administrados.
+
+Se ejecutaron tres escalas (100, 1,000 y 5,000 documentos), dos motores y treinta corridas por celda, para 180 corridas. Cada documento incluye identidad, ámbito, estado, valor, revisión y tiempo de evento. La corrida completa es la unidad informada. Los resultados crudos se conservan como JSONL y los resúmenes como JSON, CSV, Markdown y macros de \LaTeX. No se eliminaron valores atípicos; se añadieron p95, p99, desviación absoluta mediana e intervalos bootstrap del 95\% con 4,000 remuestras y semilla registrada.
+
+MongoDB y CouchDB fueron implementados mediante una interfaz común. El primero recibe una colección del controlador oficial por inyección; el segundo usa la API HTTP nativa. No se ejecutaron porque el entorno de réplica no disponía de servidores activos. Esta ausencia se informa como limitación, no como resultado favorable.
+
+\begin{table}[h]
+\centering
+\caption{Pruebas normativas.}
+\begin{tabularx}{\textwidth}{lXl}
+\toprule Código & Propiedad & Aceptación \\ \midrule
+P1 & Lectura canónica frente a proyectada & Resultado lógico idéntico.\\
+P2 & Amplificación de escritura & Operaciones y bytes observables.\\
+R1 & Reconstrucción total & Equivalencia e idempotencia.\\
+S1 & Aislamiento por ámbito & Rechazo sin ámbito y cero cruces.\\
+A1 & Producto analítico & Manifiesto, procedencia, partición y abstención.\\ \bottomrule
+\end{tabularx}
+\end{table}
+
+En la escala de 5,000 documentos, la reconstrucción presentó p95 de 50,859 ms en LokiJS y 521,530 ms en PouchDB; sus intervalos bootstrap de la mediana fueron [45,260; 46,864] ms y [495,701; 502,708] ms, respectivamente. Estas distribuciones confirman el crecimiento del costo de recuperación y evitan reducir el análisis a una sola mediana.
+
+\section{Líneas base y experimentos siguientes}
+El protocolo 1.1 congela controles de CRUD directo, proyección no gobernada, CQRS mínimo, bitácora de eventos y COBRIA C2. Se ejecutaron 450 corridas funcionales sobre LokiJS (cinco controles, tres escalas y treinta repeticiones). Su finalidad es comprobar instrumentación y costos relativos dentro del mismo arnés; no representan implementaciones industriales completas de CQRS o Event Sourcing.
+
+También se ejecutaron treinta repeticiones de D1--D8: eliminación de la proyección, interrupción, concurrencia, revisiones conflictivas, desconexión, reanudación, migración de esquema y migración entre dos instancias de control. Todos los escenarios funcionales superaron sus aserciones. D5 utiliza desconexión lógica local y D8 dos instancias LokiJS; por ello no constituyen evidencia de partición de red ni migración MongoDB--CouchDB.
+
+\section{Resultados}
+Las seis celdas superaron conjuntamente P1, P2, R1, S1 y A1. No hubo documentos recuperados desde un ámbito extranjero. La actualización canónica y proyectada produjo una amplificación de dos escrituras. R1 reconstruyó el conjunto completo y una repetición produjo la misma huella.
+
+\begin{table}[h]
+\centering
+\caption{Medianas de las treinta corridas por celda, en milisegundos.}
+\begin{tabular}{lrrrrr}
+\toprule Motor & $n$ & Canónica & Proyección & R1 & Conformidad\\ \midrule
+PouchDB & 100 & 1,186 & 0,440 & 8,376 & sí\\
+PouchDB & 1,000 & 13,589 & 4,719 & 89,301 & sí\\
+PouchDB & 5,000 & 69,291 & 23,131 & 500,070 & sí\\
+LokiJS & 100 & 0,145 & 0,052 & 0,663 & sí\\
+LokiJS & 1,000 & 1,263 & 0,409 & 6,452 & sí\\
+LokiJS & 5,000 & 7,026 & 2,220 & 46,011 & sí\\ \bottomrule
+\end{tabular}
+\end{table}
+
+La proyección fue más rápida en las seis celdas, pero esa mejora no es gratuita: cada cambio proyectado añadió una segunda escritura y toda proyección exige reconstrucción, verificación y operación. Las cifras no son parámetros universales. El hallazgo principal es que la misma batería puede medir beneficio y obligaciones de seguridad como una sola decisión.
+
+\section{Analítica e inteligencia artificial}
+Un conjunto de datos reconstruible es una proyección fechada. Declara población, ventana, transformación, catálogos, exclusiones, semilla, huellas y partición temporal. A1 exige que el conjunto pueda rehacerse desde el manifiesto y que el sistema se abstenga si falta evidencia.
+
+En recuperación aumentada, el ámbito debe limitar candidatos antes de similitud, caché o ensamblado de contexto. Cada fragmento conserva fuente, revisión y versión. Estas obligaciones no garantizan exactitud del modelo, pero hacen reproducible el insumo, reducen fugas y permiten retirar productos afectados.
+
+Como prueba funcional delimitada se ejecutaron 30 repeticiones de recuperación léxica determinista. Las treinta reprodujeron el manifiesto, conservaron la partición temporal, produjeron cero documentos de ámbito ajeno, mantuvieron citas válidas y se abstuvieron ante una consulta sin evidencia. Este control prueba el gobierno del insumo; no mide calidad generativa ni representa un modelo de incrustaciones externo.
+
+\section{Discusión}
+La reconstruibilidad cambia la naturaleza de una copia: deja de ser una autoridad protegida manualmente y se convierte en un producto regenerable con contrato. Los resultados apoyan HN1--HN4 para la implementación de referencia. HN5 recibe apoyo condicionado dentro del arnés embebido porque la proyección redujo lectura, pero su costo depende de mezcla de cargas, concurrencia, red y facturación.
+
+COBRIA también permite decidir no crear una proyección. Si un índice canónico satisface la consulta, la representación adicional aumenta superficie de fallo sin beneficio suficiente. El criterio de retiro forma parte del diseño, no de una limpieza posterior.
+
+\section{Amenazas a la validez}
+PouchDB y LokiJS son motores embebidos; no reproducen regiones, cuotas, replicación administrada, latencia de red o cobro. Los documentos son sintéticos y pueden omitir irregularidades históricas. Una sola máquina y un solo autor limitan validez externa. Las pruebas demuestran conformidad del arnés, no seguridad exhaustiva ni comprensión humana. Se necesita réplica independiente, motores administrados y estudio con desarrolladores externos.
+
+SQLite y PostgreSQL se preservan únicamente como controles históricos del desarrollo del arnés. Sus cifras quedan excluidas de esta evaluación y de cualquier inferencia NoSQL.
+
+\section{Conclusiones}
+COBRIA ofrece una especificación refutable para gobernar derivados documentales mediante autoridad, ámbito, versión, equivalencia, reconstrucción y operación. Dos adaptadores evaluados y 180 corridas muestran que P1, P2, R1, S1 y A1 pueden ejecutarse como una batería común. La proyección redujo la mediana de lectura en todas las celdas, con amplificación de dos escrituras y reconstrucción creciente con la escala. Core 1.1 mejora precisión conceptual, trazabilidad, seguridad y análisis estadístico, mientras mantiene separados los resultados observados de la infraestructura todavía no ejecutada.
+
+La contribución no es una promesa de superioridad universal, sino una forma de hacer explícito qué copia existe, por qué existe, cómo se verifica y cómo se elimina. El siguiente paso empírico es replicar la batería en servicios documentales administrados y someter especificación, código y afirmaciones a revisión externa.
+
+\begin{thebibliography}{9}
+\bibitem{buneman} Buneman, P., Khanna, S. y Tan, W.-C. (2001). Why and where: A characterization of data provenance. \emph{ICDT}.
+\bibitem{chang} Chang, F. et al. (2006). Bigtable: A distributed storage system for structured data. \emph{OSDI}.
+\bibitem{dynamo} DeCandia, G. et al. (2007). Dynamo: Amazon's highly available key-value store. \emph{SOSP}.
+\bibitem{fowler} Fowler, M. (2005). CQRS. \emph{martinfowler.com}.
+\bibitem{gupta} Gupta, A. y Mumick, I. S. (1993). Maintenance of materialized views: Problems, techniques, and applications. \emph{IEEE Data Engineering Bulletin}.
+\end{thebibliography}
+\end{document}

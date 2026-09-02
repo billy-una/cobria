@@ -1,0 +1,54 @@
+{
+  "repository": "anonymized-system-a",
+  "method": "git object inspection at frozen milestones",
+  "rows": [
+    {
+      "phase": "baseline",
+      "commit": "5962aac2",
+      "date": "2026-08-22T16:07:07-06:00",
+      "directPresentationDataImports": 143,
+      "filesChangedFromBaseline": 0,
+      "commitsFromBaseline": 0
+    },
+    {
+      "phase": "phase1",
+      "commit": "b1c3b119",
+      "date": "2026-08-22T16:20:03-06:00",
+      "directPresentationDataImports": 142,
+      "filesChangedFromBaseline": 15,
+      "commitsFromBaseline": 20
+    },
+    {
+      "phase": "phase2",
+      "commit": "720e308f",
+      "date": "2026-08-22T18:09:24-06:00",
+      "directPresentationDataImports": 137,
+      "filesChangedFromBaseline": 22,
+      "commitsFromBaseline": 32
+    },
+    {
+      "phase": "phase3",
+      "commit": "55b094d8",
+      "date": "2026-08-22T19:51:02-06:00",
+      "directPresentationDataImports": 136,
+      "filesChangedFromBaseline": 28,
+      "commitsFromBaseline": 40
+    },
+    {
+      "phase": "phase7",
+      "commit": "2584e77a",
+      "date": "2026-08-22T22:34:03-06:00",
+      "directPresentationDataImports": 0,
+      "filesChangedFromBaseline": 249,
+      "commitsFromBaseline": 50
+    },
+    {
+      "phase": "performance",
+      "commit": "f467cca9",
+      "date": "2026-08-22T23:14:45-06:00",
+      "directPresentationDataImports": 0,
+      "filesChangedFromBaseline": 257,
+      "commitsFromBaseline": 66
+    }
+  ]
+}

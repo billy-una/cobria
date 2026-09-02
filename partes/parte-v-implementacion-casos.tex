@@ -1,0 +1,837 @@
+\chapter{Método de análisis de las implementaciones}
+
+Esta parte estudia cómo los principios de COBRIA aparecen en dos sistemas existentes sin
+convertir el manuscrito en documentación de productos. Los casos se mantienen anonimizados
+como Sistema A y Sistema B. El primero está orientado a eventos, secuencias, contenido
+multimodal y componentes de inteligencia; el segundo es una plataforma empresarial
+multiinquilino con un dominio amplio, operaciones críticas y una cantidad elevada de
+entidades.
+
+El análisis se realizó sobre una instantánea del código disponible el 20 de agosto de
+2026. Los conteos representan archivos estructurales encontrados en esa fecha y no
+usuarios, transacciones, cobertura funcional ni calidad. Los nombres de clases,
+organizaciones, personas, rutas físicas, credenciales y reglas comerciales particulares
+no se publican.
+
+\section{Preguntas del estudio de implementación}
+
+La observación busca responder cinco preguntas:
+
+\begin{enumerate}[leftmargin=*]
+  \item ¿Cómo se distribuyen modelo, acceso a datos, servicios, casos de uso, esquemas y
+  catálogos?
+  \item ¿Qué elementos corresponden a patrones conocidos y cuáles constituyen la
+  integración COBRIA?
+  \item ¿Dónde aparecen entidades canónicas y proyecciones o índices derivados?
+  \item ¿Qué tan consistente es la aplicación de la estructura dentro de cada caso?
+  \item ¿Qué cambios serían necesarios para implementar COBRIA de manera verificable y
+  no solo nominal?
+\end{enumerate}
+
+\section{Fuentes de evidencia}
+
+Se utilizaron archivos de objetos, modelos base, Daters, conectores, servicios, casos de
+uso, esquemas, registries, catálogos, documentación técnica y pruebas existentes. La
+presencia de un archivo indica intención estructural; solo el código ejecutable y las
+pruebas pueden apoyar una afirmación de comportamiento.
+
+\begin{table}[H]
+\centering
+\caption{Niveles de evidencia utilizados.}
+\label{tab:niveles-evidencia-implementacion}
+\begin{tabularx}{\textwidth}{p{2cm}p{4cm}X}
+\toprule
+Nivel & Evidencia & Interpretación permitida \\
+\midrule
+E0 & Nombre o documento & Intención; no prueba implementación.\\
+E1 & Clase o contrato & Capacidad modelada.\\
+E2 & Flujo conectado & Capacidad integrada en código.\\
+E3 & Prueba automatizada & Comportamiento verificado en entorno controlado.\\
+E4 & Telemetría reproducible & Comportamiento observado bajo carga declarada.\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Este criterio evita atribuir funcionalidad completa a una clase porque su nombre
+contenga términos como inteligencia, sincronización o auditoría. También impide usar el
+número de archivos como sustituto de mantenibilidad.
+
+\section{Procedimiento de inventario}
+
+El procedimiento fue: identificar directorios de capas; clasificar archivos por función;
+examinar bases y ejemplos representativos; buscar relaciones entre objeto y Dater;
+revisar conectores y rutas; localizar índices, cachés, metadatos y servicios; y contrastar
+el hallazgo con la documentación. Los resultados se sintetizaron en categorías neutrales.
+
+Los conteos se calcularon mediante un criterio reproducible: archivos JavaScript bajo
+los directorios de objetos, Daters, servicios, casos de uso, schemas y catálogos o datos
+de referencia. Archivos generados y manuales pueden incrementar estas cifras; por eso se
+reportan como tamaño estructural aproximado.
+
+\section{Neutralidad y ética}
+
+No se copiaron datos operacionales ni secretos. Los ejemplos de esta parte son
+pseudocódigo o estructuras reducidas. Las descripciones de dominio se mantienen al nivel
+necesario para explicar variación arquitectónica. Un lector puede reproducir la
+implementación de referencia sin conocer la identidad de los sistemas originales.
+
+\chapter{Implementación neutral de referencia}
+
+\section{Objetivo}
+
+La implementación neutral no busca reemplazar las aplicaciones estudiadas. Su función es
+mostrar la unidad mínima de COBRIA sin depender de un marco de trabajo o proveedor. Debe ser
+pequeña, ejecutable y suficientemente explícita para probar identidad, ámbito, mapeo,
+proyección, reconstrucción y autorización.
+
+\section{Estructura propuesta}
+
+\begin{verbatim}
+src/
+  core/
+    entities/          entidades canónicas
+    value-objects/     valores inmutables
+    policies/          invariantes de dominio
+  application/
+    use-cases/         operaciones autorizadas
+    ports/             contratos de persistencia y eventos
+  data/
+    mappers/           dominio <-> representación física
+    repositories/      acceso por identidad y consultas declaradas
+    projections/       contratos, writers y rebuilders
+    connectors/        adaptadores del proveedor
+  metadata/
+    schemas/           tipos y validación
+    catalogs/          vocabularios y referencias
+    relationships/     vínculos semánticos
+  analytics/
+    conjuntos de datos/          contratos y manifiestos
+    características/          definiciones fuera de línea/en línea
+    lineage/           grafo de procedencia
+  intelligence/
+    retrieval/         fragmentos, embeddings y búsqueda
+    models/            registro y evaluación
+    tools/             capacidades gobernadas para agentes
+  governance/
+    policies/          acceso, retención y clasificación
+    evidence/          auditoría y evidencia
+\end{verbatim}
+
+La estructura expresa responsabilidades, no una obligación de crear un archivo por cada
+elemento. Un sistema pequeño puede agrupar módulos siempre que mantenga las fronteras.
+
+\section{Entidad canónica}
+
+Una implementación mínima contiene identidad, ámbito, revisión, versión de esquema,
+estado y atributos. El constructor valida forma básica; las transiciones con significado
+de negocio se realizan mediante métodos o políticas.
+
+\begin{verbatim}
+class CanonicalEntity {
+  constructor({ id, ámbito, revision = 0, schemaVersion = 1,
+                status = "active", attributes = {} }) {
+    requireId(id); requireScope(ámbito);
+    this.id = id;
+    this.ámbito = ámbito;
+    this.revision = revision;
+    this.schemaVersion = schemaVersion;
+    this.status = status;
+    this.attributes = structuredClone(attributes);
+  }
+}
+\end{verbatim}
+
+El objeto no conoce URL, SDK, tabla, colección ni caché. Esta independencia corresponde
+al principio de separar dominio y persistencia y se relaciona con Mapeador de datos y
+Repositorio \parencite{fowler2002poeaa}.
+
+\section{Mapeador y Repositorio}
+
+El Mapeador define correspondencia reversible entre nombres de dominio y campos físicos.
+El Repositorio ofrece operaciones en lenguaje del dominio y exige ámbito en todas ellas.
+
+\begin{verbatim}
+class EntityMapper {
+  toDomain(id, ámbito, crudo) { /* mapeo, valores predeterminados y versión */ }
+  toRaw(entity)            { /* representación persistible */ }
+}
+
+class EntityRepositorio {
+  get(ámbito, id)                 { /* lectura por clave */ }
+  save(ámbito, entity, revision)  { /* control optimista */ }
+  listBy(ámbito, query, cursor)   { /* consulta permitida */ }
+}
+\end{verbatim}
+
+El Repositorio no debe devolver el SDK del proveedor ni permitir que la presentación
+forme rutas. Un Conector traduce sus operaciones a la API concreta.
+
+\section{Dater como variante de acceso a datos}
+
+Los dos casos utilizan el término local \emph{Dater} para clases que convierten objetos,
+ejecutan CRUD, manejan caché y, en algunos módulos, mantienen índices. El nombre no
+designa un patrón reconocido distinto: funcionalmente combina responsabilidades de Data
+Acceso Objeto, Repositorio, Mapeador de datos e Mapa de identidad. COBRIA puede conservar el término
+por compatibilidad, pero recomienda declarar cuál de esas responsabilidades cumple cada
+clase.
+
+\begin{table}[H]
+\centering
+\caption{Correspondencia del Dater con patrones consolidados.}
+\label{tab:dater-patrones}
+\begin{tabularx}{\textwidth}{p{3.2cm}p{4cm}X}
+\toprule
+Responsabilidad observada & Patrón relacionado & Recomendación \\
+\midrule
+CRUD del proveedor & Data Acceso Objeto & Mantener detrás de un contrato.\\
+Obtener entidad por identidad & Repositorio & Usar vocabulario del dominio.\\
+Convertir crudo y objeto & Mapeador de datos & Separar mapeo cuando crece.\\
+Conservar instancia por ID & Mapa de identidad & Definir ámbito e invalidación.\\
+Listas con TTL & Caché & Medir frescura y fallos.\\
+Índices derivados & Vista materializada & Versionar y reconstruir.\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Contrato de proyección ejecutable}
+
+\begin{verbatim}
+const ProjectionContract = {
+  id: "entity-by-status",
+  version: 2,
+  sourceType: "Entidad",
+  dependencies: [],
+  consistency: "eventual",
+  transform(entity) { return [[entity.status, entity.id, true]]; },
+  verify(source, projection) { /* cobertura y huérfanos */ },
+  rebuild({ ámbito, cursor })  { /* lotes y checkpoints */ }
+};
+\end{verbatim}
+
+El contrato reúne propiedades que en las implementaciones aparecen distribuidas entre
+rutas, métodos de Dater, procesos de trabajo y convenciones. Su versión permite crear una proyección
+paralela y efectuar cambio de versión.
+
+\section{Caso de uso y transacción lógica}
+
+Un caso de uso coordina autorización, carga, invariantes, persistencia, cola de salida y resultado.
+
+\begin{verbatim}
+UpdateEntity(command, actor):
+  policy.require(actor, "entity.update", command.ámbito)
+  current <- repository.require(command.ámbito, command.id)
+  updated <- domain.apply(current, command.change)
+  repository.save(command.ámbito, updated, current.revision)
+  cola de salida.append(EntityChanged(updated.id, updated.revision))
+  evidence.record(command, actor, updated)
+  return presenter.summary(updated)
+\end{verbatim}
+
+Si el motor permite actualización multipath atómica, canónico, índices críticos y
+cola de salida pueden compartir una frontera. Si no, se documenta la compensación y se emplean
+procesos de trabajo idempotentes.
+
+\section{Pruebas mínimas}
+
+La referencia requiere pruebas de ida y vuelta del Mapeador, aislamiento de ámbito,
+revisión optimista, idempotencia, reconstrucción desde cero, reconstrucción incremental,
+detección de huérfanos, cambio de versión y rechazo de escritura directa en una
+proyección. Para analítica agrega corte temporal, linaje y equivalencia fuera de línea--en línea.
+
+\chapter{Caso de estudio A: sistema orientado a eventos y contenido}
+
+\section{Caracterización estructural}
+
+En la fecha de corte, el inventario del Sistema A encontró aproximadamente 88 archivos
+de objetos de dominio, 91 Daters, 182 servicios, siete casos de uso explícitos, dos
+schemas centrales y 102 archivos de catálogos o datos de referencia. Estas cantidades
+describen una base heterogénea: módulos antiguos conviven con subsistemas recientes más
+formalizados.
+
+El dominio combina participantes, grupos, sesiones, eventos, acciones evaluadas,
+planificación, salud, inventario, archivos multimedia, facturación y artefactos de IA.
+La variedad permite observar si una estructura común se adapta a información temporal,
+conectada y multimodal.
+
+\begin{table}[H]
+\centering
+\caption{Inventario neutral del Sistema A.}
+\label{tab:inventario-sistema-a}
+\begin{tabularx}{\textwidth}{p{3.5cm}p{2.2cm}X}
+\toprule
+Categoría & Conteo & Observación \\
+\midrule
+Objetos de dominio & 88 & Estilos de modelado de distintas generaciones.\\
+Daters & 91 & CRUD, caché, serialización e índices.\\
+Servicios & 182 & Operación, analítica, multimedia e IA.\\
+Casos de uso explícitos & 7 & Concentrados en flujos recientes.\\
+Esquemas centrales & 2 & La validación también aparece distribuida.\\
+Catálogos y referencias & 102 & Vocabularios, configuración y datos compartidos.\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Objetos y serialización}
+
+Los objetos observados usan clases JavaScript con constructores, getters, setters y, en
+varios módulos, métodos de serialización. Algunos emplean campos privados y copias
+defensivas para estructuras anidadas; otros exponen propiedades públicas y conservan
+alias para compatibilidad. Esta coexistencia demuestra adaptabilidad, pero también riesgo
+de semántica desigual.
+
+En los módulos de inteligencia, los objetos representan versiones de modelos, métricas,
+experimentos, consentimientos, tareas, auditorías, conocimiento, retroalimentación y solicitudes
+de acción. Esto se alinea con la Parte IV porque el modelo y la decisión no se reducen a
+un valor suelto: poseen identidad, estado, procedencia y tiempos.
+
+\section{Daters e índices derivados}
+
+Los Daters del Sistema A acceden al conector de datos, convierten cargas útiles, mantienen
+Mapa locales y actualizan índices por modelo, tipo, estado u otras dimensiones. Algunos
+construyen una actualización multipath que persiste el registro principal y varias rutas
+derivadas. Este es un ejemplo concreto del intercambio de COBRIA: una escritura lógica
+produce varias escrituras físicas para acelerar lecturas.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+  node distance=.8cm and .85cm,
+  box/.style={draw,align=center,minimum width=2.3cm,minimum height=.82cm},
+  derived/.style={box,fill=cobriaLight},
+  line/.style={-{Latex[length=2mm]},thick}
+]
+\node[box] (object) {Objeto de\\dominio};
+\node[box,right=of object] (dater) {Dater};
+\node[box,right=of dater] (connector) {Conector\\NoSQL};
+\node[derived,below=of connector] (base) {Ruta\\principal};
+\node[derived,left=of base] (indexes) {Índices por\\dimensión};
+\node[derived,left=of indexes] (cache) {Mapa e índices\\locales};
+\draw[line] (object) -- (dater);
+\draw[line] (dater) -- (connector);
+\draw[line] (connector) -- (base);
+\draw[line] (connector) -- (indexes);
+\draw[line] (dater) -- (cache);
+\end{tikzpicture}
+\caption{Flujo de datos observado y abstraído en el Sistema A.}
+\label{fig:flujo-sistema-a}
+\end{figure}
+
+La ruta principal se aproxima al canónico y los índices a proyecciones, pero esa
+clasificación debe verificarse por entidad. Un carga útil duplicado puede contener campos
+que otro módulo modifica directamente; en tal caso existe autoridad compartida y no una
+proyección COBRIA válida.
+
+\section{Servicios, casos de uso e IA}
+
+La capa de servicios incluye coordinación de eventos, análisis, reportes, sincronización,
+multimedia, salud, facturación e inteligencia. Los casos de uso explícitos aparecen en
+operaciones que requieren transiciones y permisos. En otros módulos, un servicio o Dater
+todavía concentra la coordinación.
+
+La capacidad de IA es estructuralmente relevante: existen artefactos para versiones,
+experimentos, métricas, preferencias, consentimiento, conocimiento, auditoría, retroalimentación
+y acciones propuestas. Esto apoya la adaptabilidad conceptual de COBRIA, pero no prueba
+exactitud de modelos ni seguridad de agentes. Esas capacidades deben alcanzar E3 o E4
+mediante los experimentos de la Parte IV.
+
+\section{Fortalezas observadas}
+
+\begin{itemize}[leftmargin=*]
+  \item separación visible entre presentación, lógica y datos;
+  \item objetos especializados para eventos, multimedia e inteligencia;
+  \item Daters con cachés e índices adecuados para consultas frecuentes;
+  \item actualizaciones multipath en operaciones con derivados;
+  \item servicios para analítica y ciclo de vida de artefactos;
+  \item adopción progresiva de casos de uso en flujos con reglas.
+\end{itemize}
+
+\section{Deuda y oportunidades}
+
+Los principales riesgos son estilos de objetos heterogéneos, validación distribuida,
+responsabilidades amplias en ciertos Daters, índices sin contrato uniforme, rutas
+conocidas por múltiples módulos y cobertura desigual de casos de uso. La optimización
+local mediante Mapa puede perder ámbito o frescura si la clave e invalidación no se
+declaran.
+
+La migración recomendada no reescribe todos los módulos. Se priorizan entidades con
+datos sensibles, múltiples índices, IA o alto volumen. Para cada una se registra fuente
+canónica, contrato de proyección, versión, propietario, reconstrucción y pruebas. Los
+alias de compatibilidad pueden permanecer en el Mapeador mientras se estabiliza el modelo.
+
+\section{Evolución longitudinal posterior del Sistema A}
+
+Una segunda observación del repositorio, posterior al inventario inicial, permitió
+analizar cambio arquitectónico y no solo estructura estática. La evolución no se usa
+como un nuevo prueba comparativa de rendimiento; constituye evidencia de aplicabilidad de los
+principios de COBRIA en una migración real y gradual.
+
+\begin{table}[H]
+\centering
+\caption{Evidencia longitudinal neutral del Sistema A.}
+\label{tab:evolucion-sistema-a}
+\begin{tabularx}{\textwidth}{p{4.1cm}p{2.3cm}X}
+\toprule
+Propiedad observada & Evidencia & Interpretación COBRIA \\
+\midrule
+Frontera Presentación--Data & 0 importaciones directos & La dependencia se hace verificable
+por CI, no solo convencional.\\
+Compatibilidad temporal & 134 consumidores inventariados & La deuda se congela y solo
+puede disminuir.\\
+Vocabulario físico central & 36 nodos semánticos & Los nombres compactos quedan detrás
+de un registro de rutas.\\
+Modelos de lectura explícitos & 4 repositorios de vistas & Listados y resúmenes declaran
+almacén derivado separado.\\
+Pruebas arquitectónicas y de escala & 16 artefactos relevantes & Se verifican rutas,
+concurrencia, vistas, presupuestos y fronteras.\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Las nuevas vistas de listas y resúmenes incluyen \texttt{complete},
+\texttt{updatedAt}, TTL y operaciones de reemplazo, invalidación o reconstrucción.
+Una vista fría agrupa solicitudes concurrentes en una sola reconstrucción; las pruebas
+comprueban que veinte solicitudes comparten un único warmup. La autorización se ejecuta
+en cada solicitud contra la política canónica, aun cuando el resultado materializado
+esté fresco. Este detalle separa optimización de autoridad.
+
+Las operaciones de dominio aplican actualizaciones multipath para canónico, índices,
+auditoría y notificación; utilizan versiones, transiciones explícitas, idempotencia y
+controles concurrentes para invariantes. Además, el contexto utilizado por telemetría y
+FinOps excluye valores no validados provenientes del cliente. Estas decisiones amplían
+COBRIA con dos reglas: \emph{la optimización puede fallar sin falsificar el canónico} y
+\emph{la atribución operacional debe proceder del ámbito autorizado}.
+
+La migración del interfaz aporta otra lección. Una frontera temporal puede conservar
+134 consumidores heredado sin permitir nuevos consumidores. El manifiesto y el límite
+automático convierten el patrón estrangulador en una transición medible. COBRIA debe, por
+tanto, exigir a cada puente: propietario, inventario, fecha o condición de retiro,
+presupuesto que no crezca y pruebas de delegación.
+
+\section{Implicación para la validez del caso}
+
+La observación longitudinal fortalece H8 porque el mismo sistema evolucionó hacia rutas
+semánticas, servicios de aplicación, políticas separadas, proyecciones materializadas y
+controles automatizados arquitectónicos sin una reescritura total. No demuestra causalidad: los cambios
+fueron realizados por participantes conocedores de la propuesta y no se compararon
+contra un equipo de control. Sí proporciona evidencia concreta de que COBRIA puede
+funcionar como arquitectura evolutiva y no únicamente como taxonomía retrospectiva.
+
+\chapter{Caso de estudio B: sistema empresarial multiinquilino}
+
+\section{Caracterización estructural}
+
+El Sistema B posee una escala estructural considerablemente mayor. En la fecha de corte
+se encontraron aproximadamente 680 objetos de dominio, 680 Daters, 1,624 servicios, 18
+casos de uso explícitos, 686 schemas y 514 archivos de catálogos o datos de referencia.
+La correspondencia cercana entre objetos, Daters y schemas revela una estrategia
+sistemática, parte de ella apoyada por generación o convenciones repetibles.
+
+\begin{table}[H]
+\centering
+\caption{Inventario neutral del Sistema B.}
+\label{tab:inventario-sistema-b}
+\begin{tabularx}{\textwidth}{p{3.5cm}p{2.2cm}X}
+\toprule
+Categoría & Conteo & Observación \\
+\midrule
+Objetos de dominio & 680 & Cobertura de numerosos subdominios.\\
+Daters & 680 & Correspondencia casi uno a uno con objetos.\\
+Servicios & 1,624 & Políticas, procesos de trabajo, contratos y orquestadores.\\
+Casos de uso explícitos & 18 & Operaciones críticas seleccionadas.\\
+Esquemas & 686 & Validación estructural extensa.\\
+Catálogos y referencias & 514 & Vocabularios y configuración por dominio.\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Estos números no permiten concluir que todo módulo esté integrado o probado. Sí ofrecen
+evidencia de una arquitectura dirigida por estructura y metadatos, adecuada para estudiar
+escalabilidad organizacional.
+
+\section{Modelo base y mapeo físico}
+
+Un modelo base representativo inicializa identidad y valores predeterminados, restringe campos
+desconocidos, serializa a JSON y mantiene un mapa explícito entre campo físico y campo de
+dominio. El método inverso reconstruye una instancia desde datos crudo. Esta forma
+materializa Mapeador de datos de manera directa.
+
+La ventaja es que una entidad puede conservar vocabulario estable aunque cambien claves
+físicas. El riesgo aparece cuando valores predeterminados silenciosos ocultan ausencia o versiones
+antiguas. COBRIA recomienda distinguir campo ausente, nulo y vacío y registrar la versión
+del esquema utilizada en la reconstrucción.
+
+\section{Dater base}
+
+El Dater base observado recibe ruta, modelo, conector y TTL. Implementa lectura por ID,
+alta, actualización, borrado, lista, paginación por cursor, consulta por hijo, carga
+múltiple, escucha en tiempo real, caché de entidades y caché de listas. Convierte entre
+crudo y objeto mediante el modelo.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+  node distance=.75cm and .8cm,
+  box/.style={draw,align=center,minimum width=2.25cm,minimum height=.82cm},
+  derived/.style={box,fill=cobriaLight},
+  line/.style={-{Latex[length=2mm]},thick}
+]
+\node[box] (service) {Servicio /\\caso de uso};
+\node[box,right=of service] (dater) {Dater base\\especializado};
+\node[box,right=of dater] (mapper) {Modelo y\\mapa de campos};
+\node[box,below=of mapper] (connector) {Conector};
+\node[derived,left=of connector] (store) {Almacenamiento\\multiinquilino};
+\node[derived,left=of store] (cache) {Caché con\\TTL};
+\draw[line] (service) -- (dater);
+\draw[line] (dater) -- (mapper);
+\draw[line] (dater) -- (connector);
+\draw[line] (connector) -- (store);
+\draw[line] (dater) -- (cache);
+\end{tikzpicture}
+\caption{Abstracción del acceso común observado en el Sistema B.}
+\label{fig:flujo-sistema-b}
+\end{figure}
+
+Esta base reduce duplicación y ofrece una API uniforme. Sin embargo, el argumento de
+ruta debe incorporar ámbito de forma no opcional. Una ruta base global o una clave de
+caché basada solo en ID podría romper aislamiento aunque el resto de la aplicación
+conozca el organización.
+
+\section{Metadatos, relaciones y catálogos}
+
+El Sistema B contiene registries para políticas de campo, relaciones, clasificaciones de
+referencias y correspondencia con catálogos. Los campos pueden declararse configurables,
+externos o asociados con vocabularios. Esta capa convierte reglas que normalmente
+quedarían dispersas en datos inspeccionables.
+
+La arquitectura dirigida por metadatos favorece generación de objetos, schemas, Daters,
+documentación y controles de interfaz. Para que la generación sea confiable debe existir
+una fuente primaria del metamodelo, validación del generador y detección de divergencia.
+Editar artefactos generados manualmente sin retroalimentar el metamodelo crea deriva.
+
+\section{Servicios y operaciones críticas}
+
+Los servicios abarcan consulta, disponibilidad, inventario, finanzas, comunicaciones,
+integraciones, privacidad, sincronización, reportes y operaciones multiinquilino. Existen
+contratos de repositorio, procesos de trabajo, políticas, state machines y orquestadores. Los casos de
+uso explícitos se concentran en operaciones donde estados, permisos y efectos derivados
+requieren una frontera clara.
+
+Los contratos operacionales muestran ámbito de organización y unidad, claves de
+idempotencia, autenticación, recálculo en servidor, rate limits y errores semánticos.
+Estos mecanismos coinciden con COBRIA Núcleo y Gobierno. La persistencia de cola de salida,
+operaciones idempotentes, versiones de esquema, bloqueos y trabajos programados ofrece
+puntos naturales para reconstrucción y observabilidad.
+
+\section{Fortalezas observadas}
+
+\begin{itemize}[leftmargin=*]
+  \item correspondencia sistemática entre objeto, Dater y esquema;
+  \item modelo base con mapeo entre dominio y representación física;
+  \item Dater base con caché, paginación y tiempo real;
+  \item metadatos explícitos para campos, relaciones y catálogos;
+  \item contratos de repositorio y casos de uso en operaciones críticas;
+  \item idempotencia, cola de salida, procesos de trabajo y controles multiinquilino modelados;
+  \item suficiente variedad de dominios para evaluar extensibilidad.
+\end{itemize}
+
+\section{Deuda y oportunidades}
+
+La escala produce riesgos de proliferación: una clase por estructura puede aumentar
+costo de navegación, generación y pruebas. Una correspondencia uno a uno no garantiza
+que cada estructura posea identidad o comportamiento suficiente para ser entidad. Los
+1,624 servicios pueden incluir políticas pequeñas y artefactos generados; deben
+agruparse por responsabilidad y dependencia antes de inferir complejidad.
+
+COBRIA recomienda clasificar cada tipo como entidad, value object, evento, comando,
+proyección o catálogo. También propone registrar responsabilidad de proyecciones, reconstrucción
+y presupuesto. La base común debe exigir ámbito, revisión y versión; los servicios deben
+depender de contratos, no de rutas ni SDKs.
+
+\chapter{Comparación entre casos y derivación de COBRIA}
+
+\section{Similitudes estructurales}
+
+Ambos sistemas separan presentación, lógica y datos; representan el dominio mediante
+objetos; encapsulan persistencia en Daters; utilizan servicios; conservan catálogos y
+datos compartidos; y desnormalizan para responder consultas. Ambos poseen conectores a
+un almacenamiento NoSQL y cachés locales. Estas similitudes motivaron la búsqueda de un
+vocabulario común.
+
+\begin{longtable}{>{\bfseries}p{3.2cm}p{5.6cm}p{5.6cm}}
+\caption{Comparación neutral de los casos.}\label{tab:comparacion-casos}\\
+\toprule
+Dimensión & Sistema A & Sistema B \\
+\midrule
+\endfirsthead
+\toprule
+Dimensión & Sistema A & Sistema B \\
+\midrule
+\endhead
+Dominio & Eventos, secuencias, multimedia e inteligencia. & Operaciones empresariales
+multiinquilino de gran amplitud.\\
+Objetos & Heterogéneos y especializados. & Sistemáticos, con modelo base frecuente.\\
+Daters & Especializados; varios mantienen índices propios. & Base reutilizable y amplia
+correspondencia por entidad.\\
+Esquemas & Parciales o distribuidos. & Cobertura estructural extensa.\\
+Metadatos & Catálogos y configuraciones por módulo. & Registries de campos, relaciones y
+catálogos.\\
+Casos de uso & Adopción focalizada en flujos recientes. & Adopción focalizada en
+operaciones críticas.\\
+Proyecciones & Índices locales/remotos y artefactos analíticos. & Índices, reportes,
+cachés, cola de salida y snapshots.\\
+IA & Componentes explícitos de versión, auditoría y retroalimentación. & Preparación estructural,
+automatización y datos empresariales.\\
+Riesgo principal & Heterogeneidad y contratos implícitos. & Proliferación y divergencia
+entre artefactos.\\
+\bottomrule
+\end{longtable}
+
+\section{Diferencias que prueban adaptabilidad}
+
+El Sistema A necesita representar tiempo fino, acciones, secuencias y archivos. El
+Sistema B necesita ámbito jerárquico, catálogos configurables, operaciones idempotentes y
+muchas relaciones. COBRIA no intenta igualar sus modelos. La adaptación ocurre porque
+ambos pueden expresar identidad, ámbito, versión, mapeo y proyección, pero emplean
+contratos diferentes.
+
+En A, una proyección puede indexar eventos por participante, contexto o ventana y un
+pipeline puede generar clips o características. En B, una proyección puede resolver
+disponibilidad, saldos, reportes o búsquedas por organización. El mecanismo es común; la
+semántica pertenece al dominio.
+
+\section{Elementos heredados y contribución}
+
+Los objetos, DAO/Repositorio, Mapeador de datos, Capa de servicios, casos de uso, caché, catálogos,
+vistas materializadas, cola de salida y metadatos son conceptos existentes. El Dater es un nombre
+local para una combinación de esos patrones, no una nueva categoría científica.
+
+La contribución COBRIA se ubica en la integración de estas ideas alrededor de:
+
+\begin{enumerate}[leftmargin=*]
+  \item una fuente canónica con identidad, ámbito, revisión y versión;
+  \item una separación explícita entre dominio y forma física;
+  \item proyecciones con contrato, responsabilidad, consistencia y reconstrucción;
+  \item metadatos que conectan modelo, esquema, relaciones y catálogos;
+  \item continuidad de linaje desde operación hasta conjunto de datos, modelo y decisión;
+  \item una frontera que impide a derivados o agentes adquirir autoridad por accidente.
+\end{enumerate}
+
+\section{Patrones de diseño identificados}
+
+\begin{table}[H]
+\centering
+\caption{Patrones observados y papel dentro de COBRIA.}
+\label{tab:patrones-observados}
+\begin{tabularx}{\textwidth}{p{3.4cm}p{4.2cm}X}
+\toprule
+Patrón & Evidencia típica & Papel COBRIA \\
+\midrule
+Repositorio/DAO & Daters y contratos de repositorio & Aislar persistencia.\\
+Mapeador de datos & fromRaw, toRaw y mapas de campos & Separar semántica y forma física.\\
+Mapa de identidad & Mapas por identidad & Evitar instancias duplicadas en sesión.\\
+Capa de servicios & Servicios de dominio y aplicación & Coordinar operaciones.\\
+Caso de uso & Flujos explícitos y autorizados & Definir frontera transaccional.\\
+Vista materializada & Índices, resúmenes y snapshots & Optimizar lectura con reconstrucción.\\
+CQRS parcial & Modelos de consulta especializados & Separar necesidades de lectura.\\
+Cola de salida & Eventos pendientes y procesos de trabajo & Reducir ventana de pérdida.\\
+Registro & Metadatos y catálogos & Centralizar contratos inspeccionables.\\
+Estrategia y política & Validadores y políticas intercambiables & Variar reglas sin rutas físicas.\\
+Adaptador/Pasarela & Conectores y proveedores externos & Encapsular infraestructura.\\
+Máquina de estados & Transiciones de operaciones críticas & Restringir ciclos de vida.\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Modelo de madurez}
+
+\begin{table}[H]
+\centering
+\caption{Niveles de madurez COBRIA para una entidad.}
+\label{tab:madurez-cobria}
+\begin{tabularx}{\textwidth}{p{1.5cm}p{3.2cm}X}
+\toprule
+Nivel & Nombre & Evidencia \\
+\midrule
+M0 & Acceso directo & interfaz de usuario o servicio conoce rutas y cargas útiles.\\
+M1 & Encapsulado & Objeto y Dater/Repositorio básico.\\
+M2 & Canónico & Identidad, ámbito, mapeo y esquema explícitos.\\
+M3 & Reconstruible & Proyecciones versionadas con rebuild y verificación.\\
+M4 & Gobernado & Linaje, políticas, observabilidad y recuperación.\\
+M5 & Adaptativo & Optimización basada en evidencia con aprobación.\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+La madurez se evalúa por entidad o flujo, no por sistema completo. Ambos casos pueden
+contener simultáneamente módulos M1 y M4. Esta granularidad permite una migración basada
+en riesgo.
+
+\chapter{Estrategia de adopción y migración}
+
+\section{Adopción incremental}
+
+La estrategia recomendada sigue siete pasos:
+
+\begin{enumerate}[leftmargin=*]
+  \item seleccionar una entidad con dolor verificable;
+  \item declarar identidad, ámbito, autoridad e invariantes;
+  \item aislar Mapeador y Repositorio o documentar el Dater existente;
+  \item inventariar copias, índices, cachés y consumidores;
+  \item crear contratos de proyección y verificación;
+  \item instrumentar lecturas, escrituras, anomalías y costo;
+  \item reconstruir en paralelo, comparar y efectuar cambio de versión reversible.
+\end{enumerate}
+
+No se recomienda renombrar masivamente los Daters. La migración comienza por contratos y
+propiedades verificables. El nombre puede cambiar cuando aporte claridad y no rompa
+consumidores.
+
+\section{estrangulador para datos}
+
+Una fachada compatible intercepta operaciones antiguas y las dirige al nuevo Repositorio.
+Durante la transición puede comparar lecturas o emitir eventos para nuevas proyecciones.
+La escritura dual sin verificación aumenta riesgo; se prefiere una fuente autoritativa y
+un derivado reconstruible.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+  node distance=.85cm and .9cm,
+  box/.style={draw,align=center,minimum width=2.35cm,minimum height=.82cm},
+  derived/.style={box,fill=cobriaLight},
+  line/.style={-{Latex[length=2mm]},thick}
+]
+\node[box] (heredado) {Consumidor\\existente};
+\node[box,right=of heredado] (facade) {Fachada\\compatible};
+\node[derived,right=of facade] (usecase) {Nuevo caso\\de uso};
+\node[derived,below=of usecase] (repo) {Repositorio y\\Mapeador};
+\node[box,left=of repo] (canonical) {Canónico};
+\node[derived,left=of canonical] (projection) {Proyección\\versionada};
+\draw[line] (heredado) -- (facade);
+\draw[line] (facade) -- (usecase);
+\draw[line] (usecase) -- (repo);
+\draw[line] (repo) -- (canonical);
+\draw[line] (canonical) -- (projection);
+\end{tikzpicture}
+\caption{Migración incremental mediante una fachada compatible.}
+\label{fig:migracion-strangler}
+\end{figure}
+
+\section{Priorización por riesgo y valor}
+
+Se asigna una puntuación basada en sensibilidad, frecuencia, amplificación, número de
+copias, incidentes, dificultad de reconstrucción y consumidores. Las entidades con alto
+riesgo y alto uso se atienden primero. Un catálogo estático y estable puede permanecer
+en M1 o M2 si no existe beneficio neto de mayor formalidad.
+
+\section{Generación dirigida por metadatos}
+
+En el Sistema B, la escala hace atractiva la generación. El metamodelo puede producir
+esqueleto de entidad, esquema, Mapeador, Dater/Repositorio, documentación y pruebas de
+contrato. La generación debe ser determinista; el repositorio rechaza divergencias entre
+salida generada y archivos versionados.
+
+El generador no decide invariantes de negocio ni crea proyecciones por cada campo. Esas
+decisiones requieren demanda de consulta, responsable y presupuesto.
+
+\section{Compatibilidad y versionado}
+
+Los cambios se clasifican como aditivos, deprecatorios o incompatibles. Un Mapeador puede
+leer varias versiones y escribir solo la vigente. La migración se ejecuta por lotes y
+con checkpoint. Las proyecciones incluyen versión en ruta o clave para permitir
+coexistencia y reversión.
+
+\section{Presupuesto de deuda y retiro de puentes}
+
+Toda compatibilidad temporal se registra en un manifiesto reproducible. Sea \(L_t\) el
+conjunto de consumidores heredado permitidos en la versión \(t\). La regla de integración
+continua exige:
+
+\[
+L_{t+1}\subseteq L_t.
+\]
+
+Un consumidor nuevo requiere migración al contrato vigente, no ampliación silenciosa
+del manifiesto. El puente solo reexporta o adapta; no recibe nuevas reglas de negocio. Su
+eliminación se realiza por dominio, con pruebas de comportamiento y reducción del
+presupuesto después de cada bloque estable.
+
+\section{Criterio de finalización}
+
+Una entidad se considera migrada cuando: toda escritura autorizada atraviesa casos de
+uso definidos; la fuente canónica es única; el ámbito es obligatorio; el ida y vuelta del
+Mapeador está probado; cada derivado posee contrato y responsable; una reconstrucción completa
+produce el resultado esperado; la telemetría permite medir costo y anomalías; y los
+controles automatizados impiden reintroducir rutas físicas, dependencias invertidas o consumidores heredado.
+
+\chapter{Reproducibilidad, limitaciones y síntesis de la Parte V}
+
+\section{Paquete reproducible previsto}
+
+El manuscrito debe acompañarse de un paquete que no contenga los proyectos privados. El
+paquete incluirá implementación neutral, generadores sintéticos, contratos de ejemplo,
+scripts de inventario, pruebas, configuración del prueba comparativa y plantillas de resultados.
+Cada versión publicada fijará versiones y resúmenes criptográficos.
+
+\begin{table}[H]
+\centering
+\caption{Contenido del paquete reproducible.}
+\label{tab:paquete-reproducible}
+\begin{tabularx}{\textwidth}{p{3.6cm}X}
+\toprule
+Artefacto & Contenido \\
+\midrule
+Referencia & Núcleo, Repositorio, Mapeador, Gestor de proyecciones y Gobierno.\\
+Datos sintéticos & Perfiles A y B con semilla y escalas configurables.\\
+Contratos & Entidades, proyecciones, conjuntos de datos y herramientas.\\
+Migraciones & Total, incremental, cambio de versión y reversión.\\
+Pruebas & Aislamiento, idempotencia, ida y vuelta y reconstrucción.\\
+Prueba comparativa & Cargas, instrumentación y análisis estadístico.\\
+Documentación & Diccionario, decisiones y guía de réplica.\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Limitaciones del análisis estático}
+
+El inventario no demuestra qué archivos se ejecutan en producción, qué rutas contienen
+datos, cuántos módulos tienen consumidores ni qué cobertura alcanzan las pruebas. Los
+conteos pueden incluir archivos generados, contratos pequeños o capacidades parciales.
+La documentación puede estar desactualizada. Estas limitaciones se resolverán en la
+Parte VI mediante ejecución controlada, trazas y experimentos.
+
+\section{Riesgo de sesgo del investigador}
+
+El investigador es también autor o conocedor de los sistemas, lo que facilita acceso y
+comprensión, pero puede favorecer interpretaciones positivas. Se mitigará publicando
+criterios previos, scripts, resultados negativos, niveles de evidencia y una
+implementación neutral. Cuando sea posible, otro evaluador revisará la clasificación de
+una muestra de módulos.
+
+\section{Validez de la generalización}
+
+Los casos comparten lenguaje y almacenamiento NoSQL, por lo que no prueban adaptación a
+todos los ecosistemas. La contribución generalizable es el mecanismo y sus condiciones,
+no los nombres de carpetas ni las cantidades. Una réplica futura debe incluir otro
+lenguaje, otro motor documental y un equipo independiente.
+
+\section{Síntesis de la Parte V}
+
+Esta parte conectó la formalización de COBRIA con evidencia estructural de dos sistemas
+reales y distintos. El Sistema A mostró objetos heterogéneos, Daters con índices y una
+amplia superficie de eventos, multimedia e inteligencia. El Sistema B mostró una
+correspondencia masiva entre objetos, Daters y schemas, un modelo base con mapeo físico,
+metadatos y operaciones multiinquilino más sistemáticas.
+
+El análisis confirmó que ``Objeto--Dater--Servicio--Catálogo'' no constituye por sí solo
+un patrón nuevo. Es una composición local de Modelo de dominio, DAO/Repositorio, Mapeador de datos,
+Capa de servicios, Registro, Caché y vistas materializadas. COBRIA adquiere interés de
+investigación al convertir esa composición en una arquitectura explícita, formal y
+evaluada alrededor de autoridad canónica, proyecciones reconstruibles, ámbito y linaje
+hacia IA.
+
+También se definió una implementación neutral, un modelo de madurez y una estrategia de
+migración incremental. Los conteos estructurales sirven para caracterizar, no para
+celebrar tamaño. La siguiente parte ejecutará el protocolo: medirá rendimiento,
+reconstrucción, aislamiento, evolución, linaje y adaptabilidad, y presentará tanto
+resultados favorables como negativos.

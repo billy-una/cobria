@@ -1,0 +1,550 @@
+\chapter{Glosario operacional}
+
+Este glosario fija el uso de términos dentro del manuscrito. No pretende reemplazar
+definiciones generales de ingeniería de software.
+
+\begin{longtable}{>{\bfseries}p{3.6cm}p{10.6cm}}
+\caption{Glosario COBRIA.}\label{tab:glosario-cobria}\\
+\toprule
+Término & Definición operacional \\
+\midrule
+\endfirsthead
+\toprule
+Término & Definición operacional \\
+\midrule
+\endhead
+Autoridad & Capacidad reconocida para establecer un hecho de negocio.\\
+Canónico & Representación autoritativa de una entidad dentro de un ámbito y versión.\\
+Catálogo & Vocabulario o conjunto de referencias permitidas y gobernadas.\\
+Conector & Adaptador que encapsula la API de almacenamiento o proveedor.\\
+Contrato & Especificación versionada de entradas, salidas, políticas y verificaciones.\\
+Dater & Nombre local de una clase que combina acceso, mapeo, Repositorio, caché o índices.\\
+Conjunto de datos & Proyección analítica versionada con selección, transformación y manifiesto.\\
+Derivado & Artefacto calculado desde una fuente que no adquiere autoridad automáticamente.\\
+Entidad & Objeto con identidad, ámbito, atributos, ciclo de vida, versión y revisión.\\
+Registro de evidencias & Registro minimizado que enlaza solicitud, evidencia, decisión y efecto.\\
+Conjunto de características & Conjunto versionado de características con tiempo y procedencia.\\
+Idempotencia & Propiedad por la cual repetir una operación no multiplica su efecto.\\
+Inferencia & Salida probabilística de un modelo, distinta de un hecho confirmado.\\
+Linaje & Grafo que conecta artefactos con fuentes, transformaciones y versiones.\\
+Mapeador & Componente que traduce entre dominio y representación física.\\
+Metadato & Dato que declara estructura, relación, política, versión o significado.\\
+Cola de salida & Registro persistente de una intención de publicación asociada a un cambio.\\
+Proyección & Representación derivada optimizada para una lectura, proceso o análisis.\\
+Gestor de proyecciones & Componente que mantiene, verifica, reconstruye y versiona proyecciones.\\
+Reconstruibilidad & Capacidad de regenerar un derivado desde fuentes y contratos suficientes.\\
+Repositorio & Interfaz de acceso a entidades expresada en lenguaje del dominio.\\
+Revisión & Contador o token utilizado para detectar actualización concurrente obsoleta.\\
+Ámbito & Frontera de pertenencia y autorización, como organización, organización o contexto.\\
+Servicio & Componente que expresa coordinación o capacidad de dominio/aplicación.\\
+Caso de uso & Frontera autorizada que coordina una intención y sus efectos.\\
+Marca de corte & Punto temporal o cursor declarado para procesar cambios o cortes.\\
+\bottomrule
+\end{longtable}
+
+\chapter{Plantillas de contratos}
+\begingroup
+\small
+
+\section{Contrato de entidad}
+
+\begin{verbatim}
+entity:
+  name: ExampleEntity
+  version: 1
+  identity: id
+  ámbito: [organizaciónId]
+  revision: revision
+  lifecycle: [draft, active, archived]
+  fields:
+    - name: title
+      type: string
+      required: true
+      sensitivity: internal
+  invariants:
+    - "title must not be empty"
+  retention: policy-entity-default
+  responsable: domain-team
+\end{verbatim}
+
+\section{Contrato de Mapeador}
+
+\begin{verbatim}
+mapper:
+  entity: ExampleEntity
+  version: 2
+  readsPhysicalVersions: [1, 2]
+  writesPhysicalVersion: 2
+  fields:
+    id: key
+    organizaciónId: organización_id
+    title: display_name
+    revision: rev
+  roundTrip:
+    equality: semantic
+    ignored: [storage_updated_at]
+\end{verbatim}
+
+\section{Contrato de proyección}
+
+\begin{verbatim}
+projection:
+  id: example-by-status
+  version: 3
+  sources: [ExampleEntity@1]
+  key: [organizaciónId, status, id]
+  consistency: eventual
+  freshnessSloSeconds: 30
+  deterministic: true
+  idempotent: true
+  authoritative: false
+  rebuild:
+    mode: [full, incremental]
+    batchSize: 500
+    checkpoint: required
+    cambio de versión: version-alias
+  verify:
+    coverage: 1.0
+    orphanCount: 0
+  responsable: query-team
+\end{verbatim}
+
+\section{Contrato de conjunto de datos}
+
+\begin{verbatim}
+conjunto de datos:
+  id: example-training-set
+  version: 4
+  purpose: approved-task
+  ámbito: organización
+  sources: [ExampleEntity@1, ExampleEvent@2]
+  cutoff: required
+  transformationsCommit: abc123
+  esquema: example-conjunto de datos-esquema@4
+  quality:
+    completenessMin: 0.98
+    duplicateMax: 0
+  privacy:
+    allowedFields: [category, eventTime, value]
+    retentionDays: 90
+  lineage: required
+  responsable: equipo-analitica
+\end{verbatim}
+
+\section{Contrato de característica}
+
+\begin{verbatim}
+feature:
+  name: rolling_count_30d
+  version: 2
+  entity: ExampleEntity
+  type: integer
+  window: 30d
+  availabilityTime: ingestionTime
+  toleranciaFueraEnLinea: 0
+  freshnessSeconds: 300
+  sourceDataset: example-events@2
+  responsable: ml-platform
+\end{verbatim}
+
+\section{Contrato de herramienta de agente}
+
+\begin{verbatim}
+tool:
+  name: propose_entity_change
+  version: 1
+  capability: entity.change.propose
+  inputSchema: proposal-input@1
+  outputSchema: proposal-output@1
+  ámbito: inherited-and-verified
+  risk: medium
+  confirmation: required-before-effect
+  idempotencyKey: required
+  reversible: true
+  compensation: cancel-proposal
+  audit: evidence-ledger
+\end{verbatim}
+
+\endgroup
+\chapter{Listas de comprobación de ingeniería y gobierno}
+
+\section{Lista de comprobación de entidad canónica}
+
+\begin{longtable}{p{1cm}p{12.8cm}}
+\caption{Verificación de una entidad canónica.}\label{tab:check-entidad}\\
+\toprule
+OK & Criterio \\
+\midrule
+\endfirsthead
+\toprule
+OK & Criterio \\
+\midrule
+\endhead
+$\square$ & Posee identidad estable y definida.\\
+$\square$ & El ámbito es obligatorio y forma parte de toda clave de acceso.\\
+$\square$ & Distingue atributos, relaciones y derivados.\\
+$\square$ & Declara versión de esquema y estrategia de lectura histórica.\\
+$\square$ & Usa revisión o precondición para conflictos.\\
+$\square$ & Sus invariantes se ejecutan dentro de casos de uso.\\
+$\square$ & No conoce rutas ni SDK del proveedor.\\
+$\square$ & Tiene responsable, clasificación y retención.\\
+$\square$ & Su Mapeador pasa ida y vuelta semántico.\\
+$\square$ & Existe una sola autoridad para cada hecho.\\
+\bottomrule
+\end{longtable}
+
+\section{Lista de comprobación de proyección}
+
+\begin{longtable}{p{1cm}p{12.8cm}}
+\caption{Verificación de una proyección reconstruible.}\label{tab:check-proyeccion}\\
+\toprule
+OK & Criterio \\
+\midrule
+\endfirsthead
+\toprule
+OK & Criterio \\
+\midrule
+\endhead
+$\square$ & Declara problema de lectura y consumidores.\\
+$\square$ & Identifica fuentes y versiones suficientes.\\
+$\square$ & No acepta escrituras autoritativas.\\
+$\square$ & Define ámbito, clave, función y versión.\\
+$\square$ & Declara consistencia y frescura.\\
+$\square$ & Es idempotente o documenta por qué no puede serlo.\\
+$\square$ & Posee rebuild total; incremental si está justificado.\\
+$\square$ & Verifica cobertura, huérfanos y diferencias.\\
+$\square$ & Tiene presupuesto, responsable, observabilidad y retiro.\\
+$\square$ & Puede hacer cambio de versión o reversión sin mezclar versiones.\\
+\bottomrule
+\end{longtable}
+
+\section{Lista de comprobación multiinquilino}
+
+\begin{longtable}{p{1cm}p{12.8cm}}
+\caption{Verificación de aislamiento por ámbito.}\label{tab:check-organización}\\
+\toprule
+OK & Criterio \\
+\midrule
+\endfirsthead
+\toprule
+OK & Criterio \\
+\midrule
+\endhead
+$\square$ & API, caso de uso y Repositorio requieren ámbito.\\
+$\square$ & Rutas e índices incluyen ámbito antes de identidad.\\
+$\square$ & Claves de caché y de idempotencia incluyen ámbito.\\
+$\square$ & Procesos de trabajo vuelven a autorizar mensajes.\\
+$\square$ & Exports, backups y conjuntos de datos conservan separación.\\
+$\square$ & Reconstrucciones requieren alcance explícito.\\
+$\square$ & Telemetría no expone cargas útiles de otros organizaciones.\\
+$\square$ & IDs iguales entre organizaciones forman parte de las pruebas.\\
+$\square$ & Las pruebas negativas abarcan lectura y escritura.\\
+$\square$ & Una fuga se trata como fallo crítico, no como tasa promedio.\\
+\bottomrule
+\end{longtable}
+
+\section{Lista de comprobación de IA y agentes}
+
+\begin{longtable}{p{1cm}p{12.8cm}}
+\caption{Verificación de componentes inteligentes.}\label{tab:check-ia}\\
+\toprule
+OK & Criterio \\
+\midrule
+\endfirsthead
+\toprule
+OK & Criterio \\
+\midrule
+\endhead
+$\square$ & Conjunto de datos y Conjunto de características poseen propósito, versión y linaje.\\
+$\square$ & El corte temporal evita utilizar información futura.\\
+$\square$ & Modelo y instrucción están versionados.\\
+$\square$ & Recuperación filtra ámbito y permisos antes de generar.\\
+$\square$ & La evidencia enlaza fragmento y fuente vigente.\\
+$\square$ & El contenido recuperado no puede redefinir políticas.\\
+$\square$ & Herramientas tienen capacidades mínimas y schemas.\\
+$\square$ & Acciones sensibles solicitan confirmación.\\
+$\square$ & Las operaciones mutantes son idempotentes.\\
+$\square$ & Una inferencia no se persiste como hecho sin caso de uso.\\
+$\square$ & Existen monitoreo, retiro y respuesta a incidentes.\\
+\bottomrule
+\end{longtable}
+
+\chapter{Diccionario de métricas}
+
+\begin{longtable}{>{\bfseries}p{3.2cm}p{5.2cm}p{5.2cm}}
+\caption{Definición de métricas del estudio.}\label{tab:diccionario-metricas}\\
+\toprule
+Métrica & Cálculo o unidad & Precaución \\
+\midrule
+\endfirsthead
+\toprule
+Métrica & Cálculo o unidad & Precaución \\
+\midrule
+\endhead
+Latencia p50 & Mediana en ms por corrida & No sustituir por media.\\
+Latencia p95/p99 & Percentil por corrida & Requiere muestra suficiente.\\
+Rendimiento efectivo & Operaciones exitosas por segundo & Reportar errores y concurrencia.\\
+$A_r$ & Bytes leídos / bytes útiles & Definir respuesta vacía.\\
+$A_w$ & Escrituras físicas / escritura lógica & Separar réplicas internas.\\
+$A_s$ & Almacenamiento total / canónico & Incluir índices y staging.\\
+Frescura & Confirmación a visibilidad correcta & Usar reloj y frontera declarados.\\
+Cobertura & Esperados presentes / esperados & No detecta registros extra.\\
+Huérfanos & Derivados sin fuente válida & Reportar conteo absoluto.\\
+Exactitud de reconstrucción & $1-(faltantes+extras+diferentes)/esperados$ & Desglosar errores.\\
+Cobertura de linaje & Artefactos con ruta completa / evaluados & No implica calidad.\\
+Deriva & Distancia o prueba por variable & Cambio no siempre es defecto.\\
+Precisión@k & Relevantes recuperados / $k$ & Depende del juicio de relevancia.\\
+Exhaustividad@k & Relevantes recuperados / relevantes & Requiere conjunto completo.\\
+Abstención & Sin respuesta cuando no hay evidencia & Evaluar falsos rechazos.\\
+Violaciones ámbito & Accesos o efectos cruzados & Objetivo obligatorio: cero.\\
+Esfuerzo & Tiempo activo y artefactos modificados & Separar aprendizaje.\\
+Tamaño de efecto & Diferencia estandarizada o razón & Informar intervalo.\\
+\bottomrule
+\end{longtable}
+
+\chapter{Esquema del paquete reproducible}
+
+\section{Estructura de directorios}
+
+\begin{verbatim}
+cobria-replication/
+  README.md
+  LICENSE
+  CITATION.cff
+  environment/
+    versions.bloqueo
+    hardware-template.json
+  reference/
+    src/
+    tests/
+  contracts/
+    entities/
+    projections/
+    conjuntos de datos/
+    tools/
+  generators/
+    profile-r/
+    profile-a/
+    profile-b/
+  experiments/
+    performance/
+    reconstruction/
+    isolation/
+    evolution/
+    intelligence/
+  analysis/
+    notebooks/
+    scripts/
+  results/
+    crudo/
+    processed/
+    figures/
+    manifests/
+\end{verbatim}
+
+\section{Manifiesto de corrida}
+
+\begin{verbatim}
+{
+  "runId": "uuid",
+  "startedAt": "ISO-8601",
+  "revisión": "git-sha",
+  "profile": "R|A|B",
+  "configuration": "B0|B1|C1|C2|C3|C4",
+  "seed": 42001,
+  "N": 100000,
+  "organizaciones": 10,
+  "workload": "W2",
+  "concurrency": 32,
+  "projectionCount": 3,
+  "environmentHash": "sha256",
+  "conjunto de datosHash": "sha256",
+  "result": "completed|failed|excluded",
+  "exclusionReason": null
+}
+\end{verbatim}
+
+\section{Formato de evento de medición}
+
+\begin{verbatim}
+{
+  "runId": "uuid",
+  "operationId": "uuid",
+  "operation": "query-by-status",
+  "organizaciónAlias": "t-03",
+  "startedNs": 0,
+  "durationNs": 0,
+  "reads": 0,
+  "writes": 0,
+  "bytesRead": 0,
+  "bytesWritten": 0,
+  "retries": 0,
+  "resultCount": 0,
+  "status": "ok|business-reject|error|timeout"
+}
+\end{verbatim}
+
+\section{Reglas de publicación}
+
+Los resultados crudo son inmutables. El procesamiento escribe otra carpeta y conserva
+versión del guion. Las tablas del manuscrito se generan, no se editan manualmente. Una
+exclusión permanece en crudo y aparece en el reporte de flujo. Los secretos se suministran
+fuera del paquete y nunca se imprimen.
+
+\section{Lista de comprobación de réplica}
+
+\begin{enumerate}[leftmargin=*]
+  \item verificar hash y licencia del paquete;
+  \item instalar versiones fijadas;
+  \item registrar hardware y límites;
+  \item generar perfiles con semillas publicadas;
+  \item ejecutar pruebas de corrección antes del prueba comparativa;
+  \item correr configuraciones en orden aleatorio;
+  \item conservar registros y manifiestos;
+  \item ejecutar análisis sin modificar crudo;
+  \item comparar tablas y documentar divergencias;
+  \item publicar entorno y resultados negativos.
+\end{enumerate}
+
+\chapter{Plantillas de registro y publicación}
+
+\section{Ficha de experimento}
+
+\begin{table}[H]
+\centering
+\caption{Plantilla de ficha experimental.}
+\label{tab:ficha-experimento}
+\begin{tabularx}{\textwidth}{p{3.8cm}X}
+\toprule
+Campo & Registro \\
+\midrule
+ID y versión & \rule{8cm}{0.4pt}\\
+Hipótesis & \rule{8cm}{0.4pt}\\
+Variable independiente & \rule{8cm}{0.4pt}\\
+Variables dependientes & \rule{8cm}{0.4pt}\\
+Controles & \rule{8cm}{0.4pt}\\
+Conjunto de datos y hash & \rule{8cm}{0.4pt}\\
+Configuraciones & \rule{8cm}{0.4pt}\\
+Repeticiones & \rule{8cm}{0.4pt}\\
+Exclusiones previas & \rule{8cm}{0.4pt}\\
+Regla de decisión & \rule{8cm}{0.4pt}\\
+Revisión & \rule{8cm}{0.4pt}\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Ficha de resultado}
+
+\begin{table}[H]
+\centering
+\caption{Plantilla de resultado.}
+\label{tab:ficha-resultado}
+\begin{tabularx}{\textwidth}{p{3.8cm}X}
+\toprule
+Campo & Registro \\
+\midrule
+Corridas incluidas & \rule{8cm}{0.4pt}\\
+Corridas excluidas & \rule{8cm}{0.4pt}\\
+Resumen descriptivo & \rule{8cm}{0.4pt}\\
+Tamaño de efecto & \rule{8cm}{0.4pt}\\
+Intervalo & \rule{8cm}{0.4pt}\\
+Resultado de hipótesis & Apoyada / no apoyada / inconclusa\\
+Costo adverso & \rule{8cm}{0.4pt}\\
+Amenaza principal & \rule{8cm}{0.4pt}\\
+Artefactos & \rule{8cm}{0.4pt}\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Ficha de incidente experimental}
+
+Un incidente registra identificador de corrida, instante, etapa, síntoma, impacto, datos afectados, causa
+conocida, decisión de exclusión, evidencia y acción preventiva. Un incidente de
+aislamiento se reporta aunque la corrida no sea válida para rendimiento.
+
+\section{Declaración de disponibilidad}
+
+La publicación deberá indicar qué artefactos son abiertos, cuáles se sustituyeron por
+datos sintéticos y cuáles no pueden compartirse. La imposibilidad de publicar código
+privado no impide compartir implementación neutral, generadores, contratos y resultados.
+
+\section{Declaración de autoría}
+
+\ifnum\blindreview=1
+La identidad del investigador y autor se omite en esta copia para revisión ciega. Las contribuciones
+\else
+El investigador y autor de la propuesta es Billy Jak Cordero Porras. Las contribuciones
+\fi
+de revisores, colaboradores y herramientas se declararán según las políticas de la
+institución y de la sede de publicación. La autoría implica responsabilidad sobre
+afirmaciones, datos, análisis y correcciones.
+
+\chapter{Matriz de trazabilidad del manuscrito}
+
+\begin{longtable}{>{\bfseries}p{1.4cm}p{4.2cm}p{4.6cm}p{3.6cm}}
+\caption{Trazabilidad entre preguntas, artefactos y evaluación.}\label{tab:trazabilidad-manuscrito}\\
+\toprule
+RQ & Artefacto COBRIA & Experimento & Resultado requerido \\
+\midrule
+\endfirsthead
+\toprule
+RQ & Artefacto COBRIA & Experimento & Resultado requerido \\
+\midrule
+\endhead
+RQ1 & Modelo de complejidad & P1--P5, R1--R2 & Curvas y amplificación.\\
+RQ2 & Proyecciones de consulta & P1 & Latencia, lecturas y bytes.\\
+RQ3 & Presupuesto de proyección & P2--P3 & $A_w$, $A_s$ y equilibrio.\\
+RQ4 & Gestor de proyecciones & R1--R5 & Exactitud, tiempo y recuperación.\\
+RQ5 & Metadatos y generador & Evolución y generator test & Esfuerzo y divergencia.\\
+RQ6 & Ámbito y políticas & Pruebas negativas & Cero fugas y efectos.\\
+RQ7 & Perfiles A y B & Mapeo y ejecución comparada & Principios sin ruptura.\\
+RQ8 & Conjunto de datos/Feature contracts & AI-1--AI-2 & Linaje y equivalencia.\\
+RQ9 & Retrieval, tools y ledger & AI-3--AI-7 & Evidencia y acciones seguras.\\
+RQ10 & Lienzo y costo & Todos, incluidos negativos & Región de no adopción.\\
+\bottomrule
+\end{longtable}
+
+\section{Trazabilidad de partes}
+
+\begin{table}[H]
+\centering
+\caption{Función de cada parte del documento maestro.}
+\label{tab:trazabilidad-partes}
+\begin{tabularx}{\textwidth}{p{2cm}p{4.3cm}X}
+\toprule
+Parte & Función & Producto \\
+\midrule
+I & Plantear problema y preguntas & Hipótesis y alcance.\\
+II & Formalizar artefacto & Modelo, contratos y algoritmos.\\
+III & Razonar sobre costo & Complejidad y optimización.\\
+IV & Extender a datos e IA & Linaje, RAG, agentes y gobierno.\\
+V & Conectar con implementaciones & Casos anónimos y referencia.\\
+VI & Diseñar evaluación & Experimentos y análisis.\\
+VII & Sintetizar y concluir & Guía, contribuciones y límites.\\
+VIII & Facilitar réplica & Plantillas, checklists y diccionario.\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Criterio de completitud para una versión publicable}
+
+El manuscrito estará listo para someterse como estudio empírico cuando: la referencia y
+los generadores sean públicos; P1, P2, R1, R2, aislamiento, evolución, AI-1 y AI-3 tengan
+corridas reproducibles; las hipótesis se actualicen sin eliminar resultados negativos;
+otro evaluador revise una muestra; y tablas y figuras provengan de scripts.
+
+Si se publica antes de esos experimentos, debe presentarse como propuesta arquitectónica
+y protocolo de investigación, no como validación de rendimiento. Esta distinción debe
+aparecer en título, resumen, conclusiones y carta de presentación.
+
+\section{Cierre de los anexos}
+
+Los anexos transforman COBRIA de una descripción conceptual en un artefacto inspeccionable.
+Los contratos hacen explícitas sus propiedades; los checklists permiten auditar una
+implementación; el diccionario fija métricas; y el paquete reproducible define cómo
+convertir futuras ejecuciones en evidencia.
+
+\enlargethispage{2\baselineskip}
+La utilidad de estas plantillas depende de su aplicación crítica. Marcar todas las casillas
+sin pruebas no aumenta madurez. Cada afirmación debe conservar una ruta hacia código,
+configuración, datos, ejecución o revisión que otra persona pueda examinar.

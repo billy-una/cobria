@@ -1,0 +1,645 @@
+\chapter{Introducción}
+\label{ch:introduccion}
+
+\section{Contexto}
+
+Los sistemas de información contemporáneos deben atender simultáneamente necesidades
+que antes solían resolverse en plataformas separadas. Una misma aplicación puede
+registrar operaciones de negocio, reaccionar a eventos en tiempo real, conservar un
+historial auditable, aislar información de varias organizaciones y producir datos para
+analítica o inteligencia artificial. Esta convergencia ha aumentado el valor de las
+bases de datos NoSQL, cuya flexibilidad permite representar estructuras heterogéneas y
+distribuir grandes volúmenes de información. Sistemas influyentes como Bigtable
+demostraron que un modelo distribuido orientado a columnas puede soportar cargas
+muy diferentes cuando el diseño físico se alinea con los patrones de acceso
+\parencite{chang2006bigtable}. Dynamo, por su parte, expuso de forma explícita los
+compromisos entre disponibilidad, particionamiento, replicación y consistencia en un
+almacenamiento distribuido orientado a clave \parencite{decandia2007dynamo}.
+
+Esa flexibilidad no elimina la necesidad de modelar; la desplaza. En sistemas NoSQL,
+la aplicación debe decidir qué datos se almacenan juntos, cuáles se duplican, qué
+índices se mantienen y cómo se reparan las representaciones derivadas. El esquema puede
+ser flexible en la base, pero sigue existiendo en el código, en las rutas, en las reglas
+de acceso y en las expectativas de cada consumidor.
+
+La dificultad aumenta en aplicaciones \emph{multiinquilino}, es decir, aquellas en las
+que una misma plataforma sirve a varias organizaciones o contextos lógicos. La
+consolidación puede reducir costos, pero introduce requisitos estrictos de aislamiento,
+configuración, rendimiento y recuperación. La literatura ha mostrado que no existe un
+único diseño físico que sea óptimo para todos los organizaciones y cargas; las alternativas
+intercambian escalabilidad, espacio, flexibilidad y complejidad operativa
+\parencite{aulbach2009flexibleschemas,yaish2014adaptiveschema,rico2016multitarget}.
+
+Al mismo tiempo, los datos operacionales han dejado de ser únicamente un registro del
+pasado. Se utilizan para detectar anomalías, descubrir secuencias, construir modelos
+predictivos, recuperar evidencias y asistir decisiones humanas. Los sistemas de
+aprendizaje automático necesitan características consistentes entre entrenamiento e
+inferencia, versiones reproducibles y trazabilidad hacia las fuentes. Los almacenes de
+características surgieron precisamente para organizar este flujo y reducir la
+fragmentación entre preparación, entrenamiento y servicio de modelos
+\parencite{orr2021featurestores,li2023featurestore}. Sin embargo, una capa analítica no
+puede corregir por sí sola un origen operacional ambiguo o lleno de duplicaciones sin
+propietario.
+
+Este trabajo parte de una observación práctica: los sistemas NoSQL de alcance amplio
+necesitan distinguir con claridad qué representación conserva el estado autorizado del
+negocio y cuáles representaciones existen para acelerar consultas, integrar módulos o
+alimentar procesos analíticos. A partir de esa separación se formula \COBRIA{}, una
+arquitectura que organiza entidades canónicas, mapeos físicos, repositorios, servicios,
+casos de uso y proyecciones reconstruibles dentro de una misma disciplina de diseño.
+
+\section{Problema de investigación}
+
+En un modelo desnormalizado, una modificación lógica puede afectar varias ubicaciones.
+Por ejemplo, actualizar el estado de una entidad puede requerir modificar su registro
+principal, retirar una referencia de un índice, añadirla a otro y actualizar un resumen.
+Si estas ubicaciones se tratan como fuentes equivalentes, el sistema pierde una base
+clara para decidir cuál valor es correcto cuando aparece una discrepancia. Si, por el
+contrario, se reconoce una fuente canónica y las demás se definen como funciones
+derivadas, la discrepancia puede detectarse y repararse.
+
+La vista materializada es un antecedente directo de esta idea: una representación
+derivada puede mejorar el acceso, pero debe mantenerse frente a cambios en los datos
+base. La investigación clásica sobre mantenimiento incremental estudió cómo calcular
+los cambios de una vista sin reconstruirla completamente
+\parencite{gupta1993incremental,gupta1995materialized}. En aplicaciones NoSQL, el mismo
+problema reaparece en índices manuales, resúmenes, relaciones inversas, contadores,
+colas de salida y conjuntos de datos analíticos, aunque no siempre se describa con esa
+terminología.
+
+Se identifican seis manifestaciones principales del problema:
+
+\begin{enumerate}[label=\textbf{P\arabic*.},leftmargin=*]
+  \item \textbf{Ambigüedad de autoridad.} Varias copias contienen atributos similares,
+  pero no se declara cuál es la fuente autorizada.
+
+  \item \textbf{Consultas no acotadas.} Ante la ausencia de índices apropiados, el
+  cliente recupera colecciones grandes y filtra localmente, aumentando transferencia,
+  memoria, latencia y exposición innecesaria.
+
+  \item \textbf{Derivaciones frágiles.} Los índices se actualizan mediante lógica
+  dispersa y carecen de versión, propietario, verificador o procedimiento de
+  reconstrucción.
+
+  \item \textbf{Acoplamiento semántico--físico.} Nombres, claves compactas, rutas y
+  reglas se duplican en múltiples capas; una evolución del esquema puede dejar
+  consumidores incompatibles.
+
+  \item \textbf{Aislamiento incompleto.} El organización se aplica como filtro de interfaz,
+  pero no como dimensión obligatoria del modelo, la consulta y la autorización.
+
+  \item \textbf{Preparación analítica no reproducible.} Los conjuntos de datos y características
+  se crean con exportaciones o scripts independientes, sin linaje suficiente hacia los
+  datos operacionales y sin corrección temporal verificable.
+\end{enumerate}
+
+Estas manifestaciones están relacionadas. Una consulta amplia suele motivar la creación
+de un índice; el índice introduce duplicación; la duplicación exige mantenimiento; el
+mantenimiento necesita autoridad y trazabilidad; y la trazabilidad se vuelve todavía
+más importante cuando el resultado alimenta un modelo de IA. El problema de
+investigación se formula, por tanto, de la siguiente manera:
+
+\begin{quote}
+¿Cómo diseñar y evaluar una arquitectura NoSQL multiinquilino que preserve una fuente
+canónica comprensible, permita optimizar consultas mediante proyecciones derivadas,
+pueda reconstruir esas proyecciones de forma verificable y ofrezca datos trazables para
+minería de datos e inteligencia artificial?
+\end{quote}
+
+\section{Motivación}
+
+\subsection{Motivación técnica}
+
+El rendimiento de una aplicación conectada a una base remota no depende solamente del
+tiempo de CPU. Importan también el número de solicitudes, los bytes transferidos, la
+cantidad de registros procesados por el cliente y la variabilidad de la red. Una
+proyección pequeña puede reducir el conjunto candidato de $N$ entidades a $K$
+resultados relevantes, donde $K \ll N$. No obstante, esta mejora de lectura incrementa
+el trabajo de escritura y almacenamiento. COBRIA busca hacer visible ese intercambio,
+en vez de tratar cada índice como una optimización gratuita.
+
+\subsection{Motivación de mantenibilidad}
+
+En sistemas extensos, una entidad puede estar representada por un modelo de dominio, un
+serializador, un repositorio, un servicio, reglas de validación, índices, catálogos y
+documentación. Cuando esos artefactos evolucionan de manera independiente, aparecen
+errores difíciles de detectar. Un enfoque dirigido por metadatos puede reducir la
+duplicación de decisiones, siempre que no convierta los archivos generados en una falsa
+medida de funcionalidad. COBRIA propone evaluar la generación por su capacidad para
+preservar contratos y reducir defectos, no por la cantidad de código producido.
+
+\subsection{Motivación analítica}
+
+La minería de datos requiere transformar eventos y entidades en series, agregaciones,
+secuencias, grafos o vectores de características. Cuando esas transformaciones se
+consideran proyecciones versionadas, pueden reconstruirse desde datos canónicos,
+compararse entre versiones y auditarse. Este enfoque conecta la arquitectura operacional
+con prácticas de Almacén de características y MLOps, pero evita asumir que cualquier proyección
+operacional es automáticamente adecuada para entrenar modelos.
+
+\subsection{Motivación social y regional}
+
+\ifnum\blindreview=1
+El nombre COBRIA incorpora simbólicamente el origen regional de la investigación,
+omitido durante la revisión ciega:
+\else
+El nombre COBRIA incorpora de manera simbólica la identidad de Coto Brus, Costa Rica:
+\fi
+\textbf{CO}--\textbf{BR}--\textbf{IA}. La referencia territorial no cambia el carácter
+general del artefacto; expresa que la investigación tecnológica puede originarse fuera
+de los centros tradicionales y producir conocimiento susceptible de evaluación y
+reutilización internacional. El estudio evitará, sin embargo, convertir esa identidad
+en una afirmación técnica o en evidencia de validez.
+
+\section{La propuesta COBRIA en síntesis}
+
+COBRIA significa \emph{Capa Orientada a Bases Reconstruibles para Inteligencia
+Analítica}. La palabra \emph{objeto} se utiliza en un
+sentido amplio: una entidad semántica identificable, no necesariamente una clase ligada
+a un lenguaje de programación específico.
+
+La arquitectura propone cinco movimientos principales:
+
+\begin{enumerate}[leftmargin=*]
+  \item representar el estado autorizado mediante entidades canónicas;
+  \item separar nombres semánticos de la representación física almacenada;
+  \item encapsular persistencia, reglas y operaciones mediante repositorios, servicios
+  y casos de uso;
+  \item definir índices, resúmenes, relaciones y conjuntos de datos como proyecciones con contrato
+  de reconstrucción;
+  \item conservar el linaje necesario para que minería de datos e IA utilicen
+  representaciones versionadas, autorizadas y temporalmente correctas.
+\end{enumerate}
+
+\begin{figure}[H]
+\centering
+\resizebox{0.94\textwidth}{!}{%
+\begin{tikzpicture}[
+  node distance=7mm and 12mm,
+  box/.style={draw=black,rounded corners=1pt,fill=white,
+              minimum width=5.6cm,minimum height=9mm,align=center},
+  derived/.style={draw=black,rounded corners=1pt,fill=black!6,
+                  minimum width=4.4cm,minimum height=9mm,align=center},
+  arrow/.style={-{Latex[length=2.4mm]},semithick,black}
+]
+  \node[box] (ui) {Interfaces y consumidores};
+  \node[box,below=of ui] (uc) {Casos de uso y autorización};
+  \node[box,below=of uc] (svc) {Servicios, políticas y composición};
+  \node[box,below=of svc] (repo) {Repositorios / Mapeadores de datos};
+  \node[box,below=of repo,fill=black!10] (canon) {Entidades canónicas};
+  \node[derived,below left=of canon] (oper) {Proyecciones operacionales};
+  \node[derived,below right=of canon] (anal) {Proyecciones analíticas y de IA};
+  \draw[arrow] (ui) -- (uc);
+  \draw[arrow] (uc) -- (svc);
+  \draw[arrow] (svc) -- (repo);
+  \draw[arrow] (repo) -- (canon);
+  \draw[arrow] (canon) -- node[left,font=\scriptsize]{deriva} (oper);
+  \draw[arrow] (canon) -- node[right,font=\scriptsize]{deriva} (anal);
+  \draw[-{Latex[length=2.1mm]},dashed,black] (oper) to[bend right=24]
+    node[below,font=\scriptsize]{verificación y reconstrucción} (canon);
+  \draw[-{Latex[length=2.1mm]},dashed,black] (anal) to[bend left=24]
+    node[below,font=\scriptsize]{linaje y reconstrucción} (canon);
+\end{tikzpicture}
+}
+\caption{Vista conceptual inicial de COBRIA. Las proyecciones optimizan consumidores
+específicos, pero su autoridad procede de las entidades canónicas.}
+\label{fig:cobria-general}
+\end{figure}
+
+La flecha de reconstrucción en la \cref{fig:cobria-general} no implica que una
+proyección sobrescriba libremente la entidad canónica. Indica que la proyección puede
+compararse con el resultado esperado de su función de derivación y regenerarse cuando
+sea necesario. Las correcciones del estado de negocio deben realizarse por medio de un
+caso de uso autorizado.
+
+\section{Vacío de investigación}
+
+COBRIA se apoya en conceptos conocidos. Repositorio y Mapeador de datos separan el dominio de
+la persistencia; las vistas materializadas aceleran consultas; CQRS distingue modelos
+de lectura y escritura; las arquitecturas multiinquilino estudian la consolidación y el
+aislamiento; los Almacenes de características organizan características para aprendizaje automático;
+y la ciencia del diseño ofrece un método para construir y evaluar artefactos
+\parencite{hevner2004designscience,peffers2007dsrm}.
+
+El vacío que motiva este trabajo no es la inexistencia de esas ideas, sino la falta de
+una articulación y evaluación conjunta para aplicaciones NoSQL basadas en estructuras
+JSON que:
+
+\begin{itemize}[leftmargin=*]
+  \item trate la reconstruibilidad como contrato de toda proyección, no solo como una
+  tarea de mantenimiento ocasional;
+  \item conecte el modelo semántico y la representación física compacta mediante un
+  mapeo versionado y reversible;
+  \item incorpore el organización en identidad, rutas, consultas, autorización y pruebas;
+  \item incluya proyecciones operacionales y analíticas bajo una taxonomía común;
+  \item mida simultáneamente beneficios de lectura y amplificaciones de escritura y
+  almacenamiento;
+  \item preserve linaje desde la entidad operacional hasta características,
+  predicciones y retroalimentación humana;
+  \item sea contrastada en más de un tipo de sistema y exponga también los casos en que
+  su complejidad no se justifica.
+\end{itemize}
+
+Por tanto, la originalidad pretendida es \emph{composicional y evaluativa}. El estudio
+no afirmará que COBRIA sustituye todas las alternativas documentales ni que su
+complejidad sea preferible para cualquier problema.
+
+\section{Síntesis ampliada de trabajos relacionados}
+
+La procedencia de datos antecede a COBRIA: la literatura distingue el origen de un
+resultado y las partes de la fuente responsables de él \parencite{buneman2001provenance}.
+COBRIA adopta esa preocupación, pero la lleva al contrato operacional de cada proyección:
+fuente, versión, transformación, alcance y procedimiento verificable de reconstrucción.
+Por ello, el linaje no se presenta como una invención, sino como una condición para que
+una copia optimizada pueda auditarse y regenerarse.
+
+La evolución de esquemas NoSQL también es un problema conocido. La ausencia de un
+esquema global puede trasladar heterogeneidad y migraciones al código de aplicación, y
+se han propuesto lenguajes declarativos para administrar esos cambios sin modificar el
+motor \parencite{scherzinger2013schema}. COBRIA coincide en explicitar versiones, pero
+añade la separación entre semántica canónica, mapeo físico y derivados reconstruibles.
+
+En analítica, la arquitectura lakehouse busca reunir almacenamiento abierto, gobierno,
+inteligencia de negocios y aprendizaje automático \parencite{armbrust2021lakehouse}.
+Su escala es la plataforma de datos; COBRIA opera en otra capa: contratos de dominio y
+proyecciones que pueden alimentar una plataforma analítica sin convertirla en autoridad
+del estado transaccional. Ambas ideas pueden coexistir.
+
+Finalmente, los sistemas de datos autoajustables estudian el uso del historial de carga
+para planificar cambios físicos \parencite{pavlo2017selfdriving}. Esto delimita una línea
+futura para COBRIA: recomendar o retirar proyecciones con un presupuesto observado. La
+presente evaluación no implementa un optimizador autónomo; mide primero los beneficios y
+costos que una política de ese tipo necesitaría comparar.
+
+En conjunto, la revisión sitúa la novedad posible en la integración y en sus contratos,
+no en renombrar vistas materializadas, procedencia, CQRS, repositorios o evolución de
+esquema. La contribución es refutable porque puede fallar si la reconstrucción no es
+exacta, si el aislamiento se rompe o si la amplificación supera el ahorro de lectura.
+
+\section{Objetivos}
+
+\subsection{Objetivo general}
+
+Diseñar, formalizar y evaluar COBRIA como una arquitectura dirigida por metadatos,
+basada en entidades canónicas y proyecciones reconstruibles, para determinar su efecto
+sobre la eficiencia, integridad, mantenibilidad, recuperabilidad, aislamiento
+multiinquilino y preparación para minería de datos e inteligencia artificial en sistemas
+NoSQL.
+
+\subsection{Objetivos específicos}
+
+\begin{enumerate}[label=\textbf{OE\arabic*.},leftmargin=*]
+  \item Definir los conceptos, componentes, responsabilidades y reglas de dependencia
+  de COBRIA con terminología independiente de lenguajes y proveedores.
+
+  \item Formalizar entidades canónicas, mapeos semántico--físicos, proyecciones,
+  contratos de reconstrucción, alcance multiinquilino y linaje analítico.
+
+  \item Clasificar las proyecciones en críticas, operacionales, analíticas y efímeras,
+  y asociar a cada clase requisitos de consistencia y recuperación.
+
+  \item Analizar la complejidad temporal y espacial de lectura, escritura, hidratación,
+  mantenimiento y reconstrucción.
+
+  \item Cuantificar latencia, transferencia de datos y amplificación de lectura,
+  escritura y almacenamiento frente a alternativas sin proyecciones explícitas.
+
+  \item Evaluar la exactitud y el costo de reconstrucciones totales e incrementales,
+  incluida la detección de referencias huérfanas y proyecciones faltantes.
+
+  \item Medir el efecto de metadatos compartidos sobre la evolución del esquema, la
+  consistencia entre artefactos y el esfuerzo de mantenimiento.
+
+  \item Evaluar el aislamiento multiinquilino mediante rutas acotadas, reglas de acceso y
+  pruebas negativas con datos sintéticos.
+
+  \item Analizar la capacidad de COBRIA para producir conjuntos de datos, series temporales y
+  características versionadas con linaje y corrección temporal.
+
+  \item Examinar la integración segura de modelos y agentes de IA mediante casos de
+  uso autorizados, evidencia, consentimiento, auditoría y retroalimentación humana.
+
+  \item Validar la aplicabilidad del artefacto en dos casos de estudio anónimos de
+  diferente escala y naturaleza operacional.
+
+  \item Identificar límites, antipatrones y condiciones bajo las cuales COBRIA resultaría
+  innecesaria o excesivamente compleja.
+\end{enumerate}
+
+\section{Preguntas de investigación}
+
+\begin{table}[H]
+\centering
+\caption{Preguntas de investigación de COBRIA.}
+\label{tab:preguntas}
+\begin{tabularx}{\textwidth}{>{\bfseries}p{1.6cm}X}
+\toprule
+Código & Pregunta \\
+\midrule
+RQ1 & ¿Cómo afecta COBRIA la complejidad y el comportamiento observado de las
+operaciones de lectura, escritura y reconstrucción? \\
+RQ2 & ¿En qué medida las proyecciones reducen la latencia, los registros procesados y
+los bytes transferidos en consultas frecuentes? \\
+RQ3 & ¿Qué amplificación de escritura y almacenamiento introduce el mantenimiento de
+proyecciones y cuándo se justifica ese costo? \\
+RQ4 & ¿Con qué exactitud, tiempo y consumo de recursos pueden reconstruirse las
+proyecciones a partir de entidades canónicas? \\
+RQ5 & ¿Cómo influye un mapeo semántico--físico dirigido por metadatos en la evolución
+del esquema y en la consistencia entre modelos, validadores, reglas e índices? \\
+RQ6 & ¿En qué medida el ámbito obligatorio mejora el aislamiento y limita las consultas
+en un sistema multiinquilino? \\
+RQ7 & ¿Puede la misma arquitectura adaptarse a un sistema orientado a eventos y
+multimedia y a una plataforma empresarial con un dominio mucho más extenso? \\
+RQ8 & ¿En qué medida las proyecciones analíticas versionadas mejoran la
+reproducibilidad, el linaje y la corrección temporal de conjuntos de datos y características? \\
+RQ9 & ¿Qué mecanismos arquitectónicos son necesarios para que modelos y agentes de IA
+utilicen datos autorizados, auditables y acompañados de evidencia? \\
+RQ10 & ¿Cuáles son los límites prácticos y las señales de sobrearquitectura de COBRIA? \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Las preguntas combinan propiedades técnicas y de ingeniería. RQ1--RQ4 se responderán
+principalmente mediante mediciones; RQ5 y RQ6 combinarán análisis de artefactos con
+pruebas; RQ7 utilizará comparación entre casos; RQ8 y RQ9 abordarán preparación y
+gobernanza de IA; y RQ10 sintetizará resultados negativos y costos de adopción.
+
+\section{Hipótesis}
+
+\begin{longtable}{>{\bfseries}p{1.6cm}p{5.2cm}p{7.1cm}}
+\caption{Hipótesis y evidencia prevista.}\label{tab:hipotesis}\\
+\toprule
+Código & Hipótesis & Indicadores principales \\
+\midrule
+\endfirsthead
+\toprule
+Código & Hipótesis & Indicadores principales \\
+\midrule
+\endhead
+H1 & Las consultas apoyadas en proyecciones procesan una cantidad de datos más cercana
+al número de resultados que al tamaño total de la colección. & Registros leídos, bytes,
+latencia p50/p95/p99 y amplificación de lectura. \\
+H2 & La reducción del costo de lectura se obtiene a cambio de mayor amplificación de
+escritura y almacenamiento. & Escrituras físicas por operación lógica, tamaño de
+canónicos y derivados, duración de escritura. \\
+H3 & Un contrato explícito permite reconstruir proyecciones deterministas con alta
+exactitud a partir del estado canónico. & Cobertura de proyección, referencias
+huérfanas, igualdad esperada--observada y tiempo de reconstrucción. \\
+H4 & La reconstrucción incremental resulta más eficiente que la total cuando el número
+de entidades modificadas es pequeño respecto al conjunto canónico. & Tiempo, lecturas,
+escrituras y memoria para $\Delta N$ frente a $N$. \\
+H5 & La definición compartida de metadatos reduce discrepancias entre modelo lógico,
+representación física, validación, reglas e índices. & Defectos detectados, artefactos
+modificados manualmente, tiempo de evolución y cobertura de contrato. \\
+H6 & La incorporación obligatoria del organización en rutas, consultas y autorización reduce
+la superficie de exposición cruzada. & Pruebas negativas, consultas fuera de ámbito,
+registros innecesarios recuperados y violaciones detectadas. \\
+H7 & Las proyecciones analíticas versionadas mejoran la reproducibilidad y el linaje de
+conjuntos de datos frente a exportaciones ad hoc. & Tiempo de preparación, repetibilidad,
+porcentaje de campos con procedencia y diferencias entre ejecuciones. \\
+H8 & COBRIA puede aplicarse a los dos casos anónimos sin cambiar sus principios
+centrales, aunque requiera proyecciones y políticas diferentes. & Correspondencia de
+componentes, adaptaciones necesarias y resultados por caso. \\
+H9 & El beneficio neto disminuye cuando una entidad tiene pocos registros, pocas
+consultas o demasiadas proyecciones respecto a su valor funcional. & Función de costo,
+presupuesto de proyección y análisis de sensibilidad. \\
+\bottomrule
+\end{longtable}
+
+Las hipótesis son deliberadamente refutables. H2 y H9 reconocen costos y evitan evaluar
+la arquitectura únicamente con métricas favorables. La investigación considerará
+valioso identificar escenarios donde COBRIA no produzca una mejora neta.
+
+\section{Contribuciones esperadas}
+
+\subsection{Contribución conceptual}
+
+Una definición neutral de COBRIA y un vocabulario que distinga entidad canónica,
+representación física, proyección, índice, resumen, conjunto de datos y artefacto efímero. Esta
+distinción busca facilitar la discusión entre desarrollo operacional, ingeniería de
+datos y aprendizaje automático.
+
+\subsection{Contribución formal}
+
+Un modelo de entidades, ámbitos, mapeos y proyecciones; propiedades de autoridad,
+reconstruibilidad, idempotencia y linaje; y condiciones bajo las cuales una proyección
+puede considerarse verificable.
+
+\subsection{Contribución arquitectónica}
+
+Una integración reproducible de modelos de dominio, Repositorio/Mapeador de datos, Servicio
+Capa, casos de uso, metadatos, proyecciones reconstruibles y componentes de analítica e
+IA. El aporte arquitectónico incluye reglas de dependencia y una clasificación de
+proyecciones por consistencia.
+
+\subsection{Contribución algorítmica}
+
+Pseudocódigo y posteriormente implementaciones de referencia para sincronización,
+reconstrucción total e incremental, detección de inconsistencias, migración, generación
+de conjuntos de datos y verificación de linaje.
+
+\subsection{Contribución empírica}
+
+Un conjunto de experimentos sobre dos casos anónimos que mida tanto beneficios como
+costos. Se publicarán configuraciones y datos sintéticos suficientes para permitir la
+replicación sin revelar información privada.
+
+\subsection{Contribución práctica}
+
+Una guía de adopción, un modelo de madurez, un presupuesto de proyecciones y criterios
+para decidir cuándo utilizar COBRIA, cuándo simplificarla y cuándo preferir otra
+organización documental.
+
+\section{Casos de estudio y neutralidad del análisis}
+
+La investigación se apoya en dos implementaciones existentes que comparten una familia
+de decisiones arquitectónicas, pero difieren en dominio, escala y comportamiento. Para
+evitar que el estudio se convierta en documentación de productos particulares, se
+adoptan descripciones neutrales.
+
+\begin{table}[H]
+\centering
+\caption{Caracterización inicial y anónima de los casos.}
+\label{tab:casos}
+\begin{tabularx}{\textwidth}{>{\bfseries}p{3.2cm}XX}
+\toprule
+Dimensión & Sistema A & Sistema B \\
+\midrule
+Naturaleza & Orientado a eventos, relaciones contextuales y artefactos multimodales. &
+Plataforma empresarial multiinquilino con dominio extenso y operaciones transaccionales.\\
+Escala estructural & Decenas de entidades y servicios especializados. & Cientos de
+entidades, catálogos, schemas y proyecciones.\\
+Datos destacados & Eventos temporales, secuencias, texto, métricas y multimedia. &
+Entidades operacionales, financieras, configurables, de auditoría e integración.\\
+Procesamiento & Servicios servicios internos, colas, procesos de trabajo y generación de artefactos. &
+Operaciones autorizadas, índices, procesos de trabajo, políticas y generación por metadatos.\\
+Valor para el estudio & Adaptabilidad multimodal, temporal, analítica y de IA. &
+Escalabilidad estructural, multiinquilinato, gobierno del esquema y reconstrucción.\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Los conteos exactos se fijarán en el protocolo experimental mediante scripts
+reproducibles y una fecha de corte. No se utilizará el tamaño del código como sustituto
+de calidad o completitud. Cuando una capacidad solo esté modelada o documentada, pero no
+verificada mediante pruebas, se declarará como tal.
+
+\section{Alcance}
+
+El estudio incluye:
+
+\begin{itemize}[leftmargin=*]
+  \item sistemas NoSQL cuyo modelo de aplicación pueda representarse mediante
+  documentos, árboles JSON o estructuras clave--valor jerárquicas;
+  \item entidades canónicas y representaciones derivadas para consulta;
+  \item repositorios, servicios y casos de uso como fronteras de responsabilidad;
+  \item aislamiento lógico multiinquilino;
+  \item mantenimiento y reconstrucción de índices y proyecciones;
+  \item metadatos para modelos, esquemas, reglas, validación y documentación;
+  \item complejidad computacional y mediciones de rendimiento;
+  \item proyecciones analíticas, series temporales, características y linaje;
+  \item integración gobernada de modelos y agentes de IA;
+  \item dos casos de estudio anonimizados y una implementación neutral de referencia.
+\end{itemize}
+
+\section{Delimitaciones}
+
+El estudio no pretende:
+
+\begin{itemize}[leftmargin=*]
+  \item demostrar que un motor NoSQL específico es superior a todos los demás;
+  \item reemplazar los patrones Repositorio, CQRS, vistas materializadas, Almacén de características
+  o arquitectura por capas;
+  \item evaluar todos los motores NoSQL disponibles;
+  \item probar que una cantidad elevada de entidades o archivos implica mayor madurez;
+  \item presentar una implementación de IA como evidencia suficiente de exactitud,
+  equidad o seguridad;
+  \item entrenar modelos con información personal o sensible;
+  \item revelar nombres, reglas comerciales, credenciales o datos de los sistemas
+  utilizados como casos;
+  \item afirmar causalidad más allá de lo que permita el diseño experimental.
+\end{itemize}
+
+Los experimentos iniciales se realizarán en entornos controlados y con datos sintéticos.
+Las diferencias entre emuladores y producción se tratarán como amenaza a la validez
+externa. Las integraciones externas no se considerarán funcionales únicamente porque
+existan modelos o contratos en el código.
+
+\section{Unidad de análisis y niveles de observación}
+
+La unidad principal de análisis es una \emph{operación de datos COBRIA}: una acción que
+lee o modifica una entidad canónica y, cuando corresponde, consulta o mantiene sus
+proyecciones. El estudio observará cuatro niveles:
+
+\begin{enumerate}[leftmargin=*]
+  \item \textbf{Nivel de entidad:} identidad, campos, versión, organización e invariantes.
+  \item \textbf{Nivel de operación:} lecturas, escrituras, transacciones, reintentos y
+  efectos sobre proyecciones.
+  \item \textbf{Nivel de sistema:} latencia, transferencia, almacenamiento,
+  concurrencia, aislamiento y recuperación.
+  \item \textbf{Nivel analítico:} conjunto de datos, característica, modelo, predicción, evidencia
+  y retroalimentación.
+\end{enumerate}
+
+Esta separación evita mezclar conclusiones. Por ejemplo, que un acceso a caché tenga
+costo promedio constante no implica que la operación distribuida completa sea
+instantánea; y que un conjunto de datos sea reconstruible no implica que sea adecuado o ético
+para entrenar un modelo.
+
+\section{Consideraciones éticas iniciales}
+
+La anonimización de los sistemas no es suficiente si los datos conservan combinaciones
+que permitan reidentificar personas. Por ello, los experimentos utilizarán datos
+sintéticos y no exportarán información de salud, identidad, pagos, conversaciones,
+ubicaciones precisas ni contenido multimedia privado. Las pruebas de aislamiento se
+realizarán únicamente en entornos autorizados.
+
+En los componentes de IA se aplicarán, desde el diseño, los principios de trazabilidad,
+supervisión humana, control de acceso y evaluación de riesgo. Marcos oficiales como el
+marco de gestión de riesgos de inteligencia artificial de NIST enfatizan que la gestión del riesgo debe acompañar
+el ciclo de vida completo del sistema, no limitarse al modelo entrenado
+\parencite{nist2023airmf}. COBRIA no considerará una respuesta generada como una fuente
+canónica de negocio mientras no pase por el caso de uso y las confirmaciones requeridas.
+
+\section{Organización del documento maestro}
+
+Después de esta introducción, el documento se organizará en siete bloques:
+
+\begin{enumerate}[leftmargin=*]
+  \item \textbf{Fundamentos y literatura:} conceptos necesarios y comparación con
+  trabajos relacionados.
+  \item \textbf{Diseño de COBRIA:} componentes, modelo formal, algoritmos, consistencia
+  y reconstrucción.
+  \item \textbf{Rendimiento:} complejidad, amplificación, modelo de costos y
+  optimización.
+  \item \textbf{Analítica e IA:} minería, Almacén de características, multimodalidad, RAG, agentes y
+  gobernanza.
+  \item \textbf{Implementación y casos:} implementación neutral y caracterización
+  anónima de los dos sistemas.
+  \item \textbf{Evaluación:} protocolo, resultados, análisis estadístico, discusión y
+  amenazas a la validez.
+  \item \textbf{Síntesis:} guía de adopción, conclusiones y líneas futuras.
+\end{enumerate}
+
+La estructura seguirá la lógica de la ciencia del diseño: el problema conduce a un
+artefacto; el artefacto se formaliza e implementa; y su utilidad se juzga mediante
+evaluación explícita, no por afirmación del autor \parencite{hevner2004designscience,
+peffers2007dsrm}.
+
+\section{Comparación sistemática con arquitecturas relacionadas}
+
+La revisión ampliada distingue coincidencia de mecanismos y coincidencia de objetivos.
+CQRS separa modelos de lectura y escritura, pero no obliga por sí mismo a declarar
+linaje, ámbito o reconstrucción. Las vistas materializadas anticipan consultas y pueden
+regenerarse desde sus fuentes, aunque su gobierno suele quedar dentro del motor
+\parencite{microsoft2025cqrs,microsoft2025materialized}.
+El abastecimiento por eventos conserva una secuencia autoritativa capaz de rehidratar
+estado y proyecciones, pero COBRIA permite que la autoridad sea una entidad actual
+versionada y no exige un registro completo de eventos \parencite{fowler2005eventsourcing}.
+
+Los almacenes de características gobiernan definiciones para aprendizaje automático;
+los sistemas de linaje explican procedencia; y los entornos tipo \emph{lakehouse}
+unifican operación analítica. COBRIA conecta esos mecanismos con la frontera de casos de
+uso, sin pretender sustituirlos \parencite{orr2021featurestores,li2023featurestore,
+buneman2001provenance,armbrust2021lakehouse}. COBRIA trata las semánticas particulares
+de persistencia, aislamiento e índices como capacidades explícitas de cada adaptador
+NoSQL, no como supuestos universales.
+
+\begin{table}[H]
+\centering
+\caption{Comparación entre COBRIA y enfoques relacionados.}
+\label{tab:comparacion-literatura-ampliada}
+\small
+\begin{tabularx}{\textwidth}{p{2.7cm}p{2.2cm}p{2.1cm}X}
+\toprule
+Enfoque & Autoridad & Reconstrucción & Gobierno y diferencia principal \\
+\midrule
+CQRS & Parcial & Parcial & Separa lectura y escritura; ámbito y linaje no son inherentes.\\
+Vista materializada & Externa & Sí & Optimiza consultas; el ámbito depende del motor y del diseño.\\
+Abastecimiento por eventos & Eventos & Sí & El registro de eventos es autoridad y aporta historia.\\
+Almacén de características & Fuentes analíticas & Parcial & Gobierna variables de modelos y su procedencia.\\
+Arquitectura tipo \emph{lakehouse} & Archivos o tablas & Parcial & Unifica almacenamiento y procesamiento analítico.\\
+COBRIA & Declarada & Obligatoria & Exige ámbito, linaje y gobierno desde operación hasta IA.\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+La matriz no establece superioridad. Muestra que la contribución propuesta reside en
+hacer simultáneamente verificables autoridad, ámbito, reconstrucción, costo y continuidad
+hacia inteligencia artificial. Si una solución existente satisface esos contratos con
+menor complejidad, COBRIA recomienda conservar la solución más sencilla.
+
+\section{Síntesis de la Parte I}
+
+Esta primera parte estableció el problema que COBRIA pretende investigar. Los sistemas
+NoSQL multiinquilino necesitan optimizar consultas sin perder autoridad, consistencia ni
+capacidad de recuperación. Las necesidades analíticas añaden el requisito de conservar
+linaje, versiones y corrección temporal desde la operación hasta la característica y la
+predicción. COBRIA se propone como una integración de ideas existentes alrededor de dos
+conceptos organizadores: \emph{datos canónicos} y \emph{proyecciones reconstruibles}.
+
+La investigación no presupone que dicha integración sea siempre beneficiosa. Las
+preguntas e hipótesis obligan a medir reducción de lectura junto con amplificación de
+escritura y almacenamiento, exactitud de reconstrucción junto con su costo, y
+reproducibilidad analítica junto con complejidad de adopción. Esta posición crítica será
+la base del marco teórico, el modelo formal y la evaluación posterior.

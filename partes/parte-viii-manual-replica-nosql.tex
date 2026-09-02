@@ -1,0 +1,389 @@
+\chapter{Propósito del manual de réplica}
+
+Esta parte traduce las hipótesis de COBRIA a un procedimiento ejecutable en motores
+NoSQL documentales. Su función no es imponer un proveedor, sino impedir que cada réplica
+redefina silenciosamente la unidad de datos, el índice, el ámbito o el criterio de
+equivalencia. Una comparación solo es interpretable cuando las configuraciones responden
+la misma pregunta lógica y registran las diferencias físicas relevantes.
+
+\section{Resultado esperado}
+
+Al terminar una réplica, un tercero debe poder reconstruir cuatro productos: el conjunto
+de documentos de entrada, las configuraciones comparadas, el registro de cada corrida y
+el informe que enlaza cifras con observaciones originales. También debe poder comprobar
+qué se excluyó, por qué se excluyó y si una enmienda ocurrió antes o después de conocer
+el resultado afectado.
+
+\section{Principios de neutralidad}
+
+\begin{enumerate}[leftmargin=*]
+  \item la semántica del dominio permanece igual entre motores;
+  \item cada adaptador usa capacidades documentales normales del motor evaluado;
+  \item los índices se declaran y congelan antes de medir;
+  \item las proyecciones contienen únicamente los campos necesarios para la consulta;
+  \item costo, frescura y reparación se informan junto con la latencia;
+  \item una configuración que pierde permanece en el conjunto publicado.
+\end{enumerate}
+
+\chapter{Selección y descripción de motores documentales}
+
+\section{Criterios de inclusión}
+
+Un motor es elegible cuando almacena documentos u objetos agregados, permite claves y
+filtros con ámbito, ofrece índices declarables, admite operaciones de actualización y
+posee una vía reproducible local o administrada. La réplica debe incluir al menos dos
+motores con modelos operacionales distintos para evitar que una capacidad particular se
+confunda con una propiedad general de COBRIA.
+
+\section{Ficha del motor}
+
+Cada adaptador publica versión, modalidad de despliegue, región, consistencia observable,
+límites de documento, estrategia de partición, índices, paginación, transacciones
+documentales disponibles, flujos de cambios, cuotas y unidad de facturación. Si una
+capacidad no existe, el protocolo registra la adaptación en vez de simular que todos los
+motores son idénticos.
+
+\begin{table}[H]\centering
+\caption{Campos mínimos de la ficha del motor NoSQL.}
+\begin{tabularx}{\textwidth}{p{4cm}X}\toprule
+Campo & Pregunta de control\\\midrule
+Identidad de versión & ¿Qué versión exacta o fecha del servicio se evaluó?\\
+Distribución & ¿Cómo se asignan documentos a particiones o regiones?\\
+Consistencia & ¿Qué garantía observa la consulta medida?\\
+Índices & ¿Qué campos, orden y ámbito cubre cada índice?\\
+Costo & ¿Qué operaciones, bytes y almacenamiento se facturan?\\
+Recuperación & ¿Cómo se exportan, reconstruyen y verifican documentos?\\
+\bottomrule\end{tabularx}\end{table}
+
+\chapter{Modelo documental neutral}
+
+\section{Documento canónico}
+
+El documento de referencia contiene identidad estable, ámbito, revisión, versión de
+esquema, tiempo de validez, tiempo de registro, estado y carga variable. Los campos
+opcionales se distribuyen según tasas congeladas. Las claves no incluyen información
+personal y se derivan de la semilla del generador.
+
+\section{Proyección de cobertura}
+
+La proyección conserva identidad, ámbito, revisión, campos de filtro, orden y salida de
+la consulta objetivo. No contiene reglas de negocio ni acepta escrituras autoritativas.
+Cada elemento enlaza documento fuente y versión de transformación. Una variante más
+ancha se permite como análisis de sensibilidad, pero se publica como configuración
+distinta.
+
+\section{Catálogos y evolución}
+
+Los datos incluyen versiones antiguas, valores desconocidos y sustituciones de catálogo.
+La transformación debe migrar o aislar cada caso según una política declarada. El
+generador conserva la verdad esperada para que la limpieza pueda evaluarse sin inspección
+manual de todas las filas lógicas.
+
+\chapter{Generación de cargas semirrealistas}
+
+\section{Perfiles}
+
+El perfil N1 representa eventos y multimedia; N2, reservas y disponibilidad; N3,
+inventario, ventas y cierres. Cada perfil modifica selectividad, tamaño, frecuencia de
+actualización, eventos tardíos y campos opcionales. Las diferencias deben afectar la
+forma de la carga sin revelar nombres ni reglas de los sistemas que la inspiraron.
+
+\section{Anomalías controladas}
+
+\begin{table}[H]\centering
+\caption{Anomalías que debe producir el generador.}
+\begin{tabularx}{\textwidth}{p{3.4cm}p{3cm}X}\toprule
+Anomalía & Parámetro & Resultado esperado\\\midrule
+Campo ausente & tasa por perfil & valor predeterminado o exclusión declarada\\
+Documento antiguo & versión de esquema & migración determinista\\
+Evento tardío & retraso máximo & corte temporal reproducible\\
+Entrega duplicada & identidad lógica & un solo efecto\\
+Catálogo desconocido & tasa de novedad & cuarentena observable\\
+Revisión obsoleta & distancia de revisión & rechazo sin regresión\\
+\bottomrule\end{tabularx}\end{table}
+
+La semilla gobierna identidades, orden y anomalías. Cambiarla produce otra muestra, no
+otra definición del experimento. Toda tasa se registra en el manifiesto y se incluye en
+el identificador de configuración.
+
+\chapter{Protocolo P1: lectura documental}
+
+\section{Configuraciones}
+
+N0 consulta documentos canónicos usando el índice nativo apropiado. N1 consulta una
+proyección de cobertura reconstruible. N2, opcional, evalúa una proyección más ancha para
+estimar el costo de duplicar campos. No se utiliza una consulta deliberadamente sin
+índice como adversario principal, porque la pregunta científica es si la proyección
+mejora una implementación NoSQL razonable.
+
+\section{Ejecución}
+
+Cada corrida prepara un conjunto nuevo o restaura una instantánea congelada, verifica
+conteos lógicos, calienta según protocolo y rota el orden de configuraciones. Se registran
+latencias por consulta, documentos examinados cuando el motor lo permite, bytes de
+respuesta, operaciones facturables y marca de frescura. La corrida se resume mediante
+p50, p95 y p99.
+
+\section{Interpretación}
+
+Una diferencia pequeña de latencia puede ser irrelevante si la proyección duplica datos
+sensibles, aumenta costo o incumple frescura. El informe presenta un vector de efectos.
+La recomendación se formula por región de carga y nunca como superioridad universal.
+
+\chapter{Protocolo P2: escritura y convergencia}
+
+\section{Camino de actualización}
+
+P2 modifica el documento canónico con revisión esperada. El mecanismo produce o detecta
+el cambio, actualiza el derivado de forma idempotente y publica la nueva marca de
+frescura. Se miden tiempo de confirmación canónica y tiempo de convergencia por separado.
+
+\section{Amplificación}
+
+La amplificación incluye documentos escritos, eventos, reintentos, bytes, invocaciones,
+lecturas auxiliares, almacenamiento y tiempo operacional. Una implementación que oculta
+trabajo en una función o canal de cambios no posee amplificación cero: debe atribuir ese
+costo a la configuración.
+
+\section{Frontera de decisión}
+
+Sea $\Delta Q$ el ahorro por lectura y $\Delta W$ el costo adicional por escritura. La
+frontera temporal simple exige $Q\Delta Q>W\Delta W$. El informe añade costo monetario,
+almacenamiento, frescura y riesgo como dimensiones separadas. Si $\Delta Q\leq0$, la
+proyección no se justifica por esa consulta.
+
+\chapter{Protocolos de reconstrucción y publicación}
+
+\section{Reconstrucción total}
+
+R1 crea una versión candidata desde documentos canónicos, catálogos y transformación
+congelada. La candidata no es visible para consumidores hasta superar conteo, hash por
+partición, muestreo de contenido e invariantes de ámbito. La publicación cambia un alias
+o registro de versión y conserva la anterior durante una ventana reversible.
+
+\section{Reconstrucción incremental}
+
+La ruta incremental consume cambios posteriores a un punto de control. Cada lote registra
+inicio, fin, documentos procesados, duplicados y revisión máxima. Una reconstrucción
+total periódica actúa como verificador independiente. Si ambas rutas divergen, la
+incremental se considera defectuosa aunque la consulta parezca correcta.
+
+\section{Interrupción segura}
+
+El arnés interrumpe preparación, escritura parcial, verificación y cambio de versión. En
+ningún caso una candidata incompleta debe reemplazar la versión activa. La reanudación
+puede continuar o reiniciar, pero siempre produce el mismo resultado lógico.
+
+\chapter{Aislamiento, autorización y recuperación}
+
+\section{Matriz adversarial}
+
+La prueba combina identidad válida, identidad ausente, ámbito manipulado, rol insuficiente,
+clave de caché incompleta, tarea administrativa y recuperación semántica. Los candidatos
+se restringen antes de ordenar o construir contexto. Un resultado ocultado después de
+recuperarlo ya constituye una violación del contrato.
+
+\section{Pruebas negativas}
+
+Cada ruta positiva exige una negativa equivalente. Se verifican identificadores de otro
+ámbito, referencias cruzadas, eventos reinyectados, paginación y búsqueda por campos
+opcionales. Los registros de auditoría evitan contenido sensible, pero conservan motivo,
+política, actor, ámbito y correlación.
+
+\chapter{Productos para minería de datos e inteligencia artificial}
+
+\section{Conjunto reproducible}
+
+El conjunto declara población, corte temporal, fuente, versiones, limpieza, catálogos,
+exclusiones, semilla y división. Su identificador cambia cuando una dependencia cambia.
+La réplica reconstruye el conjunto desde cero y compara manifiesto, conteos, distribución
+y huellas de contenido.
+
+\section{Recuperación con evidencia}
+
+Cada fragmento enlaza documento, revisión, ámbito, transformación y autorización. Se
+miden precisión, exhaustividad, abstención, fugas y citas válidas. Las instrucciones
+contenidas en documentos se tratan como datos, no como órdenes. La calidad lingüística
+de una respuesta requiere un estudio separado.
+
+\section{Herramientas de agentes}
+
+Una herramienta declara capacidad, esquema de entrada, validación, idempotencia, efecto,
+confirmación y auditoría. Las pruebas incluyen repetición, entrada parcial, cambio de
+ámbito y cancelación. Una acción de alto riesgo sin confirmación falla el protocolo aun
+si el resultado funcional parece correcto.
+
+\chapter{Observabilidad y costos}
+
+\section{Indicadores}
+
+El tablero mínimo contiene latencia, error, frescura, atraso, duplicados, rechazos de
+revisión, reconstrucciones, divergencia, operaciones por solicitud, almacenamiento y
+costo por ámbito. Los indicadores se segmentan por versión de proyección para detectar
+mezclas durante migración.
+
+\section{Presupuesto de proyecciones}
+
+Cada derivado consume un presupuesto compuesto por almacenamiento, escritura, eventos,
+monitoreo y carga cognitiva. El responsable revisa uso y beneficio en una fecha fija.
+Una proyección sin consultas, sin verificador o con reconstrucción rota entra en retiro.
+
+\section{Criterio de retiro}
+
+Retirar significa detener consumidores, verificar alternativas, eliminar el productor,
+esperar la ventana de seguridad y suprimir datos derivados. La fuente canónica permanece
+intacta. El proceso se prueba como cualquier migración y conserva un registro de decisión.
+
+\chapter{Análisis estadístico y resultados negativos}
+
+\section{Unidad inferencial}
+
+La unidad es la corrida completa. Las consultas internas estiman un percentil de esa
+corrida y no se presentan como observaciones independientes. Las comparaciones usan
+pares generados con el mismo conjunto y semilla. Se informan mediana, intervalo
+remuestreado, diferencia, razón y dirección de cada par.
+
+\section{Multiplicidad y sensibilidad}
+
+Las familias de hipótesis se congelan antes de medir y se ajustan por comparaciones
+múltiples. El análisis de sensibilidad cambia una dimensión por vez: escala, tamaño de
+documento, selectividad, consistencia o ancho de proyección. Las exploraciones se marcan
+como tales y no reemplazan el análisis confirmatorio.
+
+\section{Publicación de derrotas}
+
+Una celda donde el documento canónico indexado iguala o supera a la proyección es un
+resultado útil. Delimita dónde COBRIA debe simplificarse. El paquete conserva corridas
+válidas aunque contradigan HN5 y explica cualquier descarte mediante una regla previa.
+
+\chapter{Paquete abierto y revisión independiente}
+
+\section{Contenido del depósito}
+
+El depósito incluye protocolo, enmiendas, generador, adaptadores, manifiestos, eventos
+crudos, análisis, tablas, figuras, entorno, licencias y declaración de disponibilidad.
+Un comando de verificación comprueba huellas y vuelve a producir las salidas publicadas.
+
+\section{Revisión técnica}
+
+La persona revisora recibe una copia anonimizada, rúbrica y matriz de trazabilidad. Debe
+examinar equivalencia de configuraciones, unidad inferencial, exclusiones, afirmaciones y
+amenazas. Sus observaciones se responden una por una sin borrar desacuerdos sustantivos.
+
+\section{Criterio de cierre}
+
+La fase cuantitativa se considera completa cuando dos motores NoSQL terminan todas las
+celdas congeladas, el paquete reproduce cifras y una revisión independiente no detecta
+una falla que invalide la inferencia principal. Antes de ese punto, los resultados se
+describen como piloto o evidencia parcial.
+
+\chapter{Cuadernos de campo reproducibles}
+
+\section{Bitácora de preparación}
+
+Antes de ejecutar una celda, la bitácora registra identificador, fecha, responsable,
+motor NoSQL, versión, configuración efectiva, semilla, conjunto, estado de índices y
+huellas de los artefactos. El registro no depende de memoria personal: se produce desde
+el mismo entorno que ejecuta la prueba y se conserva junto al resultado crudo. Si una
+configuración cambia, nace una celda nueva; nunca se sobrescribe la evidencia anterior.
+
+La preparación verifica además espacio disponible, sincronización temporal, ausencia de
+carga ajena y aislamiento de credenciales. Una lectura breve de calentamiento confirma
+que el adaptador puede resolver documento, ámbito y revisión. Este control evita gastar
+una corrida completa para descubrir un error elemental de montaje.
+
+\section{Bitácora de ejecución}
+
+Cada fase deja marcas de inicio y final, conteos aceptados y rechazados, memoria máxima,
+operaciones por segundo, percentiles de latencia y códigos de error. Los mensajes libres
+se complementan con campos estructurados para permitir análisis automático. El operador
+puede anotar un incidente, pero no clasificarlo retroactivamente sin conservar la razón y
+la regla de exclusión utilizada.
+
+\section{Bitácora de cierre}
+
+Al terminar se verifica que los conteos coincidan con el manifiesto, que no existan
+ámbitos cruzados, que las colas estén drenadas y que las huellas puedan recalcularse.
+Una corrida válida se sella como inmutable. Una corrida inválida también se conserva,
+etiquetada con su causa, porque la tasa y naturaleza de los fallos forman parte de la
+evaluación de operabilidad.
+
+\chapter{Migraciones y evolución del contrato}
+
+\section{Cambio aditivo}
+
+El cambio preferido agrega un campo opcional con semántica, valor ausente explícito y
+versión de contrato. Lectores nuevos aceptan documentos antiguos; lectores antiguos
+ignoran el campo nuevo cuando esa conducta es segura. La prueba mínima cubre ambas
+direcciones y demuestra que la ausencia no se confunde con cero, cadena vacía o falso.
+
+\section{Cambio incompatible}
+
+Renombrar, dividir o reinterpretar un campo exige lectura doble, escritura controlada y
+una ventana de convivencia. La migración se expresa como función determinista e
+idempotente. Antes de retirar la versión previa se reconstruyen proyecciones, se comparan
+resultados por ámbito y se comprueba que ningún consumidor siga solicitando el contrato
+anterior.
+
+\section{Reversión}
+
+Toda migración declara el punto hasta el cual puede revertirse sin pérdida. Si el cambio
+destruye información, se conserva una copia temporal gobernada y con caducidad. Revertir
+no significa restaurar archivos a ciegas: significa volver a una combinación coherente
+de contrato, documentos, catálogos, índices, proyecciones y consumidores.
+
+\chapter{Rúbricas de conformidad COBRIA}
+
+\section{Rúbrica del documento canónico}
+
+La conformidad se valora de cero a dos por criterio: identidad estable, ámbito explícito,
+revisión monotónica, procedencia, contrato versionado y validación en frontera. Cero
+indica ausencia; uno, presencia parcial o no verificable; dos, evidencia automática. Un
+promedio alto no compensa un cero en aislamiento o autoridad, que son condiciones de
+seguridad y no preferencias de estilo.
+
+\section{Rúbrica del derivado}
+
+Un derivado demuestra propietario, propósito de consulta, versión de proyección,
+idempotencia, frescura observable, reconstrucción total y procedimiento de retiro. Se
+evalúa también si puede confundirse con la fuente autorizada. La etiqueta ``caché'' no
+exime ningún criterio: si persiste y alimenta decisiones, debe poder explicarse y rehacerse.
+
+\section{Rúbrica del uso analítico}
+
+El conjunto analítico enlaza cada fila o fragmento con documento, revisión, ámbito y
+transformación. La partición de entrenamiento evita contaminación temporal y cruce de
+entidades. Una salida de inteligencia artificial conserva citas comprobables y se
+abstiene cuando no reúne evidencia autorizada suficiente. La métrica de calidad se
+publica junto con la de fuga, no en sustitución de ella.
+
+\chapter{Escenarios de aceptación integral}
+
+\section{Escenario A: lectura y actualización concurrentes}
+
+Se inicia una lectura sobre una revisión conocida mientras llega una actualización del
+mismo documento. El sistema puede devolver la revisión anterior o la nueva según el
+contrato declarado, pero nunca una mezcla de campos. El evento posterior incluye la
+nueva revisión, la proyección converge y una repetición no duplica efectos.
+
+\section{Escenario B: reconstrucción bajo cambio de esquema}
+
+Se elimina un derivado, se activa una nueva versión de proyección y se recorre la fuente
+canónica. El resultado se compara con una construcción incremental limpia usando huellas,
+conteos y consultas de aceptación. Toda diferencia queda localizada por documento y
+transformación; una coincidencia meramente global no basta.
+
+\section{Escenario C: recuperación con inteligencia artificial}
+
+Una consulta solicita información disponible en dos ámbitos, pero la identidad solo
+autoriza uno. El recuperador filtra antes de clasificar, conserva procedencia y entrega
+únicamente fragmentos permitidos. Si esos fragmentos no sustentan una respuesta, el
+sistema se abstiene. La prueba falla ante una cita inexistente, una revisión obsoleta no
+declarada o cualquier exposición del ámbito prohibido.
+
+\section{Escenario D: degradación y recuperación}
+
+Se interrumpe temporalmente el consumidor que mantiene una proyección. La fuente acepta
+escrituras dentro de su contrato, el atraso se vuelve visible y las lecturas degradadas
+se etiquetan. Al reanudar, el consumidor procesa desde el último punto confirmado,
+converge sin duplicados y demuestra equivalencia con una reconstrucción independiente.

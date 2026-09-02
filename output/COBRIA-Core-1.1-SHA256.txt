@@ -1,0 +1,4 @@
+eaed1850d2da5d33206289f46229f0ef3fe6e5abe7fe90406cd4b94b9cee0c78  pdf/COBRIA-articulo-nosql-ampliado.pdf
+2b2d0748d0069a0f2f718bed29cf3b1ccdf6629f2af401facafafa842956a6a1  pdf/COBRIA-maestro-nosql-ampliado.pdf
+f7fbf7d4207cc374c6c2c6c4e2f219184834e90dc70da77d1a6e3aee1122eaa0  pdf/COBRIA-arquitectura-de-software-libro-ilustrado.pdf
+cde0ae2cffc0aeccb88f3f6fdf255990efd2f9a749941d614dc13e3685d8114b  COBRIA-Core-1.1-paquete-revision.zip

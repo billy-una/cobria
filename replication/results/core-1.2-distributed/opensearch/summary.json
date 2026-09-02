@@ -1,0 +1,49 @@
+{
+  "specification": "COBRIA Core 1.2",
+  "engine": "opensearch",
+  "runs": 90,
+  "configuration": {
+    "runs": 30,
+    "sizes": [
+      100,
+      1000,
+      5000
+    ]
+  },
+  "generatedAt": "2026-08-27T06:25:22.310Z",
+  "summary": [
+    {
+      "engine": "opensearch",
+      "size": 100,
+      "runs": 30,
+      "allPass": true,
+      "canonicalMedianMs": 178.38083350000124,
+      "projectionMedianMs": 167.0581459999994,
+      "rebuildMedianMs": 511.4448540000012,
+      "writeAmplification": 2,
+      "foreignDocuments": 0
+    },
+    {
+      "engine": "opensearch",
+      "size": 1000,
+      "runs": 30,
+      "allPass": true,
+      "canonicalMedianMs": 200.5567294999928,
+      "projectionMedianMs": 168.73262499999691,
+      "rebuildMedianMs": 851.4170625000042,
+      "writeAmplification": 2,
+      "foreignDocuments": 0
+    },
+    {
+      "engine": "opensearch",
+      "size": 5000,
+      "runs": 30,
+      "allPass": true,
+      "canonicalMedianMs": 450.8371460000053,
+      "projectionMedianMs": 250.17339599999832,
+      "rebuildMedianMs": 2998.821333499989,
+      "writeAmplification": 2,
+      "foreignDocuments": 0
+    }
+  ]
+}

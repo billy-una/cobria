@@ -1,0 +1,14 @@
+{
+  "runId": "sqlite-2026-08-23T06-22-12-484Z",
+  "protocolHash": "ff20463e30a194d0706c590daa25e8669f0ddf158fbbaab05961e018341b812e",
+  "rawHash": "e57ae84c95b82ce540a53f6ca79bc54800a6b84f1398a28d78778883232c43f9",
+  "rows": 2160,
+  "environment": {
+    "node": "v24.2.0",
+    "cpu": "Apple M2",
+    "memoryBytes": 8589934592,
+    "platform": "darwin",
+    "arch": "arm64"
+  },
+  "rawFile": "results/phase2/raw/persistent-sqlite.jsonl"
+}

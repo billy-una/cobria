@@ -1,0 +1,152 @@
+\chapter{Diseño de evaluación exclusivamente NoSQL}
+
+\section{Delimitación tecnológica}
+
+Esta edición evalúa COBRIA únicamente dentro de sistemas NoSQL documentales. La unidad
+de persistencia es el documento u objeto agregado; las consultas se expresan mediante
+claves, filtros, índices del motor, colecciones derivadas y flujos de cambios. No se
+transfieren cifras obtenidas con motores de otro paradigma. Esta decisión reduce el
+volumen de evidencia cuantitativa disponible, pero alinea la inferencia con el objeto
+real de investigación.
+
+La evaluación distingue tres niveles. El nivel estructural verifica contratos en código
+y configuración. El nivel ejecutable usa emuladores y entornos NoSQL aislados. El nivel
+empírico mide latencia, costo, frescura y recuperación en condiciones reproducibles.
+Una afirmación no asciende de nivel sin la evidencia correspondiente.
+
+\section{Casos documentales anonimizados}
+
+Se estudian tres aplicaciones con dominios distintos: eventos deportivos y multimedia,
+operación hotelera y operación comercial. Sus nombres se omiten. Las tres emplean
+documentos, colecciones, autenticación, funciones y almacenamiento administrado. Se
+buscan contratos repetidos sin revelar organizaciones, personas ni credenciales.
+
+\begin{table}[H]
+\centering
+\caption{Perfiles NoSQL utilizados en la evaluación.}
+\begin{tabularx}{\textwidth}{p{2.4cm}X X}
+\toprule
+Perfil & Carga dominante & Riesgo arquitectónico observado\\
+\midrule
+N1 & eventos, resultados y multimedia & derivados obsoletos y reconstrucción costosa\\
+N2 & reservas, disponibilidad y catálogos & concurrencia, tiempo y aislamiento\\
+N3 & inventario, ventas y cierres & agregados operacionales y trazabilidad\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\chapter{Hipótesis, variables y protocolo}
+
+\section{Hipótesis activas}
+
+\begin{enumerate}[leftmargin=*]
+  \item[HN1.] Una proyección declarada por contrato puede reconstruirse desde documentos
+  canónicos sin convertirse en autoridad paralela.
+  \item[HN2.] El ámbito obligatorio impide recuperar documentos o fragmentos de otra
+  organización antes de calcular similitud o construir contexto.
+  \item[HN3.] Revisión, idempotencia y publicación por versión reducen duplicados,
+  regresiones y estados parcialmente visibles.
+  \item[HN4.] Un conjunto analítico versionado puede reproducirse desde fuentes,
+  catálogos y transformaciones declaradas.
+  \item[HN5.] Una proyección solo se justifica si mejora un objetivo de lectura y su
+  mantenimiento permanece dentro de un presupuesto explícito.
+\end{enumerate}
+
+HN1--HN4 admiten verificación funcional. HN5 necesita mediciones específicas por motor,
+región, índice, escala y mezcla de operaciones. Esta edición no publica un umbral
+universal de lecturas por escritura.
+
+\section{Variables y unidades}
+
+Las variables independientes son motor documental, perfil, escala, número de ámbitos,
+forma del documento, política de consistencia, estrategia de reconstrucción y nivel de
+concurrencia. Las dependientes incluyen p50, p95 y p99; documentos y bytes leídos;
+operaciones facturables; frescura; duplicados; divergencia; duración de reconstrucción;
+violaciones de ámbito; y exactitud del conjunto analítico.
+
+La corrida completa es la unidad inferencial. Cada manifiesto registra semilla, versión
+de código, configuración, región, índices, calentamiento, orden de cargas y criterio de
+descarte. Las enmiendas se publican antes de observar el resultado que podrían favorecer.
+
+\chapter{Experimentos NoSQL}
+
+\section{P1: lectura selectiva documental}
+
+P1 compara la consulta canónica indexada con una proyección de cobertura sobre el mismo
+conjunto lógico. Ambas configuraciones usan el mismo motor NoSQL y los mismos documentos
+de entrada. La proyección gana únicamente si reduce el percentil objetivo o el costo
+facturable sin alterar resultados, ámbito ni frescura más allá del límite acordado.
+
+\section{P2: amplificación de escritura}
+
+P2 actualiza documentos canónicos y registra operaciones adicionales, tamaño de eventos,
+invocaciones, reintentos y tiempo hasta convergencia. El resultado es un vector de costo,
+no una sola cifra. Una reducción de lectura no compensa automáticamente mayor complejidad.
+
+\section{R1: reconstrucción total e incremental}
+
+R1 elimina una versión derivada en un entorno controlado, reconstruye una candidata,
+verifica equivalencia y publica mediante un cambio de versión. La variante incremental
+procesa revisiones posteriores a un punto de control. Ambas rutas deben ser idempotentes,
+conservar procedencia y producir el mismo resultado lógico.
+
+\section{S1: aislamiento multiinquilino}
+
+S1 genera identidades, documentos y consultas para múltiples ámbitos. Incluye ausencia
+de ámbito, ámbito manipulado, claves de caché incompletas, búsqueda semántica y tareas
+administrativas. La aceptación exige rechazo temprano y cero documentos cruzados. El
+filtro posterior a la recuperación no satisface el contrato.
+
+\section{A1: analítica e inteligencia artificial}
+
+A1 reconstruye un conjunto fechado, publica variables versionadas y ejecuta recuperación
+autorizada. Cada fragmento conserva fuente, ámbito, revisión, versión de transformación
+y política. Se miden precisión, exhaustividad, abstención, deriva y fugas. La evaluación
+de recuperación no se presenta como evaluación de un modelo generativo.
+
+\chapter{Evidencia y resultados responsables}
+
+\section{Evidencia disponible}
+
+Los tres perfiles exhiben objetos canónicos, capas de acceso documental, servicios,
+catálogos y representaciones derivadas. La recurrencia apoya la relevancia práctica del
+problema, no la novedad de cada mecanismo. La contribución de COBRIA está en convertir
+esa recurrencia en contratos comparables: autoridad, ámbito, revisión, tiempo, versión,
+equivalencia y reconstrucción.
+
+Las pruebas disponibles cubren reglas de acceso, matrices de roles, aislamiento, ciclos
+de vida, idempotencia y reconstrucción. También existe evidencia longitudinal de menor
+acceso directo desde presentación hacia la capa documental. Estos resultados prueban
+rutas concretas, pero no productividad humana ni superioridad general.
+
+\section{Resultados COBRIA Core 1.0}
+
+La primera réplica congelada se ejecutó sobre dos motores documentales embebidos,
+PouchDB y LokiJS, con escalas de 100, 1,000 y 5,000 documentos y treinta corridas por
+celda. En total se conservaron 180 corridas. Todas las celdas superaron conjuntamente
+P1, P2, R1, S1 y A1: equivalencia lógica completa, reconstrucción repetible,
+amplificación de dos escrituras por cambio proyectado, rechazo de ámbito ausente y cero
+documentos cruzados.
+
+En PouchDB las medianas de lectura canónica fueron 1,186; 13,589 y 69,291 ms, frente a
+0,440; 4,719 y 23,131 ms para la proyección. Las reconstrucciones medianas requirieron
+8,376; 89,301 y 500,070 ms. En LokiJS las lecturas canónicas fueron 0,145; 1,263 y
+7,026 ms, frente a 0,052; 0,409 y 2,220 ms; R1 requirió 0,663; 6,452 y 46,011 ms.
+
+Estos resultados apoyan conformidad funcional y muestran una reducción de lectura en
+este arnés embebido. No representan redes, regiones, concurrencia administrada, cuotas
+ni facturación. HN1--HN4 quedan apoyadas para esta implementación de referencia; HN5
+recibe apoyo local condicionado y permanece abierta para servicios administrados.
+
+\chapter{Amenazas a la validez y síntesis}
+
+Los casos comparten ecosistema y autoría. Los emuladores no reproducen cuotas,
+particiones, latencia regional ni facturación administrada. Los datos anonimizados y
+sintéticos pueden subrepresentar deriva y errores históricos. La inspección no sustituye
+ejecución; las pruebas automáticas no sustituyen revisión humana; y una implementación
+correcta no demuestra comprensión por todos los equipos.
+
+La evidencia permite afirmar que COBRIA Core 1.0 es formalizable, ejecutable y conforme
+en dos motores NoSQL documentales embebidos. No permite afirmar una mejora universal de
+rendimiento ni un umbral económico transferible. El siguiente nivel de evidencia debe
+provenir de servicios documentales administrados y una réplica externa.

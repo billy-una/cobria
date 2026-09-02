@@ -1,0 +1,30 @@
+{
+  "protocolVersion": "1.0.0",
+  "frozenAt": "2026-08-20T11:20:00-06:00",
+  "pilotManifest": "pilot-2026-08-20T17-18-21-955Z",
+  "pilotCorrections": [
+    "Se conservan 50 iteraciones por consulta porque el p95 fue medible en N=1000.",
+    "Se limita la matriz principal a N=50000 por los 8 GB de memoria del entorno.",
+    "B1 se conserva como índice nativo equivalente en forma de lectura, separado del ciclo COBRIA.",
+    "R1 reinicia las claves de idempotencia de la generación al comenzar un rebuild total."
+  ],
+  "seed": 42001,
+  "hypotheses": ["H1","H2","H3","H4","H6","H7","H8","H9"],
+  "pilot": {
+    "profiles": ["R"], "sizes": [1000, 10000], "tenants": 5,
+    "repetitions": 3, "queryIterations": 30, "projectionCounts": [0,1,3],
+    "changeRatios": [0.01,0.1,1], "eventualDelayMs": 2
+  },
+  "full": {
+    "profiles": ["R","A","B"], "sizes": [1000,10000,50000], "tenants": 10,
+    "repetitions": 5, "queryIterations": 50, "projectionCounts": [0,1,3,5,10],
+    "changeRatios": [0.001,0.01,0.1,1], "eventualDelayMs": 2
+  },
+  "exclusions": ["environment-incomplete","instrumentation-failure","dataset-hash-mismatch","external-interruption"],
+  "decisionRules": {
+    "rebuildAccuracy": 1,
+    "scopeViolations": 0,
+    "duplicateEffects": 0,
+    "offlineOnlineDivergences": 0
+  }
+}

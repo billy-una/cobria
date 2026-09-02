@@ -1,0 +1,7 @@
+{
+  "protocol": "COBRIA-NoSQL-3.0",
+  "scope": "replica confirmatoria en dos motores documentales",
+  "experiments": ["S1", "A1", "fallos"],
+  "requirements": ["manifiesto", "indices congelados", "orden rotado", "resultados negativos"],
+  "status": "pendiente de ejecución"
+}

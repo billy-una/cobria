@@ -1,0 +1,45 @@
+\documentclass[11pt]{article}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[a4paper,margin=2.5cm]{geometry}
+\usepackage{booktabs,tabularx,amsmath,microtype,newtxtext,newtxmath}
+\title{Adenda de congelación y resultados\\COBRIA Core 1.0}
+\author{Billy Jak Cordero Porras}
+\date{24 de agosto de 2026}
+\begin{document}\maketitle
+\section*{Función de esta adenda}
+Esta adenda actualiza el estado de evidencia del documento maestro. Prevalece sobre toda frase anterior que presente P1, P2, R1, S1 o A1 como trabajo futuro. SQLite y PostgreSQL se conservan únicamente como controles históricos del arnés y quedan excluidos de la inferencia NoSQL.
+
+\section*{Núcleo congelado}
+\[
+K=\langle C,f,\theta,s,v,\phi,e,r,o\rangle
+\]
+COBRIA Core 1.0 exige autoridad canónica, ámbito obligatorio, procedencia, reconstrucción, equivalencia, idempotencia, revisión monotónica, publicación segura, operabilidad y fallo cerrado. Define tres niveles: C1 Fundamental, C2 Reconstruible y C3 Gobernado. Una implementación solo declara un nivel cuando supera todas sus obligaciones.
+
+\section*{Evaluación NoSQL}
+Se implementaron adaptadores para PouchDB 9.0.0 y LokiJS 1.5.12. El archivo histórico contiene 180 corridas: dos motores, tres escalas (100, 1,000 y 5,000 documentos) y treinta repeticiones por celda. Estas cifras describen el alcance embebido del estudio y deben distinguirse de la certificación normativa independiente.
+
+\begin{table}[h]\centering\small
+\begin{tabular}{lrrrr}
+\toprule Motor & $n$ & Canónica (ms) & Proyección (ms) & R1 (ms)\\\midrule
+PouchDB&100&1,186&0,440&8,376\\
+PouchDB&1,000&13,589&4,719&89,301\\
+PouchDB&5,000&69,291&23,131&500,070\\
+LokiJS&100&0,145&0,052&0,663\\
+LokiJS&1,000&1,263&0,409&6,452\\
+LokiJS&5,000&7,026&2,220&46,011\\\bottomrule
+\end{tabular}
+\caption{Medianas de treinta corridas por celda.}
+\end{table}
+
+La proyección redujo la mediana de lectura en las seis celdas históricas. P2 registró dos escrituras por cambio proyectado. R1 fue equivalente e idempotente. S1 produjo cero documentos cruzados y rechazo ante ámbito ausente. A1 conservó manifiesto, fuente, huella y partición temporal. La auditoría posterior reclasificó estas corridas como evidencia histórica hasta su repetición con el oráculo corregido.
+
+\section*{Conclusión actualizada}
+HN1--HN4 reciben apoyo funcional condicionado al arnés embebido; no se presentan aquí como certificación independiente. HN5 recibe apoyo condicionado dentro de los motores embebidos: la lectura proyectada fue menor, pero añadió escritura y costo de reconstrucción. No se infieren latencias de red, regiones, cuotas, concurrencia administrada o facturación.
+
+COBRIA Core 1.0 puede considerarse formalizado, implementado y ejecutable en dos motores NoSQL documentales embebidos. La validación externa permanece incompleta hasta contar con replicación independiente, servicios administrados y evaluación humana.
+
+\section*{Trazabilidad}
+La especificación normativa se conserva en \texttt{specification/COBRIA-CORE-1.0.md}; los adaptadores, pruebas y arnés en \texttt{replication/}; los datos crudos y resúmenes automáticos en \texttt{replication/results/nosql-core-1.0/}; y el material SQL exploratorio en \texttt{replication/historical/sql-controls/}.
+\end{document}

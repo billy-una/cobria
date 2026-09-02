@@ -1,0 +1,11 @@
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=.88\textwidth,height=7cm,grid=major,legend pos=north west,
+xlabel={Entidades, N},ylabel={Duración (ms)},xmode=log,log basis x=10]
+\addplot[black,mark=*,solid] coordinates {(1000,0.484917) (10000,4.395667) (50000,31.322917)};
+\addlegendentry{R1}
+\end{axis}
+\end{tikzpicture}
+\caption{Tiempo de reconstrucción total para el perfil R.}
+\end{figure}

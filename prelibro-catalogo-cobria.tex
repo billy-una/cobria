@@ -1,0 +1,330 @@
+\documentclass[11pt,oneside]{book}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage[utf8]{inputenc}\usepackage[T1]{fontenc}
+\usepackage{newtxtext,newtxmath,microtype,csquotes}
+\usepackage[letterpaper,top=2.3cm,bottom=2.3cm,left=2.7cm,right=2.4cm]{geometry}
+\usepackage{setspace}\setstretch{1.16}
+\usepackage{booktabs,tabularx,longtable,array,enumitem,float}
+\usepackage{tikz,pgfplots}\pgfplotsset{compat=1.18}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric,fit}
+\usepackage{xcolor,fancyhdr,titlesec,hyperref}
+\definecolor{grisclaro}{gray}{0.95}
+\hypersetup{hidelinks,pdftitle={COBRIA: catálogo pedagógico de patrones, contratos y mecanismos},pdfauthor={Billy Jak Cordero Porras}}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small Catálogo COBRIA}\fancyhead[R]{\small\nouppercase{\leftmark}}\fancyfoot[C]{\thepage}
+\setlength{\headheight}{14pt}
+\titleformat{\chapter}[display]{\bfseries}{\filleft\Large Ficha \thechapter}{1ex}{\titlerule\vspace{1.2ex}\Huge}
+\newcommand{\COBRIA}{\textsf{COBRIA}}
+\newcommand{\etiqueta}[1]{\fcolorbox{black}{grisclaro}{\strut\small\textsc{#1}}}
+\newcommand{\Ficha}[9]{%
+\chapter{#1}
+\begingroup\small
+\noindent\etiqueta{#2}\hfill\textbf{Nivel de evidencia:} #3
+\section*{Propósito}
+#4
+\section*{Problema}
+#5
+\section*{Analogía}
+#6
+\section*{Solución y contrato}
+#7
+\section*{Aplicación responsable}
+#8
+\section*{Métricas, costos y relaciones}
+#9
+\par\endgroup
+}
+\begin{document}
+\frontmatter
+\hypersetup{pageanchor=false}
+\begin{titlepage}\thispagestyle{empty}
+\vspace*{2cm}\begin{center}
+{\fontsize{34}{38}\selectfont\bfseries COBRIA\par}\vspace{.4cm}
+{\Large Catálogo pedagógico de patrones, contratos y mecanismos\par}
+\vspace{1.2cm}\rule{.72\textwidth}{.7pt}\par\vspace{1.2cm}
+{\huge\bfseries Prelibro para arquitecturas de datos reconstruibles\par}
+\vspace{.8cm}
+{\Large De la fuente canónica a la analítica y la inteligencia artificial\par}
+\vfill
+{\large\bfseries Billy Jak Cordero Porras\par}\vspace{.3cm}
+{\normalsize Investigador independiente\\Coto Brus, Costa Rica\par}\vspace{.5cm}
+{\normalsize Agosto de 2026\par}
+\end{center}\end{titlepage}
+\hypersetup{pageanchor=true}\setcounter{page}{1}
+
+\chapter*{Propósito del prelibro}
+\addcontentsline{toc}{chapter}{Propósito del prelibro}
+Este documento transforma la investigación COBRIA en un catálogo para aprender,
+consultar y aplicar. No sustituye la tesis ni pretende declarar nuevos todos los
+mecanismos descritos. Distingue patrones establecidos, adaptaciones, contratos
+compuestos y propuestas experimentales. Su objetivo es servir como especificación
+editorial del futuro libro y como fuente de contenido para un sitio interactivo.
+
+El lector puede avanzar de principio a fin o entrar directamente a una ficha. Cada una
+parte de un problema, presenta una analogía, formula un contrato, muestra cuándo usarlo
+y termina con costos, métricas y relaciones. La repetición de esta estructura es
+deliberada: convierte conceptos abstractos en un lenguaje común.
+
+\chapter*{Cómo interpretar el nivel de evidencia}
+\addcontentsline{toc}{chapter}{Cómo interpretar el nivel de evidencia}
+\begin{table}[H]\centering
+\begin{tabularx}{\textwidth}{p{3.5cm}X}\toprule
+Nivel & Significado\\\midrule
+Establecido & Mecanismo ampliamente descrito en ingeniería de software o datos.\\
+Adaptación COBRIA & Práctica conocida sometida a las restricciones de ámbito, versión y reconstrucción.\\
+Contrato compuesto & Integración explícita de varios mecanismos conocidos.\\
+Experimental & Regla o combinación con evidencia inicial que requiere réplicas adicionales.\\
+Antipatrón observado & Forma recurrente de deterioro que el catálogo ayuda a detectar.\\
+\bottomrule\end{tabularx}\end{table}
+
+\chapter*{Mapa del catálogo}
+\addcontentsline{toc}{chapter}{Mapa del catálogo}
+\begin{figure}[H]\centering
+\begin{tikzpicture}[node distance=1.1cm and 1.4cm,
+box/.style={draw,rounded corners,fill=grisclaro,minimum width=3.2cm,minimum height=.9cm,align=center},
+line/.style={-{Latex[length=2mm]},thick}]
+\node[box] (c) {Fuente canónica};
+\node[box,right=of c] (p) {Proyecciones\\reconstruibles};
+\node[box,right=of p] (a) {Analítica e IA};
+\node[box,below=of c] (g) {Ámbito, catálogos\\y metadatos};
+\node[box,below=of p] (r) {Consistencia, fallos\\y reparación};
+\node[box,below=of a] (e) {Costo, evidencia\\y retiro};
+\draw[line] (c)--(p);\draw[line] (p)--(a);\draw[line] (g)--(c);\draw[line] (g)--(p);
+\draw[line] (r)--(p);\draw[line] (p)--(e);\draw[line] (a)--(e);
+\end{tikzpicture}
+\caption{Recorrido pedagógico del catálogo COBRIA.}
+\end{figure}
+
+\tableofcontents
+\mainmatter
+
+\part{Fundamentos canónicos}
+
+\Ficha{Objeto canónico}{Contrato compuesto}{Adaptación COBRIA}
+{Definir una representación autoritativa mínima y estable para la identidad y las reglas de una entidad.}
+{Cuando varias pantallas, índices o integraciones escriben su propia versión de un hecho, ninguna copia puede explicar cuál manda. Una corrección se convierte en una reconciliación manual.}
+{Es el original firmado de un documento. Pueden existir fotocopias anotadas y resúmenes, pero una disputa vuelve al original.}
+{El objeto canónico declara identidad, ámbito, revisión, versión de esquema y ciclo de vida. Las representaciones derivadas no se modifican como autoridad. Toda proyección apunta a su origen y puede comprobarse contra él.}
+{Úselo cuando hay reglas, múltiples consumidores o copias optimizadas. Evítelo como capa ceremonial en un CRUD pequeño. Empiece inventariando qué escritura posee autoridad y elimine rutas paralelas.}
+{Mida escrituras directas fuera de la frontera, entidades sin revisión y derivados sin origen. Se relaciona con Repositorio con ámbito, Proyección de lectura y Publicación por versión. El costo principal es diseñar migraciones y reglas de autoridad.}
+
+\Ficha{Dato fechado}{Adaptación COBRIA}{Contrato compuesto}
+{Separar cuándo un hecho fue válido de cuándo el sistema lo conoció o registró.}
+{Un único campo de fecha no permite reconstruir qué se sabía en un momento ni corregir eventos tardíos sin reescribir historia.}
+{Un periódico posee fecha del acontecimiento y fecha de publicación. Confundirlas cambia la historia narrada.}
+{Cada observación declara tiempo de validez, tiempo de registro, revisión y procedencia. Las correcciones añaden conocimiento; no alteran silenciosamente el corte histórico.}
+{Úselo para eventos, tarifas, estados, auditoría y entrenamiento temporal. Puede omitirse cuando el tiempo carece de significado de dominio. Defina primero las preguntas temporales que deben responderse.}
+{Mida eventos tardíos, correcciones, cortes reproducibles y divergencia temporal. Se relaciona con Marca de avance temporal y Conjunto de datos reproducible. Aumenta almacenamiento y exige semántica clara.}
+
+\Ficha{Repositorio con ámbito}{Patrón adaptado}{Adaptación COBRIA}
+{Encapsular persistencia y hacer obligatorio el límite organizacional en cada operación.}
+{Un filtro de organización añadido al final puede olvidarse. Cachés, consultas auxiliares o tareas administrativas terminan mezclando datos.}
+{Es una caja de seguridad cuya llave abre un compartimento específico, no todo el edificio.}
+{La interfaz no acepta operaciones sin ámbito. Identidad, claves, consultas, cachés y registros incluyen el mismo límite. La ausencia de ámbito falla antes de acceder al almacén.}
+{Úselo en sistemas multiinquilino o con fronteras de privacidad. No confíe únicamente en convenciones. Migre primero lecturas, luego escrituras y finalmente tareas de fondo.}
+{Mida solicitudes rechazadas, fugas cruzadas y claves de caché incompletas. Se relaciona con Contexto autorizado y Recuperación limitada por ámbito. Añade parámetros, índices y pruebas negativas.}
+
+\Ficha{Catálogo versionado}{Contrato}{Adaptación COBRIA}
+{Gobernar vocabularios de dominio sin incrustar significados cambiantes en código o datos derivados.}
+{Un código como ``A'' cambia de significado, desaparece o llega desde una versión antigua; las proyecciones mezclan interpretaciones.}
+{Un diccionario posee edición. Conocer la palabra sin saber qué edición se utilizó puede producir una traducción equivocada.}
+{El catálogo declara clave estable, versión, vigencia, sustituciones y política para valores desconocidos. Las transformaciones registran la edición consultada.}
+{Úselo cuando categorías afectan reglas, analítica o interoperabilidad. Evite convertir toda constante local en catálogo remoto. Defina cuarentena o migración para desconocidos.}
+{Mida valores desconocidos, versiones activas y derivados afectados. Se relaciona con Registro de dependencias y Conjunto reproducible. Su costo es coordinación y compatibilidad.}
+
+\part{Proyecciones reconstruibles}
+
+\Ficha{Proyección de lectura}{Patrón adaptado}{Establecido y adaptado}
+{Mantener una representación derivada diseñada para una consulta concreta sin crear una nueva autoridad.}
+{El modelo de escritura contiene más campos, relaciones o particiones de las que una consulta necesita. Leerlo directamente consume tiempo y bytes.}
+{Es el índice de un libro: acelera la búsqueda, pero puede rehacerse desde las páginas y no modifica la obra.}
+{La ficha declara consulta beneficiada, fuente, transformación, versión, consistencia, verificador y reconstrucción. La aplicación la trata como descartable.}
+{Úsela después de medir una consulta y comparar un índice nativo. Evítela cuando la fuente ya responde dentro del objetivo o la frescura estricta no puede sostenerse.}
+{Mida p95, filas y bytes leídos, frescura, escrituras y almacenamiento. Se relaciona con Proyección de cobertura, Frontera lectura--escritura y Retiro de proyección.}
+
+\Ficha{Proyección de cobertura}{Mecanismo}{Adaptación COBRIA}
+{Responder una consulta utilizando una representación estrecha que contiene exactamente filtros, orden y salida.}
+{Un índice encuentra filas, pero la consulta todavía debe visitar documentos o tablas anchas para completar la respuesta.}
+{Un formulario de viaje lleva solo pasaporte, boleto y dirección; no transporta todo el archivo personal.}
+{La proyección incluye campos necesarios y procedencia mínima. Su índice cubre selección y orden. La equivalencia compara resultados lógicos con la fuente.}
+{Úsela cuando la recuperación de filas anchas domina el costo. Evítela si duplica datos sensibles o cambia con demasiada frecuencia. Compare siempre contra B1.}
+{Mida ahorro p95, bytes, penalización de escritura y umbral de equilibrio. El piloto del mecanismo mostró que la proyección no domina siempre al índice nativo; la réplica definitiva debe ejecutarse sobre motores NoSQL documentales.}
+
+\Ficha{Reconstrucción total}{Contrato}{Contrato compuesto}
+{Regenerar completamente una proyección desde fuentes y versiones declaradas.}
+{Sin una reconstrucción probada, la pérdida o corrupción obliga a reparar manualmente una copia que ya no es realmente descartable.}
+{Es rehacer un índice desde el libro completo, no corregir entradas aisladas cuya procedencia se desconoce.}
+{Se construye una versión candidata, se verifica conteo y contenido, y solo después se publica. La versión activa permanece visible durante el proceso.}
+{Impleméntela antes de optimizar la incremental. Ejecútela periódicamente y después de cambios de esquema. No publique una tabla parcialmente llena.}
+{Mida duración, exactitud, pico de almacenamiento y tiempo de cambio. Se relaciona con Publicación por versión y Reparación verificable.}
+
+\Ficha{Reconstrucción incremental}{Mecanismo}{Adaptación COBRIA}
+{Actualizar solo la fracción modificada manteniendo equivalencia con una reconstrucción total.}
+{Rehacer todo el conjunto por un cambio pequeño desperdicia recursos y amplía la ventana de obsolescencia.}
+{Es actualizar las páginas cambiadas de un índice, conservando la posibilidad de regenerarlo completo si hay dudas.}
+{Un registro de cambios identifica entidades y revisiones desde un punto de control. Cada lote es idempotente; una verificación periódica contrasta contra la ruta total.}
+{Úsela cuando $\Delta N\ll N$ y descubrir cambios cuesta menos que reconstruir. Evítela si no existe registro confiable o si la transformación depende globalmente de todos los registros.}
+{Mida $\Delta N/N$, duración, omisiones, duplicados y divergencia. Se relaciona con Punto de control, Idempotencia y Reconstrucción total.}
+
+\Ficha{Publicación por versión}{Mecanismo}{Establecido y adaptado}
+{Evitar que consumidores observen una proyección incompleta durante construcción o migración.}
+{Vaciar y llenar la representación activa expone faltantes, mezclas de esquema o resultados transitorios.}
+{Un teatro ensaya detrás del telón y cambia el escenario cuando la nueva escena está lista.}
+{Se construye una versión candidata aislada, se valida y se cambia un puntero o alias de forma atómica. La anterior se conserva durante una ventana reversible.}
+{Úsela para reconstrucciones largas o cambios incompatibles. Puede simplificarse si el motor ofrece actualización atómica equivalente. Nunca elimine la versión anterior antes de verificar.}
+{Mida pérdida visible, duración del cambio y almacenamiento máximo. Se relaciona con Reconstrucción total y Migración compatible.}
+
+\part{Consistencia y recuperación}
+
+\Ficha{Procesamiento idempotente}{Patrón de mensajería}{Establecido}
+{Garantizar que repetir la misma entrega no multiplique efectos.}
+{Las redes reintentan y las colas pueden entregar más de una vez. Una operación no protegida duplica reservas, saldos o filas derivadas.}
+{Presionar dos veces el botón de un ascensor no debe crear dos ascensores.}
+{Cada mensaje posee identidad estable. El consumidor registra procesamiento o utiliza una operación naturalmente idempotente dentro de la misma frontera de consistencia.}
+{Úselo en eventos, reintentos e importaciones. No confunda idempotencia con ignorar errores. Defina cuánto tiempo se conservan identificadores.}
+{Mida entregas duplicadas, efectos producidos y tamaño del registro. Se relaciona con Cola de salida y Reconstrucción incremental.}
+
+\Ficha{Revisión obsoleta rechazada}{Control de concurrencia}{Establecido y adaptado}
+{Impedir que una actualización basada en estado antiguo sobrescriba conocimiento reciente.}
+{Dos procesos leen la misma revisión y guardan cambios incompatibles; el último oculta al primero.}
+{Dos personas editan una hoja: la segunda debe saber que la primera ya entregó una nueva versión.}
+{La escritura incluye la revisión esperada. Solo avanza si coincide con la actual; de lo contrario rechaza, recarga o aplica una política explícita de combinación.}
+{Úselo cuando las colisiones sean posibles y un bloqueo largo resulte caro. Evite reintentar automáticamente reglas no conmutativas.}
+{Mida rechazos, reintentos y conflictos resueltos. Se relaciona con Objeto canónico e Idempotencia.}
+
+\Ficha{Cola de salida transaccional}{Patrón de integración}{Establecido}
+{Publicar cambios sin perder la relación entre escritura canónica y evento de integración.}
+{Guardar datos y publicar un mensaje son dos operaciones; una puede tener éxito y la otra fallar.}
+{Es preparar la carta dentro de la misma oficina donde se registra el trámite y enviarla después con acuse.}
+{La transacción escribe entidad y registro de salida. Un publicador reintentable entrega el mensaje y marca progreso. Los consumidores permanecen idempotentes.}
+{Úsela cuando el almacén no comparte transacción con el corredor. No la convierta en una cola sin retención, observabilidad o reparación.}
+{Mida retraso, reintentos, mensajes atascados y duplicados. Se relaciona con Proyección asíncrona y Punto de control.}
+
+\Ficha{Reparación verificable}{Mecanismo}{Contrato compuesto}
+{Detectar diferencias entre fuente y proyección y recuperar equivalencia sin edición manual opaca.}
+{Una proyección puede corromperse aunque la actualización habitual parezca correcta. Sin verificador, el defecto se descubre mediante usuarios.}
+{Es comparar inventario físico con registro y reconstruir el estante, no ajustar el número para ocultar la diferencia.}
+{El verificador calcula faltantes, extras y valores distintos. La reparación genera una nueva versión desde la fuente y conserva evidencia del incidente.}
+{Úsela como prueba periódica y procedimiento de incidente. Evite modificar ambos lados para hacer coincidir cifras. La fuente debe estar definida antes de reparar.}
+{Mida exactitud, tiempo de detección y recuperación. Se relaciona con Reconstrucción total, Publicación por versión y Registro de procedencia.}
+
+\part{Analítica e inteligencia artificial}
+
+\Ficha{Conjunto de datos reproducible}{Contrato analítico}{Adaptación COBRIA}
+{Poder regenerar un conjunto analítico con la misma selección, corte, vocabulario y transformación.}
+{Un archivo exportado sin contexto no explica qué registros faltan, qué versión utilizó ni cómo repetir un resultado.}
+{Es una receta con ingredientes, cantidades y fecha de cosecha, no solo una fotografía del plato.}
+{El contrato registra fuentes, ámbitos autorizados, tiempo de corte, consulta, transformación, esquema, catálogo, resumen criptográfico y política de faltantes.}
+{Úselo para minería, entrenamiento, auditoría e informes. No publique datos personales por reproducibilidad; separe metadatos repetibles de contenido restringido.}
+{Mida cobertura de procedencia, diferencias entre reconstrucciones y registros en cuarentena. Se relaciona con Dato fechado y Característica versionada.}
+
+\Ficha{Característica versionada}{Contrato de IA}{Establecido y adaptado}
+{Definir una variable de modelo como transformación gobernada, no como columna accidental.}
+{Entrenamiento e inferencia calculan valores similares con código, ventanas o catálogos diferentes.}
+{Es una unidad de medida calibrada: el número carece de sentido sin definición y versión.}
+{La ficha declara entidad, fórmula, ventana, fuente, versión, valores ausentes, frescura y equivalencia fuera de línea--en línea.}
+{Úsela cuando una variable se comparte o influye en decisiones. Evite crear un almacén complejo para experimentos desechables sin ruta de producción.}
+{Mida divergencia, frescura, uso y deriva. Se relaciona con Conjunto reproducible y Registro de dependencias.}
+
+\Ficha{Recuperación limitada por ámbito}{Control de IA}{Contrato compuesto}
+{Impedir que búsqueda semántica o recuperación aumentada crucen fronteras de autorización.}
+{Ordenar primero y filtrar después puede recuperar fragmentos prohibidos, contaminar contexto o revelar existencia.}
+{Una bibliotecaria entra primero a la sala autorizada y después busca el libro; no revisa todas las salas y oculta resultados al final.}
+{El ámbito y la política restringen candidatos antes de similitud. Cada fragmento conserva fuente, versión y autorización; la respuesta enlaza evidencia o se abstiene.}
+{Úsela en buscadores multiinquilino y asistentes. No trate metadatos de autorización como texto opcional. Pruebe consultas negativas e inyección.}
+{Mida precisión, exhaustividad, fugas, abstención y afirmaciones sin fuente. Se relaciona con Repositorio con ámbito y Fragmento con evidencia.}
+
+\Ficha{Herramienta de agente gobernada}{Control de IA}{Experimental}
+{Permitir que un agente ejecute casos de uso sin saltarse autorización, validación o confirmación.}
+{Un modelo que llama directamente bases o servicios internos convierte una inferencia incierta en efecto real.}
+{Es un aprendiz con herramientas etiquetadas: puede observar libremente, pero necesita supervisión para acciones irreversibles.}
+{Cada herramienta declara entrada, ámbito, riesgo, idempotencia, permisos, evidencia y confirmación. El agente invoca casos de uso; no escribe proyecciones ni fuentes directamente.}
+{Úsela solo con límites, registros y capacidad de revocación. Evite autonomía de alto riesgo basada únicamente en una instrucción textual.}
+{Mida acciones rechazadas, confirmaciones, efectos duplicados y decisiones sin evidencia. Se relaciona con Contexto autorizado e Idempotencia.}
+
+\part{Decisión económica y ciclo de vida}
+
+\Ficha{Frontera lectura--escritura}{Regla de decisión}{Experimental con evidencia}
+{Decidir cuantitativamente si el ahorro de lectura compensa mantenimiento adicional.}
+{Las proyecciones suelen adoptarse por intuición y permanecen aun cuando un índice nativo sería suficiente.}
+{Una carretera nueva se justifica solo si el ahorro acumulado de viajes paga construcción y mantenimiento.}
+{Si $\Delta Q=Q_{B1}-Q_{C1}>0$ y $\Delta W=W_{C1}-W_{B1}$, C1 compensa temporalmente cuando $Q/W>\Delta W/\Delta Q$. Se añaden almacenamiento, personal y riesgo cuando estén disponibles.}
+{Mida en el entorno objetivo y por percentil. Si $\Delta Q\leq0$, B1 domina en esa métrica. No generalice el umbral entre motores, escalas o consultas.}
+{El piloto observó umbrales entre 1.49 y 38.87 lecturas por escritura; son evidencia del método, no parámetros transferibles a NoSQL. Se relaciona con Proyección de cobertura y Retiro de proyección.}
+
+\Ficha{Índice antes que proyección}{Heurística}{Adaptación COBRIA}
+{Exigir una línea base nativa competente antes de añadir una representación derivada.}
+{Comparar solo contra escaneo exagera el beneficio y oculta una solución más sencilla del motor.}
+{Antes de construir una vía paralela, se mejora la señalización de la vía existente.}
+{B0 diagnostica el costo bruto; B1 usa el mejor índice razonable; C1 debe compararse con ambos y pagar su mantenimiento. La equivalencia lógica de respuestas es obligatoria.}
+{Úsela en toda decisión de materialización. Excepciones requieren documentar por qué el motor no puede indexar la consulta.}
+{Mida plan, filas, bytes, p95 y escritura. En la fase confirmatoria, C1 solo superó significativamente a B1 en cuatro de nueve celdas.}
+
+\Ficha{Retiro de proyección}{Mecanismo de ciclo de vida}{Contrato compuesto}
+{Eliminar representaciones cuyo beneficio ya no compensa costo, riesgo o dependencia.}
+{Las proyecciones se crean para consultas temporales y permanecen como escrituras, almacenamiento y código sin propietario.}
+{Es retirar una carretera con mantenimiento permanente cuando existe una ruta mejor y nadie la utiliza.}
+{El inventario identifica consumidores, frecuencia, propietario, costo y sustituto. Se detienen escritores, se observa una ventana reversible y luego se retiran datos conforme a política.}
+{Actívelo ante cero uso, duplicación de índice, retraso persistente o ausencia de responsable. No borre antes de demostrar que los consumidores migraron.}
+{Mida consultas, costo evitado, dependientes y errores posteriores. Se relaciona con Registro de dependencias y Frontera lectura--escritura.}
+
+\part{Herramientas pedagógicas y evolución editorial}
+\chapter{Plantilla definitiva de una ficha}
+
+Cada entrada futura debe conservar los siguientes campos:
+
+\begin{longtable}{p{4cm}p{8cm}}\toprule
+Campo & Pregunta editorial\\\midrule\endfirsthead
+\toprule Campo & Pregunta editorial\\\midrule\endhead
+Nombre & ¿Es recordable y no reclama una novedad falsa?\\
+Clasificación & ¿Es patrón establecido, adaptación, contrato, mecanismo, control o antipatrón?\\
+Propósito & ¿Qué resultado busca en una oración?\\
+Problema & ¿Qué dolor observable lo hace necesario?\\
+Síntomas & ¿Cómo reconoce el lector que enfrenta ese problema?\\
+Analogía & ¿Qué situación cotidiana explica la tensión sin sustituir la precisión?\\
+Solución & ¿Qué estructura y responsabilidades introduce?\\
+Invariantes & ¿Qué debe seguir siendo cierto aun con reintentos y fallos?\\
+Aplicabilidad & ¿Cuándo conviene y cuándo debe evitarse?\\
+Implementación & ¿Qué secuencia incremental reduce riesgo?\\
+Costos & ¿Qué complejidad, almacenamiento, latencia o gobierno añade?\\
+Métricas & ¿Cómo puede refutarse o verificarse?\\
+Relaciones & ¿Qué fichas complementa, compite o precede?\\
+Antecedentes & ¿Qué patrones o trabajos existentes deben reconocerse?\\
+Evidencia COBRIA & ¿Qué experimento o caso apoya la afirmación?\\
+\bottomrule\end{longtable}
+
+\chapter{Antipatrones que debe incorporar la siguiente edición}
+
+El catálogo futuro necesita fichas negativas que permitan diagnosticar deterioro:
+
+\begin{itemize}[leftmargin=*]
+\item \textbf{Segunda autoridad accidental:} una proyección recibe correcciones que no vuelven a la fuente.
+\item \textbf{Ámbito como filtro tardío:} autorización aplicada después de recuperar o almacenar en caché.
+\item \textbf{Proyección sin consulta:} duplicación creada por anticipación sin carga medida.
+\item \textbf{Reconstrucción ceremonial:} existe un guion nunca ejecutado ni verificado.
+\item \textbf{Catálogo incrustado:} códigos semánticos dispersos en interfaces y transformaciones.
+\item \textbf{Exportación huérfana:} conjunto analítico sin corte, versión o procedencia.
+\item \textbf{Agente con acceso directo:} una inferencia evade casos de uso y políticas.
+\item \textbf{Victoria contra escaneo:} se afirma optimización sin comparar un índice nativo.
+\end{itemize}
+
+\chapter{Plan del libro completo}
+
+La siguiente edición debe ampliar este prelibro con ilustraciones originales, secuencias
+problema--solución, pseudocódigo neutral, casos completos, ejercicios y variantes por
+motor. El objetivo editorial recomendado es de 250 a 400 páginas. Cada parte debe cerrar
+con un caso integrador y cada ficha debe enlazar alternativas y antipatrones.
+
+El sitio interactivo puede generarse desde los mismos campos estructurados. Debe añadir
+búsqueda, filtros, mapa de relaciones, comparador, calculadora de frontera, simulador de
+fallos y laboratorios de reconstrucción. El libro seguirá siendo la narrativa profunda;
+la página será la herramienta de exploración.
+
+\chapter{Cierre}
+
+COBRIA se vuelve pedagógicamente útil cuando deja de presentarse como una lista de capas
+y se convierte en decisiones reconocibles. Cada ficha responde seis preguntas: qué
+problema existe, qué autoridad manda, qué copia puede perderse, cómo se reconstruye,
+cuánto cuesta y cómo se comprueba. Ese lenguaje común conecta ingeniería de software,
+datos e inteligencia artificial sin ocultar antecedentes ni límites.
+
+\end{document}

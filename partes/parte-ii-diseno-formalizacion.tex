@@ -1,0 +1,834 @@
+\chapter{Metodología para el diseño de COBRIA}
+\label{ch:metodologia-diseno}
+
+\section{Enfoque de ciencia del diseño}
+
+COBRIA se estudia como un artefacto de ingeniería y no únicamente como una descripción
+de prácticas observadas. La ciencia del diseño resulta apropiada cuando la investigación
+busca construir y evaluar un artefacto destinado a resolver un problema relevante. Ese
+artefacto puede adoptar la forma de constructos, modelos, métodos o instanciaciones
+\parencite{hevner2004designscience}. COBRIA comprende las cuatro formas: propone un
+vocabulario, formaliza relaciones, prescribe un método de diseño y se instancia en
+sistemas ejecutables.
+
+El proceso sigue seis actividades adaptadas de la metodología de
+\textcite{peffers2007dsrm}:
+
+\begin{enumerate}[leftmargin=*]
+  \item identificar el problema de autoridad, duplicación, consulta y trazabilidad;
+  \item definir objetivos verificables para una solución;
+  \item diseñar y desarrollar los componentes de COBRIA;
+  \item demostrar su aplicación en dos casos anonimizados;
+  \item evaluar beneficios, costos y fallos mediante experimentos;
+  \item comunicar resultados, límites y material de replicación.
+\end{enumerate}
+
+El desarrollo no es estrictamente lineal. Los hallazgos de evaluación pueden exigir
+reformular un contrato, retirar una proyección o reducir una abstracción. Este ciclo
+evita presentar como principio general una decisión que solo funciona en un caso.
+
+\section{Proceso de abstracción desde los casos}
+
+Los dos sistemas de estudio contienen implementaciones con diferentes grados de
+uniformidad. El Sistema A combina componentes heredados y especializados; el Sistema B
+utiliza metadatos y generación con mayor regularidad. COBRIA no copia literalmente
+ninguna de las dos estructuras. Su derivación sigue cuatro pasos:
+
+\begin{enumerate}[leftmargin=*]
+  \item \textbf{Inventario:} identificar entidades, accesos, servicios, operaciones,
+  índices, catálogos y procesos asíncronos.
+  \item \textbf{Normalización conceptual:} traducir nombres internos a términos
+  reconocibles, como Entidad, Repositorio, Mapeador de datos, Capa de servicios y Proyección.
+  \item \textbf{Comparación:} separar mecanismos comunes de decisiones exclusivas de
+  un dominio o de deuda histórica.
+  \item \textbf{Generalización cautelosa:} conservar únicamente propiedades que puedan
+  definirse, implementarse y posteriormente evaluarse.
+\end{enumerate}
+
+La correspondencia terminológica inicial se muestra en la
+\cref{tab:correspondencia-componentes}. El término interno \emph{Dater}, útil para
+describir los casos, se sustituye en la propuesta por Repositorio/Mapeador de datos, una
+terminología más próxima a la literatura de arquitectura empresarial
+\parencite{fowler2002poeaa}.
+
+\begin{table}[H]
+\centering
+\caption{Normalización conceptual de componentes observados.}
+\label{tab:correspondencia-componentes}
+\begin{tabularx}{\textwidth}{p{3.2cm}p{4.2cm}X}
+\toprule
+Nombre observado & Término COBRIA & Responsabilidad principal \\
+\midrule
+Objeto & Canónico Entidad & Representar identidad, estado semántico, versión y ciclo de vida.\\
+Dater & Repositorio/Mapeador de datos & Traducir representaciones y encapsular persistencia y consulta.\\
+Servicio & Dominio/Aplicación Servicio & Aplicar políticas, componer datos y coordinar capacidades.\\
+CasoDeUso & Caso de uso de aplicación & Ejecutar una intención autorizada y completa.\\
+Servicio indexador & Gestor de proyecciones & Mantener, verificar y reconstruir proyecciones.\\
+thingsData & Registro de catálogos & Administrar vocabularios finitos y datos de referencia.\\
+DataConnect & Pasarela de almacenamiento & Adaptar el motor físico y sus primitivas.\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Criterios de diseño}
+
+Cada componente propuesto debe satisfacer cinco criterios:
+
+\begin{description}[leftmargin=3.4cm,style=nextline]
+  \item[Comprensibilidad] Su propósito debe poder explicarse sin conocer una ruta física.
+  \item[Verificabilidad] Deben existir invariantes o resultados observables.
+  \item[Reemplazabilidad] El dominio no debe depender innecesariamente de un proveedor.
+  \item[Proporcionalidad] La complejidad añadida debe responder a una necesidad medible.
+  \item[Trazabilidad] Debe conocerse el origen y la versión de toda derivación relevante.
+\end{description}
+
+Estos criterios impiden equiparar uniformidad con calidad. Una clase generada puede ser
+estructuralmente correcta y, aun así, carecer de comportamiento funcional. Del mismo
+modo, un componente especializado puede ser adecuado aunque no herede de una base
+genérica.
+
+\section{Evidencia prevista}
+
+La evaluación combinará cuatro clases de evidencia:
+
+\begin{itemize}[leftmargin=*]
+  \item \textbf{estructural:} dependencias, contratos, metadatos y cobertura;
+  \item \textbf{funcional:} resultados de operaciones y pruebas de invariantes;
+  \item \textbf{experimental:} latencia, bytes, escrituras, almacenamiento y tiempo de
+  reconstrucción;
+  \item \textbf{analítica:} linaje, repetibilidad, corrección temporal y calidad de los
+  datos derivados.
+\end{itemize}
+
+La presencia de archivos o documentación se considerará evidencia estructural, no prueba
+de funcionamiento. Una capacidad solo se declarará validada si existe una ejecución
+observable bajo condiciones documentadas.
+
+\chapter{Arquitectura COBRIA}
+\label{ch:arquitectura-cobria}
+
+\section{Definición}
+
+\begin{quote}
+COBRIA es una arquitectura dirigida por metadatos que representa el estado autorizado
+mediante entidades canónicas, separa el modelo semántico de su representación física y
+produce proyecciones reconstruibles para operación, integración, minería de datos e
+inteligencia artificial dentro de un ámbito explícito y auditable.
+\end{quote}
+
+La definición contiene cinco compromisos. Primero, existe una fuente de autoridad
+identificable. Segundo, almacenar no equivale a modelar: la representación física puede
+cambiar sin alterar el significado. Tercero, los datos derivados poseen contrato y no
+son copias accidentales. Cuarto, la pertenencia a un organización o contexto forma parte del
+diseño. Quinto, analítica e IA consumen proyecciones trazables en lugar de exportaciones
+opacas.
+
+\section{Capas y dirección de dependencias}
+
+\begin{figure}[H]
+\centering
+\resizebox{0.92\textwidth}{!}{%
+\begin{tikzpicture}[
+  layer/.style={draw=black,minimum width=12.8cm,minimum height=1cm,align=center},
+  side/.style={draw=black,dashed,minimum width=3.2cm,minimum height=1cm,align=center},
+  arr/.style={-{Latex[length=2.4mm]},semithick},
+  node distance=5mm and 8mm
+]
+\node[layer] (present) {Presentación, API y consumidores};
+\node[layer,below=of present] (use) {Casos de uso: intención, autorización e idempotencia};
+\node[layer,below=of use] (service) {Servicios de dominio y aplicación};
+\node[layer,below=of service] (repo) {Repositorios / Mapeadores de datos};
+\node[layer,below=of repo,fill=black!8] (canonical) {Entidades canónicas};
+\node[layer,below=of canonical] (storage) {Pasarela de almacenamiento y motor NoSQL};
+\node[side,right=of use] (meta) {COBRIA Metadatos};
+\node[side,right=of canonical] (proj) {Gestores de proyecciones};
+\node[side,left=of canonical] (gov) {Auditoría y gobierno};
+\draw[arr] (present)--(use);
+\draw[arr] (use)--(service);
+\draw[arr] (service)--(repo);
+\draw[arr] (repo)--(canonical);
+\draw[arr] (canonical)--(storage);
+\draw[dashed] (meta)--(use);
+\draw[dashed] (meta)--(proj);
+\draw[dashed] (proj)--(canonical);
+\draw[dashed] (gov)--(canonical);
+\end{tikzpicture}%
+}
+\caption{Capas y preocupaciones transversales de COBRIA.}
+\label{fig:capas-cobria}
+\end{figure}
+
+La dirección descendente de la \cref{fig:capas-cobria} representa conocimiento de
+abstracciones, no necesariamente el orden temporal de cada llamada. Un escucha del
+almacenamiento puede iniciar una notificación ascendente, pero su dato debe cruzar el
+Mapeador de datos antes de presentarse como entidad. La interfaz no debe construir rutas
+físicas ni actualizar proyecciones por cuenta propia.
+
+\section{Módulos internos}
+
+\subsection{COBRIA Núcleo}
+
+Incluye entidades, repositorios, servicios, casos de uso, catálogos y contexto. Es el
+subconjunto mínimo. Un sistema pequeño puede adoptar Núcleo sin Analítica o Inteligencia.
+
+\subsection{COBRIA Metadatos}
+
+Contiene descripciones de campos, tipos, mapeos, ámbito, relaciones, sensibilidad,
+índices y ciclo de vida. Los metadatos pueden alimentar validadores y generadores, pero
+no sustituyen pruebas funcionales.
+
+\subsection{COBRIA Proyecciones}
+
+Define funciones de derivación, destinos, niveles de consistencia, verificadores y
+procedimientos de reconstrucción. La proyección puede residir en el mismo motor o en uno
+diferente.
+
+\subsection{COBRIA Analítica}
+
+Transforma datos autorizados en eventos, agregaciones, series, grafos, conjuntos de datos y
+características versionadas. Su diseño debe preservar linaje y tiempo de observación.
+
+\subsection{COBRIA Inteligencia}
+
+Administra versiones de modelos, inferencias, evidencia, retroalimentación, consentimiento y
+agentes. Ninguna predicción adquiere por sí sola autoridad sobre el estado canónico.
+
+\subsection{COBRIA Gobierno}
+
+Reúne auditoría, retención, protección de datos, observabilidad, reconciliación y
+políticas de acceso. La gobernanza no se considera un módulo opcional cuando se manejan
+datos sensibles o decisiones asistidas por IA.
+
+\section{COBRIA frente a patrones relacionados}
+
+COBRIA puede usar separación de lectura y escritura, pero no exige dos bases ni
+mensajería. Por ello no es sinónimo de CQRS. CQRS permite optimizar modelos de lectura y
+escritura de forma independiente, aunque añade sincronización y consistencia eventual
+\parencite{microsoft2025cqrs}. COBRIA adopta esa separación cuando existe una razón
+medible y añade el contrato de reconstrucción y el linaje analítico.
+
+Tampoco exige abastecimiento por eventos. La fuente canónica puede ser el estado actual versionado,
+un historial de eventos o una combinación. En un sistema basado en estado, la auditoría
+no convierte automáticamente cada cambio en un evento capaz de reconstruir todo el
+agregado.
+
+Las proyecciones COBRIA incluyen vistas materializadas, pero su alcance es mayor: pueden
+ser índices booleanos, relaciones inversas, resúmenes, artefactos multimedia o conjuntos de datos.
+Comparten la propiedad esencial de ser desechables y regenerables desde una fuente
+\parencite{microsoft2025materialized,gupta1995materialized}.
+
+\chapter{Modelo formal de datos canónicos}
+\label{ch:modelo-formal}
+
+\section{Conjuntos fundamentales}
+
+Sea $\mathcal{E}$ el conjunto de entidades canónicas, $\mathcal{P}$ el conjunto de
+proyecciones, $\mathcal{S}$ el conjunto de ámbitos y $\mathcal{M}$ el conjunto de
+versiones de metadatos. Una entidad se define como:
+
+\begin{equation}
+E=(I,A,S,V,L,R),
+\label{eq:entidad}
+\end{equation}
+
+donde $I$ es la identidad, $A$ los atributos semánticos, $S\in\mathcal{S}$ el ámbito,
+$V$ la versión del esquema, $L$ el estado de ciclo de vida y $R$ la revisión de
+concurrencia.
+
+La identidad global lógica puede expresarse como:
+
+\begin{equation}
+I_g=(\tau,S,I_l),
+\end{equation}
+
+donde $\tau$ es el tipo de entidad e $I_l$ el identificador local. Dos entidades con el
+mismo identificador local pero ámbitos distintos no son la misma entidad.
+
+\section{Atributos y ausencia de valor}
+
+Cada atributo $a_j\in A$ declara tipo, nulabilidad, valor inicial, sensibilidad y reglas
+de validación. COBRIA distingue entre ausencia, valor nulo y valor vacío cuando el
+dominio lo requiere. Convertir indiscriminadamente los tres estados puede destruir
+información necesaria para migraciones o analítica.
+
+Los valores monetarios deben conservar moneda y unidad menor; las fechas de negocio no
+deben confundirse con instantes; y los identificadores externos deben diferenciarse de
+las claves internas. Estas decisiones pertenecen al modelo semántico, no al nombre corto
+utilizado en almacenamiento.
+
+\section{Ámbito y multiinquilinato}
+
+Un ámbito puede contener varios niveles:
+
+\begin{equation}
+S=(\mathrm{organizacion},\mathrm{contexto}_1,\ldots,\mathrm{contexto}_q).
+\end{equation}
+
+Para toda operación autorizada $o$ realizada por un actor $u$ sobre una entidad $E$, se
+exige:
+
+\begin{equation}
+\operatorname{autorizado}(u,o,E)\Rightarrow \operatorname{ambito}(E)\in
+\operatorname{ambitos}(u,o).
+\label{eq:ambito}
+\end{equation}
+
+La condición de la \cref{eq:ambito} debe verificarse en una frontera confiable. Ocultar
+una entidad en la interfaz no constituye aislamiento. La ruta física puede incluir el
+ámbito para acotar consultas, pero la seguridad no debe depender únicamente de que el
+cliente construya correctamente esa ruta.
+
+\section{Ciclo de vida}
+
+El estado $L$ se modela como:
+
+\begin{equation}
+L\in\{active,archived,deleted\},
+\end{equation}
+
+con extensiones específicas del dominio. \emph{Eliminado} puede representar una marca
+lógica cuando existen obligaciones de auditoría. Una política de retención define si y
+cuándo procede la eliminación física. Las proyecciones deben excluir o representar
+entidades archivadas de acuerdo con su contrato, no según una convención implícita.
+
+\section{Revisión y concurrencia}
+
+La revisión $R\in\mathbb{N}_0$ aumenta con cada modificación aceptada. Una actualización
+optimista exige:
+
+\begin{equation}
+R_{request}=R_{stored}.
+\end{equation}
+
+Si la igualdad no se cumple, el caso de uso rechaza, reintenta desde un estado nuevo o
+ejecuta una reconciliación explícita. El control de revisión no reemplaza transacciones
+atómicas cuando una invariante involucra varias ubicaciones.
+
+\section{Invariantes canónicas}
+
+Se proponen cinco invariantes generales:
+
+\begin{align}
+&\forall E\in\mathcal{E}: I(E)\neq\varnothing,\\
+&\forall E\in\mathcal{E}: S(E)\neq\varnothing\quad\text{si el tipo es ámbitod},\\
+&\forall E_1,E_2: I_g(E_1)=I_g(E_2)\Rightarrow E_1=E_2,\\
+&\forall E: deserialize(serialize(E,M),M)=E,\\
+&\forall p\in\mathcal{P}: source(p)\subseteq\mathcal{E}\cup\mathcal{P}.
+\end{align}
+
+La cuarta igualdad se entiende sobre campos persistidos y admite normalizaciones
+declaradas. Un timestamp generado por servidor, por ejemplo, debe modelarse como tal en
+vez de ocultarse como una diferencia accidental.
+
+\chapter{Representación física y persistencia}
+\label{ch:persistencia}
+
+\section{Mapeo semántico--físico}
+
+Sea $M_v$ un mapeo versionado y $F$ una función de serialización:
+
+\begin{equation}
+F_{M_v}:\mathcal{E}\rightarrow\mathcal{R},
+\end{equation}
+
+donde $\mathcal{R}$ es el conjunto de representaciones físicas. La operación inversa
+$G_{M_v}$ debe satisfacer:
+
+\begin{equation}
+G_{M_v}(F_{M_v}(E))\equiv E.
+\label{eq:roundtrip}
+\end{equation}
+
+La equivalencia de la \cref{eq:roundtrip} incluye identidad y semántica, no propiedades
+transitorias de memoria. Un ejemplo neutral es:
+
+\begin{table}[H]
+\centering
+\caption{Ejemplo de mapeo semántico--físico versionado.}
+\label{tab:fieldmap}
+\begin{tabular}{lll}
+\toprule
+Campo semántico & Clave física & Regla \\
+\midrule
+organizaciónId & a & cadena no vacía \\
+contextId & b & cadena no vacía \\
+status & c & código de catálogo versionado \\
+createdAt & d & instante UTC \\
+revision & e & entero no negativo \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Las claves compactas pueden reducir repetición, pero disminuyen legibilidad y elevan el
+costo de diagnóstico. COBRIA no las prescribe; exige medir su beneficio y conservar un
+diccionario versionado. Una clave física nunca debe reutilizarse con otro significado
+dentro de la misma versión.
+
+\section{Repositorio y Mapeador de datos}
+
+El Repositorio ofrece una colección conceptual de entidades; el Mapeador de datos traduce
+entre objeto y almacenamiento sin introducir dependencias físicas en el dominio
+\parencite{fowler2002poeaa}. En una implementación compacta ambas responsabilidades
+pueden residir en una clase, siempre que su interfaz permanezca explícita.
+
+El contrato mínimo es:
+
+\begin{verbatim}
+get(id, ámbito) -> Entidad | null
+list(query, ámbito, page) -> Page<Entidad>
+save(entity, expectedRevision) -> Entidad
+remove(id, ámbito, policy) -> Result
+subscribe(id, ámbito, observer) -> Unsubscribe
+\end{verbatim}
+
+El Repositorio no decide por sí solo una transición de negocio. Puede validar forma y
+ámbito, pero una operación como aprobar, cancelar o transferir pertenece al caso de uso.
+
+\section{Mapa de identidad y caché}
+
+Una caché $C:I_g\rightarrow E$ evita cargar repetidamente la misma identidad durante una
+unidad de trabajo. Su acceso promedio puede aproximarse a $O(1)$ mediante tabla hash,
+pero introduce expiración, invalidación y riesgo de servir datos obsoletos. COBRIA exige
+declarar el alcance de la caché:
+
+\begin{itemize}[leftmargin=*]
+  \item por operación, con vida corta y consistencia sencilla;
+  \item por sesión, con invalidación mediante eventos o TTL;
+  \item compartida, con políticas explícitas de coherencia y aislamiento.
+\end{itemize}
+
+Una caché nunca debe omitir la dimensión de organización en su clave.
+
+\section{Pasarela de almacenamiento}
+
+El Pasarela adapta primitivas como lectura, transacción, actualización multipath,
+escucha, paginación y generación de identidad. Esta frontera permite contrastar el
+modelo en emuladores y sustituir el motor, pero no promete portabilidad automática: las
+garantías varían entre almacenes. Sistemas como Dynamo priorizan disponibilidad y
+resolución de versiones \parencite{decandia2007dynamo}, mientras Spanner demuestra un
+modelo distribuido con transacciones externamente consistentes bajo otras decisiones de
+infraestructura \parencite{corbett2012spanner}.
+
+\section{Registro de rutas semánticas}
+
+Cuando el almacenamiento utiliza nombres físicos compactos, el desacoplamiento no se
+logra solo con un Mapeador. También se necesita un registro central que traduzca nombres
+semánticos a nodos y construya rutas con ámbito. Sea
+\(\rho_v:S\times K^*\rightarrow Path\) la función versionada que recibe un símbolo
+semántico \(S\) y segmentos de clave \(K\). Los servicios de aplicación dependen de
+\(\rho_v\), no de literales físicos dispersos.
+
+Este registro aporta cuatro propiedades comprobables:
+
+\begin{enumerate}[leftmargin=*]
+  \item una ruta física cambia en un punto controlado;
+  \item una búsqueda estática puede prohibir literales fuera de infraestructura;
+  \item las pruebas verifican normalización y presencia obligatoria de ámbito;
+  \item telemetría, reglas y migraciones comparten el mismo vocabulario.
+\end{enumerate}
+
+El registro no convierte automáticamente un esquema compacto en modelo canónico. Su
+función es establecer una frontera semántico--física y hacer localizable la deuda.
+
+\section{Capa de servicios y casos de uso}
+
+El Capa de servicios establece capacidades y coordina la respuesta de la aplicación
+\parencite{fowler2002poeaa}. COBRIA distingue:
+
+\begin{itemize}[leftmargin=*]
+  \item \textbf{servicio de dominio:} regla que no pertenece naturalmente a una sola
+  entidad;
+  \item \textbf{servicio de aplicación:} composición técnica de repositorios, políticas
+  y proveedores;
+  \item \textbf{caso de uso:} intención completa iniciada por un actor o proceso.
+\end{itemize}
+
+Un caso de uso recibe comando, actor, ámbito, clave de idempotencia y revisión esperada.
+Produce un resultado funcional, una auditoría y los cambios derivados requeridos. La
+interfaz no debe convertir un cambio de estado complejo en un CRUD genérico.
+
+\section{Contexto autorizado como dato derivado confiable}
+
+El ámbito solicitado por cabeceras, query string o cuerpo identifica una intención, no
+demuestra autorización. COBRIA distingue \(S_{solicitado}\) de
+\(S_{autorizado}\). El segundo debe derivarse en servidor a partir de identidad,
+declaraciones y relación comprobada con el recurso:
+
+\[
+S_{autorizado}=\operatorname{autorizar}(actor,recurso,politica).
+\]
+
+Servicios, auditoría, facturación, FinOps y proyecciones posteriores consumen únicamente
+el contexto autorizado. Recalcularlo de manera distinta en cada capa crea divergencia;
+aceptarlo del cliente permite atribución falsa. Por ello, el contexto validado es una
+proyección efímera de seguridad: tiene fuente, política, alcance y vida limitada, pero
+no reemplaza la autorización de cada operación sensible.
+
+\chapter{Teoría de proyecciones reconstruibles}
+\label{ch:proyecciones}
+
+\section{Definición}
+
+Una proyección $P_i$ se define mediante una función versionada:
+
+\begin{equation}
+P_i=g_{i,v}(D_i),
+\label{eq:projection}
+\end{equation}
+
+donde $D_i$ es un conjunto de entidades canónicas o proyecciones previamente
+autorizadas. Para evitar ciclos no controlados, el grafo de dependencias de
+reconstrucción debe ser acíclico o declarar un punto fijo y un algoritmo de convergencia.
+
+Una copia es proyección COBRIA solo si declara:
+
+\begin{enumerate}[leftmargin=*]
+  \item fuentes y ámbito;
+  \item función y versión;
+  \item destino y clave;
+  \item propietario de escritura;
+  \item nivel de consistencia;
+  \item procedimiento de reconstrucción;
+  \item verificador de integridad;
+  \item política de privacidad y retención.
+\end{enumerate}
+
+\section{Taxonomía}
+
+\begin{table}[H]
+\centering
+\caption{Taxonomía de proyecciones COBRIA.}
+\label{tab:taxonomia-proyecciones}
+\begin{tabularx}{\textwidth}{p{2.5cm}p{3.3cm}X}
+\toprule
+Clase & Consistencia esperada & Ejemplos y tratamiento \\
+\midrule
+Crítica & Atómica con la operación o verificada antes de confirmar & Reserva de recurso,
+saldo operativo, unicidad. Si no puede mantenerse, falla el caso de uso.\\
+Operacional & Eventual acotada & Índices de consulta, resúmenes de lista, relaciones
+inversas. Debe existir reconciliación.\\
+Analítica & Eventual y versionada & Series, características, conjuntos de datos, agregados históricos.
+Prioriza linaje y corrección temporal.\\
+Efímera & Sin garantía durable & Caché, vista previa o cálculo temporal. Puede descartarse sin
+reconstrucción persistente.\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Clasificar no convierte una proyección en correcta. La clase define qué retrasos y
+fallos son aceptables y qué pruebas se requieren.
+
+\section{Propiedades}
+
+\subsection{Determinismo}
+
+Con fuentes y versión iguales, una proyección determinista produce el mismo resultado:
+
+\begin{equation}
+D_i^{(1)}=D_i^{(2)}\Rightarrow g_{i,v}(D_i^{(1)})=g_{i,v}(D_i^{(2)}).
+\end{equation}
+
+Si utiliza tiempo actual, aleatoriedad o un proveedor externo, esos valores deben
+capturarse como entradas versionadas.
+
+\subsection{Idempotencia}
+
+Aplicar dos veces el mismo cambio no debe duplicar resultados:
+
+\begin{equation}
+apply(apply(P,c),c)=apply(P,c).
+\end{equation}
+
+\subsection{Reconstructibilidad}
+
+Si $P_i$ se pierde, debe poder calcularse $P_i'$ tal que:
+
+\begin{equation}
+verify(P_i',g_{i,v}(D_i))=true.
+\end{equation}
+
+\subsection{No autoridad}
+
+Una proyección no se edita para corregir negocio. La corrección se ejecuta sobre el
+canónico mediante un caso de uso y luego se propaga.
+
+\section{Grafo de dependencias}
+
+Sea $G=(V,E_d)$ un grafo donde $V=\mathcal{E}\cup\mathcal{P}$ y una arista $(x,p)$
+indica que $p$ depende de $x$. El orden de reconstrucción se obtiene mediante orden
+topológico. Si se detecta un ciclo no declarado, el plan se rechaza.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+  n/.style={draw=black,rounded corners=1pt,minimum width=3.2cm,minimum height=8mm,align=center},
+  p/.style={draw=black,fill=black!7,minimum width=3.2cm,minimum height=8mm,align=center},
+  a/.style={-{Latex[length=2.2mm]},semithick},node distance=9mm and 14mm]
+\node[n] (e1) {Entidad canónica A};
+\node[n,below=of e1] (e2) {Entidad canónica B};
+\node[p,right=of e1] (idx) {Índice operacional};
+\node[p,right=of e2] (sum) {Resumen compuesto};
+\node[p,right=of sum] (data) {Conjunto de datos versionado};
+\draw[a] (e1)--(idx);
+\draw[a] (e1)--(sum);
+\draw[a] (e2)--(sum);
+\draw[a] (sum)--(data);
+\end{tikzpicture}
+\caption{Ejemplo de grafo acíclico de reconstrucción.}
+\label{fig:grafo-proyecciones}
+\end{figure}
+
+\section{Contrato de proyección}
+
+Una representación neutral puede adoptar la siguiente forma:
+
+\begin{verbatim}
+ProjectionContract {
+  name, version, class,
+  sources[], ámbito,
+  destination, keyFunction,
+  build, verify,
+  consistency, responsable,
+  privacy, retention
+}
+\end{verbatim}
+
+El contrato es declarativo respecto al propósito, aunque `build` y `verify` pueden ser
+funciones. Debe poder responder quién escribe la proyección y cómo se repara. Si esas
+preguntas no tienen respuesta, la duplicación permanece fuera de gobierno.
+
+\chapter{Algoritmos, consistencia y recuperación}
+\label{ch:algoritmos-consistencia}
+
+\section{Creación de una entidad}
+
+\begin{verbatim}
+algorithm Create(command, actor, idempotencyKey):
+  require authorize(actor, command.ámbito, command.action)
+  if resultExists(idempotencyKey): return previousResult
+  metadata <- registry.forType(command.type)
+  entity <- metadata.construct(command.carga útil)
+  validate(entity)
+  critical <- projections.criticalFor(entity.type)
+  atomicWrite(entity, buildAll(critical, entity))
+  enqueue(projections.nonCriticalFor(entity.type), entity.revision)
+  audit(actor, command, entity)
+  return remember(idempotencyKey, entity)
+\end{verbatim}
+
+Las proyecciones críticas forman parte de la confirmación. Las demás se envían a un
+proceso idempotente. Si el motor no ofrece una escritura atómica suficiente, el diseño
+debe reducir la frontera crítica o implementar una reserva y compensación explícitas.
+
+\section{Actualización optimista}
+
+\begin{verbatim}
+algorithm Update(command, actor, expectedRevision):
+  current <- repository.get(command.id, command.ámbito)
+  require current.revision = expectedRevision
+  next <- useCase.transition(current, command)
+  next.revision <- current.revision + 1
+  validateTransition(current, next)
+  atomicWrite(next, criticalDelta(current, next))
+  enqueue(nonCriticalDelta(current, next))
+  return next
+\end{verbatim}
+
+El delta debe eliminar claves antiguas además de añadir nuevas. Cambiar el estado o el
+ámbito sin retirar índices previos produce referencias fantasma.
+
+\section{Reconstrucción total}
+
+\begin{verbatim}
+algorithm RebuildAll(contract, ámbito):
+  acquireLease(contract.name, ámbito)
+  targetVersion <- createShadowDestination()
+  for page in sourcePages(contract.sources, ámbito):
+    records <- contract.build(page)
+    writeIdempotently(targetVersion, records)
+    checkpoint(page.cursor)
+  report <- contract.verify(targetVersion)
+  require report.errors = 0
+  atomicCutover(targetVersion)
+  releaseLease()
+  return report
+\end{verbatim}
+
+El destino sombra evita dejar una proyección parcialmente reconstruida como si estuviera
+completa. Para volúmenes pequeños puede reconstruirse en sitio, pero debe exponerse el
+estado `rebuilding` y tolerar reanudación.
+
+\section{Reconstrucción incremental}
+
+\begin{verbatim}
+algorithm RebuildChanged(contract, marca de corte):
+  changes <- canonicalChangesAfter(marca de corte)
+  for change in ordered(changes):
+    require notProcessed(change.id, contract.version)
+    delta <- contract.buildDelta(change.before, change.after)
+    applyIdempotently(delta)
+    markProcessed(change.id, contract.version)
+  return contract.verifyAffected(changes)
+\end{verbatim}
+
+La reconstrucción incremental necesita un registro confiable de cambios o una marca de
+actualización consultable. Si no existe, escanear el conjunto canónico puede ser la única
+forma correcta de detectar diferencias.
+
+\section{Verificación de integridad}
+
+Se definen cuatro clases de anomalía:
+
+\begin{align}
+orphan &= \{p\in P: sourceId(p)\notin I(\mathcal{E})\},\\
+missing &= \{e\in E: expected(e)\setminus actual(e)\neq\varnothing\},\\
+stale &= \{p\in P: sourceRevision(p)<revision(source(p))\},\\
+divergent &= \{p\in P:p\neq g_{v}(source(p))\}.
+\end{align}
+
+Un reporte debe separar conteos, ejemplos anonimizados y severidad. La reparación
+automática es apropiada para derivados deterministas; una divergencia canónica requiere
+revisión de negocio.
+
+\section{Consistencia por clase}
+
+\begin{table}[H]
+\centering
+\caption{Mecanismos de consistencia recomendados.}
+\label{tab:consistencia-mecanismos}
+\begin{tabularx}{\textwidth}{p{3cm}p{4cm}X}
+\toprule
+Necesidad & Mecanismo & Consideración \\
+\midrule
+Invariante local & Transacción o compare-and-set & Rechazar revisiones obsoletas.\\
+Varias rutas del mismo motor & Actualización multipath atómica & Validar límites reales
+del proveedor.\\
+Derivado operacional & Evento/cola de salida y proceso de trabajo idempotente & Medir retraso y reconciliar.\\
+Integración externa & Saga o compensación & No asumir transacción distribuida.\\
+Conjunto de datos analítico & Lote versionado con marca de corte & Preservar tiempo y linaje.\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+La consistencia fuerte global no debe afirmarse por analogía. Las garantías dependen del
+motor, partición y frontera transaccional. COBRIA documenta esas garantías en el contrato
+del caso de uso.
+
+\section{Estado materializado: completitud, frescura y procedencia}
+
+Una vista no debe considerarse válida por el solo hecho de existir. El contrato mínimo
+incluye metadatos de control:
+
+\begin{verbatim}
+_meta:
+  complete: boolean
+  updatedAt: timestamp
+  schemaVersion: integer
+  sourceRevision|marca de corte: value
+  count|checksum: optional
+\end{verbatim}
+
+La lectura acepta la vista únicamente si está completa, dentro de su presupuesto de
+frescura y en una versión compatible. Una mutación puede actualizarla, invalidarla o
+marcarla incompleta. Si la proyección es mejor esfuerzo, su fallo no revierte la escritura
+canónica; la lectura cae a la fuente autorizada y programa reparación.
+
+Cuando varias solicitudes encuentran una vista fría, la reconstrucción debe
+\emph{coalescerse}: una promesa, arrendamiento o bloqueo por ámbito evita que todas repitan el mismo
+escaneo. Esta protección contra \emph{cache stampede} forma parte del contrato de
+reconstrucción y debe probarse con solicitudes concurrentes.
+
+\section{Arquitectura ejecutable y funciones de aptitud}
+
+Una regla escrita puede degradarse silenciosamente. COBRIA incorpora funciones de
+aptitud arquitectónica: pruebas o análisis estáticos que convierten una propiedad
+estructural en una condición de integración continua. Ejemplos:
+
+\begin{itemize}[leftmargin=*]
+  \item presentación no importa infraestructura de datos;
+  \item rutas físicas compactas no aparecen en servicios de aplicación;
+  \item todo modelo de lectura declara metadatos de completitud y frescura;
+  \item una operación sensible usa contexto autorizado por servidor;
+  \item el número de consumidores de una fachada heredado no puede crecer;
+  \item rutas críticas respetan presupuestos de bytes, LCP y bloqueo.
+\end{itemize}
+
+Para una deuda medible \(d_t\), el control automatizado de migración impone
+\(d_{t+1}\leq d_t\), y el objetivo final puede fijarse en cero. Este presupuesto
+monótono permite migrar sin una reescritura total y evita que una fachada temporal se
+convierta en arquitectura permanente.
+
+\section{Cola de salida, reintentos y duplicados}
+
+Cuando guardar el canónico y publicar un mensaje no forman una transacción única, existe
+una ventana de pérdida. El patrón cola de salida conserva la intención de publicación junto al
+cambio autorizado; un proceso de trabajo la entrega y registra el resultado. La entrega puede ser
+al menos una vez, por lo que consumidores y Gestores de proyecciones deben ser idempotentes.
+
+Una clave de idempotencia se asocia con actor, ámbito, operación y ventana temporal. No
+debe reutilizarse entre organizaciones. El resultado previo puede devolverse siempre que los
+parámetros relevantes coincidan; en caso contrario, la reutilización se rechaza.
+
+\section{Recuperación y observabilidad}
+
+Cada proceso de reconstrucción registra:
+
+\begin{itemize}[leftmargin=*]
+  \item contrato y versión;
+  \item ámbito y rango temporal;
+  \item cursor o checkpoint;
+  \item entidades leídas y registros escritos;
+  \item anomalías antes y después;
+  \item duración y consumo aproximado;
+  \item identidad del operador o proceso de trabajo;
+  \item resultado del cambio de versión.
+\end{itemize}
+
+El objetivo de recuperación (RTO) y el punto de recuperación (RPO) deben definirse por
+clase de proyección. Una caché puede perderse sin RPO; un saldo derivado utilizado en una
+operación exige un tratamiento diferente.
+
+\section{Antipatrones}
+
+COBRIA identifica como antipatrones:
+
+\begin{enumerate}[leftmargin=*]
+  \item editar una proyección para corregir la fuente;
+  \item construir rutas físicas en la presentación;
+  \item mantener el mismo índice desde múltiples servicios sin propietario;
+  \item usar un ID sin ámbito como clave de caché multiinquilino;
+  \item generar una clase por cada estructura sin justificar identidad o ciclo de vida;
+  \item llamar transacción a una secuencia de escrituras independientes;
+  \item entrenar con una exportación sin versión, marca de corte ni linaje;
+  \item permitir que un agente de IA escriba directamente en el almacenamiento;
+  \item declarar una integración completa por la sola presencia de modelos o contratos;
+  \item añadir proyecciones sin medir amplificación y frecuencia de consulta;
+  \item confiar en el ámbito enviado por el cliente para auditoría o autorización;
+  \item servir una vista existente sin comprobar completitud, versión y frescura;
+  \item crear una capa de compatibilidad sin inventario ni presupuesto decreciente;
+  \item documentar límites de capas sin un control automatizado que detecte regresiones.
+\end{enumerate}
+
+\section{Criterio mínimo de adopción}
+
+COBRIA Núcleo puede justificarse cuando existe al menos una de estas condiciones: dominio
+con reglas relevantes, multiinquilinato, duplicación derivada, necesidad de reconstrucción,
+procesamiento asíncrono o uso analítico trazable. Si el sistema es un CRUD pequeño, con
+pocos registros y consultas directas, Repositorio más un modelo sencillo puede ser
+suficiente. La arquitectura se considera exitosa cuando hace explícitos los compromisos,
+incluso si la decisión resultante es no crear una proyección.
+
+\section{Síntesis de la Parte II}
+
+Esta parte transformó la intuición inicial en un artefacto definido. COBRIA organiza el
+estado mediante entidades con identidad, ámbito, versión, ciclo de vida y revisión;
+separa semántica de persistencia mediante un mapeo reversible; y asigna a Repositorio,
+Servicio y Caso de uso fronteras distintas. Su elemento diferenciador es el contrato de
+proyección, que convierte índices, resúmenes y conjuntos de datos en derivaciones gobernadas y
+reconstruibles.
+
+También se establecieron algoritmos de creación, actualización, reconstrucción y
+verificación, junto con mecanismos de consistencia proporcionales a la criticidad. Estas
+definiciones preparan la siguiente parte del estudio: analizar complejidad, amplificación
+y costo, y comprobar mediante experimentos si la disciplina propuesta produce un
+beneficio neto.

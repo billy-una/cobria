@@ -1,0 +1,10 @@
+{
+  "runs": 30,
+  "pass": true,
+  "manifestReproducibility": 30,
+  "temporalLeakage": 0,
+  "foreignDocuments": 0,
+  "appropriateAbstention": 30,
+  "validCitations": 30,
+  "limits": "Recuperación léxica determinista; no evalúa calidad de un modelo generativo ni de incrustaciones externas."
+}

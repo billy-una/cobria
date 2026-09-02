@@ -1,0 +1,45 @@
+{
+  "runId": "full-2026-08-20T17-24-44-588Z",
+  "mode": "full",
+  "frozenConfigHash": "8c1f1221bd0258afe617aa7d0a8ee4733b61fa1caf40b4af7dc40fd118a7d070",
+  "settings": {
+    "profiles": [
+      "R",
+      "A",
+      "B"
+    ],
+    "sizes": [
+      1000,
+      10000,
+      50000
+    ],
+    "tenants": 10,
+    "repetitions": 5,
+    "queryIterations": 50,
+    "projectionCounts": [
+      0,
+      1,
+      3,
+      5,
+      10
+    ],
+    "changeRatios": [
+      0.001,
+      0.01,
+      0.1,
+      1
+    ],
+    "eventualDelayMs": 2
+  },
+  "environment": {
+    "node": "v24.2.0",
+    "platform": "darwin",
+    "arch": "arm64",
+    "cpu": "Apple M2",
+    "cpuCount": 8,
+    "memoryBytes": 8589934592
+  },
+  "rows": 1755,
+  "rawFile": "results/raw/measurements.jsonl",
+  "rawHash": "4146bfb76f5df845ab6b77fb74fb945453223cc17ca6164e619437439b20cbfe"
+}

@@ -1,0 +1,16 @@
+{
+  "runId": "postgres-2026-08-23T07-08-32-521Z",
+  "protocolHash": "461153e87983d0ef9778caf5fb98bed95b8a84d0f5198129345da8c1754c1c70",
+  "rawHash": "bf273b48ea2940e93345a48e190651d59d32854c8ae084992561f35439665830",
+  "rows": 2070,
+  "environment": {
+    "node": "v24.2.0",
+    "cpu": "Apple M2",
+    "memoryBytes": 8589934592,
+    "platform": "darwin",
+    "arch": "arm64",
+    "postgres": "16-alpine",
+    "transport": "TCP localhost:55432"
+  },
+  "rawFile": "results/phase3/raw/postgres.jsonl"
+}

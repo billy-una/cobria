@@ -1,0 +1,49 @@
+{
+  "specification": "COBRIA Core 1.2",
+  "engine": "mongodb",
+  "runs": 90,
+  "configuration": {
+    "runs": 30,
+    "sizes": [
+      100,
+      1000,
+      5000
+    ]
+  },
+  "generatedAt": "2026-08-25T05:08:57.013Z",
+  "summary": [
+    {
+      "engine": "mongodb",
+      "size": 100,
+      "runs": 30,
+      "allPass": true,
+      "canonicalMedianMs": 11.211729000000105,
+      "projectionMedianMs": 9.747271000000183,
+      "rebuildMedianMs": 643.444645999999,
+      "writeAmplification": 2,
+      "foreignDocuments": 0
+    },
+    {
+      "engine": "mongodb",
+      "size": 1000,
+      "runs": 30,
+      "allPass": true,
+      "canonicalMedianMs": 49.52758300000278,
+      "projectionMedianMs": 40.56379200000083,
+      "rebuildMedianMs": 5436.908437500038,
+      "writeAmplification": 2,
+      "foreignDocuments": 0
+    },
+    {
+      "engine": "mongodb",
+      "size": 5000,
+      "runs": 30,
+      "allPass": true,
+      "canonicalMedianMs": 196.35535399997025,
+      "projectionMedianMs": 160.51908349979203,
+      "rebuildMedianMs": 26128.40633299999,
+      "writeAmplification": 2,
+      "foreignDocuments": 0
+    }
+  ]
+}

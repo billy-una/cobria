@@ -1,0 +1,211 @@
+{
+  "scope": "modelos funcionales mínimos sobre LokiJS; no equivalen a productos, índices físicos ni marcos industriales completos",
+  "controls": {
+    "documento-directo": "lectura filtrada de la colección canónica",
+    "indice-filtrado": "control lógico de consulta; LokiJS no permite aislar un índice físico comparable",
+    "proyeccion-no-gobernada": "copia de lectura sin fuente formal de recuperación",
+    "cqrs-minimo": "modelo de escritura y modelo de lectura separados, sin mensajería",
+    "bitacora-reconstruible": "eventos inmutables simplificados y plegado",
+    "cobria-c2": "canónica, candidata, equivalencia y publicación versionada"
+  },
+  "summary": [
+    {
+      "mode": "documento-directo",
+      "size": 100,
+      "runs": 30,
+      "writeMedianMs": 0.5220410000000015,
+      "readMedianMs": 0.19716700000000742,
+      "recoveryMedianMs": 0.0006660000000238142,
+      "recoveryApplicable": false,
+      "recoverable": true,
+      "medianWrites": 100
+    },
+    {
+      "mode": "documento-directo",
+      "size": 1000,
+      "runs": 30,
+      "writeMedianMs": 3.781082999999853,
+      "readMedianMs": 1.4862090000000308,
+      "recoveryMedianMs": 0.0007080000000314612,
+      "recoveryApplicable": false,
+      "recoverable": true,
+      "medianWrites": 1000
+    },
+    {
+      "mode": "documento-directo",
+      "size": 5000,
+      "runs": 30,
+      "writeMedianMs": 29.38762499999939,
+      "readMedianMs": 9.145125000000917,
+      "recoveryMedianMs": 0.001457999999729509,
+      "recoveryApplicable": false,
+      "recoverable": true,
+      "medianWrites": 5000
+    },
+    {
+      "mode": "indice-filtrado",
+      "size": 100,
+      "runs": 30,
+      "writeMedianMs": 0.6741670000000113,
+      "readMedianMs": 0.18500000000000227,
+      "recoveryMedianMs": 0.0005419999999958236,
+      "recoveryApplicable": false,
+      "recoverable": true,
+      "medianWrites": 100
+    },
+    {
+      "mode": "indice-filtrado",
+      "size": 1000,
+      "runs": 30,
+      "writeMedianMs": 3.7552080000000387,
+      "readMedianMs": 1.4828750000000355,
+      "recoveryMedianMs": 0.0006250000000136424,
+      "recoveryApplicable": false,
+      "recoverable": true,
+      "medianWrites": 1000
+    },
+    {
+      "mode": "indice-filtrado",
+      "size": 5000,
+      "runs": 30,
+      "writeMedianMs": 28.20575000000008,
+      "readMedianMs": 9.011999999998807,
+      "recoveryMedianMs": 0.0015419999999721767,
+      "recoveryApplicable": false,
+      "recoverable": true,
+      "medianWrites": 5000
+    },
+    {
+      "mode": "proyeccion-no-gobernada",
+      "size": 100,
+      "runs": 30,
+      "writeMedianMs": 1.0807499999999948,
+      "readMedianMs": 0.07758300000000418,
+      "recoveryMedianMs": 0.0007499999999822649,
+      "recoveryApplicable": true,
+      "recoverable": false,
+      "medianWrites": 134
+    },
+    {
+      "mode": "proyeccion-no-gobernada",
+      "size": 1000,
+      "runs": 30,
+      "writeMedianMs": 4.988416999999799,
+      "readMedianMs": 0.49216599999999744,
+      "recoveryMedianMs": 0.0006670000000212895,
+      "recoveryApplicable": true,
+      "recoverable": false,
+      "medianWrites": 1334
+    },
+    {
+      "mode": "proyeccion-no-gobernada",
+      "size": 5000,
+      "runs": 30,
+      "writeMedianMs": 43.932834000000184,
+      "readMedianMs": 2.7754170000007434,
+      "recoveryMedianMs": 0.0010839999995368998,
+      "recoveryApplicable": true,
+      "recoverable": false,
+      "medianWrites": 6667
+    },
+    {
+      "mode": "cqrs-minimo",
+      "size": 100,
+      "runs": 30,
+      "writeMedianMs": 0.9438749999999914,
+      "readMedianMs": 0.07979199999999764,
+      "recoveryMedianMs": 0.5747089999999844,
+      "recoveryApplicable": true,
+      "recoverable": true,
+      "medianWrites": 168
+    },
+    {
+      "mode": "cqrs-minimo",
+      "size": 1000,
+      "runs": 30,
+      "writeMedianMs": 5.324041999999963,
+      "readMedianMs": 0.5143340000001899,
+      "recoveryMedianMs": 4.158500000000004,
+      "recoveryApplicable": true,
+      "recoverable": true,
+      "medianWrites": 1668
+    },
+    {
+      "mode": "cqrs-minimo",
+      "size": 5000,
+      "runs": 30,
+      "writeMedianMs": 42.757707999999184,
+      "readMedianMs": 3.0205000000005384,
+      "recoveryMedianMs": 28.451999999999316,
+      "recoveryApplicable": true,
+      "recoverable": true,
+      "medianWrites": 8334
+    },
+    {
+      "mode": "bitacora-reconstruible",
+      "size": 100,
+      "runs": 30,
+      "writeMedianMs": 0.49254200000001447,
+      "readMedianMs": 0.20387499999998226,
+      "recoveryMedianMs": 0.6329579999999737,
+      "recoveryApplicable": true,
+      "recoverable": true,
+      "medianWrites": 134
+    },
+    {
+      "mode": "bitacora-reconstruible",
+      "size": 1000,
+      "runs": 30,
+      "writeMedianMs": 3.8788750000001073,
+      "readMedianMs": 1.565499999999929,
+      "recoveryMedianMs": 4.117375000000038,
+      "recoveryApplicable": true,
+      "recoverable": true,
+      "medianWrites": 1334
+    },
+    {
+      "mode": "bitacora-reconstruible",
+      "size": 5000,
+      "runs": 30,
+      "writeMedianMs": 33.44583300000022,
+      "readMedianMs": 9.865916000000198,
+      "recoveryMedianMs": 33.94487500000105,
+      "recoveryApplicable": true,
+      "recoverable": true,
+      "medianWrites": 6667
+    },
+    {
+      "mode": "cobria-c2",
+      "size": 100,
+      "runs": 30,
+      "writeMedianMs": 1.372709000000043,
+      "readMedianMs": 0.06537500000001728,
+      "recoveryMedianMs": 0.6765419999999835,
+      "recoveryApplicable": true,
+      "recoverable": true,
+      "medianWrites": 202
+    },
+    {
+      "mode": "cobria-c2",
+      "size": 1000,
+      "runs": 30,
+      "writeMedianMs": 7.924708999999893,
+      "readMedianMs": 0.45612499999992906,
+      "recoveryMedianMs": 4.115333000000078,
+      "recoveryApplicable": true,
+      "recoverable": true,
+      "medianWrites": 2002
+    },
+    {
+      "mode": "cobria-c2",
+      "size": 5000,
+      "runs": 30,
+      "writeMedianMs": 59.20166599999993,
+      "readMedianMs": 2.8869589999994787,
+      "recoveryMedianMs": 34.367958000000726,
+      "recoveryApplicable": true,
+      "recoverable": true,
+      "medianWrites": 10001
+    }
+  ]
+}

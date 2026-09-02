@@ -1,0 +1,41 @@
+services:
+  mongodb:
+    image: mongo:8.0
+    command: ["mongod", "--replSet", "rs0", "--bind_ip_all"]
+    ports: ["27017:27017"]
+    volumes: ["mongo_data:/data/db"]
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping').ok"]
+      interval: 5s
+      timeout: 3s
+      retries: 30
+  couchdb:
+    image: couchdb:3.4
+    environment:
+      COUCHDB_USER: cobria
+      COUCHDB_PASSWORD: cobria_local_only
+    ports: ["5984:5984"]
+    volumes: ["couch_data:/opt/couchdb/data"]
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:5984/_up"]
+      interval: 5s
+      timeout: 3s
+      retries: 30
+  opensearch:
+    image: opensearchproject/opensearch:3.2.0
+    environment:
+      discovery.type: single-node
+      plugins.security.disabled: "true"
+      OPENSEARCH_JAVA_OPTS: -Xms512m -Xmx512m
+    ports: ["9200:9200"]
+    volumes: ["search_data:/usr/share/opensearch/data"]
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:9200/_cluster/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+volumes:
+  mongo_data:
+  couch_data:
+  search_data:
+

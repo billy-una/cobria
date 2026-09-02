@@ -1,0 +1,12 @@
+{
+  "specification": "COBRIA Core 1.0",
+  "frozenAt": "2026-08-24T00:00:00-06:00",
+  "scope": "NoSQL documental",
+  "levels": {
+    "C1": ["authority", "scope", "stableIdentity", "monotonicRevision", "writeBoundary"],
+    "C2": ["C1", "versionedTransform", "idempotency", "equivalence", "fullRebuild", "safePublication"],
+    "C3": ["C2", "provenance", "freshnessBudget", "observability", "owner", "retirement"]
+  },
+  "requiredExperiments": ["P1", "P2", "R1", "S1", "A1"],
+  "excludedEngines": ["SQLite", "PostgreSQL"]
+}

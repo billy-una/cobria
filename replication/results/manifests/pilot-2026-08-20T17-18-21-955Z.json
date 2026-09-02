@@ -1,0 +1,39 @@
+{
+  "runId": "pilot-2026-08-20T17-18-21-955Z",
+  "mode": "pilot",
+  "frozenConfigHash": "8cb0956d56ed63a28e25a35fd626a3b97a88eb5abeb6f52dbd9b1361b257a1ad",
+  "settings": {
+    "profiles": [
+      "R"
+    ],
+    "sizes": [
+      1000,
+      10000
+    ],
+    "tenants": 5,
+    "repetitions": 3,
+    "queryIterations": 30,
+    "projectionCounts": [
+      0,
+      1,
+      3
+    ],
+    "changeRatios": [
+      0.01,
+      0.1,
+      1
+    ],
+    "eventualDelayMs": 2
+  },
+  "environment": {
+    "node": "v24.2.0",
+    "platform": "darwin",
+    "arch": "arm64",
+    "cpu": "Apple M2",
+    "cpuCount": 8,
+    "memoryBytes": 8589934592
+  },
+  "rows": 126,
+  "rawFile": "results/raw/pilot.jsonl",
+  "rawHash": "797128b38c1901d049203bd144630381ed2760f2b5de236128713fafc6050cd4"
+}

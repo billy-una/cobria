@@ -1,0 +1,15 @@
+{
+  "runs": 30,
+  "allPass": true,
+  "passed": {
+    "D1": 30,
+    "D2": 30,
+    "D3": 30,
+    "D4": 30,
+    "D5": 30,
+    "D6": 30,
+    "D7": 30,
+    "D8": 30
+  },
+  "limits": "D5 es inyección local de desconexión lógica; no representa una partición de red real. D8 migra entre dos instancias del adaptador de control."
+}

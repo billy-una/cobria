@@ -1,0 +1,35 @@
+\documentclass[11pt]{article}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[a4paper,margin=2.5cm]{geometry}
+\usepackage{booktabs,tabularx,microtype,newtxtext,newtxmath}
+\title{Adenda metodológica y de validación\\COBRIA Core 1.1}
+\author{Billy Jak Cordero Porras}
+\date{24 de agosto de 2026}
+\begin{document}\maketitle
+\section*{Relación con Core 1.0}
+Core 1.0 permanece congelado. Esta adenda registra una extensión compatible que mejora precisión conceptual, trazabilidad, seguridad, implementación y análisis sin reescribir los 180 resultados confirmatorios originales.
+
+COBRIA se define como una propuesta arquitectónica para sistemas documentales NoSQL reconstruibles. No es una estructura de datos, un motor, un ORM ni un algoritmo de consenso. Su contribución defendible es la composición formalizada y comprobable de autoridad canónica, derivados versionados, ámbito y evidencia reproducible.
+
+\section*{Trazabilidad y seguridad}
+Se introdujeron quince requisitos identificados desde COBRIA-AUT-001 hasta COBRIA-SEC-001. Cada requisito declara nivel y prueba mínima. El modelo de amenazas cubre doce riesgos: mezcla de ámbitos, edición paralela, repetición, revisión obsoleta, manipulación, publicación interrumpida, envenenamiento analítico, recuperación no autorizada, evidencia insuficiente, herramientas excesivas, eliminación incompleta y dependencia del proveedor.
+
+\section*{Implementación y evaluación complementaria}
+La implementación 1.1 separa núcleo y adaptadores. Se añadieron adaptadores ejecutables para MongoDB y CouchDB; no se les atribuyen resultados porque el entorno no tenía servidores activos. PouchDB y LokiJS mantienen la evidencia confirmatoria.
+
+El análisis de las 180 corridas ahora incluye p50, p95, p99, desviación absoluta mediana e intervalos bootstrap del 95\%, con 4,000 remuestras, semilla registrada y cero valores atípicos eliminados. Además se ejecutaron:
+\begin{itemize}
+\item 450 corridas de cinco líneas base funcionales en tres escalas;
+\item 30 repeticiones de los escenarios D1--D8 de resiliencia local;
+\item 30 controles de manifiesto, partición temporal, aislamiento, citas y abstención.
+\end{itemize}
+Estas evaluaciones complementarias verifican el arnés, pero no sustituyen una réplica distribuida, un modelo generativo real o una implementación industrial completa de CQRS y Event Sourcing.
+
+\section*{Conclusión actualizada}
+COBRIA posee ahora una separación más clara entre especificación, patrones, mecanismos, método e implementaciones. La evidencia local apoya conformidad, reconstrucción y gobierno reproducible dentro del alcance declarado. Core 1.1 continuará como borrador hasta ejecutar MongoDB y CouchDB en infraestructura registrada y recibir revisión externa independiente.
+
+\section*{Artefactos}
+La especificación se encuentra en \texttt{specification/}; la implementación y resultados en \texttt{replication/}; el protocolo de revisión externa en \texttt{review/}; y los productos pedagógicos y públicos conservan sus propios alcances editoriales.
+\end{document}

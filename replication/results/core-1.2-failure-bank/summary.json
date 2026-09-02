@@ -1,0 +1,57 @@
+{
+  "runs": 300,
+  "scenarios": [
+    {
+      "scenario": "eliminacion-total",
+      "runs": 30,
+      "pass": 30
+    },
+    {
+      "scenario": "corrupcion-parcial",
+      "runs": 30,
+      "pass": 30
+    },
+    {
+      "scenario": "entrega-duplicada",
+      "runs": 30,
+      "pass": 30
+    },
+    {
+      "scenario": "revision-fuera-de-orden",
+      "runs": 30,
+      "pass": 30
+    },
+    {
+      "scenario": "interrupcion-25",
+      "runs": 30,
+      "pass": 30
+    },
+    {
+      "scenario": "interrupcion-50",
+      "runs": 30,
+      "pass": 30
+    },
+    {
+      "scenario": "interrupcion-75",
+      "runs": 30,
+      "pass": 30
+    },
+    {
+      "scenario": "cambio-esquema",
+      "runs": 30,
+      "pass": 30
+    },
+    {
+      "scenario": "catalogo-invalido",
+      "runs": 30,
+      "pass": 30
+    },
+    {
+      "scenario": "fuga-ambito",
+      "runs": 30,
+      "pass": 30
+    }
+  ],
+  "allPass": true,
+  "limits": "Inyección determinista en memoria; comprueba detección y reparación funcional, no fallos físicos, regiones ni corrupción interna del motor."
+}

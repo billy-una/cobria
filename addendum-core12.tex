@@ -1,0 +1,26 @@
+\documentclass[11pt]{article}
+\usepackage[spanish]{babel}\usepackage[utf8]{inputenc}\usepackage[T1]{fontenc}
+\usepackage[a4paper,margin=2.5cm]{geometry}\usepackage{booktabs,tabularx,microtype,newtxtext,newtxmath}
+\title{Adenda pedagógica y experimental\\COBRIA Core 1.2}
+\author{Billy Jak Cordero Porras}\date{27 de agosto de 2026}
+\begin{document}\maketitle
+\section*{Propósito}
+Core 1.2 mejora transferencia y posibilidad de refutación sin modificar los resultados congelados de Core 1.0. Añade un caso de principio a fin, glosario, seis rutas de lectura, ocho contraejemplos, ocho hipótesis comparativas y una matriz cuantificable de decisión.
+
+\section*{Banco de fallos}
+Se ejecutaron 300 inyecciones locales: eliminación total, corrupción parcial, entrega duplicada, revisión fuera de orden, interrupción al 25\%, 50\% y 75\%, cambio de esquema, catálogo inválido y fuga de ámbito. Cada escenario terminó con 30/30 aceptaciones. La primera corrida identificó que la migración de esquema no estaba modelada; el mecanismo se corrigió y la batería se repitió. La evidencia conserva ambas etapas.
+
+\section*{Concurrencia y recursos}
+Treinta repeticiones locales combinaron 1,000 escrituras, cien actualizaciones y reconstrucción concurrente. Todas conservaron conteos y revisiones esperados. La mediana del incremento de heap fue 2,708,144 bytes; CPU usuario, 12,471 microsegundos; y CPU sistema, 548 microsegundos. Son propiedades de un proceso LokiJS, no resultados de clúster.
+
+\section*{Literatura y transferencia}
+Se congeló un protocolo para seleccionar trabajos primarios y documentación oficial sobre vistas, CQRS, eventos, procedencia, contratos, multiinquilinato, reproducibilidad y RAG. La revisión completa requiere doble cribado independiente. También se diseñó un estudio con seis participantes en tres equipos para implementar C2 sin asistencia del autor; permanece pendiente de participación y revisión ética.
+
+\section*{Réplica distribuida}
+Se archivaron 270 corridas distribuidas: MongoDB 8.0, CouchDB 3.4 y OpenSearch 2.19.3; tres escalas y treinta repeticiones por celda. Según el oráculo original, las 270 superaron P1, P2, R1, S1 y A1, conservaron amplificación de dos escrituras y produjeron cero cruces de ámbito. Una auditoría posterior fortaleció R1, S1 y A1; por ello estas cifras se clasifican como evidencia histórica hasta repetirlas con el arnés corregido. Las reconstrucciones medianas para 5.000 documentos fueron 3.179,603 ms, 12.844,488 ms y 2.998,821 ms, respectivamente.
+
+La carga y reconstrucción usaron operaciones por lotes nativas. Un prepiloto MongoDB con escrituras individuales se conserva pero se excluye de la comparación. OpenSearch 3.2.0 sufrió un \texttt{SIGSEGV} de Java 24 bajo emulación x86\_64; una VM ARM no pudo descargarse por un fallo DNS. Por ello OpenSearch 2.19.3 con Java 21 se informa como réplica de compatibilidad y sus cifras no se atribuyen a 3.2.0.
+
+\section*{Conclusión}
+La contribución se concentra en reconstruibilidad, trazabilidad y separación de autoridad a cambio de costos medibles. La siguiente puerta científica es una réplica en servicios administrados, OpenSearch 3.2.0 sobre ARM nativo y una implementación externa sin guía del autor.
+\end{document}

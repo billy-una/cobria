@@ -1,0 +1,12 @@
+{
+  "date": "2026-08-23",
+  "initialCombinedRun": {"passed": 0, "failed": 1, "status": "discarded-harness-project-mismatch"},
+  "revocationCheckDisabledRun": {"passed": 0, "failed": 1, "status": "same-failure"},
+  "finalRuns": [
+    {"suite": "players-http", "project": "bshandball-players-http-test", "passed": 1, "failed": 0},
+    {"suite": "seasons-http", "project": "bshandball-seasons-http-test", "passed": 4, "failed": 0},
+    {"suite": "participation-http", "project": "bshandball-participation-http-test", "passed": 3, "failed": 0}
+  ],
+  "total": {"passed": 8, "failed": 0},
+  "claimBoundary": "Contract tests with real emulator tokens; not an exhaustive security audit or production benchmark."
+}

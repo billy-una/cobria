@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+title: "Paquete de reproducción de COBRIA"
+message: "Si utiliza este programa o sus resultados sintéticos, cítelo mediante estos metadatos."
+type: software
+authors:
+  - family-names: "Cordero Porras"
+    given-names: "Billy Jak"
+date-released: 2026-08-23
+version: 3.0.0
+license: MIT
+abstract: "Implementaciones neutrales en memoria, SQLite y PostgreSQL; cargas sintéticas y semirrealistas; fallos operacionales; contratos de IA y análisis reproducibles de COBRIA."
+repository-code: "DOI_OR_REPOSITORY_URL_PENDING"
+identifiers:
+  - type: other
+    value: "DOI_PENDING_EXTERNAL_DEPOSIT"
+    description: "Sustituir después de un depósito en Zenodo o en un repositorio institucional."

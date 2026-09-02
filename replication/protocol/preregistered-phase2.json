@@ -1,0 +1,9 @@
+{
+  "protocol": "COBRIA-NoSQL-2.0",
+  "scope": "motores documentales",
+  "experiments": ["P1", "P2", "R1"],
+  "scales": [1000, 10000, 50000],
+  "tenants": 10,
+  "repetitions": 30,
+  "status": "pendiente de ejecución"
+}

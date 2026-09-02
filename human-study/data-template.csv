@@ -1,0 +1,1 @@
+participant_code,order,condition_a,time_a_seconds,tests_first_a,tests_final_a,defects_a,files_a,lines_a,authority_time_a_seconds,tlx_a,comprehension_a,confidence_a,condition_b,time_b_seconds,tests_first_b,tests_final_b,defects_b,files_b,lines_b,authority_time_b_seconds,tlx_b,comprehension_b,confidence_b,excluded,exclusion_reason

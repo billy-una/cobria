@@ -1,0 +1,608 @@
+\chapter{Modelo de rendimiento y notación}
+
+La utilidad de una arquitectura de datos no puede deducirse únicamente de la claridad
+de sus clases o diagramas. Una separación correcta de responsabilidades puede reducir
+errores y, al mismo tiempo, introducir lecturas, escrituras, almacenamiento y tareas de
+mantenimiento adicionales. Esta parte establece un modelo para razonar sobre esos
+compromisos antes de medirlos y un protocolo para comprobarlos sin atribuir a COBRIA
+resultados que dependan del motor, la red o una configuración particular.
+
+El análisis distingue dos preguntas. La primera es asintótica: cómo crece el trabajo
+cuando aumenta el volumen de datos. La segunda es empírica: cuánto tarda y cuánto cuesta
+una operación bajo una carga y una plataforma concretas. La notación $O(\cdot)$ responde
+a la primera pregunta; no representa milisegundos, precio monetario ni garantía de
+rendimiento. Dos operaciones de orden $O(1)$ pueden tener costos reales muy distintos
+si una requiere una lectura local y otra varias comunicaciones de red
+\parencite{cormen2022algorithms}.
+
+\section{Variables del modelo}
+
+Sea $N$ el número de entidades canónicas dentro de un ámbito; $R$ el número de resultados
+de una consulta; $P$ el número de proyecciones asociadas con una entidad; $P_w\leq P$ el
+número de proyecciones afectadas por una escritura; $\Delta N$ el número de entidades
+modificadas desde un marca de corte; $B_c$ el tamaño medio de un canónico y $B_{p_i}$ el
+tamaño medio de su contribución a la proyección $i$. Se utilizan además:
+
+\begin{table}[H]
+\centering
+\caption{Símbolos del modelo de rendimiento.}
+\label{tab:simbolos-rendimiento}
+\begin{tabularx}{\textwidth}{>{\bfseries}p{2cm}X>{\bfseries}p{2cm}X}
+\toprule
+Símbolo & Significado & Símbolo & Significado \\
+\midrule
+$L$ & latencia observada & $Q$ & operaciones por unidad de tiempo \\
+$S$ & bytes almacenados & $T$ & bytes transferidos \\
+$W_f$ & escrituras físicas & $R_f$ & lecturas físicas \\
+$C_x$ & costo unitario del recurso $x$ & $h$ & proporción de aciertos de caché \\
+$f_q$ & frecuencia de la consulta & $f_w$ & frecuencia de escritura \\
+$d$ & número de dependencias & $k$ & tamaño del lote \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Estas variables se calculan por organización y también de manera agregada. El promedio global
+puede ocultar que un organización pequeño recibe peor servicio o que uno grande domina el
+consumo. Por ello, cada resultado debe conservar al menos identificador anonimizado de
+ámbito, tipo de operación, versión del contrato y configuración experimental.
+
+\section{Frontera de medición}
+
+Una medición debe indicar dónde comienza y termina. COBRIA propone tres fronteras:
+
+\begin{enumerate}[leftmargin=*]
+  \item \textbf{Algorítmica:} trabajo efectuado por la transformación, sin red ni
+  persistencia.
+  \item \textbf{Componente:} Repositorio, Gestor de proyecciones o Constructor de conjuntos de datos junto
+  con sus dependencias simuladas o reales.
+  \item \textbf{Extremo a extremo:} desde el caso de uso hasta la respuesta observable,
+  incluyendo autorización, serialización, red, almacenamiento y reintentos.
+\end{enumerate}
+
+No deben compararse cifras de fronteras distintas como si midieran el mismo fenómeno.
+La instrumentación se incorpora fuera del dominio siempre que sea posible para evitar
+que el modelo canónico dependa de un proveedor de telemetría.
+
+\section{Métricas principales}
+
+La latencia se reportará mediante mediana y percentiles p95 y p99, no solo con el
+promedio. El rendimiento efectivo se expresa como operaciones completadas por segundo bajo una
+concurrencia declarada. También se registrarán bytes leídos y escritos, cantidad de
+operaciones físicas, errores, reintentos, uso de memoria, tiempo de CPU y retraso de
+actualización de proyecciones. El enfoque sigue la práctica de separar carga de trabajo,
+métricas y configuración al comparar sistemas de almacenamiento
+\parencite{cooper2010ycsb,jain1991performance}.
+
+\chapter{Complejidad computacional de las operaciones}
+
+\section{Acceso canónico}
+
+Cuando una clave física se deriva directamente de $(S,id)$ y el motor ofrece acceso
+indexado por clave, la búsqueda lógica de una entidad se modela como $O(1)$ promedio.
+Esta expresión presupone una clave conocida; no cubre resolución DNS, autenticación,
+red, deserialización ni contención. Si se busca por un atributo no indexado, el costo
+puede crecer hasta $O(N)$ porque deben examinarse los registros del ámbito.
+
+La recuperación de una página de $R$ resultados desde una proyección ordenada puede
+modelarse como $O(\log N+R)$ cuando existe una estructura de búsqueda balanceada, o como
+$O(R)$ después de localizar un cursor. El uso de offset puede degradarse al aumentar la
+profundidad; COBRIA prefiere cursores estables compuestos por orden, ámbito e identidad.
+
+\section{Creación y actualización}
+
+Validar un objeto con $m$ campos tiene costo $O(m)$ si cada regla es local. Las reglas
+que consultan otras entidades agregan $d$ accesos y deben expresarse como
+$O(m+d)$ más el costo de esos accesos. Persistir solamente el canónico requiere una
+escritura lógica. Mantener síncronamente $P_w$ proyecciones agrega, en el caso simple,
+$O(P_w)$ transformaciones y escrituras:
+
+\begin{equation}
+T_{write}=T_{validate}+T_{canonical}+\sum_{i=1}^{P_w}
+  (T_{g_i}+T_{persist_i}).
+\label{eq:tiempo-escritura}
+\end{equation}
+
+La suma no implica que todos los términos sean iguales. Una proyección de clave puede
+ser constante, mientras un agregado que inspecciona una colección puede depender de su
+tamaño. La ejecución paralela reduce tiempo de pared, pero no elimina trabajo total ni
+garantiza atomicidad.
+
+\section{Reconstrucción total e incremental}
+
+Una reconstrucción total que aplica $P$ transformaciones independientes a $N$ entidades
+tiene costo superior $O(NP)$. Si cada entidad alimenta solamente un subconjunto fijo,
+el costo efectivo es $O(N\bar{P})$, donde $\bar{P}$ es el promedio de proyecciones
+aplicables. La memoria puede mantenerse en $O(k)$ mediante procesamiento por lotes, en
+vez de cargar $O(N)$ objetos.
+
+Una reconstrucción incremental basada en un índice confiable de cambios procesa
+$\Delta N$ entidades:
+
+\begin{equation}
+T_{incremental}\approx O(\Delta N\bar{P})+T_{discover}+T_{verify}.
+\end{equation}
+
+Es ventajosa cuando $\Delta N\ll N$ y el costo de descubrir cambios no domina. Si el
+marca de corte es incompleto, una reconstrucción incremental rápida puede producir un estado
+incorrecto. La optimización, por tanto, está subordinada a la cobertura del registro de
+cambios.
+
+\section{Verificación de proyecciones}
+
+Comparar cada canónico con sus derivados cuesta $O(N\bar{P})$. Un muestreo de $s$
+entidades reduce el trabajo a $O(s\bar{P})$, pero solo estima la tasa de anomalías. Los
+resúmenes criptográficos por partición permiten localizar diferencias sin transferir todos los objetos;
+su construcción inicial sigue siendo lineal y su actualización requiere disciplina de
+versionado.
+
+\begin{table}[H]
+\centering
+\caption{Complejidad esperada de operaciones COBRIA.}
+\label{tab:complejidad-operaciones}
+\begin{tabularx}{\textwidth}{p{4cm}p{3.2cm}X}
+\toprule
+Operación & Orden esperado & Condición principal \\
+\midrule
+Buscar canónico por clave & $O(1)$ promedio & Ruta derivable de ámbito e ID.\\
+Escanear por atributo & $O(N)$ & No existe proyección o índice.\\
+Consultar proyección & $O(\log N+R)$ & Índice ordenado; depende del motor.\\
+Validar entidad & $O(m+d)$ & Reglas locales y dependencias explícitas.\\
+Actualizar derivados & $O(P_w)$ & Transformaciones acotadas por proyección.\\
+Reconstrucción total & $O(N\bar{P})$ & Recorrido completo por lotes.\\
+Reconstrucción incremental & $O(\Delta N\bar{P})$ & Registro de cambios completo.\\
+Verificación completa & $O(N\bar{P})$ & Comparación fuente--derivado.\\
+Generar conjunto de datos & $O(NF)$ & $F$ características por entidad, sin uniones externos.\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+La tabla representa modelos de crecimiento y no contratos del proveedor. Cada
+implementación deberá confirmar sus supuestos con planes de consulta, contadores y
+pruebas de carga.
+
+\chapter{Amplificación y modelo de costos}
+
+\section{Amplificación de lectura}
+
+La amplificación de lectura relaciona trabajo físico y resultado útil. Para una consulta
+$q$ se define:
+
+\begin{equation}
+A_r(q)=\frac{B_{read}(q)}{\max(B_{result}(q),\epsilon)},
+\end{equation}
+
+donde $\epsilon$ evita división por cero en consultas sin resultados. También puede
+calcularse por registros: $A_r^{reg}=R_f/\max(R,1)$. Una consulta que escanea diez mil
+registros para devolver diez tiene amplificación aproximada de mil. Una proyección bien
+diseñada acerca el numerador al volumen útil, aunque añade mantenimiento y almacenamiento.
+
+\section{Amplificación de escritura}
+
+Para una operación lógica $o$:
+
+\begin{equation}
+A_w(o)=\frac{W_f(o)}{W_l(o)},
+\end{equation}
+
+donde normalmente $W_l=1$. Si se persiste el canónico, una entrada cola de salida y tres
+proyecciones, $A_w=5$ sin contar réplicas internas del motor. Deben reportarse por
+separado la amplificación visible para la aplicación y la amplificación interna cuando
+el proveedor la exponga.
+
+\section{Amplificación de almacenamiento}
+
+El factor de almacenamiento es:
+
+\begin{equation}
+A_s=\frac{S_{canonical}+S_{projections}+S_{metadata}+S_{registros}}
+{S_{canonical}}.
+\end{equation}
+
+Una proyección no se justifica por ser pequeña de forma aislada. Su costo acumulado
+incluye versiones durante reconstrucciones, índices del motor, historial, respaldos y
+transferencia. COBRIA asigna a cada proyección un presupuesto y un propietario.
+
+\section{Costo total por ventana}
+
+Para una ventana temporal $\tau$, el costo observable se modela como:
+
+\begin{align}
+C_{total}(\tau)=&\ C_{read}R_f + C_{write}W_f + C_{store}S\tau \\
+&+ C_{transfer}T + C_{compute}U + C_{ops}H,
+\label{eq:costo-total}
+\end{align}
+
+donde $U$ representa consumo computacional y $H$ esfuerzo operativo estimado. El último
+término evita declarar óptima una solución barata para el proveedor pero costosa de
+operar, depurar o reconstruir. Los precios cambian; por ello el experimento publicará
+cantidades físicas y dejará los precios como parámetros reemplazables.
+
+\section{Punto de equilibrio de una proyección}
+
+Sea $C_s$ el costo de una consulta sin proyección, $C_p$ el costo de consultarla con
+proyección y $C_m$ el costo de mantenerla por escritura. La proyección produce beneficio
+en una ventana cuando:
+
+\begin{equation}
+f_q(C_s-C_p)>f_wC_m+C_{storage}+C_{rebuild}.
+\label{eq:break-even}
+\end{equation}
+
+Esta desigualdad no pretende reducir toda decisión a dinero. Latencia máxima,
+disponibilidad, aislamiento y corrección pueden actuar como restricciones obligatorias.
+Sí permite identificar proyecciones con uso insuficiente o mantenimiento excesivo.
+
+\section{Presupuesto de proyecciones}
+
+Cada contrato debe declarar límites de bytes, escrituras por cambio, retraso tolerable,
+tiempo máximo de reconstrucción y frecuencia mínima que justifica su existencia. Un
+reporte periódico compara presupuesto y observación. Si una proyección excede el límite,
+las opciones son optimizarla, reducir campos, agrupar eventos, cambiar consistencia o
+retirarla; no se oculta el exceso mediante promedios.
+
+\chapter{Estrategias de optimización}
+
+\section{Optimizar desde la consulta}
+
+La secuencia recomendada parte de una consulta observable: frecuencia, selectividad,
+orden, tamaño de respuesta y objetivo de latencia. Después se decide si basta una clave
+canónica, un índice del motor, una proyección específica o una caché. Crear estructuras
+derivadas antes de conocer la carga aumenta $P$ y puede empeorar H9.
+
+Una proyección debe almacenar solo campos necesarios para filtrar, ordenar y responder.
+Duplicar el documento completo facilita algunas lecturas, pero aumenta transferencia,
+amplificación y riesgo de exposición. La paginación por cursor evita recorrer desplazamientos
+crecientes y conserva una frontera consistente de lectura cuando el orden incluye una
+clave de desempate.
+
+\section{Lotes y paralelismo controlado}
+
+El tamaño de lote $k$ equilibra memoria, viajes de red y duración de transacciones. Un
+lote demasiado pequeño multiplica comunicaciones; uno demasiado grande presiona memoria
+y extiende la recuperación después de un fallo. COBRIA no fija un $k$ universal: lo
+selecciona experimentalmente y registra la configuración.
+
+El paralelismo se limita por partición, cuota y capacidad de escritura. Aumentar procesos de trabajo
+puede reducir tiempo hasta alcanzar contención o limitación de capacidad; después, el rendimiento efectivo se
+estanca y la latencia de cola aumenta. El controlador debe aplicar control de contrapresión, variación aleatoria
+y reintentos acotados, conservando idempotencia.
+
+\section{Caché con ámbito y revisión}
+
+Con una tasa de aciertos $h$, el costo medio simplificado de lectura es:
+
+\begin{equation}
+E[T]=hT_{hit}+(1-h)T_{miss}.
+\end{equation}
+
+La clave incluye organización, tipo, ID y, cuando corresponda, versión. La caché no sustituye
+una proyección si se necesita consulta por atributos, ni se considera autoridad. TTL
+reduce permanencia, pero no garantiza invalidación inmediata. Para datos sensibles se
+deben medir además exposición, borrado y segregación.
+
+\section{Reconstrucción eficiente}
+
+Una reconstrucción segura y optimizada sigue cinco decisiones:
+
+\begin{enumerate}[leftmargin=*]
+  \item fijar versión y marca de corte de entrada;
+  \item dividir por ámbito y rango estable;
+  \item procesar lotes idempotentes con checkpoints;
+  \item escribir en una versión paralela de la proyección;
+  \item verificar y efectuar un cambio de versión atómico o reversible.
+\end{enumerate}
+
+La versión paralela requiere almacenamiento temporal, pero evita exponer una mezcla de
+contratos. Para reconstrucciones incrementales se conserva una operación total como
+mecanismo de recuperación y como prueba periódica de reconstruibilidad.
+
+\section{Optimización adaptativa}
+
+La arquitectura puede recomendar cambios a partir de telemetría, sin permitir que una
+heurística modifique por sí sola el estado canónico. Un ciclo adaptativo observa
+frecuencia, amplificación, latencia y retraso; propone crear, rediseñar o retirar una
+proyección; estima el punto de equilibrio; ejecuta una comparación controlada; y somete
+el cambio a aprobación. Esto hace posible usar minería de datos para descubrir patrones
+de acceso y aprendizaje automático para predecir carga, manteniendo una frontera de
+gobierno.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+  node distance=1.15cm and 1.25cm,
+  box/.style={draw,rounded corners,align=center,minimum width=2.55cm,
+    minimum height=.9cm,fill=cobriaLight},
+  line/.style={-{Latex[length=2mm]},thick}
+]
+\node[box] (observe) {Observar\\telemetría};
+\node[box,right=of observe] (analyze) {Analizar\\costo y carga};
+\node[box,right=of analyze] (propose) {Proponer\\cambio};
+\node[box,below=of propose] (evaluate) {Evaluar\\en paralelo};
+\node[box,left=of evaluate] (approve) {Aprobar y\\versionar};
+\node[box,left=of approve] (verify) {Verificar\\resultado};
+\draw[line] (observe) -- (analyze);
+\draw[line] (analyze) -- (propose);
+\draw[line] (propose) -- (evaluate);
+\draw[line] (evaluate) -- (approve);
+\draw[line] (approve) -- (verify);
+\draw[line] (verify) -- (observe);
+\end{tikzpicture}
+\caption{Ciclo gobernado de optimización adaptativa.}
+\label{fig:ciclo-optimizacion}
+\end{figure}
+
+\chapter{Protocolo experimental de rendimiento}
+
+\section{Objetivo y comparaciones}
+
+El protocolo evaluará si COBRIA reduce el costo de lectura y mejora reconstrucción y
+trazabilidad a cambio de costos cuantificables. No se presentarán resultados hasta
+ejecutar el protocolo. Se compararán, como mínimo, estas configuraciones:
+
+\begin{enumerate}[leftmargin=*]
+  \item \textbf{B0, acceso directo:} canónicos sin proyección específica;
+  \item \textbf{B1, optimización nativa:} índices disponibles en el motor;
+  \item \textbf{C1, COBRIA síncrona:} canónico y proyecciones críticas en la operación;
+  \item \textbf{C2, COBRIA asíncrona:} canónico, cola de salida y proyecciones actualizadas por
+  procesos de trabajo;
+  \item \textbf{C3, COBRIA incremental:} C2 con registro de cambios y reconstrucción
+  incremental.
+\end{enumerate}
+
+No todas las configuraciones aplican a toda operación. La comparación se declara antes
+de observar resultados y mantiene la misma semántica, conjunto de datos y política de consistencia.
+
+\section{Factores y niveles}
+
+\begin{table}[H]
+\centering
+\caption{Factores propuestos para los experimentos.}
+\label{tab:factores-experimento}
+\begin{tabularx}{\textwidth}{p{3.6cm}X X}
+\toprule
+Factor & Niveles iniciales & Propósito \\
+\midrule
+Volumen $N$ & $10^3$, $10^4$, $10^5$ y, si es viable, $10^6$ & Estimar tendencia de
+crecimiento.\\
+Mezcla lectura/escritura & 95/5, 80/20, 50/50 & Representar cargas distintas.\\
+Concurrencia & 1, 8, 32 y 128 clientes & Detectar saturación y contención.\\
+Número de proyecciones & 0, 1, 3, 5 y 10 & Medir amplificación marginal.\\
+Distribución & uniforme y sesgada & Evaluar claves calientes.\\
+Tamaño de entidad & pequeño, medio y grande & Medir serialización y transferencia.\\
+Cambios $\Delta N/N$ & 0.1\%, 1\%, 10\% y 100\% & Comparar reconstrucción incremental
+y total.\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Los valores son puntos iniciales y se ajustarán a la capacidad del entorno antes de
+registrar la especificación definitiva. El Sistema A aportará cargas temporales,
+multimodales y de eventos; el Sistema B, operaciones empresariales, catálogos e
+aislamiento multiinquilino. Los nombres y datos originales no aparecerán en scripts ni
+resultados.
+
+\section{Datos y cargas reproducibles}
+
+Los generadores usarán semilla publicada, distribuciones declaradas y relaciones
+válidas. Para evitar que datos triviales favorezcan una estrategia, incluirán cardinalidad,
+sesgo, valores ausentes, revisiones y tamaños variables. Los artefactos multimedia se
+representarán mediante metadatos y archivos sintéticos; no se copiará contenido privado.
+
+Cada ejecución incluye calentamiento, ventana de medición y enfriamiento. Se aleatoriza
+el orden de configuraciones cuando sea posible y se repiten ejecuciones independientes.
+Se registra hardware, sistema operativo, entorno de ejecución, versión del motor, región, límites,
+configuración de índices y revisión del código. Un prueba comparativa como YCSB sirve de referencia
+para estructurar cargas, pero las operaciones de dominio y reconstrucción requieren
+escenarios COBRIA adicionales \parencite{cooper2010ycsb}.
+
+\section{Instrumentación y control}
+
+Cada operación recibe un identificador de correlación. Los contadores se toman en el
+cliente y, cuando exista acceso, en el almacenamiento. Se sincronizan relojes para medir
+retraso asíncrono, pero la latencia local utiliza un reloj monotónico. Se evita registrar
+cargas útiles sensibles. La telemetría debe distinguir éxito, rechazo de negocio, conflicto,
+timeout y reintento.
+
+Los ensayos controlarán cachés, calentamiento, concurrencia y tareas de fondo. Si un
+servicio administrado introduce ruido no controlable, se reportará y se aumentarán
+repeticiones, sin eliminar observaciones solo por ser desfavorables.
+
+\section{Análisis estadístico}
+
+Para cada combinación se reportarán tamaño muestral, mediana, p95, p99, intervalo de
+confianza y distribución gráfica. Las comparaciones incluirán diferencia absoluta,
+razón y tamaño de efecto. Antes de usar pruebas paramétricas se examinarán independencia,
+forma de distribución y varianza. Cuando no se satisfagan supuestos, se preferirán
+intervalos remuestreo con reemplazo o pruebas no paramétricas. Las múltiples comparaciones se
+identificarán y corregirán cuando corresponda.
+
+La significancia estadística no reemplaza relevancia práctica. Una mejora pequeña puede
+carecer de valor si aumenta mucho $A_w$, $A_s$ o el retraso. El análisis de sensibilidad
+variará precios, frecuencias y objetivos de latencia en la ecuación
+\ref{eq:costo-total}.
+
+\section{Criterios de aceptación}
+
+Las hipótesis se juzgarán con reglas previas:
+
+\begin{itemize}[leftmargin=*]
+  \item H1 se apoya si el crecimiento de lecturas se aproxima a $R$ y la latencia de
+  cola mejora sin cambiar la semántica;
+  \item H2 se cuantifica, no se considera un fallo: toda reducción se acompaña de
+  $A_w$ y $A_s$;
+  \item H3 requiere igualdad según el contrato, ausencia de huérfanos y cobertura
+  completa después de reconstruir;
+  \item H4 compara total e incremental para distintos $\Delta N/N$ y busca su punto de
+  cruce;
+  \item H9 se apoya si existen regiones donde el costo marginal supera el beneficio de
+  lectura.
+\end{itemize}
+
+No se modificará un umbral después de conocer resultados sin declarar el cambio como
+exploratorio.
+
+\section{Plantilla de resultados}
+
+\begin{table}[H]
+\centering
+\caption{Matriz mínima de resultados por escenario.}
+\label{tab:plantilla-resultados}
+\begin{tabularx}{\textwidth}{p{3.7cm}X X}
+\toprule
+Dimensión & Indicadores & Interpretación requerida \\
+\midrule
+Respuesta & p50, p95, p99, rendimiento efectivo & Saturación y variabilidad.\\
+Lectura & registros, bytes, $A_r$ & Trabajo evitado frente a resultado.\\
+Escritura & operaciones, bytes, $A_w$ & Precio de mantener derivados.\\
+Almacenamiento & bytes y $A_s$ & Incluye versiones e índices.\\
+Reconstrucción & duración, cobertura, anomalías & Exactitud antes que velocidad.\\
+Consistencia & retraso, conflictos, reintentos & Ventana de obsolescencia.\\
+Operación & CPU, memoria, horas de trabajo & Costo total y mantenibilidad.\\
+Equidad de ámbito & percentiles por organización & Evitar ocultar degradación.\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\chapter{Rendimiento para minería de datos e inteligencia artificial}
+
+\section{Preparación analítica como proyección}
+
+Un conjunto de datos se trata como una proyección versionada del estado canónico y de eventos
+permitidos. Su costo de construcción depende de entidades, ventanas temporales y número
+de características. Para $N$ entidades y $F$ características locales, el caso simple es
+$O(NF)$. Uniones, agregados temporales, texto o embeddings añaden términos que deben
+medirse por separado.
+
+Esta estructura favorece minería de datos porque conserva el significado de la entidad,
+el ámbito, el tiempo del evento, la versión de transformación y el linaje. Permite volver
+a producir un conjunto de datos, comparar versiones y detectar qué cambios de datos explican una
+diferencia. No garantiza que las características sean útiles ni que el modelo sea justo.
+
+\section{Corrección temporal y prevención de fuga}
+
+Para una observación con tiempo de corte $t$, solo se utilizan hechos disponibles en o
+antes de $t$. Una característica calculada con datos futuros produce fuga y métricas de
+entrenamiento engañosas. El Constructor de conjuntos de datos recibe marca de corte, ventana y versión; el
+resultado registra tiempo de evento, tiempo de ingestión y tiempo de cálculo.
+
+El acceso punto-en-tiempo puede requerir historial canónico, log de eventos o snapshots.
+Si el sistema conserva únicamente el estado actual, COBRIA debe declarar que ciertas
+reconstrucciones históricas no son posibles en vez de inferirlas.
+
+\section{Características, embeddings y multimodalidad}
+
+Las características tabulares, series, texto y referencias multimedia pueden compartir
+un contrato de procedencia. Los archivos grandes permanecen fuera del objeto canónico;
+este conserva ubicación autorizada, hash, tipo, versión y política. Una extracción de
+audio, texto o imagen genera un derivado con modelo, parámetros y fecha.
+
+Los embeddings son proyecciones reconstruibles si se conserva la entrada autorizada,
+el identificador exacto del modelo y la transformación. Cambiar de modelo produce una
+nueva versión; no se mezclan vectores incompatibles en el mismo índice sin una estrategia
+explícita. La reconstrucción puede ser costosa, por lo que se presupuestan cómputo,
+transferencia y ventana de coexistencia.
+
+\section{RAG y agentes}
+
+En recuperación aumentada, el índice vectorial no es autoridad: sirve para localizar
+candidatos. La respuesta debe enlazar fragmento, documento canónico, versión y permisos.
+La autorización se aplica antes de incorporar contexto al instrucción. Un agente puede leer
+proyecciones adaptadas a su tarea, pero cualquier cambio de negocio vuelve a un caso de
+uso que valida identidad, ámbito, invariantes e idempotencia.
+
+Esta frontera limita el daño de una inferencia incorrecta y permite auditar propuesta,
+evidencia, decisión humana y efecto final. El rendimiento del modelo se mide separado
+del rendimiento de datos: recuperación, construcción de contexto, inferencia y
+persistencia tienen latencias y costos distintos.
+
+\section{Optimización de cadenas de procesamiento de IA}
+
+COBRIA permite reutilizar transformaciones deterministas, materializar características
+de alto uso y reconstruirlas en lotes. La decisión se rige por el mismo punto de
+equilibrio de la ecuación \ref{eq:break-even}. Para entrenamiento se favorecen lotes
+grandes y reproducibilidad; para inferencia en línea, baja latencia y frescura. Una sola
+representación física rara vez optimiza ambos caminos, por lo que los contratos deben
+declarar equivalencia semántica entre versión fuera de línea y en línea, idea central de los
+Almacenes de características \parencite{orr2021featurestores,li2023featurestore}.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+  node distance=.95cm and 1.05cm,
+  box/.style={draw,align=center,minimum width=2.45cm,minimum height=.9cm},
+  derived/.style={box,fill=cobriaLight},
+  line/.style={-{Latex[length=2mm]},thick}
+]
+\node[box] (canonical) {Datos canónicos\\y eventos};
+\node[derived,right=of canonical] (builder) {Constructor de conjuntos de datos\\versionado};
+\node[derived,right=of builder] (datosNodo) {Conjunto de datos /\\Conjunto de características};
+\node[derived,below=of datosNodo] (model) {Modelo y\\evaluación};
+\node[derived,left=of model] (prediction) {Predicción con\\evidencia};
+\node[box,left=of prediction] (usecase) {Caso de uso\\autorizado};
+\draw[line] (canonical) -- (builder);
+\draw[line] (builder) -- (datosNodo);
+\draw[line] (datosNodo) -- (model);
+\draw[line] (model) -- (prediction);
+\draw[line] (prediction) -- (usecase);
+\draw[line,dashed] (usecase) -- node[left,font=\small]{cambio validado} (canonical);
+\end{tikzpicture}
+\caption{Flujo gobernado desde datos canónicos hasta decisiones asistidas por IA.}
+\label{fig:flujo-ia}
+\end{figure}
+
+\section{Métricas analíticas y de IA}
+
+Además de exactitud, precisión, exhaustividad u otras métricas propias del problema, se
+registrarán cobertura de linaje, reproducibilidad entre ejecuciones, frescura,
+divergencia en línea--fuera de línea, proporción de campos desconocidos, costo por ejemplo y
+latencia por etapa. Para RAG se separan recuperación y generación; para agentes se miden
+también acciones rechazadas, confirmaciones y efectos reversibles. La gestión de riesgo
+acompaña el ciclo completo y no se reduce a una puntuación del modelo
+\parencite{nist2023airmf}.
+
+\chapter{Amenazas a la validez y síntesis de la Parte III}
+
+\section{Validez interna}
+
+Cambios de caché, calentamiento, throttling, tareas de fondo o distinta configuración
+pueden explicar una diferencia atribuida a COBRIA. Se mitigarán mediante automatización,
+orden aleatorio, repetición, configuración registrada y comparación sobre la misma
+semántica. La instrumentación también tiene costo; se medirá una configuración de
+control cuando su efecto pueda ser relevante.
+
+\section{Validez de constructo}
+
+Latencia no equivale a calidad arquitectónica, cantidad de clases no equivale a
+mantenibilidad y reconstrucción exitosa no equivale a corrección del negocio. Por ello
+cada concepto utiliza varios indicadores. La reconstruibilidad exige fuente suficiente,
+contrato versionado, resultado verificable y ausencia de autoridad en el derivado.
+
+\section{Validez externa}
+
+Dos sistemas anonimizados permiten variación de dominio, pero no representan todos los
+motores ni escalas. Los emuladores pueden diferir de servicios administrados. Los
+resultados se generalizarán como condiciones y mecanismos ---por ejemplo, relación entre
+frecuencia de lectura y amplificación---, no como una promesa universal de milisegundos.
+
+\section{Validez de conclusión}
+
+Muestras pequeñas, colas largas y múltiples comparaciones pueden producir conclusiones
+inestables. Se publicarán distribuciones, intervalos, tamaños de efecto y resultados
+negativos. Una hipótesis no apoyada no se ocultará; puede delimitar el dominio donde la
+arquitectura deja de ser conveniente.
+
+\section{Síntesis de la Parte III}
+
+Esta parte convirtió la afirmación general de ``optimizar'' en magnitudes observables.
+El beneficio esperado de las proyecciones es reducir el trabajo de lectura desde una
+dependencia de $N$ hacia una dependencia más cercana a $R$, a cambio de trabajo de
+escritura $O(P_w)$, almacenamiento adicional y reconstrucción. Las ecuaciones de
+amplificación y costo permiten comparar ese intercambio sin confundir complejidad
+asintótica con tiempo real.
+
+También se definieron estrategias de optimización, un protocolo reproducible y reglas
+de análisis que impiden inventar resultados. Finalmente, el mismo principio de
+proyección reconstruible se extendió a conjuntos de datos, características, embeddings, RAG y
+agentes, incorporando corrección temporal, linaje y autorización. Con ello queda
+preparada la siguiente parte: desarrollar en profundidad la adaptabilidad de COBRIA a
+analítica e inteligencia artificial y formalizar sus mecanismos de gobierno.

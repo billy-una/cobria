@@ -1,0 +1,147 @@
+\documentclass[12pt,oneside]{book}
+\providecommand{\blindreview}{0}
+
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{newtxtext,newtxmath}
+\usepackage{microtype}
+\usepackage{geometry}
+\geometry{letterpaper,top=2.7cm,bottom=2.7cm,left=3.2cm,right=2.7cm}
+\usepackage{setspace}
+\onehalfspacing
+\usepackage{csquotes}
+\usepackage{amsmath,mathtools}
+\usepackage{booktabs,tabularx,longtable,array,multirow}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric,fit,backgrounds}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{float}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{tocloft}
+\setlength{\cftsecnumwidth}{3.2em}
+\usepackage{hyperref}
+\usepackage[nameinlink,noabbrev,spanish]{cleveref}
+\usepackage[backend=biber,style=apa,sorting=nyt,maxcitenames=2]{biblatex}
+\addbibresource{referencias.bib}
+
+\definecolor{cobriaBlue}{gray}{0}
+\definecolor{cobriaGreen}{gray}{0}
+\definecolor{cobriaGold}{gray}{0}
+\definecolor{cobriaLight}{gray}{0.96}
+
+\hypersetup{
+  hidelinks,
+  pdftitle={COBRIA: diseño y evaluación de una arquitectura de datos canónicos y proyecciones reconstruibles},
+  pdfauthor={\ifnum\blindreview=1 Autor anonimizado\else Billy Jak Cordero Porras\fi}
+}
+
+\pagestyle{fancy}
+\setlength{\headheight}{14.5pt}
+\fancyhf{}
+\fancyhead[L]{\small COBRIA}
+\fancyhead[R]{\small\nouppercase{\leftmark}}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\titleformat{\chapter}[display]
+  {\normalfont\bfseries}
+  {\filleft\Large\chaptername\ \thechapter}
+  {1ex}
+  {\titlerule[0.6pt]\vspace{1.5ex}\Huge}
+
+\newcommand{\COBRIA}{\textsf{COBRIA}}
+\newcommand{\pendiente}[1]{\textit{[Pendiente: #1]}}
+
+\begin{document}
+\frontmatter
+\hypersetup{pageanchor=false}
+\input{portada}
+\hypersetup{pageanchor=true}
+\setcounter{page}{1}
+
+\chapter*{Declaración de alcance y originalidad}
+\addcontentsline{toc}{chapter}{Declaración de alcance y originalidad}
+Este manuscrito propone, formaliza y evalúa una integración arquitectónica denominada
+\COBRIA. No se atribuye como invención propia ninguno de los patrones consolidados que
+la componen, entre ellos Repositorio, Mapeador de datos, Capa de servicios, casos de uso, vistas
+materializadas, separación de modelos de lectura y escritura o generación dirigida por
+metadatos. La contribución buscada reside en su articulación explícita alrededor de
+entidades canónicas, proyecciones reconstruibles, aislamiento multiinquilino y preparación
+trazable para minería de datos e inteligencia artificial, así como en su evaluación
+mediante una implementación neutral y dos perfiles de caso anonimizados.
+
+Los casos se describen de forma neutral como \emph{Sistema A} y \emph{Sistema B}. Los
+experimentos emplearon datos sintéticos o semirrealistas y configuraciones reproducibles.
+No se publicarán nombres comerciales, credenciales, datos personales ni detalles que
+permitan identificar organizaciones o personas.
+
+\chapter*{Resumen}
+\addcontentsline{toc}{chapter}{Resumen}
+Los sistemas NoSQL permiten construir aplicaciones flexibles y distribuidas, pero
+trasladan al diseño de la aplicación decisiones complejas sobre desnormalización,
+índices, consistencia, aislamiento entre organizaciones y evolución del esquema. Estas
+dificultades aumentan cuando los mismos datos deben alimentar consultas operacionales,
+procesamiento de eventos, minería de datos e inteligencia artificial. Este trabajo
+presenta \COBRIA{} (\emph{Capa Orientada a Bases Reconstruibles para Inteligencia
+Analítica}), una arquitectura dirigida por metadatos que distingue entidades
+canónicas de representaciones físicas y proyecciones derivadas. La propuesta organiza
+el acceso mediante repositorios, servicios y casos de uso; clasifica las proyecciones
+según sus requisitos de consistencia; y exige que todo dato derivado declare su origen,
+versión y mecanismo de reconstrucción. La investigación siguió ciencia del diseño y
+examinó la propuesta en tres aplicaciones documentales anonimizadas. La evaluación
+activa comprende inspección de contratos, pruebas con emuladores NoSQL, reconstrucción
+de proyecciones, aislamiento por ámbito, evolución de esquemas y recuperación autorizada
+para analítica e inteligencia artificial. Los resultados disponibles apoyan la
+viabilidad estructural de la reconstrucción y la separación entre autoridad y derivados.
+Las mediciones obtenidas fuera de motores NoSQL fueron excluidas de esta edición y no se
+utilizan para sostener afirmaciones de rendimiento. Permanecen pendientes una réplica
+multirregión sobre motores documentales, evaluación humana de mantenibilidad y revisión
+independiente.
+
+\noindent\textbf{Palabras clave:} NoSQL; datos canónicos; proyecciones reconstruibles;
+multiinquilinato; vistas materializadas; minería de datos; inteligencia artificial;
+arquitectura dirigida por metadatos.
+
+\tableofcontents
+\listoffigures
+\listoftables
+
+\mainmatter
+\part{Fundamentos de la investigación}
+\input{partes/parte-i-fundamentos}
+
+\part{Diseño y formalización de COBRIA}
+\input{partes/parte-ii-diseno-formalizacion}
+
+\part{Rendimiento, complejidad y optimización}
+\input{partes/parte-iii-rendimiento-optimizacion}
+
+\part{Analítica, minería de datos e inteligencia artificial}
+\input{partes/parte-iv-analitica-ia}
+
+\part{Implementación de referencia y casos de estudio}
+\input{partes/parte-v-implementacion-casos}
+
+\part{Evaluación experimental, análisis y validez}
+\input{partes/parte-vi-evaluacion-nosql}
+
+\part{Síntesis, adopción y conclusiones}
+\input{partes/parte-vii-sintesis-nosql}
+
+\part{Manual de réplica y operación NoSQL}
+\input{partes/parte-viii-manual-replica-nosql}
+
+\part{Anexos técnicos y reproducibilidad}
+\input{partes/parte-viii-anexos-reproducibilidad}
+
+\backmatter
+\printbibliography[heading=bibintoc,title={Referencias}]
+\end{document}

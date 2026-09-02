@@ -1,0 +1,73 @@
+{
+  "specification": "COBRIA Core 1.0",
+  "generatedAt": "2026-09-02T18:27:32.648Z",
+  "runs": 180,
+  "summary": [
+    {
+      "engine": "PouchDB",
+      "size": 100,
+      "runs": 30,
+      "allPass": true,
+      "p1CanonicalMedianMs": 3.6590839999998934,
+      "p1ProjectionMedianMs": 1.421041999999943,
+      "r1MedianMs": 11.346624999999676,
+      "writeAmplification": 2,
+      "foreignDocuments": 0
+    },
+    {
+      "engine": "PouchDB",
+      "size": 1000,
+      "runs": 30,
+      "allPass": true,
+      "p1CanonicalMedianMs": 24.80304199999955,
+      "p1ProjectionMedianMs": 9.251500000000306,
+      "r1MedianMs": 79.90670899999895,
+      "writeAmplification": 2,
+      "foreignDocuments": 0
+    },
+    {
+      "engine": "PouchDB",
+      "size": 5000,
+      "runs": 30,
+      "allPass": true,
+      "p1CanonicalMedianMs": 125.40037499999744,
+      "p1ProjectionMedianMs": 42.36462500000198,
+      "r1MedianMs": 361.9207500000048,
+      "writeAmplification": 2,
+      "foreignDocuments": 0
+    },
+    {
+      "engine": "LokiJS",
+      "size": 100,
+      "runs": 30,
+      "allPass": true,
+      "p1CanonicalMedianMs": 0.4707499999785796,
+      "p1ProjectionMedianMs": 0.1934999999939464,
+      "r1MedianMs": 1.0828340000007302,
+      "writeAmplification": 2,
+      "foreignDocuments": 0
+    },
+    {
+      "engine": "LokiJS",
+      "size": 1000,
+      "runs": 30,
+      "allPass": true,
+      "p1CanonicalMedianMs": 3.633333000005223,
+      "p1ProjectionMedianMs": 1.3072500000125729,
+      "r1MedianMs": 9.788375000003725,
+      "writeAmplification": 2,
+      "foreignDocuments": 0
+    },
+    {
+      "engine": "LokiJS",
+      "size": 5000,
+      "runs": 30,
+      "allPass": true,
+      "p1CanonicalMedianMs": 15.894333999982337,
+      "p1ProjectionMedianMs": 5.595084000000497,
+      "r1MedianMs": 47.24345799998264,
+      "writeAmplification": 2,
+      "foreignDocuments": 0
+    }
+  ]
+}

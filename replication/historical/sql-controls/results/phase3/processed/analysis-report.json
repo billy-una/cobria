@@ -1,0 +1,18 @@
+{
+  "rawRows": 2070,
+  "groups": 69,
+  "pairedComparisons": 18,
+  "economicRows": 9,
+  "failureRuns": {
+    "PG-F1": 30,
+    "PG-F2": 30,
+    "PG-F3": 30,
+    "PG-F4": 30,
+    "PG-F5": 30
+  },
+  "outputs": [
+    "/Users/billitas/Documents/proyectos/COBRIA-paper/replication/results/phase3/processed/summary-v3.csv",
+    "/Users/billitas/Documents/proyectos/COBRIA-paper/replication/results/phase3/processed/paired-effects-v3.csv",
+    "/Users/billitas/Documents/proyectos/COBRIA-paper/replication/results/phase3/processed/economic-break-even.csv"
+  ]
+}

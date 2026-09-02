@@ -1,0 +1,357 @@
+\documentclass[12pt]{article}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage[utf8]{inputenc}\usepackage[T1]{fontenc}
+\usepackage{newtxtext,newtxmath,microtype}
+\usepackage[letterpaper,margin=2.55cm]{geometry}
+\usepackage{setspace,csquotes}\onehalfspacing
+\usepackage{amsmath,booktabs,tabularx,array,float,enumitem}
+\usepackage{tikz}\usetikzlibrary{arrows.meta,positioning,shapes.geometric}
+\usepackage{hyperref}\hypersetup{hidelinks,pdftitle={Contratos reconstruibles para sistemas NoSQL documentales},pdfauthor={Billy Jak Cordero Porras}}
+\usepackage[backend=biber,style=apa,sorting=nyt,maxcitenames=2]{biblatex}
+\addbibresource{referencias.bib}
+\newcommand{\COBRIA}{\textsf{COBRIA}}
+\title{\textbf{Contratos reconstruibles con ámbito explícito para sistemas NoSQL documentales}}
+\author{Billy Jak Cordero Porras\\Investigador independiente, Coto Brus, Costa Rica}
+\date{Agosto de 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Los sistemas NoSQL documentales permiten adaptar la forma física de los datos a sus
+patrones de acceso, pero esa flexibilidad puede producir copias derivadas sin autoridad,
+aislamiento o reparación verificable. Este artículo formaliza el contrato de proyección
+reconstruible con ámbito explícito de COBRIA. El contrato reúne fuente canónica,
+transformación versionada, ámbito obligatorio, criterio de equivalencia, política de
+frescura y procedimiento de reconstrucción. La propuesta se examina mediante ciencia
+del diseño en tres perfiles documentales anonimizados y un protocolo de pruebas para
+reconstrucción, idempotencia, evolución, recuperación autorizada y productos de datos.
+La evidencia actual es estructural y ejecutable: demuestra aplicabilidad de los
+contratos y permite formular hipótesis refutables. No se presentan cifras de rendimiento
+obtenidas fuera de motores NoSQL ni se afirma superioridad universal. El resultado
+principal es una especificación neutral y una agenda empírica reproducible para decidir
+cuándo una proyección aporta valor sin convertirse en una segunda fuente de verdad.
+\end{abstract}
+
+\noindent\textbf{Palabras clave:} NoSQL documental; datos canónicos; proyecciones
+reconstruibles; multiinquilinato; procedencia; minería de datos; inteligencia artificial.
+
+\section{Introducción}
+
+Una aplicación documental rara vez conserva una sola forma de cada hecho. Las reglas de
+negocio necesitan documentos completos; las interfaces requieren respuestas breves;
+la analítica necesita cortes estables; y la inteligencia artificial necesita fragmentos
+con evidencia y autorización. Duplicar puede ser correcto, pero la copia se vuelve
+peligrosa cuando nadie puede responder de dónde provino, qué versión representa, a qué
+ámbito pertenece o cómo se repara.
+
+La literatura describe separación de lectura y escritura, procesamiento de eventos,
+procedencia, almacenes de características y gobierno de productos de datos
+\parencite{microsoft2025cqrs,fowler2005eventsourcing,buneman2001provenance,
+orr2021featurestores,li2023featurestore}. COBRIA no reclama esos mecanismos como nuevos.
+Su contribución es composicional: convertir reconstrucción, ámbito y equivalencia en un
+contrato verificable que acompaña a cada representación derivada.
+
+La pregunta principal es: \emph{¿qué contrato permite optimizar lecturas documentales
+sin crear una autoridad paralela ni debilitar aislamiento, trazabilidad y capacidad de
+reparación?} Se derivan cuatro preguntas: cómo formalizar la proyección; qué invariantes
+comprobar; cómo extender el contrato hacia analítica e inteligencia artificial; y qué
+evidencia hace falta para justificar su costo.
+
+Las contribuciones son:
+\begin{enumerate}[leftmargin=*]
+\item una definición formal del contrato reconstruible con ámbito;
+\item una taxonomía neutral de canónicos, proyecciones, productos y mecanismos;
+\item un protocolo NoSQL para lectura, escritura, reconstrucción, aislamiento y linaje;
+\item una separación explícita entre evidencia disponible y evaluación pendiente.
+\end{enumerate}
+
+\section{Contexto y vacío de investigación}
+
+Bigtable y Dynamo mostraron que partición, replicación, disponibilidad y patrones de
+acceso deben considerarse desde el diseño \parencite{chang2006bigtable,
+decandia2007dynamo}. La flexibilidad documental no elimina el esquema: lo distribuye
+entre código, índices, reglas de acceso, eventos, cachés y consumidores.
+
+La separación de modelos ofrece vocabulario para lectura y escritura; los eventos pueden
+rehidratar estado; los almacenes de características preservan definiciones entre
+entrenamiento e inferencia; y la procedencia explica cómo se obtuvo un resultado. Una
+implementación todavía debe decidir quién posee autoridad, qué ámbito restringe la
+copia, qué equivalencia se acepta y qué reparación es ejecutable.
+
+El vacío abordado es la falta de una ficha contractual común que conecte optimización
+operacional, aislamiento y productos para analítica e inteligencia artificial dentro de
+sistemas documentales.
+
+\section{Contrato COBRIA}
+
+Sea $C$ una colección de documentos canónicos. Una proyección $P_i$ se describe por:
+\[
+K_i=\langle C,f_i,\theta_i,s,v,\phi_i,e_i,r_i,o_i\rangle,
+\]
+donde $f_i$ es la transformación, $\theta_i$ sus catálogos y políticas, $s$ el ámbito,
+$v$ la versión, $\phi_i$ el límite de frescura, $e_i$ el verificador de equivalencia,
+$r_i$ la reconstrucción y $o_i$ la propiedad operacional del componente.
+
+El contrato satisface seis invariantes:
+\begin{enumerate}[leftmargin=*]
+\item \textbf{autoridad}: solo $C$ acepta cambios de dominio autoritativos;
+\item \textbf{ámbito}: identidad, consulta, caché, evento y recuperación incluyen $s$;
+\item \textbf{procedencia}: cada elemento derivado enlaza origen y versión;
+\item \textbf{reconstrucción}: $r_i(C,\theta_i,v)$ produce una candidata completa;
+\item \textbf{equivalencia}: $e_i$ compara resultado lógico, no representación física;
+\item \textbf{operabilidad}: existen responsable, métricas, alerta y criterio de retiro.
+\end{enumerate}
+
+La publicación segura construye $P_i^{v+1}$, verifica equivalencia y cambia un alias de
+forma indivisible. La versión activa no se vacía durante el proceso. La actualización
+incremental es válida si puede repetirse y si una reconstrucción total periódica detecta
+omisiones o deriva.
+
+\section{Arquitectura documental}
+
+\begin{figure}[H]\centering
+\begin{tikzpicture}[node distance=1.1cm and 1.25cm,b/.style={draw,rounded corners,minimum width=3.1cm,minimum height=.9cm,align=center},a/.style={-{Latex[length=2mm]},thick}]
+\node[b] (u) {Caso de uso};
+\node[b,below left=of u] (c) {Documento canónico};
+\node[b,below=of u] (p) {Proyección reconstruible};
+\node[b,below right=of u] (d) {Producto de datos};
+\node[b,below=of p] (m) {Metadatos, ámbito y versión};
+\draw[a] (u)--(c);\draw[a] (c)--(p);\draw[a] (p)--(u);
+\draw[a] (p)--(d);\draw[a] (m)--(c);\draw[a] (m)--(p);\draw[a] (m)--(d);
+\end{tikzpicture}
+\caption{Relaciones principales del contrato COBRIA en NoSQL documental.}
+\end{figure}
+
+El objeto canónico expresa identidad, revisión, tiempo y ciclo de vida. El Dater traduce
+entre esa semántica y documentos físicos, índices y consultas. El servicio ejecuta
+reglas y autorización. El catálogo conserva vocabulario versionado. Esta separación es
+una guía de responsabilidades; no obliga a multiplicar clases cuando un módulo pequeño
+puede cumplir el mismo contrato.
+
+\section{Minería de datos e inteligencia artificial}
+
+Un conjunto de datos reconstruible es una proyección fechada. Declara población,
+ventana temporal, transformación, versión de catálogos, exclusiones, semilla y política
+de división. Una característica versionada añade definición, tipo, tiempo de evento,
+tiempo de conocimiento y prevención de fuga temporal.
+
+La recuperación aumentada restringe candidatos por ámbito antes de calcular similitud.
+Cada fragmento conserva documento fuente, revisión, versión, autorización y fecha. La
+respuesta enlaza evidencia o se abstiene. Una herramienta de agente añade capacidad
+mínima, validación, idempotencia, confirmación para efectos de alto riesgo y registro.
+
+Estas propiedades no garantizan exactitud de un modelo. Sí hacen reproducible el insumo,
+limitan cruces de ámbito y permiten retirar productos afectados por cambios o borrado.
+
+\section{Método}
+
+La investigación sigue ciencia del diseño: problema, objetivos, construcción,
+demostración, evaluación y comunicación. Tres perfiles anonimizados representan eventos
+y multimedia, operación hotelera y operación comercial. Se inspeccionan canónicos,
+Daters, servicios, catálogos, reglas, índices, funciones y derivados.
+
+La evaluación activa se restringe a NoSQL documental. Se distinguen evidencia
+estructural, ejecutable y empírica. El protocolo registra motor, región, escala, ámbitos,
+forma documental, índices, semillas, calentamiento, orden, versión y descartes. La
+corrida completa es la unidad inferencial.
+
+Las hipótesis son: HN1, reconstrucción equivalente; HN2, cero cruces de ámbito; HN3,
+idempotencia y revisión; HN4, reproducción de productos analíticos; y HN5, beneficio de
+lectura suficiente para pagar mantenimiento. HN5 permanece abierta hasta ejecutar una
+réplica multiescala en motores documentales.
+
+\section{Protocolo experimental NoSQL}
+
+\begin{table}[H]\centering
+\caption{Experimentos y criterios de aceptación.}
+\begin{tabularx}{\textwidth}{p{1.4cm}p{3.5cm}X}\toprule
+Código & Experimento & Aceptación\\\midrule
+P1 & consulta canónica frente a proyección & mismo resultado y mejora del objetivo declarado\\
+P2 & amplificación de escritura & operaciones, bytes, eventos y convergencia dentro de presupuesto\\
+R1 & reconstrucción total e incremental & equivalencia, idempotencia y publicación segura\\
+S1 & aislamiento adversarial & cero documentos cruzados y rechazo sin ámbito\\
+A1 & conjunto, recuperación y herramientas & procedencia completa, abstención y cero fugas\\
+\bottomrule\end{tabularx}\end{table}
+
+P1 y P2 deben ejecutarse en al menos dos motores NoSQL, con treinta corridas válidas por
+celda, orden rotado, escalas múltiples y resultados negativos publicados. R1 interrumpe
+la construcción antes de publicar; S1 manipula identidad, caché y búsqueda; A1 introduce
+eventos tardíos, duplicados, catálogos desconocidos y documentos incompletos.
+
+\section{Resultados disponibles}
+
+Los tres perfiles contienen fuentes documentales, capas de acceso, servicios, catálogos
+y derivados. La recurrencia confirma que el problema existe en dominios heterogéneos.
+Las pruebas disponibles verifican reglas de acceso, roles, aislamiento, ciclos de vida,
+idempotencia y reconstrucción en rutas concretas. Una observación longitudinal también
+muestra reducción de accesos directos desde presentación hacia la capa documental.
+
+Esta evidencia apoya viabilidad estructural y ejecutable. No demuestra beneficio
+universal de rendimiento, productividad humana ni seguridad exhaustiva. Las cifras de
+pilotos ajenos al alcance NoSQL se excluyeron y no alimentan el resumen ni las
+conclusiones.
+
+\section{Proposiciones verificables}
+
+El contrato permite derivar propiedades que un arnés puede intentar refutar. No se
+presentan como teoremas universales del almacenamiento distribuido, sino como
+obligaciones de una implementación COBRIA.
+
+\subsection{Autoridad única}
+
+Sea $w(x)$ una operación que cambia el estado de dominio de $x$. Para cualquier
+proyección $P_i$, una operación válida satisface:
+\[
+w(x)\Rightarrow w(C_x)\land \neg w_{autoridad}(P_i(x)).
+\]
+Una interfaz administrativa que modifica directamente el derivado viola la propiedad,
+aunque luego intente sincronizar la fuente. La prueba combina análisis estático de
+dependencias con una escritura adversarial contra el adaptador.
+
+\subsection{Aislamiento previo a recuperación}
+
+Para una identidad $a$ y ámbito autorizado $s_a$, el conjunto candidato cumple:
+\[
+Cand(a,q)\subseteq \{x\mid scope(x)=s_a\land permit(a,x)\}.
+\]
+La condición se aplica antes de similitud, orden, caché o ensamblado de contexto. Así,
+un documento prohibido no influye en puntuaciones, tiempos, conteos ni explicaciones.
+
+\subsection{Reconstrucción equivalente}
+
+Para una versión congelada $v$, política $\theta$ y corte $t$, la reconstrucción se
+acepta cuando:
+\[
+e_i\bigl(P_i^{activo},r_i(C_{\leq t},\theta,v)\bigr)=1.
+\]
+El verificador puede comparar igualdad exacta, conjunto ordenado, tolerancia numérica o
+invariantes de dominio. La tolerancia debe declararse antes de observar divergencias.
+
+\subsection{Monotonicidad de revisión}
+
+Si $rev(x')<rev(C_x)$, el procesamiento de $x'$ no puede reducir la revisión visible ni
+reaplicar un efecto no conmutativo. La propiedad cubre entregas fuera de orden,
+reintentos y restauraciones parciales.
+
+\section{Modelo de decisión multidimensional}
+
+Una proyección no se justifica únicamente por latencia. Se define el vector:
+\[
+D_i=\langle \Delta L,\Delta O,\Delta B,\Delta S,\Delta F,\Delta R,\Delta H\rangle,
+\]
+donde $L$ es latencia, $O$ operaciones facturables, $B$ bytes, $S$ almacenamiento,
+$F$ frescura, $R$ riesgo operacional y $H$ esfuerzo humano. Los tres primeros pueden
+medirse automáticamente; los últimos requieren objetivos, incidentes y estudios humanos.
+
+La frontera temporal simplificada usa consultas $Q$, escrituras $W$, ahorro de lectura
+$\Delta q$ y costo adicional $\Delta w$:
+\[
+Q\Delta q>W\Delta w.
+\]
+Esta desigualdad no decide por sí sola. Si una proyección duplica información sensible,
+incumple frescura o carece de reparación, se rechaza aunque el tiempo agregado resulte
+favorable. El valor del modelo es obligar a declarar dimensiones y evitar que una
+mediana aislada se convierta en recomendación arquitectónica.
+
+\begin{table}[H]\centering
+\caption{Preguntas de decisión antes de adoptar una proyección.}
+\begin{tabularx}{\textwidth}{p{3.3cm}X X}\toprule
+Dimensión & Evidencia mínima & Señal para simplificar\\\midrule
+Lectura & percentiles pareados y costo & índice canónico cumple el objetivo\\
+Escritura & operaciones, eventos y convergencia & amplificación supera presupuesto\\
+Frescura & atraso y distribución temporal & consumidor exige lectura inmediata\\
+Reparación & ensayo total e incremental & reconstrucción no es repetible\\
+Privacidad & pruebas negativas por ámbito & derivado duplica campos innecesarios\\
+Operación & responsable, alertas e incidentes & nadie posee o utiliza la proyección\\
+\bottomrule\end{tabularx}\end{table}
+
+\section{Ejemplo de aplicación neutral}
+
+Considérese una colección de actividades con documentos heterogéneos, diez ámbitos y una
+pantalla que muestra únicamente identidad, fecha, estado y resumen. La fuente canónica
+conserva además reglas, multimedia, revisión y procedencia. El equipo observa que la
+consulta indexada cumple el objetivo en escalas pequeñas, pero aumenta operaciones y
+bytes en la escala superior.
+
+La ficha COBRIA no ordena crear una copia. Primero define la consulta y congela el índice
+canónico. Después propone una proyección estrecha con los cuatro campos visibles,
+revisión, fuente y versión. P1 compara ambas rutas; P2 mide la actualización; R1 elimina
+y reconstruye la candidata; S1 intenta cruzar ámbitos; A1 verifica que un conjunto
+analítico pueda enlazar cada registro con el documento de origen.
+
+Tres resultados son posibles. Si la consulta canónica satisface costo y latencia, se
+descarta la proyección. Si la proyección mejora lectura pero rompe frescura o reparación,
+se corrige antes de publicarla. Solo si cumple el vector de decisión se adopta, con fecha
+de revisión y criterio de retiro. El ejemplo muestra que COBRIA es un proceso de
+decisión, no una instrucción de duplicar.
+
+\section{Trazabilidad entre hipótesis y artefactos}
+
+\begin{table}[H]\centering
+\caption{Matriz de trazabilidad del artículo.}
+\begin{tabularx}{\textwidth}{p{1.5cm}p{3.3cm}p{3.2cm}X}\toprule
+Hipótesis & Riesgo & Prueba & Evidencia requerida\\\midrule
+HN1 & autoridad paralela & R1 y escritura adversarial & equivalencia y rechazo directo\\
+HN2 & fuga entre ámbitos & S1 & cero candidatos cruzados\\
+HN3 & duplicados o regresión & repetición y revisión vieja & un efecto y revisión monotónica\\
+HN4 & producto irreproducible & A1 & manifiesto, huella y procedencia\\
+HN5 & costo sin beneficio & P1 y P2 & vector pareado por región de carga\\
+\bottomrule\end{tabularx}\end{table}
+
+La matriz evita que una métrica secundaria sustituya la hipótesis. Por ejemplo, una
+reconstrucción rápida no apoya HN1 si produce documentos distintos; una precisión alta
+no apoya HN2 si el conjunto candidato contenía material prohibido.
+
+\section{Plan de análisis y ciencia abierta}
+
+Cada celda contiene treinta corridas válidas. Se publican medianas, intervalos del 95\%
+obtenidos mediante remuestreo de corridas, diferencias y razones pareadas. La dirección
+de cada par se conserva. Las familias confirmatorias se ajustan por comparaciones
+múltiples y las exploraciones se rotulan por separado.
+
+El paquete de réplica debe incluir protocolo, enmiendas, generador, adaptadores,
+manifiestos, eventos crudos, análisis, tablas y entorno. Las huellas enlazan cada figura
+con sus entradas. Una corrida se descarta únicamente por reglas congeladas: manifiesto
+incompleto, pérdida de equivalencia previa a la medición, interferencia externa registrada
+o fallo del arnés. Los datos descartados se conservan fuera del conjunto inferencial.
+
+La revisión independiente examinará equivalencia de configuraciones, unidad inferencial,
+exclusiones y correspondencia entre evidencia y afirmaciones. El artículo se actualizará
+con cifras solo después de completar dos motores documentales y reproducir las salidas
+desde el depósito.
+
+\section{Discusión}
+
+La reconstruibilidad cambia la naturaleza de una copia: deja de ser un activo que debe
+protegerse manualmente y se convierte en un producto regenerable con contrato. El ámbito
+explícito evita que optimización y recuperación debiliten la autorización. La
+procedencia continua conecta operación, analítica e inteligencia artificial.
+
+El costo es real: más metadatos, observabilidad, almacenamiento, eventos y disciplina.
+Por ello COBRIA incorpora un criterio de retiro. Una proyección sin objetivo,
+responsable, verificador o uso suficiente debe eliminarse. En sistemas pequeños, la
+mejor decisión puede ser conservar solo documentos canónicos bien indexados.
+
+\section{Amenazas a la validez}
+
+Los perfiles comparten autoría y ecosistema. Los emuladores no reproducen todas las
+cuotas, particiones, regiones o costos administrados. La inspección no sustituye
+ejecución; los datos sintéticos pueden omitir errores históricos; y las pruebas
+automáticas no prueban comprensión humana. Se requieren réplica externa, revisión
+independiente y estudio con desarrolladores ajenos a los casos.
+
+\section{Conclusión}
+
+COBRIA formaliza una arquitectura NoSQL documental en la que cada derivado conserva
+autoridad rastreable, ámbito, versión, equivalencia y reconstrucción. Su aporte no es
+inventar repositorios, eventos o proyecciones, sino integrarlos en una especificación
+verificable que alcanza productos analíticos y de inteligencia artificial.
+
+La evidencia actual permite afirmar aplicabilidad y comprobación de contratos en rutas
+concretas. La afirmación cuantitativa fuerte permanece abierta hasta completar P1--A1 en
+motores NoSQL y publicar el paquete congelado. Esta delimitación transforma una intuición
+arquitectónica en un programa científico refutable.
+
+\printbibliography
+\end{document}

@@ -1,0 +1,34 @@
+{
+  "name": "cobria-replication",
+  "version": "1.2.0",
+  "private": true,
+  "type": "module",
+  "bin": {
+    "cobria": "src/cli.mjs"
+  },
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "pilot": "node scripts/run-experiments.mjs --mode pilot",
+    "experiment": "node scripts/run-experiments.mjs --mode full",
+    "analyze": "python3 analysis/analyze.py",
+    "all": "npm test && npm run nosql:conformance && npm run nosql:report && npm run statistics",
+    "nosql:conformance": "node scripts/run-nosql-conformance.mjs",
+    "nosql:report": "python3 analysis/generate_nosql_report.py",
+    "statistics": "python3 analysis/statistics_core11.py",
+    "statistics:distributed": "python3 analysis/statistics_core12_distributed.py",
+    "analytics-ai:core11": "node scripts/run-analytics-ai-core11.mjs",
+    "baselines:core11": "node scripts/run-baselines-core11.mjs",
+    "resilience:core11": "node scripts/run-resilience-core11.mjs",
+    "failure-bank:core12": "node scripts/run-failure-bank-core12.mjs",
+    "concurrency:core12": "node scripts/run-concurrency-core12.mjs",
+    "distributed:core12": "node scripts/run-distributed-core12.mjs",
+    "ai-eval": "node scripts/run-ai-evaluation.mjs",
+    "longitudinal": "node scripts/analyze-longitudinal.mjs",
+    "context-figures": "python3 analysis/generate_context_figures.py"
+  },
+  "dependencies": {
+    "lokijs": "1.5.12",
+    "mongodb": "7.6.0",
+    "pouchdb": "9.0.0"
+  }
+}
