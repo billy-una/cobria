@@ -20,6 +20,8 @@ jobs:
       - run: npm ci
       - run: npm test
       - run: node src/cli.mjs verificar --adaptador lokijs --tamano 30 --salida "$RUNNER_TEMP/cobria"
+      - run: npm run sbom
+      - run: node -e "const s=require('./SBOM.cdx.json'); if(s.bomFormat!=='CycloneDX'||!s.components.length) process.exit(1)"
 
   package-integrity:
     runs-on: ubuntu-latest
@@ -30,3 +32,9 @@ jobs:
           python-version: "3.12"
       - run: python3 replication/scripts/build-release-manifest.py
         working-directory: replication
+
+  infrastructure-config:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker compose -f replication/infrastructure/docker-compose.core12.yml config

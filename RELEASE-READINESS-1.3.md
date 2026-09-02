@@ -11,6 +11,7 @@ Fecha de corte: 2 de septiembre de 2026.
 - CI para pruebas Node y verificación del paquete.
 - SBOM CycloneDX derivado del lockfile.
 - Trazabilidad actualizada para publicación, seguridad y catálogo.
+- Paginación de OpenSearch para conjuntos mayores que 10.000 documentos.
 
 ## Pendiente externo
 
