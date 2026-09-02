@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { LokiJsAdapter } from "../src/adapters/lokijs-adapter.mjs";
-import { documentoCobria, RepositorioCobria, ProyeccionCobria, huella } from "../src/core/cobria.mjs";
+import { documentoCobria, RepositorioCobria, ProyeccionCobria, PublicadorVersionado, AutorizadorAmbito, huella } from "../src/core/cobria.mjs";
 
 test("documento exige ámbito, identidad y revisión", () => {
   assert.throws(() => documentoCobria({id:"x",revision:1}), /SCP-001/);
@@ -34,4 +34,28 @@ test("proyección se reconstruye y verifica fuera de la versión activa", async 
   assert.equal(result.values.length, 1);
   assert.match(result.candidate, /candidate/);
   await adapter.close();
+});
+
+test("publicador cambia versión y permite rollback sin aceptar candidata corrupta", async () => {
+  const adapter = new LokiJsAdapter();
+  const publisher = new PublicadorVersionado(adapter, { name: "busqueda" });
+  const candidate = [{ id: "rana-1", scope: "bosque-sur", revision: 1, value: 1 }];
+  await adapter.put("candidate-v1", "bosque-sur", "rana-1", candidate[0]);
+  await assert.rejects(() => publisher.publicar("bosque-sur", "candidate-v1", { version: "v1", expectedHash: "bad" }), /EQV-001/);
+  const hash = huella(await adapter.list("candidate-v1", "bosque-sur"));
+  await publisher.publicar("bosque-sur", "candidate-v1", { version: "v1", expectedHash: hash });
+  await adapter.put("candidate-v2", "bosque-sur", "rana-1", { ...candidate[0], value: 2 });
+  const hash2 = huella(await adapter.list("candidate-v2", "bosque-sur"));
+  await publisher.publicar("bosque-sur", "candidate-v2", { version: "v2", expectedHash: hash2 });
+  assert.equal(await publisher.active("bosque-sur"), "v2");
+  assert.equal(await publisher.rollback("bosque-sur"), "v1");
+  assert.equal(await publisher.active("bosque-sur"), "v1");
+  await adapter.close();
+});
+
+test("autorizador separa permisos de lectura y escritura por ámbito", () => {
+  const auth = new AutorizadorAmbito({ lector: ["read:sur"], escritor: ["write:sur"] });
+  assert.equal(auth.exigir("lector", "sur", "read"), true);
+  assert.throws(() => auth.exigir("lector", "sur", "write"), /AUTH-001/);
+  assert.throws(() => auth.exigir("lector", "norte", "read"), /AUTH-001/);
 });

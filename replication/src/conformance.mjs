@@ -1,5 +1,6 @@
 import { performance } from "node:perf_hooks";
 import { createHash } from "node:crypto";
+import { equivalentDocuments } from "./oracle.mjs";
 
 const duration = async fn => { const start = performance.now(); const value = await fn(); return { value, ms: performance.now() - start }; };
 const hash = value => createHash("sha256").update(JSON.stringify(value)).digest("hex");
@@ -30,7 +31,7 @@ export async function runConformance(adapter, {engine, size=1000, scope="bosque-
   else for (const doc of activeDocs) await adapter.put("projection-v1", scope, doc.id, doc);
   const p1Projection = await duration(() => adapter.list("projection-v1", scope));
   const expectedProjection = p1Canonical.value.map(project).filter(Boolean);
-  const equivalentP1 = hash(normalize(expectedProjection)) === hash(normalize(p1Projection.value));
+   const equivalentP1 = equivalentDocuments(expectedProjection, p1Projection.value);
 
   const beforeP2 = adapter.snapshot();
   const changed = {...docs[0], revision:2, value:docs[0].value+1};
@@ -52,23 +53,23 @@ export async function runConformance(adapter, {engine, size=1000, scope="bosque-
   const r1 = await duration(rebuild);
   const canonicalAfter = await adapter.list("canonical", scope);
   const expectedAfter=canonicalAfter.map(project).filter(Boolean);
-  const r1Equivalent = hash(normalize(expectedAfter)) === hash(normalize(r1.value));
+   const r1Equivalent = equivalentDocuments(expectedAfter, r1.value);
   const r1Repeat = await rebuild();
-  const r1Idempotent = hash(normalize(r1.value)) === hash(normalize(r1Repeat));
+   const r1Idempotent = equivalentDocuments(r1.value, r1Repeat);
 
   // Una candidata inválida no puede reemplazar la versión publicada.
   const publishedBefore=await adapter.list("projection-v1",scope);
   const invalidCandidate=r1Repeat.slice(1);
-  const invalidRejected=hash(normalize(expectedAfter))!==hash(normalize(invalidCandidate));
+   const invalidRejected=!equivalentDocuments(expectedAfter, invalidCandidate);
   const publishedAfterRejected=await adapter.list("projection-v1",scope);
-  const activePreserved=hash(normalize(publishedBefore))===hash(normalize(publishedAfterRejected));
+   const activePreserved=equivalentDocuments(publishedBefore, publishedAfterRejected);
 
   // Reconstrucción incremental: aplicar un cambio sobre una copia completa válida.
   const incrementalDoc={...canonicalAfter.find(x=>x.status==="activo"),revision:3,value:777};
   await adapter.put("canonical",scope,incrementalDoc.id,incrementalDoc);
   const incremental=[...r1Repeat.filter(x=>x.id!==incrementalDoc.id),project(incrementalDoc)].filter(Boolean);
   const canonicalIncremental=(await adapter.list("canonical",scope)).map(project).filter(Boolean);
-  const incrementalEquivalent=hash(normalize(incremental))===hash(normalize(canonicalIncremental));
+   const incrementalEquivalent=equivalentDocuments(incremental, canonicalIncremental);
 
   let missingScopeRejected = false;
   try { await adapter.list("canonical", ""); } catch { missingScopeRejected = true; }

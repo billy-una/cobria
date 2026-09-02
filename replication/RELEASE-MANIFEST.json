@@ -36,8 +36,13 @@
     },
     {
       "path": "README.md",
-      "bytes": 2406,
-      "sha256": "d3f2e134e0265a67bd0182e6a494fe8ba6e3348d88f19f0f42774759bd3f9a63"
+      "bytes": 3146,
+      "sha256": "565c24578910074ce0ed0d31bd693734194a8b5a89325ef95fa916aeb90fefbe"
+    },
+    {
+      "path": "SBOM.cdx.json",
+      "bytes": 11758,
+      "sha256": "eaaa6bfdc2f19018b49a7e7c594667e32a450f27f030dd067d91dc4866a2251f"
     },
     {
       "path": "SYSTEMATIC-REVIEW-PROTOCOL-1.2.md",
@@ -206,8 +211,8 @@
     },
     {
       "path": "package.json",
-      "bytes": 1442,
-      "sha256": "612dfd1c9265f172889f30a138330be63e3c13ea5f29e571ce9309ff12224725"
+      "bytes": 1488,
+      "sha256": "af8414bf6ff55b7fc0a96cf3646e219d1570cc7d03676fe95ff74f253ead7924"
     },
     {
       "path": "protocol/AMENDMENT-001.md",
@@ -530,6 +535,11 @@
       "sha256": "caccc7a06c419458b9c160c0e45c6f78ef69a9a7533fab4a79aa4b6f69828f1d"
     },
     {
+      "path": "scripts/generate-sbom.mjs",
+      "bytes": 1104,
+      "sha256": "816c017b34262b4b76a67eb89c645d045b5c9daf02f2b1ac6280d83725211f51"
+    },
+    {
       "path": "scripts/run-ai-evaluation.mjs",
       "bytes": 2883,
       "sha256": "e06bd9ddaaba75a703565cb6d498d0bd7647b1756c8868bc63a506de6adba8b5"
@@ -600,6 +610,11 @@
       "sha256": "cb2647d143f80f4d6a5c7b1a873e43cf53c39012a688ce3bd06b156e27c1789b"
     },
     {
+      "path": "src/adversarial-generator.mjs",
+      "bytes": 580,
+      "sha256": "03047fed07e596a7109b96ce55c909fbbb9deb9e4cb833dedec7a30de9a7b22a"
+    },
+    {
       "path": "src/cli.mjs",
       "bytes": 3461,
       "sha256": "f62676021c4db588e271274671e3db813992efb4150ce35fd7b6846e6ef993f0"
@@ -611,13 +626,13 @@
     },
     {
       "path": "src/conformance.mjs",
-      "bytes": 7670,
-      "sha256": "b71103070274fea9c3f2f67adce7b887fb8267373fe042e09f73e57cf3fd092a"
+      "bytes": 7639,
+      "sha256": "895f7b76ef0b824deec23063df4212fe9bb247751e71025bf450ac09d91b6154"
     },
     {
       "path": "src/core/cobria.mjs",
-      "bytes": 2697,
-      "sha256": "18f1d233d9d96fb82f7af57ce2bbcc51db450f27b1dc82999ab58247497e4cf3"
+      "bytes": 4550,
+      "sha256": "825291a456ed22b6e11e8b0351acc64ca3eddb0b81817897f587edf4c9e4e00a"
     },
     {
       "path": "src/decision-matrix.mjs",
@@ -628,6 +643,11 @@
       "path": "src/generator.mjs",
       "bytes": 826,
       "sha256": "c838ad3ea51ceb2a9957306c885e4c614d38db203445a0ac0573938dc01cfc2a"
+    },
+    {
+      "path": "src/oracle.mjs",
+      "bytes": 737,
+      "sha256": "84c96070fe8f98aa963b1ae49cf3566b576b2c173920e66e9010c8c631e9fc3c"
     },
     {
       "path": "src/semirealistic-generator.mjs",
@@ -651,13 +671,18 @@
     },
     {
       "path": "tests/core11.test.mjs",
-      "bytes": 1752,
-      "sha256": "72b01e7558cb4fa621bccee712d6d913c299d32bc450eea113bece68a9c72d49"
+      "bytes": 3326,
+      "sha256": "11337284a61539784c384f2242d0ab0d13610915eb8882b34db2e47dec2435a2"
     },
     {
       "path": "tests/decision-matrix.test.mjs",
       "bytes": 475,
       "sha256": "54c87475a4acad70bd8f45dfcc37aac0c04783511dac9c46530116e2cf0d3a15"
+    },
+    {
+      "path": "tests/oracle.test.mjs",
+      "bytes": 1076,
+      "sha256": "22ffbb95c27ef1a5ece0f9a8fcc745e2991f1438d544e84625847f62a3bde2b6"
     }
   ]
 }

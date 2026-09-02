@@ -18,7 +18,7 @@ Una transformación versionada `T_v` produce cero o una representación derivada
 4. **Autoridad única:** modificar `P_v` no altera `D`; solo `D` acepta cambios autoritativos.
 5. **Procedencia:** cada `p ∈ P_v` identifica al menos origen, revisión fuente y versión de transformación.
 6. **Equivalencia:** una candidata solo es publicable si `E(P_v, T_v(Q(D))) = verdadero`.
-7. **Publicación segura:** si falla la construcción o verificación, la versión activa anterior permanece legible.
+7. **Publicación segura:** si falla la construcción o verificación, la versión activa anterior permanece legible; una publicación aceptada registra versión, candidata, huella y versión previa para rollback.
 8. **Idempotencia:** aplicar dos veces la misma entrega lógica deja el mismo estado observable.
 9. **Reconstruibilidad:** eliminar `P_v` no destruye la capacidad de producirla desde las fuentes declaradas.
 10. **Abstención:** una salida automatizada sin evidencia autorizada suficiente no afirma un resultado.
@@ -39,6 +39,7 @@ Una transformación versionada `T_v` produce cero o una representación derivada
 
 - Precondiciones: construcción completa, equivalencia superada y revisión de fuentes vigente.
 - Poscondiciones: los lectores resuelven una única versión activa; el cambio deja evidencia; un fallo previo conserva la versión anterior.
+- La prueba mínima local exige que una huella incorrecta sea rechazada, que el catálogo cambie de versión y que el rollback restaure la versión previa. Esto no equivale todavía a un intercambio atómico entre nodos.
 
 ## 4. Máquina de estados
 

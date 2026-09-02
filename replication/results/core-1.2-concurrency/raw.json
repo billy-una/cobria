@@ -7,9 +7,9 @@
     "staleCount": 100,
     "staleDetected": true,
     "repairEquivalent": true,
-    "heapDeltaBytes": 2849824,
-    "cpuUserMicros": 94535,
-    "cpuSystemMicros": 8399,
+    "heapDeltaBytes": 2658320,
+    "cpuUserMicros": 82101,
+    "cpuSystemMicros": 4869,
     "pass": true
   },
   {
@@ -20,9 +20,9 @@
     "staleCount": 100,
     "staleDetected": true,
     "repairEquivalent": true,
-    "heapDeltaBytes": 256208,
-    "cpuUserMicros": 68930,
-    "cpuSystemMicros": 2443,
+    "heapDeltaBytes": 252472,
+    "cpuUserMicros": 63323,
+    "cpuSystemMicros": 2885,
     "pass": true
   },
   {
@@ -33,9 +33,9 @@
     "staleCount": 100,
     "staleDetected": true,
     "repairEquivalent": true,
-    "heapDeltaBytes": 2834664,
-    "cpuUserMicros": 32905,
-    "cpuSystemMicros": 1529,
+    "heapDeltaBytes": 2900480,
+    "cpuUserMicros": 31352,
+    "cpuSystemMicros": 1144,
     "pass": true
   },
   {
@@ -46,9 +46,9 @@
     "staleCount": 100,
     "staleDetected": true,
     "repairEquivalent": true,
-    "heapDeltaBytes": 2238568,
-    "cpuUserMicros": 37082,
-    "cpuSystemMicros": 1298,
+    "heapDeltaBytes": 2185728,
+    "cpuUserMicros": 34794,
+    "cpuSystemMicros": 1655,
     "pass": true
   },
   {
@@ -59,9 +59,9 @@
     "staleCount": 100,
     "staleDetected": true,
     "repairEquivalent": true,
-    "heapDeltaBytes": 2395032,
-    "cpuUserMicros": 39196,
-    "cpuSystemMicros": 1345,
+    "heapDeltaBytes": 2333872,
+    "cpuUserMicros": 37970,
+    "cpuSystemMicros": 2100,
     "pass": true
   },
   {
@@ -72,9 +72,9 @@
     "staleCount": 100,
     "staleDetected": true,
     "repairEquivalent": true,
-    "heapDeltaBytes": 2356624,
-    "cpuUserMicros": 25245,
-    "cpuSystemMicros": 678,
+    "heapDeltaBytes": 2351864,
+    "cpuUserMicros": 25867,
+    "cpuSystemMicros": 1519,
     "pass": true
   },
   {
@@ -85,9 +85,9 @@
     "staleCount": 100,
     "staleDetected": true,
     "repairEquivalent": true,
-    "heapDeltaBytes": -4010992,
-    "cpuUserMicros": 28505,
-    "cpuSystemMicros": 1501,
+    "heapDeltaBytes": -3881000,
+    "cpuUserMicros": 28115,
+    "cpuSystemMicros": 2016,
     "pass": true
   },
   {
@@ -98,9 +98,9 @@
     "staleCount": 100,
     "staleDetected": true,
     "repairEquivalent": true,
-    "heapDeltaBytes": 8744976,
-    "cpuUserMicros": 29923,
-    "cpuSystemMicros": 810,
+    "heapDeltaBytes": 8756536,
+    "cpuUserMicros": 23469,
+    "cpuSystemMicros": 1382,
     "pass": true
   },
   {
@@ -111,9 +111,9 @@
     "staleCount": 100,
     "staleDetected": true,
     "repairEquivalent": true,
-    "heapDeltaBytes": -5151656,
-    "cpuUserMicros": 31158,
-    "cpuSystemMicros": 1477,
+    "heapDeltaBytes": -5196680,
+    "cpuUserMicros": 28096,
+    "cpuSystemMicros": 2098,
     "pass": true
   },
   {
@@ -125,8 +125,8 @@
     "staleDetected": true,
     "repairEquivalent": true,
     "heapDeltaBytes": 8756368,
-    "cpuUserMicros": 25012,
-    "cpuSystemMicros": 1032,
+    "cpuUserMicros": 22669,
+    "cpuSystemMicros": 1748,
     "pass": true
   },
   {
@@ -137,9 +137,9 @@
     "staleCount": 100,
     "staleDetected": true,
     "repairEquivalent": true,
-    "heapDeltaBytes": -15830008,
-    "cpuUserMicros": 48956,
-    "cpuSystemMicros": 2618,
+    "heapDeltaBytes": -15699080,
+    "cpuUserMicros": 48499,
+    "cpuSystemMicros": 3060,
     "pass": true
   },
   {
@@ -150,9 +150,9 @@
     "staleCount": 100,
     "staleDetected": true,
     "repairEquivalent": true,
-    "heapDeltaBytes": 8588176,
-    "cpuUserMicros": 24320,
-    "cpuSystemMicros": 597,
+    "heapDeltaBytes": 8601008,
+    "cpuUserMicros": 23310,
+    "cpuSystemMicros": 587,
     "pass": true
   },
   {
@@ -163,9 +163,9 @@
     "staleCount": 100,
     "staleDetected": true,
     "repairEquivalent": true,
-    "heapDeltaBytes": -5677800,
-    "cpuUserMicros": 26585,
-    "cpuSystemMicros": 827,
+    "heapDeltaBytes": -5911592,
+    "cpuUserMicros": 26295,
+    "cpuSystemMicros": 1044,
     "pass": true
   },
   {
@@ -176,9 +176,9 @@
     "staleCount": 100,
     "staleDetected": true,
     "repairEquivalent": true,
-    "heapDeltaBytes": 8757120,
-    "cpuUserMicros": 21951,
-    "cpuSystemMicros": 370,
+    "heapDeltaBytes": 8733184,
+    "cpuUserMicros": 22521,
+    "cpuSystemMicros": 890,
     "pass": true
   },
   {
@@ -189,9 +189,9 @@
     "staleCount": 100,
     "staleDetected": true,
     "repairEquivalent": true,
-    "heapDeltaBytes": -4496896,
-    "cpuUserMicros": 28088,
-    "cpuSystemMicros": 866,
+    "heapDeltaBytes": -4237224,
+    "cpuUserMicros": 26671,
+    "cpuSystemMicros": 1152,
     "pass": true
   },
   {
@@ -202,9 +202,9 @@
     "staleCount": 100,
     "staleDetected": true,
     "repairEquivalent": true,
-    "heapDeltaBytes": -4459392,
-    "cpuUserMicros": 37906,
-    "cpuSystemMicros": 940,
+    "heapDeltaBytes": -4491200,
+    "cpuUserMicros": 36836,
+    "cpuSystemMicros": 742,
     "pass": true
   },
   {
@@ -215,9 +215,9 @@
     "staleCount": 100,
     "staleDetected": true,
     "repairEquivalent": true,
-    "heapDeltaBytes": 8718112,
-    "cpuUserMicros": 22450,
-    "cpuSystemMicros": 464,
+    "heapDeltaBytes": 8756272,
+    "cpuUserMicros": 21909,
+    "cpuSystemMicros": 632,
     "pass": true
   },
   {
@@ -228,9 +228,9 @@
     "staleCount": 100,
     "staleDetected": true,
     "repairEquivalent": true,
-    "heapDeltaBytes": -4258944,
-    "cpuUserMicros": 26873,
-    "cpuSystemMicros": 495,
+    "heapDeltaBytes": -4282656,
+    "cpuUserMicros": 26304,
+    "cpuSystemMicros": 1317,
     "pass": true
   },
   {
@@ -242,8 +242,8 @@
     "staleDetected": true,
     "repairEquivalent": true,
     "heapDeltaBytes": 8755912,
-    "cpuUserMicros": 23012,
-    "cpuSystemMicros": 434,
+    "cpuUserMicros": 22242,
+    "cpuSystemMicros": 799,
     "pass": true
   },
   {
@@ -254,9 +254,9 @@
     "staleCount": 100,
     "staleDetected": true,
     "repairEquivalent": true,
-    "heapDeltaBytes": -4558776,
-    "cpuUserMicros": 26619,
-    "cpuSystemMicros": 473,
+    "heapDeltaBytes": -4816840,
+    "cpuUserMicros": 25842,
+    "cpuSystemMicros": 631,
     "pass": true
   },
   {
@@ -267,9 +267,9 @@
     "staleCount": 100,
     "staleDetected": true,
     "repairEquivalent": true,
-    "heapDeltaBytes": -4470816,
-    "cpuUserMicros": 27019,
-    "cpuSystemMicros": 626,
+    "heapDeltaBytes": -4456360,
+    "cpuUserMicros": 26443,
+    "cpuSystemMicros": 921,
     "pass": true
   },
   {
@@ -280,9 +280,9 @@
     "staleCount": 100,
     "staleDetected": true,
     "repairEquivalent": true,
-    "heapDeltaBytes": 8756272,
-    "cpuUserMicros": 22337,
-    "cpuSystemMicros": 452,
+    "heapDeltaBytes": 8733120,
+    "cpuUserMicros": 21338,
+    "cpuSystemMicros": 470,
     "pass": true
   },
   {
@@ -293,9 +293,9 @@
     "staleCount": 100,
     "staleDetected": true,
     "repairEquivalent": true,
-    "heapDeltaBytes": -4115368,
-    "cpuUserMicros": 25694,
-    "cpuSystemMicros": 365,
+    "heapDeltaBytes": -4486448,
+    "cpuUserMicros": 26917,
+    "cpuSystemMicros": 1036,
     "pass": true
   },
   {
@@ -306,9 +306,9 @@
     "staleCount": 100,
     "staleDetected": true,
     "repairEquivalent": true,
-    "heapDeltaBytes": 8756272,
-    "cpuUserMicros": 22903,
-    "cpuSystemMicros": 380,
+    "heapDeltaBytes": 8618280,
+    "cpuUserMicros": 21576,
+    "cpuSystemMicros": 714,
     "pass": true
   },
   {
@@ -319,9 +319,9 @@
     "staleCount": 100,
     "staleDetected": true,
     "repairEquivalent": true,
-    "heapDeltaBytes": -4818256,
-    "cpuUserMicros": 26076,
-    "cpuSystemMicros": 579,
+    "heapDeltaBytes": -4343912,
+    "cpuUserMicros": 25516,
+    "cpuSystemMicros": 867,
     "pass": true
   },
   {
@@ -332,9 +332,9 @@
     "staleCount": 100,
     "staleDetected": true,
     "repairEquivalent": true,
-    "heapDeltaBytes": -4339104,
-    "cpuUserMicros": 26535,
-    "cpuSystemMicros": 674,
+    "heapDeltaBytes": -4667336,
+    "cpuUserMicros": 27122,
+    "cpuSystemMicros": 1137,
     "pass": true
   },
   {
@@ -345,9 +345,9 @@
     "staleCount": 100,
     "staleDetected": true,
     "repairEquivalent": true,
-    "heapDeltaBytes": 8618104,
-    "cpuUserMicros": 21139,
-    "cpuSystemMicros": 158,
+    "heapDeltaBytes": 8561368,
+    "cpuUserMicros": 21312,
+    "cpuSystemMicros": 552,
     "pass": true
   },
   {
@@ -358,9 +358,9 @@
     "staleCount": 100,
     "staleDetected": true,
     "repairEquivalent": true,
-    "heapDeltaBytes": -4489240,
-    "cpuUserMicros": 25977,
-    "cpuSystemMicros": 801,
+    "heapDeltaBytes": -4188352,
+    "cpuUserMicros": 26965,
+    "cpuSystemMicros": 1216,
     "pass": true
   },
   {
@@ -371,9 +371,9 @@
     "staleCount": 100,
     "staleDetected": true,
     "repairEquivalent": true,
-    "heapDeltaBytes": 8618264,
-    "cpuUserMicros": 21467,
-    "cpuSystemMicros": 155,
+    "heapDeltaBytes": 8756256,
+    "cpuUserMicros": 24746,
+    "cpuSystemMicros": 1014,
     "pass": true
   },
   {
@@ -384,9 +384,9 @@
     "staleCount": 100,
     "staleDetected": true,
     "repairEquivalent": true,
-    "heapDeltaBytes": -4347760,
-    "cpuUserMicros": 26075,
-    "cpuSystemMicros": 654,
+    "heapDeltaBytes": -4217504,
+    "cpuUserMicros": 27383,
+    "cpuSystemMicros": 1353,
     "pass": true
   }
 ]

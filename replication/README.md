@@ -44,6 +44,18 @@ facturación administrada.
 Los controles exploratorios con SQLite y PostgreSQL se preservan únicamente en
 `historical/sql-controls/`; están fuera del corpus confirmatorio NoSQL.
 
+## Estado de la fase 1.3
+
+- Publicación versionada, verificación de huella y rollback: probado localmente con LokiJS.
+- Autorización por ámbito: probado con permisos separados de lectura y escritura.
+- Oráculo y datos adversariales: disponibles en `src/oracle.mjs` y `src/adversarial-generator.mjs`.
+- CI: `.github/workflows/ci.yml` ejecuta pruebas y verificación de integridad.
+- SBOM: `npm run sbom` genera `SBOM.cdx.json` desde `package-lock.json`.
+- Integración con clúster, ACL del motor, red y servicios administrados: pendiente de infraestructura externa.
+
+Los perfiles CQRS, Event Sourcing e índice especializado se conservan como controles
+experimentales; no se presentan como implementaciones industriales equivalentes.
+
 ## Ética y seguridad
 
 Solo se utilizan datos sintéticos, semirrealistas anonimizados o emuladores. No se deben

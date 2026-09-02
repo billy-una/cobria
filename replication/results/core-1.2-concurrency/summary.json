@@ -4,9 +4,9 @@
   "racesWithStalenessDetected": 30,
   "repairsEquivalent": 30,
   "staleMedian": 100,
-  "heapDeltaMedianBytes": 2238568,
-  "cpuUserMedianMicros": 26585,
-  "cpuSystemMedianMicros": 678,
+  "heapDeltaMedianBytes": 2185728,
+  "cpuUserMedianMicros": 26443,
+  "cpuSystemMedianMicros": 1144,
   "interpretation": "Una reconstrucción sobre una instantánea puede quedar obsoleta si coexiste con escrituras; COBRIA debe detectarlo antes de publicar o reparar por revisión.",
   "limits": "Concurrencia de promesas sobre LokiJS en un proceso; no demuestra bloqueo, consenso, aislamiento transaccional ni comportamiento de red en un clúster."
 }

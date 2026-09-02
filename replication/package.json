@@ -16,6 +16,7 @@
     "nosql:report": "python3 analysis/generate_nosql_report.py",
     "statistics": "python3 analysis/statistics_core11.py",
     "statistics:distributed": "python3 analysis/statistics_core12_distributed.py",
+    "sbom": "node scripts/generate-sbom.mjs",
     "analytics-ai:core11": "node scripts/run-analytics-ai-core11.mjs",
     "baselines:core11": "node scripts/run-baselines-core11.mjs",
     "resilience:core11": "node scripts/run-resilience-core11.mjs",
