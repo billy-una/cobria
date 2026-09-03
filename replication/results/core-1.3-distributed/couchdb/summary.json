@@ -1,0 +1,25 @@
+{
+  "specification": "COBRIA Core 1.2",
+  "engine": "couchdb",
+  "runs": 1,
+  "configuration": {
+    "runs": 1,
+    "sizes": [
+      30
+    ]
+  },
+  "generatedAt": "2026-09-03T00:09:43.099Z",
+  "summary": [
+    {
+      "engine": "couchdb",
+      "size": 30,
+      "runs": 1,
+      "allPass": true,
+      "canonicalMedianMs": 154.40741700000035,
+      "projectionMedianMs": 53.243084000000636,
+      "rebuildMedianMs": 210.2149159999999,
+      "writeAmplification": 2,
+      "foreignDocuments": 0
+    }
+  ]
+}

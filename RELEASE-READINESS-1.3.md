@@ -12,6 +12,7 @@ Fecha de corte: 2 de septiembre de 2026.
 - SBOM CycloneDX derivado del lockfile.
 - Trazabilidad actualizada para publicación, seguridad y catálogo.
 - Paginación de OpenSearch para conjuntos mayores que 10.000 documentos.
+- Smoke test real: MongoDB 8.0 y CouchDB 3.4 superaron una corrida local de 30 documentos; OpenSearch 3.2.0 quedó como incidente `SIGILL` bajo emulación.
 
 ## Pendiente externo
 

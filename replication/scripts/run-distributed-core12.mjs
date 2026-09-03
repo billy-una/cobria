@@ -23,7 +23,7 @@ async function adapterFor(run, size) {
   return new OpenSearchAdapter({url:process.env.OPENSEARCH_URL || 'http://127.0.0.1:9200',index:`cobria-${size}-${run}`});
 }
 
-const out = path.resolve(`results/core-1.2-distributed/${engine}`);
+const out = path.resolve(process.env.COBRIA_OUTPUT_DIR || `results/core-1.2-distributed/${engine}`);
 fs.mkdirSync(out,{recursive:true});
 const rows=[];
 try {

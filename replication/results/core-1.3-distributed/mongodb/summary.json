@@ -1,0 +1,25 @@
+{
+  "specification": "COBRIA Core 1.2",
+  "engine": "mongodb",
+  "runs": 1,
+  "configuration": {
+    "runs": 1,
+    "sizes": [
+      30
+    ]
+  },
+  "generatedAt": "2026-09-03T00:09:35.572Z",
+  "summary": [
+    {
+      "engine": "mongodb",
+      "size": 30,
+      "runs": 1,
+      "allPass": true,
+      "canonicalMedianMs": 20.28125,
+      "projectionMedianMs": 33.39795900000013,
+      "rebuildMedianMs": 80.6519159999998,
+      "writeAmplification": 2,
+      "foreignDocuments": 0
+    }
+  ]
+}

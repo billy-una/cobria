@@ -53,6 +53,7 @@ Los controles exploratorios con SQLite y PostgreSQL se preservan únicamente en
 - SBOM: `npm run sbom` genera `SBOM.cdx.json` desde `package-lock.json`.
 - Integración con clúster, ACL del motor, red y servicios administrados: pendiente de infraestructura externa.
 - OpenSearch recupera listados grandes mediante paginación `search_after`; la prueba local cubre más de 10.000 documentos.
+- `run-distributed-core12.mjs` acepta `COBRIA_OUTPUT_DIR` para no sobrescribir resultados históricos.
 
 Los perfiles CQRS, Event Sourcing e índice especializado se conservan como controles
 experimentales; no se presentan como implementaciones industriales equivalentes.
