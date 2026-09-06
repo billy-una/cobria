@@ -23,6 +23,69 @@ jobs:
       - run: npm run sbom
       - run: node -e "const s=require('./SBOM.cdx.json'); if(s.bomFormat!=='CycloneDX'||!s.components.length) process.exit(1)"
 
+  distributed-integration:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        engine: [mongodb, couchdb, opensearch]
+    defaults:
+      run:
+        working-directory: replication
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: replication/package-lock.json
+      - run: npm ci
+      - name: Start ${{ matrix.engine }}
+        run: docker compose -f infrastructure/docker-compose.core12.yml up -d ${{ matrix.engine }}
+      - name: Wait for MongoDB and initialize replica set
+        if: matrix.engine == 'mongodb'
+        shell: bash
+        run: |
+          for i in {1..60}; do
+            if docker compose -f infrastructure/docker-compose.core12.yml exec -T mongodb mongosh --quiet --eval "db.adminCommand('ping').ok" | grep -q 1; then break; fi
+            sleep 2
+          done
+          docker compose -f infrastructure/docker-compose.core12.yml exec -T mongodb mongosh --quiet --eval "try { rs.status().ok } catch (e) { rs.initiate({_id:'rs0',members:[{_id:0,host:'localhost:27017'}]}).ok }"
+          for i in {1..60}; do
+            if docker compose -f infrastructure/docker-compose.core12.yml exec -T mongodb mongosh --quiet --eval "db.hello().isWritablePrimary" | grep -q true; then exit 0; fi
+            sleep 2
+          done
+          exit 1
+      - name: Wait for CouchDB
+        if: matrix.engine == 'couchdb'
+        shell: bash
+        run: |
+          for i in {1..60}; do curl -fsS -u cobria:cobria_local_only http://127.0.0.1:5984/_up && exit 0 || sleep 2; done
+          exit 1
+      - name: Wait for OpenSearch
+        if: matrix.engine == 'opensearch'
+        shell: bash
+        run: |
+          for i in {1..90}; do curl -fsS http://127.0.0.1:9200/_cluster/health && exit 0 || sleep 2; done
+          exit 1
+      - name: Run distributed conformance smoke test
+        env:
+          COBRIA_ENGINE: ${{ matrix.engine }}
+          COBRIA_RUNS: "1"
+          COBRIA_SIZES: "30"
+          COBRIA_OUTPUT_DIR: ${{ runner.temp }}/cobria-${{ matrix.engine }}
+          MONGODB_URL: mongodb://127.0.0.1:27017/?replicaSet=rs0
+          COUCHDB_URL: http://127.0.0.1:5984
+          COUCHDB_USER: cobria
+          COUCHDB_PASSWORD: cobria_local_only
+          OPENSEARCH_URL: http://127.0.0.1:9200
+        run: node scripts/run-distributed-core12.mjs
+      - name: Show service logs on failure
+        if: failure()
+        run: docker compose -f infrastructure/docker-compose.core12.yml logs --no-color ${{ matrix.engine }}
+      - if: always()
+        run: docker compose -f infrastructure/docker-compose.core12.yml down -v
+
   package-integrity:
     runs-on: ubuntu-latest
     steps:
