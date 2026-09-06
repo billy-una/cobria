@@ -23,6 +23,8 @@
     "failure-bank:core12": "node scripts/run-failure-bank-core12.mjs",
     "concurrency:core12": "node scripts/run-concurrency-core12.mjs",
     "distributed:core12": "node scripts/run-distributed-core12.mjs",
+    "phase2:confirmatory": "node scripts/run-phase2-confirmatory.mjs",
+    "phase3:confirmatory": "node scripts/run-phase3-confirmatory.mjs",
     "ai-eval": "node scripts/run-ai-evaluation.mjs",
     "longitudinal": "node scripts/analyze-longitudinal.mjs",
     "context-figures": "python3 analysis/generate_context_figures.py"
