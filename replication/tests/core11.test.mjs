@@ -9,11 +9,20 @@ test("documento exige ámbito, identidad y revisión", () => {
   assert.throws(() => documentoCobria({id:"x",scope:"sur",revision:0}), /REV-001/);
 });
 
-test("repositorio rechaza regresión de revisión", async () => {
+test("huella usa serialización canónica independiente del orden de propiedades", () => {
+  assert.equal(huella({b:2,a:{d:4,c:3}}), huella({a:{c:3,d:4},b:2}));
+  assert.notEqual(huella({a:1}), huella({a:2}));
+});
+
+test("repositorio rechaza regresión y conflicto dentro de la misma revisión", async () => {
   const adapter = new LokiJsAdapter();
   const repo = new RepositorioCobria(adapter);
   await repo.guardar({id:"ave-1",scope:"bosque-sur",revision:2,species:"colibrí"});
   await assert.rejects(() => repo.guardar({id:"ave-1",scope:"bosque-sur",revision:1}), /REV-001/);
+  await assert.rejects(() => repo.guardar({id:"ave-1",scope:"bosque-sur",revision:2,species:"quetzal"}), /REV-002/);
+  const before = adapter.snapshot().writes;
+  await repo.guardar({id:"ave-1",scope:"bosque-sur",revision:2,species:"colibrí"});
+  assert.equal(adapter.snapshot().writes, before, "repetir exactamente la revisión es idempotente");
   await adapter.close();
 });
 
@@ -53,12 +62,24 @@ test("publicador cambia versión y permite rollback sin aceptar candidata corrup
   await adapter.close();
 });
 
+test("CAS rechaza escritor con revisión de catálogo obsoleta", async () => {
+  const adapter = new LokiJsAdapter();
+  const first = {id:"busqueda",scope:"sur",revision:1,active:"v1",previous:null};
+  assert.equal(await adapter.compareAndSwap("publication-catalog","sur","busqueda",null,first), true);
+  const second = {...first,revision:2,active:"v2",previous:"v1"};
+  assert.equal(await adapter.compareAndSwap("publication-catalog","sur","busqueda",1,second), true);
+  const stale = {...first,revision:2,active:"v3",previous:"v1"};
+  assert.equal(await adapter.compareAndSwap("publication-catalog","sur","busqueda",1,stale), false);
+  assert.equal((await adapter.list("publication-catalog","sur"))[0].active, "v2");
+  await adapter.close();
+});
+
 test("fallo al publicar conserva la versión activa anterior", async () => {
   class FailingCatalogAdapter extends LokiJsAdapter {
     constructor() { super(); this.failCatalog = false; }
-    async put(kind, scope, id, value) {
+    async compareAndSwap(kind, scope, id, expectedRevision, value) {
       if (this.failCatalog && kind === "publication-catalog") throw new Error("injected publication failure");
-      return super.put(kind, scope, id, value);
+      return super.compareAndSwap(kind, scope, id, expectedRevision, value);
     }
   }
   const adapter = new FailingCatalogAdapter();
@@ -79,4 +100,19 @@ test("autorizador separa permisos de lectura y escritura por ámbito", () => {
   assert.equal(auth.exigir("lector", "sur", "read"), true);
   assert.throws(() => auth.exigir("lector", "sur", "write"), /AUTH-001/);
   assert.throws(() => auth.exigir("lector", "norte", "read"), /AUTH-001/);
+});
+
+test("repositorio y publicador aplican autorización, no solo el helper", async () => {
+  const adapter = new LokiJsAdapter();
+  const auth = new AutorizadorAmbito({ lector:["read:sur"], operador:["write:sur","read:sur","publish:sur","rollback:sur"] });
+  const readonly = new RepositorioCobria(adapter, {authorizer:auth, principal:"lector"});
+  await assert.rejects(() => readonly.guardar({id:"x",scope:"sur",revision:1}), /AUTH-001/);
+  const repo = new RepositorioCobria(adapter, {authorizer:auth, principal:"operador"});
+  await repo.guardar({id:"x",scope:"sur",revision:1});
+  assert.equal((await repo.listar("sur")).length, 1);
+  const publisher = new PublicadorVersionado(adapter, {name:"busqueda",authorizer:auth,principal:"lector"});
+  await adapter.put("candidate-v1","sur","x",{id:"x",scope:"sur",revision:1});
+  const hash = huella(await adapter.list("candidate-v1","sur"));
+  await assert.rejects(() => publisher.publicar("sur","candidate-v1",{version:"v1",expectedHash:hash}), /AUTH-001/);
+  await adapter.close();
 });
