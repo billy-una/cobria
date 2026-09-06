@@ -31,6 +31,23 @@ export class CouchDbAdapter {
     this.metrics.writes++;
     this.metrics.bytesWritten += Buffer.byteLength(JSON.stringify(value));
   }
+  async compareAndSwap(kind, scope, id, expectedRevision, value) {
+    const safeScope = exigirCoincidenciaAmbito(scope, value);
+    const _id = this.key(kind, safeScope, id);
+    const currentResponse = await this.fetch(`${this.base}/${encodeURIComponent(_id)}`, {headers:this.headers()});
+    let current = null;
+    if (currentResponse.ok) current = await currentResponse.json();
+    else if (currentResponse.status !== 404) throw new Error(`CouchDB ${currentResponse.status}: ${await currentResponse.text()}`);
+    const actualRevision = current?.payload?.revision ?? null;
+    if (actualRevision !== expectedRevision) return false;
+    const body = JSON.stringify({_id, ...(current?._rev ? {_rev:current._rev} : {}), kind, scope:safeScope, payload:value});
+    const response = await this.fetch(`${this.base}/${encodeURIComponent(_id)}`, {method:"PUT", headers:this.headers(), body});
+    if (response.status === 409) return false;
+    if (!response.ok) throw new Error(`CouchDB ${response.status}: ${await response.text()}`);
+    this.metrics.writes++;
+    this.metrics.bytesWritten += Buffer.byteLength(JSON.stringify(value));
+    return true;
+  }
   async putMany(kind, scope, values) {
     const safeScope=exigirAmbito(scope);
     values.forEach(value=>exigirCoincidenciaAmbito(safeScope,value));
