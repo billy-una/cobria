@@ -188,7 +188,10 @@ test('la partición analítica rechaza fuga de una misma entidad', () => {
     { ...entrada, entidadId:'ave-1', conocidaEn:'2026-09-04T11:00:00Z', consentimientoAnalitico:true },
     { ...entrada, id:'obs-2', entidadId:'ave-1', observadaEn:'2026-10-01T10:00:00Z', conocidaEn:'2026-09-05T11:00:00Z', consentimientoAnalitico:true },
   ];
-  assert.throws(() => construirConjuntoAnalitico({ documentos, ambito:'bosque-a', corteTemporal:'2026-09-30T23:59:59Z', transformacion:{ nombre:'rasgos', version:'1' }, calcularHuella:calcularHuellaSha256 }), /ENTITY_LEAKAGE/);
+  assert.throws(
+    () => construirConjuntoAnalitico({ documentos, ambito:'bosque-a', corteTemporal:'2026-09-30T23:59:59Z', transformacion:{ nombre:'rasgos', version:'1' }, calcularHuella:calcularHuellaSha256 }),
+    error => error?.codigo === 'ANALYTICS_ENTITY_LEAKAGE',
+  );
 });
 
 test('la recuperación filtra ámbito antes de similitud y cita revisiones', async () => {

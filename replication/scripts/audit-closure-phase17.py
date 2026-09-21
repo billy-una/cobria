@@ -29,6 +29,7 @@ def sha(path: Path) -> str:
 
 execute("cierre-14-15", ["make", "verificar-cierre-14-15"])
 execute("replication-tests", ["npm", "test"], ROOT / "replication")
+execute("reference-application-tests", ["npm", "test"], ROOT / "replication" / "examples" / "ecosistema-app")
 execute("site-lint", ["npm", "run", "lint"], ROOT / "sitio")
 execute("site-tests", ["node", "--test", "tests/rendered-html.test.mjs"], ROOT / "sitio")
 
