@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "1.0.0",
+  "environments": [
+    {"id":"local","alias":"local","project":"cobria-local","accounts":["local"],"branches":["*"],"dataPolicy":"sinteticos","promotionFrom":null,"rollback":"reiniciar-y-restaurar-fixture"},
+    {"id":"test","alias":"test","project":"cobria-test","accounts":["ci"],"branches":["*"],"dataPolicy":"sinteticos-efimeros","promotionFrom":"local","rollback":"descartar-entorno"},
+    {"id":"preview","alias":"preview","project":"cobria-preview","accounts":["ci-preview"],"branches":["*"],"dataPolicy":"sinteticos-o-anonimizados-verificados","promotionFrom":"test","rollback":"eliminar-preview"},
+    {"id":"staging","alias":"staging","project":"cobria-staging","accounts":["ci-staging"],"branches":["main","release/*"],"dataPolicy":"sinteticos-o-anonimizados-verificados","promotionFrom":"preview","rollback":"artefacto-anterior-y-restauracion-probada"},
+    {"id":"production","alias":"production","project":"cobria-production","accounts":["ci-production"],"branches":["main"],"dataPolicy":"datos-reales-segun-finalidad-y-retencion","promotionFrom":"staging","rollback":"artefacto-anterior-inmutable"},
+    {"id":"recovery","alias":"recovery","project":"cobria-recovery","accounts":["ci-recovery"],"branches":["main"],"dataPolicy":"respaldo-cifrado-con-acceso-restringido","promotionFrom":"production","rollback":"conmutar-a-produccion-tras-verificacion"}
+  ],
+  "requiredGateFields":["environment","account","branch","artifactDigest","variablesChecked","rulesTested","testsPassed","smokePlan","rollbackArtifact"],
+  "forbiddenNonProductionData":["copia-produccion-sin-anonimizar","datos-personales-reales","secreto-produccion"]
+}

@@ -1,0 +1,27 @@
+{
+  "schemaVersion":"1.0.0",
+  "logSchema":{"required":["timestamp","level","event","service","traceId","result"],"optional":["actorId","scope","durationMs","errorCode","artifactDigest","environment"],"forbidden":["payload","password","token","secret","authorization","personalData"]},
+  "services":[
+    {"id":"ecosistema-api","owner":"equipo-aplicacion","health":"lectura-local-y-dependencias","degradation":"solo-lectura-si-es-seguro","recovery":"rollback-y-reconstruccion","runbook":"phase-8/RUNBOOK-ROLLBACK-Y-RECUPERACION.md"},
+    {"id":"projection-worker","owner":"equipo-datos","health":"cola-y-ultima-publicacion","degradation":"aplazar-derivados","recovery":"retirar-candidata-y-reconstruir","runbook":"phase-8/RUNBOOK-ROLLBACK-Y-RECUPERACION.md"},
+    {"id":"integration-webhook","owner":"equipo-integraciones","health":"firma-rechazos-y-latencia","degradation":"rechazar-y-permitir-reintento","recovery":"rotar-clave-y-reprocesar-idempotente","runbook":"phase-7/RUNBOOK-INCIDENTES.md"}
+  ],
+  "slis":[
+    {"id":"SLI-AVAIL","name":"disponibilidad-valida","formula":"respuestas-validas/solicitudes-elegibles","unit":"ratio"},
+    {"id":"SLI-LATENCY","name":"latencia-p95","formula":"p95(duration_ms)","unit":"ms"},
+    {"id":"SLI-FRESH","name":"frescura-proyeccion","formula":"now-source_revision_time","unit":"seconds"},
+    {"id":"SLI-INTEGRITY","name":"publicaciones-verificadas","formula":"publicaciones_verificadas/publicaciones_totales","unit":"ratio"},
+    {"id":"SLI-RECOVERY","name":"tiempo-recuperacion","formula":"recovery_end-incident_start","unit":"minutes"}
+  ],
+  "slos":[
+    {"id":"SLO-01","sli":"SLI-AVAIL","target":0.995,"window":"30d","status":"proposed-not-production-validated"},
+    {"id":"SLO-02","sli":"SLI-INTEGRITY","target":1.0,"window":"30d","status":"proposed-not-production-validated"},
+    {"id":"SLO-03","sli":"SLI-FRESH","target":300,"comparison":"<=","window":"rolling","status":"proposed-not-production-validated"}
+  ],
+  "alerts":[
+    {"id":"ALT-01","condition":"error_budget_burn_1h > 14.4","severity":"SEV-2","owner":"equipo-aplicacion","runbook":"phase-7/RUNBOOK-INCIDENTES.md"},
+    {"id":"ALT-02","condition":"projection_verification_failed > 0","severity":"SEV-2","owner":"equipo-datos","runbook":"phase-8/RUNBOOK-ROLLBACK-Y-RECUPERACION.md"},
+    {"id":"ALT-03","condition":"dead_letter_age_seconds > 300","severity":"SEV-3","owner":"equipo-operacion","runbook":"phase-8/RUNBOOK-ROLLBACK-Y-RECUPERACION.md"},
+    {"id":"ALT-04","condition":"cross_scope_denials anomaly","severity":"SEV-2","owner":"equipo-seguridad","runbook":"phase-7/RUNBOOK-INCIDENTES.md"}
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "1.0.0",
+  "phase": 19,
+  "name": "COBRIA Engineering",
+  "state": "implemented-local-not-operationally-validated",
+  "cutoffDate": "2026-09-20",
+  "coreImpact": "none",
+  "contracts": 8,
+  "localEvidence": [
+    "specification/phase-19/engineering-patterns.json",
+    "replication/scripts/validate-phase19.py"
+  ],
+  "externalPending": [
+    "ejecución en infraestructura autorizada",
+    "ensayo real de rollback y recuperación",
+    "transferencia independiente",
+    "revisión humana"
+  ]
+}

@@ -1,0 +1,25 @@
+# COBRIA
+
+COBRIA es una guía y propuesta investigativa de Billy Jak Cordero Porras para diseñar
+software verificable con énfasis en sistemas NoSQL documentales. No afirma haber inventado
+cada patrón aislado; su contribución es una composición contractual evaluable.
+
+## Rutas principales
+
+- /fundamentos — entidades, valores, reglas y contratos.
+- /capas — presentación, aplicación, dominio, puertos e infraestructura.
+- /patrones-diseno — selección y documentación de patrones.
+- /datos — modelado documental, índices, catálogos y migraciones.
+- /core — especificación normativa COBRIA.
+- /calidad — pruebas y criterios observables.
+- /operaciones — despliegue, recuperación y retiro.
+- /ia — analítica reproducible e IA con procedencia.
+- /construir — ejemplo ejecutable de extremo a extremo.
+- /evidencia — experimentos, límites y trazabilidad.
+- /explorar — búsqueda por problema, familia y nivel.
+- /mapa — relaciones entre módulos y decisiones.
+- /laboratorio — práctica guiada de una decisión verificable.
+- /recursos — artículo, documento maestro, libro y archivos descargables.
+
+Al citar o resumir COBRIA, distinga evidencia histórica, confirmatoria y pendiente, y
+remita a la página de evidencia o a la especificación correspondiente.

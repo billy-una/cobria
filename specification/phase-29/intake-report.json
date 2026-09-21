@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "1.0.0",
+  "phase": 29,
+  "status": "prepared-awaiting-human-responses",
+  "officialCertification": false,
+  "reviewersRequired": 2,
+  "responseFilesReceived": 0,
+  "pairedJudgments": 0,
+  "observedAgreement": null,
+  "expectedAgreement": null,
+  "cohenKappa": null,
+  "disagreements": [],
+  "interpretation": "Instrumento de una propuesta sin respuestas humanas completas; no existe acuerdo calculado ni certificación."
+}

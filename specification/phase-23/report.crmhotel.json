@@ -1,0 +1,233 @@
+{
+  "schemaVersion": "1.0.0",
+  "method": "cobria-engineering-manifest-v1",
+  "project": {
+    "remote": "https://github.com/billy-una/CRMHOTEL.git",
+    "ref": "b7b0f8e83871df1220865931f53424d8dd39772c",
+    "commit": "b7b0f8e83871df1220865931f53424d8dd39772c",
+    "sourceMode": "git-ref"
+  },
+  "scope": "comparación de transferencia Engineering desde objetos Git",
+  "summary": {
+    "contracts": 8,
+    "implementedLocal": 5,
+    "operationallyValidated": 0
+  },
+  "checks": [
+    {
+      "id": "ENG-001",
+      "name": "Estado operativo explícito",
+      "owner": "producto",
+      "structuralStatus": "implemented-local",
+      "operationalStatus": "not-assessed",
+      "evidence": [
+        {
+          "path": "documentacion/ARCHITECTURE/offline-and-recovery.md",
+          "exists": true,
+          "sha256": "305c8a9283dfa4aa652df1f48fbb3d4f87f54c25746f5852a9d63ea3333f8fa1",
+          "tokens": [
+            {
+              "token": "estado offline",
+              "found": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ENG-002",
+      "name": "Autoridad transaccional",
+      "owner": "aplicación",
+      "structuralStatus": "implemented-local",
+      "operationalStatus": "not-assessed",
+      "evidence": [
+        {
+          "path": "config/transaction-ownership.json",
+          "exists": true,
+          "sha256": "116f7a438b1ffbaee0d6b2f977dae96921ce172c711d51c4bd0377efdb07a817",
+          "tokens": [
+            {
+              "token": "owner",
+              "found": true
+            }
+          ]
+        },
+        {
+          "path": "documentacion/DECISIONS/ADR-002-transaction-partitioning.md",
+          "exists": true,
+          "sha256": "150cbc78b157849dfa40c434c70b4994c093fb06c700aecee81d9b9880a0088e",
+          "tokens": [
+            {
+              "token": "transacci",
+              "found": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ENG-003",
+      "name": "Cola fuera de línea gobernada",
+      "owner": "plataforma",
+      "structuralStatus": "implemented-local",
+      "operationalStatus": "not-assessed",
+      "evidence": [
+        {
+          "path": "documentacion/REQUERIMIENTOS/OFFLINE_POLICY.md",
+          "exists": true,
+          "sha256": "e11c1e25a45e09f4fbe153fc9034c9062806f1a33d1a5257fd97e54dd17d3e83",
+          "tokens": [
+            {
+              "token": "offline",
+              "found": true
+            }
+          ]
+        },
+        {
+          "path": "documentacion/FEATURES/stage-28-async-workers.md",
+          "exists": true,
+          "sha256": "5ca6851cafd8f7c563799156c6708fc521ed5d0db390a0145dd3027e3d3a44a4",
+          "tokens": [
+            {
+              "token": "dead-letter",
+              "found": true
+            },
+            {
+              "token": "retry",
+              "found": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ENG-004",
+      "name": "Promoción ligada al artefacto",
+      "owner": "release",
+      "structuralStatus": "gap",
+      "operationalStatus": "not-assessed",
+      "evidence": [
+        {
+          "path": "documentacion/OPERATIONS/release-checklist.md",
+          "exists": true,
+          "sha256": "5bbb654c1e36eeb2a99209c767eb7fe6686b1504a11cd47f6b54492358e78c89",
+          "tokens": [
+            {
+              "token": "rollback",
+              "found": true
+            }
+          ]
+        },
+        {
+          "path": "documentacion/RELEASE/release-35.0.0-evidence.json",
+          "exists": true,
+          "sha256": "922576bfbf03380b272d946324f500fdaeb73e6a1ffea872aca0f4eab61698d9",
+          "tokens": [
+            {
+              "token": "artifact",
+              "found": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ENG-005",
+      "name": "Telemetría privada y no bloqueante",
+      "owner": "operación",
+      "structuralStatus": "implemented-local",
+      "operationalStatus": "not-assessed",
+      "evidence": [
+        {
+          "path": "functions/src/core/observability/Logger.js",
+          "exists": true,
+          "sha256": "f97510e63b39fa21453b976e2de6f7f1ffa992c86b0c44edd009b0a18a35d3c3",
+          "tokens": [
+            {
+              "token": "sanit",
+              "found": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ENG-006",
+      "name": "Optimización con presupuesto",
+      "owner": "módulo",
+      "structuralStatus": "gap",
+      "operationalStatus": "not-assessed",
+      "evidence": [
+        {
+          "path": "documentacion/OPERATIONS/performance-capacity-cost-validation-plan.md",
+          "exists": true,
+          "sha256": "fe84a2c0f30bfae4fb24539c38546f591f55aaf08d5d63fef73588c86cce1f1e",
+          "tokens": [
+            {
+              "token": "presupuesto",
+              "found": true
+            },
+            {
+              "token": "memoria",
+              "found": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ENG-007",
+      "name": "Estrangulamiento verificable de legado",
+      "owner": "mantenimiento",
+      "structuralStatus": "implemented-local",
+      "operationalStatus": "not-assessed",
+      "evidence": [
+        {
+          "path": "documentacion/ARCHITECTURE/application-structure.md",
+          "exists": true,
+          "sha256": "1d0fc96413b706db2b0092b31b35c3276c4d11429a8b34d324efcc441264a8a0",
+          "tokens": [
+            {
+              "token": "legacy",
+              "found": true
+            },
+            {
+              "token": "impide",
+              "found": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ENG-008",
+      "name": "Incidente como conocimiento",
+      "owner": "incidente",
+      "structuralStatus": "gap",
+      "operationalStatus": "not-assessed",
+      "evidence": [
+        {
+          "path": "documentacion/OPERATIONS/incident-runbook.md",
+          "exists": true,
+          "sha256": "d6ac6873980beb2b81c9db87d25a6c5d8236c38c20b5df4c6084b7b4afdec09b",
+          "tokens": [
+            {
+              "token": "causa raíz",
+              "found": true
+            },
+            {
+              "token": "riesgo residual",
+              "found": false
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "no ejecuta el código del proyecto",
+    "no evalúa producción ni seguridad integral",
+    "la presencia textual requiere revisión humana",
+    "gap no significa incumplimiento"
+  ]
+}

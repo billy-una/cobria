@@ -1,0 +1,62 @@
+{
+  "schemaVersion": "1.0.0",
+  "reviewerCode": "R-QAOPS",
+  "sample": "M-03",
+  "conflictStatement": "Declaro que realicé esta revisión personalmente, de forma independiente, sin participación en COBRIA ni coordinación con el otro revisor.",
+  "decisions": [
+    {
+      "id": "ENG-001",
+      "decision": "supported",
+      "confidence": 4,
+      "rationale": "UIStateManager declara un conjunto cerrado de estados y códigos de error y centraliza su representación. El mecanismo existe, aunque el fragmento no demuestra su adopción por todas las pantallas."
+    },
+    {
+      "id": "ENG-002",
+      "decision": "insufficient",
+      "confidence": 2,
+      "rationale": "La función compone teamId y metadatos de autorización, pero no se observa ninguna operación transaccional, control de concurrencia, idempotencia o decisión autoritativa sobre una mutación."
+    },
+    {
+      "id": "ENG-003",
+      "decision": "insufficient",
+      "confidence": 3,
+      "rationale": "La cola distingue pending, syncing, failed y synced y persiste en localStorage, pero el fragmento no demuestra backoff, número máximo de intentos, expiración, dead-letter ni resolución de conflictos."
+    },
+    {
+      "id": "ENG-004",
+      "decision": "insufficient",
+      "confidence": 2,
+      "rationale": "La evidencia es principalmente un checklist y una referencia a documentación externa; no muestra SHA, digest, firma o registro que ate inequívocamente verificación, despliegue y rollback al mismo artefacto."
+    },
+    {
+      "id": "ENG-005",
+      "decision": "insufficient",
+      "confidence": 3,
+      "rationale": "Se observan truncado, normalización y hashing, útiles para privacidad, pero no hay evidencia de exclusión de PII completa ni de que fallas al registrar telemetría no bloqueen la solicitud principal."
+    },
+    {
+      "id": "ENG-006",
+      "decision": "supported",
+      "confidence": 5,
+      "rationale": "El script mide el tamaño agregado por ruta y compara contra un límite configurado, estableciendo fallo cuando se excede. Es un presupuesto con enforcement directo."
+    },
+    {
+      "id": "ENG-007",
+      "decision": "insufficient",
+      "confidence": 3,
+      "rationale": "El documento prohíbe crecimiento y funcionalidad nueva en el archivo legacy, pero en este fragmento no se muestra el architecture audit ni una prueba que haga cumplir ese budget automáticamente."
+    },
+    {
+      "id": "ENG-008",
+      "decision": "insufficient",
+      "confidence": 2,
+      "rationale": "El fragmento se concentra en identidades lógicas y físicas de servicios. No contiene evidencia visible de incidente, causa raíz, acciones correctivas, no regresión o riesgo residual."
+    }
+  ],
+  "recommendation": "revise-manifest",
+  "attestation": {
+    "type": "human",
+    "date": "2026-09-20",
+    "independentWork": true
+  }
+}

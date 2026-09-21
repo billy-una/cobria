@@ -1,0 +1,17 @@
+{
+  "$id": "https://cobria.example.invalid/schemas/data-dictionary.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "allOf": [
+    {
+      "$ref": "manifest.schema.json"
+    },
+    {
+      "properties": {
+        "manifestId": {
+          "const": "cobria-data-dictionary"
+        }
+      }
+    }
+  ],
+  "title": "Esquema data-dictionary COBRIA"
+}

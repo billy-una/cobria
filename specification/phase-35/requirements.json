@@ -1,0 +1,1 @@
+{"phase":35,"status":"proposal","requirements":[{"id":"P35-REQ-001","owner":"release","acceptance":"manifiesto determinista con huellas SHA-256","test":"replication/tests/phase32-36-research-closure.test.mjs"},{"id":"P35-REQ-002","owner":"release","acceptance":"candidato no firmado ni publicado","test":"replication/scripts/validate-phase35.py"}]}

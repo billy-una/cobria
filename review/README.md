@@ -12,6 +12,6 @@ Para preservar independencia:
 
 Estado actual: **manuscrito ciego y solicitud preparados; revisión externa todavía no recibida**.
 
-El PDF ciego se genera desde `blind-main.tex`. Antes de remitirlo, una persona
+El PDF ciego se genera desde `review/blind-article.tex`. Antes de remitirlo, una persona
 intermediaria debe comprobar metadatos, agradecimientos, rutas y cualquier referencia
 indirecta que pueda revelar la identidad.

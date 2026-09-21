@@ -1,0 +1,11 @@
+{
+  "version": "1.0.0",
+  "scope": "comparación algorítmica local neutral",
+  "seed": 20260919,
+  "workload": { "sizes": [1000, 10000, 50000], "runs": 30, "warmupRuns": 5, "order": "aleatorio determinista por tamaño y repetición" },
+  "strategies": ["single-document", "native-index", "materialized-view", "cqrs", "events", "projection-without-contract", "cobria"],
+  "metrics": ["queryMs", "buildMs", "recoveryMs", "cpuMs", "memoryBytes", "storageBytes", "writeAmplification", "workProxy"],
+  "statistics": ["p50", "p95", "p99", "mad", "iqr"],
+  "controlledVariables": ["dataset", "query", "process", "runtime", "run-count", "seed", "warmup-count"],
+  "limitations": ["no network", "single process", "no managed-service billing", "no direct energy meter", "memory deltas are noisy"]
+}

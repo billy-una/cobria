@@ -1,0 +1,79 @@
+{
+  "schemaVersion": "1.0.0",
+  "method": "cobria-dimensional-evidence-v1",
+  "project": {
+    "commit": "b7b0f8e83871df1220865931f53424d8dd39772c",
+    "sourceMode": "git-ref"
+  },
+  "contract": "ENG-007",
+  "dimensions": [
+    {
+      "id": "boundary",
+      "description": "frontera explícita del legado",
+      "satisfied": true,
+      "evidence": [
+        {
+          "path": "documentacion/ARCHITECTURE/domain-layer.md",
+          "exists": true,
+          "sha256": "fbca60db5f6beb1190bbfefbadfe3c76cbdcf5fd7e92844e86a7817c7b3fb906",
+          "tokens": [
+            {
+              "token": "shims",
+              "found": true
+            },
+            {
+              "token": "bloquea imports legacy",
+              "found": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "no-growth",
+      "description": "control verificable contra crecimiento",
+      "satisfied": true,
+      "evidence": [
+        {
+          "path": "tools/check-naming-governance.mjs",
+          "exists": true,
+          "sha256": "834ae21cad58a2f76ae350263cee2515209d216ba8b793f2b1de8872f05a3a0c",
+          "tokens": [
+            {
+              "token": "legacy",
+              "found": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "retirement",
+      "description": "condición o ruta de retiro",
+      "satisfied": false,
+      "evidence": [
+        {
+          "path": "documentacion/ARCHITECTURE/generated-artifacts.md",
+          "exists": true,
+          "sha256": "3872442ccb8dd5c86de801d0f43b65ad0d7b11929d613ac6835856371a006a3a",
+          "tokens": [
+            {
+              "token": "condición de retiro",
+              "found": false
+            },
+            {
+              "token": "eliminar shim",
+              "found": false
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "required": 3,
+    "satisfied": 2,
+    "strictStatus": "insufficient-structural"
+  },
+  "interpretation": "Resultado estructural de una propuesta; no certifica operación, calidad ni conformidad oficial."
+}

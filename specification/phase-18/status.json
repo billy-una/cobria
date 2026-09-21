@@ -1,0 +1,16 @@
+{
+  "schemaVersion": "1.0.0",
+  "phase": 18,
+  "state": "prepared-not-externally-validated",
+  "cutoffDate": "2026-09-20",
+  "milestones": [
+    {"id": "P18-LOCAL", "name": "conformidad y construcción local", "status": "executed", "evidence": ["Makefile", "AUDITORIA-FASE-17.md"]},
+    {"id": "P18-REVIEW", "name": "revisión humana independiente", "status": "pending-human", "evidence": []},
+    {"id": "P18-SCREENING", "name": "doble cribado bibliográfico", "status": "pending-human", "evidence": []},
+    {"id": "P18-TRANSFER", "name": "estudio de transferencia con participantes", "status": "pending-ethics-and-participants", "evidence": []},
+    {"id": "P18-REPLICATION", "name": "réplica externa en otra computadora", "status": "pending-external", "evidence": []},
+    {"id": "P18-SIGN", "name": "release firmado", "status": "pending-authorized-human", "evidence": []},
+    {"id": "P18-DOI", "name": "archivo público y DOI", "status": "pending-external-service", "evidence": []},
+    {"id": "P18-LICENSE", "name": "licencia pública confirmada", "status": "executed", "evidence": ["LICENSES.md"], "attestedBy": {"type": "human", "name": "Billy Jak Cordero Porras", "date": "2026-09-20"}}
+  ]
+}

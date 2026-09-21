@@ -1,0 +1,16 @@
+{
+  "schemaVersion": "1.0.0",
+  "phase": 19,
+  "module": "COBRIA Engineering",
+  "coreImpact": "none",
+  "patterns": [
+    {"id":"ENG-001","name":"Estado operativo explícito","problem":"la interfaz oculta carga, error o repetición","contract":"reposo-carga-exito-vacio-error-reintento y un efecto por acción","evidence":"prueba de componente, teclado y E2E","cost":"más estados y pruebas","retirement":"no aplica mientras exista interacción asíncrona","owner":"producto"},
+    {"id":"ENG-002","name":"Autoridad transaccional","problem":"el cliente decide identidad, ámbito o cifras críticas","contract":"derivar-validar-idempotencia-aplicar-auditar","evidence":"contrato, aislamiento e integración","cost":"viaje y lógica de servidor","retirement":"solo al dejar de ser crítica la operación","owner":"aplicación"},
+    {"id":"ENG-003","name":"Cola fuera de línea gobernada","problem":"reintentos ilimitados o efectos peligrosos sin conexión","contract":"clasificación, preflight, capacidad, TTL, intentos, backoff y dead-letter","evidence":"inyección de fallos y política","cost":"almacenamiento y soporte operacional","retirement":"cuando no exista requisito offline","owner":"plataforma"},
+    {"id":"ENG-004","name":"Promoción ligada al artefacto","problem":"staging prueba algo distinto de producción","contract":"un digest, evidencia del SHA, aprobación, humo y rollback","evidence":"gate de release","cost":"almacenamiento y disciplina de promoción","retirement":"no aplica mientras exista entrega a ambientes","owner":"release"},
+    {"id":"ENG-005","name":"Telemetría privada y no bloqueante","problem":"observar filtra datos o interrumpe negocio","contract":"muestreo y cola acotados, atributos sanitizados y degradación segura","evidence":"contrato de campos y fallo de transporte","cost":"agregación y pérdida deliberada de detalle","retirement":"cuando el componente se retira","owner":"operación"},
+    {"id":"ENG-006","name":"Optimización con presupuesto","problem":"cambios rápidos sin línea base aumentan costo o complejidad","contract":"medir-causa-cambio mínimo-verificar-documentar","evidence":"benchmark reproducible y presupuesto","cost":"instrumentación y tiempo de análisis","retirement":"retirar mecanismo cuando el beneficio no supera el costo","owner":"módulo"},
+    {"id":"ENG-007","name":"Estrangulamiento verificable de legado","problem":"un módulo heredado sigue creciendo durante su migración","contract":"no-growth, frontera, consumidores, presupuesto y salida","evidence":"gate de imports, tamaño y consumidores","cost":"convivencia temporal","retirement":"eliminar al llegar a cero consumidores","owner":"mantenimiento"},
+    {"id":"ENG-008","name":"Incidente como conocimiento","problem":"la corrección se pierde y el fallo reaparece","contract":"síntoma-causa-impacto-solución-verificación-riesgo-revisión","evidence":"registro enlazado a prueba","cost":"disciplina documental","retirement":"conservar según política de retención","owner":"incidente"}
+  ]
+}

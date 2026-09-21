@@ -1,0 +1,1293 @@
+{
+  "schemaVersion": "1.0.0",
+  "phase": 27,
+  "status": "proposal-evidence-dossier",
+  "officialCertification": false,
+  "method": "cobria-engineering-dimensional-review-queue-v1",
+  "assessments": [
+    {
+      "id": "posguapiles",
+      "source": {
+        "remote": "https://github.com/billy-una/posguapiles.git",
+        "commit": "ae8d63ce535ecff40059b49d8b8c9f050c353d96",
+        "mode": "git-ref"
+      },
+      "contracts": [
+        {
+          "id": "ENG-001",
+          "sourceStructuralStatus": "implemented-local",
+          "dimensions": [
+            {
+              "id": "states",
+              "decision": "pending-semantic-review",
+              "candidateEvidence": [
+                {
+                  "path": "src/public/presentationLayer/js/services/PageStateService.js",
+                  "sha256": "98b367fd88c82616a67dc781e3b0357ab1e23f3a3e3a58b11cb08a7f583270b8",
+                  "observedTokens": [
+                    "loading",
+                    "empty",
+                    "error"
+                  ]
+                }
+              ],
+              "rationale": "La evidencia de nivel contrato debe revisarse contra el criterio específico de esta dimensión."
+            },
+            {
+              "id": "transitions",
+              "decision": "pending-semantic-review",
+              "candidateEvidence": [
+                {
+                  "path": "src/public/presentationLayer/js/services/PageStateService.js",
+                  "sha256": "98b367fd88c82616a67dc781e3b0357ab1e23f3a3e3a58b11cb08a7f583270b8",
+                  "observedTokens": [
+                    "loading",
+                    "empty",
+                    "error"
+                  ]
+                }
+              ],
+              "rationale": "La evidencia de nivel contrato debe revisarse contra el criterio específico de esta dimensión."
+            },
+            {
+              "id": "recovery",
+              "decision": "pending-semantic-review",
+              "candidateEvidence": [
+                {
+                  "path": "src/public/presentationLayer/js/services/PageStateService.js",
+                  "sha256": "98b367fd88c82616a67dc781e3b0357ab1e23f3a3e3a58b11cb08a7f583270b8",
+                  "observedTokens": [
+                    "loading",
+                    "empty",
+                    "error"
+                  ]
+                }
+              ],
+              "rationale": "La evidencia de nivel contrato debe revisarse contra el criterio específico de esta dimensión."
+            }
+          ]
+        },
+        {
+          "id": "ENG-002",
+          "sourceStructuralStatus": "implemented-local",
+          "dimensions": [
+            {
+              "id": "trusted-context",
+              "decision": "pending-semantic-review",
+              "candidateEvidence": [
+                {
+                  "path": "functions/handlers/commit-sale.js",
+                  "sha256": "c25129180d3daa0a4e2670d1f8d0cb3423c7e896b98bf9aa45072c3499afad54",
+                  "observedTokens": [
+                    "requestId",
+                    "scope"
+                  ]
+                }
+              ],
+              "rationale": "La evidencia de nivel contrato debe revisarse contra el criterio específico de esta dimensión."
+            },
+            {
+              "id": "single-effect",
+              "decision": "pending-semantic-review",
+              "candidateEvidence": [
+                {
+                  "path": "functions/handlers/commit-sale.js",
+                  "sha256": "c25129180d3daa0a4e2670d1f8d0cb3423c7e896b98bf9aa45072c3499afad54",
+                  "observedTokens": [
+                    "requestId",
+                    "scope"
+                  ]
+                }
+              ],
+              "rationale": "La evidencia de nivel contrato debe revisarse contra el criterio específico de esta dimensión."
+            },
+            {
+              "id": "traceable-output",
+              "decision": "pending-semantic-review",
+              "candidateEvidence": [
+                {
+                  "path": "functions/handlers/commit-sale.js",
+                  "sha256": "c25129180d3daa0a4e2670d1f8d0cb3423c7e896b98bf9aa45072c3499afad54",
+                  "observedTokens": [
+                    "requestId",
+                    "scope"
+                  ]
+                }
+              ],
+              "rationale": "La evidencia de nivel contrato debe revisarse contra el criterio específico de esta dimensión."
+            }
+          ]
+        },
+        {
+          "id": "ENG-003",
+          "sourceStructuralStatus": "implemented-local",
+          "dimensions": [
+            {
+              "id": "declared-policy",
+              "decision": "pending-semantic-review",
+              "candidateEvidence": [
+                {
+                  "path": "src/public/dataLayer/offline/OfflinePolicy.js",
+                  "sha256": "6b8e2d3b1952d594987c5a08ee994f875aefacdb73f3fc9f7127a8b86bb79836",
+                  "observedTokens": [
+                    "online-only"
+                  ]
+                },
+                {
+                  "path": "test/offline-resilience.test.mjs",
+                  "sha256": "7a059935c8fb581a03dc5c0e4462c8e770ca46bbf828a8e904c1471f862e3b8e",
+                  "observedTokens": [
+                    "dead"
+                  ]
+                }
+              ],
+              "rationale": "La evidencia de nivel contrato debe revisarse contra el criterio específico de esta dimensión."
+            },
+            {
+              "id": "bounded-retry",
+              "decision": "pending-semantic-review",
+              "candidateEvidence": [
+                {
+                  "path": "src/public/dataLayer/offline/OfflinePolicy.js",
+                  "sha256": "6b8e2d3b1952d594987c5a08ee994f875aefacdb73f3fc9f7127a8b86bb79836",
+                  "observedTokens": [
+                    "online-only"
+                  ]
+                },
+                {
+                  "path": "test/offline-resilience.test.mjs",
+                  "sha256": "7a059935c8fb581a03dc5c0e4462c8e770ca46bbf828a8e904c1471f862e3b8e",
+                  "observedTokens": [
+                    "dead"
+                  ]
+                }
+              ],
+              "rationale": "La evidencia de nivel contrato debe revisarse contra el criterio específico de esta dimensión."
+            },
+            {
+              "id": "visible-recovery",
+              "decision": "pending-semantic-review",
+              "candidateEvidence": [
+                {
+                  "path": "src/public/dataLayer/offline/OfflinePolicy.js",
+                  "sha256": "6b8e2d3b1952d594987c5a08ee994f875aefacdb73f3fc9f7127a8b86bb79836",
+                  "observedTokens": [
+                    "online-only"
+                  ]
+                },
+                {
+                  "path": "test/offline-resilience.test.mjs",
+                  "sha256": "7a059935c8fb581a03dc5c0e4462c8e770ca46bbf828a8e904c1471f862e3b8e",
+                  "observedTokens": [
+                    "dead"
+                  ]
+                }
+              ],
+              "rationale": "La evidencia de nivel contrato debe revisarse contra el criterio específico de esta dimensión."
+            }
+          ]
+        },
+        {
+          "id": "ENG-004",
+          "sourceStructuralStatus": "implemented-local",
+          "dimensions": [
+            {
+              "id": "immutable-artifact",
+              "decision": "pending-semantic-review",
+              "candidateEvidence": [
+                {
+                  "path": "documentacion/OPERATIONS/RELEASE_PROMOTION_RUNBOOK.md",
+                  "sha256": "9ab3b524d7a37a7f101cd9e0616966ea4cae56227d73ee5d072ba51f6aa2a735",
+                  "observedTokens": [
+                    "SHA",
+                    "rollback"
+                  ]
+                }
+              ],
+              "rationale": "La evidencia de nivel contrato debe revisarse contra el criterio específico de esta dimensión."
+            },
+            {
+              "id": "promotion-gates",
+              "decision": "pending-semantic-review",
+              "candidateEvidence": [
+                {
+                  "path": "documentacion/OPERATIONS/RELEASE_PROMOTION_RUNBOOK.md",
+                  "sha256": "9ab3b524d7a37a7f101cd9e0616966ea4cae56227d73ee5d072ba51f6aa2a735",
+                  "observedTokens": [
+                    "SHA",
+                    "rollback"
+                  ]
+                }
+              ],
+              "rationale": "La evidencia de nivel contrato debe revisarse contra el criterio específico de esta dimensión."
+            },
+            {
+              "id": "rollback",
+              "decision": "pending-semantic-review",
+              "candidateEvidence": [
+                {
+                  "path": "documentacion/OPERATIONS/RELEASE_PROMOTION_RUNBOOK.md",
+                  "sha256": "9ab3b524d7a37a7f101cd9e0616966ea4cae56227d73ee5d072ba51f6aa2a735",
+                  "observedTokens": [
+                    "SHA",
+                    "rollback"
+                  ]
+                }
+              ],
+              "rationale": "La evidencia de nivel contrato debe revisarse contra el criterio específico de esta dimensión."
+            }
+          ]
+        },
+        {
+          "id": "ENG-005",
+          "sourceStructuralStatus": "implemented-local",
+          "dimensions": [
+            {
+              "id": "minimization",
+              "decision": "pending-semantic-review",
+              "candidateEvidence": [
+                {
+                  "path": "test/telemetry-policy.test.mjs",
+                  "sha256": "bfe1a0f22ca71b238586101425afede4393d79ff79d3ca22aa0ffe77924107c2",
+                  "observedTokens": [
+                    "sanitiz"
+                  ]
+                }
+              ],
+              "rationale": "La evidencia de nivel contrato debe revisarse contra el criterio específico de esta dimensión."
+            },
+            {
+              "id": "bounded-cardinality",
+              "decision": "pending-semantic-review",
+              "candidateEvidence": [
+                {
+                  "path": "test/telemetry-policy.test.mjs",
+                  "sha256": "bfe1a0f22ca71b238586101425afede4393d79ff79d3ca22aa0ffe77924107c2",
+                  "observedTokens": [
+                    "sanitiz"
+                  ]
+                }
+              ],
+              "rationale": "La evidencia de nivel contrato debe revisarse contra el criterio específico de esta dimensión."
+            },
+            {
+              "id": "non-blocking",
+              "decision": "pending-semantic-review",
+              "candidateEvidence": [
+                {
+                  "path": "test/telemetry-policy.test.mjs",
+                  "sha256": "bfe1a0f22ca71b238586101425afede4393d79ff79d3ca22aa0ffe77924107c2",
+                  "observedTokens": [
+                    "sanitiz"
+                  ]
+                }
+              ],
+              "rationale": "La evidencia de nivel contrato debe revisarse contra el criterio específico de esta dimensión."
+            }
+          ]
+        },
+        {
+          "id": "ENG-006",
+          "sourceStructuralStatus": "implemented-local",
+          "dimensions": [
+            {
+              "id": "baseline",
+              "decision": "pending-semantic-review",
+              "candidateEvidence": [
+                {
+                  "path": "tools/check-performance-budget.mjs",
+                  "sha256": "72f473bf143b3d4edef05621e263d4c7f9a70376d7b7ed7bdb861243e74908c9",
+                  "observedTokens": [
+                    "budget"
+                  ]
+                }
+              ],
+              "rationale": "La evidencia de nivel contrato debe revisarse contra el criterio específico de esta dimensión."
+            },
+            {
+              "id": "budget",
+              "decision": "pending-semantic-review",
+              "candidateEvidence": [
+                {
+                  "path": "tools/check-performance-budget.mjs",
+                  "sha256": "72f473bf143b3d4edef05621e263d4c7f9a70376d7b7ed7bdb861243e74908c9",
+                  "observedTokens": [
+                    "budget"
+                  ]
+                }
+              ],
+              "rationale": "La evidencia de nivel contrato debe revisarse contra el criterio específico de esta dimensión."
+            },
+            {
+              "id": "verify-retire",
+              "decision": "pending-semantic-review",
+              "candidateEvidence": [
+                {
+                  "path": "tools/check-performance-budget.mjs",
+                  "sha256": "72f473bf143b3d4edef05621e263d4c7f9a70376d7b7ed7bdb861243e74908c9",
+                  "observedTokens": [
+                    "budget"
+                  ]
+                }
+              ],
+              "rationale": "La evidencia de nivel contrato debe revisarse contra el criterio específico de esta dimensión."
+            }
+          ]
+        },
+        {
+          "id": "ENG-007",
+          "sourceStructuralStatus": "implemented-local",
+          "dimensions": [
+            {
+              "id": "boundary",
+              "decision": "pending-semantic-review",
+              "candidateEvidence": [
+                {
+                  "path": "functions/test/functions-legacy-isolation-contract.test.js",
+                  "sha256": "421b6026d88e7229b4ddc8259f74d000d3b6d4b7317b6e58a2eb0a59da1b7bd7",
+                  "observedTokens": [
+                    "legacy"
+                  ]
+                }
+              ],
+              "rationale": "La evidencia de nivel contrato debe revisarse contra el criterio específico de esta dimensión."
+            },
+            {
+              "id": "no-growth",
+              "decision": "pending-semantic-review",
+              "candidateEvidence": [
+                {
+                  "path": "functions/test/functions-legacy-isolation-contract.test.js",
+                  "sha256": "421b6026d88e7229b4ddc8259f74d000d3b6d4b7317b6e58a2eb0a59da1b7bd7",
+                  "observedTokens": [
+                    "legacy"
+                  ]
+                }
+              ],
+              "rationale": "La evidencia de nivel contrato debe revisarse contra el criterio específico de esta dimensión."
+            },
+            {
+              "id": "retirement",
+              "decision": "pending-semantic-review",
+              "candidateEvidence": [
+                {
+                  "path": "functions/test/functions-legacy-isolation-contract.test.js",
+                  "sha256": "421b6026d88e7229b4ddc8259f74d000d3b6d4b7317b6e58a2eb0a59da1b7bd7",
+                  "observedTokens": [
+                    "legacy"
+                  ]
+                }
+              ],
+              "rationale": "La evidencia de nivel contrato debe revisarse contra el criterio específico de esta dimensión."
+            }
+          ]
+        },
+        {
+          "id": "ENG-008",
+          "sourceStructuralStatus": "implemented-local",
+          "dimensions": [
+            {
+              "id": "structured-record",
+              "decision": "pending-semantic-review",
+              "candidateEvidence": [
+                {
+                  "path": "documentacion/DEVELOPMENT/INCIDENTES_SOLUCIONES_2026-09-20.md",
+                  "sha256": "63cbb2010e1510ffa315ba508d2e30f7d488fe0070cf86aa82458e7410a34e1d",
+                  "observedTokens": [
+                    "causa raíz"
+                  ]
+                }
+              ],
+              "rationale": "La evidencia de nivel contrato debe revisarse contra el criterio específico de esta dimensión."
+            },
+            {
+              "id": "corrective-action",
+              "decision": "pending-semantic-review",
+              "candidateEvidence": [
+                {
+                  "path": "documentacion/DEVELOPMENT/INCIDENTES_SOLUCIONES_2026-09-20.md",
+                  "sha256": "63cbb2010e1510ffa315ba508d2e30f7d488fe0070cf86aa82458e7410a34e1d",
+                  "observedTokens": [
+                    "causa raíz"
+                  ]
+                }
+              ],
+              "rationale": "La evidencia de nivel contrato debe revisarse contra el criterio específico de esta dimensión."
+            },
+            {
+              "id": "verification-reuse",
+              "decision": "pending-semantic-review",
+              "candidateEvidence": [
+                {
+                  "path": "documentacion/DEVELOPMENT/INCIDENTES_SOLUCIONES_2026-09-20.md",
+                  "sha256": "63cbb2010e1510ffa315ba508d2e30f7d488fe0070cf86aa82458e7410a34e1d",
+                  "observedTokens": [
+                    "causa raíz"
+                  ]
+                }
+              ],
+              "rationale": "La evidencia de nivel contrato debe revisarse contra el criterio específico de esta dimensión."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "crmhotel",
+      "source": {
+        "remote": "https://github.com/billy-una/CRMHOTEL.git",
+        "commit": "b7b0f8e83871df1220865931f53424d8dd39772c",
+        "mode": "git-ref"
+      },
+      "contracts": [
+        {
+          "id": "ENG-001",
+          "sourceStructuralStatus": "implemented-local",
+          "dimensions": [
+            {
+              "id": "states",
+              "decision": "pending-semantic-review",
+              "candidateEvidence": [
+                {
+                  "path": "documentacion/ARCHITECTURE/offline-and-recovery.md",
+                  "sha256": "305c8a9283dfa4aa652df1f48fbb3d4f87f54c25746f5852a9d63ea3333f8fa1",
+                  "observedTokens": [
+                    "estado offline"
+                  ]
+                }
+              ],
+              "rationale": "La evidencia de nivel contrato debe revisarse contra el criterio específico de esta dimensión."
+            },
+            {
+              "id": "transitions",
+              "decision": "pending-semantic-review",
+              "candidateEvidence": [
+                {
+                  "path": "documentacion/ARCHITECTURE/offline-and-recovery.md",
+                  "sha256": "305c8a9283dfa4aa652df1f48fbb3d4f87f54c25746f5852a9d63ea3333f8fa1",
+                  "observedTokens": [
+                    "estado offline"
+                  ]
+                }
+              ],
+              "rationale": "La evidencia de nivel contrato debe revisarse contra el criterio específico de esta dimensión."
+            },
+            {
+              "id": "recovery",
+              "decision": "pending-semantic-review",
+              "candidateEvidence": [
+                {
+                  "path": "documentacion/ARCHITECTURE/offline-and-recovery.md",
+                  "sha256": "305c8a9283dfa4aa652df1f48fbb3d4f87f54c25746f5852a9d63ea3333f8fa1",
+                  "observedTokens": [
+                    "estado offline"
+                  ]
+                }
+              ],
+              "rationale": "La evidencia de nivel contrato debe revisarse contra el criterio específico de esta dimensión."
+            }
+          ]
+        },
+        {
+          "id": "ENG-002",
+          "sourceStructuralStatus": "implemented-local",
+          "dimensions": [
+            {
+              "id": "trusted-context",
+              "decision": "pending-semantic-review",
+              "candidateEvidence": [
+                {
+                  "path": "config/transaction-ownership.json",
+                  "sha256": "116f7a438b1ffbaee0d6b2f977dae96921ce172c711d51c4bd0377efdb07a817",
+                  "observedTokens": [
+                    "owner"
+                  ]
+                },
+                {
+                  "path": "documentacion/DECISIONS/ADR-002-transaction-partitioning.md",
+                  "sha256": "150cbc78b157849dfa40c434c70b4994c093fb06c700aecee81d9b9880a0088e",
+                  "observedTokens": [
+                    "transacci"
+                  ]
+                }
+              ],
+              "rationale": "La evidencia de nivel contrato debe revisarse contra el criterio específico de esta dimensión."
+            },
+            {
+              "id": "single-effect",
+              "decision": "pending-semantic-review",
+              "candidateEvidence": [
+                {
+                  "path": "config/transaction-ownership.json",
+                  "sha256": "116f7a438b1ffbaee0d6b2f977dae96921ce172c711d51c4bd0377efdb07a817",
+                  "observedTokens": [
+                    "owner"
+                  ]
+                },
+                {
+                  "path": "documentacion/DECISIONS/ADR-002-transaction-partitioning.md",
+                  "sha256": "150cbc78b157849dfa40c434c70b4994c093fb06c700aecee81d9b9880a0088e",
+                  "observedTokens": [
+                    "transacci"
+                  ]
+                }
+              ],
+              "rationale": "La evidencia de nivel contrato debe revisarse contra el criterio específico de esta dimensión."
+            },
+            {
+              "id": "traceable-output",
+              "decision": "pending-semantic-review",
+              "candidateEvidence": [
+                {
+                  "path": "config/transaction-ownership.json",
+                  "sha256": "116f7a438b1ffbaee0d6b2f977dae96921ce172c711d51c4bd0377efdb07a817",
+                  "observedTokens": [
+                    "owner"
+                  ]
+                },
+                {
+                  "path": "documentacion/DECISIONS/ADR-002-transaction-partitioning.md",
+                  "sha256": "150cbc78b157849dfa40c434c70b4994c093fb06c700aecee81d9b9880a0088e",
+                  "observedTokens": [
+                    "transacci"
+                  ]
+                }
+              ],
+              "rationale": "La evidencia de nivel contrato debe revisarse contra el criterio específico de esta dimensión."
+            }
+          ]
+        },
+        {
+          "id": "ENG-003",
+          "sourceStructuralStatus": "implemented-local",
+          "dimensions": [
+            {
+              "id": "declared-policy",
+              "decision": "pending-semantic-review",
+              "candidateEvidence": [
+                {
+                  "path": "documentacion/REQUERIMIENTOS/OFFLINE_POLICY.md",
+                  "sha256": "e11c1e25a45e09f4fbe153fc9034c9062806f1a33d1a5257fd97e54dd17d3e83",
+                  "observedTokens": [
+                    "offline"
+                  ]
+                },
+                {
+                  "path": "documentacion/FEATURES/stage-28-async-workers.md",
+                  "sha256": "5ca6851cafd8f7c563799156c6708fc521ed5d0db390a0145dd3027e3d3a44a4",
+                  "observedTokens": [
+                    "dead-letter",
+                    "retry"
+                  ]
+                }
+              ],
+              "rationale": "La evidencia de nivel contrato debe revisarse contra el criterio específico de esta dimensión."
+            },
+            {
+              "id": "bounded-retry",
+              "decision": "pending-semantic-review",
+              "candidateEvidence": [
+                {
+                  "path": "documentacion/REQUERIMIENTOS/OFFLINE_POLICY.md",
+                  "sha256": "e11c1e25a45e09f4fbe153fc9034c9062806f1a33d1a5257fd97e54dd17d3e83",
+                  "observedTokens": [
+                    "offline"
+                  ]
+                },
+                {
+                  "path": "documentacion/FEATURES/stage-28-async-workers.md",
+                  "sha256": "5ca6851cafd8f7c563799156c6708fc521ed5d0db390a0145dd3027e3d3a44a4",
+                  "observedTokens": [
+                    "dead-letter",
+                    "retry"
+                  ]
+                }
+              ],
+              "rationale": "La evidencia de nivel contrato debe revisarse contra el criterio específico de esta dimensión."
+            },
+            {
+              "id": "visible-recovery",
+              "decision": "pending-semantic-review",
+              "candidateEvidence": [
+                {
+                  "path": "documentacion/REQUERIMIENTOS/OFFLINE_POLICY.md",
+                  "sha256": "e11c1e25a45e09f4fbe153fc9034c9062806f1a33d1a5257fd97e54dd17d3e83",
+                  "observedTokens": [
+                    "offline"
+                  ]
+                },
+                {
+                  "path": "documentacion/FEATURES/stage-28-async-workers.md",
+                  "sha256": "5ca6851cafd8f7c563799156c6708fc521ed5d0db390a0145dd3027e3d3a44a4",
+                  "observedTokens": [
+                    "dead-letter",
+                    "retry"
+                  ]
+                }
+              ],
+              "rationale": "La evidencia de nivel contrato debe revisarse contra el criterio específico de esta dimensión."
+            }
+          ]
+        },
+        {
+          "id": "ENG-004",
+          "sourceStructuralStatus": "gap",
+          "dimensions": [
+            {
+              "id": "immutable-artifact",
+              "decision": "pending-semantic-review",
+              "candidateEvidence": [
+                {
+                  "path": "documentacion/OPERATIONS/release-checklist.md",
+                  "sha256": "5bbb654c1e36eeb2a99209c767eb7fe6686b1504a11cd47f6b54492358e78c89",
+                  "observedTokens": [
+                    "rollback"
+                  ]
+                },
+                {
+                  "path": "documentacion/RELEASE/release-35.0.0-evidence.json",
+                  "sha256": "922576bfbf03380b272d946324f500fdaeb73e6a1ffea872aca0f4eab61698d9",
+                  "observedTokens": []
+                }
+              ],
+              "rationale": "La evidencia de nivel contrato debe revisarse contra el criterio específico de esta dimensión."
+            },
+            {
+              "id": "promotion-gates",
+              "decision": "pending-semantic-review",
+              "candidateEvidence": [
+                {
+                  "path": "documentacion/OPERATIONS/release-checklist.md",
+                  "sha256": "5bbb654c1e36eeb2a99209c767eb7fe6686b1504a11cd47f6b54492358e78c89",
+                  "observedTokens": [
+                    "rollback"
+                  ]
+                },
+                {
+                  "path": "documentacion/RELEASE/release-35.0.0-evidence.json",
+                  "sha256": "922576bfbf03380b272d946324f500fdaeb73e6a1ffea872aca0f4eab61698d9",
+                  "observedTokens": []
+                }
+              ],
+              "rationale": "La evidencia de nivel contrato debe revisarse contra el criterio específico de esta dimensión."
+            },
+            {
+              "id": "rollback",
+              "decision": "pending-semantic-review",
+              "candidateEvidence": [
+                {
+                  "path": "documentacion/OPERATIONS/release-checklist.md",
+                  "sha256": "5bbb654c1e36eeb2a99209c767eb7fe6686b1504a11cd47f6b54492358e78c89",
+                  "observedTokens": [
+                    "rollback"
+                  ]
+                },
+                {
+                  "path": "documentacion/RELEASE/release-35.0.0-evidence.json",
+                  "sha256": "922576bfbf03380b272d946324f500fdaeb73e6a1ffea872aca0f4eab61698d9",
+                  "observedTokens": []
+                }
+              ],
+              "rationale": "La evidencia de nivel contrato debe revisarse contra el criterio específico de esta dimensión."
+            }
+          ]
+        },
+        {
+          "id": "ENG-005",
+          "sourceStructuralStatus": "implemented-local",
+          "dimensions": [
+            {
+              "id": "minimization",
+              "decision": "pending-semantic-review",
+              "candidateEvidence": [
+                {
+                  "path": "functions/src/core/observability/Logger.js",
+                  "sha256": "f97510e63b39fa21453b976e2de6f7f1ffa992c86b0c44edd009b0a18a35d3c3",
+                  "observedTokens": [
+                    "sanit"
+                  ]
+                }
+              ],
+              "rationale": "La evidencia de nivel contrato debe revisarse contra el criterio específico de esta dimensión."
+            },
+            {
+              "id": "bounded-cardinality",
+              "decision": "pending-semantic-review",
+              "candidateEvidence": [
+                {
+                  "path": "functions/src/core/observability/Logger.js",
+                  "sha256": "f97510e63b39fa21453b976e2de6f7f1ffa992c86b0c44edd009b0a18a35d3c3",
+                  "observedTokens": [
+                    "sanit"
+                  ]
+                }
+              ],
+              "rationale": "La evidencia de nivel contrato debe revisarse contra el criterio específico de esta dimensión."
+            },
+            {
+              "id": "non-blocking",
+              "decision": "pending-semantic-review",
+              "candidateEvidence": [
+                {
+                  "path": "functions/src/core/observability/Logger.js",
+                  "sha256": "f97510e63b39fa21453b976e2de6f7f1ffa992c86b0c44edd009b0a18a35d3c3",
+                  "observedTokens": [
+                    "sanit"
+                  ]
+                }
+              ],
+              "rationale": "La evidencia de nivel contrato debe revisarse contra el criterio específico de esta dimensión."
+            }
+          ]
+        },
+        {
+          "id": "ENG-006",
+          "sourceStructuralStatus": "gap",
+          "dimensions": [
+            {
+              "id": "baseline",
+              "decision": "pending-semantic-review",
+              "candidateEvidence": [
+                {
+                  "path": "documentacion/OPERATIONS/performance-capacity-cost-validation-plan.md",
+                  "sha256": "fe84a2c0f30bfae4fb24539c38546f591f55aaf08d5d63fef73588c86cce1f1e",
+                  "observedTokens": [
+                    "presupuesto"
+                  ]
+                }
+              ],
+              "rationale": "La evidencia de nivel contrato debe revisarse contra el criterio específico de esta dimensión."
+            },
+            {
+              "id": "budget",
+              "decision": "pending-semantic-review",
+              "candidateEvidence": [
+                {
+                  "path": "documentacion/OPERATIONS/performance-capacity-cost-validation-plan.md",
+                  "sha256": "fe84a2c0f30bfae4fb24539c38546f591f55aaf08d5d63fef73588c86cce1f1e",
+                  "observedTokens": [
+                    "presupuesto"
+                  ]
+                }
+              ],
+              "rationale": "La evidencia de nivel contrato debe revisarse contra el criterio específico de esta dimensión."
+            },
+            {
+              "id": "verify-retire",
+              "decision": "pending-semantic-review",
+              "candidateEvidence": [
+                {
+                  "path": "documentacion/OPERATIONS/performance-capacity-cost-validation-plan.md",
+                  "sha256": "fe84a2c0f30bfae4fb24539c38546f591f55aaf08d5d63fef73588c86cce1f1e",
+                  "observedTokens": [
+                    "presupuesto"
+                  ]
+                }
+              ],
+              "rationale": "La evidencia de nivel contrato debe revisarse contra el criterio específico de esta dimensión."
+            }
+          ]
+        },
+        {
+          "id": "ENG-007",
+          "sourceStructuralStatus": "implemented-local",
+          "dimensions": [
+            {
+              "id": "boundary",
+              "decision": "pending-semantic-review",
+              "candidateEvidence": [
+                {
+                  "path": "documentacion/ARCHITECTURE/application-structure.md",
+                  "sha256": "1d0fc96413b706db2b0092b31b35c3276c4d11429a8b34d324efcc441264a8a0",
+                  "observedTokens": [
+                    "legacy",
+                    "impide"
+                  ]
+                }
+              ],
+              "rationale": "La evidencia de nivel contrato debe revisarse contra el criterio específico de esta dimensión."
+            },
+            {
+              "id": "no-growth",
+              "decision": "pending-semantic-review",
+              "candidateEvidence": [
+                {
+                  "path": "documentacion/ARCHITECTURE/application-structure.md",
+                  "sha256": "1d0fc96413b706db2b0092b31b35c3276c4d11429a8b34d324efcc441264a8a0",
+                  "observedTokens": [
+                    "legacy",
+                    "impide"
+                  ]
+                }
+              ],
+              "rationale": "La evidencia de nivel contrato debe revisarse contra el criterio específico de esta dimensión."
+            },
+            {
+              "id": "retirement",
+              "decision": "pending-semantic-review",
+              "candidateEvidence": [
+                {
+                  "path": "documentacion/ARCHITECTURE/application-structure.md",
+                  "sha256": "1d0fc96413b706db2b0092b31b35c3276c4d11429a8b34d324efcc441264a8a0",
+                  "observedTokens": [
+                    "legacy",
+                    "impide"
+                  ]
+                }
+              ],
+              "rationale": "La evidencia de nivel contrato debe revisarse contra el criterio específico de esta dimensión."
+            }
+          ]
+        },
+        {
+          "id": "ENG-008",
+          "sourceStructuralStatus": "gap",
+          "dimensions": [
+            {
+              "id": "structured-record",
+              "decision": "pending-semantic-review",
+              "candidateEvidence": [
+                {
+                  "path": "documentacion/OPERATIONS/incident-runbook.md",
+                  "sha256": "d6ac6873980beb2b81c9db87d25a6c5d8236c38c20b5df4c6084b7b4afdec09b",
+                  "observedTokens": [
+                    "causa raíz"
+                  ]
+                }
+              ],
+              "rationale": "La evidencia de nivel contrato debe revisarse contra el criterio específico de esta dimensión."
+            },
+            {
+              "id": "corrective-action",
+              "decision": "pending-semantic-review",
+              "candidateEvidence": [
+                {
+                  "path": "documentacion/OPERATIONS/incident-runbook.md",
+                  "sha256": "d6ac6873980beb2b81c9db87d25a6c5d8236c38c20b5df4c6084b7b4afdec09b",
+                  "observedTokens": [
+                    "causa raíz"
+                  ]
+                }
+              ],
+              "rationale": "La evidencia de nivel contrato debe revisarse contra el criterio específico de esta dimensión."
+            },
+            {
+              "id": "verification-reuse",
+              "decision": "pending-semantic-review",
+              "candidateEvidence": [
+                {
+                  "path": "documentacion/OPERATIONS/incident-runbook.md",
+                  "sha256": "d6ac6873980beb2b81c9db87d25a6c5d8236c38c20b5df4c6084b7b4afdec09b",
+                  "observedTokens": [
+                    "causa raíz"
+                  ]
+                }
+              ],
+              "rationale": "La evidencia de nivel contrato debe revisarse contra el criterio específico de esta dimensión."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bshandball",
+      "source": {
+        "remote": "https://github.com/billy-una/BSHandball.git",
+        "commit": "09c15acd14ab806abe436a8176ef3247c61a2df6",
+        "mode": "git-ref"
+      },
+      "contracts": [
+        {
+          "id": "ENG-001",
+          "sourceStructuralStatus": "implemented-local",
+          "dimensions": [
+            {
+              "id": "states",
+              "decision": "pending-semantic-review",
+              "candidateEvidence": [
+                {
+                  "path": "src/public/logicLayer/services/servicesThing/general/UIStateManager.js",
+                  "sha256": "7352ec615c3e247cc45af9d2ccd3edd221461b929c5acd499d9c169796530fdd",
+                  "observedTokens": [
+                    "loading",
+                    "empty",
+                    "error"
+                  ]
+                }
+              ],
+              "rationale": "La evidencia de nivel contrato debe revisarse contra el criterio específico de esta dimensión."
+            },
+            {
+              "id": "transitions",
+              "decision": "pending-semantic-review",
+              "candidateEvidence": [
+                {
+                  "path": "src/public/logicLayer/services/servicesThing/general/UIStateManager.js",
+                  "sha256": "7352ec615c3e247cc45af9d2ccd3edd221461b929c5acd499d9c169796530fdd",
+                  "observedTokens": [
+                    "loading",
+                    "empty",
+                    "error"
+                  ]
+                }
+              ],
+              "rationale": "La evidencia de nivel contrato debe revisarse contra el criterio específico de esta dimensión."
+            },
+            {
+              "id": "recovery",
+              "decision": "pending-semantic-review",
+              "candidateEvidence": [
+                {
+                  "path": "src/public/logicLayer/services/servicesThing/general/UIStateManager.js",
+                  "sha256": "7352ec615c3e247cc45af9d2ccd3edd221461b929c5acd499d9c169796530fdd",
+                  "observedTokens": [
+                    "loading",
+                    "empty",
+                    "error"
+                  ]
+                }
+              ],
+              "rationale": "La evidencia de nivel contrato debe revisarse contra el criterio específico de esta dimensión."
+            }
+          ]
+        },
+        {
+          "id": "ENG-002",
+          "sourceStructuralStatus": "implemented-local",
+          "dimensions": [
+            {
+              "id": "trusted-context",
+              "decision": "pending-semantic-review",
+              "candidateEvidence": [
+                {
+                  "path": "src/server/lib/trusted-team-context.js",
+                  "sha256": "8d01b6fe9df959d6beceb34416483db84e13a344d69e7f7bd76df3bb425199ba",
+                  "observedTokens": [
+                    "teamId"
+                  ]
+                }
+              ],
+              "rationale": "La evidencia de nivel contrato debe revisarse contra el criterio específico de esta dimensión."
+            },
+            {
+              "id": "single-effect",
+              "decision": "pending-semantic-review",
+              "candidateEvidence": [
+                {
+                  "path": "src/server/lib/trusted-team-context.js",
+                  "sha256": "8d01b6fe9df959d6beceb34416483db84e13a344d69e7f7bd76df3bb425199ba",
+                  "observedTokens": [
+                    "teamId"
+                  ]
+                }
+              ],
+              "rationale": "La evidencia de nivel contrato debe revisarse contra el criterio específico de esta dimensión."
+            },
+            {
+              "id": "traceable-output",
+              "decision": "pending-semantic-review",
+              "candidateEvidence": [
+                {
+                  "path": "src/server/lib/trusted-team-context.js",
+                  "sha256": "8d01b6fe9df959d6beceb34416483db84e13a344d69e7f7bd76df3bb425199ba",
+                  "observedTokens": [
+                    "teamId"
+                  ]
+                }
+              ],
+              "rationale": "La evidencia de nivel contrato debe revisarse contra el criterio específico de esta dimensión."
+            }
+          ]
+        },
+        {
+          "id": "ENG-003",
+          "sourceStructuralStatus": "gap",
+          "dimensions": [
+            {
+              "id": "declared-policy",
+              "decision": "pending-semantic-review",
+              "candidateEvidence": [
+                {
+                  "path": "src/public/logicLayer/services/servicesOffline/OfflineSyncQueue.js",
+                  "sha256": "cdb0df84b0fef99820cd7737db70506857fbfe7727675fbff4900f1793bfe214",
+                  "observedTokens": [
+                    "queue"
+                  ]
+                }
+              ],
+              "rationale": "La evidencia de nivel contrato debe revisarse contra el criterio específico de esta dimensión."
+            },
+            {
+              "id": "bounded-retry",
+              "decision": "pending-semantic-review",
+              "candidateEvidence": [
+                {
+                  "path": "src/public/logicLayer/services/servicesOffline/OfflineSyncQueue.js",
+                  "sha256": "cdb0df84b0fef99820cd7737db70506857fbfe7727675fbff4900f1793bfe214",
+                  "observedTokens": [
+                    "queue"
+                  ]
+                }
+              ],
+              "rationale": "La evidencia de nivel contrato debe revisarse contra el criterio específico de esta dimensión."
+            },
+            {
+              "id": "visible-recovery",
+              "decision": "pending-semantic-review",
+              "candidateEvidence": [
+                {
+                  "path": "src/public/logicLayer/services/servicesOffline/OfflineSyncQueue.js",
+                  "sha256": "cdb0df84b0fef99820cd7737db70506857fbfe7727675fbff4900f1793bfe214",
+                  "observedTokens": [
+                    "queue"
+                  ]
+                }
+              ],
+              "rationale": "La evidencia de nivel contrato debe revisarse contra el criterio específico de esta dimensión."
+            }
+          ]
+        },
+        {
+          "id": "ENG-004",
+          "sourceStructuralStatus": "gap",
+          "dimensions": [
+            {
+              "id": "immutable-artifact",
+              "decision": "pending-semantic-review",
+              "candidateEvidence": [
+                {
+                  "path": "documentacion/INFRASTRUCTURE/deployment-devops.md",
+                  "sha256": "422039528ed0ff65470148e290aa423e670953c68673c0b99ba0873341312aa0",
+                  "observedTokens": [
+                    "rollback"
+                  ]
+                }
+              ],
+              "rationale": "La evidencia de nivel contrato debe revisarse contra el criterio específico de esta dimensión."
+            },
+            {
+              "id": "promotion-gates",
+              "decision": "pending-semantic-review",
+              "candidateEvidence": [
+                {
+                  "path": "documentacion/INFRASTRUCTURE/deployment-devops.md",
+                  "sha256": "422039528ed0ff65470148e290aa423e670953c68673c0b99ba0873341312aa0",
+                  "observedTokens": [
+                    "rollback"
+                  ]
+                }
+              ],
+              "rationale": "La evidencia de nivel contrato debe revisarse contra el criterio específico de esta dimensión."
+            },
+            {
+              "id": "rollback",
+              "decision": "pending-semantic-review",
+              "candidateEvidence": [
+                {
+                  "path": "documentacion/INFRASTRUCTURE/deployment-devops.md",
+                  "sha256": "422039528ed0ff65470148e290aa423e670953c68673c0b99ba0873341312aa0",
+                  "observedTokens": [
+                    "rollback"
+                  ]
+                }
+              ],
+              "rationale": "La evidencia de nivel contrato debe revisarse contra el criterio específico de esta dimensión."
+            }
+          ]
+        },
+        {
+          "id": "ENG-005",
+          "sourceStructuralStatus": "gap",
+          "dimensions": [
+            {
+              "id": "minimization",
+              "decision": "pending-semantic-review",
+              "candidateEvidence": [
+                {
+                  "path": "src/server/analytics/ErrorTelemetryService.js",
+                  "sha256": "619ad8a8db29aea202ecdc019d4680c29b4a3b62bc190e5fd25d45db42283afe",
+                  "observedTokens": []
+                }
+              ],
+              "rationale": "La evidencia de nivel contrato debe revisarse contra el criterio específico de esta dimensión."
+            },
+            {
+              "id": "bounded-cardinality",
+              "decision": "pending-semantic-review",
+              "candidateEvidence": [
+                {
+                  "path": "src/server/analytics/ErrorTelemetryService.js",
+                  "sha256": "619ad8a8db29aea202ecdc019d4680c29b4a3b62bc190e5fd25d45db42283afe",
+                  "observedTokens": []
+                }
+              ],
+              "rationale": "La evidencia de nivel contrato debe revisarse contra el criterio específico de esta dimensión."
+            },
+            {
+              "id": "non-blocking",
+              "decision": "pending-semantic-review",
+              "candidateEvidence": [
+                {
+                  "path": "src/server/analytics/ErrorTelemetryService.js",
+                  "sha256": "619ad8a8db29aea202ecdc019d4680c29b4a3b62bc190e5fd25d45db42283afe",
+                  "observedTokens": []
+                }
+              ],
+              "rationale": "La evidencia de nivel contrato debe revisarse contra el criterio específico de esta dimensión."
+            }
+          ]
+        },
+        {
+          "id": "ENG-006",
+          "sourceStructuralStatus": "implemented-local",
+          "dimensions": [
+            {
+              "id": "baseline",
+              "decision": "pending-semantic-review",
+              "candidateEvidence": [
+                {
+                  "path": "src/public/tools/frontend/check-bundle-budgets.mjs",
+                  "sha256": "e925759f88b9506723529eb08d5ea143a0aa48c34a1a4c4d68f62779b04d5973",
+                  "observedTokens": [
+                    "budget"
+                  ]
+                }
+              ],
+              "rationale": "La evidencia de nivel contrato debe revisarse contra el criterio específico de esta dimensión."
+            },
+            {
+              "id": "budget",
+              "decision": "pending-semantic-review",
+              "candidateEvidence": [
+                {
+                  "path": "src/public/tools/frontend/check-bundle-budgets.mjs",
+                  "sha256": "e925759f88b9506723529eb08d5ea143a0aa48c34a1a4c4d68f62779b04d5973",
+                  "observedTokens": [
+                    "budget"
+                  ]
+                }
+              ],
+              "rationale": "La evidencia de nivel contrato debe revisarse contra el criterio específico de esta dimensión."
+            },
+            {
+              "id": "verify-retire",
+              "decision": "pending-semantic-review",
+              "candidateEvidence": [
+                {
+                  "path": "src/public/tools/frontend/check-bundle-budgets.mjs",
+                  "sha256": "e925759f88b9506723529eb08d5ea143a0aa48c34a1a4c4d68f62779b04d5973",
+                  "observedTokens": [
+                    "budget"
+                  ]
+                }
+              ],
+              "rationale": "La evidencia de nivel contrato debe revisarse contra el criterio específico de esta dimensión."
+            }
+          ]
+        },
+        {
+          "id": "ENG-007",
+          "sourceStructuralStatus": "implemented-local",
+          "dimensions": [
+            {
+              "id": "boundary",
+              "decision": "pending-semantic-review",
+              "candidateEvidence": [
+                {
+                  "path": "documentacion/DEVELOPMENT/MODULES/CLIPS_LEGACY_BOUNDARY.md",
+                  "sha256": "89a4a387c31af6cf3fb753dd1b4129214f3f0f5bf04647434c22d30e1bea2b99",
+                  "observedTokens": [
+                    "no puede crecer",
+                    "funcionalidad nueva"
+                  ]
+                }
+              ],
+              "rationale": "La evidencia de nivel contrato debe revisarse contra el criterio específico de esta dimensión."
+            },
+            {
+              "id": "no-growth",
+              "decision": "pending-semantic-review",
+              "candidateEvidence": [
+                {
+                  "path": "documentacion/DEVELOPMENT/MODULES/CLIPS_LEGACY_BOUNDARY.md",
+                  "sha256": "89a4a387c31af6cf3fb753dd1b4129214f3f0f5bf04647434c22d30e1bea2b99",
+                  "observedTokens": [
+                    "no puede crecer",
+                    "funcionalidad nueva"
+                  ]
+                }
+              ],
+              "rationale": "La evidencia de nivel contrato debe revisarse contra el criterio específico de esta dimensión."
+            },
+            {
+              "id": "retirement",
+              "decision": "pending-semantic-review",
+              "candidateEvidence": [
+                {
+                  "path": "documentacion/DEVELOPMENT/MODULES/CLIPS_LEGACY_BOUNDARY.md",
+                  "sha256": "89a4a387c31af6cf3fb753dd1b4129214f3f0f5bf04647434c22d30e1bea2b99",
+                  "observedTokens": [
+                    "no puede crecer",
+                    "funcionalidad nueva"
+                  ]
+                }
+              ],
+              "rationale": "La evidencia de nivel contrato debe revisarse contra el criterio específico de esta dimensión."
+            }
+          ]
+        },
+        {
+          "id": "ENG-008",
+          "sourceStructuralStatus": "gap",
+          "dimensions": [
+            {
+              "id": "structured-record",
+              "decision": "pending-semantic-review",
+              "candidateEvidence": [
+                {
+                  "path": "documentacion/INFRASTRUCTURE/production-runbook.md",
+                  "sha256": "07d8e0835f38a56ffec6e74e45142702f0b15aa275c3dc6782e99922c2013c4e",
+                  "observedTokens": []
+                }
+              ],
+              "rationale": "La evidencia de nivel contrato debe revisarse contra el criterio específico de esta dimensión."
+            },
+            {
+              "id": "corrective-action",
+              "decision": "pending-semantic-review",
+              "candidateEvidence": [
+                {
+                  "path": "documentacion/INFRASTRUCTURE/production-runbook.md",
+                  "sha256": "07d8e0835f38a56ffec6e74e45142702f0b15aa275c3dc6782e99922c2013c4e",
+                  "observedTokens": []
+                }
+              ],
+              "rationale": "La evidencia de nivel contrato debe revisarse contra el criterio específico de esta dimensión."
+            },
+            {
+              "id": "verification-reuse",
+              "decision": "pending-semantic-review",
+              "candidateEvidence": [
+                {
+                  "path": "documentacion/INFRASTRUCTURE/production-runbook.md",
+                  "sha256": "07d8e0835f38a56ffec6e74e45142702f0b15aa275c3dc6782e99922c2013c4e",
+                  "observedTokens": []
+                }
+              ],
+              "rationale": "La evidencia de nivel contrato debe revisarse contra el criterio específico de esta dimensión."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "projects": 3,
+    "contractsPerProject": 8,
+    "decisions": 72,
+    "pendingSemanticReview": 72,
+    "supported": 0,
+    "operationallyValidated": 0
+  },
+  "interpretation": "Expediente de evidencia candidata de una propuesta. No certifica cumplimiento, calidad, operación ni madurez de los proyectos."
+}

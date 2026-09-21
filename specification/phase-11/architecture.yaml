@@ -1,0 +1,161 @@
+{
+  "generatedFrom": [
+    "specification/phase-5/architecture.yaml"
+  ],
+  "manifestId": "cobria-architecture",
+  "records": [
+    {
+      "data": {
+        "artifacts": [
+          "entity",
+          "value-object",
+          "domain-policy",
+          "domain-error"
+        ],
+        "id": "LAY-DOMAIN",
+        "mayDependOn": [
+          "LAY-DOMAIN"
+        ],
+        "mustNotKnow": [
+          "UI",
+          "HTTP",
+          "SDK",
+          "base de datos",
+          "variables de entorno",
+          "rutas físicas"
+        ],
+        "path": "src/domain",
+        "purpose": "Modelo, identidad, valores, políticas e invariantes del problema."
+      },
+      "id": "LAY-DOMAIN",
+      "owner": "COBRIA Layers",
+      "references": [
+        "specification/phase-5/MANUAL-DE-CAPAS.md"
+      ],
+      "source": "specification/phase-5/architecture.yaml",
+      "version": "1.0.0"
+    },
+    {
+      "data": {
+        "artifacts": [
+          "use-case",
+          "input",
+          "result",
+          "port",
+          "application-policy"
+        ],
+        "id": "LAY-APPLICATION",
+        "mayDependOn": [
+          "LAY-APPLICATION",
+          "LAY-DOMAIN"
+        ],
+        "mustNotKnow": [
+          "componentes visuales",
+          "rutas físicas",
+          "SDK de proveedor",
+          "variables de entorno"
+        ],
+        "path": "src/application",
+        "purpose": "Casos de uso, puertos y coordinación de intenciones."
+      },
+      "id": "LAY-APPLICATION",
+      "owner": "COBRIA Layers",
+      "references": [
+        "specification/phase-5/MANUAL-DE-CAPAS.md"
+      ],
+      "source": "specification/phase-5/architecture.yaml",
+      "version": "1.0.0"
+    },
+    {
+      "data": {
+        "artifacts": [
+          "controller",
+          "view-model",
+          "request-mapper",
+          "response-mapper"
+        ],
+        "id": "LAY-PRESENTATION",
+        "mayDependOn": [
+          "LAY-PRESENTATION",
+          "LAY-APPLICATION",
+          "LAY-DOMAIN"
+        ],
+        "mustNotKnow": [
+          "rutas de almacenamiento",
+          "consultas del proveedor",
+          "reglas de negocio nuevas"
+        ],
+        "path": "src/presentation",
+        "purpose": "Traducir protocolos e interacción a entradas y resultados de aplicación."
+      },
+      "id": "LAY-PRESENTATION",
+      "owner": "COBRIA Layers",
+      "references": [
+        "specification/phase-5/MANUAL-DE-CAPAS.md"
+      ],
+      "source": "specification/phase-5/architecture.yaml",
+      "version": "1.0.0"
+    },
+    {
+      "data": {
+        "artifacts": [
+          "adapter",
+          "repository",
+          "dater",
+          "provider",
+          "client",
+          "migration"
+        ],
+        "id": "LAY-INFRASTRUCTURE",
+        "mayDependOn": [
+          "LAY-INFRASTRUCTURE",
+          "LAY-APPLICATION",
+          "LAY-DOMAIN"
+        ],
+        "mustNotKnow": [
+          "estado visual",
+          "navegación de pantalla"
+        ],
+        "path": "src/infrastructure",
+        "purpose": "Implementar puertos, persistencia, Daters, SDK, red, reloj, criptografía y observabilidad."
+      },
+      "id": "LAY-INFRASTRUCTURE",
+      "owner": "COBRIA Layers",
+      "references": [
+        "specification/phase-5/MANUAL-DE-CAPAS.md"
+      ],
+      "source": "specification/phase-5/architecture.yaml",
+      "version": "1.0.0"
+    },
+    {
+      "data": {
+        "artifacts": [
+          "composition-root",
+          "factory",
+          "configuration-binding"
+        ],
+        "id": "LAY-COMPOSITION",
+        "mayDependOn": [
+          "LAY-COMPOSITION",
+          "LAY-DOMAIN",
+          "LAY-APPLICATION",
+          "LAY-PRESENTATION",
+          "LAY-INFRASTRUCTURE"
+        ],
+        "mustNotKnow": [
+          "reglas de negocio no expresadas por componentes"
+        ],
+        "path": "src/composition.mjs",
+        "purpose": "Construir el grafo, seleccionar adaptadores y conectar capacidades."
+      },
+      "id": "LAY-COMPOSITION",
+      "owner": "COBRIA Layers",
+      "references": [
+        "specification/phase-5/MANUAL-DE-CAPAS.md"
+      ],
+      "source": "specification/phase-5/architecture.yaml",
+      "version": "1.0.0"
+    }
+  ],
+  "schemaVersion": "1.0.0"
+}

@@ -1,18 +1,21 @@
 \documentclass[12pt]{article}
+\providecommand{\blindreview}{0}
 \usepackage[spanish,es-nodecimaldot]{babel}
 \usepackage[utf8]{inputenc}\usepackage[T1]{fontenc}
 \usepackage{newtxtext,newtxmath,microtype}
+\setlength{\emergencystretch}{2em}
 \usepackage[letterpaper,margin=2.55cm]{geometry}
 \usepackage{setspace,csquotes}\onehalfspacing
 \usepackage{amsmath,booktabs,tabularx,array,float,enumitem}
 \usepackage{tikz}\usetikzlibrary{arrows.meta,positioning,shapes.geometric}
-\usepackage{hyperref}\hypersetup{hidelinks,pdftitle={Contratos reconstruibles para sistemas NoSQL documentales},pdfauthor={Billy Jak Cordero Porras}}
+\input{editorial/generated/identity.tex}
+\usepackage{hyperref}\hypersetup{hidelinks,pdftitle={Contratos reconstruibles con ámbito explícito para sistemas NoSQL documentales},pdfauthor={\ifnum\blindreview=1 Autor anonimizado\else\COBRIAAutor\fi},pdfsubject={Artículo científico de la propuesta independiente COBRIA},pdfkeywords={COBRIA, NoSQL documental, ámbito, reconstrucción, procedencia}}
 \usepackage[backend=biber,style=apa,sorting=nyt,maxcitenames=2]{biblatex}
 \addbibresource{referencias.bib}
 \newcommand{\COBRIA}{\textsf{COBRIA}}
 \title{\textbf{Contratos reconstruibles con ámbito explícito para sistemas NoSQL documentales}}
-\author{Billy Jak Cordero Porras\\Investigador independiente, Coto Brus, Costa Rica}
-\date{Agosto de 2026}
+\author{\ifnum\blindreview=1 Autor anonimizado\else\COBRIAAutor\\Investigador independiente, \COBRIALugar\fi}
+\date{\COBRIAAnio}
 
 \begin{document}
 \maketitle
@@ -26,11 +29,13 @@ transformación versionada, ámbito obligatorio, criterio de equivalencia, polí
 frescura y procedimiento de reconstrucción. La propuesta se examina mediante ciencia
 del diseño en tres perfiles documentales anonimizados y un protocolo de pruebas para
 reconstrucción, idempotencia, evolución, recuperación autorizada y productos de datos.
-La evidencia actual es estructural y ejecutable: demuestra aplicabilidad de los
-contratos y permite formular hipótesis refutables. No se presentan cifras de rendimiento
-obtenidas fuera de motores NoSQL ni se afirma superioridad universal. El resultado
-principal es una especificación neutral y una agenda empírica reproducible para decidir
-cuándo una proyección aporta valor sin convertirse en una segunda fuente de verdad.
+La evidencia incluye una réplica histórica de 270 corridas sobre MongoDB 8.0,
+CouchDB 3.4 y OpenSearch 2.19.3, además de una repetición preliminar del arnés corregido
+sobre MongoDB y CouchDB. Las 270 corridas se conservan como evidencia histórica porque
+emplearon un oráculo posteriormente fortalecido; no se presentan como certificación
+vigente. El resultado principal es una especificación neutral, un conjunto instalable
+de conformidad y una agenda empírica reproducible para decidir cuándo una proyección
+aporta valor sin convertirse en una segunda fuente de verdad.
 \end{abstract}
 
 \noindent\textbf{Palabras clave:} NoSQL documental; datos canónicos; proyecciones
@@ -63,7 +68,8 @@ Las contribuciones son:
 \item una definición formal del contrato reconstruible con ámbito;
 \item una taxonomía neutral de canónicos, proyecciones, productos y mecanismos;
 \item un protocolo NoSQL para lectura, escritura, reconstrucción, aislamiento y linaje;
-\item una separación explícita entre evidencia disponible y evaluación pendiente.
+\item un arnés de conformidad reutilizable y una aplicación neutral ejecutable;
+\item una separación explícita entre evidencia histórica, vigente y pendiente.
 \end{enumerate}
 
 \section{Contexto y vacío de investigación}
@@ -179,7 +185,7 @@ celda, orden rotado, escalas múltiples y resultados negativos publicados. R1 in
 la construcción antes de publicar; S1 manipula identidad, caché y búsqueda; A1 introduce
 eventos tardíos, duplicados, catálogos desconocidos y documentos incompletos.
 
-\section{Resultados disponibles}
+\section{Resultados disponibles y estado de la evidencia}
 
 Los tres perfiles contienen fuentes documentales, capas de acceso, servicios, catálogos
 y derivados. La recurrencia confirma que el problema existe en dominios heterogéneos.
@@ -187,9 +193,27 @@ Las pruebas disponibles verifican reglas de acceso, roles, aislamiento, ciclos d
 idempotencia y reconstrucción en rutas concretas. Una observación longitudinal también
 muestra reducción de accesos directos desde presentación hacia la capa documental.
 
+La réplica distribuida histórica conservó 270 corridas: tres motores, tres escalas y
+treinta repeticiones por celda. Incluyó MongoDB 8.0, CouchDB 3.4 y OpenSearch 2.19.3.
+Todas las celdas superaron P1, P2, R1, S1 y A1 bajo el oráculo utilizado entonces, sin
+recuperación cruzada de documentos entre ámbitos. Una auditoría posterior fortaleció
+el oráculo; por ello, esas corridas describen comportamiento histórico y no conformidad
+vigente. Una repetición preliminar con el arnés corregido completó casos pequeños en
+MongoDB y CouchDB. OpenSearch 3.2.0 alcanzó estado saludable, pero falló durante la carga
+bajo emulación; el incidente se conserva como incompatibilidad de plataforma y no como
+resultado de COBRIA.
+
+Como comparación complementaria, un experimento algorítmico controlado contrasta siete
+estrategias: consulta del documento, índice nativo, vista materializada, CQRS,
+reconstrucción por eventos, proyección sin contrato y proyección COBRIA. El conjunto
+contiene 630 observaciones (siete estrategias, tres escalas y treinta repeticiones) y
+registra p50, p95, p99, CPU, memoria, almacenamiento, recuperación y amplificación de
+escritura. Su propósito es hacer visibles los costos relativos del contrato; al ejecutarse
+en un único proceso, no se interpreta como comparación de rendimiento entre motores.
+
 Esta evidencia apoya viabilidad estructural y ejecutable. No demuestra beneficio
 universal de rendimiento, productividad humana ni seguridad exhaustiva. Las cifras de
-pilotos ajenos al alcance NoSQL se excluyeron y no alimentan el resumen ni las
+controles SQL históricos permanecen segregadas y no alimentan el resumen ni las
 conclusiones.
 
 \section{Proposiciones verificables}
@@ -286,11 +310,19 @@ se corrige antes de publicarla. Solo si cumple el vector de decisión se adopta,
 de revisión y criterio de retiro. El ejemplo muestra que COBRIA es un proceso de
 decisión, no una instrucción de duplicar.
 
+El paquete de réplica incorpora además una aplicación mínima de observaciones de
+biodiversidad. Se organiza en dominio, aplicación, puertos e infraestructura; exige
+ámbito antes del acceso, rechaza revisiones obsoletas, aplica idempotencia ligada a la
+huella de entrada y reconstruye un resumen por especie. Seis pruebas automáticas cubren
+registro válido, autorización previa, repetición sin duplicado, conflicto de clave,
+monotonicidad y equivalencia tras retirar y regenerar la proyección. Su función es
+pedagógica y de transferencia: no sustituye los experimentos P1--A1.
+
 \section{Trazabilidad entre hipótesis y artefactos}
 
 \begin{table}[H]\centering
 \caption{Matriz de trazabilidad del artículo.}
-\begin{tabularx}{\textwidth}{p{1.5cm}p{3.3cm}p{3.2cm}X}\toprule
+\begin{tabularx}{\textwidth}{p{1.7cm}p{3.1cm}p{3.2cm}X}\toprule
 Hipótesis & Riesgo & Prueba & Evidencia requerida\\\midrule
 HN1 & autoridad paralela & R1 y escritura adversarial & equivalencia y rechazo directo\\
 HN2 & fuga entre ámbitos & S1 & cero candidatos cruzados\\
@@ -317,9 +349,9 @@ incompleto, pérdida de equivalencia previa a la medición, interferencia extern
 o fallo del arnés. Los datos descartados se conservan fuera del conjunto inferencial.
 
 La revisión independiente examinará equivalencia de configuraciones, unidad inferencial,
-exclusiones y correspondencia entre evidencia y afirmaciones. El artículo se actualizará
-con cifras solo después de completar dos motores documentales y reproducir las salidas
-desde el depósito.
+exclusiones y correspondencia entre evidencia y afirmaciones. Las cifras confirmatorias
+futuras se incorporarán solo después de repetir las celdas distribuidas con el arnés
+corregido y reproducir las salidas desde el depósito.
 
 \section{Discusión}
 
@@ -349,9 +381,11 @@ inventar repositorios, eventos o proyecciones, sino integrarlos en una especific
 verificable que alcanza productos analíticos y de inteligencia artificial.
 
 La evidencia actual permite afirmar aplicabilidad y comprobación de contratos en rutas
-concretas. La afirmación cuantitativa fuerte permanece abierta hasta completar P1--A1 en
-motores NoSQL y publicar el paquete congelado. Esta delimitación transforma una intuición
-arquitectónica en un programa científico refutable.
+concretas, junto con una réplica histórica distribuida claramente delimitada. La
+afirmación cuantitativa fuerte permanece abierta hasta repetir P1--A1 con el oráculo
+corregido, ejecutar OpenSearch 3.2.0 en una plataforma compatible y obtener réplica
+independiente. Esta delimitación transforma una intuición arquitectónica en un programa
+científico refutable.
 
 \printbibliography
 \end{document}

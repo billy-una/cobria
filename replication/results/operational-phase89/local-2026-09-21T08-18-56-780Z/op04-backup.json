@@ -1,0 +1,21 @@
+{
+  "createdAt": "2026-09-21T08:18:56.803Z",
+  "records": [
+    {
+      "id": "obs-1",
+      "ambito": "reserva-sur",
+      "especie": "colibri",
+      "cantidad": 2,
+      "revision": 1,
+      "observadaEn": "2026-09-21T08:00:00Z"
+    },
+    {
+      "id": "obs-2",
+      "ambito": "reserva-sur",
+      "especie": "rana",
+      "cantidad": 1,
+      "revision": 1,
+      "observadaEn": "2026-09-21T08:01:00Z"
+    }
+  ]
+}

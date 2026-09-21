@@ -1,0 +1,10 @@
+{
+  "objective": "Agregar el nombre común opcional a una observación neutral",
+  "scope": "aplicación neutral y diccionario",
+  "authority": "implementation",
+  "files": ["replication/examples/ecosistema-app/src/domain/observacion.mjs", "replication/examples/ecosistema-app/test/app.test.mjs", "specification/phase-3/data-dictionary.yaml"],
+  "invariants": ["AI-INV-001", "AI-INV-002", "AI-INV-004"],
+  "tests": ["cd replication/examples/ecosistema-app && npm test", "python3 replication/scripts/validate-phase3.py"],
+  "risks": ["compatibilidad de documentos anteriores"],
+  "humanPending": []
+}

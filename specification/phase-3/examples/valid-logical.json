@@ -1,0 +1,15 @@
+{
+  "observacionId": "observacion-0042",
+  "ambitoId": "bosque-sur",
+  "revision": 3,
+  "versionEsquema": 3,
+  "ocurrioEn": "2026-08-24T14:10:00-06:00",
+  "especieCodigo": "AVE-003",
+  "catalogoVersion": "2026.1",
+  "estado": "verificada",
+  "procedencia": {
+    "fuenteId": "sensor-17",
+    "registradoEn": "2026-08-24T14:12:00-06:00",
+    "metodo": "manual"
+  }
+}

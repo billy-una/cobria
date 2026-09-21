@@ -1,0 +1,25 @@
+{
+  "manifestId": "cobria-documentation-reference",
+  "version": "1.0.0",
+  "status": "reference",
+  "owner": "COBRIA Documentation",
+  "language": "es-CR",
+  "reviewPolicy": "Revisar al cambiar contrato, responsabilidad, riesgo o evidencia; revisión ordinaria anual.",
+  "documentTypes": [
+    {"id": "DOC-README", "purpose": "orientar instalación, uso, límites y siguiente nivel documental", "requiredSections": ["propósito", "alcance", "estructura", "uso", "verificación", "límites", "responsable"]},
+    {"id": "DOC-ADR", "purpose": "conservar una decisión y sus alternativas", "requiredSections": ["estado", "fecha", "contexto", "decisión", "alternativas", "consecuencias", "revisión"]},
+    {"id": "DOC-API", "purpose": "especificar contrato de integración", "requiredSections": ["versión", "entrada", "salida", "errores", "autorización", "idempotencia", "ejemplos"]},
+    {"id": "DOC-EVENT", "purpose": "especificar evento y compatibilidad", "requiredSections": ["productor", "consumidor", "esquema", "orden", "duplicados", "reintentos", "retención"]},
+    {"id": "DOC-RUNBOOK", "purpose": "diagnosticar, mitigar, recuperar y escalar", "requiredSections": ["síntoma", "impacto", "precondiciones", "diagnóstico", "mitigación", "recuperación", "verificación", "escalamiento"]}
+  ],
+  "canonicalDocuments": [
+    {"path": "MANIFESTO.md", "type": "DOC-README", "owner": "Billy Jak Cordero Porras", "version": "1.0", "status": "stable", "reviewBefore": "2027-09-16"},
+    {"path": "specification/COBRIA-CORE-1.0.md", "type": "DOC-README", "owner": "Billy Jak Cordero Porras", "version": "1.0", "status": "frozen", "reviewBefore": "2027-09-16"},
+    {"path": "specification/MAPA-ECOSISTEMA.md", "type": "DOC-README", "owner": "COBRIA Documentation", "version": "1.0", "status": "stable", "reviewBefore": "2027-09-16"},
+    {"path": "specification/phase-2/REQUISITOS-ECOSISTEMA.md", "type": "DOC-README", "owner": "COBRIA Evidence", "version": "1.0", "status": "stable", "reviewBefore": "2027-09-16"},
+    {"path": "specification/phase-3/data-dictionary.yaml", "type": "DOC-API", "owner": "COBRIA Data", "version": "1.0.0", "status": "reference", "reviewBefore": "2027-09-16"},
+    {"path": "specification/phase-4/nodes.yaml", "type": "DOC-API", "owner": "COBRIA Data", "version": "1.0.0", "status": "reference", "reviewBefore": "2027-09-16"},
+    {"path": "specification/phase-5/architecture.yaml", "type": "DOC-API", "owner": "COBRIA Layers", "version": "1.0.0", "status": "reference", "reviewBefore": "2027-09-16"},
+    {"path": "specification/phase-6/ERROR-CATALOG.json", "type": "DOC-API", "owner": "COBRIA Documentation", "version": "1.0.0", "status": "reference", "reviewBefore": "2027-09-16"}
+  ]
+}

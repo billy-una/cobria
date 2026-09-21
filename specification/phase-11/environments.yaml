@@ -1,0 +1,148 @@
+{
+  "generatedFrom": [
+    "specification/phase-8/environments.json"
+  ],
+  "manifestId": "cobria-environments",
+  "records": [
+    {
+      "data": {
+        "accounts": [
+          "local"
+        ],
+        "alias": "local",
+        "branches": [
+          "*"
+        ],
+        "dataPolicy": "sinteticos",
+        "id": "local",
+        "project": "cobria-local",
+        "promotionFrom": null,
+        "rollback": "reiniciar-y-restaurar-fixture"
+      },
+      "id": "ENV-LOCAL",
+      "owner": "Responsable de operación",
+      "references": [
+        "specification/phase-8/MANUAL-DE-AMBIENTES.md"
+      ],
+      "source": "specification/phase-8/environments.json",
+      "version": "1.0.0"
+    },
+    {
+      "data": {
+        "accounts": [
+          "ci"
+        ],
+        "alias": "test",
+        "branches": [
+          "*"
+        ],
+        "dataPolicy": "sinteticos-efimeros",
+        "id": "test",
+        "project": "cobria-test",
+        "promotionFrom": "local",
+        "rollback": "descartar-entorno"
+      },
+      "id": "ENV-TEST",
+      "owner": "Responsable de operación",
+      "references": [
+        "specification/phase-8/MANUAL-DE-AMBIENTES.md"
+      ],
+      "source": "specification/phase-8/environments.json",
+      "version": "1.0.0"
+    },
+    {
+      "data": {
+        "accounts": [
+          "ci-preview"
+        ],
+        "alias": "preview",
+        "branches": [
+          "*"
+        ],
+        "dataPolicy": "sinteticos-o-anonimizados-verificados",
+        "id": "preview",
+        "project": "cobria-preview",
+        "promotionFrom": "test",
+        "rollback": "eliminar-preview"
+      },
+      "id": "ENV-PREVIEW",
+      "owner": "Responsable de operación",
+      "references": [
+        "specification/phase-8/MANUAL-DE-AMBIENTES.md"
+      ],
+      "source": "specification/phase-8/environments.json",
+      "version": "1.0.0"
+    },
+    {
+      "data": {
+        "accounts": [
+          "ci-staging"
+        ],
+        "alias": "staging",
+        "branches": [
+          "main",
+          "release/*"
+        ],
+        "dataPolicy": "sinteticos-o-anonimizados-verificados",
+        "id": "staging",
+        "project": "cobria-staging",
+        "promotionFrom": "preview",
+        "rollback": "artefacto-anterior-y-restauracion-probada"
+      },
+      "id": "ENV-STAGING",
+      "owner": "Responsable de operación",
+      "references": [
+        "specification/phase-8/MANUAL-DE-AMBIENTES.md"
+      ],
+      "source": "specification/phase-8/environments.json",
+      "version": "1.0.0"
+    },
+    {
+      "data": {
+        "accounts": [
+          "ci-production"
+        ],
+        "alias": "production",
+        "branches": [
+          "main"
+        ],
+        "dataPolicy": "datos-reales-segun-finalidad-y-retencion",
+        "id": "production",
+        "project": "cobria-production",
+        "promotionFrom": "staging",
+        "rollback": "artefacto-anterior-inmutable"
+      },
+      "id": "ENV-PRODUCTION",
+      "owner": "Responsable de operación",
+      "references": [
+        "specification/phase-8/MANUAL-DE-AMBIENTES.md"
+      ],
+      "source": "specification/phase-8/environments.json",
+      "version": "1.0.0"
+    },
+    {
+      "data": {
+        "accounts": [
+          "ci-recovery"
+        ],
+        "alias": "recovery",
+        "branches": [
+          "main"
+        ],
+        "dataPolicy": "respaldo-cifrado-con-acceso-restringido",
+        "id": "recovery",
+        "project": "cobria-recovery",
+        "promotionFrom": "production",
+        "rollback": "conmutar-a-produccion-tras-verificacion"
+      },
+      "id": "ENV-RECOVERY",
+      "owner": "Responsable de operación",
+      "references": [
+        "specification/phase-8/MANUAL-DE-AMBIENTES.md"
+      ],
+      "source": "specification/phase-8/environments.json",
+      "version": "1.0.0"
+    }
+  ],
+  "schemaVersion": "1.0.0"
+}

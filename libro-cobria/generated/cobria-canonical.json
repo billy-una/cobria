@@ -1,0 +1,80 @@
+{
+  "schemaVersion": "1.0.0",
+  "identity": {
+    "name": "COBRIA",
+    "ecosystemVersion": "1.0.0",
+    "coreVersion": "1.0",
+    "author": "Billy Jak Cordero Porras",
+    "place": "Coto Brus, Costa Rica",
+    "year": 2026,
+    "repository": "https://github.com/billy-una/cobria",
+    "language": "es"
+  },
+  "titles": {
+    "master": "COBRIA: diseño y evaluación de contratos reconstruibles para sistemas NoSQL documentales",
+    "article": "Contratos reconstruibles con ámbito explícito para sistemas NoSQL documentales",
+    "book": "COBRIA: patrones, capas, datos y software verificable",
+    "site": "COBRIA · Patrones y manuales para construir software"
+  },
+  "ecosystem": {
+    "moduleCount": 17,
+    "modules": [
+      "Manifesto",
+      "Fundamentos",
+      "Layers",
+      "Pattern Design",
+      "Data",
+      "Core",
+      "API & UX",
+      "Security",
+      "Quality",
+      "Performance",
+      "Cloud & Operations",
+      "Analytics & AI",
+      "Engineering",
+      "Build",
+      "Toolkit",
+      "Evidence",
+      "Knowledge"
+    ]
+  },
+  "claims": [
+    {
+      "id": "CLAIM-ALT-630",
+      "value": 630,
+      "unit": "observaciones",
+      "status": "ejecutado",
+      "source": "replication/results/core-1.3-alternatives/summary.json#/rawCount",
+      "allowedProducts": [
+        "article",
+        "master",
+        "book",
+        "site"
+      ]
+    },
+    {
+      "id": "CLAIM-STRATEGIES-7",
+      "value": 7,
+      "unit": "alternativas",
+      "status": "ejecutado",
+      "source": "specification/phase-15/benchmark-plan.json#/strategies",
+      "allowedProducts": [
+        "article",
+        "master",
+        "book",
+        "site"
+      ]
+    },
+    {
+      "id": "CLAIM-HISTORICAL-270",
+      "value": 270,
+      "unit": "corridas históricas",
+      "status": "histórico-no-confirmatorio",
+      "source": "replication/PROTOCOL-1.1.md",
+      "allowedProducts": [
+        "article",
+        "master"
+      ]
+    }
+  ]
+}

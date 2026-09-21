@@ -1,0 +1,11 @@
+{
+  "schemaVersion": "1.0.0",
+  "proposalIndependent": true,
+  "authority": "read-only-consumer",
+  "datasetRequired": ["purpose", "consent", "scope", "validTime", "knownTime", "sources", "transformation", "partition", "seed", "exclusions", "hash"],
+  "retrievalOrder": ["authenticate", "authorize-capability", "filter-scope", "retrieve", "rank", "verify-citations", "answer-or-abstain"],
+  "forbidden": ["write-canonical", "cross-scope-retrieval", "uncited-claim", "silent-model-change", "training-without-purpose", "automatic-feedback-as-truth"],
+  "modelRegistryRequired": ["modelId", "version", "purpose", "trainingManifest", "evaluation", "thresholds", "owner", "rollback", "retiredAt"],
+  "evaluation": ["dataset-reproducibility", "temporal-leakage", "entity-leakage", "scope-violations", "citation-validity", "appropriate-abstention", "drift", "human-review-when-required"],
+  "claimLimit": "La evaluación léxica local no demuestra calidad generativa, ausencia de sesgo, seguridad completa ni utilidad humana."
+}

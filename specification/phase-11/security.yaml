@@ -1,0 +1,63 @@
+{
+  "generatedFrom": [
+    "specification/phase-7/security.json"
+  ],
+  "manifestId": "cobria-security",
+  "records": [
+    {
+      "data": {
+        "actor": "ACT-02",
+        "audit": [
+          "actorId",
+          "capacidad",
+          "ambito",
+          "finalidad",
+          "resultado",
+          "codigo",
+          "ocurridoEn"
+        ],
+        "capability": "observaciones:escribir",
+        "id": "SEC-OP-001",
+        "name": "registrar-observacion",
+        "negativeTest": "SEC-NEG-001",
+        "purpose": "obligatoria",
+        "scope": "obligatorio-y-exacto"
+      },
+      "id": "SEC-OP-001",
+      "owner": "Responsable de seguridad",
+      "references": [
+        "specification/phase-7/MODELO-DE-AMENAZAS.md"
+      ],
+      "source": "specification/phase-7/security.json",
+      "version": "1.0.0"
+    },
+    {
+      "data": {
+        "actor": "ACT-03",
+        "audit": [
+          "actorId",
+          "capacidad",
+          "ambito",
+          "finalidad",
+          "resultado",
+          "codigo",
+          "ocurridoEn"
+        ],
+        "capability": "observaciones:leer",
+        "id": "SEC-OP-002",
+        "name": "reconstruir-resumen",
+        "negativeTest": "SEC-NEG-002",
+        "purpose": "obligatoria",
+        "scope": "obligatorio-y-exacto"
+      },
+      "id": "SEC-OP-002",
+      "owner": "Responsable de seguridad",
+      "references": [
+        "specification/phase-7/MODELO-DE-AMENAZAS.md"
+      ],
+      "source": "specification/phase-7/security.json",
+      "version": "1.0.0"
+    }
+  ],
+  "schemaVersion": "1.0.0"
+}

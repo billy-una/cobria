@@ -1,0 +1,300 @@
+{
+  "generatedFrom": [
+    "specification/phase-4/nodes.yaml"
+  ],
+  "manifestId": "cobria-nodes",
+  "records": [
+    {
+      "data": {
+        "atomicity": "una observación y su revisión; salidas externas mediante outbox",
+        "cardinality": "muchas observaciones por ámbito; identidad única dentro del ámbito",
+        "consistency": "rechazo de revisión obsoleta",
+        "costs": [
+          "almacenamiento canónico",
+          "índices de identidad y tiempo"
+        ],
+        "growth": "crecimiento continuo; paginación obligatoria",
+        "id": "NODE-OBS-CANONICAL",
+        "identity": [
+          "ambitoId",
+          "observacionId"
+        ],
+        "indexes": [
+          "unique(ambitoId, observacionId)",
+          "(ambitoId, ocurrioEn desc)"
+        ],
+        "kind": "canonical",
+        "lifecycle": "crear → revisar → verificar/descartar → retener/eliminar por política",
+        "logicalName": "ObservacionesCanonicas",
+        "need": "Conservar la autoridad de cada observación con identidad, ámbito y revisión.",
+        "owner": "Equipo responsable de datos del ámbito",
+        "physicalPath": "n8/{ambitoId}/{observacionId}",
+        "queries": [
+          "obtener por identidad y ámbito",
+          "listar por ámbito y tiempo con cursor"
+        ],
+        "rebuild": null,
+        "retention": "política del ámbito y finalidad; eliminación propagada a derivados",
+        "scope": "ambitoId",
+        "security": "autorizar ámbito antes de formar ruta o consulta",
+        "tests": [
+          "identidad requerida",
+          "ámbito extranjero rechazado",
+          "revisión obsoleta rechazada"
+        ],
+        "writeAuthority": "RepositorioObservaciones"
+      },
+      "id": "NODE-OBS-CANONICAL",
+      "owner": "Equipo responsable de datos del ámbito",
+      "references": [
+        "specification/phase-4/NODOS-Y-AGREGADOS.md",
+        "specification/phase-3/data-dictionary.yaml"
+      ],
+      "source": "specification/phase-4/nodes.yaml",
+      "version": "1.0.0"
+    },
+    {
+      "data": {
+        "atomicity": "se escribe con la observación",
+        "cardinality": "cero o uno por observación",
+        "consistency": "fuerte dentro de la frontera documental disponible",
+        "costs": [
+          "aumenta tamaño y frecuencia de reescritura del documento"
+        ],
+        "growth": "acotado; tamaño máximo declarado",
+        "id": "NODE-OBS-DETAIL",
+        "identity": [
+          "parent:observacionId"
+        ],
+        "indexes": [],
+        "kind": "embedded",
+        "lifecycle": "idéntico al padre",
+        "logicalName": "DetalleUbicacion",
+        "need": "Conservar un valor pequeño que solo existe con la observación.",
+        "owner": "Dominio de observaciones",
+        "physicalPath": "n8/{ambitoId}/{observacionId}/sn1",
+        "queries": [
+          "leer junto con la observación"
+        ],
+        "rebuild": null,
+        "retention": "idéntica al padre",
+        "scope": "heredado y verificado contra ambitoId del padre",
+        "security": "no amplía permisos del padre",
+        "tests": [
+          "no sobrepasa tamaño máximo",
+          "no existe sin padre",
+          "ámbito coincide con padre"
+        ],
+        "writeAuthority": "RepositorioObservaciones"
+      },
+      "id": "NODE-OBS-DETAIL",
+      "owner": "Dominio de observaciones",
+      "references": [
+        "specification/phase-4/NODOS-Y-AGREGADOS.md",
+        "specification/phase-3/data-dictionary.yaml"
+      ],
+      "source": "specification/phase-4/nodes.yaml",
+      "version": "1.0.0"
+    },
+    {
+      "data": {
+        "atomicity": "publicación por versión completa o alias estable",
+        "cardinality": "muchos códigos por versión; versiones inmutables publicadas",
+        "consistency": "lectura por versión exacta",
+        "costs": [
+          "coordinación editorial",
+          "retención multiversión"
+        ],
+        "growth": "bajo y versionado",
+        "id": "NODE-CATALOG-SPECIES",
+        "identity": [
+          "catalogoVersion",
+          "especieCodigo"
+        ],
+        "indexes": [
+          "unique(catalogoVersion, especieCodigo)"
+        ],
+        "kind": "reference",
+        "lifecycle": "borrador → validado → publicado → sustituido → archivado",
+        "logicalName": "CatalogoEspecies",
+        "need": "Interpretar códigos históricos usando una edición gobernada.",
+        "owner": "Responsable del catálogo de especies",
+        "physicalPath": "n9/{catalogoVersion}/{especieCodigo}",
+        "queries": [
+          "resolver código por versión",
+          "listar edición para validación"
+        ],
+        "rebuild": "regenerable solo desde fuente maestra y manifiesto declarados",
+        "retention": "versiones referenciadas se conservan mientras existan datos dependientes",
+        "scope": "global o por jurisdicción declarada; nunca inferido",
+        "security": "escritura restringida; lectura según sensibilidad del catálogo",
+        "tests": [
+          "versión inexistente rechazada",
+          "código desconocido aplica política",
+          "edición publicada es inmutable"
+        ],
+        "writeAuthority": "PublicadorCatalogo"
+      },
+      "id": "NODE-CATALOG-SPECIES",
+      "owner": "Responsable del catálogo de especies",
+      "references": [
+        "specification/phase-4/NODOS-Y-AGREGADOS.md",
+        "specification/phase-3/data-dictionary.yaml"
+      ],
+      "source": "specification/phase-4/nodes.yaml",
+      "version": "1.0.0"
+    },
+    {
+      "data": {
+        "atomicity": "documento canónico y registro outbox se confirman juntos cuando el motor lo permite",
+        "cardinality": "varios eventos por observación",
+        "consistency": "entrega al menos una vez; consumidor idempotente",
+        "costs": [
+          "escritura adicional",
+          "trabajador, reintentos y cola de fallos"
+        ],
+        "growth": "continuo; compactación después de entrega y retención",
+        "id": "NODE-OUTBOX",
+        "identity": [
+          "ambitoId",
+          "eventoId"
+        ],
+        "indexes": [
+          "(ambitoId, estado, proximoIntento)",
+          "unique(ambitoId, claveIdempotencia)"
+        ],
+        "kind": "outbox",
+        "lifecycle": "pendiente → procesando → entregado/fallido → archivado/eliminado",
+        "logicalName": "BandejaEventosObservacion",
+        "need": "Coordinar efectos cuando el motor no ofrece una transacción que abarque consumidores externos.",
+        "owner": "Equipo de integración",
+        "physicalPath": "n10/{ambitoId}/{eventoId}",
+        "queries": [
+          "pendientes por ámbito y próximo intento",
+          "evento por clave idempotente"
+        ],
+        "rebuild": "no se reconstruye desde la proyección; reemisión requiere regla explícita",
+        "retention": "ventana operativa más auditoría mínima",
+        "scope": "ambitoId",
+        "security": "solo backend; contenido minimizado",
+        "tests": [
+          "entrega duplicada no duplica efecto",
+          "fallo conserva evento",
+          "otro ámbito no consume"
+        ],
+        "writeAuthority": "RepositorioObservaciones dentro de la misma frontera atómica"
+      },
+      "id": "NODE-OUTBOX",
+      "owner": "Equipo de integración",
+      "references": [
+        "specification/phase-4/NODOS-Y-AGREGADOS.md",
+        "specification/phase-3/data-dictionary.yaml"
+      ],
+      "source": "specification/phase-4/nodes.yaml",
+      "version": "1.0.0"
+    },
+    {
+      "data": {
+        "atomicity": "construcción separada; publicación mediante versión/alias",
+        "cardinality": "a lo sumo una entrada por observación y versión",
+        "consistency": "frescura declarada y revisión de fuente",
+        "costs": [
+          "amplificación de escritura",
+          "almacenamiento temporal",
+          "operación de reconstrucción"
+        ],
+        "growth": "proporcional a fuentes; versiones candidatas duplican temporalmente almacenamiento",
+        "id": "NODE-SEARCH-PROJECTION",
+        "identity": [
+          "versionProyeccion",
+          "ambitoId",
+          "observacionId"
+        ],
+        "indexes": [
+          "índice textual por ámbito",
+          "(ambitoId, especieCodigo, estado)"
+        ],
+        "kind": "projection",
+        "lifecycle": "ausente → construyendo → candidata → verificada → publicada → retirada",
+        "logicalName": "BusquedaObservaciones",
+        "need": "Responder búsqueda de texto y filtros sin ampliar la autoridad canónica.",
+        "owner": "Equipo de búsqueda",
+        "physicalPath": "n11/{versionProyeccion}/{ambitoId}/{observacionId}",
+        "queries": [
+          "buscar texto dentro del ámbito",
+          "filtrar por especie y estado"
+        ],
+        "rebuild": "total desde NODE-OBS-CANONICAL y NODE-CATALOG-SPECIES con contrato versionado",
+        "retention": "versión activa más ventana de rollback; retirar datos eliminados",
+        "scope": "ambitoId copiado y verificado desde fuente",
+        "security": "filtrar ámbito antes de ranking o similitud",
+        "tests": [
+          "R1 equivalencia y repetición",
+          "S1 cero cruces de ámbito",
+          "publicación fallida conserva versión activa"
+        ],
+        "writeAuthority": "ConstructorProyeccionBusqueda"
+      },
+      "id": "NODE-SEARCH-PROJECTION",
+      "owner": "Equipo de búsqueda",
+      "references": [
+        "specification/phase-4/NODOS-Y-AGREGADOS.md",
+        "specification/phase-3/data-dictionary.yaml"
+      ],
+      "source": "specification/phase-4/nodes.yaml",
+      "version": "1.0.0"
+    },
+    {
+      "data": {
+        "atomicity": "manifiesto se publica solo al completar y verificar fragmentos",
+        "cardinality": "muchas filas o fragmentos por versión",
+        "consistency": "corte congelado; no se modifica en sitio",
+        "costs": [
+          "almacenamiento por versión",
+          "cómputo",
+          "riesgo de retención de datos"
+        ],
+        "growth": "por ejecución; presupuesto y expiración declarados",
+        "id": "NODE-ANALYTIC-SNAPSHOT",
+        "identity": [
+          "datasetVersion",
+          "partitionId"
+        ],
+        "indexes": [
+          "unique(datasetVersion, partitionId)",
+          "manifiesto por versión"
+        ],
+        "kind": "snapshot",
+        "lifecycle": "propuesto → materializando → verificado → publicado → expirado/retirado",
+        "logicalName": "ConjuntoAnaliticoFechado",
+        "need": "Reproducir análisis o entrenamiento con corte, transformación y partición declarados.",
+        "owner": "Equipo responsable de analítica",
+        "physicalPath": "n12/{datasetVersion}/{partitionId}",
+        "queries": [
+          "leer por versión y partición",
+          "verificar huellas y cobertura"
+        ],
+        "rebuild": "desde fuentes, corte, consulta, catálogo, transformación y semilla del manifiesto",
+        "retention": "según finalidad, consentimiento, costo y reproducibilidad permitida",
+        "scope": "lista explícita de ámbitos autorizados; particiones sin fuga",
+        "security": "minimización, seudonimización y autorización antes de materializar",
+        "tests": [
+          "A1 manifiesto completo",
+          "partición temporal sin fuga",
+          "huellas coinciden",
+          "abstención si falta evidencia"
+        ],
+        "writeAuthority": "ConstructorDataset"
+      },
+      "id": "NODE-ANALYTIC-SNAPSHOT",
+      "owner": "Equipo responsable de analítica",
+      "references": [
+        "specification/phase-4/NODOS-Y-AGREGADOS.md",
+        "specification/phase-3/data-dictionary.yaml"
+      ],
+      "source": "specification/phase-4/nodes.yaml",
+      "version": "1.0.0"
+    }
+  ],
+  "schemaVersion": "1.0.0"
+}

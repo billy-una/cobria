@@ -1,0 +1,370 @@
+{
+  "generatedFrom": [
+    "specification/phase-2/REQUISITOS-ECOSISTEMA.md",
+    "specification/phase-9/quality.json"
+  ],
+  "manifestId": "cobria-traceability",
+  "records": [
+    {
+      "data": {
+        "status": "executed",
+        "test": "phase-2-traceability",
+        "title": "Registrar una necesidad"
+      },
+      "id": "ECO-RF-001",
+      "owner": "Gobernanza COBRIA",
+      "references": [
+        "specification/phase-2/TRAZABILIDAD.md",
+        "test:phase-2-traceability"
+      ],
+      "source": "specification/phase-2/REQUISITOS-ECOSISTEMA.md",
+      "version": "1.0.0"
+    },
+    {
+      "data": {
+        "status": "planned",
+        "test": "small-project-scenario",
+        "title": "Seleccionar adopción mínima"
+      },
+      "id": "ECO-RF-002",
+      "owner": "Gobernanza COBRIA",
+      "references": [
+        "specification/phase-2/TRAZABILIDAD.md",
+        "test:small-project-scenario"
+      ],
+      "source": "specification/phase-2/REQUISITOS-ECOSISTEMA.md",
+      "version": "1.0.0"
+    },
+    {
+      "data": {
+        "status": "executed",
+        "test": "validate-phase2",
+        "title": "Asignar responsabilidades"
+      },
+      "id": "ECO-RF-003",
+      "owner": "Gobernanza COBRIA",
+      "references": [
+        "specification/phase-2/TRAZABILIDAD.md",
+        "test:validate-phase2"
+      ],
+      "source": "specification/phase-2/REQUISITOS-ECOSISTEMA.md",
+      "version": "1.0.0"
+    },
+    {
+      "data": {
+        "status": "executed",
+        "test": "validate-phase3",
+        "title": "Definir datos y contratos"
+      },
+      "id": "ECO-RF-004",
+      "owner": "Gobernanza COBRIA",
+      "references": [
+        "specification/phase-2/TRAZABILIDAD.md",
+        "test:validate-phase3"
+      ],
+      "source": "specification/phase-2/REQUISITOS-ECOSISTEMA.md",
+      "version": "1.0.0"
+    },
+    {
+      "data": {
+        "status": "executed-by-profile",
+        "test": "P1-P2-R1-S1-A1",
+        "title": "Separar autoridad y derivados"
+      },
+      "id": "ECO-RF-005",
+      "owner": "Gobernanza COBRIA",
+      "references": [
+        "specification/phase-2/TRAZABILIDAD.md",
+        "test:P1-P2-R1-S1-A1"
+      ],
+      "source": "specification/phase-2/REQUISITOS-ECOSISTEMA.md",
+      "version": "1.0.0"
+    },
+    {
+      "data": {
+        "status": "partial",
+        "test": "ADR-audit",
+        "title": "Registrar una decisión"
+      },
+      "id": "ECO-RF-006",
+      "owner": "Gobernanza COBRIA",
+      "references": [
+        "specification/phase-2/TRAZABILIDAD.md",
+        "test:ADR-audit"
+      ],
+      "source": "specification/phase-2/REQUISITOS-ECOSISTEMA.md",
+      "version": "1.0.0"
+    },
+    {
+      "data": {
+        "status": "executed",
+        "test": "validate-phase2",
+        "title": "Relacionar requisito y prueba"
+      },
+      "id": "ECO-RF-007",
+      "owner": "Gobernanza COBRIA",
+      "references": [
+        "specification/phase-2/TRAZABILIDAD.md",
+        "test:validate-phase2"
+      ],
+      "source": "specification/phase-2/REQUISITOS-ECOSISTEMA.md",
+      "version": "1.0.0"
+    },
+    {
+      "data": {
+        "status": "executed-simulation",
+        "test": "validate-phase8",
+        "title": "Gestionar ambientes"
+      },
+      "id": "ECO-RF-008",
+      "owner": "Gobernanza COBRIA",
+      "references": [
+        "specification/phase-2/TRAZABILIDAD.md",
+        "test:validate-phase8"
+      ],
+      "source": "specification/phase-2/REQUISITOS-ECOSISTEMA.md",
+      "version": "1.0.0"
+    },
+    {
+      "data": {
+        "status": "executed-local",
+        "test": "validate-phase7-and-S1",
+        "title": "Verificar seguridad por flujo"
+      },
+      "id": "ECO-RF-009",
+      "owner": "Gobernanza COBRIA",
+      "references": [
+        "specification/phase-2/TRAZABILIDAD.md",
+        "test:validate-phase7-and-S1"
+      ],
+      "source": "specification/phase-2/REQUISITOS-ECOSISTEMA.md",
+      "version": "1.0.0"
+    },
+    {
+      "data": {
+        "status": "executed-local",
+        "test": "validate-phase9",
+        "title": "Observar y recuperar"
+      },
+      "id": "ECO-RF-010",
+      "owner": "Gobernanza COBRIA",
+      "references": [
+        "specification/phase-2/TRAZABILIDAD.md",
+        "test:validate-phase9"
+      ],
+      "source": "specification/phase-2/REQUISITOS-ECOSISTEMA.md",
+      "version": "1.0.0"
+    },
+    {
+      "data": {
+        "status": "partial",
+        "test": "phase-15-comparison",
+        "title": "Medir alternativas"
+      },
+      "id": "ECO-RF-011",
+      "owner": "Gobernanza COBRIA",
+      "references": [
+        "specification/phase-2/TRAZABILIDAD.md",
+        "test:phase-15-comparison"
+      ],
+      "source": "specification/phase-2/REQUISITOS-ECOSISTEMA.md",
+      "version": "1.0.0"
+    },
+    {
+      "data": {
+        "status": "planned",
+        "test": "blind-agent-tasks",
+        "title": "Gobernar asistencia de IA"
+      },
+      "id": "ECO-RF-012",
+      "owner": "Gobernanza COBRIA",
+      "references": [
+        "specification/phase-2/TRAZABILIDAD.md",
+        "test:blind-agent-tasks"
+      ],
+      "source": "specification/phase-2/REQUISITOS-ECOSISTEMA.md",
+      "version": "1.0.0"
+    },
+    {
+      "data": {
+        "status": "planned",
+        "test": "phase-17-sync",
+        "title": "Publicar productos coherentes"
+      },
+      "id": "ECO-RF-013",
+      "owner": "Gobernanza COBRIA",
+      "references": [
+        "specification/phase-2/TRAZABILIDAD.md",
+        "test:phase-17-sync"
+      ],
+      "source": "specification/phase-2/REQUISITOS-ECOSISTEMA.md",
+      "version": "1.0.0"
+    },
+    {
+      "data": {
+        "status": "external-required",
+        "test": "phase-18-external",
+        "title": "Preparar validación externa"
+      },
+      "id": "ECO-RF-014",
+      "owner": "Gobernanza COBRIA",
+      "references": [
+        "specification/phase-2/TRAZABILIDAD.md",
+        "test:phase-18-external"
+      ],
+      "source": "specification/phase-2/REQUISITOS-ECOSISTEMA.md",
+      "version": "1.0.0"
+    },
+    {
+      "data": {
+        "status": "planned",
+        "test": "editorial-review",
+        "title": "Comprensibilidad"
+      },
+      "id": "ECO-RNF-001",
+      "owner": "Gobernanza COBRIA",
+      "references": [
+        "specification/phase-2/TRAZABILIDAD.md",
+        "test:editorial-review"
+      ],
+      "source": "specification/phase-2/REQUISITOS-ECOSISTEMA.md",
+      "version": "1.0.0"
+    },
+    {
+      "data": {
+        "status": "partial",
+        "test": "traceability-validators",
+        "title": "Trazabilidad"
+      },
+      "id": "ECO-RNF-002",
+      "owner": "Gobernanza COBRIA",
+      "references": [
+        "specification/phase-2/TRAZABILIDAD.md",
+        "test:traceability-validators"
+      ],
+      "source": "specification/phase-2/REQUISITOS-ECOSISTEMA.md",
+      "version": "1.0.0"
+    },
+    {
+      "data": {
+        "status": "partial",
+        "test": "internal-and-external-replication",
+        "title": "Reproducibilidad"
+      },
+      "id": "ECO-RNF-003",
+      "owner": "Gobernanza COBRIA",
+      "references": [
+        "specification/phase-2/TRAZABILIDAD.md",
+        "test:internal-and-external-replication"
+      ],
+      "source": "specification/phase-2/REQUISITOS-ECOSISTEMA.md",
+      "version": "1.0.0"
+    },
+    {
+      "data": {
+        "status": "partial",
+        "test": "multi-engine-conformance",
+        "title": "Portabilidad conceptual"
+      },
+      "id": "ECO-RNF-004",
+      "owner": "Gobernanza COBRIA",
+      "references": [
+        "specification/phase-2/TRAZABILIDAD.md",
+        "test:multi-engine-conformance"
+      ],
+      "source": "specification/phase-2/REQUISITOS-ECOSISTEMA.md",
+      "version": "1.0.0"
+    },
+    {
+      "data": {
+        "status": "executed-local",
+        "test": "validate-phase7",
+        "title": "Seguridad por defecto"
+      },
+      "id": "ECO-RNF-005",
+      "owner": "Gobernanza COBRIA",
+      "references": [
+        "specification/phase-2/TRAZABILIDAD.md",
+        "test:validate-phase7"
+      ],
+      "source": "specification/phase-2/REQUISITOS-ECOSISTEMA.md",
+      "version": "1.0.0"
+    },
+    {
+      "data": {
+        "status": "planned",
+        "test": "phase-10-accessibility",
+        "title": "Accesibilidad"
+      },
+      "id": "ECO-RNF-006",
+      "owner": "Gobernanza COBRIA",
+      "references": [
+        "specification/phase-2/TRAZABILIDAD.md",
+        "test:phase-10-accessibility"
+      ],
+      "source": "specification/phase-2/REQUISITOS-ECOSISTEMA.md",
+      "version": "1.0.0"
+    },
+    {
+      "data": {
+        "status": "partial",
+        "test": "version-review",
+        "title": "Evolución compatible"
+      },
+      "id": "ECO-RNF-007",
+      "owner": "Gobernanza COBRIA",
+      "references": [
+        "specification/phase-2/TRAZABILIDAD.md",
+        "test:version-review"
+      ],
+      "source": "specification/phase-2/REQUISITOS-ECOSISTEMA.md",
+      "version": "1.0.0"
+    },
+    {
+      "data": {
+        "status": "executed",
+        "test": "make-verificar",
+        "title": "Construcción limpia"
+      },
+      "id": "ECO-RNF-008",
+      "owner": "Gobernanza COBRIA",
+      "references": [
+        "specification/phase-2/TRAZABILIDAD.md",
+        "test:make-verificar"
+      ],
+      "source": "specification/phase-2/REQUISITOS-ECOSISTEMA.md",
+      "version": "1.0.0"
+    },
+    {
+      "data": {
+        "status": "partial",
+        "test": "epistemic-status-audit",
+        "title": "Honestidad epistémica"
+      },
+      "id": "ECO-RNF-009",
+      "owner": "Gobernanza COBRIA",
+      "references": [
+        "specification/phase-2/TRAZABILIDAD.md",
+        "test:epistemic-status-audit"
+      ],
+      "source": "specification/phase-2/REQUISITOS-ECOSISTEMA.md",
+      "version": "1.0.0"
+    },
+    {
+      "data": {
+        "status": "planned",
+        "test": "phase-17-regeneration",
+        "title": "Mantenibilidad"
+      },
+      "id": "ECO-RNF-010",
+      "owner": "Gobernanza COBRIA",
+      "references": [
+        "specification/phase-2/TRAZABILIDAD.md",
+        "test:phase-17-regeneration"
+      ],
+      "source": "specification/phase-2/REQUISITOS-ECOSISTEMA.md",
+      "version": "1.0.0"
+    }
+  ],
+  "schemaVersion": "1.0.0"
+}

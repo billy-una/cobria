@@ -1,0 +1,166 @@
+{
+  "alcance": "repetición confirmatoria Core 1.3",
+  "estado": "preliminar-incompleto",
+  "celdasAusentes": [
+    "mongodb/5000: 20/30 corridas",
+    "couchdb/100: archivo ausente",
+    "couchdb/1000: archivo ausente",
+    "couchdb/5000: archivo ausente",
+    "opensearch/100: archivo ausente",
+    "opensearch/1000: archivo ausente",
+    "opensearch/5000: archivo ausente"
+  ],
+  "intervalo": "bootstrap percentil de la mediana, 5000 remuestras",
+  "contraste": "permutación pareada de signos, 20000 remuestras; ajuste Holm",
+  "filas": [
+    {
+      "motor": "mongodb",
+      "n": 100,
+      "métrica": "consulta_canónica_ms",
+      "corridas": 30,
+      "p50": 13.200916499999948,
+      "p95": 23.442306549999373,
+      "p99": 44.846322499999616,
+      "ic95_mediana_inferior": 12.989645499999824,
+      "ic95_mediana_superior": 14.214750500001173,
+      "media": 15.595619433333377,
+      "desviación": 7.7383625819647
+    },
+    {
+      "motor": "mongodb",
+      "n": 100,
+      "métrica": "consulta_proyección_ms",
+      "corridas": 30,
+      "p50": 13.348687499999869,
+      "p95": 24.02348534999815,
+      "p99": 44.667455459998905,
+      "ic95_mediana_inferior": 12.698665999996592,
+      "ic95_mediana_superior": 14.551979000000756,
+      "media": 15.228977733333583,
+      "desviación": 7.484451000101108
+    },
+    {
+      "motor": "mongodb",
+      "n": 100,
+      "métrica": "reconstrucción_ms",
+      "corridas": 30,
+      "p50": 76.65591649999806,
+      "p95": 107.51538354999897,
+      "p99": 226.19780221999997,
+      "ic95_mediana_inferior": 74.20583349999833,
+      "ic95_mediana_superior": 81.78424950000044,
+      "media": 86.6440721666664,
+      "desviación": 36.34925055750946
+    },
+    {
+      "motor": "mongodb",
+      "n": 1000,
+      "métrica": "consulta_canónica_ms",
+      "corridas": 30,
+      "p50": 78.70052050000231,
+      "p95": 198.73860624998474,
+      "p99": 259.44026392999956,
+      "ic95_mediana_inferior": 70.13052100001369,
+      "ic95_mediana_superior": 84.93541650000407,
+      "media": 94.135313766667,
+      "desviación": 48.63500371605519
+    },
+    {
+      "motor": "mongodb",
+      "n": 1000,
+      "métrica": "consulta_proyección_ms",
+      "corridas": 30,
+      "p50": 66.34431200000108,
+      "p95": 122.42346264999067,
+      "p99": 172.11714125001225,
+      "ic95_mediana_inferior": 60.90412499998638,
+      "ic95_mediana_superior": 83.33741699998791,
+      "media": 78.8088124666642,
+      "desviación": 29.055552080009857
+    },
+    {
+      "motor": "mongodb",
+      "n": 1000,
+      "métrica": "reconstrucción_ms",
+      "corridas": 30,
+      "p50": 609.6429789999893,
+      "p95": 1097.063058000009,
+      "p99": 1515.1042412099932,
+      "ic95_mediana_inferior": 552.1069284999891,
+      "ic95_mediana_superior": 651.1426040000006,
+      "media": 682.857155466663,
+      "desviación": 254.26983632955196
+    },
+    {
+      "motor": "mongodb",
+      "n": 5000,
+      "métrica": "consulta_canónica_ms",
+      "corridas": 20,
+      "p50": 664.2093955000164,
+      "p95": 1111.4416583499988,
+      "p99": 1136.8850652699941,
+      "ic95_mediana_inferior": 571.7480209999485,
+      "ic95_mediana_superior": 787.7212079999736,
+      "media": 662.4174167500081,
+      "desviación": 259.7509580423908
+    },
+    {
+      "motor": "mongodb",
+      "n": 5000,
+      "métrica": "consulta_proyección_ms",
+      "corridas": 20,
+      "p50": 615.7966460000025,
+      "p95": 998.3576607499039,
+      "p99": 1003.983465749952,
+      "ic95_mediana_inferior": 440.8224999999511,
+      "ic95_mediana_superior": 766.8845835000102,
+      "media": 603.1904292999855,
+      "desviación": 244.73072035333027
+    },
+    {
+      "motor": "mongodb",
+      "n": 5000,
+      "métrica": "reconstrucción_ms",
+      "corridas": 20,
+      "p50": 5466.461917000008,
+      "p95": 8720.398868400016,
+      "p99": 9315.992406479989,
+      "ic95_mediana_inferior": 4837.870812499954,
+      "ic95_mediana_superior": 6485.04941700006,
+      "media": 5701.904706199997,
+      "desviación": 1575.8783713020669
+    }
+  ],
+  "comparaciones": [
+    {
+      "motor": "mongodb",
+      "n": 100,
+      "corridas": 30,
+      "diferencia_pareada_media_ms": -0.36664169999979396,
+      "razón_pareada_mediana": 0.9938061811236785,
+      "tamaño_efecto_dz": -0.040314422016073194,
+      "p_raw": 0.7737113144342783,
+      "p_holm": 0.7737113144342783
+    },
+    {
+      "motor": "mongodb",
+      "n": 1000,
+      "corridas": 30,
+      "diferencia_pareada_media_ms": -15.326501300002807,
+      "razón_pareada_mediana": 0.8841329082111463,
+      "tamaño_efecto_dz": -0.38377933243425727,
+      "p_raw": 0.010499475026248688,
+      "p_holm": 0.03149842507874606
+    },
+    {
+      "motor": "mongodb",
+      "n": 5000,
+      "corridas": 20,
+      "diferencia_pareada_media_ms": -59.22698745002272,
+      "razón_pareada_mediana": 0.9097069657350185,
+      "tamaño_efecto_dz": -0.2712947326931697,
+      "p_raw": 0.2358882055897205,
+      "p_holm": 0.471776411179441
+    }
+  ]
+}

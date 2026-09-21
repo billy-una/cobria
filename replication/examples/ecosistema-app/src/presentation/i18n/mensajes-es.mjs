@@ -1,0 +1,25 @@
+const mensajes = Object.freeze({
+  OBS_ID_REQUIRED: 'El identificador es obligatorio.',
+  OBS_SCOPE_REQUIRED: 'El ámbito es obligatorio.',
+  OBS_SPECIES_REQUIRED: 'La especie es obligatoria.',
+  OBS_QUANTITY_INVALID: 'La cantidad debe ser positiva.',
+  OBS_REVISION_INVALID: 'La revisión debe ser positiva.',
+  OBS_DATE_INVALID: 'La fecha de observación no es válida.',
+  IDEMPOTENCY_KEY_REQUIRED: 'La clave de idempotencia es obligatoria.',
+  IDEMPOTENCY_CONFLICT: 'La operación ya fue utilizada con otra entrada.',
+  STALE_REVISION: 'Existe una revisión igual o más reciente.',
+  ACCESS_DENIED: 'No tiene permiso para realizar esta acción.',
+  SCOPE_INVALID: 'El ámbito solicitado no es válido.',
+  PAGE_SIZE_INVALID: 'El tamaño de página debe estar entre 1 y 100.',
+  CURSOR_INVALID: 'El cursor de paginación no es válido.',
+  PROJECTION_VERIFICATION_FAILED: 'La proyección no superó la verificación.',
+  PHYSICAL_VERSION_UNSUPPORTED: 'La versión de datos no es compatible.',
+  PROVIDER_FAILURE: 'El servicio de datos no está disponible temporalmente.',
+  AI_QUERY_REQUIRED: 'La consulta de evidencia es obligatoria.',
+  DRIFT_CONFIG_INVALID: 'La configuración de deriva no es válida.',
+  ANALYTICS_CONFIG_INVALID: 'La configuración analítica no es válida.',
+  ANALYTICS_CUTOFF_INVALID: 'El corte temporal no es válido.',
+  ANALYTICS_ENTITY_LEAKAGE: 'La partición presenta fuga entre entidades.',
+});
+
+export const traducirErrorEs = (codigo) => mensajes[codigo] ?? 'No fue posible completar la operación.';

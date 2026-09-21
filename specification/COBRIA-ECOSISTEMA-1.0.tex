@@ -1,0 +1,92 @@
+\documentclass[11pt,letterpaper]{article}
+\usepackage[spanish]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=2.3cm]{geometry}
+\usepackage{xcolor,booktabs,longtable,enumitem,hyperref}
+\definecolor{bosque}{HTML}{174A3A}
+\definecolor{coral}{HTML}{D96B4B}
+\hypersetup{colorlinks=true,linkcolor=bosque,urlcolor=coral,pdftitle={COBRIA Ecosistema 1.0: especificación de alcance},pdfauthor={Billy Jak Cordero Porras},pdfsubject={Especificación normativa del ecosistema COBRIA},pdfkeywords={COBRIA, arquitectura de software, patrones, NoSQL, trazabilidad}}
+\setlist{nosep,leftmargin=*}
+\title{\textcolor{bosque}{COBRIA Ecosistema 1.0}\\\large Especificación de alcance, autoridad y conformidad}
+\author{Billy Jak Cordero Porras}
+\date{Coto Brus, Costa Rica · 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+Este documento identifica las partes normativas del Ecosistema COBRIA 1.0 y sus
+relaciones con los productos pedagógicos y científicos. COBRIA es una propuesta
+independiente que compone prácticas conocidas mediante contratos verificables; no se
+presenta como estándar oficial ni como invención aislada de cada mecanismo.
+\end{abstract}
+\tableofcontents
+\section{Autoridad documental}
+El orden de autoridad es: especificación, implementación, evidencia y productos
+editoriales. Una explicación del libro o del sitio no puede ampliar un requisito del
+núcleo normativo. Una cifra experimental solo puede publicarse si conserva fuente,
+configuración, estado y limitaciones.
+\begin{longtable}{p{.19\linewidth}p{.27\linewidth}p{.46\linewidth}}
+\toprule Producto & Autoridad & Responsabilidad \\ \midrule
+Especificación & Normativa & Define requisitos, invariantes, niveles y vocabulario.\\
+Implementación & Ejecutable & Materializa contratos sin redefinirlos.\\
+Evidencia & Empírica & Registra pruebas, mediciones, fallos y amenazas.\\
+Artículo & Científica & Resume contribución, método, resultados y límites.\\
+Documento maestro & Metodológica & Desarrolla fundamentos, protocolo y trazabilidad.\\
+Libro y sitio & Pedagógica & Enseñan mediante patrones, ejemplos y laboratorios.\\
+\bottomrule
+\end{longtable}
+\section{Invariantes transversales}
+\begin{enumerate}
+\item El dominio y la aplicación no dependen de interfaz, SDK o almacenamiento.
+\item Las claves físicas compactas se traducen exclusivamente en Daters o adaptadores.
+\item Toda operación sensible conserva actor, capacidad, ámbito y finalidad.
+\item Ningún estado ejecutado se afirma sin un artefacto verificable.
+\item Índices, cachés, vectores y proyecciones no adquieren autoridad silenciosamente.
+\item Todo derivado declara fuente, contrato, versión, frescura y retiro.
+\item La optimización se justifica con mediciones y una alternativa más simple.
+\item Las actividades humanas o externas permanecen pendientes hasta recibir evidencia válida.
+\end{enumerate}
+\section{Módulos del ecosistema}
+El ecosistema organiza diecisiete módulos: Manifiesto, Fundamentos, Layers, Pattern
+Design, Data, Core, API \& UX, Security, Quality, Performance, Cloud \& Operations,
+Analytics \& AI, Engineering, Build, Toolkit, Evidence y Knowledge. No todos son
+obligatorios para todos los proyectos; el nivel mínimo debe corresponder al riesgo.
+\section{COBRIA Core 1.0}
+Core 1.0 permanece congelado. Su ámbito son sistemas NoSQL documentales con datos
+canónicos y representaciones reconstruibles. La conformidad se declara por nivel:
+\begin{description}
+\item[C1 --- Fundamental.] Autoridad, identidad, ámbito, revisión y frontera de escritura.
+\item[C2 --- Reconstruible.] C1 más contrato de transformación, equivalencia,
+idempotencia, reconstrucción y publicación segura.
+\item[C3 --- Gobernado.] C2 más procedencia, frescura, observabilidad, responsable y retiro.
+\end{description}
+Una implementación solo declara un nivel cuando supera todas sus pruebas obligatorias.
+\section{Patrones, capas y datos}
+Una ficha de patrón DEBE separar contexto, problema, fuerzas, solución, participantes,
+consecuencias, implementación, casos negativos, métricas y relaciones. Las capas DEBEN
+respetar dependencias hacia el dominio. El modelado documental DEBE partir de identidad,
+ciclo de vida, consultas, invariantes, ámbito y evolución; una estructura de carpetas no
+constituye por sí sola una arquitectura.
+\section{Seguridad, operación e inteligencia artificial}
+Los controles de seguridad se aplican en la frontera y se prueban con casos negativos.
+Los ambientes promueven artefactos inmutables y conservan rollback. La telemetría no
+debe exponer secretos ni bloquear el flujo principal. Un sistema de IA conserva
+procedencia, utiliza capacidades mínimas y se abstiene cuando la evidencia es insuficiente.
+\section{Evidencia y estados}
+Los estados permitidos son: propuesto, documentado, implementado, ejecutado, reproducido
+externamente y revisado por terceros. Ningún estado implica automáticamente el siguiente.
+Los resultados locales no demuestran comportamiento distribuido ni superioridad universal.
+\section{Productos y versiones}
+El libro principal contiene enseñanza duradera; el cuaderno reúne ejercicios; el anexo
+técnico conserva trazabilidad de fases. El artículo y el documento maestro consumen las
+mismas afirmaciones canónicas. La descarga pública no debe ofrecer versiones finales
+competidoras.
+\section{Licencia y cita}
+Cada tipo de material se rige por la licencia declarada en el repositorio. La atribución
+recomendada es: Cordero Porras, B. J. (2026). \emph{COBRIA Ecosistema 1.0: especificación
+de alcance, autoridad y conformidad}. Publicación independiente.
+\section{Límites}
+COBRIA no garantiza rendimiento, seguridad, disponibilidad, cumplimiento legal ni éxito
+de un proyecto. No reemplaza análisis de dominio, pruebas en infraestructura real,
+consentimiento, evaluación ética o revisión profesional independiente.
+\end{document}

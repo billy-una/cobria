@@ -2,7 +2,17 @@ build/*
 !build/.gitkeep
 tmp/
 output/**/build*/
+output/pdf/*.pdf
+output/release/**
+output/review/**
+libro-cobria/output/*.pdf
 replication/node_modules/
+sitio/node_modules/
+sitio/.next/
+sitio/.vinext/
+sitio/.wrangler/
+sitio/dist/
+sitio/.env*
 replication/**/test.db
 .DS_Store
 *.aux

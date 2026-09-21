@@ -1,0 +1,6 @@
+{
+  "schemaVersion":"1.0.0","command":"cobria generar --tipo TIPO --nombre NOMBRE --directorio RUTA",
+  "types":["proyecto","modulo","entidad","valor","caso-uso","puerto","adaptador","dater","nodo","catalogo","function","evento","adr","prueba","runbook"],
+  "artifactsPerGeneration":["src/generated/{tipo}-{slug}.mjs","test/generated/{tipo}-{slug}.test.mjs","docs/generated/{tipo}-{slug}.md",".cobria/generated/{tipo}-{slug}.json"],
+  "rules":["preflight-before-write","never-overwrite-divergent","same-input-same-bytes","safe-name-grammar","manifest-links-all-artifacts","negative-test-included"]
+}

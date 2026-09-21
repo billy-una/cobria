@@ -5,6 +5,21 @@ on:
   pull_request:
 
 jobs:
+  sitio:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: sitio
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: sitio/package-lock.json
+      - run: npm ci
+      - run: npm test
+
   replication:
     runs-on: ubuntu-latest
     defaults:
@@ -18,10 +33,30 @@ jobs:
           cache: npm
           cache-dependency-path: replication/package-lock.json
       - run: npm ci
+      - run: python3 scripts/validate-phase2.py
+      - run: python3 scripts/validate-phase3.py
+      - run: python3 scripts/validate-phase4.py
+      - run: python3 scripts/validate-phase5.py
+      - run: python3 scripts/validate-phase6.py
+      - run: python3 scripts/validate-phase7.py
+      - run: python3 scripts/validate-phase8.py
+      - run: python3 scripts/validate-phase9.py
+      - run: python3 scripts/validate-phase10.py
+      - run: python3 scripts/validate-phase11.py
+      - run: python3 scripts/validate-phase12.py
+      - run: python3 scripts/validate-phase13.py
+      - run: python3 scripts/validate-phase14.py
+      - run: python3 scripts/validate-phase15.py
+      - run: python3 scripts/validate-phase16.py
+      - run: python3 scripts/validate-phase17.py
+      - run: python3 scripts/validate-phase18.py
       - run: npm test
+      - run: npm test
+        working-directory: replication/examples/ecosistema-app
       - run: node src/cli.mjs verificar --adaptador lokijs --tamano 30 --salida "$RUNNER_TEMP/cobria"
       - run: npm run sbom
       - run: node -e "const s=require('./SBOM.cdx.json'); if(s.bomFormat!=='CycloneDX'||!s.components.length) process.exit(1)"
+      - run: npm audit --audit-level=high
 
   package-integrity:
     runs-on: ubuntu-latest

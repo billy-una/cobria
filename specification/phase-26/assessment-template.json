@@ -1,0 +1,193 @@
+{
+  "schemaVersion": "1.0.0",
+  "subject": "ejemplo-neutral",
+  "status": "unassessed",
+  "officialCertification": false,
+  "contracts": [
+    {
+      "id": "ENG-001",
+      "dimensions": [
+        {
+          "id": "states",
+          "decision": null,
+          "evidence": [],
+          "rationale": ""
+        },
+        {
+          "id": "transitions",
+          "decision": null,
+          "evidence": [],
+          "rationale": ""
+        },
+        {
+          "id": "recovery",
+          "decision": null,
+          "evidence": [],
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "ENG-002",
+      "dimensions": [
+        {
+          "id": "trusted-context",
+          "decision": null,
+          "evidence": [],
+          "rationale": ""
+        },
+        {
+          "id": "single-effect",
+          "decision": null,
+          "evidence": [],
+          "rationale": ""
+        },
+        {
+          "id": "traceable-output",
+          "decision": null,
+          "evidence": [],
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "ENG-003",
+      "dimensions": [
+        {
+          "id": "declared-policy",
+          "decision": null,
+          "evidence": [],
+          "rationale": ""
+        },
+        {
+          "id": "bounded-retry",
+          "decision": null,
+          "evidence": [],
+          "rationale": ""
+        },
+        {
+          "id": "visible-recovery",
+          "decision": null,
+          "evidence": [],
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "ENG-004",
+      "dimensions": [
+        {
+          "id": "immutable-artifact",
+          "decision": null,
+          "evidence": [],
+          "rationale": ""
+        },
+        {
+          "id": "promotion-gates",
+          "decision": null,
+          "evidence": [],
+          "rationale": ""
+        },
+        {
+          "id": "rollback",
+          "decision": null,
+          "evidence": [],
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "ENG-005",
+      "dimensions": [
+        {
+          "id": "minimization",
+          "decision": null,
+          "evidence": [],
+          "rationale": ""
+        },
+        {
+          "id": "bounded-cardinality",
+          "decision": null,
+          "evidence": [],
+          "rationale": ""
+        },
+        {
+          "id": "non-blocking",
+          "decision": null,
+          "evidence": [],
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "ENG-006",
+      "dimensions": [
+        {
+          "id": "baseline",
+          "decision": null,
+          "evidence": [],
+          "rationale": ""
+        },
+        {
+          "id": "budget",
+          "decision": null,
+          "evidence": [],
+          "rationale": ""
+        },
+        {
+          "id": "verify-retire",
+          "decision": null,
+          "evidence": [],
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "ENG-007",
+      "dimensions": [
+        {
+          "id": "boundary",
+          "decision": null,
+          "evidence": [],
+          "rationale": ""
+        },
+        {
+          "id": "no-growth",
+          "decision": null,
+          "evidence": [],
+          "rationale": ""
+        },
+        {
+          "id": "retirement",
+          "decision": null,
+          "evidence": [],
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "ENG-008",
+      "dimensions": [
+        {
+          "id": "structured-record",
+          "decision": null,
+          "evidence": [],
+          "rationale": ""
+        },
+        {
+          "id": "corrective-action",
+          "decision": null,
+          "evidence": [],
+          "rationale": ""
+        },
+        {
+          "id": "verification-reuse",
+          "decision": null,
+          "evidence": [],
+          "rationale": ""
+        }
+      ]
+    }
+  ],
+  "interpretation": "Plantilla sin evaluar; null no significa incumplimiento."
+}

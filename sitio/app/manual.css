@@ -1,0 +1,26 @@
+.manual-page{min-height:100vh}
+.manual-shell{display:grid;grid-template-columns:290px minmax(0,820px);gap:70px;max-width:1250px;margin:0 auto;padding:70px 28px 110px}
+.manual-shell>aside{position:sticky;top:105px;align-self:start}
+.manual-shell>aside>b{width:58px;height:58px;display:grid;place-content:center;border-radius:50%;background:var(--forest);color:white;font-size:22px}
+.manual-shell>aside>p{font-weight:900;color:var(--coral);text-transform:uppercase;font-size:12px;letter-spacing:.13em}
+.manual-shell>aside nav{display:flex;flex-direction:column;border-top:1px solid var(--line);margin-top:24px}
+.manual-shell>aside nav a{padding:12px 10px;border-bottom:1px solid var(--line);font-size:14px}
+.manual-shell>aside nav a[aria-current=page]{background:#e5efe9;color:var(--forest);font-weight:850;border-left:4px solid var(--leaf)}
+.manual-shell>article>h1{font-family:"Iowan Old Style",Georgia,serif;font-size:clamp(48px,7vw,78px);line-height:1;margin:15px 0 22px;color:var(--deep)}
+.manual-intro{font-family:"Iowan Old Style",Georgia,serif;font-size:22px;line-height:1.55}
+.outcomes{display:flex;flex-wrap:wrap;gap:9px;margin:30px 0 55px}
+.outcomes span{padding:9px 13px;background:#e7f0ea;color:var(--forest);font-weight:800;border-radius:999px;font-size:13px}
+.manual-shell article>section{padding:34px 0;border-top:1px solid var(--line)}
+.manual-shell article>section h2{font-family:"Iowan Old Style",Georgia,serif;font-size:34px;color:var(--forest);margin:0 0 15px}
+.manual-shell article>section p{font-size:17px;line-height:1.75}
+.manual-code{margin-top:24px;border-radius:14px;overflow:hidden;background:var(--deep);color:white}
+.manual-code>div{background:#dfe9e2;color:var(--forest);padding:12px 16px;font-size:13px;font-weight:850}
+.manual-code pre{margin:0;padding:25px;overflow:auto;line-height:1.65}
+.manual-next{border-left:6px solid var(--gold);background:#faf1d5;padding:24px;margin-top:35px}
+.manual-next p{line-height:1.65;margin-bottom:0}
+@media(max-width:800px){.manual-shell{grid-template-columns:1fr}
+.manual-shell>aside{position:static}
+.manual-shell>aside nav{display:grid;grid-template-columns:1fr 1fr}
+.manual-shell>aside nav a{font-size:12px}
+}
+

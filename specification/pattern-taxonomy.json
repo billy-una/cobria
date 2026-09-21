@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "1.0.0",
+  "catalogVersion": "ecosistema-1.0",
+  "status": "pedagogical",
+  "source": "sitio/public/catalogo.json",
+  "families": [
+    "Modelado documental",
+    "Seguridad por ámbito",
+    "Catálogos y vocabularios",
+    "Proyecciones de lectura",
+    "Reconstrucción",
+    "Eventos y consistencia",
+    "Gobernanza del ciclo de vida",
+    "Analítica reproducible",
+    "IA con procedencia"
+  ],
+  "relationTypes": ["requiere", "complementa", "alternativa", "especializa", "prepara", "protege", "entra-en-tension"],
+  "requiredFields": [
+    "id", "slug", "nombre", "familia", "tipo", "estado", "resumen", "problema",
+    "contexto", "fuerzas", "cuandoUsar", "cuandoEvitar", "estructura", "participantes",
+    "secuencia", "ejemplo", "codigo", "casoNegativo", "antipatrones", "consecuencias",
+    "pruebas", "seguridad", "operacion", "migracionRetiro", "relaciones", "ejercicio",
+    "procedencia"
+  ]
+}

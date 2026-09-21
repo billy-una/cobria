@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "1.0.0",
+  "responses": [
+    {
+      "file": "respuesta-R-ARCH24-M-01.json",
+      "reviewerCode": "R-ARCH24",
+      "sample": "M-01",
+      "sha256": "de52d9ded273a315e6cbdb709301058bdf8362aa9bc1d1142c04bf595d6bf406",
+      "attestation": "human-self-declared-confirmed-by-coordinator"
+    },
+    {
+      "file": "respuesta-R-ARCH24-M-02.json",
+      "reviewerCode": "R-ARCH24",
+      "sample": "M-02",
+      "sha256": "121e2375bff15515becd9709c09478b5949da9715002493f094ed30c15b57bbd",
+      "attestation": "human-self-declared-confirmed-by-coordinator"
+    },
+    {
+      "file": "respuesta-R-ARCH24-M-03.json",
+      "reviewerCode": "R-ARCH24",
+      "sample": "M-03",
+      "sha256": "e0abc1aec43aab95fb952e56d7dcd65fee59818e6ad4529c69f24f29f2f2fce4",
+      "attestation": "human-self-declared-confirmed-by-coordinator"
+    },
+    {
+      "file": "respuesta-R-QAOPS-M-01.json",
+      "reviewerCode": "R-QAOPS",
+      "sample": "M-01",
+      "sha256": "316251eafbb0381b99ecd1c3813bcc668303927d666e102b922fd818abcbd9fc",
+      "attestation": "human-self-declared-confirmed-by-coordinator"
+    },
+    {
+      "file": "respuesta-R-QAOPS-M-02.json",
+      "reviewerCode": "R-QAOPS",
+      "sample": "M-02",
+      "sha256": "64f289dd9c6a819cd75376cc6dc27307f633f3f0c6acd8703eff7ad46d88f447",
+      "attestation": "human-self-declared-confirmed-by-coordinator"
+    },
+    {
+      "file": "respuesta-R-QAOPS-M-03.json",
+      "reviewerCode": "R-QAOPS",
+      "sample": "M-03",
+      "sha256": "1c2617d1e8c8e5edd00a2cf9a9e07ccda87f461046dc4c4c1f5459773a07f7d6",
+      "attestation": "human-self-declared-confirmed-by-coordinator"
+    }
+  ]
+}

@@ -1,0 +1,150 @@
+{
+  "generatedFrom": [
+    "specification/phase-8/deployables.json"
+  ],
+  "manifestId": "cobria-functions",
+  "records": [
+    {
+      "data": {
+        "concurrency": 20,
+        "contract": "evento.observacion.v1",
+        "costControls": [
+          "maxInstances=10",
+          "concurrency=20",
+          "timeout=30s"
+        ],
+        "deadLetter": "observaciones-fallidas",
+        "id": "DEP-001",
+        "idempotency": "eventId+ambito",
+        "memoryMiB": 256,
+        "metrics": [
+          "invocaciones",
+          "errores",
+          "reintentos",
+          "dead_letter",
+          "duracion_ms",
+          "costo_estimado"
+        ],
+        "name": "procesar-observacion",
+        "owner": "equipo-operacion",
+        "permissions": [
+          "observaciones:leer",
+          "proyecciones:publicar"
+        ],
+        "recovery": "reprocesar-dead-letter-con-misma-clave-idempotencia",
+        "region": "us-central1",
+        "retries": {
+          "backoff": "exponencial-con-jitter",
+          "maximumAttempts": 5
+        },
+        "scope": "obligatorio-en-evento",
+        "secrets": [
+          "ref:GESTOR/CREDENCIAL_REPOSITORIO"
+        ],
+        "timeoutSeconds": 30,
+        "type": "function"
+      },
+      "id": "DEP-001",
+      "owner": "equipo-operacion",
+      "references": [
+        "specification/phase-8/MANUAL-DE-AMBIENTES.md",
+        "specification/phase-7/security.json"
+      ],
+      "source": "specification/phase-8/deployables.json",
+      "version": "1.0.0"
+    },
+    {
+      "data": {
+        "concurrency": 1,
+        "contract": "comando.reconstruccion.v1",
+        "costControls": [
+          "maxInstances=2",
+          "concurrency=1",
+          "presupuesto-por-ejecucion"
+        ],
+        "deadLetter": "reconstrucciones-fallidas",
+        "id": "DEP-002",
+        "idempotency": "projectionId+sourceRevision",
+        "memoryMiB": 512,
+        "metrics": [
+          "documentos_procesados",
+          "errores",
+          "duracion_ms",
+          "verificacion_fallida",
+          "costo_estimado"
+        ],
+        "name": "reconstruir-proyeccion",
+        "owner": "equipo-datos",
+        "permissions": [
+          "observaciones:leer",
+          "proyecciones:publicar"
+        ],
+        "recovery": "retirar-candidata-y-conservar-version-activa",
+        "region": "us-central1",
+        "retries": {
+          "backoff": "exponencial-con-jitter",
+          "maximumAttempts": 3
+        },
+        "scope": "obligatorio-en-comando",
+        "secrets": [],
+        "timeoutSeconds": 540,
+        "type": "worker"
+      },
+      "id": "DEP-002",
+      "owner": "equipo-datos",
+      "references": [
+        "specification/phase-8/MANUAL-DE-AMBIENTES.md",
+        "specification/phase-7/security.json"
+      ],
+      "source": "specification/phase-8/deployables.json",
+      "version": "1.0.0"
+    },
+    {
+      "data": {
+        "concurrency": 40,
+        "contract": "http.webhook.v1",
+        "costControls": [
+          "maxInstances=20",
+          "limite-por-identidad",
+          "tamano-maximo"
+        ],
+        "deadLetter": "no-aplica",
+        "id": "DEP-003",
+        "idempotency": "webhookEventId",
+        "memoryMiB": 256,
+        "metrics": [
+          "firmas_invalidas",
+          "repeticiones",
+          "rechazos",
+          "duracion_ms"
+        ],
+        "name": "entrada-integracion",
+        "owner": "equipo-integraciones",
+        "permissions": [
+          "observaciones:escribir"
+        ],
+        "recovery": "emisor-reintenta-con-mismo-identificador",
+        "region": "us-central1",
+        "retries": {
+          "backoff": "no-aplica",
+          "maximumAttempts": 0
+        },
+        "scope": "derivado-de-identidad-validada",
+        "secrets": [
+          "ref:GESTOR/FIRMA_WEBHOOK"
+        ],
+        "timeoutSeconds": 15,
+        "type": "webhook"
+      },
+      "id": "DEP-003",
+      "owner": "equipo-integraciones",
+      "references": [
+        "specification/phase-8/MANUAL-DE-AMBIENTES.md",
+        "specification/phase-7/security.json"
+      ],
+      "source": "specification/phase-8/deployables.json",
+      "version": "1.0.0"
+    }
+  ],
+  "schemaVersion": "1.0.0"
+}

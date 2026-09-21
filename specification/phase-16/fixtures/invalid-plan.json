@@ -1,0 +1,10 @@
+{
+  "objective": "Cambiar rápidamente el formato",
+  "scope": "todo",
+  "authority": "implementation",
+  "files": ["specification/COBRIA-CORE-1.0.md", "replication/results/core-1.3-alternatives/summary.json"],
+  "invariants": [],
+  "tests": [],
+  "risks": [],
+  "humanPending": []
+}

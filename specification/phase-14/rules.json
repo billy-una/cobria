@@ -1,0 +1,11 @@
+{
+  "schemaVersion":"1.0.0","rules":[
+    {"id":"AUD-001","name":"dependencia-de-capa-prohibida","severity":"medium"},
+    {"id":"AUD-002","name":"clave-fisica-fuera-de-dater","severity":"medium"},
+    {"id":"AUD-003","name":"proveedor-fuera-de-infraestructura","severity":"medium"},
+    {"id":"AUD-004","name":"function-sin-limites","severity":"medium"},
+    {"id":"AUD-005","name":"catalogo-sin-version","severity":"medium"},
+    {"id":"AUD-006","name":"permiso-comodin","severity":"medium"},
+    {"id":"AUD-007","name":"requisito-sin-prueba","severity":"high"}
+  ]
+}

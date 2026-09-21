@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "1.0.0",
+  "project": "observaciones-ambientales-comunitarias",
+  "proposalIndependent": true,
+  "milestones": [
+    {"id":"B01","name":"Necesidad y límites","evidence":["README.md","GUIA-PASO-A-PASO.md"],"test":"document-review"},
+    {"id":"B02","name":"Dominio e invariantes","evidence":["src/domain/observacion.mjs"],"test":"registra un documento canónico válido"},
+    {"id":"B03","name":"Capas y composición","evidence":["src/composition.mjs","src/application/ports/repositorio-observaciones.mjs"],"test":"el controlador traduce protocolo sin conocer infraestructura"},
+    {"id":"B04","name":"Diccionario físico y Dater","evidence":["src/infrastructure/data/observacion-dater.mjs"],"test":"el Dater aísla claves físicas del dominio"},
+    {"id":"B05","name":"Persistencia intercambiable","evidence":["src/infrastructure/repositorio-memoria.mjs","src/infrastructure/repositorio-mongodb.mjs","src/infrastructure/repositorio-couchdb.mjs"],"test":"adaptadores conservan el contrato"},
+    {"id":"B06","name":"Seguridad por capacidad y ámbito","evidence":["src/application/security/autorizar-capacidad.mjs"],"test":"rechaza el acceso a otro ámbito antes de tocar el repositorio"},
+    {"id":"B07","name":"Idempotencia y revisión","evidence":["src/application/registrar-observacion.mjs"],"test":"repetir la misma operación devuelve el mismo resultado sin duplicar"},
+    {"id":"B08","name":"API y errores","evidence":["src/presentation/problema-http.mjs","src/presentation/listar-observaciones-controller.mjs"],"test":"rechaza cursor y tamaño de página inválidos con códigos estables"},
+    {"id":"B09","name":"Proyección reconstruible","evidence":["src/application/reconstruir-resumen.mjs"],"test":"reconstruye una proyección equivalente después de retirarla"},
+    {"id":"B10","name":"Conjunto analítico","evidence":["src/application/analytics/construir-conjunto.mjs"],"test":"el conjunto analítico conserva consentimiento, tiempo, partición y huella"},
+    {"id":"B11","name":"IA limitada por evidencia","evidence":["src/application/ai/recuperar-evidencia.mjs","src/application/ai/evaluar-deriva.mjs"],"test":"la IA se abstiene sin evidencia y nunca adquiere escritura"},
+    {"id":"B12","name":"Calidad y rendimiento","evidence":["../../../specification/phase-9/quality.json","../../../specification/phase-15/benchmark-plan.json"],"test":"make verificar-cierre-8-9"},
+    {"id":"B13","name":"Operación y recuperación","evidence":["../../results/operational-phase89/latest.json"],"test":"make validar-ensayo-operacional-8-9"},
+    {"id":"B14","name":"Límites y retiro","evidence":["../../../CIERRE-FASES-8-9.md"],"test":"document-review"}
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "schemaVersion":"1.0.0",
+  "project":{"repository":"https://github.com/billy-una/BSHandball.git","ref":"09c15acd14ab806abe436a8176ef3247c61a2df6","expectedRemote":"https://github.com/billy-una/BSHandball.git","expectedCommit":"09c15acd14ab806abe436a8176ef3247c61a2df6"},
+  "scope":"comparación de transferencia Engineering desde objetos Git",
+  "contracts":[
+    {"id":"ENG-001","name":"Estado operativo explícito","owner":"producto","evidence":[{"path":"src/public/logicLayer/services/servicesThing/general/UIStateManager.js","containsAll":["loading","empty","error"]}]},
+    {"id":"ENG-002","name":"Autoridad transaccional","owner":"aplicación","evidence":[{"path":"src/server/lib/trusted-team-context.js","containsAll":["teamId"]}]},
+    {"id":"ENG-003","name":"Cola fuera de línea gobernada","owner":"plataforma","evidence":[{"path":"src/public/logicLayer/services/servicesOffline/OfflineSyncQueue.js","containsAll":["retry","queue"]}]},
+    {"id":"ENG-004","name":"Promoción ligada al artefacto","owner":"release","evidence":[{"path":"documentacion/INFRASTRUCTURE/deployment-devops.md","containsAll":["rollback","artifact"]}]},
+    {"id":"ENG-005","name":"Telemetría privada y no bloqueante","owner":"operación","evidence":[{"path":"src/server/analytics/ErrorTelemetryService.js","containsAll":["sanit"]}]},
+    {"id":"ENG-006","name":"Optimización con presupuesto","owner":"módulo","evidence":[{"path":"src/public/tools/frontend/check-bundle-budgets.mjs","containsAll":["budget"]}]},
+    {"id":"ENG-007","name":"Estrangulamiento verificable de legado","owner":"mantenimiento","evidence":[{"path":"documentacion/DEVELOPMENT/MODULES/CLIPS_LEGACY_BOUNDARY.md","containsAll":["no puede crecer","funcionalidad nueva"]}]},
+    {"id":"ENG-008","name":"Incidente como conocimiento","owner":"incidente","evidence":[{"path":"documentacion/INFRASTRUCTURE/production-runbook.md","containsAll":["causa raíz","riesgo residual"]}]}
+  ],
+  "limits":["no ejecuta el código del proyecto","no evalúa producción ni seguridad integral","la presencia textual requiere revisión humana","gap no significa incumplimiento"]
+}

@@ -1,3 +1,10 @@
-The synthetic datasets, raw benchmark measurements, processed summaries, tables and figures in this replication package are dedicated to the public domain under CC0 1.0.
+COBRIA synthetic datasets and generated results
+Copyright 2026 Billy Jak Cordero Porras
 
-This dedication does not apply to private source systems, third-party software, trademarks or any personal data. No private production data is included.
+SPDX-License-Identifier: CC-BY-4.0
+
+Licensed under Creative Commons Attribution 4.0 International:
+https://creativecommons.org/licenses/by/4.0/
+
+Attribution must identify the author, COBRIA version and artifact hash. This license
+does not cover private source systems, personal data, trademarks or third-party assets.

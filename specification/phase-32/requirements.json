@@ -1,0 +1,1 @@
+{"phase":32,"status":"proposal","requirements":[{"id":"P32-REQ-001","owner":"replicador externo","acceptance":"cinco tareas con evidencia","test":"replication/tests/phase32-36-research-closure.test.mjs"},{"id":"P32-REQ-002","owner":"coordinación","acceptance":"atestación humana independiente","test":"replication/scripts/validate-phase32.py"}]}

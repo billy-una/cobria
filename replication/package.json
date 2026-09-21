@@ -25,11 +25,22 @@
     "distributed:core12": "node scripts/run-distributed-core12.mjs",
     "ai-eval": "node scripts/run-ai-evaluation.mjs",
     "longitudinal": "node scripts/analyze-longitudinal.mjs",
-    "context-figures": "python3 analysis/generate_context_figures.py"
+    "context-figures": "python3 analysis/generate_context_figures.py",
+    "alternatives:core13": "node --expose-gc scripts/run-alternatives-comparison.mjs",
+    "performance:phase15": "node --expose-gc scripts/run-alternatives-comparison.mjs",
+    "context:agent": "node scripts/generate-agent-context.mjs",
+    "editorial:sync": "node scripts/sync-editorial.mjs",
+    "editorial:check": "node scripts/sync-editorial.mjs --check",
+    "release:phase18": "node scripts/build-phase18-package.mjs",
+    "traceability": "node scripts/generate-traceability.mjs",
+    "statistics:core13": "python3 analysis/statistics_core13_confirmatory.py"
   },
   "dependencies": {
     "lokijs": "1.5.12",
     "mongodb": "7.6.0",
     "pouchdb": "9.0.0"
+  },
+  "overrides": {
+    "uuid": "11.1.1"
   }
 }

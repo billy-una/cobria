@@ -1,0 +1,1 @@
+{"phase":34,"status":"proposal","requirements":[{"id":"P34-REQ-001","owner":"edición","acceptance":"cuatro productos comparten estado y límites","test":"replication/tests/phase32-36-research-closure.test.mjs"},{"id":"P34-REQ-002","owner":"evidencia","acceptance":"cero afirmaciones externas inventadas","test":"replication/scripts/validate-phase34.py"}]}

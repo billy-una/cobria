@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "1.0.0",
+  "phase": 36,
+  "status": "prepared-not-published",
+  "proposalIndependent": true,
+  "officialCertification": false,
+  "published": false,
+  "doi": null,
+  "releaseSignature": null,
+  "blockers": [
+    {
+      "id": "review-human",
+      "status": "pending-human"
+    },
+    {
+      "id": "operational-run",
+      "status": "pending-authorized-environment"
+    },
+    {
+      "id": "external-replication",
+      "status": "pending-external"
+    },
+    {
+      "id": "release-signature",
+      "status": "pending-authorized-human"
+    },
+    {
+      "id": "public-deposit-doi",
+      "status": "pending-external-service"
+    }
+  ],
+  "interpretation": "Paquete local de una propuesta independiente. Publicar, firmar o solicitar DOI requiere una acción humana o servicio externo autorizado."
+}

@@ -1,0 +1,64 @@
+{
+  "schemaVersion": "1.0.0",
+  "phase": 31,
+  "status": "prepared-not-operationally-executed",
+  "proposalIndependent": true,
+  "officialCertification": false,
+  "environment": {
+    "kind": null,
+    "name": null,
+    "authorized": null,
+    "containsProductionPersonalData": null
+  },
+  "execution": {
+    "runId": null,
+    "actor": null,
+    "startedAt": null,
+    "endedAt": null,
+    "artifactSha256": null,
+    "synthetic": null
+  },
+  "scenarios": [
+    {
+      "id": "OP-01",
+      "result": null,
+      "observations": "",
+      "evidence": [],
+      "incident": null
+    },
+    {
+      "id": "OP-02",
+      "result": null,
+      "observations": "",
+      "evidence": [],
+      "incident": null
+    },
+    {
+      "id": "OP-03",
+      "result": null,
+      "observations": "",
+      "evidence": [],
+      "incident": null
+    },
+    {
+      "id": "OP-04",
+      "result": null,
+      "observations": "",
+      "evidence": [],
+      "incident": null
+    },
+    {
+      "id": "OP-05",
+      "result": null,
+      "observations": "",
+      "evidence": [],
+      "incident": null
+    }
+  ],
+  "summary": {
+    "executed": 0,
+    "passed": 0,
+    "failed": 0
+  },
+  "interpretation": "Plantilla de una propuesta independiente; no existe validación operacional hasta aportar evidencia auténtica."
+}

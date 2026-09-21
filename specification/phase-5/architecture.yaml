@@ -1,0 +1,62 @@
+{
+  "architectureId": "cobria-layers-reference",
+  "version": "1.0.0",
+  "status": "reference",
+  "owner": "COBRIA Layers",
+  "sourceRequirement": "ECO-RF-003",
+  "layers": [
+    {
+      "id": "LAY-DOMAIN",
+      "path": "src/domain",
+      "purpose": "Modelo, identidad, valores, políticas e invariantes del problema.",
+      "mayDependOn": ["LAY-DOMAIN"],
+      "mustNotKnow": ["UI", "HTTP", "SDK", "base de datos", "variables de entorno", "rutas físicas"],
+      "artifacts": ["entity", "value-object", "domain-policy", "domain-error"]
+    },
+    {
+      "id": "LAY-APPLICATION",
+      "path": "src/application",
+      "purpose": "Casos de uso, puertos y coordinación de intenciones.",
+      "mayDependOn": ["LAY-APPLICATION", "LAY-DOMAIN"],
+      "mustNotKnow": ["componentes visuales", "rutas físicas", "SDK de proveedor", "variables de entorno"],
+      "artifacts": ["use-case", "input", "result", "port", "application-policy"]
+    },
+    {
+      "id": "LAY-PRESENTATION",
+      "path": "src/presentation",
+      "purpose": "Traducir protocolos e interacción a entradas y resultados de aplicación.",
+      "mayDependOn": ["LAY-PRESENTATION", "LAY-APPLICATION", "LAY-DOMAIN"],
+      "mustNotKnow": ["rutas de almacenamiento", "consultas del proveedor", "reglas de negocio nuevas"],
+      "artifacts": ["controller", "view-model", "request-mapper", "response-mapper"]
+    },
+    {
+      "id": "LAY-INFRASTRUCTURE",
+      "path": "src/infrastructure",
+      "purpose": "Implementar puertos, persistencia, Daters, SDK, red, reloj, criptografía y observabilidad.",
+      "mayDependOn": ["LAY-INFRASTRUCTURE", "LAY-APPLICATION", "LAY-DOMAIN"],
+      "mustNotKnow": ["estado visual", "navegación de pantalla"],
+      "artifacts": ["adapter", "repository", "dater", "provider", "client", "migration"]
+    },
+    {
+      "id": "LAY-COMPOSITION",
+      "path": "src/composition.mjs",
+      "purpose": "Construir el grafo, seleccionar adaptadores y conectar capacidades.",
+      "mayDependOn": ["LAY-COMPOSITION", "LAY-DOMAIN", "LAY-APPLICATION", "LAY-PRESENTATION", "LAY-INFRASTRUCTURE"],
+      "mustNotKnow": ["reglas de negocio no expresadas por componentes"],
+      "artifacts": ["composition-root", "factory", "configuration-binding"]
+    }
+  ],
+  "roles": [
+    {"id": "ROLE-ENTITY", "responsibility": "preservar identidad e invariantes", "notResponsibleFor": "persistencia o serialización"},
+    {"id": "ROLE-USE-CASE", "responsibility": "autorizar intención y coordinar puertos", "notResponsibleFor": "HTTP, SDK o ruta física"},
+    {"id": "ROLE-PORT", "responsibility": "declarar capacidad requerida por aplicación", "notResponsibleFor": "elegir proveedor"},
+    {"id": "ROLE-REPOSITORY", "responsibility": "acceder agregados según identidad, ámbito y revisión", "notResponsibleFor": "traducir interfaz visual"},
+    {"id": "ROLE-DATER", "responsibility": "traducir y validar modelo lógico frente a forma física versionada", "notResponsibleFor": "orquestar casos de uso o autorizar actores"},
+    {"id": "ROLE-SERVICE", "responsibility": "coordinar una política que no pertenece naturalmente a una entidad", "notResponsibleFor": "convertirse en contenedor de utilidades"},
+    {"id": "ROLE-CATALOG", "responsibility": "estabilizar significado, versión y vigencia de vocabularios gobernados", "notResponsibleFor": "duplicar textos de interfaz o configuración mutable sin gobierno"},
+    {"id": "ROLE-INDEXER", "responsibility": "construir y verificar una representación derivada para lectura", "notResponsibleFor": "aceptar cambios como autoridad del dominio"},
+    {"id": "ROLE-CONNECTOR", "responsibility": "encapsular protocolo, red, SDK y fallos técnicos de un proveedor", "notResponsibleFor": "decidir reglas de negocio o autorización"},
+    {"id": "ROLE-CONTROLLER", "responsibility": "traducir protocolo a entrada y resultado visible", "notResponsibleFor": "reglas de dominio o consultas directas"},
+    {"id": "ROLE-COMPOSITION", "responsibility": "instanciar e inyectar dependencias", "notResponsibleFor": "ocultar dependencias mediante estado global"}
+  ]
+}

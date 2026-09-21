@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["teamCode", "consentVersion", "startedAt", "endedAt", "testsPassed", "questionsToAuthor", "interpretationErrors"],
+  "properties": {
+    "teamCode": {"type": "string", "minLength": 3},
+    "consentVersion": {"type": "string", "minLength": 3},
+    "startedAt": {"type": "string", "format": "date-time"},
+    "endedAt": {"type": "string", "format": "date-time"},
+    "testsPassed": {"type": "integer", "minimum": 0},
+    "questionsToAuthor": {"type": "integer", "minimum": 0},
+    "interpretationErrors": {"type": "array", "items": {"type": "string"}}
+  },
+  "additionalProperties": false
+}

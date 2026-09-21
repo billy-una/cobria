@@ -1,0 +1,28 @@
+{
+  "catalogId": "cobria-errors-reference",
+  "version": "1.0.0",
+  "languageIndependent": true,
+  "errors": [
+    {"code": "OBS_ID_REQUIRED", "category": "validation", "http": 400, "retryable": false, "safeParameters": []},
+    {"code": "OBS_SCOPE_REQUIRED", "category": "validation", "http": 400, "retryable": false, "safeParameters": []},
+    {"code": "OBS_SPECIES_REQUIRED", "category": "validation", "http": 400, "retryable": false, "safeParameters": []},
+    {"code": "OBS_QUANTITY_INVALID", "category": "validation", "http": 400, "retryable": false, "safeParameters": []},
+    {"code": "OBS_REVISION_INVALID", "category": "validation", "http": 400, "retryable": false, "safeParameters": []},
+    {"code": "OBS_DATE_INVALID", "category": "validation", "http": 400, "retryable": false, "safeParameters": []},
+    {"code": "IDEMPOTENCY_KEY_REQUIRED", "category": "validation", "http": 400, "retryable": false, "safeParameters": []},
+    {"code": "IDEMPOTENCY_CONFLICT", "category": "conflict", "http": 409, "retryable": false, "safeParameters": []},
+    {"code": "STALE_REVISION", "category": "conflict", "http": 409, "retryable": false, "safeParameters": []},
+    {"code": "ACCESS_DENIED", "category": "authorization", "http": 403, "retryable": false, "safeParameters": []},
+    {"code": "SCOPE_INVALID", "category": "security", "http": 400, "retryable": false, "safeParameters": []},
+    {"code": "PAGE_SIZE_INVALID", "category": "validation", "http": 400, "retryable": false, "safeParameters": []},
+    {"code": "CURSOR_INVALID", "category": "validation", "http": 400, "retryable": false, "safeParameters": []},
+    {"code": "PROJECTION_VERIFICATION_FAILED", "category": "integrity", "http": 422, "retryable": false, "safeParameters": []},
+    {"code": "PHYSICAL_VERSION_UNSUPPORTED", "category": "compatibility", "http": 422, "retryable": false, "safeParameters": ["version"]},
+    {"code": "PROVIDER_FAILURE", "category": "infrastructure", "http": 503, "retryable": true, "safeParameters": ["providerStatus"]},
+    {"code": "AI_QUERY_REQUIRED", "category": "validation", "http": 400, "retryable": false, "safeParameters": []},
+    {"code": "DRIFT_CONFIG_INVALID", "category": "validation", "http": 400, "retryable": false, "safeParameters": []},
+    {"code": "ANALYTICS_CONFIG_INVALID", "category": "validation", "http": 400, "retryable": false, "safeParameters": []},
+    {"code": "ANALYTICS_CUTOFF_INVALID", "category": "validation", "http": 400, "retryable": false, "safeParameters": []},
+    {"code": "ANALYTICS_ENTITY_LEAKAGE", "category": "integrity", "http": 422, "retryable": false, "safeParameters": []}
+  ]
+}

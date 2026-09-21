@@ -1,0 +1,15 @@
+{
+  "a": "observacion-0042",
+  "b": "bosque-sur",
+  "c": 3,
+  "d": 3,
+  "e": "2026-08-24T14:10:00-06:00",
+  "f": "AVE-003",
+  "g": "2026.1",
+  "h": "verificada",
+  "i": {
+    "fuenteId": "sensor-17",
+    "registradoEn": "2026-08-24T14:12:00-06:00",
+    "metodo": "manual"
+  }
+}

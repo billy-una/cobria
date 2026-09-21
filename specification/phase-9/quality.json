@@ -1,0 +1,53 @@
+{
+  "schemaVersion":"1.0.0",
+  "testTypes":[
+    {"id":"unit","purpose":"reglas aisladas","available":true,"command":"npm test"},
+    {"id":"contract","purpose":"puertos y adaptadores","available":true,"command":"npm test"},
+    {"id":"integration","purpose":"componentes coordinados","available":true,"command":"npm test"},
+    {"id":"emulator","purpose":"servicios locales","available":false,"status":"planned"},
+    {"id":"real-engine","purpose":"motores NoSQL","available":true,"command":"npm run nosql:conformance"},
+    {"id":"e2e","purpose":"flujo externo completo","available":false,"status":"planned"},
+    {"id":"accessibility","purpose":"interacción inclusiva","available":false,"status":"phase-10"},
+    {"id":"security","purpose":"casos negativos y suministro","available":true,"command":"python3 scripts/validate-phase7.py"},
+    {"id":"performance","purpose":"latencia y recursos","available":true,"command":"npm run experiment"},
+    {"id":"resilience","purpose":"fallos y recuperación","available":true,"command":"npm run resilience:core11"},
+    {"id":"migration","purpose":"compatibilidad de datos","available":true,"command":"python3 scripts/validate-phase3.py"},
+    {"id":"smoke","purpose":"salud posterior a entrega","available":false,"status":"requires-deployed-endpoint"}
+  ],
+  "changePolicies":[
+    {"change":"domain-rule","required":["unit","contract","security"]},
+    {"change":"repository-adapter","required":["contract","integration","real-engine","resilience"]},
+    {"change":"data-schema","required":["unit","migration","contract","rollback"]},
+    {"change":"api-or-ui","required":["contract","e2e","accessibility","smoke"]},
+    {"change":"security-policy","required":["security","contract","negative"]},
+    {"change":"deployment-config","required":["integration","security","smoke","rollback"]},
+    {"change":"projection-or-index","required":["contract","real-engine","performance","resilience"]}
+  ],
+  "requirementEvidence":[
+    {"id":"ECO-RF-001","test":"phase-2-traceability","status":"executed"},
+    {"id":"ECO-RF-002","test":"small-project-scenario","status":"planned"},
+    {"id":"ECO-RF-003","test":"validate-phase2","status":"executed"},
+    {"id":"ECO-RF-004","test":"validate-phase3","status":"executed"},
+    {"id":"ECO-RF-005","test":"P1-P2-R1-S1-A1","status":"executed-by-profile"},
+    {"id":"ECO-RF-006","test":"ADR-audit","status":"partial"},
+    {"id":"ECO-RF-007","test":"validate-phase2","status":"executed"},
+    {"id":"ECO-RF-008","test":"validate-phase8","status":"executed-simulation"},
+    {"id":"ECO-RF-009","test":"validate-phase7-and-S1","status":"executed-local"},
+    {"id":"ECO-RF-010","test":"validate-phase9","status":"executed-local"},
+    {"id":"ECO-RF-011","test":"phase-15-comparison","status":"partial"},
+    {"id":"ECO-RF-012","test":"blind-agent-tasks","status":"planned"},
+    {"id":"ECO-RF-013","test":"phase-17-sync","status":"planned"},
+    {"id":"ECO-RF-014","test":"phase-18-external","status":"external-required"},
+    {"id":"ECO-RNF-001","test":"editorial-review","status":"planned"},
+    {"id":"ECO-RNF-002","test":"traceability-validators","status":"partial"},
+    {"id":"ECO-RNF-003","test":"internal-and-external-replication","status":"partial"},
+    {"id":"ECO-RNF-004","test":"multi-engine-conformance","status":"partial"},
+    {"id":"ECO-RNF-005","test":"validate-phase7","status":"executed-local"},
+    {"id":"ECO-RNF-006","test":"phase-10-accessibility","status":"planned"},
+    {"id":"ECO-RNF-007","test":"version-review","status":"partial"},
+    {"id":"ECO-RNF-008","test":"make-verificar","status":"executed"},
+    {"id":"ECO-RNF-009","test":"epistemic-status-audit","status":"partial"},
+    {"id":"ECO-RNF-010","test":"phase-17-regeneration","status":"planned"}
+  ],
+  "allowedStatuses":["executed","executed-local","executed-simulation","executed-by-profile","partial","planned","external-required"]
+}

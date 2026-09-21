@@ -1,0 +1,17 @@
+{
+  "$id": "https://cobria.example.invalid/schemas/environments.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "allOf": [
+    {
+      "$ref": "manifest.schema.json"
+    },
+    {
+      "properties": {
+        "manifestId": {
+          "const": "cobria-environments"
+        }
+      }
+    }
+  ],
+  "title": "Esquema environments COBRIA"
+}

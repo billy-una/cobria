@@ -1,0 +1,13 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "title":"Evidencia de entrega COBRIA","type":"object",
+  "required":["schemaVersion","status","environment","revision","artifactDigest","startedAt","finishedAt","gate","tests","smoke","rollbackReady","limitations"],
+  "properties":{
+    "schemaVersion":{"const":"1.0.0"},"status":{"enum":["gate-only","deployed","rolled-back","failed"]},
+    "environment":{"enum":["preview","staging","production","recovery"]},
+    "revision":{"pattern":"^[0-9a-f]{40}$"},"artifactDigest":{"pattern":"^(sha256:[0-9a-f]{64}|git:[0-9a-f]{40})$"},
+    "startedAt":{"format":"date-time"},"finishedAt":{"format":"date-time"},
+    "gate":{"type":"object"},"tests":{"type":"array"},"smoke":{"type":"array"},
+    "rollbackReady":{"type":"boolean"},"limitations":{"type":"array","items":{"type":"string"}}
+  },"additionalProperties":false
+}

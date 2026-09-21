@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "1.0.0",
+  "state": "received-pending-adjudication",
+  "reviewers": [
+    "R-ARCH24",
+    "R-QAOPS"
+  ],
+  "samples": [
+    "M-01",
+    "M-02",
+    "M-03"
+  ],
+  "attestationBasis": "self-declared-human-and-coordinator-confirmed-correction",
+  "identityVerification": "not-stored-in-public-repository",
+  "comparisons": [
+    {
+      "sample": "M-01",
+      "decisions": 8,
+      "agreement": 0.875,
+      "cohenKappa": 0.75,
+      "disagreements": [
+        "ENG-007"
+      ]
+    },
+    {
+      "sample": "M-02",
+      "decisions": 8,
+      "agreement": 0.875,
+      "cohenKappa": 0.784,
+      "disagreements": [
+        "ENG-007"
+      ]
+    },
+    {
+      "sample": "M-03",
+      "decisions": 8,
+      "agreement": 0.875,
+      "cohenKappa": 0.714,
+      "disagreements": [
+        "ENG-007"
+      ]
+    }
+  ],
+  "global": {
+    "decisions": 24,
+    "agreement": 0.875,
+    "cohenKappa": 0.771,
+    "disagreements": [
+      "M-01-ENG-007",
+      "M-02-ENG-007",
+      "M-03-ENG-007"
+    ]
+  },
+  "adjudicationRequired": true
+}

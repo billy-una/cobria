@@ -1,0 +1,91 @@
+name: COBRIA delivery gates
+
+on:
+  workflow_dispatch:
+    inputs:
+      target:
+        description: Último ambiente que se desea validar
+        required: true
+        type: choice
+        options: [preview, staging, production]
+      rollback_digest:
+        description: Digest git:SHA40 del artefacto anterior probado
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    environment: preview
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - name: Gate preview
+        run: >-
+          python3 replication/scripts/deployment-gate.py
+          --environment preview --account ci-preview --branch "$GITHUB_REF_NAME"
+          --artifact "git:$GITHUB_SHA" --rollback-artifact "${{ inputs.rollback_digest }}"
+          --data-policy sinteticos-o-anonimizados-verificados
+          --variables-checked --rules-tested --tests-passed --smoke-plan
+      - name: Evidencia preview
+        run: >-
+          python3 replication/scripts/capture-delivery-evidence.py --environment preview
+          --revision "$GITHUB_SHA" --artifact "git:$GITHUB_SHA" --status gate-only
+          --output "$RUNNER_TEMP/evidence-preview.json"
+      - uses: actions/upload-artifact@v4
+        with: { name: evidence-preview, path: "${{ runner.temp }}/evidence-preview.json" }
+
+  staging:
+    if: inputs.target == 'staging' || inputs.target == 'production'
+    needs: preview
+    runs-on: ubuntu-latest
+    environment: staging
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - name: Gate staging
+        run: >-
+          python3 replication/scripts/deployment-gate.py
+          --environment staging --account ci-staging --branch "$GITHUB_REF_NAME"
+          --artifact "git:$GITHUB_SHA" --rollback-artifact "${{ inputs.rollback_digest }}"
+          --data-policy sinteticos-o-anonimizados-verificados
+          --variables-checked --rules-tested --tests-passed --smoke-plan
+      - name: Evidencia staging
+        run: >-
+          python3 replication/scripts/capture-delivery-evidence.py --environment staging
+          --revision "$GITHUB_SHA" --artifact "git:$GITHUB_SHA" --status gate-only
+          --output "$RUNNER_TEMP/evidence-staging.json"
+      - uses: actions/upload-artifact@v4
+        with: { name: evidence-staging, path: "${{ runner.temp }}/evidence-staging.json" }
+
+  production:
+    if: inputs.target == 'production'
+    needs: staging
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - name: Gate production
+        run: >-
+          python3 replication/scripts/deployment-gate.py
+          --environment production --account ci-production --branch "$GITHUB_REF_NAME"
+          --artifact "git:$GITHUB_SHA" --rollback-artifact "${{ inputs.rollback_digest }}"
+          --data-policy datos-reales-segun-finalidad-y-retencion
+          --variables-checked --rules-tested --tests-passed --smoke-plan
+      - name: Evidencia producción
+        run: >-
+          python3 replication/scripts/capture-delivery-evidence.py --environment production
+          --revision "$GITHUB_SHA" --artifact "git:$GITHUB_SHA" --status gate-only
+          --output "$RUNNER_TEMP/evidence-production.json"
+      - uses: actions/upload-artifact@v4
+        with: { name: evidence-production, path: "${{ runner.temp }}/evidence-production.json" }
+
+# Este workflow valida promoción y aprobaciones. No despliega hasta que se añada,
+# de forma explícita, un adaptador de proveedor con identidad federada por ambiente.

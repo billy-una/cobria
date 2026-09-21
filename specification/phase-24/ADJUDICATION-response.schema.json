@@ -1,0 +1,15 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"https://cobria.dev/schemas/phase24-adjudication-response.schema.json",
+  "title":"Adjudicación independiente de desacuerdos COBRIA Engineering",
+  "type":"object",
+  "required":["schemaVersion","adjudicatorCode","conflictStatement","decisions","attestation"],
+  "properties":{
+    "schemaVersion":{"const":"1.0.0"},
+    "adjudicatorCode":{"type":"string","pattern":"^A-[A-Z0-9]{3,12}$"},
+    "conflictStatement":{"type":"string","minLength":20},
+    "decisions":{"type":"array","minItems":3,"maxItems":3,"items":{"type":"object","required":["sample","contract","decision","confidence","rationale","addressesBothReviews"],"properties":{"sample":{"enum":["M-01","M-02","M-03"]},"contract":{"const":"ENG-007"},"decision":{"enum":["supported","unsupported","insufficient"]},"confidence":{"type":"integer","minimum":1,"maximum":5},"rationale":{"type":"string","minLength":40},"addressesBothReviews":{"type":"boolean"}},"additionalProperties":false}},
+    "attestation":{"type":"object","required":["type","date","independentWork","reviewedOriginalEvidence"],"properties":{"type":{"const":"human"},"date":{"type":"string","format":"date"},"independentWork":{"const":true},"reviewedOriginalEvidence":{"const":true}},"additionalProperties":false}
+  },
+  "additionalProperties":false
+}

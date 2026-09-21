@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["reviewerCode", "date", "version", "conflictStatement", "findings", "recommendation"],
+  "properties": {
+    "reviewerCode": {"type": "string", "minLength": 3},
+    "date": {"type": "string", "format": "date"},
+    "version": {"type": "string", "minLength": 7},
+    "conflictStatement": {"type": "string", "minLength": 10},
+    "findings": {"type": "array", "minItems": 1, "items": {"type": "object", "required": ["severity", "location", "observation"], "properties": {"severity": {"enum": ["critical", "major", "minor", "editorial", "positive"]}, "location": {"type": "string"}, "observation": {"type": "string", "minLength": 10}}}},
+    "recommendation": {"enum": ["accept", "minor-revision", "major-revision", "reject"]}
+  },
+  "additionalProperties": false
+}

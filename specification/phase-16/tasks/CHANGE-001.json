@@ -1,0 +1,10 @@
+{
+  "id": "CHANGE-001",
+  "objective": "Agregar el nombre común opcional a una observación neutral",
+  "authority": "implementation",
+  "allowedPaths": ["replication/examples/ecosistema-app/src/domain", "replication/examples/ecosistema-app/src/application", "replication/examples/ecosistema-app/test", "specification/phase-3"],
+  "forbiddenPaths": ["replication/results", "output/pdf", "specification/COBRIA-CORE-1.0.md"],
+  "requiredInvariants": ["AI-INV-001", "AI-INV-002", "AI-INV-004"],
+  "requiredTests": ["cd replication/examples/ecosistema-app && npm test", "python3 replication/scripts/validate-phase3.py"],
+  "acceptance": ["el dominio usa nombre semántico", "ninguna clave física aparece en dominio", "el diccionario documenta significado y nulabilidad"]
+}

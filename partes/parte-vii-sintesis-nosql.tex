@@ -47,16 +47,19 @@ que une fuente, transformación, ámbito, versión, equivalencia y reparación. 
 arquitectónica es una frontera coherente desde documentos hasta productos de IA. La
 práctica es un catálogo, listas de comprobación y protocolo reproducible.
 
-La contribución empírica actual combina tres perfiles documentales con 180 corridas históricas
-regeneradas sobre PouchDB y LokiJS. Las seis celdas superaron P1, P2, R1, S1 y A1 dentro del
-alcance funcional local y sin fugas de ámbito. La
-reducción observada de lectura y el costo de reconstrucción pertenecen al arnés embebido;
-no se extrapolan a servicios administrados ni prueban causalidad sobre mantenibilidad.
+La contribución empírica conserva dos estratos. El primero contiene 180 corridas locales
+históricas sobre PouchDB y LokiJS. El segundo contiene 270 corridas distribuidas
+históricas sobre MongoDB 8.0, CouchDB 3.4 y OpenSearch 2.19.3. Todas superaron P1, P2,
+R1, S1 y A1 bajo sus oráculos originales y no registraron fugas de ámbito. Como una
+auditoría posterior fortaleció el arnés, estas cifras describen evidencia histórica y no
+certificación vigente. La repetición preliminar corregida completó casos pequeños en
+MongoDB y CouchDB; OpenSearch 3.2.0 quedó pendiente por incompatibilidad de plataforma.
 
-Falta una réplica independiente sobre servicios documentales y regiones; un estudio
-humano; una evaluación generativa con jueces; y publicación externa del paquete
-congelado. P1, P2, R1, S1 y A1 ya forman el conjunto de criterios de conformidad 1.0,
-pero la certificación independiente permanece pendiente.
+Falta repetir las celdas distribuidas completas con el arnés corregido; ejecutar
+OpenSearch 3.2.0 en ARM nativo o infraestructura compatible; realizar una réplica
+independiente; completar el doble cribado bibliográfico; y ejecutar el estudio humano de
+transferencia. P1, P2, R1, S1 y A1 forman el conjunto de criterios de conformidad, pero
+la certificación independiente permanece pendiente.
 
 \chapter{Conclusión}
 

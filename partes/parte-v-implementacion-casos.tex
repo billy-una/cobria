@@ -84,6 +84,20 @@ mostrar la unidad mínima de COBRIA sin depender de un marco de trabajo o provee
 pequeña, ejecutable y suficientemente explícita para probar identidad, ámbito, mapeo,
 proyección, reconstrucción y autorización.
 
+La versión ejecutable se distribuye en
+\texttt{replication/examples/ecosistema-app}. Modela observaciones de biodiversidad sin
+depender de los dominios originales ni de un proveedor. Puede ejecutarse con
+\texttt{npm test} y \texttt{npm start}; no requiere bibliotecas externas.
+
+\section{Comportamientos comprobados de la aplicación pedagógica}
+
+El ejemplo contiene seis pruebas automatizadas: registro de un documento canónico
+válido; rechazo de un ámbito ajeno antes de acceder al repositorio; repetición
+idempotente sin duplicación; rechazo de una clave reutilizada con otra entrada; rechazo
+de revisiones obsoletas; y equivalencia después de retirar y reconstruir la proyección.
+Esta suite demuestra la conexión entre capas y contratos en una unidad pequeña. No se
+usa como sustituto de las pruebas distribuidas ni como evidencia de rendimiento.
+
 \section{Estructura propuesta}
 
 \begin{verbatim}

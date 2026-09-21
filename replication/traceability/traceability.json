@@ -1,0 +1,18 @@
+[
+  {"requisito":"AUT-001","patron":"Objeto canónico","implementacion":"RepositorioCobria","prueba":"frontera de escritura","resultado":"cubierta local","amenaza":"escritura paralela externa","documento":"Core 1.1"},
+  {"requisito":"ID-001","patron":"Identidad documental estable","implementacion":"documentoCobria","prueba":"identidad requerida","resultado":"cubierta local","amenaza":"migración entre proveedores","documento":"Core 1.1"},
+  {"requisito":"SCP-001","patron":"Repositorio con ámbito","implementacion":"adaptadores NoSQL","prueba":"S1 y mutante con fuga","resultado":"cubierta funcional","amenaza":"ACL y canales laterales","documento":"Core 1.1; modelo de amenazas"},
+  {"requisito":"REV-001","patron":"Revisión obsoleta rechazada","implementacion":"RepositorioCobria.guardar","prueba":"entrega fuera de orden","resultado":"30/30 local","amenaza":"escritura distribuida","documento":"Core 1.1"},
+  {"requisito":"VSN-001","patron":"Catálogo versionado","implementacion":"PublicadorVersionado","prueba":"publicación y reversión","resultado":"cubierta local","amenaza":"lectura multiversión real","documento":"Core 1.1"},
+  {"requisito":"PRV-001","patron":"Manifiesto de procedencia","implementacion":"manifiesto A1","prueba":"integridad de fuentes","resultado":"cubierta funcional","amenaza":"custodia y firma externa","documento":"Core 1.1"},
+  {"requisito":"IDM-001","patron":"Procesamiento idempotente","implementacion":"clave compuesta","prueba":"entrega duplicada","resultado":"30/30 local","amenaza":"entrega de red al menos una vez","documento":"Core 1.1"},
+  {"requisito":"REC-001","patron":"Reconstrucción total","implementacion":"candidata separada","prueba":"R1 y eliminación total","resultado":"cubierta funcional","amenaza":"recuperación física","documento":"Core 1.1"},
+  {"requisito":"EQV-001","patron":"Reparación verificable","implementacion":"normalización y huella","prueba":"candidata corrupta","resultado":"cubierta funcional","amenaza":"oráculo incompleto","documento":"Modelo formal 1.2"},
+  {"requisito":"PUB-001","patron":"Publicación por versión","implementacion":"PublicadorVersionado","prueba":"fallo antes del intercambio","resultado":"cubierta local bajo fallo","amenaza":"atomicidad distribuida","documento":"Core 1.1"},
+  {"requisito":"OBS-001","patron":"Auditoría narrativa","implementacion":"métricas del adaptador","prueba":"presencia de métricas","resultado":"parcial","amenaza":"alertas operativas reales","documento":"Core 1.1"},
+  {"requisito":"RET-001","patron":"Retiro de proyección","implementacion":"procedimiento de retiro","prueba":"eliminación y reconstrucción","resultado":"parcial","amenaza":"retención y borrado legal","documento":"Core 1.1"},
+  {"requisito":"ANA-001","patron":"Conjunto reproducible","implementacion":"materialización A1","prueba":"reconstrucción analítica","resultado":"cubierta funcional","amenaza":"fuente externa mutable","documento":"Core 1.1"},
+  {"requisito":"AI-001","patron":"Abstención con evidencia","implementacion":"regla A1","prueba":"ausencia de evidencia","resultado":"parcial","amenaza":"evaluación humana y daño","documento":"Core 1.1"},
+  {"requisito":"SEC-001","patron":"Recuperación limitada","implementacion":"AutorizadorAmbito","prueba":"S1 y permisos","resultado":"cubierta lógica local","amenaza":"autorización del motor","documento":"Modelo de amenazas 1.1"},
+  {"requisito":"CON-001","patron":"Revisión de candidata vigente","implementacion":"reparación incremental","prueba":"carrera reconstrucción/escritura","resultado":"30/30 local","amenaza":"clúster, consenso y red","documento":"Modelo formal 1.2"}
+]

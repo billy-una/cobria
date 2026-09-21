@@ -1,0 +1,23 @@
+{
+  "equivalent": true,
+  "expectedProjection": {
+    "ambito": "reserva-sur",
+    "version": 1,
+    "conteos": {
+      "colibri": 2,
+      "rana": 1
+    }
+  },
+  "actualProjection": {
+    "ambito": "reserva-sur",
+    "version": 1,
+    "conteos": {
+      "colibri": 2,
+      "rana": 1
+    }
+  },
+  "sourceRecords": 2,
+  "restoredRecords": 2,
+  "rpoRecords": 0,
+  "rtoMs": 0.21433300000001054
+}

@@ -1,0 +1,62 @@
+{
+  "schemaVersion": "1.0.0",
+  "reviewerCode": "R-QAOPS",
+  "sample": "M-01",
+  "conflictStatement": "Declaro que realicé esta revisión personalmente, de forma independiente, sin participación en COBRIA ni coordinación con el otro revisor.",
+  "decisions": [
+    {
+      "id": "ENG-001",
+      "decision": "insufficient",
+      "confidence": 2,
+      "rationale": "La presencia de componentes Loading y EmptyState sugiere estados de interfaz, pero el fragmento no demuestra cuándo se activan, cómo se resuelven errores ni que todas las salidas queden cubiertas."
+    },
+    {
+      "id": "ENG-002",
+      "decision": "insufficient",
+      "confidence": 2,
+      "rationale": "El registro de auditoría conserva actor, alcance y requestId, pero no muestra una transacción, validación server-side o una escritura autorizada cuyo resultado dependa de esa autoridad."
+    },
+    {
+      "id": "ENG-003",
+      "decision": "supported",
+      "confidence": 4,
+      "rationale": "Hay allowlist explícita para offline, default online-only, límites y señales de TTL, retry y dead-letter. Aunque parte de la prueba es lexical, el fragmento muestra controles concretos de gobierno."
+    },
+    {
+      "id": "ENG-004",
+      "decision": "supported",
+      "confidence": 4,
+      "rationale": "El procedimiento exige verificar y construir desde el mismo SHA, incorpora aprobación, backup, rollback y smoke postdeploy; el requisito de identidad del candidato está expresamente integrado al release."
+    },
+    {
+      "id": "ENG-005",
+      "decision": "insufficient",
+      "confidence": 3,
+      "rationale": "Las pruebas de política reducen nombres y rutas para evitar identificadores sensibles, pero no hay evidencia en el fragmento de que una falla de telemetría sea absorbida sin afectar la operación principal."
+    },
+    {
+      "id": "ENG-006",
+      "decision": "supported",
+      "confidence": 4,
+      "rationale": "El chequeo de performance compara recursos contra límites y ejecuta process.exit(1) cuando detecta violaciones; el presupuesto tiene una consecuencia automática verificable."
+    },
+    {
+      "id": "ENG-007",
+      "decision": "insufficient",
+      "confidence": 3,
+      "rationale": "El test prueba que index.js sea un shim pequeño y que bootstrap cargue legacy-index, pero el fragmento no demuestra por sí solo que el legado no pueda crecer ni que nuevas funciones estén bloqueadas fuera de él."
+    },
+    {
+      "id": "ENG-008",
+      "decision": "supported",
+      "confidence": 5,
+      "rationale": "Se documenta un incidente concreto con síntoma observable, causa raíz técnica e impacto sobre el gate; la información es suficientemente específica para reutilizarse en diagnóstico y prevención."
+    }
+  ],
+  "recommendation": "revise-manifest",
+  "attestation": {
+    "type": "human",
+    "date": "2026-09-20",
+    "independentWork": true
+  }
+}

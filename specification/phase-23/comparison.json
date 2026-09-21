@@ -1,0 +1,84 @@
+{
+  "schemaVersion": "1.0.0",
+  "method": "cobria-engineering-transfer-comparison-v1",
+  "interpretation": "Compara cobertura de evidencia estructural declarada; no ordena calidad, madurez ni rendimiento de los proyectos.",
+  "projects": [
+    {
+      "repository": "https://github.com/billy-una/posguapiles.git",
+      "commit": "ae8d63ce535ecff40059b49d8b8c9f050c353d96",
+      "contracts": 8,
+      "implementedLocal": 8,
+      "structuralCoverage": 1,
+      "operationallyValidated": 0
+    },
+    {
+      "repository": "https://github.com/billy-una/CRMHOTEL.git",
+      "commit": "b7b0f8e83871df1220865931f53424d8dd39772c",
+      "contracts": 8,
+      "implementedLocal": 5,
+      "structuralCoverage": 0.625,
+      "operationallyValidated": 0
+    },
+    {
+      "repository": "https://github.com/billy-una/BSHandball.git",
+      "commit": "09c15acd14ab806abe436a8176ef3247c61a2df6",
+      "contracts": 8,
+      "implementedLocal": 4,
+      "structuralCoverage": 0.5,
+      "operationallyValidated": 0
+    }
+  ],
+  "contracts": [
+    {
+      "id": "ENG-001",
+      "projectsWithStructuralEvidence": 3,
+      "projectsAssessed": 3
+    },
+    {
+      "id": "ENG-002",
+      "projectsWithStructuralEvidence": 3,
+      "projectsAssessed": 3
+    },
+    {
+      "id": "ENG-003",
+      "projectsWithStructuralEvidence": 2,
+      "projectsAssessed": 3
+    },
+    {
+      "id": "ENG-004",
+      "projectsWithStructuralEvidence": 1,
+      "projectsAssessed": 3
+    },
+    {
+      "id": "ENG-005",
+      "projectsWithStructuralEvidence": 2,
+      "projectsAssessed": 3
+    },
+    {
+      "id": "ENG-006",
+      "projectsWithStructuralEvidence": 2,
+      "projectsAssessed": 3
+    },
+    {
+      "id": "ENG-007",
+      "projectsWithStructuralEvidence": 3,
+      "projectsAssessed": 3
+    },
+    {
+      "id": "ENG-008",
+      "projectsWithStructuralEvidence": 1,
+      "projectsAssessed": 3
+    }
+  ],
+  "summary": {
+    "projects": 3,
+    "contracts": 8,
+    "operationallyValidated": 0
+  },
+  "limits": [
+    "los manifiestos fueron preparados por el autor de COBRIA",
+    "la búsqueda textual puede producir falsos positivos o negativos",
+    "no se ejecutó producción ni una revisión humana independiente",
+    "una brecha significa ausencia de la evidencia declarada, no incumplimiento del proyecto"
+  ]
+}

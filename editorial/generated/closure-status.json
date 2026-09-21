@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "1.0.0",
+  "phase": 34,
+  "status": "editorial-snapshot-synchronized",
+  "proposalIndependent": true,
+  "officialCertification": false,
+  "humanResponses": 0,
+  "operationalRuns": 0,
+  "externalReplications": 0,
+  "products": [
+    "artículo",
+    "documento maestro",
+    "libro",
+    "sitio"
+  ],
+  "claims": [
+    {
+      "id": "C34-LOCAL",
+      "status": "supported-local",
+      "text": "La propuesta posee instrumentos y gates ejecutables localmente."
+    },
+    {
+      "id": "C34-HUMAN",
+      "status": "pending-human",
+      "text": "La revisión independiente permanece pendiente."
+    },
+    {
+      "id": "C34-OPS",
+      "status": "pending-operational",
+      "text": "La validación operacional permanece pendiente."
+    },
+    {
+      "id": "C34-EXT",
+      "status": "pending-external",
+      "text": "La repetición en otra computadora permanece pendiente."
+    }
+  ]
+}

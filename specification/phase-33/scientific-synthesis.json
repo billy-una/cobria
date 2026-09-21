@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "1.0.0",
+  "phase": 33,
+  "status": "synthesis-with-pending-external-evidence",
+  "proposalIndependent": true,
+  "officialCertification": false,
+  "evidenceLevels": {
+    "localAutomated": "available",
+    "humanIndependent": "pending",
+    "operational": "pending",
+    "externalReplication": "pending"
+  },
+  "publishableClaims": [
+    "COBRIA define contratos y herramientas verificables localmente.",
+    "La propuesta conserva límites entre evidencia estructural, humana y operacional."
+  ],
+  "prohibitedClaims": [
+    "COBRIA está certificada.",
+    "COBRIA fue validada universalmente.",
+    "COBRIA supera alternativas en producción."
+  ],
+  "effectSizes": null,
+  "confidenceIntervals": null,
+  "interpretation": "Síntesis provisional de una propuesta independiente; no rellena evidencia externa ausente."
+}

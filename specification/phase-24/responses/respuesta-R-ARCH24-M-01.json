@@ -1,0 +1,62 @@
+{
+  "schemaVersion": "1.0.0",
+  "reviewerCode": "R-ARCH24",
+  "sample": "M-01",
+  "conflictStatement": "Declaro que realicé esta revisión personalmente, de forma independiente, sin participación en COBRIA ni coordinación con el otro revisor.",
+  "decisions": [
+    {
+      "id": "ENG-001",
+      "decision": "insufficient",
+      "confidence": 3,
+      "rationale": "El fragmento importa componentes Loading, EmptyState y Toast, pero no muestra transiciones ni condiciones que gobiernen loading/empty/error; la implementación completa no es demostrable."
+    },
+    {
+      "id": "ENG-002",
+      "decision": "insufficient",
+      "confidence": 2,
+      "rationale": "Se observa un registro de auditoría con actor, companyId y requestId y carga de contexto de precios, pero no se ve la operación atómica ni el límite de autoridad transaccional."
+    },
+    {
+      "id": "ENG-003",
+      "decision": "supported",
+      "confidence": 5,
+      "rationale": "La cola es opt-in mediante OFFLINE_ALLOWED_NODES, deja nodos nuevos online-only y la evidencia incluye lotes atómicos, TTL, límites, reintentos y dead-letter; el gobierno está explícito."
+    },
+    {
+      "id": "ENG-004",
+      "decision": "supported",
+      "confidence": 4,
+      "rationale": "El flujo exige Go/No-Go y build desde el mismo SHA candidato, aprobación humana, backup y smoke postdeploy; la promoción queda explícitamente ligada al artefacto candidato."
+    },
+    {
+      "id": "ENG-005",
+      "decision": "insufficient",
+      "confidence": 3,
+      "rationale": "Las pruebas verifican reducción de rutas y ausencia de datos sensibles en nombres de métricas, pero el fragmento no demuestra que emitir telemetría sea no bloqueante frente al flujo principal."
+    },
+    {
+      "id": "ENG-006",
+      "decision": "supported",
+      "confidence": 5,
+      "rationale": "El verificador compara tamaños con límites explícitos y termina con error ante violaciones; existe un presupuesto ejecutable y un mecanismo de enforcement."
+    },
+    {
+      "id": "ENG-007",
+      "decision": "supported",
+      "confidence": 4,
+      "rationale": "Las pruebas fuerzan un index mínimo que delega a bootstrap/legacy-index y comprueban una frontera estructural alrededor del código heredado; existe un mecanismo verificable de encapsulación del legado."
+    },
+    {
+      "id": "ENG-008",
+      "decision": "supported",
+      "confidence": 4,
+      "rationale": "El fragmento registra error observable, causa raíz e impacto de un incidente real, convirtiendo el fallo del gate en evidencia causal reutilizable y no en una simple alerta."
+    }
+  ],
+  "recommendation": "revise-manifest",
+  "attestation": {
+    "type": "human",
+    "date": "2026-09-20",
+    "independentWork": true
+  }
+}

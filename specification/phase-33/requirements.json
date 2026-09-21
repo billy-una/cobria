@@ -1,0 +1,1 @@
+{"phase":33,"status":"proposal","requirements":[{"id":"P33-REQ-001","owner":"investigación","acceptance":"afirmaciones separadas por nivel de evidencia","test":"replication/tests/phase32-36-research-closure.test.mjs"},{"id":"P33-REQ-002","owner":"estadística","acceptance":"intervalos y efectos nulos sin observaciones externas","test":"replication/scripts/validate-phase33.py"}]}

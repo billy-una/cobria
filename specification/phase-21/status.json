@@ -1,0 +1,10 @@
+{
+  "schemaVersion":"1.0.0",
+  "phase":21,
+  "state":"executed-structural-pilot-not-operationally-validated",
+  "project":"https://github.com/billy-una/posguapiles.git",
+  "expectedCommit":"303890830433f5019818a1b4fd696b9e33b45392",
+  "contracts":8,
+  "operationallyValidated":0,
+  "next":"manifest-driven-adoption-assessment"
+}

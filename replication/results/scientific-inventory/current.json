@@ -1,0 +1,77 @@
+{
+  "schemaVersion": "1.0.0",
+  "proposalIndependent": true,
+  "officialCertification": false,
+  "generatedAt": "2026-09-21T08:35:35.406Z",
+  "internalEvidence": [
+    {
+      "id": "E-CONFORMANCE",
+      "status": "executed-local",
+      "observations": 180,
+      "source": "replication/results/nosql-core-1.0/summary.json",
+      "sha256": "f4fb1bed34724fa6c28a8e51e1684664dde073a2ff07a528b43eca7e72e0b81b",
+      "limit": "PouchDB y LokiJS locales; no producción."
+    },
+    {
+      "id": "E-ALTERNATIVES",
+      "status": "executed-local",
+      "observations": 630,
+      "source": "replication/results/core-1.3-alternatives/summary.json",
+      "sha256": "fd88898424f07083e37666da01c0f80b09ba6ee7e830940a451accb178c09d71",
+      "limit": "Comparación algorítmica local y controlada; no representa un servicio distribuido ni consumo energético medido."
+    },
+    {
+      "id": "E-ANALYTICS-AI",
+      "status": "executed-local",
+      "observations": 30,
+      "source": "replication/results/core-1.1-analytics-ai/summary.json",
+      "sha256": "4962a6bc544391a8a2c7d6b646ee58a75a611b316ed8318b050f53309a70a1f2",
+      "limit": "Recuperación léxica determinista; no evalúa calidad de un modelo generativo ni de incrustaciones externas."
+    },
+    {
+      "id": "E-OPERATIONAL",
+      "status": "executed-controlled-local",
+      "observations": 5,
+      "source": "replication/results/operational-phase89/local-2026-09-21T08-18-56-780Z/run.json",
+      "sha256": "32c7c4bed86fbb10f295fea01f8934566b5efc42dc0e1351e1623c127198c340",
+      "limit": "sin contenedores; sin red distribuida; sin proveedor administrado; sin tráfico productivo; RPO/RTO solo del fixture local"
+    },
+    {
+      "id": "E-STATISTICS-CONFIRMATORY",
+      "status": "preliminar-incompleto",
+      "observations": null,
+      "source": "replication/results/core-1.3-statistics/summary.json",
+      "sha256": "a15e9b78ea043ad5c3e98c03745272b60893485c8a186892e15674bcb93e6785",
+      "missing": [
+        "mongodb/5000: 20/30 corridas",
+        "couchdb/100: archivo ausente",
+        "couchdb/1000: archivo ausente",
+        "couchdb/5000: archivo ausente",
+        "opensearch/100: archivo ausente",
+        "opensearch/1000: archivo ausente",
+        "opensearch/5000: archivo ausente"
+      ]
+    }
+  ],
+  "traceability": {
+    "rows": 16,
+    "source": "replication/traceability/traceability.json",
+    "sha256": "1adbd3b9fb76dacc10e4eafb6c9eda030850d9f6d31ec781bc10f6fbb298f2f3"
+  },
+  "externalEvidence": {
+    "replication": {
+      "status": "prepared-not-externally-repeated",
+      "runs": 0
+    },
+    "independentHumanReview": "pending-human",
+    "doubleScreening": "pending-human",
+    "transferStudy": "pending-ethics-and-participants"
+  },
+  "publishableClaim": "COBRIA propone contratos verificables localmente y un programa refutable para evaluar autoridad, ámbito, derivación y reconstrucción.",
+  "prohibitedClaims": [
+    "validación universal",
+    "certificación oficial",
+    "superioridad en producción",
+    "transferencia humana demostrada"
+  ]
+}

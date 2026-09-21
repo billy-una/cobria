@@ -1,0 +1,8 @@
+{
+  "schemaVersion":"1.0.0",
+  "phase":20,
+  "state":"executed-local-not-production-validated",
+  "tests":9,
+  "contractsCovered":["ENG-001","ENG-002","ENG-003","ENG-004","ENG-005","ENG-006","ENG-007","ENG-008"],
+  "externalPending":["infraestructura real","rollback y recuperación","accesibilidad con personas","transferencia independiente"]
+}

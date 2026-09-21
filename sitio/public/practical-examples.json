@@ -1,0 +1,572 @@
+[
+  {
+    "id": 1,
+    "nombre": "Objeto canónico",
+    "escena": "Expediente de un árbol patrimonial",
+    "problema": "Varias brigadas guardan altura, especie y estado en archivos distintos.",
+    "participantes": [
+      "ArbolPatrimonial",
+      "Contrato de entrada",
+      "Repositorio documental",
+      "Evidencia"
+    ],
+    "resultado": "Un único expediente conserva identidad y reglas; los mapas son derivados.",
+    "code": {
+      "TypeScript": "// Expediente de un árbol patrimonial\ntype Solicitud = Record<string, unknown>;\n\nclass ArbolPatrimonial {\n  registrar(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 1, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new ArbolPatrimonial().registrar({ arbolId: \"roble-42\", especie: \"Quercus costaricensis\" });",
+      "Python": "# Expediente de un árbol patrimonial\nclass ArbolPatrimonial:\n    def registrar(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 1, \"evidencia\": True, **solicitud}\n\nresultado = ArbolPatrimonial().registrar({\"detalle\": \"arbolId: \\\"roble-42\\\", especie: \\\"Quercus costaricensis\\\"\"})",
+      "Java": "// Expediente de un árbol patrimonial\nrecord Solicitud(String detalle) {}\n\nfinal class ArbolPatrimonial {\n  Resultado registrar(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(1, true, solicitud);\n  }\n}\n\nvar resultado = new ArbolPatrimonial().registrar(new Solicitud(\"arbolId: \\\"roble-42\\\", especie: \\\"Quercus costaricensis\\\"\"));",
+      "Go": "// Expediente de un árbol patrimonial\ntype Solicitud struct { Detalle string }\n\nfunc Registrar(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 1, Evidencia: true}, nil\n}\n\nresultado, err := Registrar(Solicitud{Detalle: \"arbolId: \\\"roble-42\\\", especie: \\\"Quercus costaricensis\\\"\"})"
+    }
+  },
+  {
+    "id": 2,
+    "nombre": "Dato fechado",
+    "escena": "Medición de un río después de una tormenta",
+    "problema": "Una lectura sin tiempo válido confunde cuándo ocurrió con cuándo se transmitió.",
+    "participantes": [
+      "MedicionRio",
+      "Contrato de entrada",
+      "Repositorio documental",
+      "Evidencia"
+    ],
+    "resultado": "La observación conserva tiempo observado, recibido y procedencia del sensor.",
+    "code": {
+      "TypeScript": "// Medición de un río después de una tormenta\ntype Solicitud = Record<string, unknown>;\n\nclass MedicionRio {\n  registrar(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 2, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new MedicionRio().registrar({ rioId: \"terraba\", nivelCm: 184, observadoEn: \"2026-08-24T06:15:00Z\" });",
+      "Python": "# Medición de un río después de una tormenta\nclass MedicionRio:\n    def registrar(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 2, \"evidencia\": True, **solicitud}\n\nresultado = MedicionRio().registrar({\"detalle\": \"rioId: \\\"terraba\\\", nivelCm: 184, observadoEn: \\\"2026-08-24T06:15:00Z\\\"\"})",
+      "Java": "// Medición de un río después de una tormenta\nrecord Solicitud(String detalle) {}\n\nfinal class MedicionRio {\n  Resultado registrar(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(2, true, solicitud);\n  }\n}\n\nvar resultado = new MedicionRio().registrar(new Solicitud(\"rioId: \\\"terraba\\\", nivelCm: 184, observadoEn: \\\"2026-08-24T06:15:00Z\\\"\"));",
+      "Go": "// Medición de un río después de una tormenta\ntype Solicitud struct { Detalle string }\n\nfunc Registrar(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 2, Evidencia: true}, nil\n}\n\nresultado, err := Registrar(Solicitud{Detalle: \"rioId: \\\"terraba\\\", nivelCm: 184, observadoEn: \\\"2026-08-24T06:15:00Z\\\"\"})"
+    }
+  },
+  {
+    "id": 3,
+    "nombre": "Repositorio con ámbito",
+    "escena": "Observaciones privadas de una reserva",
+    "problema": "Una consulta sin reservaId puede mezclar registros de áreas protegidas diferentes.",
+    "participantes": [
+      "RepositorioObservaciones",
+      "Contrato de entrada",
+      "Repositorio documental",
+      "Evidencia"
+    ],
+    "resultado": "El repositorio rechaza cualquier lectura que no declare primero la reserva.",
+    "code": {
+      "TypeScript": "// Observaciones privadas de una reserva\ntype Solicitud = Record<string, unknown>;\n\nclass RepositorioObservaciones {\n  buscar(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 3, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new RepositorioObservaciones().buscar({ reservaId: \"las-tablas\", observacionId: \"obs-184\" });",
+      "Python": "# Observaciones privadas de una reserva\nclass RepositorioObservaciones:\n    def buscar(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 3, \"evidencia\": True, **solicitud}\n\nresultado = RepositorioObservaciones().buscar({\"detalle\": \"reservaId: \\\"las-tablas\\\", observacionId: \\\"obs-184\\\"\"})",
+      "Java": "// Observaciones privadas de una reserva\nrecord Solicitud(String detalle) {}\n\nfinal class RepositorioObservaciones {\n  Resultado buscar(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(3, true, solicitud);\n  }\n}\n\nvar resultado = new RepositorioObservaciones().buscar(new Solicitud(\"reservaId: \\\"las-tablas\\\", observacionId: \\\"obs-184\\\"\"));",
+      "Go": "// Observaciones privadas de una reserva\ntype Solicitud struct { Detalle string }\n\nfunc Buscar(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 3, Evidencia: true}, nil\n}\n\nresultado, err := Buscar(Solicitud{Detalle: \"reservaId: \\\"las-tablas\\\", observacionId: \\\"obs-184\\\"\"})"
+    }
+  },
+  {
+    "id": 4,
+    "nombre": "Catálogo versionado",
+    "escena": "Códigos de especies usados durante diez años",
+    "problema": "El código AV-03 cambió de significado y los informes históricos quedan ambiguos.",
+    "participantes": [
+      "CatalogoEspecies",
+      "Contrato de entrada",
+      "Repositorio documental",
+      "Evidencia"
+    ],
+    "resultado": "Cada observación se interpreta con la edición del catálogo que estaba vigente.",
+    "code": {
+      "TypeScript": "// Códigos de especies usados durante diez años\ntype Solicitud = Record<string, unknown>;\n\nclass CatalogoEspecies {\n  resolver(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 4, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new CatalogoEspecies().resolver({ codigo: \"AV-03\", version: \"2024.2\" });",
+      "Python": "# Códigos de especies usados durante diez años\nclass CatalogoEspecies:\n    def resolver(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 4, \"evidencia\": True, **solicitud}\n\nresultado = CatalogoEspecies().resolver({\"detalle\": \"codigo: \\\"AV-03\\\", version: \\\"2024.2\\\"\"})",
+      "Java": "// Códigos de especies usados durante diez años\nrecord Solicitud(String detalle) {}\n\nfinal class CatalogoEspecies {\n  Resultado resolver(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(4, true, solicitud);\n  }\n}\n\nvar resultado = new CatalogoEspecies().resolver(new Solicitud(\"codigo: \\\"AV-03\\\", version: \\\"2024.2\\\"\"));",
+      "Go": "// Códigos de especies usados durante diez años\ntype Solicitud struct { Detalle string }\n\nfunc Resolver(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 4, Evidencia: true}, nil\n}\n\nresultado, err := Resolver(Solicitud{Detalle: \"codigo: \\\"AV-03\\\", version: \\\"2024.2\\\"\"})"
+    }
+  },
+  {
+    "id": 5,
+    "nombre": "Proyección de lectura",
+    "escena": "Panel diario de avistamientos",
+    "problema": "La pantalla recorre miles de observaciones para contar especies cada vez que abre.",
+    "participantes": [
+      "PanelAvistamientos",
+      "Contrato de entrada",
+      "Repositorio documental",
+      "Evidencia"
+    ],
+    "resultado": "Una vista reconstruible entrega conteos diarios sin reemplazar las observaciones.",
+    "code": {
+      "TypeScript": "// Panel diario de avistamientos\ntype Solicitud = Record<string, unknown>;\n\nclass PanelAvistamientos {\n  proyectar(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 5, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new PanelAvistamientos().proyectar({ reservaId: \"piedras-blancas\", fecha: \"2026-08-24\" });",
+      "Python": "# Panel diario de avistamientos\nclass PanelAvistamientos:\n    def proyectar(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 5, \"evidencia\": True, **solicitud}\n\nresultado = PanelAvistamientos().proyectar({\"detalle\": \"reservaId: \\\"piedras-blancas\\\", fecha: \\\"2026-08-24\\\"\"})",
+      "Java": "// Panel diario de avistamientos\nrecord Solicitud(String detalle) {}\n\nfinal class PanelAvistamientos {\n  Resultado proyectar(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(5, true, solicitud);\n  }\n}\n\nvar resultado = new PanelAvistamientos().proyectar(new Solicitud(\"reservaId: \\\"piedras-blancas\\\", fecha: \\\"2026-08-24\\\"\"));",
+      "Go": "// Panel diario de avistamientos\ntype Solicitud struct { Detalle string }\n\nfunc Proyectar(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 5, Evidencia: true}, nil\n}\n\nresultado, err := Proyectar(Solicitud{Detalle: \"reservaId: \\\"piedras-blancas\\\", fecha: \\\"2026-08-24\\\"\"})"
+    }
+  },
+  {
+    "id": 6,
+    "nombre": "Proyección de cobertura",
+    "escena": "Ficha breve para guardaparques sin conexión",
+    "problema": "La consulta móvil descarga expedientes completos cuando solo necesita ubicación y alerta.",
+    "participantes": [
+      "FichaGuardaparque",
+      "Contrato de entrada",
+      "Repositorio documental",
+      "Evidencia"
+    ],
+    "resultado": "La proyección contiene exactamente los campos que necesita la ronda de campo.",
+    "code": {
+      "TypeScript": "// Ficha breve para guardaparques sin conexión\ntype Solicitud = Record<string, unknown>;\n\nclass FichaGuardaparque {\n  crear(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 6, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new FichaGuardaparque().crear({ senderoId: \"quebrada-azul\", incluir: [\"riesgo\", \"ubicacion\"] });",
+      "Python": "# Ficha breve para guardaparques sin conexión\nclass FichaGuardaparque:\n    def crear(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 6, \"evidencia\": True, **solicitud}\n\nresultado = FichaGuardaparque().crear({\"detalle\": \"senderoId: \\\"quebrada-azul\\\", incluir: [\\\"riesgo\\\", \\\"ubicacion\\\"]\"})",
+      "Java": "// Ficha breve para guardaparques sin conexión\nrecord Solicitud(String detalle) {}\n\nfinal class FichaGuardaparque {\n  Resultado crear(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(6, true, solicitud);\n  }\n}\n\nvar resultado = new FichaGuardaparque().crear(new Solicitud(\"senderoId: \\\"quebrada-azul\\\", incluir: [\\\"riesgo\\\", \\\"ubicacion\\\"]\"));",
+      "Go": "// Ficha breve para guardaparques sin conexión\ntype Solicitud struct { Detalle string }\n\nfunc Crear(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 6, Evidencia: true}, nil\n}\n\nresultado, err := Crear(Solicitud{Detalle: \"senderoId: \\\"quebrada-azul\\\", incluir: [\\\"riesgo\\\", \\\"ubicacion\\\"]\"})"
+    }
+  },
+  {
+    "id": 7,
+    "nombre": "Reconstrucción total",
+    "escena": "Mapa de calor de nacientes",
+    "problema": "Una nueva fórmula exige recalcular todo el mapa sin modificar mediciones originales.",
+    "participantes": [
+      "ReconstruirMapaNacientes",
+      "Contrato de entrada",
+      "Repositorio documental",
+      "Evidencia"
+    ],
+    "resultado": "Se construye una versión candidata completa, se verifica y luego se publica.",
+    "code": {
+      "TypeScript": "// Mapa de calor de nacientes\ntype Solicitud = Record<string, unknown>;\n\nclass ReconstruirMapaNacientes {\n  ejecutar(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 7, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new ReconstruirMapaNacientes().ejecutar({ cuencaId: \"coto-brus\", version: \"v3\" });",
+      "Python": "# Mapa de calor de nacientes\nclass ReconstruirMapaNacientes:\n    def ejecutar(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 7, \"evidencia\": True, **solicitud}\n\nresultado = ReconstruirMapaNacientes().ejecutar({\"detalle\": \"cuencaId: \\\"coto-brus\\\", version: \\\"v3\\\"\"})",
+      "Java": "// Mapa de calor de nacientes\nrecord Solicitud(String detalle) {}\n\nfinal class ReconstruirMapaNacientes {\n  Resultado ejecutar(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(7, true, solicitud);\n  }\n}\n\nvar resultado = new ReconstruirMapaNacientes().ejecutar(new Solicitud(\"cuencaId: \\\"coto-brus\\\", version: \\\"v3\\\"\"));",
+      "Go": "// Mapa de calor de nacientes\ntype Solicitud struct { Detalle string }\n\nfunc Ejecutar(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 7, Evidencia: true}, nil\n}\n\nresultado, err := Ejecutar(Solicitud{Detalle: \"cuencaId: \\\"coto-brus\\\", version: \\\"v3\\\"\"})"
+    }
+  },
+  {
+    "id": 8,
+    "nombre": "Reconstrucción incremental",
+    "escena": "Conteo de visitantes por sendero",
+    "problema": "Recalcular cinco años por una entrada nueva desperdicia tiempo y energía.",
+    "participantes": [
+      "ActualizarConteoSenderos",
+      "Contrato de entrada",
+      "Repositorio documental",
+      "Evidencia"
+    ],
+    "resultado": "Solo se procesa el cambio nuevo y se conserva un cursor verificable.",
+    "code": {
+      "TypeScript": "// Conteo de visitantes por sendero\ntype Solicitud = Record<string, unknown>;\n\nclass ActualizarConteoSenderos {\n  aplicar(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 8, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new ActualizarConteoSenderos().aplicar({ eventoId: \"paso-991\", senderoId: \"cotoncito\" });",
+      "Python": "# Conteo de visitantes por sendero\nclass ActualizarConteoSenderos:\n    def aplicar(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 8, \"evidencia\": True, **solicitud}\n\nresultado = ActualizarConteoSenderos().aplicar({\"detalle\": \"eventoId: \\\"paso-991\\\", senderoId: \\\"cotoncito\\\"\"})",
+      "Java": "// Conteo de visitantes por sendero\nrecord Solicitud(String detalle) {}\n\nfinal class ActualizarConteoSenderos {\n  Resultado aplicar(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(8, true, solicitud);\n  }\n}\n\nvar resultado = new ActualizarConteoSenderos().aplicar(new Solicitud(\"eventoId: \\\"paso-991\\\", senderoId: \\\"cotoncito\\\"\"));",
+      "Go": "// Conteo de visitantes por sendero\ntype Solicitud struct { Detalle string }\n\nfunc Aplicar(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 8, Evidencia: true}, nil\n}\n\nresultado, err := Aplicar(Solicitud{Detalle: \"eventoId: \\\"paso-991\\\", senderoId: \\\"cotoncito\\\"\"})"
+    }
+  },
+  {
+    "id": 9,
+    "nombre": "Publicación por versión",
+    "escena": "Nueva clasificación del estado del bosque",
+    "problema": "Los lectores podrían observar una mezcla de datos viejos y nuevos durante el cálculo.",
+    "participantes": [
+      "PublicadorCoberturaBosque",
+      "Contrato de entrada",
+      "Repositorio documental",
+      "Evidencia"
+    ],
+    "resultado": "La versión candidata se activa mediante un único cambio de referencia.",
+    "code": {
+      "TypeScript": "// Nueva clasificación del estado del bosque\ntype Solicitud = Record<string, unknown>;\n\nclass PublicadorCoberturaBosque {\n  publicar(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 9, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new PublicadorCoberturaBosque().publicar({ candidata: \"cobertura-v7\", esperada: \"cobertura-v6\" });",
+      "Python": "# Nueva clasificación del estado del bosque\nclass PublicadorCoberturaBosque:\n    def publicar(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 9, \"evidencia\": True, **solicitud}\n\nresultado = PublicadorCoberturaBosque().publicar({\"detalle\": \"candidata: \\\"cobertura-v7\\\", esperada: \\\"cobertura-v6\\\"\"})",
+      "Java": "// Nueva clasificación del estado del bosque\nrecord Solicitud(String detalle) {}\n\nfinal class PublicadorCoberturaBosque {\n  Resultado publicar(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(9, true, solicitud);\n  }\n}\n\nvar resultado = new PublicadorCoberturaBosque().publicar(new Solicitud(\"candidata: \\\"cobertura-v7\\\", esperada: \\\"cobertura-v6\\\"\"));",
+      "Go": "// Nueva clasificación del estado del bosque\ntype Solicitud struct { Detalle string }\n\nfunc Publicar(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 9, Evidencia: true}, nil\n}\n\nresultado, err := Publicar(Solicitud{Detalle: \"candidata: \\\"cobertura-v7\\\", esperada: \\\"cobertura-v6\\\"\"})"
+    }
+  },
+  {
+    "id": 10,
+    "nombre": "Procesamiento idempotente",
+    "escena": "Sensor que reenvía la misma lectura",
+    "problema": "La mala señal hace que una medición llegue tres veces y triplique el promedio.",
+    "participantes": [
+      "ProcesadorLecturas",
+      "Contrato de entrada",
+      "Repositorio documental",
+      "Evidencia"
+    ],
+    "resultado": "La clave del evento permite repetir la operación sin duplicar efectos.",
+    "code": {
+      "TypeScript": "// Sensor que reenvía la misma lectura\ntype Solicitud = Record<string, unknown>;\n\nclass ProcesadorLecturas {\n  procesar(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 10, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new ProcesadorLecturas().procesar({ eventoId: \"sensor-17:8842\", humedad: 86 });",
+      "Python": "# Sensor que reenvía la misma lectura\nclass ProcesadorLecturas:\n    def procesar(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 10, \"evidencia\": True, **solicitud}\n\nresultado = ProcesadorLecturas().procesar({\"detalle\": \"eventoId: \\\"sensor-17:8842\\\", humedad: 86\"})",
+      "Java": "// Sensor que reenvía la misma lectura\nrecord Solicitud(String detalle) {}\n\nfinal class ProcesadorLecturas {\n  Resultado procesar(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(10, true, solicitud);\n  }\n}\n\nvar resultado = new ProcesadorLecturas().procesar(new Solicitud(\"eventoId: \\\"sensor-17:8842\\\", humedad: 86\"));",
+      "Go": "// Sensor que reenvía la misma lectura\ntype Solicitud struct { Detalle string }\n\nfunc Procesar(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 10, Evidencia: true}, nil\n}\n\nresultado, err := Procesar(Solicitud{Detalle: \"eventoId: \\\"sensor-17:8842\\\", humedad: 86\"})"
+    }
+  },
+  {
+    "id": 11,
+    "nombre": "Revisión obsoleta rechazada",
+    "escena": "Dos brigadas editan el mismo sendero",
+    "problema": "Una tableta sin conexión intenta guardar una descripción anterior sobre una revisión nueva.",
+    "participantes": [
+      "EditorSendero",
+      "Contrato de entrada",
+      "Repositorio documental",
+      "Evidencia"
+    ],
+    "resultado": "La escritura falla con conflicto y conserva la revisión más reciente.",
+    "code": {
+      "TypeScript": "// Dos brigadas editan el mismo sendero\ntype Solicitud = Record<string, unknown>;\n\nclass EditorSendero {\n  guardar(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 11, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new EditorSendero().guardar({ senderoId: \"fila-cal\", revisionEsperada: 12, dificultad: \"alta\" });",
+      "Python": "# Dos brigadas editan el mismo sendero\nclass EditorSendero:\n    def guardar(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 11, \"evidencia\": True, **solicitud}\n\nresultado = EditorSendero().guardar({\"detalle\": \"senderoId: \\\"fila-cal\\\", revisionEsperada: 12, dificultad: \\\"alta\\\"\"})",
+      "Java": "// Dos brigadas editan el mismo sendero\nrecord Solicitud(String detalle) {}\n\nfinal class EditorSendero {\n  Resultado guardar(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(11, true, solicitud);\n  }\n}\n\nvar resultado = new EditorSendero().guardar(new Solicitud(\"senderoId: \\\"fila-cal\\\", revisionEsperada: 12, dificultad: \\\"alta\\\"\"));",
+      "Go": "// Dos brigadas editan el mismo sendero\ntype Solicitud struct { Detalle string }\n\nfunc Guardar(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 11, Evidencia: true}, nil\n}\n\nresultado, err := Guardar(Solicitud{Detalle: \"senderoId: \\\"fila-cal\\\", revisionEsperada: 12, dificultad: \\\"alta\\\"\"})"
+    }
+  },
+  {
+    "id": 12,
+    "nombre": "Cola de salida transaccional",
+    "escena": "Alerta por deslizamiento junto con la medición",
+    "problema": "Guardar la alerta después de la medición puede fallar y dejar el riesgo sin notificación.",
+    "participantes": [
+      "RegistroConAlerta",
+      "Contrato de entrada",
+      "Repositorio documental",
+      "Evidencia"
+    ],
+    "resultado": "Documento y mensaje pendiente nacen juntos; un trabajador publica después.",
+    "code": {
+      "TypeScript": "// Alerta por deslizamiento junto con la medición\ntype Solicitud = Record<string, unknown>;\n\nclass RegistroConAlerta {\n  guardar(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 12, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new RegistroConAlerta().guardar({ sensorId: \"ladera-8\", riesgo: \"alto\" });",
+      "Python": "# Alerta por deslizamiento junto con la medición\nclass RegistroConAlerta:\n    def guardar(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 12, \"evidencia\": True, **solicitud}\n\nresultado = RegistroConAlerta().guardar({\"detalle\": \"sensorId: \\\"ladera-8\\\", riesgo: \\\"alto\\\"\"})",
+      "Java": "// Alerta por deslizamiento junto con la medición\nrecord Solicitud(String detalle) {}\n\nfinal class RegistroConAlerta {\n  Resultado guardar(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(12, true, solicitud);\n  }\n}\n\nvar resultado = new RegistroConAlerta().guardar(new Solicitud(\"sensorId: \\\"ladera-8\\\", riesgo: \\\"alto\\\"\"));",
+      "Go": "// Alerta por deslizamiento junto con la medición\ntype Solicitud struct { Detalle string }\n\nfunc Guardar(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 12, Evidencia: true}, nil\n}\n\nresultado, err := Guardar(Solicitud{Detalle: \"sensorId: \\\"ladera-8\\\", riesgo: \\\"alto\\\"\"})"
+    }
+  },
+  {
+    "id": 13,
+    "nombre": "Reparación verificable",
+    "escena": "Índice de especies incompleto",
+    "problema": "Una interrupción dejó veinte observaciones fuera del índice de búsqueda.",
+    "participantes": [
+      "ReparadorIndiceEspecies",
+      "Contrato de entrada",
+      "Repositorio documental",
+      "Evidencia"
+    ],
+    "resultado": "La reparación compara fuente e índice, corrige diferencias y vuelve a medir.",
+    "code": {
+      "TypeScript": "// Índice de especies incompleto\ntype Solicitud = Record<string, unknown>;\n\nclass ReparadorIndiceEspecies {\n  reparar(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 13, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new ReparadorIndiceEspecies().reparar({ reservaId: \"golfo-dulce\", lote: 100 });",
+      "Python": "# Índice de especies incompleto\nclass ReparadorIndiceEspecies:\n    def reparar(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 13, \"evidencia\": True, **solicitud}\n\nresultado = ReparadorIndiceEspecies().reparar({\"detalle\": \"reservaId: \\\"golfo-dulce\\\", lote: 100\"})",
+      "Java": "// Índice de especies incompleto\nrecord Solicitud(String detalle) {}\n\nfinal class ReparadorIndiceEspecies {\n  Resultado reparar(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(13, true, solicitud);\n  }\n}\n\nvar resultado = new ReparadorIndiceEspecies().reparar(new Solicitud(\"reservaId: \\\"golfo-dulce\\\", lote: 100\"));",
+      "Go": "// Índice de especies incompleto\ntype Solicitud struct { Detalle string }\n\nfunc Reparar(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 13, Evidencia: true}, nil\n}\n\nresultado, err := Reparar(Solicitud{Detalle: \"reservaId: \\\"golfo-dulce\\\", lote: 100\"})"
+    }
+  },
+  {
+    "id": 14,
+    "nombre": "Conjunto de datos reproducible",
+    "escena": "Estudio anual de presencia de aves",
+    "problema": "El conjunto cambia cada vez que alguien corrige una observación histórica.",
+    "participantes": [
+      "ConstructorDatasetAves",
+      "Contrato de entrada",
+      "Repositorio documental",
+      "Evidencia"
+    ],
+    "resultado": "El manifiesto fija consulta, corte, catálogo, transformación y huellas.",
+    "code": {
+      "TypeScript": "// Estudio anual de presencia de aves\ntype Solicitud = Record<string, unknown>;\n\nclass ConstructorDatasetAves {\n  construir(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 14, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new ConstructorDatasetAves().construir({ corte: \"2026-07-31\", catalogo: \"aves-5\", semilla: 420 });",
+      "Python": "# Estudio anual de presencia de aves\nclass ConstructorDatasetAves:\n    def construir(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 14, \"evidencia\": True, **solicitud}\n\nresultado = ConstructorDatasetAves().construir({\"detalle\": \"corte: \\\"2026-07-31\\\", catalogo: \\\"aves-5\\\", semilla: 420\"})",
+      "Java": "// Estudio anual de presencia de aves\nrecord Solicitud(String detalle) {}\n\nfinal class ConstructorDatasetAves {\n  Resultado construir(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(14, true, solicitud);\n  }\n}\n\nvar resultado = new ConstructorDatasetAves().construir(new Solicitud(\"corte: \\\"2026-07-31\\\", catalogo: \\\"aves-5\\\", semilla: 420\"));",
+      "Go": "// Estudio anual de presencia de aves\ntype Solicitud struct { Detalle string }\n\nfunc Construir(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 14, Evidencia: true}, nil\n}\n\nresultado, err := Construir(Solicitud{Detalle: \"corte: \\\"2026-07-31\\\", catalogo: \\\"aves-5\\\", semilla: 420\"})"
+    }
+  },
+  {
+    "id": 15,
+    "nombre": "Característica versionada",
+    "escena": "Índice de sequedad para riesgo de incendio",
+    "problema": "Cambiar la fórmula altera predicciones sin explicar por qué.",
+    "participantes": [
+      "IndiceSequedad",
+      "Contrato de entrada",
+      "Repositorio documental",
+      "Evidencia"
+    ],
+    "resultado": "El valor viaja con la versión exacta de la fórmula que lo produjo.",
+    "code": {
+      "TypeScript": "// Índice de sequedad para riesgo de incendio\ntype Solicitud = Record<string, unknown>;\n\nclass IndiceSequedad {\n  calcular(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 15, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new IndiceSequedad().calcular({ humedad: 31, lluvia7d: 4, formula: \"is-2\" });",
+      "Python": "# Índice de sequedad para riesgo de incendio\nclass IndiceSequedad:\n    def calcular(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 15, \"evidencia\": True, **solicitud}\n\nresultado = IndiceSequedad().calcular({\"detalle\": \"humedad: 31, lluvia7d: 4, formula: \\\"is-2\\\"\"})",
+      "Java": "// Índice de sequedad para riesgo de incendio\nrecord Solicitud(String detalle) {}\n\nfinal class IndiceSequedad {\n  Resultado calcular(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(15, true, solicitud);\n  }\n}\n\nvar resultado = new IndiceSequedad().calcular(new Solicitud(\"humedad: 31, lluvia7d: 4, formula: \\\"is-2\\\"\"));",
+      "Go": "// Índice de sequedad para riesgo de incendio\ntype Solicitud struct { Detalle string }\n\nfunc Calcular(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 15, Evidencia: true}, nil\n}\n\nresultado, err := Calcular(Solicitud{Detalle: \"humedad: 31, lluvia7d: 4, formula: \\\"is-2\\\"\"})"
+    }
+  },
+  {
+    "id": 16,
+    "nombre": "Recuperación limitada por ámbito",
+    "escena": "Asistente sobre una estación biológica",
+    "problema": "El asistente podría citar documentos pertenecientes a otra estación.",
+    "participantes": [
+      "BuscadorEstacion",
+      "Contrato de entrada",
+      "Repositorio documental",
+      "Evidencia"
+    ],
+    "resultado": "Filtro, búsqueda y citas conservan el mismo ámbito autorizado.",
+    "code": {
+      "TypeScript": "// Asistente sobre una estación biológica\ntype Solicitud = Record<string, unknown>;\n\nclass BuscadorEstacion {\n  recuperar(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 16, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new BuscadorEstacion().recuperar({ estacionId: \"las-cruces\", pregunta: \"¿Qué floreció esta semana?\" });",
+      "Python": "# Asistente sobre una estación biológica\nclass BuscadorEstacion:\n    def recuperar(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 16, \"evidencia\": True, **solicitud}\n\nresultado = BuscadorEstacion().recuperar({\"detalle\": \"estacionId: \\\"las-cruces\\\", pregunta: \\\"¿Qué floreció esta semana?\\\"\"})",
+      "Java": "// Asistente sobre una estación biológica\nrecord Solicitud(String detalle) {}\n\nfinal class BuscadorEstacion {\n  Resultado recuperar(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(16, true, solicitud);\n  }\n}\n\nvar resultado = new BuscadorEstacion().recuperar(new Solicitud(\"estacionId: \\\"las-cruces\\\", pregunta: \\\"¿Qué floreció esta semana?\\\"\"));",
+      "Go": "// Asistente sobre una estación biológica\ntype Solicitud struct { Detalle string }\n\nfunc Recuperar(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 16, Evidencia: true}, nil\n}\n\nresultado, err := Recuperar(Solicitud{Detalle: \"estacionId: \\\"las-cruces\\\", pregunta: \\\"¿Qué floreció esta semana?\\\"\"})"
+    }
+  },
+  {
+    "id": 17,
+    "nombre": "Herramienta de agente gobernada",
+    "escena": "Asistente que propone cerrar un sendero",
+    "problema": "Un modelo no debe cerrar rutas por sí mismo al detectar lluvia intensa.",
+    "participantes": [
+      "AgenteSenderos",
+      "Contrato de entrada",
+      "Repositorio documental",
+      "Evidencia"
+    ],
+    "resultado": "La herramienta valida permiso, muestra evidencia y exige aprobación humana.",
+    "code": {
+      "TypeScript": "// Asistente que propone cerrar un sendero\ntype Solicitud = Record<string, unknown>;\n\nclass AgenteSenderos {\n  proponer(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 17, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new AgenteSenderos().proponer({ senderoId: \"cerro-pittier\", accion: \"cerrar\" });",
+      "Python": "# Asistente que propone cerrar un sendero\nclass AgenteSenderos:\n    def proponer(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 17, \"evidencia\": True, **solicitud}\n\nresultado = AgenteSenderos().proponer({\"detalle\": \"senderoId: \\\"cerro-pittier\\\", accion: \\\"cerrar\\\"\"})",
+      "Java": "// Asistente que propone cerrar un sendero\nrecord Solicitud(String detalle) {}\n\nfinal class AgenteSenderos {\n  Resultado proponer(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(17, true, solicitud);\n  }\n}\n\nvar resultado = new AgenteSenderos().proponer(new Solicitud(\"senderoId: \\\"cerro-pittier\\\", accion: \\\"cerrar\\\"\"));",
+      "Go": "// Asistente que propone cerrar un sendero\ntype Solicitud struct { Detalle string }\n\nfunc Proponer(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 17, Evidencia: true}, nil\n}\n\nresultado, err := Proponer(Solicitud{Detalle: \"senderoId: \\\"cerro-pittier\\\", accion: \\\"cerrar\\\"\"})"
+    }
+  },
+  {
+    "id": 18,
+    "nombre": "Frontera lectura—escritura",
+    "escena": "Resumen público de calidad del agua",
+    "problema": "Editar el resumen directamente lo convertiría en una segunda autoridad.",
+    "participantes": [
+      "ResumenCalidadAgua",
+      "Contrato de entrada",
+      "Repositorio documental",
+      "Evidencia"
+    ],
+    "resultado": "El resumen solo se lee; toda corrección entra por la medición canónica.",
+    "code": {
+      "TypeScript": "// Resumen público de calidad del agua\ntype Solicitud = Record<string, unknown>;\n\nclass ResumenCalidadAgua {\n  consultar(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 18, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new ResumenCalidadAgua().consultar({ cuencaId: \"sixaola\", mes: \"2026-08\" });",
+      "Python": "# Resumen público de calidad del agua\nclass ResumenCalidadAgua:\n    def consultar(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 18, \"evidencia\": True, **solicitud}\n\nresultado = ResumenCalidadAgua().consultar({\"detalle\": \"cuencaId: \\\"sixaola\\\", mes: \\\"2026-08\\\"\"})",
+      "Java": "// Resumen público de calidad del agua\nrecord Solicitud(String detalle) {}\n\nfinal class ResumenCalidadAgua {\n  Resultado consultar(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(18, true, solicitud);\n  }\n}\n\nvar resultado = new ResumenCalidadAgua().consultar(new Solicitud(\"cuencaId: \\\"sixaola\\\", mes: \\\"2026-08\\\"\"));",
+      "Go": "// Resumen público de calidad del agua\ntype Solicitud struct { Detalle string }\n\nfunc Consultar(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 18, Evidencia: true}, nil\n}\n\nresultado, err := Consultar(Solicitud{Detalle: \"cuencaId: \\\"sixaola\\\", mes: \\\"2026-08\\\"\"})"
+    }
+  },
+  {
+    "id": 19,
+    "nombre": "Índice antes que proyección",
+    "escena": "Búsqueda de viveros por cantón",
+    "problema": "El equipo quiere copiar fichas completas cuando un índice compuesto basta.",
+    "participantes": [
+      "IndiceViveros",
+      "Contrato de entrada",
+      "Repositorio documental",
+      "Evidencia"
+    ],
+    "resultado": "Se prueba primero una clave pequeña antes de mantener otra representación.",
+    "code": {
+      "TypeScript": "// Búsqueda de viveros por cantón\ntype Solicitud = Record<string, unknown>;\n\nclass IndiceViveros {\n  buscar(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 19, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new IndiceViveros().buscar({ canton: \"coto-brus\", especie: \"roble-sabana\" });",
+      "Python": "# Búsqueda de viveros por cantón\nclass IndiceViveros:\n    def buscar(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 19, \"evidencia\": True, **solicitud}\n\nresultado = IndiceViveros().buscar({\"detalle\": \"canton: \\\"coto-brus\\\", especie: \\\"roble-sabana\\\"\"})",
+      "Java": "// Búsqueda de viveros por cantón\nrecord Solicitud(String detalle) {}\n\nfinal class IndiceViveros {\n  Resultado buscar(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(19, true, solicitud);\n  }\n}\n\nvar resultado = new IndiceViveros().buscar(new Solicitud(\"canton: \\\"coto-brus\\\", especie: \\\"roble-sabana\\\"\"));",
+      "Go": "// Búsqueda de viveros por cantón\ntype Solicitud struct { Detalle string }\n\nfunc Buscar(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 19, Evidencia: true}, nil\n}\n\nresultado, err := Buscar(Solicitud{Detalle: \"canton: \\\"coto-brus\\\", especie: \\\"roble-sabana\\\"\"})"
+    }
+  },
+  {
+    "id": 20,
+    "nombre": "Retiro de proyección",
+    "escena": "Mapa antiguo que nadie consulta",
+    "problema": "Una proyección sin usuarios continúa consumiendo almacenamiento y monitoreo.",
+    "participantes": [
+      "RetirarMapaHistorico",
+      "Contrato de entrada",
+      "Repositorio documental",
+      "Evidencia"
+    ],
+    "resultado": "Se confirma ausencia de consumidores, se conserva la fuente y se retira la copia.",
+    "code": {
+      "TypeScript": "// Mapa antiguo que nadie consulta\ntype Solicitud = Record<string, unknown>;\n\nclass RetirarMapaHistorico {\n  ejecutar(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 20, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new RetirarMapaHistorico().ejecutar({ proyeccion: \"mapa-2019\", diasSinUso: 420 });",
+      "Python": "# Mapa antiguo que nadie consulta\nclass RetirarMapaHistorico:\n    def ejecutar(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 20, \"evidencia\": True, **solicitud}\n\nresultado = RetirarMapaHistorico().ejecutar({\"detalle\": \"proyeccion: \\\"mapa-2019\\\", diasSinUso: 420\"})",
+      "Java": "// Mapa antiguo que nadie consulta\nrecord Solicitud(String detalle) {}\n\nfinal class RetirarMapaHistorico {\n  Resultado ejecutar(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(20, true, solicitud);\n  }\n}\n\nvar resultado = new RetirarMapaHistorico().ejecutar(new Solicitud(\"proyeccion: \\\"mapa-2019\\\", diasSinUso: 420\"));",
+      "Go": "// Mapa antiguo que nadie consulta\ntype Solicitud struct { Detalle string }\n\nfunc Ejecutar(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 20, Evidencia: true}, nil\n}\n\nresultado, err := Ejecutar(Solicitud{Detalle: \"proyeccion: \\\"mapa-2019\\\", diasSinUso: 420\"})"
+    }
+  },
+  {
+    "id": 21,
+    "nombre": "Identidad documental estable",
+    "escena": "La misma cámara cambia de ubicación",
+    "problema": "Usar la ubicación como identificador crea otro dispositivo al moverla.",
+    "participantes": [
+      "CamaraTrampa",
+      "Contrato de entrada",
+      "Repositorio documental",
+      "Evidencia"
+    ],
+    "resultado": "La identidad permanece estable mientras sus atributos pueden cambiar.",
+    "code": {
+      "TypeScript": "// La misma cámara cambia de ubicación\ntype Solicitud = Record<string, unknown>;\n\nclass CamaraTrampa {\n  registrar(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 21, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new CamaraTrampa().registrar({ camaraId: \"cam-0091\", ubicacion: \"sendero-norte\" });",
+      "Python": "# La misma cámara cambia de ubicación\nclass CamaraTrampa:\n    def registrar(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 21, \"evidencia\": True, **solicitud}\n\nresultado = CamaraTrampa().registrar({\"detalle\": \"camaraId: \\\"cam-0091\\\", ubicacion: \\\"sendero-norte\\\"\"})",
+      "Java": "// La misma cámara cambia de ubicación\nrecord Solicitud(String detalle) {}\n\nfinal class CamaraTrampa {\n  Resultado registrar(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(21, true, solicitud);\n  }\n}\n\nvar resultado = new CamaraTrampa().registrar(new Solicitud(\"camaraId: \\\"cam-0091\\\", ubicacion: \\\"sendero-norte\\\"\"));",
+      "Go": "// La misma cámara cambia de ubicación\ntype Solicitud struct { Detalle string }\n\nfunc Registrar(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 21, Evidencia: true}, nil\n}\n\nresultado, err := Registrar(Solicitud{Detalle: \"camaraId: \\\"cam-0091\\\", ubicacion: \\\"sendero-norte\\\"\"})"
+    }
+  },
+  {
+    "id": 22,
+    "nombre": "Validación en frontera",
+    "escena": "Formulario ciudadano de avistamientos",
+    "problema": "Coordenadas imposibles o especies desconocidas llegan hasta el almacén.",
+    "participantes": [
+      "IngresoAvistamiento",
+      "Contrato de entrada",
+      "Repositorio documental",
+      "Evidencia"
+    ],
+    "resultado": "La entrada se normaliza o rechaza antes de crear el documento.",
+    "code": {
+      "TypeScript": "// Formulario ciudadano de avistamientos\ntype Solicitud = Record<string, unknown>;\n\nclass IngresoAvistamiento {\n  aceptar(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 22, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new IngresoAvistamiento().aceptar({ latitud: 8.79, longitud: -82.96, especie: \"tucan-pico-iris\" });",
+      "Python": "# Formulario ciudadano de avistamientos\nclass IngresoAvistamiento:\n    def aceptar(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 22, \"evidencia\": True, **solicitud}\n\nresultado = IngresoAvistamiento().aceptar({\"detalle\": \"latitud: 8.79, longitud: -82.96, especie: \\\"tucan-pico-iris\\\"\"})",
+      "Java": "// Formulario ciudadano de avistamientos\nrecord Solicitud(String detalle) {}\n\nfinal class IngresoAvistamiento {\n  Resultado aceptar(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(22, true, solicitud);\n  }\n}\n\nvar resultado = new IngresoAvistamiento().aceptar(new Solicitud(\"latitud: 8.79, longitud: -82.96, especie: \\\"tucan-pico-iris\\\"\"));",
+      "Go": "// Formulario ciudadano de avistamientos\ntype Solicitud struct { Detalle string }\n\nfunc Aceptar(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 22, Evidencia: true}, nil\n}\n\nresultado, err := Aceptar(Solicitud{Detalle: \"latitud: 8.79, longitud: -82.96, especie: \\\"tucan-pico-iris\\\"\"})"
+    }
+  },
+  {
+    "id": 23,
+    "nombre": "Contrato documental versionado",
+    "escena": "Aplicación móvil todavía usa el formato anterior",
+    "problema": "Cambiar nombre de campos rompe tabletas que aún no se actualizaron.",
+    "participantes": [
+      "ContratoObservacion",
+      "Contrato de entrada",
+      "Repositorio documental",
+      "Evidencia"
+    ],
+    "resultado": "El lector selecciona el contrato correcto y migra de forma explícita.",
+    "code": {
+      "TypeScript": "// Aplicación móvil todavía usa el formato anterior\ntype Solicitud = Record<string, unknown>;\n\nclass ContratoObservacion {\n  decodificar(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 23, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new ContratoObservacion().decodificar({ schemaVersion: 2, especieCodigo: \"AV-12\" });",
+      "Python": "# Aplicación móvil todavía usa el formato anterior\nclass ContratoObservacion:\n    def decodificar(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 23, \"evidencia\": True, **solicitud}\n\nresultado = ContratoObservacion().decodificar({\"detalle\": \"schemaVersion: 2, especieCodigo: \\\"AV-12\\\"\"})",
+      "Java": "// Aplicación móvil todavía usa el formato anterior\nrecord Solicitud(String detalle) {}\n\nfinal class ContratoObservacion {\n  Resultado decodificar(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(23, true, solicitud);\n  }\n}\n\nvar resultado = new ContratoObservacion().decodificar(new Solicitud(\"schemaVersion: 2, especieCodigo: \\\"AV-12\\\"\"));",
+      "Go": "// Aplicación móvil todavía usa el formato anterior\ntype Solicitud struct { Detalle string }\n\nfunc Decodificar(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 23, Evidencia: true}, nil\n}\n\nresultado, err := Decodificar(Solicitud{Detalle: \"schemaVersion: 2, especieCodigo: \\\"AV-12\\\"\"})"
+    }
+  },
+  {
+    "id": 24,
+    "nombre": "Lectura coherente por revisión",
+    "escena": "Informe combina mapa y estadísticas",
+    "problema": "Leer partes en momentos distintos produce un informe internamente contradictorio.",
+    "participantes": [
+      "InformeReserva",
+      "Contrato de entrada",
+      "Repositorio documental",
+      "Evidencia"
+    ],
+    "resultado": "Todas las piezas declaran la misma revisión o la lectura se repite.",
+    "code": {
+      "TypeScript": "// Informe combina mapa y estadísticas\ntype Solicitud = Record<string, unknown>;\n\nclass InformeReserva {\n  cargar(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 24, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new InformeReserva().cargar({ reservaId: \"corcovado\", revision: 884 });",
+      "Python": "# Informe combina mapa y estadísticas\nclass InformeReserva:\n    def cargar(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 24, \"evidencia\": True, **solicitud}\n\nresultado = InformeReserva().cargar({\"detalle\": \"reservaId: \\\"corcovado\\\", revision: 884\"})",
+      "Java": "// Informe combina mapa y estadísticas\nrecord Solicitud(String detalle) {}\n\nfinal class InformeReserva {\n  Resultado cargar(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(24, true, solicitud);\n  }\n}\n\nvar resultado = new InformeReserva().cargar(new Solicitud(\"reservaId: \\\"corcovado\\\", revision: 884\"));",
+      "Go": "// Informe combina mapa y estadísticas\ntype Solicitud struct { Detalle string }\n\nfunc Cargar(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 24, Evidencia: true}, nil\n}\n\nresultado, err := Cargar(Solicitud{Detalle: \"reservaId: \\\"corcovado\\\", revision: 884\"})"
+    }
+  },
+  {
+    "id": 25,
+    "nombre": "Ventana de frescura declarada",
+    "escena": "Tablero de incendios forestales",
+    "problema": "Un tablero parece actual aunque la última proyección tenga dos horas.",
+    "participantes": [
+      "TableroIncendios",
+      "Contrato de entrada",
+      "Repositorio documental",
+      "Evidencia"
+    ],
+    "resultado": "El consumidor acepta, espera o rechaza según la edad declarada.",
+    "code": {
+      "TypeScript": "// Tablero de incendios forestales\ntype Solicitud = Record<string, unknown>;\n\nclass TableroIncendios {\n  consultar(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 25, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new TableroIncendios().consultar({ region: \"brunca\", frescuraMaxMin: 10 });",
+      "Python": "# Tablero de incendios forestales\nclass TableroIncendios:\n    def consultar(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 25, \"evidencia\": True, **solicitud}\n\nresultado = TableroIncendios().consultar({\"detalle\": \"region: \\\"brunca\\\", frescuraMaxMin: 10\"})",
+      "Java": "// Tablero de incendios forestales\nrecord Solicitud(String detalle) {}\n\nfinal class TableroIncendios {\n  Resultado consultar(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(25, true, solicitud);\n  }\n}\n\nvar resultado = new TableroIncendios().consultar(new Solicitud(\"region: \\\"brunca\\\", frescuraMaxMin: 10\"));",
+      "Go": "// Tablero de incendios forestales\ntype Solicitud struct { Detalle string }\n\nfunc Consultar(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 25, Evidencia: true}, nil\n}\n\nresultado, err := Consultar(Solicitud{Detalle: \"region: \\\"brunca\\\", frescuraMaxMin: 10\"})"
+    }
+  },
+  {
+    "id": 26,
+    "nombre": "Manifiesto de proyección",
+    "escena": "Mapa de corredores biológicos",
+    "problema": "Nadie recuerda con qué fuentes y filtros se produjo el mapa publicado.",
+    "participantes": [
+      "ManifiestoCorredores",
+      "Contrato de entrada",
+      "Repositorio documental",
+      "Evidencia"
+    ],
+    "resultado": "La proyección publica receta, entradas, versión, huellas y responsable.",
+    "code": {
+      "TypeScript": "// Mapa de corredores biológicos\ntype Solicitud = Record<string, unknown>;\n\nclass ManifiestoCorredores {\n  crear(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 26, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new ManifiestoCorredores().crear({ version: \"corredores-12\", fuentes: [\"bosque-v7\", \"rios-v3\"] });",
+      "Python": "# Mapa de corredores biológicos\nclass ManifiestoCorredores:\n    def crear(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 26, \"evidencia\": True, **solicitud}\n\nresultado = ManifiestoCorredores().crear({\"detalle\": \"version: \\\"corredores-12\\\", fuentes: [\\\"bosque-v7\\\", \\\"rios-v3\\\"]\"})",
+      "Java": "// Mapa de corredores biológicos\nrecord Solicitud(String detalle) {}\n\nfinal class ManifiestoCorredores {\n  Resultado crear(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(26, true, solicitud);\n  }\n}\n\nvar resultado = new ManifiestoCorredores().crear(new Solicitud(\"version: \\\"corredores-12\\\", fuentes: [\\\"bosque-v7\\\", \\\"rios-v3\\\"]\"));",
+      "Go": "// Mapa de corredores biológicos\ntype Solicitud struct { Detalle string }\n\nfunc Crear(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 26, Evidencia: true}, nil\n}\n\nresultado, err := Crear(Solicitud{Detalle: \"version: \\\"corredores-12\\\", fuentes: [\\\"bosque-v7\\\", \\\"rios-v3\\\"]\"})"
+    }
+  },
+  {
+    "id": 27,
+    "nombre": "Partición analítica sin fuga",
+    "escena": "Predicción de floración",
+    "problema": "Observaciones futuras del mismo árbol aparecen en entrenamiento y validación.",
+    "participantes": [
+      "ParticionFloracion",
+      "Contrato de entrada",
+      "Repositorio documental",
+      "Evidencia"
+    ],
+    "resultado": "La partición respeta grupos y tiempo antes de calcular características.",
+    "code": {
+      "TypeScript": "// Predicción de floración\ntype Solicitud = Record<string, unknown>;\n\nclass ParticionFloracion {\n  dividir(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 27, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new ParticionFloracion().dividir({ grupo: \"arbolId\", corte: \"2025-12-31\", semilla: 73 });",
+      "Python": "# Predicción de floración\nclass ParticionFloracion:\n    def dividir(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 27, \"evidencia\": True, **solicitud}\n\nresultado = ParticionFloracion().dividir({\"detalle\": \"grupo: \\\"arbolId\\\", corte: \\\"2025-12-31\\\", semilla: 73\"})",
+      "Java": "// Predicción de floración\nrecord Solicitud(String detalle) {}\n\nfinal class ParticionFloracion {\n  Resultado dividir(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(27, true, solicitud);\n  }\n}\n\nvar resultado = new ParticionFloracion().dividir(new Solicitud(\"grupo: \\\"arbolId\\\", corte: \\\"2025-12-31\\\", semilla: 73\"));",
+      "Go": "// Predicción de floración\ntype Solicitud struct { Detalle string }\n\nfunc Dividir(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 27, Evidencia: true}, nil\n}\n\nresultado, err := Dividir(Solicitud{Detalle: \"grupo: \\\"arbolId\\\", corte: \\\"2025-12-31\\\", semilla: 73\"})"
+    }
+  },
+  {
+    "id": 28,
+    "nombre": "Abstención con evidencia",
+    "escena": "Asistente identifica una especie en una foto borrosa",
+    "problema": "El modelo podría inventar una respuesta segura sin evidencia suficiente.",
+    "participantes": [
+      "IdentificadorEspecies",
+      "Contrato de entrada",
+      "Repositorio documental",
+      "Evidencia"
+    ],
+    "resultado": "El asistente se abstiene, explica qué falta y conserva candidatos.",
+    "code": {
+      "TypeScript": "// Asistente identifica una especie en una foto borrosa\ntype Solicitud = Record<string, unknown>;\n\nclass IdentificadorEspecies {\n  responder(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 28, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new IdentificadorEspecies().responder({ confianza: 0.41, minimo: 0.78, candidatos: [\"tangara\", \"mielero\"] });",
+      "Python": "# Asistente identifica una especie en una foto borrosa\nclass IdentificadorEspecies:\n    def responder(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 28, \"evidencia\": True, **solicitud}\n\nresultado = IdentificadorEspecies().responder({\"detalle\": \"confianza: 0.41, minimo: 0.78, candidatos: [\\\"tangara\\\", \\\"mielero\\\"]\"})",
+      "Java": "// Asistente identifica una especie en una foto borrosa\nrecord Solicitud(String detalle) {}\n\nfinal class IdentificadorEspecies {\n  Resultado responder(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(28, true, solicitud);\n  }\n}\n\nvar resultado = new IdentificadorEspecies().responder(new Solicitud(\"confianza: 0.41, minimo: 0.78, candidatos: [\\\"tangara\\\", \\\"mielero\\\"]\"));",
+      "Go": "// Asistente identifica una especie en una foto borrosa\ntype Solicitud struct { Detalle string }\n\nfunc Responder(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 28, Evidencia: true}, nil\n}\n\nresultado, err := Responder(Solicitud{Detalle: \"confianza: 0.41, minimo: 0.78, candidatos: [\\\"tangara\\\", \\\"mielero\\\"]\"})"
+    }
+  },
+  {
+    "id": 29,
+    "nombre": "Presupuesto de derivados",
+    "escena": "Cada equipo solicita su propio tablero",
+    "problema": "Diez proyecciones similares multiplican escritura, costo y mantenimiento.",
+    "participantes": [
+      "PresupuestoProyecciones",
+      "Contrato de entrada",
+      "Repositorio documental",
+      "Evidencia"
+    ],
+    "resultado": "La copia solo se aprueba con propietario, beneficio y criterio de retiro.",
+    "code": {
+      "TypeScript": "// Cada equipo solicita su propio tablero\ntype Solicitud = Record<string, unknown>;\n\nclass PresupuestoProyecciones {\n  evaluar(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 29, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new PresupuestoProyecciones().evaluar({ beneficioMensual: 18, costoMensual: 31, consumidores: 1 });",
+      "Python": "# Cada equipo solicita su propio tablero\nclass PresupuestoProyecciones:\n    def evaluar(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 29, \"evidencia\": True, **solicitud}\n\nresultado = PresupuestoProyecciones().evaluar({\"detalle\": \"beneficioMensual: 18, costoMensual: 31, consumidores: 1\"})",
+      "Java": "// Cada equipo solicita su propio tablero\nrecord Solicitud(String detalle) {}\n\nfinal class PresupuestoProyecciones {\n  Resultado evaluar(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(29, true, solicitud);\n  }\n}\n\nvar resultado = new PresupuestoProyecciones().evaluar(new Solicitud(\"beneficioMensual: 18, costoMensual: 31, consumidores: 1\"));",
+      "Go": "// Cada equipo solicita su propio tablero\ntype Solicitud struct { Detalle string }\n\nfunc Evaluar(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 29, Evidencia: true}, nil\n}\n\nresultado, err := Evaluar(Solicitud{Detalle: \"beneficioMensual: 18, costoMensual: 31, consumidores: 1\"})"
+    }
+  },
+  {
+    "id": 30,
+    "nombre": "Auditoría narrativa reconstruible",
+    "escena": "Explicar por qué se cerró una reserva",
+    "problema": "Registros aislados no cuentan qué lluvia, regla y aprobación produjeron la decisión.",
+    "participantes": [
+      "HistoriaCierreReserva",
+      "Contrato de entrada",
+      "Repositorio documental",
+      "Evidencia"
+    ],
+    "resultado": "Una línea temporal enlaza eventos, revisiones, política, responsable y resultado.",
+    "code": {
+      "TypeScript": "// Explicar por qué se cerró una reserva\ntype Solicitud = Record<string, unknown>;\n\nclass HistoriaCierreReserva {\n  reconstruir(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 30, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new HistoriaCierreReserva().reconstruir({ reservaId: \"la-amistad\", desde: \"2026-08-23T18:00:00Z\" });",
+      "Python": "# Explicar por qué se cerró una reserva\nclass HistoriaCierreReserva:\n    def reconstruir(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 30, \"evidencia\": True, **solicitud}\n\nresultado = HistoriaCierreReserva().reconstruir({\"detalle\": \"reservaId: \\\"la-amistad\\\", desde: \\\"2026-08-23T18:00:00Z\\\"\"})",
+      "Java": "// Explicar por qué se cerró una reserva\nrecord Solicitud(String detalle) {}\n\nfinal class HistoriaCierreReserva {\n  Resultado reconstruir(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(30, true, solicitud);\n  }\n}\n\nvar resultado = new HistoriaCierreReserva().reconstruir(new Solicitud(\"reservaId: \\\"la-amistad\\\", desde: \\\"2026-08-23T18:00:00Z\\\"\"));",
+      "Go": "// Explicar por qué se cerró una reserva\ntype Solicitud struct { Detalle string }\n\nfunc Reconstruir(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 30, Evidencia: true}, nil\n}\n\nresultado, err := Reconstruir(Solicitud{Detalle: \"reservaId: \\\"la-amistad\\\", desde: \\\"2026-08-23T18:00:00Z\\\"\"})"
+    }
+  }
+]

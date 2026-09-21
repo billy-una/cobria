@@ -1,0 +1,29 @@
+[
+  {
+    "actorId": "operador-local-controlado",
+    "capacidad": "observaciones:escribir",
+    "ambito": "reserva-sur",
+    "finalidad": "ensayo-operacional",
+    "resultado": "permitido",
+    "codigo": "ACCESS_GRANTED",
+    "ocurridoEn": "2026-09-21T08:18:29.722Z"
+  },
+  {
+    "actorId": "operador-local-controlado",
+    "capacidad": "observaciones:leer",
+    "ambito": "reserva-norte",
+    "finalidad": "ensayo-operacional",
+    "resultado": "denegado",
+    "codigo": "ACCESS_DENIED",
+    "ocurridoEn": "2026-09-21T08:18:29.722Z"
+  },
+  {
+    "actorId": "operador-local-controlado",
+    "capacidad": "observaciones:leer",
+    "ambito": "reserva-sur",
+    "finalidad": "ensayo-operacional",
+    "resultado": "denegado",
+    "codigo": "ACCESS_DENIED",
+    "ocurridoEn": "2026-09-21T08:18:29.722Z"
+  }
+]

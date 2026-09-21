@@ -1,0 +1,300 @@
+{
+  "schemaVersion": "1.0.0",
+  "method": "cobria-engineering-manifest-v1",
+  "project": {
+    "remote": "https://github.com/billy-una/posguapiles.git",
+    "ref": "303890830433f5019818a1b4fd696b9e33b45392",
+    "commit": "303890830433f5019818a1b4fd696b9e33b45392",
+    "sourceMode": "git-ref"
+  },
+  "scope": "franja de ingeniería operativa; evaluación estructural desde objetos Git",
+  "summary": {
+    "contracts": 8,
+    "implementedLocal": 8,
+    "operationallyValidated": 0
+  },
+  "checks": [
+    {
+      "id": "ENG-001",
+      "name": "Estado operativo explícito",
+      "owner": "producto",
+      "structuralStatus": "implemented-local",
+      "operationalStatus": "not-assessed",
+      "evidence": [
+        {
+          "path": "AGENTS.md",
+          "exists": true,
+          "sha256": "2840fcfcbe84d5b7a6f2078a3628dc9612981285fc8c785a01c33168105669b7",
+          "tokens": [
+            {
+              "token": "PageStateService",
+              "found": true
+            },
+            {
+              "token": "AsyncActionController",
+              "found": true
+            }
+          ]
+        },
+        {
+          "path": "test/ux-operational-contract.test.mjs",
+          "exists": true,
+          "sha256": "9d69764a105810c940edef2c85d7615aa3e305a61f625fbc3881be3db6a3096c",
+          "tokens": [
+            {
+              "token": "PageStateService",
+              "found": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ENG-002",
+      "name": "Autoridad transaccional",
+      "owner": "aplicación",
+      "structuralStatus": "implemented-local",
+      "operationalStatus": "not-assessed",
+      "evidence": [
+        {
+          "path": "functions/handlers/commit-sale.js",
+          "exists": true,
+          "sha256": "c25129180d3daa0a4e2670d1f8d0cb3423c7e896b98bf9aa45072c3499afad54",
+          "tokens": [
+            {
+              "token": "requestId",
+              "found": true
+            },
+            {
+              "token": "scope",
+              "found": true
+            }
+          ]
+        },
+        {
+          "path": "functions/test/commit-sale-modular-contract.test.js",
+          "exists": true,
+          "sha256": "4284ec57f1e40177337e22e561b6010be006509e151b994f3b27a0017b136f82",
+          "tokens": [
+            {
+              "token": "commitSale",
+              "found": true
+            },
+            {
+              "token": "company-scoped",
+              "found": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ENG-003",
+      "name": "Cola fuera de línea gobernada",
+      "owner": "plataforma",
+      "structuralStatus": "implemented-local",
+      "operationalStatus": "not-assessed",
+      "evidence": [
+        {
+          "path": "src/public/dataLayer/offline/OfflinePolicy.js",
+          "exists": true,
+          "sha256": "6b8e2d3b1952d594987c5a08ee994f875aefacdb73f3fc9f7127a8b86bb79836",
+          "tokens": [
+            {
+              "token": "online-only",
+              "found": true
+            }
+          ]
+        },
+        {
+          "path": "test/offline-resilience.test.mjs",
+          "exists": true,
+          "sha256": "7a059935c8fb581a03dc5c0e4462c8e770ca46bbf828a8e904c1471f862e3b8e",
+          "tokens": [
+            {
+              "token": "dead",
+              "found": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ENG-004",
+      "name": "Promoción ligada al artefacto",
+      "owner": "release",
+      "structuralStatus": "implemented-local",
+      "operationalStatus": "not-assessed",
+      "evidence": [
+        {
+          "path": "documentacion/OPERATIONS/RELEASE_PROMOTION_RUNBOOK.md",
+          "exists": true,
+          "sha256": "9ab3b524d7a37a7f101cd9e0616966ea4cae56227d73ee5d072ba51f6aa2a735",
+          "tokens": [
+            {
+              "token": "SHA",
+              "found": true
+            },
+            {
+              "token": "rollback",
+              "found": true
+            }
+          ]
+        },
+        {
+          "path": "tools/evaluate-go-no-go.mjs",
+          "exists": true,
+          "sha256": "bb58fb407694a7380386f3e43f12fcb961833da83531141ae4831f0a73373ef5",
+          "tokens": [
+            {
+              "token": "artifact",
+              "found": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ENG-005",
+      "name": "Telemetría privada y no bloqueante",
+      "owner": "operación",
+      "structuralStatus": "implemented-local",
+      "operationalStatus": "not-assessed",
+      "evidence": [
+        {
+          "path": "AGENTS.md",
+          "exists": true,
+          "sha256": "2840fcfcbe84d5b7a6f2078a3628dc9612981285fc8c785a01c33168105669b7",
+          "tokens": [
+            {
+              "token": "sanitiz",
+              "found": true
+            },
+            {
+              "token": "cola",
+              "found": true
+            }
+          ]
+        },
+        {
+          "path": "test/telemetry-policy.test.mjs",
+          "exists": true,
+          "sha256": "bfe1a0f22ca71b238586101425afede4393d79ff79d3ca22aa0ffe77924107c2",
+          "tokens": [
+            {
+              "token": "sanitiz",
+              "found": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ENG-006",
+      "name": "Optimización con presupuesto",
+      "owner": "módulo",
+      "structuralStatus": "implemented-local",
+      "operationalStatus": "not-assessed",
+      "evidence": [
+        {
+          "path": "documentacion/DEVELOPMENT/CONTINUOUS_OPTIMIZATION_LINE.md",
+          "exists": true,
+          "sha256": "e85ef6b2a3da16a4e22129d152efcfa98addbfae9ab9b04dd7c04dd90d258a49",
+          "tokens": [
+            {
+              "token": "medir",
+              "found": true
+            }
+          ]
+        },
+        {
+          "path": "tools/check-performance-budget.mjs",
+          "exists": true,
+          "sha256": "72f473bf143b3d4edef05621e263d4c7f9a70376d7b7ed7bdb861243e74908c9",
+          "tokens": [
+            {
+              "token": "budget",
+              "found": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ENG-007",
+      "name": "Estrangulamiento verificable de legado",
+      "owner": "mantenimiento",
+      "structuralStatus": "implemented-local",
+      "operationalStatus": "not-assessed",
+      "evidence": [
+        {
+          "path": "AGENTS.md",
+          "exists": true,
+          "sha256": "2840fcfcbe84d5b7a6f2078a3628dc9612981285fc8c785a01c33168105669b7",
+          "tokens": [
+            {
+              "token": "no-growth",
+              "found": true
+            },
+            {
+              "token": "legacy",
+              "found": true
+            }
+          ]
+        },
+        {
+          "path": "functions/test/functions-legacy-isolation-contract.test.js",
+          "exists": true,
+          "sha256": "421b6026d88e7229b4ddc8259f74d000d3b6d4b7317b6e58a2eb0a59da1b7bd7",
+          "tokens": [
+            {
+              "token": "legacy",
+              "found": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ENG-008",
+      "name": "Incidente como conocimiento",
+      "owner": "incidente",
+      "structuralStatus": "implemented-local",
+      "operationalStatus": "not-assessed",
+      "evidence": [
+        {
+          "path": "AGENTS.md",
+          "exists": true,
+          "sha256": "2840fcfcbe84d5b7a6f2078a3628dc9612981285fc8c785a01c33168105669b7",
+          "tokens": [
+            {
+              "token": "causa raíz",
+              "found": true
+            },
+            {
+              "token": "riesgo residual",
+              "found": true
+            }
+          ]
+        },
+        {
+          "path": "documentacion/DEVELOPMENT/INCIDENTES_SOLUCIONES_2026-09-20.md",
+          "exists": true,
+          "sha256": "3387a78eb876e2bfe4d553d06aa9a3699ed1985d677f393051a5ea08cf75fdd0",
+          "tokens": [
+            {
+              "token": "causa raíz",
+              "found": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "no ejecuta el código del proyecto",
+    "no evalúa producción ni seguridad integral",
+    "la presencia textual requiere revisión humana",
+    "not-assessed no significa incumplimiento"
+  ]
+}

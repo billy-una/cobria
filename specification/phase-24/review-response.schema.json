@@ -1,0 +1,17 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"https://cobria.dev/schemas/phase24-review-response.schema.json",
+  "title":"Respuesta de revisión semántica COBRIA Engineering",
+  "type":"object",
+  "required":["schemaVersion","reviewerCode","sample","conflictStatement","decisions","recommendation","attestation"],
+  "properties":{
+    "schemaVersion":{"const":"1.0.0"},
+    "reviewerCode":{"type":"string","pattern":"^R-[A-Z0-9]{3,12}$"},
+    "sample":{"enum":["M-01","M-02","M-03"]},
+    "conflictStatement":{"type":"string","minLength":20},
+    "decisions":{"type":"array","minItems":8,"maxItems":8,"items":{"type":"object","required":["id","decision","confidence","rationale"],"properties":{"id":{"pattern":"^ENG-00[1-8]$"},"decision":{"enum":["supported","unsupported","insufficient"]},"confidence":{"type":"integer","minimum":1,"maximum":5},"rationale":{"type":"string","minLength":20}},"additionalProperties":false}},
+    "recommendation":{"enum":["accept-manifest","revise-manifest","reject-manifest"]},
+    "attestation":{"type":"object","required":["type","date","independentWork"],"properties":{"type":{"const":"human"},"date":{"type":"string","format":"date"},"independentWork":{"const":true}},"additionalProperties":false}
+  },
+  "additionalProperties":false
+}

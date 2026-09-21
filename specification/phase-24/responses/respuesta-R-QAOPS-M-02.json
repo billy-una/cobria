@@ -1,0 +1,62 @@
+{
+  "schemaVersion": "1.0.0",
+  "reviewerCode": "R-QAOPS",
+  "sample": "M-02",
+  "conflictStatement": "Declaro que realicé esta revisión personalmente, de forma independiente, sin participación en COBRIA ni coordinación con el otro revisor.",
+  "decisions": [
+    {
+      "id": "ENG-001",
+      "decision": "supported",
+      "confidence": 4,
+      "rationale": "El comportamiento offline está definido de forma observable: aviso persistente, acciones críticas deshabilitadas y prohibición de mostrar éxito sin confirmación; hay estado y consecuencias verificables."
+    },
+    {
+      "id": "ENG-002",
+      "decision": "supported",
+      "confidence": 4,
+      "rationale": "El ADR identifica la frontera atómica real de RTDB y prohíbe reemplazarla por escrituras separadas que producirían estados parciales; la autoridad transaccional está preservada explícitamente."
+    },
+    {
+      "id": "ENG-003",
+      "decision": "supported",
+      "confidence": 4,
+      "rationale": "La política impide cachear datos operativos o confirmar operaciones críticas offline, y el worker diferido incorpora retry, idempotencia y dead-letter; los estados diferidos tienen reglas de gobierno claras."
+    },
+    {
+      "id": "ENG-004",
+      "decision": "insufficient",
+      "confidence": 3,
+      "rationale": "El checklist exige rollback y el reporte registra checks de una releaseVersion, pero no aparece una identidad criptográfica del artefacto ni evidencia de que el mismo binario o build haya sido promovido."
+    },
+    {
+      "id": "ENG-005",
+      "decision": "insufficient",
+      "confidence": 4,
+      "rationale": "El sanitizador filtra nombres de campos sensibles y limita estructuras, pero privacidad no equivale a no bloqueo; falta evidencia de timeouts, aislamiento, captura de errores o envío fuera del camino crítico."
+    },
+    {
+      "id": "ENG-006",
+      "decision": "unsupported",
+      "confidence": 5,
+      "rationale": "La propia evidencia declara que los límites reales de costo y consumo deben fijarse posteriormente con datos del piloto. El presupuesto exigido todavía es una tarea pendiente, no un control vigente."
+    },
+    {
+      "id": "ENG-007",
+      "decision": "insufficient",
+      "confidence": 3,
+      "rationale": "La documentación afirma que no hay excepciones legacy y describe reexportaciones de compatibilidad, pero el fragmento no aporta un audit, test o regla automática que impida nuevas dependencias o crecimiento."
+    },
+    {
+      "id": "ENG-008",
+      "decision": "supported",
+      "confidence": 4,
+      "rationale": "El criterio de cierre exige causa raíz, impacto, timeline, evidencia, acciones correctivas, responsable y prueba de no regresión, con revisión posterior para P1/P2; existe un proceso de aprendizaje explícito."
+    }
+  ],
+  "recommendation": "revise-manifest",
+  "attestation": {
+    "type": "human",
+    "date": "2026-09-20",
+    "independentWork": true
+  }
+}

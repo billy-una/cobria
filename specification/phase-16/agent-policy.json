@@ -1,0 +1,25 @@
+{
+  "version": "1.0.0",
+  "language": "es",
+  "authorityOrder": ["specification", "implementation", "evidence", "editorial"],
+  "protectedPaths": [
+    {"path": "specification/COBRIA-CORE-1.0.md", "reason": "núcleo congelado", "changeRequires": ["nueva-version", "ADR", "revision-humana"]},
+    {"path": "replication/results", "reason": "evidencia generada", "changeRequires": ["ejecucion-del-protocolo"]},
+    {"path": "specification/phase-11", "reason": "manifiestos derivados", "changeRequires": ["cambio-en-fuente", "make generar-manifiestos"]},
+    {"path": "output/pdf", "reason": "artefactos derivados", "changeRequires": ["compilacion-desde-fuente"]}
+  ],
+  "invariants": [
+    {"id": "AI-INV-001", "rule": "dominio y aplicación no importan infraestructura o presentación"},
+    {"id": "AI-INV-002", "rule": "claves físicas a-h solo se traducen en Dater o adaptador de datos"},
+    {"id": "AI-INV-003", "rule": "toda operación sensible conserva actor, capacidad, ámbito y finalidad"},
+    {"id": "AI-INV-004", "rule": "ninguna cifra o estado ejecutado se afirma sin artefacto verificable"},
+    {"id": "AI-INV-005", "rule": "producción y secretos reales requieren autoridad humana explícita"}
+  ],
+  "commands": {
+    "readOnly": ["rg", "git status", "git diff", "make ayuda", "node src/cli.mjs contexto"],
+    "verification": ["make verificar", "npm test", "python3 replication/scripts/validate-phase16.py"],
+    "generatedWrites": ["make generar-manifiestos", "make generar-esquemas", "make sincronizar-descargas"],
+    "humanOnly": ["desplegar-produccion", "rotar-secretos", "publicar-release", "aprobar-consentimiento"]
+  },
+  "changeContract": ["objective", "scope", "authority", "files", "invariants", "tests", "risks", "humanPending"]
+}

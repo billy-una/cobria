@@ -1,0 +1,83 @@
+{
+  "schemaVersion": "1.0.0",
+  "method": "cobria-dimensional-evidence-v1",
+  "project": {
+    "commit": "09c15acd14ab806abe436a8176ef3247c61a2df6",
+    "sourceMode": "git-ref"
+  },
+  "contract": "ENG-007",
+  "dimensions": [
+    {
+      "id": "boundary",
+      "description": "frontera explícita del legado",
+      "satisfied": true,
+      "evidence": [
+        {
+          "path": "documentacion/DEVELOPMENT/MODULES/CLIPS_LEGACY_BOUNDARY.md",
+          "exists": true,
+          "sha256": "89a4a387c31af6cf3fb753dd1b4129214f3f0f5bf04647434c22d30e1bea2b99",
+          "tokens": [
+            {
+              "token": "frontera legacy",
+              "found": true
+            },
+            {
+              "token": "fallback legacy",
+              "found": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "no-growth",
+      "description": "control verificable contra crecimiento",
+      "satisfied": true,
+      "evidence": [
+        {
+          "path": "src/server/scripts/audit-architecture-hardening.mjs",
+          "exists": true,
+          "sha256": "e1615be7bf15798e9658f54c4fdbe60a4d68df5e506ea491f55b18d12fa002d6",
+          "tokens": [
+            {
+              "token": "legacy clips router is frozen",
+              "found": true
+            },
+            {
+              "token": "exceeded its frozen size budget",
+              "found": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "retirement",
+      "description": "condición o ruta de retiro",
+      "satisfied": true,
+      "evidence": [
+        {
+          "path": "documentacion/DEVELOPMENT/MODULES/CLIPS_LEGACY_BOUNDARY.md",
+          "exists": true,
+          "sha256": "89a4a387c31af6cf3fb753dd1b4129214f3f0f5bf04647434c22d30e1bea2b99",
+          "tokens": [
+            {
+              "token": "se elimina únicamente después",
+              "found": true
+            },
+            {
+              "token": "todos sus",
+              "found": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "required": 3,
+    "satisfied": 3,
+    "strictStatus": "supported-structural"
+  },
+  "interpretation": "Resultado estructural de una propuesta; no certifica operación, calidad ni conformidad oficial."
+}

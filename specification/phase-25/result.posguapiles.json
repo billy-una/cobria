@@ -1,0 +1,94 @@
+{
+  "schemaVersion": "1.0.0",
+  "method": "cobria-dimensional-evidence-v1",
+  "project": {
+    "commit": "ae8d63ce535ecff40059b49d8b8c9f050c353d96",
+    "sourceMode": "git-ref"
+  },
+  "contract": "ENG-007",
+  "dimensions": [
+    {
+      "id": "boundary",
+      "description": "frontera explícita del legado",
+      "satisfied": true,
+      "evidence": [
+        {
+          "path": "AGENTS.md",
+          "exists": true,
+          "sha256": "2840fcfcbe84d5b7a6f2078a3628dc9612981285fc8c785a01c33168105669b7",
+          "tokens": [
+            {
+              "token": "functions/index.js",
+              "found": true
+            },
+            {
+              "token": "shim",
+              "found": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "no-growth",
+      "description": "control verificable contra crecimiento",
+      "satisfied": true,
+      "evidence": [
+        {
+          "path": "AGENTS.md",
+          "exists": true,
+          "sha256": "2840fcfcbe84d5b7a6f2078a3628dc9612981285fc8c785a01c33168105669b7",
+          "tokens": [
+            {
+              "token": "legacy-index.js",
+              "found": true
+            },
+            {
+              "token": "no-growth",
+              "found": true
+            }
+          ]
+        },
+        {
+          "path": "functions/test/legacy-modular-retirement-contract.test.js",
+          "exists": true,
+          "sha256": "ccf97dbe537d4a5ac8e9223092443cf505c63472ecf0c77d5793a6f19464cf23",
+          "tokens": [
+            {
+              "token": "legacy",
+              "found": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "retirement",
+      "description": "condición o ruta de retiro",
+      "satisfied": true,
+      "evidence": [
+        {
+          "path": "documentacion/DEVELOPMENT/CONTINUOUS_OPTIMIZATION_LINE.md",
+          "exists": true,
+          "sha256": "e85ef6b2a3da16a4e22129d152efcfa98addbfae9ab9b04dd7c04dd90d258a49",
+          "tokens": [
+            {
+              "token": "solo puede reducirse",
+              "found": true
+            },
+            {
+              "token": "retirar código antiguo",
+              "found": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "required": 3,
+    "satisfied": 3,
+    "strictStatus": "supported-structural"
+  },
+  "interpretation": "Resultado estructural de una propuesta; no certifica operación, calidad ni conformidad oficial."
+}

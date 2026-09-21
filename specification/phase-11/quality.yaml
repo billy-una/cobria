@@ -1,0 +1,189 @@
+{
+  "generatedFrom": [
+    "specification/phase-9/quality.json"
+  ],
+  "manifestId": "cobria-quality",
+  "records": [
+    {
+      "data": {
+        "available": true,
+        "command": "npm test",
+        "id": "unit",
+        "purpose": "reglas aisladas"
+      },
+      "id": "TEST-UNIT",
+      "owner": "Responsable de calidad",
+      "references": [
+        "specification/phase-9/MANUAL-DE-CALIDAD.md"
+      ],
+      "source": "specification/phase-9/quality.json",
+      "version": "1.0.0"
+    },
+    {
+      "data": {
+        "available": true,
+        "command": "npm test",
+        "id": "contract",
+        "purpose": "puertos y adaptadores"
+      },
+      "id": "TEST-CONTRACT",
+      "owner": "Responsable de calidad",
+      "references": [
+        "specification/phase-9/MANUAL-DE-CALIDAD.md"
+      ],
+      "source": "specification/phase-9/quality.json",
+      "version": "1.0.0"
+    },
+    {
+      "data": {
+        "available": true,
+        "command": "npm test",
+        "id": "integration",
+        "purpose": "componentes coordinados"
+      },
+      "id": "TEST-INTEGRATION",
+      "owner": "Responsable de calidad",
+      "references": [
+        "specification/phase-9/MANUAL-DE-CALIDAD.md"
+      ],
+      "source": "specification/phase-9/quality.json",
+      "version": "1.0.0"
+    },
+    {
+      "data": {
+        "available": false,
+        "id": "emulator",
+        "purpose": "servicios locales",
+        "status": "planned"
+      },
+      "id": "TEST-EMULATOR",
+      "owner": "Responsable de calidad",
+      "references": [
+        "specification/phase-9/MANUAL-DE-CALIDAD.md"
+      ],
+      "source": "specification/phase-9/quality.json",
+      "version": "1.0.0"
+    },
+    {
+      "data": {
+        "available": true,
+        "command": "npm run nosql:conformance",
+        "id": "real-engine",
+        "purpose": "motores NoSQL"
+      },
+      "id": "TEST-REAL-ENGINE",
+      "owner": "Responsable de calidad",
+      "references": [
+        "specification/phase-9/MANUAL-DE-CALIDAD.md"
+      ],
+      "source": "specification/phase-9/quality.json",
+      "version": "1.0.0"
+    },
+    {
+      "data": {
+        "available": false,
+        "id": "e2e",
+        "purpose": "flujo externo completo",
+        "status": "planned"
+      },
+      "id": "TEST-E2E",
+      "owner": "Responsable de calidad",
+      "references": [
+        "specification/phase-9/MANUAL-DE-CALIDAD.md"
+      ],
+      "source": "specification/phase-9/quality.json",
+      "version": "1.0.0"
+    },
+    {
+      "data": {
+        "available": false,
+        "id": "accessibility",
+        "purpose": "interacción inclusiva",
+        "status": "phase-10"
+      },
+      "id": "TEST-ACCESSIBILITY",
+      "owner": "Responsable de calidad",
+      "references": [
+        "specification/phase-9/MANUAL-DE-CALIDAD.md"
+      ],
+      "source": "specification/phase-9/quality.json",
+      "version": "1.0.0"
+    },
+    {
+      "data": {
+        "available": true,
+        "command": "python3 scripts/validate-phase7.py",
+        "id": "security",
+        "purpose": "casos negativos y suministro"
+      },
+      "id": "TEST-SECURITY",
+      "owner": "Responsable de calidad",
+      "references": [
+        "specification/phase-9/MANUAL-DE-CALIDAD.md"
+      ],
+      "source": "specification/phase-9/quality.json",
+      "version": "1.0.0"
+    },
+    {
+      "data": {
+        "available": true,
+        "command": "npm run experiment",
+        "id": "performance",
+        "purpose": "latencia y recursos"
+      },
+      "id": "TEST-PERFORMANCE",
+      "owner": "Responsable de calidad",
+      "references": [
+        "specification/phase-9/MANUAL-DE-CALIDAD.md"
+      ],
+      "source": "specification/phase-9/quality.json",
+      "version": "1.0.0"
+    },
+    {
+      "data": {
+        "available": true,
+        "command": "npm run resilience:core11",
+        "id": "resilience",
+        "purpose": "fallos y recuperación"
+      },
+      "id": "TEST-RESILIENCE",
+      "owner": "Responsable de calidad",
+      "references": [
+        "specification/phase-9/MANUAL-DE-CALIDAD.md"
+      ],
+      "source": "specification/phase-9/quality.json",
+      "version": "1.0.0"
+    },
+    {
+      "data": {
+        "available": true,
+        "command": "python3 scripts/validate-phase3.py",
+        "id": "migration",
+        "purpose": "compatibilidad de datos"
+      },
+      "id": "TEST-MIGRATION",
+      "owner": "Responsable de calidad",
+      "references": [
+        "specification/phase-9/MANUAL-DE-CALIDAD.md"
+      ],
+      "source": "specification/phase-9/quality.json",
+      "version": "1.0.0"
+    },
+    {
+      "data": {
+        "available": false,
+        "id": "smoke",
+        "purpose": "salud posterior a entrega",
+        "status": "requires-deployed-endpoint"
+      },
+      "id": "TEST-SMOKE",
+      "owner": "Responsable de calidad",
+      "references": [
+        "specification/phase-9/MANUAL-DE-CALIDAD.md"
+      ],
+      "source": "specification/phase-9/quality.json",
+      "version": "1.0.0"
+    }
+  ],
+  "schemaVersion": "1.0.0"
+}

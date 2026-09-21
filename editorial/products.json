@@ -1,0 +1,15 @@
+{
+  "version": "1.0.0",
+  "products": [
+    {"id": "specification", "authority": "normative", "source": "specification/", "build": "make construir-editorial", "output": "output/pdf/COBRIA-especificacion-ecosistema-1.0.pdf"},
+    {"id": "article", "authority": "scientific-summary", "source": "articulo-cobria.tex", "build": "make construir-articulo", "output": "output/pdf/COBRIA-articulo-cientifico-actualizado.pdf"},
+    {"id": "master", "authority": "scientific-development", "source": "main.tex", "build": "make construir-maestro", "output": "output/pdf/COBRIA-documento-maestro-ecosistema.pdf"},
+    {"id": "book", "authority": "pedagogical", "source": "libro-cobria/build-book.mjs", "build": "cd libro-cobria && node build-book.mjs", "output": "output/pdf/COBRIA-ecosistema-manual-completo.pdf"},
+    {"id": "workbook", "authority": "pedagogical-practice", "source": "libro-cobria/build-book.mjs", "build": "make construir-editorial", "output": "output/pdf/COBRIA-cuaderno-de-trabajo.pdf"},
+    {"id": "technical-annex", "authority": "editorial-traceability", "source": "libro-cobria/build-book.mjs", "build": "make construir-editorial", "output": "output/pdf/COBRIA-anexo-tecnico.pdf"},
+    {"id": "site", "authority": "interactive-pedagogical", "source": "sitio/app/", "build": "cd sitio && npm test", "output": "sitio/dist/"},
+    {"id": "toolkit", "authority": "verification-tooling", "source": "replication/src/", "build": "make verificar-replica", "output": "replication/"},
+    {"id": "evidence", "authority": "empirical", "source": "replication/", "build": "make verificar-replica", "output": "replication/results/"}
+  ],
+  "authorityFlow": ["specification", "implementation", "evidence", "article/master", "book/site"]
+}

@@ -1,0 +1,33 @@
+{
+  "schemaVersion":"1.0.0",
+  "deployables":[
+    {
+      "id":"DEP-001","type":"function","name":"procesar-observacion","contract":"evento.observacion.v1",
+      "scope":"obligatorio-en-evento","region":"us-central1","memoryMiB":256,"timeoutSeconds":30,"concurrency":20,
+      "idempotency":"eventId+ambito","retries":{"maximumAttempts":5,"backoff":"exponencial-con-jitter"},
+      "deadLetter":"observaciones-fallidas","secrets":["ref:GESTOR/CREDENCIAL_REPOSITORIO"],
+      "permissions":["observaciones:leer","proyecciones:publicar"],
+      "metrics":["invocaciones","errores","reintentos","dead_letter","duracion_ms","costo_estimado"],
+      "costControls":["maxInstances=10","concurrency=20","timeout=30s"],
+      "recovery":"reprocesar-dead-letter-con-misma-clave-idempotencia","owner":"equipo-operacion"
+    },
+    {
+      "id":"DEP-002","type":"worker","name":"reconstruir-proyeccion","contract":"comando.reconstruccion.v1",
+      "scope":"obligatorio-en-comando","region":"us-central1","memoryMiB":512,"timeoutSeconds":540,"concurrency":1,
+      "idempotency":"projectionId+sourceRevision","retries":{"maximumAttempts":3,"backoff":"exponencial-con-jitter"},
+      "deadLetter":"reconstrucciones-fallidas","secrets":[],"permissions":["observaciones:leer","proyecciones:publicar"],
+      "metrics":["documentos_procesados","errores","duracion_ms","verificacion_fallida","costo_estimado"],
+      "costControls":["maxInstances=2","concurrency=1","presupuesto-por-ejecucion"],
+      "recovery":"retirar-candidata-y-conservar-version-activa","owner":"equipo-datos"
+    },
+    {
+      "id":"DEP-003","type":"webhook","name":"entrada-integracion","contract":"http.webhook.v1",
+      "scope":"derivado-de-identidad-validada","region":"us-central1","memoryMiB":256,"timeoutSeconds":15,"concurrency":40,
+      "idempotency":"webhookEventId","retries":{"maximumAttempts":0,"backoff":"no-aplica"},"deadLetter":"no-aplica",
+      "secrets":["ref:GESTOR/FIRMA_WEBHOOK"],"permissions":["observaciones:escribir"],
+      "metrics":["firmas_invalidas","repeticiones","rechazos","duracion_ms"],
+      "costControls":["maxInstances=20","limite-por-identidad","tamano-maximo"],
+      "recovery":"emisor-reintenta-con-mismo-identificador","owner":"equipo-integraciones"
+    }
+  ]
+}

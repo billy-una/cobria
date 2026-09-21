@@ -1,0 +1,12 @@
+[
+  {
+    "requested": "reserva-norte",
+    "denied": true,
+    "code": "ACCESS_DENIED"
+  },
+  {
+    "requested": "reserva-sur",
+    "denied": true,
+    "code": "ACCESS_DENIED"
+  }
+]

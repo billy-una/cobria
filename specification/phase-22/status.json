@@ -1,0 +1,10 @@
+{
+  "schemaVersion":"1.0.0",
+  "phase":22,
+  "state":"implemented-and-executed-local",
+  "engine":"replication/src/engineering-adoption.mjs",
+  "manifest":"specification/phase-22/adoption-manifest.posguapiles.json",
+  "contracts":8,
+  "operationallyValidated":0,
+  "next":"multi-project-transfer-comparison"
+}

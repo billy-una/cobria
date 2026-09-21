@@ -1,0 +1,1 @@
+{"phase":36,"status":"proposal","requirements":[{"id":"P36-REQ-001","owner":"autor","acceptance":"lista explícita de bloqueadores humanos y externos","test":"replication/tests/phase32-36-research-closure.test.mjs"},{"id":"P36-REQ-002","owner":"publicación","acceptance":"published=false, DOI y firma nulos","test":"replication/scripts/validate-phase36.py"}]}

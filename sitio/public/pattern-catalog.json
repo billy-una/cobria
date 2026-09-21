@@ -1,0 +1,2306 @@
+{
+  "schemaVersion": "1.0.0",
+  "catalogVersion": "ecosistema-1.0",
+  "status": "documentado",
+  "source": "sitio/public/catalogo.json",
+  "itemCount": 30,
+  "families": [
+    "Modelado documental",
+    "Seguridad por ámbito",
+    "Catálogos y vocabularios",
+    "Proyecciones de lectura",
+    "Reconstrucción",
+    "Eventos y consistencia",
+    "Gobernanza del ciclo de vida",
+    "Analítica reproducible",
+    "IA con procedencia"
+  ],
+  "items": [
+    {
+      "id": 1,
+      "slug": "objeto-canonico",
+      "nombre": "Objeto canónico",
+      "familia": "Modelado documental",
+      "tipo": "Contrato compuesto",
+      "estado": "documentado",
+      "resumen": "Definir una representación autoritativa mínima y estable para la identidad y las reglas de una entidad.",
+      "problema": "Cuando varias pantallas, índices o integraciones escriben su propia versión de un hecho, ninguna copia puede explicar cuál manda. Una corrección se convierte en una reconciliación manual.",
+      "contexto": "Úselo cuando hay reglas, múltiples consumidores o copias optimizadas. Evítelo como capa ceremonial en un CRUD pequeño. Empiece inventariando qué escritura posee autoridad y elimine rutas paralelas.",
+      "fuerzas": [
+        "simplicidad frente a control",
+        "rendimiento frente a costo total",
+        "autonomía frente a autoridad y trazabilidad"
+      ],
+      "cuandoUsar": "Úselo cuando hay reglas, múltiples consumidores o copias optimizadas.",
+      "cuandoEvitar": "Evítelo cuando el problema descrito no existe o una alternativa más simple satisface el contrato de Objeto canónico.",
+      "estructura": "ArbolPatrimonial → Contrato de entrada → Repositorio documental → Evidencia",
+      "participantes": [
+        "ArbolPatrimonial",
+        "Contrato de entrada",
+        "Repositorio documental",
+        "Evidencia"
+      ],
+      "secuencia": "guardar(cambio) → validar → escribirCanónico → emitirRevisión",
+      "ejemplo": {
+        "escena": "Expediente de un árbol patrimonial",
+        "problema": "Varias brigadas guardan altura, especie y estado en archivos distintos.",
+        "resultado": "Un único expediente conserva identidad y reglas; los mapas son derivados."
+      },
+      "codigo": {
+        "TypeScript": "// Expediente de un árbol patrimonial\ntype Solicitud = Record<string, unknown>;\n\nclass ArbolPatrimonial {\n  registrar(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 1, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new ArbolPatrimonial().registrar({ arbolId: \"roble-42\", especie: \"Quercus costaricensis\" });",
+        "Python": "# Expediente de un árbol patrimonial\nclass ArbolPatrimonial:\n    def registrar(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 1, \"evidencia\": True, **solicitud}\n\nresultado = ArbolPatrimonial().registrar({\"detalle\": \"arbolId: \\\"roble-42\\\", especie: \\\"Quercus costaricensis\\\"\"})",
+        "Java": "// Expediente de un árbol patrimonial\nrecord Solicitud(String detalle) {}\n\nfinal class ArbolPatrimonial {\n  Resultado registrar(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(1, true, solicitud);\n  }\n}\n\nvar resultado = new ArbolPatrimonial().registrar(new Solicitud(\"arbolId: \\\"roble-42\\\", especie: \\\"Quercus costaricensis\\\"\"));",
+        "Go": "// Expediente de un árbol patrimonial\ntype Solicitud struct { Detalle string }\n\nfunc Registrar(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 1, Evidencia: true}, nil\n}\n\nresultado, err := Registrar(Solicitud{Detalle: \"arbolId: \\\"roble-42\\\", especie: \\\"Quercus costaricensis\\\"\"})"
+      },
+      "casoNegativo": "La solución se introduce sin contrato ni prueba y termina ocultando el problema que Objeto canónico debía controlar.",
+      "antipatrones": [
+        "Objeto canónico ceremonial",
+        "aplicación sin medición ni caso negativo"
+      ],
+      "consecuencias": "Mida escrituras directas fuera de la frontera, entidades sin revisión y derivados sin origen. Se relaciona con Repositorio con ámbito, Proyección de lectura y Publicación por versión. El costo principal es diseñar migraciones y reglas de autoridad.",
+      "pruebas": [
+        "comprobar: guardar(cambio) → validar → escribirCanónico → emitirRevisión",
+        "resolver y verificar: Dibuje las rutas de escritura actuales. Marque cuál puede cambiar una regla de dominio y cierre las demás."
+      ],
+      "seguridad": "Conservar actor, capacidad, ámbito y finalidad cuando el flujo accede o transforma información sensible.",
+      "operacion": "Mida escrituras directas fuera de la frontera, entidades sin revisión y derivados sin origen. Se relaciona con Repositorio con ámbito, Proyección de lectura y Publicación por versión. El costo principal es diseñar migraciones y reglas de autoridad.",
+      "migracionRetiro": "Introducir detrás de un contrato, comparar el comportamiento y retirar cuando deje de justificar su costo. Úselo cuando hay reglas, múltiples consumidores o copias optimizadas. Evítelo como capa ceremonial en un CRUD pequeño. Empiece inventariando qué escritura posee autoridad y elimine rutas paralelas.",
+      "relaciones": [
+        {
+          "type": "complementa",
+          "target": "Dato fechado"
+        },
+        {
+          "type": "complementa",
+          "target": "Reconstrucción total"
+        },
+        {
+          "type": "complementa",
+          "target": "Conjunto de datos reproducible"
+        }
+      ],
+      "ejercicio": {
+        "consigna": "Dibuje las rutas de escritura actuales. Marque cuál puede cambiar una regla de dominio y cierre las demás.",
+        "resultadoEsperado": "Decisión justificada, caso negativo y evidencia observable."
+      },
+      "procedencia": {
+        "clasificacion": "Adaptación COBRIA",
+        "fuentes": [
+          "Evans (2003)",
+          "Fowler (2002)",
+          "Kleppmann (2017)"
+        ],
+        "sourceSlug": "objeto-canonico"
+      }
+    },
+    {
+      "id": 2,
+      "slug": "dato-fechado",
+      "nombre": "Dato fechado",
+      "familia": "Modelado documental",
+      "tipo": "Adaptación COBRIA",
+      "estado": "documentado",
+      "resumen": "Separar cuándo un hecho fue válido de cuándo el sistema lo conoció o registró.",
+      "problema": "Un único campo de fecha no permite reconstruir qué se sabía en un momento ni corregir eventos tardíos sin reescribir historia.",
+      "contexto": "Úselo para eventos, tarifas, estados, auditoría y entrenamiento temporal. Puede omitirse cuando el tiempo carece de significado de dominio. Defina primero las preguntas temporales que deben responderse.",
+      "fuerzas": [
+        "simplicidad frente a control",
+        "rendimiento frente a costo total",
+        "autonomía frente a autoridad y trazabilidad"
+      ],
+      "cuandoUsar": "Úselo para eventos, tarifas, estados, auditoría y entrenamiento temporal.",
+      "cuandoEvitar": "Evítelo cuando el problema descrito no existe o una alternativa más simple satisface el contrato de Dato fechado.",
+      "estructura": "MedicionRio → Contrato de entrada → Repositorio documental → Evidencia",
+      "participantes": [
+        "MedicionRio",
+        "Contrato de entrada",
+        "Repositorio documental",
+        "Evidencia"
+      ],
+      "secuencia": "registrar(hecho, válidoEn, conocidoEn, procedencia)",
+      "ejemplo": {
+        "escena": "Medición de un río después de una tormenta",
+        "problema": "Una lectura sin tiempo válido confunde cuándo ocurrió con cuándo se transmitió.",
+        "resultado": "La observación conserva tiempo observado, recibido y procedencia del sensor."
+      },
+      "codigo": {
+        "TypeScript": "// Medición de un río después de una tormenta\ntype Solicitud = Record<string, unknown>;\n\nclass MedicionRio {\n  registrar(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 2, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new MedicionRio().registrar({ rioId: \"terraba\", nivelCm: 184, observadoEn: \"2026-08-24T06:15:00Z\" });",
+        "Python": "# Medición de un río después de una tormenta\nclass MedicionRio:\n    def registrar(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 2, \"evidencia\": True, **solicitud}\n\nresultado = MedicionRio().registrar({\"detalle\": \"rioId: \\\"terraba\\\", nivelCm: 184, observadoEn: \\\"2026-08-24T06:15:00Z\\\"\"})",
+        "Java": "// Medición de un río después de una tormenta\nrecord Solicitud(String detalle) {}\n\nfinal class MedicionRio {\n  Resultado registrar(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(2, true, solicitud);\n  }\n}\n\nvar resultado = new MedicionRio().registrar(new Solicitud(\"rioId: \\\"terraba\\\", nivelCm: 184, observadoEn: \\\"2026-08-24T06:15:00Z\\\"\"));",
+        "Go": "// Medición de un río después de una tormenta\ntype Solicitud struct { Detalle string }\n\nfunc Registrar(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 2, Evidencia: true}, nil\n}\n\nresultado, err := Registrar(Solicitud{Detalle: \"rioId: \\\"terraba\\\", nivelCm: 184, observadoEn: \\\"2026-08-24T06:15:00Z\\\"\"})"
+      },
+      "casoNegativo": "La solución se introduce sin contrato ni prueba y termina ocultando el problema que Dato fechado debía controlar.",
+      "antipatrones": [
+        "Dato fechado ceremonial",
+        "aplicación sin medición ni caso negativo"
+      ],
+      "consecuencias": "Mida eventos tardíos, correcciones, cortes reproducibles y divergencia temporal. Se relaciona con Marca de avance temporal y Conjunto de datos reproducible. Aumenta almacenamiento y exige semántica clara.",
+      "pruebas": [
+        "comprobar: registrar(hecho, válidoEn, conocidoEn, procedencia)",
+        "resolver y verificar: Elija un hecho tardío y reconstruya qué se sabía antes y después de su registro."
+      ],
+      "seguridad": "Conservar actor, capacidad, ámbito y finalidad cuando el flujo accede o transforma información sensible.",
+      "operacion": "Mida eventos tardíos, correcciones, cortes reproducibles y divergencia temporal. Se relaciona con Marca de avance temporal y Conjunto de datos reproducible. Aumenta almacenamiento y exige semántica clara.",
+      "migracionRetiro": "Introducir detrás de un contrato, comparar el comportamiento y retirar cuando deje de justificar su costo. Úselo para eventos, tarifas, estados, auditoría y entrenamiento temporal. Puede omitirse cuando el tiempo carece de significado de dominio. Defina primero las preguntas temporales que deben responderse.",
+      "relaciones": [
+        {
+          "type": "complementa",
+          "target": "Repositorio con ámbito"
+        },
+        {
+          "type": "complementa",
+          "target": "Reconstrucción incremental"
+        },
+        {
+          "type": "complementa",
+          "target": "Característica versionada"
+        }
+      ],
+      "ejercicio": {
+        "consigna": "Elija un hecho tardío y reconstruya qué se sabía antes y después de su registro.",
+        "resultadoEsperado": "Decisión justificada, caso negativo y evidencia observable."
+      },
+      "procedencia": {
+        "clasificacion": "Contrato compuesto",
+        "fuentes": [
+          "Evans (2003)",
+          "Fowler (2002)",
+          "Kleppmann (2017)"
+        ],
+        "sourceSlug": "dato-fechado"
+      }
+    },
+    {
+      "id": 3,
+      "slug": "repositorio-con-ambito",
+      "nombre": "Repositorio con ámbito",
+      "familia": "Seguridad por ámbito",
+      "tipo": "Patrón adaptado",
+      "estado": "documentado",
+      "resumen": "Encapsular persistencia y hacer obligatorio el límite organizacional en cada operación.",
+      "problema": "Un filtro de organización añadido al final puede olvidarse. Cachés, consultas auxiliares o tareas administrativas terminan mezclando datos.",
+      "contexto": "Úselo en sistemas multiinquilino o con fronteras de privacidad. No confíe únicamente en convenciones. Migre primero lecturas, luego escrituras y finalmente tareas de fondo.",
+      "fuerzas": [
+        "simplicidad frente a control",
+        "rendimiento frente a costo total",
+        "autonomía frente a autoridad y trazabilidad"
+      ],
+      "cuandoUsar": "Úselo en sistemas multiinquilino o con fronteras de privacidad.",
+      "cuandoEvitar": "Evítelo cuando el problema descrito no existe o una alternativa más simple satisface el contrato de Repositorio con ámbito.",
+      "estructura": "RepositorioObservaciones → Contrato de entrada → Repositorio documental → Evidencia",
+      "participantes": [
+        "RepositorioObservaciones",
+        "Contrato de entrada",
+        "Repositorio documental",
+        "Evidencia"
+      ],
+      "secuencia": "obtener(ámbito, identidad) o fallarAntesDeLeer()",
+      "ejemplo": {
+        "escena": "Observaciones privadas de una reserva",
+        "problema": "Una consulta sin reservaId puede mezclar registros de áreas protegidas diferentes.",
+        "resultado": "El repositorio rechaza cualquier lectura que no declare primero la reserva."
+      },
+      "codigo": {
+        "TypeScript": "// Observaciones privadas de una reserva\ntype Solicitud = Record<string, unknown>;\n\nclass RepositorioObservaciones {\n  buscar(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 3, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new RepositorioObservaciones().buscar({ reservaId: \"las-tablas\", observacionId: \"obs-184\" });",
+        "Python": "# Observaciones privadas de una reserva\nclass RepositorioObservaciones:\n    def buscar(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 3, \"evidencia\": True, **solicitud}\n\nresultado = RepositorioObservaciones().buscar({\"detalle\": \"reservaId: \\\"las-tablas\\\", observacionId: \\\"obs-184\\\"\"})",
+        "Java": "// Observaciones privadas de una reserva\nrecord Solicitud(String detalle) {}\n\nfinal class RepositorioObservaciones {\n  Resultado buscar(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(3, true, solicitud);\n  }\n}\n\nvar resultado = new RepositorioObservaciones().buscar(new Solicitud(\"reservaId: \\\"las-tablas\\\", observacionId: \\\"obs-184\\\"\"));",
+        "Go": "// Observaciones privadas de una reserva\ntype Solicitud struct { Detalle string }\n\nfunc Buscar(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 3, Evidencia: true}, nil\n}\n\nresultado, err := Buscar(Solicitud{Detalle: \"reservaId: \\\"las-tablas\\\", observacionId: \\\"obs-184\\\"\"})"
+      },
+      "casoNegativo": "La solución se introduce sin contrato ni prueba y termina ocultando el problema que Repositorio con ámbito debía controlar.",
+      "antipatrones": [
+        "Repositorio con ámbito ceremonial",
+        "aplicación sin medición ni caso negativo"
+      ],
+      "consecuencias": "Mida solicitudes rechazadas, fugas cruzadas y claves de caché incompletas. Se relaciona con Contexto autorizado y Recuperación limitada por ámbito. Añade parámetros, índices y pruebas negativas.",
+      "pruebas": [
+        "comprobar: obtener(ámbito, identidad) o fallarAntesDeLeer()",
+        "resolver y verificar: Escriba tres pruebas negativas: ámbito ausente, manipulado y válido con recurso ajeno."
+      ],
+      "seguridad": "Conservar actor, capacidad, ámbito y finalidad cuando el flujo accede o transforma información sensible.",
+      "operacion": "Mida solicitudes rechazadas, fugas cruzadas y claves de caché incompletas. Se relaciona con Contexto autorizado y Recuperación limitada por ámbito. Añade parámetros, índices y pruebas negativas.",
+      "migracionRetiro": "Introducir detrás de un contrato, comparar el comportamiento y retirar cuando deje de justificar su costo. Úselo en sistemas multiinquilino o con fronteras de privacidad. No confíe únicamente en convenciones. Migre primero lecturas, luego escrituras y finalmente tareas de fondo.",
+      "relaciones": [
+        {
+          "type": "complementa",
+          "target": "Catálogo versionado"
+        },
+        {
+          "type": "complementa",
+          "target": "Publicación por versión"
+        },
+        {
+          "type": "complementa",
+          "target": "Recuperación limitada por ámbito"
+        }
+      ],
+      "ejercicio": {
+        "consigna": "Escriba tres pruebas negativas: ámbito ausente, manipulado y válido con recurso ajeno.",
+        "resultadoEsperado": "Decisión justificada, caso negativo y evidencia observable."
+      },
+      "procedencia": {
+        "clasificacion": "Adaptación COBRIA",
+        "fuentes": [
+          "OWASP: principios de autorización",
+          "Kleppmann (2017)"
+        ],
+        "sourceSlug": "repositorio-con-ambito"
+      }
+    },
+    {
+      "id": 4,
+      "slug": "catalogo-versionado",
+      "nombre": "Catálogo versionado",
+      "familia": "Catálogos y vocabularios",
+      "tipo": "Contrato",
+      "estado": "documentado",
+      "resumen": "Gobernar vocabularios de dominio sin incrustar significados cambiantes en código o datos derivados.",
+      "problema": "Un código como “A” cambia de significado, desaparece o llega desde una versión antigua; las proyecciones mezclan interpretaciones.",
+      "contexto": "Úselo cuando categorías afectan reglas, analítica o interoperabilidad. Evite convertir toda constante local en catálogo remoto. Defina cuarentena o migración para desconocidos.",
+      "fuerzas": [
+        "simplicidad frente a control",
+        "rendimiento frente a costo total",
+        "autonomía frente a autoridad y trazabilidad"
+      ],
+      "cuandoUsar": "Úselo cuando categorías afectan reglas, analítica o interoperabilidad.",
+      "cuandoEvitar": "Evítelo cuando el problema descrito no existe o una alternativa más simple satisface el contrato de Catálogo versionado.",
+      "estructura": "CatalogoEspecies → Contrato de entrada → Repositorio documental → Evidencia",
+      "participantes": [
+        "CatalogoEspecies",
+        "Contrato de entrada",
+        "Repositorio documental",
+        "Evidencia"
+      ],
+      "secuencia": "resolver(clave, versión, fecha) o ponerEnCuarentena()",
+      "ejemplo": {
+        "escena": "Códigos de especies usados durante diez años",
+        "problema": "El código AV-03 cambió de significado y los informes históricos quedan ambiguos.",
+        "resultado": "Cada observación se interpreta con la edición del catálogo que estaba vigente."
+      },
+      "codigo": {
+        "TypeScript": "// Códigos de especies usados durante diez años\ntype Solicitud = Record<string, unknown>;\n\nclass CatalogoEspecies {\n  resolver(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 4, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new CatalogoEspecies().resolver({ codigo: \"AV-03\", version: \"2024.2\" });",
+        "Python": "# Códigos de especies usados durante diez años\nclass CatalogoEspecies:\n    def resolver(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 4, \"evidencia\": True, **solicitud}\n\nresultado = CatalogoEspecies().resolver({\"detalle\": \"codigo: \\\"AV-03\\\", version: \\\"2024.2\\\"\"})",
+        "Java": "// Códigos de especies usados durante diez años\nrecord Solicitud(String detalle) {}\n\nfinal class CatalogoEspecies {\n  Resultado resolver(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(4, true, solicitud);\n  }\n}\n\nvar resultado = new CatalogoEspecies().resolver(new Solicitud(\"codigo: \\\"AV-03\\\", version: \\\"2024.2\\\"\"));",
+        "Go": "// Códigos de especies usados durante diez años\ntype Solicitud struct { Detalle string }\n\nfunc Resolver(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 4, Evidencia: true}, nil\n}\n\nresultado, err := Resolver(Solicitud{Detalle: \"codigo: \\\"AV-03\\\", version: \\\"2024.2\\\"\"})"
+      },
+      "casoNegativo": "La solución se introduce sin contrato ni prueba y termina ocultando el problema que Catálogo versionado debía controlar.",
+      "antipatrones": [
+        "Catálogo versionado ceremonial",
+        "aplicación sin medición ni caso negativo"
+      ],
+      "consecuencias": "Mida valores desconocidos, versiones activas y derivados afectados. Se relaciona con Registro de dependencias y Conjunto reproducible. Su costo es coordinación y compatibilidad.",
+      "pruebas": [
+        "comprobar: resolver(clave, versión, fecha) o ponerEnCuarentena()",
+        "resolver y verificar: Tome un código ambiguo y defina versión, vigencia, sustitución y cuarentena."
+      ],
+      "seguridad": "Conservar actor, capacidad, ámbito y finalidad cuando el flujo accede o transforma información sensible.",
+      "operacion": "Mida valores desconocidos, versiones activas y derivados afectados. Se relaciona con Registro de dependencias y Conjunto reproducible. Su costo es coordinación y compatibilidad.",
+      "migracionRetiro": "Introducir detrás de un contrato, comparar el comportamiento y retirar cuando deje de justificar su costo. Úselo cuando categorías afectan reglas, analítica o interoperabilidad. Evite convertir toda constante local en catálogo remoto. Defina cuarentena o migración para desconocidos.",
+      "relaciones": [
+        {
+          "type": "complementa",
+          "target": "Proyección de lectura"
+        },
+        {
+          "type": "complementa",
+          "target": "Procesamiento idempotente"
+        },
+        {
+          "type": "complementa",
+          "target": "Herramienta de agente gobernada"
+        }
+      ],
+      "ejercicio": {
+        "consigna": "Tome un código ambiguo y defina versión, vigencia, sustitución y cuarentena.",
+        "resultadoEsperado": "Decisión justificada, caso negativo y evidencia observable."
+      },
+      "procedencia": {
+        "clasificacion": "Adaptación COBRIA",
+        "fuentes": [
+          "Fowler (2002)",
+          "Evans (2003)"
+        ],
+        "sourceSlug": "catalogo-versionado"
+      }
+    },
+    {
+      "id": 5,
+      "slug": "proyeccion-de-lectura",
+      "nombre": "Proyección de lectura",
+      "familia": "Proyecciones de lectura",
+      "tipo": "Patrón adaptado",
+      "estado": "documentado",
+      "resumen": "Mantener una representación derivada diseñada para una consulta concreta sin crear una nueva autoridad.",
+      "problema": "El modelo de escritura contiene más campos, relaciones o particiones de las que una consulta necesita. Leerlo directamente consume tiempo y bytes.",
+      "contexto": "Úsela después de medir una consulta y comparar un índice nativo. Evítela cuando la fuente ya responde dentro del objetivo o la frescura estricta no puede sostenerse.",
+      "fuerzas": [
+        "simplicidad frente a control",
+        "rendimiento frente a costo total",
+        "autonomía frente a autoridad y trazabilidad"
+      ],
+      "cuandoUsar": "Úsela después de medir una consulta y comparar un índice nativo.",
+      "cuandoEvitar": "Evítelo cuando el problema descrito no existe o una alternativa más simple satisface el contrato de Proyección de lectura.",
+      "estructura": "PanelAvistamientos → Contrato de entrada → Repositorio documental → Evidencia",
+      "participantes": [
+        "PanelAvistamientos",
+        "Contrato de entrada",
+        "Repositorio documental",
+        "Evidencia"
+      ],
+      "secuencia": "proyectar(fuente, transformación, versión, ámbito)",
+      "ejemplo": {
+        "escena": "Panel diario de avistamientos",
+        "problema": "La pantalla recorre miles de observaciones para contar especies cada vez que abre.",
+        "resultado": "Una vista reconstruible entrega conteos diarios sin reemplazar las observaciones."
+      },
+      "codigo": {
+        "TypeScript": "// Panel diario de avistamientos\ntype Solicitud = Record<string, unknown>;\n\nclass PanelAvistamientos {\n  proyectar(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 5, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new PanelAvistamientos().proyectar({ reservaId: \"piedras-blancas\", fecha: \"2026-08-24\" });",
+        "Python": "# Panel diario de avistamientos\nclass PanelAvistamientos:\n    def proyectar(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 5, \"evidencia\": True, **solicitud}\n\nresultado = PanelAvistamientos().proyectar({\"detalle\": \"reservaId: \\\"piedras-blancas\\\", fecha: \\\"2026-08-24\\\"\"})",
+        "Java": "// Panel diario de avistamientos\nrecord Solicitud(String detalle) {}\n\nfinal class PanelAvistamientos {\n  Resultado proyectar(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(5, true, solicitud);\n  }\n}\n\nvar resultado = new PanelAvistamientos().proyectar(new Solicitud(\"reservaId: \\\"piedras-blancas\\\", fecha: \\\"2026-08-24\\\"\"));",
+        "Go": "// Panel diario de avistamientos\ntype Solicitud struct { Detalle string }\n\nfunc Proyectar(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 5, Evidencia: true}, nil\n}\n\nresultado, err := Proyectar(Solicitud{Detalle: \"reservaId: \\\"piedras-blancas\\\", fecha: \\\"2026-08-24\\\"\"})"
+      },
+      "casoNegativo": "La solución se introduce sin contrato ni prueba y termina ocultando el problema que Proyección de lectura debía controlar.",
+      "antipatrones": [
+        "Proyección de lectura ceremonial",
+        "aplicación sin medición ni caso negativo"
+      ],
+      "consecuencias": "Mida p95, filas y bytes leídos, frescura, escrituras y almacenamiento. Se relaciona con Proyección de cobertura, Frontera lectura—escritura y Retiro de proyección.",
+      "pruebas": [
+        "comprobar: proyectar(fuente, transformación, versión, ámbito)",
+        "resolver y verificar: Seleccione una consulta lenta y escriba exactamente filtros, orden, salida y frescura."
+      ],
+      "seguridad": "Conservar actor, capacidad, ámbito y finalidad cuando el flujo accede o transforma información sensible.",
+      "operacion": "Mida p95, filas y bytes leídos, frescura, escrituras y almacenamiento. Se relaciona con Proyección de cobertura, Frontera lectura—escritura y Retiro de proyección.",
+      "migracionRetiro": "Introducir detrás de un contrato, comparar el comportamiento y retirar cuando deje de justificar su costo. Úsela después de medir una consulta y comparar un índice nativo. Evítela cuando la fuente ya responde dentro del objetivo o la frescura estricta no puede sostenerse.",
+      "relaciones": [
+        {
+          "type": "complementa",
+          "target": "Proyección de cobertura"
+        },
+        {
+          "type": "complementa",
+          "target": "Revisión obsoleta rechazada"
+        },
+        {
+          "type": "complementa",
+          "target": "Frontera lectura—escritura"
+        }
+      ],
+      "ejercicio": {
+        "consigna": "Seleccione una consulta lenta y escriba exactamente filtros, orden, salida y frescura.",
+        "resultadoEsperado": "Decisión justificada, caso negativo y evidencia observable."
+      },
+      "procedencia": {
+        "clasificacion": "Establecido y adaptado",
+        "fuentes": [
+          "Fowler (2002)",
+          "Kleppmann (2017)"
+        ],
+        "sourceSlug": "proyeccion-de-lectura"
+      }
+    },
+    {
+      "id": 6,
+      "slug": "proyeccion-de-cobertura",
+      "nombre": "Proyección de cobertura",
+      "familia": "Proyecciones de lectura",
+      "tipo": "Mecanismo",
+      "estado": "documentado",
+      "resumen": "Responder una consulta utilizando una representación estrecha que contiene exactamente filtros, orden y salida.",
+      "problema": "Un índice encuentra filas, pero la consulta todavía debe visitar documentos o tablas anchas para completar la respuesta.",
+      "contexto": "Úsela cuando la recuperación de filas anchas domina el costo. Evítela si duplica datos sensibles o cambia con demasiada frecuencia. Compare siempre contra B1.",
+      "fuerzas": [
+        "simplicidad frente a control",
+        "rendimiento frente a costo total",
+        "autonomía frente a autoridad y trazabilidad"
+      ],
+      "cuandoUsar": "Úsela cuando la recuperación de filas anchas domina el costo.",
+      "cuandoEvitar": "Evítelo cuando el problema descrito no existe o una alternativa más simple satisface el contrato de Proyección de cobertura.",
+      "estructura": "FichaGuardaparque → Contrato de entrada → Repositorio documental → Evidencia",
+      "participantes": [
+        "FichaGuardaparque",
+        "Contrato de entrada",
+        "Repositorio documental",
+        "Evidencia"
+      ],
+      "secuencia": "cubrir(filtros, orden, salida) sinCamposExtra()",
+      "ejemplo": {
+        "escena": "Ficha breve para guardaparques sin conexión",
+        "problema": "La consulta móvil descarga expedientes completos cuando solo necesita ubicación y alerta.",
+        "resultado": "La proyección contiene exactamente los campos que necesita la ronda de campo."
+      },
+      "codigo": {
+        "TypeScript": "// Ficha breve para guardaparques sin conexión\ntype Solicitud = Record<string, unknown>;\n\nclass FichaGuardaparque {\n  crear(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 6, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new FichaGuardaparque().crear({ senderoId: \"quebrada-azul\", incluir: [\"riesgo\", \"ubicacion\"] });",
+        "Python": "# Ficha breve para guardaparques sin conexión\nclass FichaGuardaparque:\n    def crear(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 6, \"evidencia\": True, **solicitud}\n\nresultado = FichaGuardaparque().crear({\"detalle\": \"senderoId: \\\"quebrada-azul\\\", incluir: [\\\"riesgo\\\", \\\"ubicacion\\\"]\"})",
+        "Java": "// Ficha breve para guardaparques sin conexión\nrecord Solicitud(String detalle) {}\n\nfinal class FichaGuardaparque {\n  Resultado crear(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(6, true, solicitud);\n  }\n}\n\nvar resultado = new FichaGuardaparque().crear(new Solicitud(\"senderoId: \\\"quebrada-azul\\\", incluir: [\\\"riesgo\\\", \\\"ubicacion\\\"]\"));",
+        "Go": "// Ficha breve para guardaparques sin conexión\ntype Solicitud struct { Detalle string }\n\nfunc Crear(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 6, Evidencia: true}, nil\n}\n\nresultado, err := Crear(Solicitud{Detalle: \"senderoId: \\\"quebrada-azul\\\", incluir: [\\\"riesgo\\\", \\\"ubicacion\\\"]\"})"
+      },
+      "casoNegativo": "La solución se introduce sin contrato ni prueba y termina ocultando el problema que Proyección de cobertura debía controlar.",
+      "antipatrones": [
+        "Proyección de cobertura ceremonial",
+        "aplicación sin medición ni caso negativo"
+      ],
+      "consecuencias": "Mida ahorro p95, bytes, penalización de escritura y umbral de equilibrio. El piloto del mecanismo mostró que la proyección no domina siempre al índice nativo; la réplica definitiva debe ejecutarse sobre motores NoSQL documentales.",
+      "pruebas": [
+        "comprobar: cubrir(filtros, orden, salida) sinCamposExtra()",
+        "resolver y verificar: Quite todos los campos no usados por la consulta y vuelva a medir bytes y costo."
+      ],
+      "seguridad": "Conservar actor, capacidad, ámbito y finalidad cuando el flujo accede o transforma información sensible.",
+      "operacion": "Mida ahorro p95, bytes, penalización de escritura y umbral de equilibrio. El piloto del mecanismo mostró que la proyección no domina siempre al índice nativo; la réplica definitiva debe ejecutarse sobre motores NoSQL documentales.",
+      "migracionRetiro": "Introducir detrás de un contrato, comparar el comportamiento y retirar cuando deje de justificar su costo. Úsela cuando la recuperación de filas anchas domina el costo. Evítela si duplica datos sensibles o cambia con demasiada frecuencia. Compare siempre contra B1.",
+      "relaciones": [
+        {
+          "type": "complementa",
+          "target": "Reconstrucción total"
+        },
+        {
+          "type": "complementa",
+          "target": "Cola de salida transaccional"
+        },
+        {
+          "type": "complementa",
+          "target": "Índice antes que proyección"
+        }
+      ],
+      "ejercicio": {
+        "consigna": "Quite todos los campos no usados por la consulta y vuelva a medir bytes y costo.",
+        "resultadoEsperado": "Decisión justificada, caso negativo y evidencia observable."
+      },
+      "procedencia": {
+        "clasificacion": "Adaptación COBRIA",
+        "fuentes": [
+          "Fowler (2002)",
+          "Kleppmann (2017)"
+        ],
+        "sourceSlug": "proyeccion-de-cobertura"
+      }
+    },
+    {
+      "id": 7,
+      "slug": "reconstruccion-total",
+      "nombre": "Reconstrucción total",
+      "familia": "Reconstrucción",
+      "tipo": "Contrato",
+      "estado": "documentado",
+      "resumen": "Regenerar completamente una proyección desde fuentes y versiones declaradas.",
+      "problema": "Sin una reconstrucción probada, la pérdida o corrupción obliga a reparar manualmente una copia que ya no es realmente descartable.",
+      "contexto": "Impleméntela antes de optimizar la incremental. Ejecútela periódicamente y después de cambios de esquema. No publique una tabla parcialmente llena.",
+      "fuerzas": [
+        "simplicidad frente a control",
+        "rendimiento frente a costo total",
+        "autonomía frente a autoridad y trazabilidad"
+      ],
+      "cuandoUsar": "Impleméntela antes de optimizar la incremental.",
+      "cuandoEvitar": "Evítelo cuando el problema descrito no existe o una alternativa más simple satisface el contrato de Reconstrucción total.",
+      "estructura": "ReconstruirMapaNacientes → Contrato de entrada → Repositorio documental → Evidencia",
+      "participantes": [
+        "ReconstruirMapaNacientes",
+        "Contrato de entrada",
+        "Repositorio documental",
+        "Evidencia"
+      ],
+      "secuencia": "candidata = reconstruir(canónicos); verificar(candidata); publicar()",
+      "ejemplo": {
+        "escena": "Mapa de calor de nacientes",
+        "problema": "Una nueva fórmula exige recalcular todo el mapa sin modificar mediciones originales.",
+        "resultado": "Se construye una versión candidata completa, se verifica y luego se publica."
+      },
+      "codigo": {
+        "TypeScript": "// Mapa de calor de nacientes\ntype Solicitud = Record<string, unknown>;\n\nclass ReconstruirMapaNacientes {\n  ejecutar(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 7, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new ReconstruirMapaNacientes().ejecutar({ cuencaId: \"coto-brus\", version: \"v3\" });",
+        "Python": "# Mapa de calor de nacientes\nclass ReconstruirMapaNacientes:\n    def ejecutar(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 7, \"evidencia\": True, **solicitud}\n\nresultado = ReconstruirMapaNacientes().ejecutar({\"detalle\": \"cuencaId: \\\"coto-brus\\\", version: \\\"v3\\\"\"})",
+        "Java": "// Mapa de calor de nacientes\nrecord Solicitud(String detalle) {}\n\nfinal class ReconstruirMapaNacientes {\n  Resultado ejecutar(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(7, true, solicitud);\n  }\n}\n\nvar resultado = new ReconstruirMapaNacientes().ejecutar(new Solicitud(\"cuencaId: \\\"coto-brus\\\", version: \\\"v3\\\"\"));",
+        "Go": "// Mapa de calor de nacientes\ntype Solicitud struct { Detalle string }\n\nfunc Ejecutar(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 7, Evidencia: true}, nil\n}\n\nresultado, err := Ejecutar(Solicitud{Detalle: \"cuencaId: \\\"coto-brus\\\", version: \\\"v3\\\"\"})"
+      },
+      "casoNegativo": "La solución se introduce sin contrato ni prueba y termina ocultando el problema que Reconstrucción total debía controlar.",
+      "antipatrones": [
+        "Reconstrucción total ceremonial",
+        "aplicación sin medición ni caso negativo"
+      ],
+      "consecuencias": "Mida duración, exactitud, pico de almacenamiento y tiempo de cambio. Se relaciona con Publicación por versión y Reparación verificable.",
+      "pruebas": [
+        "comprobar: candidata = reconstruir(canónicos); verificar(candidata); publicar()",
+        "resolver y verificar: Elimine una copia en un entorno aislado y regenérela sin tocar la fuente."
+      ],
+      "seguridad": "Conservar actor, capacidad, ámbito y finalidad cuando el flujo accede o transforma información sensible.",
+      "operacion": "Mida duración, exactitud, pico de almacenamiento y tiempo de cambio. Se relaciona con Publicación por versión y Reparación verificable.",
+      "migracionRetiro": "Introducir detrás de un contrato, comparar el comportamiento y retirar cuando deje de justificar su costo. Impleméntela antes de optimizar la incremental. Ejecútela periódicamente y después de cambios de esquema. No publique una tabla parcialmente llena.",
+      "relaciones": [
+        {
+          "type": "complementa",
+          "target": "Reconstrucción incremental"
+        },
+        {
+          "type": "complementa",
+          "target": "Reparación verificable"
+        },
+        {
+          "type": "complementa",
+          "target": "Retiro de proyección"
+        }
+      ],
+      "ejercicio": {
+        "consigna": "Elimine una copia en un entorno aislado y regenérela sin tocar la fuente.",
+        "resultadoEsperado": "Decisión justificada, caso negativo y evidencia observable."
+      },
+      "procedencia": {
+        "clasificacion": "Contrato compuesto",
+        "fuentes": [
+          "Kleppmann (2017)",
+          "Fowler (2002)"
+        ],
+        "sourceSlug": "reconstruccion-total"
+      }
+    },
+    {
+      "id": 8,
+      "slug": "reconstruccion-incremental",
+      "nombre": "Reconstrucción incremental",
+      "familia": "Reconstrucción",
+      "tipo": "Mecanismo",
+      "estado": "documentado",
+      "resumen": "Actualizar solo la fracción modificada manteniendo equivalencia con una reconstrucción total.",
+      "problema": "Rehacer todo el conjunto por un cambio pequeño desperdicia recursos y amplía la ventana de obsolescencia.",
+      "contexto": "Úsela cuando Δ N≪ N y descubrir cambios cuesta menos que reconstruir. Evítela si no existe registro confiable o si la transformación depende globalmente de todos los registros.",
+      "fuerzas": [
+        "simplicidad frente a control",
+        "rendimiento frente a costo total",
+        "autonomía frente a autoridad y trazabilidad"
+      ],
+      "cuandoUsar": "Úsela cuando Δ N≪ N y descubrir cambios cuesta menos que reconstruir.",
+      "cuandoEvitar": "Evítelo cuando el problema descrito no existe o una alternativa más simple satisface el contrato de Reconstrucción incremental.",
+      "estructura": "ActualizarConteoSenderos → Contrato de entrada → Repositorio documental → Evidencia",
+      "participantes": [
+        "ActualizarConteoSenderos",
+        "Contrato de entrada",
+        "Repositorio documental",
+        "Evidencia"
+      ],
+      "secuencia": "desde(puntoDeControl).procesarUnaVezPorRevisión()",
+      "ejemplo": {
+        "escena": "Conteo de visitantes por sendero",
+        "problema": "Recalcular cinco años por una entrada nueva desperdicia tiempo y energía.",
+        "resultado": "Solo se procesa el cambio nuevo y se conserva un cursor verificable."
+      },
+      "codigo": {
+        "TypeScript": "// Conteo de visitantes por sendero\ntype Solicitud = Record<string, unknown>;\n\nclass ActualizarConteoSenderos {\n  aplicar(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 8, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new ActualizarConteoSenderos().aplicar({ eventoId: \"paso-991\", senderoId: \"cotoncito\" });",
+        "Python": "# Conteo de visitantes por sendero\nclass ActualizarConteoSenderos:\n    def aplicar(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 8, \"evidencia\": True, **solicitud}\n\nresultado = ActualizarConteoSenderos().aplicar({\"detalle\": \"eventoId: \\\"paso-991\\\", senderoId: \\\"cotoncito\\\"\"})",
+        "Java": "// Conteo de visitantes por sendero\nrecord Solicitud(String detalle) {}\n\nfinal class ActualizarConteoSenderos {\n  Resultado aplicar(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(8, true, solicitud);\n  }\n}\n\nvar resultado = new ActualizarConteoSenderos().aplicar(new Solicitud(\"eventoId: \\\"paso-991\\\", senderoId: \\\"cotoncito\\\"\"));",
+        "Go": "// Conteo de visitantes por sendero\ntype Solicitud struct { Detalle string }\n\nfunc Aplicar(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 8, Evidencia: true}, nil\n}\n\nresultado, err := Aplicar(Solicitud{Detalle: \"eventoId: \\\"paso-991\\\", senderoId: \\\"cotoncito\\\"\"})"
+      },
+      "casoNegativo": "La solución se introduce sin contrato ni prueba y termina ocultando el problema que Reconstrucción incremental debía controlar.",
+      "antipatrones": [
+        "Reconstrucción incremental ceremonial",
+        "aplicación sin medición ni caso negativo"
+      ],
+      "consecuencias": "Mida Δ N/N , duración, omisiones, duplicados y divergencia. Se relaciona con Punto de control, Idempotencia y Reconstrucción total.",
+      "pruebas": [
+        "comprobar: desde(puntoDeControl).procesarUnaVezPorRevisión()",
+        "resolver y verificar: Procese dos veces el mismo lote y compare el resultado con una reconstrucción total."
+      ],
+      "seguridad": "Conservar actor, capacidad, ámbito y finalidad cuando el flujo accede o transforma información sensible.",
+      "operacion": "Mida Δ N/N , duración, omisiones, duplicados y divergencia. Se relaciona con Punto de control, Idempotencia y Reconstrucción total.",
+      "migracionRetiro": "Introducir detrás de un contrato, comparar el comportamiento y retirar cuando deje de justificar su costo. Úsela cuando Δ N≪ N y descubrir cambios cuesta menos que reconstruir. Evítela si no existe registro confiable o si la transformación depende globalmente de todos los registros.",
+      "relaciones": [
+        {
+          "type": "complementa",
+          "target": "Publicación por versión"
+        },
+        {
+          "type": "complementa",
+          "target": "Conjunto de datos reproducible"
+        },
+        {
+          "type": "complementa",
+          "target": "Identidad documental estable"
+        }
+      ],
+      "ejercicio": {
+        "consigna": "Procese dos veces el mismo lote y compare el resultado con una reconstrucción total.",
+        "resultadoEsperado": "Decisión justificada, caso negativo y evidencia observable."
+      },
+      "procedencia": {
+        "clasificacion": "Adaptación COBRIA",
+        "fuentes": [
+          "Kleppmann (2017)",
+          "Fowler (2002)"
+        ],
+        "sourceSlug": "reconstruccion-incremental"
+      }
+    },
+    {
+      "id": 9,
+      "slug": "publicacion-por-version",
+      "nombre": "Publicación por versión",
+      "familia": "Eventos y consistencia",
+      "tipo": "Mecanismo",
+      "estado": "documentado",
+      "resumen": "Evitar que consumidores observen una proyección incompleta durante construcción o migración.",
+      "problema": "Vaciar y llenar la representación activa expone faltantes, mezclas de esquema o resultados transitorios.",
+      "contexto": "Úsela para reconstrucciones largas o cambios incompatibles. Puede simplificarse si el motor ofrece actualización atómica equivalente. Nunca elimine la versión anterior antes de verificar.",
+      "fuerzas": [
+        "simplicidad frente a control",
+        "rendimiento frente a costo total",
+        "autonomía frente a autoridad y trazabilidad"
+      ],
+      "cuandoUsar": "Úsela para reconstrucciones largas o cambios incompatibles.",
+      "cuandoEvitar": "Evítelo cuando el problema descrito no existe o una alternativa más simple satisface el contrato de Publicación por versión.",
+      "estructura": "PublicadorCoberturaBosque → Contrato de entrada → Repositorio documental → Evidencia",
+      "participantes": [
+        "PublicadorCoberturaBosque",
+        "Contrato de entrada",
+        "Repositorio documental",
+        "Evidencia"
+      ],
+      "secuencia": "construir(vNueva); verificar(); cambiarAlias(); conservar(vAnterior)",
+      "ejemplo": {
+        "escena": "Nueva clasificación del estado del bosque",
+        "problema": "Los lectores podrían observar una mezcla de datos viejos y nuevos durante el cálculo.",
+        "resultado": "La versión candidata se activa mediante un único cambio de referencia."
+      },
+      "codigo": {
+        "TypeScript": "// Nueva clasificación del estado del bosque\ntype Solicitud = Record<string, unknown>;\n\nclass PublicadorCoberturaBosque {\n  publicar(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 9, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new PublicadorCoberturaBosque().publicar({ candidata: \"cobertura-v7\", esperada: \"cobertura-v6\" });",
+        "Python": "# Nueva clasificación del estado del bosque\nclass PublicadorCoberturaBosque:\n    def publicar(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 9, \"evidencia\": True, **solicitud}\n\nresultado = PublicadorCoberturaBosque().publicar({\"detalle\": \"candidata: \\\"cobertura-v7\\\", esperada: \\\"cobertura-v6\\\"\"})",
+        "Java": "// Nueva clasificación del estado del bosque\nrecord Solicitud(String detalle) {}\n\nfinal class PublicadorCoberturaBosque {\n  Resultado publicar(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(9, true, solicitud);\n  }\n}\n\nvar resultado = new PublicadorCoberturaBosque().publicar(new Solicitud(\"candidata: \\\"cobertura-v7\\\", esperada: \\\"cobertura-v6\\\"\"));",
+        "Go": "// Nueva clasificación del estado del bosque\ntype Solicitud struct { Detalle string }\n\nfunc Publicar(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 9, Evidencia: true}, nil\n}\n\nresultado, err := Publicar(Solicitud{Detalle: \"candidata: \\\"cobertura-v7\\\", esperada: \\\"cobertura-v6\\\"\"})"
+      },
+      "casoNegativo": "La solución se introduce sin contrato ni prueba y termina ocultando el problema que Publicación por versión debía controlar.",
+      "antipatrones": [
+        "Publicación por versión ceremonial",
+        "aplicación sin medición ni caso negativo"
+      ],
+      "consecuencias": "Mida pérdida visible, duración del cambio y almacenamiento máximo. Se relaciona con Reconstrucción total y Migración compatible.",
+      "pruebas": [
+        "comprobar: construir(vNueva); verificar(); cambiarAlias(); conservar(vAnterior)",
+        "resolver y verificar: Construya una candidata, interrumpa antes del cambio y compruebe que la activa sigue completa."
+      ],
+      "seguridad": "Conservar actor, capacidad, ámbito y finalidad cuando el flujo accede o transforma información sensible.",
+      "operacion": "Mida pérdida visible, duración del cambio y almacenamiento máximo. Se relaciona con Reconstrucción total y Migración compatible.",
+      "migracionRetiro": "Introducir detrás de un contrato, comparar el comportamiento y retirar cuando deje de justificar su costo. Úsela para reconstrucciones largas o cambios incompatibles. Puede simplificarse si el motor ofrece actualización atómica equivalente. Nunca elimine la versión anterior antes de verificar.",
+      "relaciones": [
+        {
+          "type": "complementa",
+          "target": "Procesamiento idempotente"
+        },
+        {
+          "type": "complementa",
+          "target": "Característica versionada"
+        },
+        {
+          "type": "complementa",
+          "target": "Validación en frontera"
+        }
+      ],
+      "ejercicio": {
+        "consigna": "Construya una candidata, interrumpa antes del cambio y compruebe que la activa sigue completa.",
+        "resultadoEsperado": "Decisión justificada, caso negativo y evidencia observable."
+      },
+      "procedencia": {
+        "clasificacion": "Establecido y adaptado",
+        "fuentes": [
+          "Kleppmann (2017)",
+          "Fowler (2002)"
+        ],
+        "sourceSlug": "publicacion-por-version"
+      }
+    },
+    {
+      "id": 10,
+      "slug": "procesamiento-idempotente",
+      "nombre": "Procesamiento idempotente",
+      "familia": "Eventos y consistencia",
+      "tipo": "Patrón de mensajería",
+      "estado": "documentado",
+      "resumen": "Garantizar que repetir la misma entrega no multiplique efectos.",
+      "problema": "Las redes reintentan y las colas pueden entregar más de una vez. Una operación no protegida duplica reservas, saldos o filas derivadas.",
+      "contexto": "Úselo en eventos, reintentos e importaciones. No confunda idempotencia con ignorar errores. Defina cuánto tiempo se conservan identificadores.",
+      "fuerzas": [
+        "simplicidad frente a control",
+        "rendimiento frente a costo total",
+        "autonomía frente a autoridad y trazabilidad"
+      ],
+      "cuandoUsar": "Úselo en eventos, reintentos e importaciones.",
+      "cuandoEvitar": "Evítelo cuando el problema descrito no existe o una alternativa más simple satisface el contrato de Procesamiento idempotente.",
+      "estructura": "ProcesadorLecturas → Contrato de entrada → Repositorio documental → Evidencia",
+      "participantes": [
+        "ProcesadorLecturas",
+        "Contrato de entrada",
+        "Repositorio documental",
+        "Evidencia"
+      ],
+      "secuencia": "si procesado(idMensaje) entonces noHacerNada()",
+      "ejemplo": {
+        "escena": "Sensor que reenvía la misma lectura",
+        "problema": "La mala señal hace que una medición llegue tres veces y triplique el promedio.",
+        "resultado": "La clave del evento permite repetir la operación sin duplicar efectos."
+      },
+      "codigo": {
+        "TypeScript": "// Sensor que reenvía la misma lectura\ntype Solicitud = Record<string, unknown>;\n\nclass ProcesadorLecturas {\n  procesar(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 10, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new ProcesadorLecturas().procesar({ eventoId: \"sensor-17:8842\", humedad: 86 });",
+        "Python": "# Sensor que reenvía la misma lectura\nclass ProcesadorLecturas:\n    def procesar(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 10, \"evidencia\": True, **solicitud}\n\nresultado = ProcesadorLecturas().procesar({\"detalle\": \"eventoId: \\\"sensor-17:8842\\\", humedad: 86\"})",
+        "Java": "// Sensor que reenvía la misma lectura\nrecord Solicitud(String detalle) {}\n\nfinal class ProcesadorLecturas {\n  Resultado procesar(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(10, true, solicitud);\n  }\n}\n\nvar resultado = new ProcesadorLecturas().procesar(new Solicitud(\"eventoId: \\\"sensor-17:8842\\\", humedad: 86\"));",
+        "Go": "// Sensor que reenvía la misma lectura\ntype Solicitud struct { Detalle string }\n\nfunc Procesar(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 10, Evidencia: true}, nil\n}\n\nresultado, err := Procesar(Solicitud{Detalle: \"eventoId: \\\"sensor-17:8842\\\", humedad: 86\"})"
+      },
+      "casoNegativo": "La solución se introduce sin contrato ni prueba y termina ocultando el problema que Procesamiento idempotente debía controlar.",
+      "antipatrones": [
+        "Procesamiento idempotente ceremonial",
+        "aplicación sin medición ni caso negativo"
+      ],
+      "consecuencias": "Mida entregas duplicadas, efectos producidos y tamaño del registro. Se relaciona con Cola de salida y Reconstrucción incremental.",
+      "pruebas": [
+        "comprobar: si procesado(idMensaje) entonces noHacerNada()",
+        "resolver y verificar: Entregue dos veces el mismo mensaje y compruebe que solo existe un efecto."
+      ],
+      "seguridad": "Conservar actor, capacidad, ámbito y finalidad cuando el flujo accede o transforma información sensible.",
+      "operacion": "Mida entregas duplicadas, efectos producidos y tamaño del registro. Se relaciona con Cola de salida y Reconstrucción incremental.",
+      "migracionRetiro": "Introducir detrás de un contrato, comparar el comportamiento y retirar cuando deje de justificar su costo. Úselo en eventos, reintentos e importaciones. No confunda idempotencia con ignorar errores. Defina cuánto tiempo se conservan identificadores.",
+      "relaciones": [
+        {
+          "type": "complementa",
+          "target": "Revisión obsoleta rechazada"
+        },
+        {
+          "type": "complementa",
+          "target": "Recuperación limitada por ámbito"
+        },
+        {
+          "type": "complementa",
+          "target": "Contrato documental versionado"
+        }
+      ],
+      "ejercicio": {
+        "consigna": "Entregue dos veces el mismo mensaje y compruebe que solo existe un efecto.",
+        "resultadoEsperado": "Decisión justificada, caso negativo y evidencia observable."
+      },
+      "procedencia": {
+        "clasificacion": "Establecido",
+        "fuentes": [
+          "Kleppmann (2017)",
+          "Fowler (2002)"
+        ],
+        "sourceSlug": "procesamiento-idempotente"
+      }
+    },
+    {
+      "id": 11,
+      "slug": "revision-obsoleta-rechazada",
+      "nombre": "Revisión obsoleta rechazada",
+      "familia": "Eventos y consistencia",
+      "tipo": "Control de concurrencia",
+      "estado": "documentado",
+      "resumen": "Impedir que una actualización basada en estado antiguo sobrescriba conocimiento reciente.",
+      "problema": "Dos procesos leen la misma revisión y guardan cambios incompatibles; el último oculta al primero.",
+      "contexto": "Úselo cuando las colisiones sean posibles y un bloqueo largo resulte caro. Evite reintentar automáticamente reglas no conmutativas.",
+      "fuerzas": [
+        "simplicidad frente a control",
+        "rendimiento frente a costo total",
+        "autonomía frente a autoridad y trazabilidad"
+      ],
+      "cuandoUsar": "Úselo cuando las colisiones sean posibles y un bloqueo largo resulte caro.",
+      "cuandoEvitar": "Evítelo cuando el problema descrito no existe o una alternativa más simple satisface el contrato de Revisión obsoleta rechazada.",
+      "estructura": "EditorSendero → Contrato de entrada → Repositorio documental → Evidencia",
+      "participantes": [
+        "EditorSendero",
+        "Contrato de entrada",
+        "Repositorio documental",
+        "Evidencia"
+      ],
+      "secuencia": "si revisiónEsperada ≠ revisiónActual entonces rechazar()",
+      "ejemplo": {
+        "escena": "Dos brigadas editan el mismo sendero",
+        "problema": "Una tableta sin conexión intenta guardar una descripción anterior sobre una revisión nueva.",
+        "resultado": "La escritura falla con conflicto y conserva la revisión más reciente."
+      },
+      "codigo": {
+        "TypeScript": "// Dos brigadas editan el mismo sendero\ntype Solicitud = Record<string, unknown>;\n\nclass EditorSendero {\n  guardar(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 11, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new EditorSendero().guardar({ senderoId: \"fila-cal\", revisionEsperada: 12, dificultad: \"alta\" });",
+        "Python": "# Dos brigadas editan el mismo sendero\nclass EditorSendero:\n    def guardar(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 11, \"evidencia\": True, **solicitud}\n\nresultado = EditorSendero().guardar({\"detalle\": \"senderoId: \\\"fila-cal\\\", revisionEsperada: 12, dificultad: \\\"alta\\\"\"})",
+        "Java": "// Dos brigadas editan el mismo sendero\nrecord Solicitud(String detalle) {}\n\nfinal class EditorSendero {\n  Resultado guardar(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(11, true, solicitud);\n  }\n}\n\nvar resultado = new EditorSendero().guardar(new Solicitud(\"senderoId: \\\"fila-cal\\\", revisionEsperada: 12, dificultad: \\\"alta\\\"\"));",
+        "Go": "// Dos brigadas editan el mismo sendero\ntype Solicitud struct { Detalle string }\n\nfunc Guardar(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 11, Evidencia: true}, nil\n}\n\nresultado, err := Guardar(Solicitud{Detalle: \"senderoId: \\\"fila-cal\\\", revisionEsperada: 12, dificultad: \\\"alta\\\"\"})"
+      },
+      "casoNegativo": "La solución se introduce sin contrato ni prueba y termina ocultando el problema que Revisión obsoleta rechazada debía controlar.",
+      "antipatrones": [
+        "Revisión obsoleta rechazada ceremonial",
+        "aplicación sin medición ni caso negativo"
+      ],
+      "consecuencias": "Mida rechazos, reintentos y conflictos resueltos. Se relaciona con Objeto canónico e Idempotencia.",
+      "pruebas": [
+        "comprobar: si revisiónEsperada ≠ revisiónActual entonces rechazar()",
+        "resolver y verificar: Envíe una revisión antigua y verifique rechazo, auditoría y ausencia de regresión."
+      ],
+      "seguridad": "Conservar actor, capacidad, ámbito y finalidad cuando el flujo accede o transforma información sensible.",
+      "operacion": "Mida rechazos, reintentos y conflictos resueltos. Se relaciona con Objeto canónico e Idempotencia.",
+      "migracionRetiro": "Introducir detrás de un contrato, comparar el comportamiento y retirar cuando deje de justificar su costo. Úselo cuando las colisiones sean posibles y un bloqueo largo resulte caro. Evite reintentar automáticamente reglas no conmutativas.",
+      "relaciones": [
+        {
+          "type": "complementa",
+          "target": "Cola de salida transaccional"
+        },
+        {
+          "type": "complementa",
+          "target": "Herramienta de agente gobernada"
+        },
+        {
+          "type": "complementa",
+          "target": "Lectura coherente por revisión"
+        }
+      ],
+      "ejercicio": {
+        "consigna": "Envíe una revisión antigua y verifique rechazo, auditoría y ausencia de regresión.",
+        "resultadoEsperado": "Decisión justificada, caso negativo y evidencia observable."
+      },
+      "procedencia": {
+        "clasificacion": "Establecido y adaptado",
+        "fuentes": [
+          "Kleppmann (2017)",
+          "Fowler (2002)"
+        ],
+        "sourceSlug": "revision-obsoleta-rechazada"
+      }
+    },
+    {
+      "id": 12,
+      "slug": "cola-de-salida-transaccional",
+      "nombre": "Cola de salida transaccional",
+      "familia": "Eventos y consistencia",
+      "tipo": "Patrón de integración",
+      "estado": "documentado",
+      "resumen": "Publicar cambios sin perder la relación entre escritura canónica y evento de integración.",
+      "problema": "Guardar datos y publicar un mensaje son dos operaciones; una puede tener éxito y la otra fallar.",
+      "contexto": "Úsela cuando el almacén no comparte transacción con el corredor. No la convierta en una cola sin retención, observabilidad o reparación.",
+      "fuerzas": [
+        "simplicidad frente a control",
+        "rendimiento frente a costo total",
+        "autonomía frente a autoridad y trazabilidad"
+      ],
+      "cuandoUsar": "Úsela cuando el almacén no comparte transacción con el corredor.",
+      "cuandoEvitar": "Evítelo cuando el problema descrito no existe o una alternativa más simple satisface el contrato de Cola de salida transaccional.",
+      "estructura": "RegistroConAlerta → Contrato de entrada → Repositorio documental → Evidencia",
+      "participantes": [
+        "RegistroConAlerta",
+        "Contrato de entrada",
+        "Repositorio documental",
+        "Evidencia"
+      ],
+      "secuencia": "enUnaOperación { guardarCanónico(); guardarEventoSalida(); }",
+      "ejemplo": {
+        "escena": "Alerta por deslizamiento junto con la medición",
+        "problema": "Guardar la alerta después de la medición puede fallar y dejar el riesgo sin notificación.",
+        "resultado": "Documento y mensaje pendiente nacen juntos; un trabajador publica después."
+      },
+      "codigo": {
+        "TypeScript": "// Alerta por deslizamiento junto con la medición\ntype Solicitud = Record<string, unknown>;\n\nclass RegistroConAlerta {\n  guardar(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 12, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new RegistroConAlerta().guardar({ sensorId: \"ladera-8\", riesgo: \"alto\" });",
+        "Python": "# Alerta por deslizamiento junto con la medición\nclass RegistroConAlerta:\n    def guardar(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 12, \"evidencia\": True, **solicitud}\n\nresultado = RegistroConAlerta().guardar({\"detalle\": \"sensorId: \\\"ladera-8\\\", riesgo: \\\"alto\\\"\"})",
+        "Java": "// Alerta por deslizamiento junto con la medición\nrecord Solicitud(String detalle) {}\n\nfinal class RegistroConAlerta {\n  Resultado guardar(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(12, true, solicitud);\n  }\n}\n\nvar resultado = new RegistroConAlerta().guardar(new Solicitud(\"sensorId: \\\"ladera-8\\\", riesgo: \\\"alto\\\"\"));",
+        "Go": "// Alerta por deslizamiento junto con la medición\ntype Solicitud struct { Detalle string }\n\nfunc Guardar(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 12, Evidencia: true}, nil\n}\n\nresultado, err := Guardar(Solicitud{Detalle: \"sensorId: \\\"ladera-8\\\", riesgo: \\\"alto\\\"\"})"
+      },
+      "casoNegativo": "La solución se introduce sin contrato ni prueba y termina ocultando el problema que Cola de salida transaccional debía controlar.",
+      "antipatrones": [
+        "Cola de salida transaccional ceremonial",
+        "aplicación sin medición ni caso negativo"
+      ],
+      "consecuencias": "Mida retraso, reintentos, mensajes atascados y duplicados. Se relaciona con Proyección asíncrona y Punto de control.",
+      "pruebas": [
+        "comprobar: enUnaOperación { guardarCanónico(); guardarEventoSalida(); }",
+        "resolver y verificar: Interrumpa el publicador después de guardar la entidad y confirme que el evento sigue recuperable."
+      ],
+      "seguridad": "Conservar actor, capacidad, ámbito y finalidad cuando el flujo accede o transforma información sensible.",
+      "operacion": "Mida retraso, reintentos, mensajes atascados y duplicados. Se relaciona con Proyección asíncrona y Punto de control.",
+      "migracionRetiro": "Introducir detrás de un contrato, comparar el comportamiento y retirar cuando deje de justificar su costo. Úsela cuando el almacén no comparte transacción con el corredor. No la convierta en una cola sin retención, observabilidad o reparación.",
+      "relaciones": [
+        {
+          "type": "complementa",
+          "target": "Reparación verificable"
+        },
+        {
+          "type": "complementa",
+          "target": "Frontera lectura—escritura"
+        },
+        {
+          "type": "complementa",
+          "target": "Ventana de frescura declarada"
+        }
+      ],
+      "ejercicio": {
+        "consigna": "Interrumpa el publicador después de guardar la entidad y confirme que el evento sigue recuperable.",
+        "resultadoEsperado": "Decisión justificada, caso negativo y evidencia observable."
+      },
+      "procedencia": {
+        "clasificacion": "Establecido",
+        "fuentes": [
+          "Kleppmann (2017)",
+          "Fowler (2002)"
+        ],
+        "sourceSlug": "cola-de-salida-transaccional"
+      }
+    },
+    {
+      "id": 13,
+      "slug": "reparacion-verificable",
+      "nombre": "Reparación verificable",
+      "familia": "Reconstrucción",
+      "tipo": "Mecanismo",
+      "estado": "documentado",
+      "resumen": "Detectar diferencias entre fuente y proyección y recuperar equivalencia sin edición manual opaca.",
+      "problema": "Una proyección puede corromperse aunque la actualización habitual parezca correcta. Sin verificador, el defecto se descubre mediante usuarios.",
+      "contexto": "Úsela como prueba periódica y procedimiento de incidente. Evite modificar ambos lados para hacer coincidir cifras. La fuente debe estar definida antes de reparar.",
+      "fuerzas": [
+        "simplicidad frente a control",
+        "rendimiento frente a costo total",
+        "autonomía frente a autoridad y trazabilidad"
+      ],
+      "cuandoUsar": "Úsela como prueba periódica y procedimiento de incidente.",
+      "cuandoEvitar": "Evítelo cuando el problema descrito no existe o una alternativa más simple satisface el contrato de Reparación verificable.",
+      "estructura": "ReparadorIndiceEspecies → Contrato de entrada → Repositorio documental → Evidencia",
+      "participantes": [
+        "ReparadorIndiceEspecies",
+        "Contrato de entrada",
+        "Repositorio documental",
+        "Evidencia"
+      ],
+      "secuencia": "si !equivalente(derivado, esperado) entonces reconstruirYVerificar()",
+      "ejemplo": {
+        "escena": "Índice de especies incompleto",
+        "problema": "Una interrupción dejó veinte observaciones fuera del índice de búsqueda.",
+        "resultado": "La reparación compara fuente e índice, corrige diferencias y vuelve a medir."
+      },
+      "codigo": {
+        "TypeScript": "// Índice de especies incompleto\ntype Solicitud = Record<string, unknown>;\n\nclass ReparadorIndiceEspecies {\n  reparar(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 13, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new ReparadorIndiceEspecies().reparar({ reservaId: \"golfo-dulce\", lote: 100 });",
+        "Python": "# Índice de especies incompleto\nclass ReparadorIndiceEspecies:\n    def reparar(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 13, \"evidencia\": True, **solicitud}\n\nresultado = ReparadorIndiceEspecies().reparar({\"detalle\": \"reservaId: \\\"golfo-dulce\\\", lote: 100\"})",
+        "Java": "// Índice de especies incompleto\nrecord Solicitud(String detalle) {}\n\nfinal class ReparadorIndiceEspecies {\n  Resultado reparar(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(13, true, solicitud);\n  }\n}\n\nvar resultado = new ReparadorIndiceEspecies().reparar(new Solicitud(\"reservaId: \\\"golfo-dulce\\\", lote: 100\"));",
+        "Go": "// Índice de especies incompleto\ntype Solicitud struct { Detalle string }\n\nfunc Reparar(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 13, Evidencia: true}, nil\n}\n\nresultado, err := Reparar(Solicitud{Detalle: \"reservaId: \\\"golfo-dulce\\\", lote: 100\"})"
+      },
+      "casoNegativo": "La solución se introduce sin contrato ni prueba y termina ocultando el problema que Reparación verificable debía controlar.",
+      "antipatrones": [
+        "Reparación verificable ceremonial",
+        "aplicación sin medición ni caso negativo"
+      ],
+      "consecuencias": "Mida exactitud, tiempo de detección y recuperación. Se relaciona con Reconstrucción total, Publicación por versión y Registro de procedencia.",
+      "pruebas": [
+        "comprobar: si !equivalente(derivado, esperado) entonces reconstruirYVerificar()",
+        "resolver y verificar: Corrompa una muestra derivada, detecte la divergencia y repare desde canónicos."
+      ],
+      "seguridad": "Conservar actor, capacidad, ámbito y finalidad cuando el flujo accede o transforma información sensible.",
+      "operacion": "Mida exactitud, tiempo de detección y recuperación. Se relaciona con Reconstrucción total, Publicación por versión y Registro de procedencia.",
+      "migracionRetiro": "Introducir detrás de un contrato, comparar el comportamiento y retirar cuando deje de justificar su costo. Úsela como prueba periódica y procedimiento de incidente. Evite modificar ambos lados para hacer coincidir cifras. La fuente debe estar definida antes de reparar.",
+      "relaciones": [
+        {
+          "type": "complementa",
+          "target": "Conjunto de datos reproducible"
+        },
+        {
+          "type": "complementa",
+          "target": "Índice antes que proyección"
+        },
+        {
+          "type": "complementa",
+          "target": "Manifiesto de proyección"
+        }
+      ],
+      "ejercicio": {
+        "consigna": "Corrompa una muestra derivada, detecte la divergencia y repare desde canónicos.",
+        "resultadoEsperado": "Decisión justificada, caso negativo y evidencia observable."
+      },
+      "procedencia": {
+        "clasificacion": "Contrato compuesto",
+        "fuentes": [
+          "Kleppmann (2017)",
+          "Fowler (2002)"
+        ],
+        "sourceSlug": "reparacion-verificable"
+      }
+    },
+    {
+      "id": 14,
+      "slug": "conjunto-de-datos-reproducible",
+      "nombre": "Conjunto de datos reproducible",
+      "familia": "Analítica reproducible",
+      "tipo": "Contrato analítico",
+      "estado": "documentado",
+      "resumen": "Poder regenerar un conjunto analítico con la misma selección, corte, vocabulario y transformación.",
+      "problema": "Un archivo exportado sin contexto no explica qué registros faltan, qué versión utilizó ni cómo repetir un resultado.",
+      "contexto": "Úselo para minería, entrenamiento, auditoría e informes. No publique datos personales por reproducibilidad; separe metadatos repetibles de contenido restringido.",
+      "fuerzas": [
+        "simplicidad frente a control",
+        "rendimiento frente a costo total",
+        "autonomía frente a autoridad y trazabilidad"
+      ],
+      "cuandoUsar": "Úselo para minería, entrenamiento, auditoría e informes.",
+      "cuandoEvitar": "Evítelo cuando el problema descrito no existe o una alternativa más simple satisface el contrato de Conjunto de datos reproducible.",
+      "estructura": "ConstructorDatasetAves → Contrato de entrada → Repositorio documental → Evidencia",
+      "participantes": [
+        "ConstructorDatasetAves",
+        "Contrato de entrada",
+        "Repositorio documental",
+        "Evidencia"
+      ],
+      "secuencia": "conjunto = construir(corte, fuentes, versiones, semilla)",
+      "ejemplo": {
+        "escena": "Estudio anual de presencia de aves",
+        "problema": "El conjunto cambia cada vez que alguien corrige una observación histórica.",
+        "resultado": "El manifiesto fija consulta, corte, catálogo, transformación y huellas."
+      },
+      "codigo": {
+        "TypeScript": "// Estudio anual de presencia de aves\ntype Solicitud = Record<string, unknown>;\n\nclass ConstructorDatasetAves {\n  construir(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 14, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new ConstructorDatasetAves().construir({ corte: \"2026-07-31\", catalogo: \"aves-5\", semilla: 420 });",
+        "Python": "# Estudio anual de presencia de aves\nclass ConstructorDatasetAves:\n    def construir(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 14, \"evidencia\": True, **solicitud}\n\nresultado = ConstructorDatasetAves().construir({\"detalle\": \"corte: \\\"2026-07-31\\\", catalogo: \\\"aves-5\\\", semilla: 420\"})",
+        "Java": "// Estudio anual de presencia de aves\nrecord Solicitud(String detalle) {}\n\nfinal class ConstructorDatasetAves {\n  Resultado construir(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(14, true, solicitud);\n  }\n}\n\nvar resultado = new ConstructorDatasetAves().construir(new Solicitud(\"corte: \\\"2026-07-31\\\", catalogo: \\\"aves-5\\\", semilla: 420\"));",
+        "Go": "// Estudio anual de presencia de aves\ntype Solicitud struct { Detalle string }\n\nfunc Construir(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 14, Evidencia: true}, nil\n}\n\nresultado, err := Construir(Solicitud{Detalle: \"corte: \\\"2026-07-31\\\", catalogo: \\\"aves-5\\\", semilla: 420\"})"
+      },
+      "casoNegativo": "La solución se introduce sin contrato ni prueba y termina ocultando el problema que Conjunto de datos reproducible debía controlar.",
+      "antipatrones": [
+        "Conjunto de datos reproducible ceremonial",
+        "aplicación sin medición ni caso negativo"
+      ],
+      "consecuencias": "Mida cobertura de procedencia, diferencias entre reconstrucciones y registros en cuarentena. Se relaciona con Dato fechado y Característica versionada.",
+      "pruebas": [
+        "comprobar: conjunto = construir(corte, fuentes, versiones, semilla)",
+        "resolver y verificar: Reconstruya el mismo corte dos veces y compare manifiesto, conteos y huellas."
+      ],
+      "seguridad": "Conservar actor, capacidad, ámbito y finalidad cuando el flujo accede o transforma información sensible.",
+      "operacion": "Mida cobertura de procedencia, diferencias entre reconstrucciones y registros en cuarentena. Se relaciona con Dato fechado y Característica versionada.",
+      "migracionRetiro": "Introducir detrás de un contrato, comparar el comportamiento y retirar cuando deje de justificar su costo. Úselo para minería, entrenamiento, auditoría e informes. No publique datos personales por reproducibilidad; separe metadatos repetibles de contenido restringido.",
+      "relaciones": [
+        {
+          "type": "complementa",
+          "target": "Característica versionada"
+        },
+        {
+          "type": "complementa",
+          "target": "Retiro de proyección"
+        },
+        {
+          "type": "complementa",
+          "target": "Partición analítica sin fuga"
+        }
+      ],
+      "ejercicio": {
+        "consigna": "Reconstruya el mismo corte dos veces y compare manifiesto, conteos y huellas.",
+        "resultadoEsperado": "Decisión justificada, caso negativo y evidencia observable."
+      },
+      "procedencia": {
+        "clasificacion": "Adaptación COBRIA",
+        "fuentes": [
+          "Kleppmann (2017)",
+          "composición COBRIA"
+        ],
+        "sourceSlug": "conjunto-de-datos-reproducible"
+      }
+    },
+    {
+      "id": 15,
+      "slug": "caracteristica-versionada",
+      "nombre": "Característica versionada",
+      "familia": "Analítica reproducible",
+      "tipo": "Contrato de IA",
+      "estado": "documentado",
+      "resumen": "Definir una variable de modelo como transformación gobernada, no como columna accidental.",
+      "problema": "Entrenamiento e inferencia calculan valores similares con código, ventanas o catálogos diferentes.",
+      "contexto": "Úsela cuando una variable se comparte o influye en decisiones. Evite crear un almacén complejo para experimentos desechables sin ruta de producción.",
+      "fuerzas": [
+        "simplicidad frente a control",
+        "rendimiento frente a costo total",
+        "autonomía frente a autoridad y trazabilidad"
+      ],
+      "cuandoUsar": "Úsela cuando una variable se comparte o influye en decisiones.",
+      "cuandoEvitar": "Evítelo cuando el problema descrito no existe o una alternativa más simple satisface el contrato de Característica versionada.",
+      "estructura": "IndiceSequedad → Contrato de entrada → Repositorio documental → Evidencia",
+      "participantes": [
+        "IndiceSequedad",
+        "Contrato de entrada",
+        "Repositorio documental",
+        "Evidencia"
+      ],
+      "secuencia": "característica = calcular(definición, tiempoEvento, versión)",
+      "ejemplo": {
+        "escena": "Índice de sequedad para riesgo de incendio",
+        "problema": "Cambiar la fórmula altera predicciones sin explicar por qué.",
+        "resultado": "El valor viaja con la versión exacta de la fórmula que lo produjo."
+      },
+      "codigo": {
+        "TypeScript": "// Índice de sequedad para riesgo de incendio\ntype Solicitud = Record<string, unknown>;\n\nclass IndiceSequedad {\n  calcular(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 15, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new IndiceSequedad().calcular({ humedad: 31, lluvia7d: 4, formula: \"is-2\" });",
+        "Python": "# Índice de sequedad para riesgo de incendio\nclass IndiceSequedad:\n    def calcular(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 15, \"evidencia\": True, **solicitud}\n\nresultado = IndiceSequedad().calcular({\"detalle\": \"humedad: 31, lluvia7d: 4, formula: \\\"is-2\\\"\"})",
+        "Java": "// Índice de sequedad para riesgo de incendio\nrecord Solicitud(String detalle) {}\n\nfinal class IndiceSequedad {\n  Resultado calcular(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(15, true, solicitud);\n  }\n}\n\nvar resultado = new IndiceSequedad().calcular(new Solicitud(\"humedad: 31, lluvia7d: 4, formula: \\\"is-2\\\"\"));",
+        "Go": "// Índice de sequedad para riesgo de incendio\ntype Solicitud struct { Detalle string }\n\nfunc Calcular(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 15, Evidencia: true}, nil\n}\n\nresultado, err := Calcular(Solicitud{Detalle: \"humedad: 31, lluvia7d: 4, formula: \\\"is-2\\\"\"})"
+      },
+      "casoNegativo": "La solución se introduce sin contrato ni prueba y termina ocultando el problema que Característica versionada debía controlar.",
+      "antipatrones": [
+        "Característica versionada ceremonial",
+        "aplicación sin medición ni caso negativo"
+      ],
+      "consecuencias": "Mida divergencia, frescura, uso y deriva. Se relaciona con Conjunto reproducible y Registro de dependencias.",
+      "pruebas": [
+        "comprobar: característica = calcular(definición, tiempoEvento, versión)",
+        "resolver y verificar: Cambie una definición de variable y confirme que produce una versión nueva."
+      ],
+      "seguridad": "Conservar actor, capacidad, ámbito y finalidad cuando el flujo accede o transforma información sensible.",
+      "operacion": "Mida divergencia, frescura, uso y deriva. Se relaciona con Conjunto reproducible y Registro de dependencias.",
+      "migracionRetiro": "Introducir detrás de un contrato, comparar el comportamiento y retirar cuando deje de justificar su costo. Úsela cuando una variable se comparte o influye en decisiones. Evite crear un almacén complejo para experimentos desechables sin ruta de producción.",
+      "relaciones": [
+        {
+          "type": "complementa",
+          "target": "Recuperación limitada por ámbito"
+        },
+        {
+          "type": "complementa",
+          "target": "Identidad documental estable"
+        },
+        {
+          "type": "complementa",
+          "target": "Abstención con evidencia"
+        }
+      ],
+      "ejercicio": {
+        "consigna": "Cambie una definición de variable y confirme que produce una versión nueva.",
+        "resultadoEsperado": "Decisión justificada, caso negativo y evidencia observable."
+      },
+      "procedencia": {
+        "clasificacion": "Establecido y adaptado",
+        "fuentes": [
+          "Kleppmann (2017)",
+          "composición COBRIA"
+        ],
+        "sourceSlug": "caracteristica-versionada"
+      }
+    },
+    {
+      "id": 16,
+      "slug": "recuperacion-limitada-por-ambito",
+      "nombre": "Recuperación limitada por ámbito",
+      "familia": "IA con procedencia",
+      "tipo": "Control de IA",
+      "estado": "documentado",
+      "resumen": "Impedir que búsqueda semántica o recuperación aumentada crucen fronteras de autorización.",
+      "problema": "Ordenar primero y filtrar después puede recuperar fragmentos prohibidos, contaminar contexto o revelar existencia.",
+      "contexto": "Úsela en buscadores multiinquilino y asistentes. No trate metadatos de autorización como texto opcional. Pruebe consultas negativas e inyección.",
+      "fuerzas": [
+        "simplicidad frente a control",
+        "rendimiento frente a costo total",
+        "autonomía frente a autoridad y trazabilidad"
+      ],
+      "cuandoUsar": "Úsela en buscadores multiinquilino y asistentes.",
+      "cuandoEvitar": "Evítelo cuando el problema descrito no existe o una alternativa más simple satisface el contrato de Recuperación limitada por ámbito.",
+      "estructura": "BuscadorEstacion → Contrato de entrada → Repositorio documental → Evidencia",
+      "participantes": [
+        "BuscadorEstacion",
+        "Contrato de entrada",
+        "Repositorio documental",
+        "Evidencia"
+      ],
+      "secuencia": "candidatos = buscar(dentroDe(ámbito, política), consulta)",
+      "ejemplo": {
+        "escena": "Asistente sobre una estación biológica",
+        "problema": "El asistente podría citar documentos pertenecientes a otra estación.",
+        "resultado": "Filtro, búsqueda y citas conservan el mismo ámbito autorizado."
+      },
+      "codigo": {
+        "TypeScript": "// Asistente sobre una estación biológica\ntype Solicitud = Record<string, unknown>;\n\nclass BuscadorEstacion {\n  recuperar(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 16, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new BuscadorEstacion().recuperar({ estacionId: \"las-cruces\", pregunta: \"¿Qué floreció esta semana?\" });",
+        "Python": "# Asistente sobre una estación biológica\nclass BuscadorEstacion:\n    def recuperar(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 16, \"evidencia\": True, **solicitud}\n\nresultado = BuscadorEstacion().recuperar({\"detalle\": \"estacionId: \\\"las-cruces\\\", pregunta: \\\"¿Qué floreció esta semana?\\\"\"})",
+        "Java": "// Asistente sobre una estación biológica\nrecord Solicitud(String detalle) {}\n\nfinal class BuscadorEstacion {\n  Resultado recuperar(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(16, true, solicitud);\n  }\n}\n\nvar resultado = new BuscadorEstacion().recuperar(new Solicitud(\"estacionId: \\\"las-cruces\\\", pregunta: \\\"¿Qué floreció esta semana?\\\"\"));",
+        "Go": "// Asistente sobre una estación biológica\ntype Solicitud struct { Detalle string }\n\nfunc Recuperar(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 16, Evidencia: true}, nil\n}\n\nresultado, err := Recuperar(Solicitud{Detalle: \"estacionId: \\\"las-cruces\\\", pregunta: \\\"¿Qué floreció esta semana?\\\"\"})"
+      },
+      "casoNegativo": "La solución se introduce sin contrato ni prueba y termina ocultando el problema que Recuperación limitada por ámbito debía controlar.",
+      "antipatrones": [
+        "Recuperación limitada por ámbito ceremonial",
+        "aplicación sin medición ni caso negativo"
+      ],
+      "consecuencias": "Mida precisión, exhaustividad, fugas, abstención y afirmaciones sin fuente. Se relaciona con Repositorio con ámbito y Fragmento con evidencia.",
+      "pruebas": [
+        "comprobar: candidatos = buscar(dentroDe(ámbito, política), consulta)",
+        "resolver y verificar: Intente recuperar un fragmento de otro ámbito y compruebe que nunca fue candidato."
+      ],
+      "seguridad": "Conservar actor, capacidad, ámbito y finalidad cuando el flujo accede o transforma información sensible.",
+      "operacion": "Mida precisión, exhaustividad, fugas, abstención y afirmaciones sin fuente. Se relaciona con Repositorio con ámbito y Fragmento con evidencia.",
+      "migracionRetiro": "Introducir detrás de un contrato, comparar el comportamiento y retirar cuando deje de justificar su costo. Úsela en buscadores multiinquilino y asistentes. No trate metadatos de autorización como texto opcional. Pruebe consultas negativas e inyección.",
+      "relaciones": [
+        {
+          "type": "complementa",
+          "target": "Herramienta de agente gobernada"
+        },
+        {
+          "type": "complementa",
+          "target": "Validación en frontera"
+        },
+        {
+          "type": "complementa",
+          "target": "Presupuesto de derivados"
+        }
+      ],
+      "ejercicio": {
+        "consigna": "Intente recuperar un fragmento de otro ámbito y compruebe que nunca fue candidato.",
+        "resultadoEsperado": "Decisión justificada, caso negativo y evidencia observable."
+      },
+      "procedencia": {
+        "clasificacion": "Contrato compuesto",
+        "fuentes": [
+          "Kleppmann (2017)",
+          "composición COBRIA"
+        ],
+        "sourceSlug": "recuperacion-limitada-por-ambito"
+      }
+    },
+    {
+      "id": 17,
+      "slug": "herramienta-de-agente-gobernada",
+      "nombre": "Herramienta de agente gobernada",
+      "familia": "IA con procedencia",
+      "tipo": "Control de IA",
+      "estado": "documentado",
+      "resumen": "Permitir que un agente ejecute casos de uso sin saltarse autorización, validación o confirmación.",
+      "problema": "Un modelo que llama directamente bases o servicios internos convierte una inferencia incierta en efecto real.",
+      "contexto": "Úsela solo con límites, registros y capacidad de revocación. Evite autonomía de alto riesgo basada únicamente en una instrucción textual.",
+      "fuerzas": [
+        "simplicidad frente a control",
+        "rendimiento frente a costo total",
+        "autonomía frente a autoridad y trazabilidad"
+      ],
+      "cuandoUsar": "Úsela solo con límites, registros y capacidad de revocación.",
+      "cuandoEvitar": "Evítelo cuando el problema descrito no existe o una alternativa más simple satisface el contrato de Herramienta de agente gobernada.",
+      "estructura": "AgenteSenderos → Contrato de entrada → Repositorio documental → Evidencia",
+      "participantes": [
+        "AgenteSenderos",
+        "Contrato de entrada",
+        "Repositorio documental",
+        "Evidencia"
+      ],
+      "secuencia": "herramienta.validar(); exigirCapacidad(); confirmarSiRiesgo(); auditar()",
+      "ejemplo": {
+        "escena": "Asistente que propone cerrar un sendero",
+        "problema": "Un modelo no debe cerrar rutas por sí mismo al detectar lluvia intensa.",
+        "resultado": "La herramienta valida permiso, muestra evidencia y exige aprobación humana."
+      },
+      "codigo": {
+        "TypeScript": "// Asistente que propone cerrar un sendero\ntype Solicitud = Record<string, unknown>;\n\nclass AgenteSenderos {\n  proponer(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 17, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new AgenteSenderos().proponer({ senderoId: \"cerro-pittier\", accion: \"cerrar\" });",
+        "Python": "# Asistente que propone cerrar un sendero\nclass AgenteSenderos:\n    def proponer(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 17, \"evidencia\": True, **solicitud}\n\nresultado = AgenteSenderos().proponer({\"detalle\": \"senderoId: \\\"cerro-pittier\\\", accion: \\\"cerrar\\\"\"})",
+        "Java": "// Asistente que propone cerrar un sendero\nrecord Solicitud(String detalle) {}\n\nfinal class AgenteSenderos {\n  Resultado proponer(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(17, true, solicitud);\n  }\n}\n\nvar resultado = new AgenteSenderos().proponer(new Solicitud(\"senderoId: \\\"cerro-pittier\\\", accion: \\\"cerrar\\\"\"));",
+        "Go": "// Asistente que propone cerrar un sendero\ntype Solicitud struct { Detalle string }\n\nfunc Proponer(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 17, Evidencia: true}, nil\n}\n\nresultado, err := Proponer(Solicitud{Detalle: \"senderoId: \\\"cerro-pittier\\\", accion: \\\"cerrar\\\"\"})"
+      },
+      "casoNegativo": "La solución se introduce sin contrato ni prueba y termina ocultando el problema que Herramienta de agente gobernada debía controlar.",
+      "antipatrones": [
+        "Herramienta de agente gobernada ceremonial",
+        "aplicación sin medición ni caso negativo"
+      ],
+      "consecuencias": "Mida acciones rechazadas, confirmaciones, efectos duplicados y decisiones sin evidencia. Se relaciona con Contexto autorizado e Idempotencia.",
+      "pruebas": [
+        "comprobar: herramienta.validar(); exigirCapacidad(); confirmarSiRiesgo(); auditar()",
+        "resolver y verificar: Repita una acción de alto riesgo sin confirmación y exija abstención auditable."
+      ],
+      "seguridad": "Conservar actor, capacidad, ámbito y finalidad cuando el flujo accede o transforma información sensible.",
+      "operacion": "Mida acciones rechazadas, confirmaciones, efectos duplicados y decisiones sin evidencia. Se relaciona con Contexto autorizado e Idempotencia.",
+      "migracionRetiro": "Introducir detrás de un contrato, comparar el comportamiento y retirar cuando deje de justificar su costo. Úsela solo con límites, registros y capacidad de revocación. Evite autonomía de alto riesgo basada únicamente en una instrucción textual.",
+      "relaciones": [
+        {
+          "type": "complementa",
+          "target": "Frontera lectura—escritura"
+        },
+        {
+          "type": "complementa",
+          "target": "Contrato documental versionado"
+        },
+        {
+          "type": "complementa",
+          "target": "Auditoría narrativa reconstruible"
+        }
+      ],
+      "ejercicio": {
+        "consigna": "Repita una acción de alto riesgo sin confirmación y exija abstención auditable.",
+        "resultadoEsperado": "Decisión justificada, caso negativo y evidencia observable."
+      },
+      "procedencia": {
+        "clasificacion": "Experimental",
+        "fuentes": [
+          "Kleppmann (2017)",
+          "composición COBRIA"
+        ],
+        "sourceSlug": "herramienta-de-agente-gobernada"
+      }
+    },
+    {
+      "id": 18,
+      "slug": "frontera-lectura-escritura",
+      "nombre": "Frontera lectura—escritura",
+      "familia": "Gobernanza del ciclo de vida",
+      "tipo": "Regla de decisión",
+      "estado": "documentado",
+      "resumen": "Decidir cuantitativamente si el ahorro de lectura compensa mantenimiento adicional.",
+      "problema": "Las proyecciones suelen adoptarse por intuición y permanecen aun cuando un índice nativo sería suficiente.",
+      "contexto": "Mida en el entorno objetivo y por percentil. Si Δ Q≤0 , B1 domina en esa métrica. No generalice el umbral entre motores, escalas o consultas.",
+      "fuerzas": [
+        "simplicidad frente a control",
+        "rendimiento frente a costo total",
+        "autonomía frente a autoridad y trazabilidad"
+      ],
+      "cuandoUsar": "Mida en el entorno objetivo y por percentil.",
+      "cuandoEvitar": "Evítelo cuando el problema descrito no existe o una alternativa más simple satisface el contrato de Frontera lectura—escritura.",
+      "estructura": "ResumenCalidadAgua → Contrato de entrada → Repositorio documental → Evidencia",
+      "participantes": [
+        "ResumenCalidadAgua",
+        "Contrato de entrada",
+        "Repositorio documental",
+        "Evidencia"
+      ],
+      "secuencia": "adoptar si ahorroLectura > costoEscritura + costoOperacional",
+      "ejemplo": {
+        "escena": "Resumen público de calidad del agua",
+        "problema": "Editar el resumen directamente lo convertiría en una segunda autoridad.",
+        "resultado": "El resumen solo se lee; toda corrección entra por la medición canónica."
+      },
+      "codigo": {
+        "TypeScript": "// Resumen público de calidad del agua\ntype Solicitud = Record<string, unknown>;\n\nclass ResumenCalidadAgua {\n  consultar(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 18, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new ResumenCalidadAgua().consultar({ cuencaId: \"sixaola\", mes: \"2026-08\" });",
+        "Python": "# Resumen público de calidad del agua\nclass ResumenCalidadAgua:\n    def consultar(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 18, \"evidencia\": True, **solicitud}\n\nresultado = ResumenCalidadAgua().consultar({\"detalle\": \"cuencaId: \\\"sixaola\\\", mes: \\\"2026-08\\\"\"})",
+        "Java": "// Resumen público de calidad del agua\nrecord Solicitud(String detalle) {}\n\nfinal class ResumenCalidadAgua {\n  Resultado consultar(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(18, true, solicitud);\n  }\n}\n\nvar resultado = new ResumenCalidadAgua().consultar(new Solicitud(\"cuencaId: \\\"sixaola\\\", mes: \\\"2026-08\\\"\"));",
+        "Go": "// Resumen público de calidad del agua\ntype Solicitud struct { Detalle string }\n\nfunc Consultar(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 18, Evidencia: true}, nil\n}\n\nresultado, err := Consultar(Solicitud{Detalle: \"cuencaId: \\\"sixaola\\\", mes: \\\"2026-08\\\"\"})"
+      },
+      "casoNegativo": "La solución se introduce sin contrato ni prueba y termina ocultando el problema que Frontera lectura—escritura debía controlar.",
+      "antipatrones": [
+        "Frontera lectura—escritura ceremonial",
+        "aplicación sin medición ni caso negativo"
+      ],
+      "consecuencias": "El piloto observó umbrales entre 1.49 y 38.87 lecturas por escritura; son evidencia del método, no parámetros transferibles a NoSQL. Se relaciona con Proyección de cobertura y Retiro de proyección.",
+      "pruebas": [
+        "comprobar: adoptar si ahorroLectura > costoEscritura + costoOperacional",
+        "resolver y verificar: Calcule el punto de equilibrio con costos medidos y repita con el doble de escrituras."
+      ],
+      "seguridad": "Conservar actor, capacidad, ámbito y finalidad cuando el flujo accede o transforma información sensible.",
+      "operacion": "El piloto observó umbrales entre 1.49 y 38.87 lecturas por escritura; son evidencia del método, no parámetros transferibles a NoSQL. Se relaciona con Proyección de cobertura y Retiro de proyección.",
+      "migracionRetiro": "Introducir detrás de un contrato, comparar el comportamiento y retirar cuando deje de justificar su costo. Mida en el entorno objetivo y por percentil. Si Δ Q≤0 , B1 domina en esa métrica. No generalice el umbral entre motores, escalas o consultas.",
+      "relaciones": [
+        {
+          "type": "complementa",
+          "target": "Índice antes que proyección"
+        },
+        {
+          "type": "complementa",
+          "target": "Lectura coherente por revisión"
+        },
+        {
+          "type": "complementa",
+          "target": "Objeto canónico"
+        }
+      ],
+      "ejercicio": {
+        "consigna": "Calcule el punto de equilibrio con costos medidos y repita con el doble de escrituras.",
+        "resultadoEsperado": "Decisión justificada, caso negativo y evidencia observable."
+      },
+      "procedencia": {
+        "clasificacion": "Experimental con evidencia",
+        "fuentes": [
+          "Kleppmann (2017)",
+          "Sadalage y Fowler (2012)"
+        ],
+        "sourceSlug": "frontera-lectura-escritura"
+      }
+    },
+    {
+      "id": 19,
+      "slug": "indice-antes-que-proyeccion",
+      "nombre": "Índice antes que proyección",
+      "familia": "Gobernanza del ciclo de vida",
+      "tipo": "Heurística",
+      "estado": "documentado",
+      "resumen": "Exigir una línea base nativa competente antes de añadir una representación derivada.",
+      "problema": "Comparar solo contra escaneo exagera el beneficio y oculta una solución más sencilla del motor.",
+      "contexto": "Úsela en toda decisión de materialización. Excepciones requieren documentar por qué el motor no puede indexar la consulta.",
+      "fuerzas": [
+        "simplicidad frente a control",
+        "rendimiento frente a costo total",
+        "autonomía frente a autoridad y trazabilidad"
+      ],
+      "cuandoUsar": "Úsela en toda decisión de materialización.",
+      "cuandoEvitar": "Evítelo cuando el problema descrito no existe o una alternativa más simple satisface el contrato de Índice antes que proyección.",
+      "estructura": "IndiceViveros → Contrato de entrada → Repositorio documental → Evidencia",
+      "participantes": [
+        "IndiceViveros",
+        "Contrato de entrada",
+        "Repositorio documental",
+        "Evidencia"
+      ],
+      "secuencia": "medir(consultaConÍndice) antesDe crearProyección()",
+      "ejemplo": {
+        "escena": "Búsqueda de viveros por cantón",
+        "problema": "El equipo quiere copiar fichas completas cuando un índice compuesto basta.",
+        "resultado": "Se prueba primero una clave pequeña antes de mantener otra representación."
+      },
+      "codigo": {
+        "TypeScript": "// Búsqueda de viveros por cantón\ntype Solicitud = Record<string, unknown>;\n\nclass IndiceViveros {\n  buscar(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 19, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new IndiceViveros().buscar({ canton: \"coto-brus\", especie: \"roble-sabana\" });",
+        "Python": "# Búsqueda de viveros por cantón\nclass IndiceViveros:\n    def buscar(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 19, \"evidencia\": True, **solicitud}\n\nresultado = IndiceViveros().buscar({\"detalle\": \"canton: \\\"coto-brus\\\", especie: \\\"roble-sabana\\\"\"})",
+        "Java": "// Búsqueda de viveros por cantón\nrecord Solicitud(String detalle) {}\n\nfinal class IndiceViveros {\n  Resultado buscar(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(19, true, solicitud);\n  }\n}\n\nvar resultado = new IndiceViveros().buscar(new Solicitud(\"canton: \\\"coto-brus\\\", especie: \\\"roble-sabana\\\"\"));",
+        "Go": "// Búsqueda de viveros por cantón\ntype Solicitud struct { Detalle string }\n\nfunc Buscar(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 19, Evidencia: true}, nil\n}\n\nresultado, err := Buscar(Solicitud{Detalle: \"canton: \\\"coto-brus\\\", especie: \\\"roble-sabana\\\"\"})"
+      },
+      "casoNegativo": "La solución se introduce sin contrato ni prueba y termina ocultando el problema que Índice antes que proyección debía controlar.",
+      "antipatrones": [
+        "Índice antes que proyección ceremonial",
+        "aplicación sin medición ni caso negativo"
+      ],
+      "consecuencias": "Mida plan, filas, bytes, p95 y escritura. En la fase confirmatoria, C1 solo superó significativamente a B1 en cuatro de nueve celdas.",
+      "pruebas": [
+        "comprobar: medir(consultaConÍndice) antesDe crearProyección()",
+        "resolver y verificar: Añada primero un índice documental equivalente y mida antes de crear una copia."
+      ],
+      "seguridad": "Conservar actor, capacidad, ámbito y finalidad cuando el flujo accede o transforma información sensible.",
+      "operacion": "Mida plan, filas, bytes, p95 y escritura. En la fase confirmatoria, C1 solo superó significativamente a B1 en cuatro de nueve celdas.",
+      "migracionRetiro": "Introducir detrás de un contrato, comparar el comportamiento y retirar cuando deje de justificar su costo. Úsela en toda decisión de materialización. Excepciones requieren documentar por qué el motor no puede indexar la consulta.",
+      "relaciones": [
+        {
+          "type": "complementa",
+          "target": "Retiro de proyección"
+        },
+        {
+          "type": "complementa",
+          "target": "Ventana de frescura declarada"
+        },
+        {
+          "type": "complementa",
+          "target": "Dato fechado"
+        }
+      ],
+      "ejercicio": {
+        "consigna": "Añada primero un índice documental equivalente y mida antes de crear una copia.",
+        "resultadoEsperado": "Decisión justificada, caso negativo y evidencia observable."
+      },
+      "procedencia": {
+        "clasificacion": "Adaptación COBRIA",
+        "fuentes": [
+          "Kleppmann (2017)",
+          "Sadalage y Fowler (2012)"
+        ],
+        "sourceSlug": "indice-antes-que-proyeccion"
+      }
+    },
+    {
+      "id": 20,
+      "slug": "retiro-de-proyeccion",
+      "nombre": "Retiro de proyección",
+      "familia": "Gobernanza del ciclo de vida",
+      "tipo": "Mecanismo de ciclo de vida",
+      "estado": "documentado",
+      "resumen": "Eliminar representaciones cuyo beneficio ya no compensa costo, riesgo o dependencia.",
+      "problema": "Las proyecciones se crean para consultas temporales y permanecen como escrituras, almacenamiento y código sin propietario.",
+      "contexto": "Actívelo ante cero uso, duplicación de índice, retraso persistente o ausencia de responsable. No borre antes de demostrar que los consumidores migraron.",
+      "fuerzas": [
+        "simplicidad frente a control",
+        "rendimiento frente a costo total",
+        "autonomía frente a autoridad y trazabilidad"
+      ],
+      "cuandoUsar": "Actívelo ante cero uso, duplicación de índice, retraso persistente o ausencia de responsable.",
+      "cuandoEvitar": "Evítelo cuando el problema descrito no existe o una alternativa más simple satisface el contrato de Retiro de proyección.",
+      "estructura": "RetirarMapaHistorico → Contrato de entrada → Repositorio documental → Evidencia",
+      "participantes": [
+        "RetirarMapaHistorico",
+        "Contrato de entrada",
+        "Repositorio documental",
+        "Evidencia"
+      ],
+      "secuencia": "detenerConsumidores(); retirarProductor(); esperar(); eliminarDerivado()",
+      "ejemplo": {
+        "escena": "Mapa antiguo que nadie consulta",
+        "problema": "Una proyección sin usuarios continúa consumiendo almacenamiento y monitoreo.",
+        "resultado": "Se confirma ausencia de consumidores, se conserva la fuente y se retira la copia."
+      },
+      "codigo": {
+        "TypeScript": "// Mapa antiguo que nadie consulta\ntype Solicitud = Record<string, unknown>;\n\nclass RetirarMapaHistorico {\n  ejecutar(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 20, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new RetirarMapaHistorico().ejecutar({ proyeccion: \"mapa-2019\", diasSinUso: 420 });",
+        "Python": "# Mapa antiguo que nadie consulta\nclass RetirarMapaHistorico:\n    def ejecutar(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 20, \"evidencia\": True, **solicitud}\n\nresultado = RetirarMapaHistorico().ejecutar({\"detalle\": \"proyeccion: \\\"mapa-2019\\\", diasSinUso: 420\"})",
+        "Java": "// Mapa antiguo que nadie consulta\nrecord Solicitud(String detalle) {}\n\nfinal class RetirarMapaHistorico {\n  Resultado ejecutar(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(20, true, solicitud);\n  }\n}\n\nvar resultado = new RetirarMapaHistorico().ejecutar(new Solicitud(\"proyeccion: \\\"mapa-2019\\\", diasSinUso: 420\"));",
+        "Go": "// Mapa antiguo que nadie consulta\ntype Solicitud struct { Detalle string }\n\nfunc Ejecutar(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 20, Evidencia: true}, nil\n}\n\nresultado, err := Ejecutar(Solicitud{Detalle: \"proyeccion: \\\"mapa-2019\\\", diasSinUso: 420\"})"
+      },
+      "casoNegativo": "La solución se introduce sin contrato ni prueba y termina ocultando el problema que Retiro de proyección debía controlar.",
+      "antipatrones": [
+        "Retiro de proyección ceremonial",
+        "aplicación sin medición ni caso negativo"
+      ],
+      "consecuencias": "Mida consultas, costo evitado, dependientes y errores posteriores. Se relaciona con Registro de dependencias y Frontera lectura—escritura.",
+      "pruebas": [
+        "comprobar: detenerConsumidores(); retirarProductor(); esperar(); eliminarDerivado()",
+        "resolver y verificar: Identifique una proyección sin uso, simule el retiro y verifique consumidores y reversión."
+      ],
+      "seguridad": "Conservar actor, capacidad, ámbito y finalidad cuando el flujo accede o transforma información sensible.",
+      "operacion": "Mida consultas, costo evitado, dependientes y errores posteriores. Se relaciona con Registro de dependencias y Frontera lectura—escritura.",
+      "migracionRetiro": "Introducir detrás de un contrato, comparar el comportamiento y retirar cuando deje de justificar su costo. Actívelo ante cero uso, duplicación de índice, retraso persistente o ausencia de responsable. No borre antes de demostrar que los consumidores migraron.",
+      "relaciones": [
+        {
+          "type": "complementa",
+          "target": "Identidad documental estable"
+        },
+        {
+          "type": "complementa",
+          "target": "Manifiesto de proyección"
+        },
+        {
+          "type": "complementa",
+          "target": "Repositorio con ámbito"
+        }
+      ],
+      "ejercicio": {
+        "consigna": "Identifique una proyección sin uso, simule el retiro y verifique consumidores y reversión.",
+        "resultadoEsperado": "Decisión justificada, caso negativo y evidencia observable."
+      },
+      "procedencia": {
+        "clasificacion": "Contrato compuesto",
+        "fuentes": [
+          "Kleppmann (2017)",
+          "Sadalage y Fowler (2012)"
+        ],
+        "sourceSlug": "retiro-de-proyeccion"
+      }
+    },
+    {
+      "id": 21,
+      "slug": "identidad-documental-estable",
+      "nombre": "Identidad documental estable",
+      "familia": "Modelado documental",
+      "tipo": "Adaptación COBRIA",
+      "estado": "documentado",
+      "resumen": "Mantener una identidad independiente de ubicación, forma y proveedor.",
+      "problema": "Claves derivadas de rutas, nombres visibles o posiciones cambian durante una migración y rompen referencias.",
+      "contexto": "Úselo cuando un documento sobreviva importaciones, fusiones o cambios de colección. Evite codificar significado mutable en la identidad.",
+      "fuerzas": [
+        "simplicidad frente a control",
+        "rendimiento frente a costo total",
+        "autonomía frente a autoridad y trazabilidad"
+      ],
+      "cuandoUsar": "Úselo cuando un documento sobreviva importaciones, fusiones o cambios de colección.",
+      "cuandoEvitar": "Evítelo cuando el problema descrito no existe o una alternativa más simple satisface el contrato de Identidad documental estable.",
+      "estructura": "CamaraTrampa → Contrato de entrada → Repositorio documental → Evidencia",
+      "participantes": [
+        "CamaraTrampa",
+        "Contrato de entrada",
+        "Repositorio documental",
+        "Evidencia"
+      ],
+      "secuencia": "identidad = asignar(ámbito); referencias.usar(identidad)",
+      "ejemplo": {
+        "escena": "La misma cámara cambia de ubicación",
+        "problema": "Usar la ubicación como identificador crea otro dispositivo al moverla.",
+        "resultado": "La identidad permanece estable mientras sus atributos pueden cambiar."
+      },
+      "codigo": {
+        "TypeScript": "// La misma cámara cambia de ubicación\ntype Solicitud = Record<string, unknown>;\n\nclass CamaraTrampa {\n  registrar(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 21, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new CamaraTrampa().registrar({ camaraId: \"cam-0091\", ubicacion: \"sendero-norte\" });",
+        "Python": "# La misma cámara cambia de ubicación\nclass CamaraTrampa:\n    def registrar(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 21, \"evidencia\": True, **solicitud}\n\nresultado = CamaraTrampa().registrar({\"detalle\": \"camaraId: \\\"cam-0091\\\", ubicacion: \\\"sendero-norte\\\"\"})",
+        "Java": "// La misma cámara cambia de ubicación\nrecord Solicitud(String detalle) {}\n\nfinal class CamaraTrampa {\n  Resultado registrar(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(21, true, solicitud);\n  }\n}\n\nvar resultado = new CamaraTrampa().registrar(new Solicitud(\"camaraId: \\\"cam-0091\\\", ubicacion: \\\"sendero-norte\\\"\"));",
+        "Go": "// La misma cámara cambia de ubicación\ntype Solicitud struct { Detalle string }\n\nfunc Registrar(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 21, Evidencia: true}, nil\n}\n\nresultado, err := Registrar(Solicitud{Detalle: \"camaraId: \\\"cam-0091\\\", ubicacion: \\\"sendero-norte\\\"\"})"
+      },
+      "casoNegativo": "La solución se introduce sin contrato ni prueba y termina ocultando el problema que Identidad documental estable debía controlar.",
+      "antipatrones": [
+        "Identidad documental estable ceremonial",
+        "aplicación sin medición ni caso negativo"
+      ],
+      "consecuencias": "Mida colisiones, referencias huérfanas y tiempo de resolución. Se relaciona con Objeto canónico, Revisión obsoleta rechazada y Catálogo versionado.",
+      "pruebas": [
+        "comprobar: identidad = asignar(ámbito); referencias.usar(identidad)",
+        "resolver y verificar: Cambie ubicación y nombre externo de diez documentos y demuestre que sus referencias internas permanecen válidas."
+      ],
+      "seguridad": "Conservar actor, capacidad, ámbito y finalidad cuando el flujo accede o transforma información sensible.",
+      "operacion": "Mida colisiones, referencias huérfanas y tiempo de resolución. Se relaciona con Objeto canónico, Revisión obsoleta rechazada y Catálogo versionado.",
+      "migracionRetiro": "Introducir detrás de un contrato, comparar el comportamiento y retirar cuando deje de justificar su costo. Úselo cuando un documento sobreviva importaciones, fusiones o cambios de colección. Evite codificar significado mutable en la identidad.",
+      "relaciones": [
+        {
+          "type": "complementa",
+          "target": "Validación en frontera"
+        },
+        {
+          "type": "complementa",
+          "target": "Partición analítica sin fuga"
+        },
+        {
+          "type": "complementa",
+          "target": "Catálogo versionado"
+        }
+      ],
+      "ejercicio": {
+        "consigna": "Cambie ubicación y nombre externo de diez documentos y demuestre que sus referencias internas permanecen válidas.",
+        "resultadoEsperado": "Decisión justificada, caso negativo y evidencia observable."
+      },
+      "procedencia": {
+        "clasificacion": "Identidad y migración",
+        "fuentes": [
+          "Evans (2003)",
+          "Fowler (2002)",
+          "Kleppmann (2017)"
+        ],
+        "sourceSlug": "identidad-documental-estable"
+      }
+    },
+    {
+      "id": 22,
+      "slug": "validacion-en-frontera",
+      "nombre": "Validación en frontera",
+      "familia": "Modelado documental",
+      "tipo": "Patrón establecido",
+      "estado": "documentado",
+      "resumen": "Impedir que formas inválidas entren al núcleo documental.",
+      "problema": "Aceptar primero y corregir después dispersa supuestos y convierte cada lector en un validador distinto.",
+      "contexto": "Aplíquelo en API, importadores, consumidores y herramientas. Conserve el dato crudo separado cuando sea evidencia legítima.",
+      "fuerzas": [
+        "simplicidad frente a control",
+        "rendimiento frente a costo total",
+        "autonomía frente a autoridad y trazabilidad"
+      ],
+      "cuandoUsar": "Aplíquelo en API, importadores, consumidores y herramientas.",
+      "cuandoEvitar": "Evítelo cuando el problema descrito no existe o una alternativa más simple satisface el contrato de Validación en frontera.",
+      "estructura": "IngresoAvistamiento → Contrato de entrada → Repositorio documental → Evidencia",
+      "participantes": [
+        "IngresoAvistamiento",
+        "Contrato de entrada",
+        "Repositorio documental",
+        "Evidencia"
+      ],
+      "secuencia": "validar(entrada, contrato, ámbito) o rechazarSinEfectos()",
+      "ejemplo": {
+        "escena": "Formulario ciudadano de avistamientos",
+        "problema": "Coordenadas imposibles o especies desconocidas llegan hasta el almacén.",
+        "resultado": "La entrada se normaliza o rechaza antes de crear el documento."
+      },
+      "codigo": {
+        "TypeScript": "// Formulario ciudadano de avistamientos\ntype Solicitud = Record<string, unknown>;\n\nclass IngresoAvistamiento {\n  aceptar(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 22, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new IngresoAvistamiento().aceptar({ latitud: 8.79, longitud: -82.96, especie: \"tucan-pico-iris\" });",
+        "Python": "# Formulario ciudadano de avistamientos\nclass IngresoAvistamiento:\n    def aceptar(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 22, \"evidencia\": True, **solicitud}\n\nresultado = IngresoAvistamiento().aceptar({\"detalle\": \"latitud: 8.79, longitud: -82.96, especie: \\\"tucan-pico-iris\\\"\"})",
+        "Java": "// Formulario ciudadano de avistamientos\nrecord Solicitud(String detalle) {}\n\nfinal class IngresoAvistamiento {\n  Resultado aceptar(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(22, true, solicitud);\n  }\n}\n\nvar resultado = new IngresoAvistamiento().aceptar(new Solicitud(\"latitud: 8.79, longitud: -82.96, especie: \\\"tucan-pico-iris\\\"\"));",
+        "Go": "// Formulario ciudadano de avistamientos\ntype Solicitud struct { Detalle string }\n\nfunc Aceptar(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 22, Evidencia: true}, nil\n}\n\nresultado, err := Aceptar(Solicitud{Detalle: \"latitud: 8.79, longitud: -82.96, especie: \\\"tucan-pico-iris\\\"\"})"
+      },
+      "casoNegativo": "La solución se introduce sin contrato ni prueba y termina ocultando el problema que Validación en frontera debía controlar.",
+      "antipatrones": [
+        "Validación en frontera ceremonial",
+        "aplicación sin medición ni caso negativo"
+      ],
+      "consecuencias": "Mida rechazos por causa, campos desconocidos y escrituras parciales. Se conecta con Contrato versionado y Herramienta de agente gobernada.",
+      "pruebas": [
+        "comprobar: validar(entrada, contrato, ámbito) o rechazarSinEfectos()",
+        "resolver y verificar: Diseñe cinco entradas inválidas y compruebe rechazo completo, causa legible y ausencia de efectos parciales."
+      ],
+      "seguridad": "Conservar actor, capacidad, ámbito y finalidad cuando el flujo accede o transforma información sensible.",
+      "operacion": "Mida rechazos por causa, campos desconocidos y escrituras parciales. Se conecta con Contrato versionado y Herramienta de agente gobernada.",
+      "migracionRetiro": "Introducir detrás de un contrato, comparar el comportamiento y retirar cuando deje de justificar su costo. Aplíquelo en API, importadores, consumidores y herramientas. Conserve el dato crudo separado cuando sea evidencia legítima.",
+      "relaciones": [
+        {
+          "type": "complementa",
+          "target": "Contrato documental versionado"
+        },
+        {
+          "type": "complementa",
+          "target": "Abstención con evidencia"
+        },
+        {
+          "type": "complementa",
+          "target": "Proyección de lectura"
+        }
+      ],
+      "ejercicio": {
+        "consigna": "Diseñe cinco entradas inválidas y compruebe rechazo completo, causa legible y ausencia de efectos parciales.",
+        "resultadoEsperado": "Decisión justificada, caso negativo y evidencia observable."
+      },
+      "procedencia": {
+        "clasificacion": "Contrato verificable",
+        "fuentes": [
+          "Evans (2003)",
+          "Fowler (2002)",
+          "Kleppmann (2017)"
+        ],
+        "sourceSlug": "validacion-en-frontera"
+      }
+    },
+    {
+      "id": 23,
+      "slug": "contrato-documental-versionado",
+      "nombre": "Contrato documental versionado",
+      "familia": "Modelado documental",
+      "tipo": "Adaptación COBRIA",
+      "estado": "documentado",
+      "resumen": "Evolucionar documentos sin exigir una migración instantánea de todo el conjunto.",
+      "problema": "Cambiar el significado de un campo bajo el mismo nombre produce lectores temporalmente incompatibles.",
+      "contexto": "Úselo ante cambios aditivos o incompatibles. Mantenga pruebas de lectura hacia atrás y hacia delante durante la convivencia.",
+      "fuerzas": [
+        "simplicidad frente a control",
+        "rendimiento frente a costo total",
+        "autonomía frente a autoridad y trazabilidad"
+      ],
+      "cuandoUsar": "Úselo ante cambios aditivos o incompatibles.",
+      "cuandoEvitar": "Evítelo cuando el problema descrito no existe o una alternativa más simple satisface el contrato de Contrato documental versionado.",
+      "estructura": "ContratoObservacion → Contrato de entrada → Repositorio documental → Evidencia",
+      "participantes": [
+        "ContratoObservacion",
+        "Contrato de entrada",
+        "Repositorio documental",
+        "Evidencia"
+      ],
+      "secuencia": "leer(según versión); migrar(de, hacia) deFormaIdempotente()",
+      "ejemplo": {
+        "escena": "Aplicación móvil todavía usa el formato anterior",
+        "problema": "Cambiar nombre de campos rompe tabletas que aún no se actualizaron.",
+        "resultado": "El lector selecciona el contrato correcto y migra de forma explícita."
+      },
+      "codigo": {
+        "TypeScript": "// Aplicación móvil todavía usa el formato anterior\ntype Solicitud = Record<string, unknown>;\n\nclass ContratoObservacion {\n  decodificar(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 23, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new ContratoObservacion().decodificar({ schemaVersion: 2, especieCodigo: \"AV-12\" });",
+        "Python": "# Aplicación móvil todavía usa el formato anterior\nclass ContratoObservacion:\n    def decodificar(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 23, \"evidencia\": True, **solicitud}\n\nresultado = ContratoObservacion().decodificar({\"detalle\": \"schemaVersion: 2, especieCodigo: \\\"AV-12\\\"\"})",
+        "Java": "// Aplicación móvil todavía usa el formato anterior\nrecord Solicitud(String detalle) {}\n\nfinal class ContratoObservacion {\n  Resultado decodificar(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(23, true, solicitud);\n  }\n}\n\nvar resultado = new ContratoObservacion().decodificar(new Solicitud(\"schemaVersion: 2, especieCodigo: \\\"AV-12\\\"\"));",
+        "Go": "// Aplicación móvil todavía usa el formato anterior\ntype Solicitud struct { Detalle string }\n\nfunc Decodificar(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 23, Evidencia: true}, nil\n}\n\nresultado, err := Decodificar(Solicitud{Detalle: \"schemaVersion: 2, especieCodigo: \\\"AV-12\\\"\"})"
+      },
+      "casoNegativo": "La solución se introduce sin contrato ni prueba y termina ocultando el problema que Contrato documental versionado debía controlar.",
+      "antipatrones": [
+        "Contrato documental versionado ceremonial",
+        "aplicación sin medición ni caso negativo"
+      ],
+      "consecuencias": "Mida documentos por versión, fallos de conversión y consumidores antiguos. Se relaciona con Catálogo versionado y Publicación por versión.",
+      "pruebas": [
+        "comprobar: leer(según versión); migrar(de, hacia) deFormaIdempotente()",
+        "resolver y verificar: Lea documentos de tres versiones, migre dos veces la misma muestra y compare huellas."
+      ],
+      "seguridad": "Conservar actor, capacidad, ámbito y finalidad cuando el flujo accede o transforma información sensible.",
+      "operacion": "Mida documentos por versión, fallos de conversión y consumidores antiguos. Se relaciona con Catálogo versionado y Publicación por versión.",
+      "migracionRetiro": "Introducir detrás de un contrato, comparar el comportamiento y retirar cuando deje de justificar su costo. Úselo ante cambios aditivos o incompatibles. Mantenga pruebas de lectura hacia atrás y hacia delante durante la convivencia.",
+      "relaciones": [
+        {
+          "type": "complementa",
+          "target": "Lectura coherente por revisión"
+        },
+        {
+          "type": "complementa",
+          "target": "Presupuesto de derivados"
+        },
+        {
+          "type": "complementa",
+          "target": "Proyección de cobertura"
+        }
+      ],
+      "ejercicio": {
+        "consigna": "Lea documentos de tres versiones, migre dos veces la misma muestra y compare huellas.",
+        "resultadoEsperado": "Decisión justificada, caso negativo y evidencia observable."
+      },
+      "procedencia": {
+        "clasificacion": "Compatibilidad demostrada",
+        "fuentes": [
+          "Evans (2003)",
+          "Fowler (2002)",
+          "Kleppmann (2017)"
+        ],
+        "sourceSlug": "contrato-documental-versionado"
+      }
+    },
+    {
+      "id": 24,
+      "slug": "lectura-coherente-por-revision",
+      "nombre": "Lectura coherente por revisión",
+      "familia": "Eventos y consistencia",
+      "tipo": "Contrato compuesto",
+      "estado": "documentado",
+      "resumen": "Evitar respuestas formadas por fragmentos de revisiones incompatibles.",
+      "problema": "Consultar varias proyecciones puede mezclar estados aunque cada lectura aislada sea correcta.",
+      "contexto": "Aplíquelo en vistas compuestas, informes y recuperación aumentada. No prometa coherencia que el motor o las proyecciones no sostienen.",
+      "fuerzas": [
+        "simplicidad frente a control",
+        "rendimiento frente a costo total",
+        "autonomía frente a autoridad y trazabilidad"
+      ],
+      "cuandoUsar": "Aplíquelo en vistas compuestas, informes y recuperación aumentada.",
+      "cuandoEvitar": "Evítelo cuando el problema descrito no existe o una alternativa más simple satisface el contrato de Lectura coherente por revisión.",
+      "estructura": "InformeReserva → Contrato de entrada → Repositorio documental → Evidencia",
+      "participantes": [
+        "InformeReserva",
+        "Contrato de entrada",
+        "Repositorio documental",
+        "Evidencia"
+      ],
+      "secuencia": "leerTodoEn(revisiónObjetivo) o declararDegradación()",
+      "ejemplo": {
+        "escena": "Informe combina mapa y estadísticas",
+        "problema": "Leer partes en momentos distintos produce un informe internamente contradictorio.",
+        "resultado": "Todas las piezas declaran la misma revisión o la lectura se repite."
+      },
+      "codigo": {
+        "TypeScript": "// Informe combina mapa y estadísticas\ntype Solicitud = Record<string, unknown>;\n\nclass InformeReserva {\n  cargar(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 24, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new InformeReserva().cargar({ reservaId: \"corcovado\", revision: 884 });",
+        "Python": "# Informe combina mapa y estadísticas\nclass InformeReserva:\n    def cargar(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 24, \"evidencia\": True, **solicitud}\n\nresultado = InformeReserva().cargar({\"detalle\": \"reservaId: \\\"corcovado\\\", revision: 884\"})",
+        "Java": "// Informe combina mapa y estadísticas\nrecord Solicitud(String detalle) {}\n\nfinal class InformeReserva {\n  Resultado cargar(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(24, true, solicitud);\n  }\n}\n\nvar resultado = new InformeReserva().cargar(new Solicitud(\"reservaId: \\\"corcovado\\\", revision: 884\"));",
+        "Go": "// Informe combina mapa y estadísticas\ntype Solicitud struct { Detalle string }\n\nfunc Cargar(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 24, Evidencia: true}, nil\n}\n\nresultado, err := Cargar(Solicitud{Detalle: \"reservaId: \\\"corcovado\\\", revision: 884\"})"
+      },
+      "casoNegativo": "La solución se introduce sin contrato ni prueba y termina ocultando el problema que Lectura coherente por revisión debía controlar.",
+      "antipatrones": [
+        "Lectura coherente por revisión ceremonial",
+        "aplicación sin medición ni caso negativo"
+      ],
+      "consecuencias": "Mida mezclas detectadas, abstenciones y atraso por revisión. Se vincula con Reconstrucción incremental y Recuperación limitada por ámbito.",
+      "pruebas": [
+        "comprobar: leerTodoEn(revisiónObjetivo) o declararDegradación()",
+        "resolver y verificar: Combine dos proyecciones con atraso distinto y compruebe que nunca se presenta una revisión mezclada."
+      ],
+      "seguridad": "Conservar actor, capacidad, ámbito y finalidad cuando el flujo accede o transforma información sensible.",
+      "operacion": "Mida mezclas detectadas, abstenciones y atraso por revisión. Se vincula con Reconstrucción incremental y Recuperación limitada por ámbito.",
+      "migracionRetiro": "Introducir detrás de un contrato, comparar el comportamiento y retirar cuando deje de justificar su costo. Aplíquelo en vistas compuestas, informes y recuperación aumentada. No prometa coherencia que el motor o las proyecciones no sostienen.",
+      "relaciones": [
+        {
+          "type": "complementa",
+          "target": "Ventana de frescura declarada"
+        },
+        {
+          "type": "complementa",
+          "target": "Auditoría narrativa reconstruible"
+        },
+        {
+          "type": "complementa",
+          "target": "Reconstrucción total"
+        }
+      ],
+      "ejercicio": {
+        "consigna": "Combine dos proyecciones con atraso distinto y compruebe que nunca se presenta una revisión mezclada.",
+        "resultadoEsperado": "Decisión justificada, caso negativo y evidencia observable."
+      },
+      "procedencia": {
+        "clasificacion": "Consistencia observable",
+        "fuentes": [
+          "Kleppmann (2017)",
+          "Fowler (2002)"
+        ],
+        "sourceSlug": "lectura-coherente-por-revision"
+      }
+    },
+    {
+      "id": 25,
+      "slug": "ventana-de-frescura-declarada",
+      "nombre": "Ventana de frescura declarada",
+      "familia": "Eventos y consistencia",
+      "tipo": "Adaptación COBRIA",
+      "estado": "documentado",
+      "resumen": "Hacer explícito cuánto atraso puede tolerar cada lectura.",
+      "problema": "Sin un límite declarado, una proyección aparentemente rápida puede entregar información inaceptablemente antigua.",
+      "contexto": "Úselo en derivados asíncronos. Defina ventanas por decisión, no una cifra universal para todo el sistema.",
+      "fuerzas": [
+        "simplicidad frente a control",
+        "rendimiento frente a costo total",
+        "autonomía frente a autoridad y trazabilidad"
+      ],
+      "cuandoUsar": "Úselo en derivados asíncronos.",
+      "cuandoEvitar": "Evítelo cuando el problema descrito no existe o una alternativa más simple satisface el contrato de Ventana de frescura declarada.",
+      "estructura": "TableroIncendios → Contrato de entrada → Repositorio documental → Evidencia",
+      "participantes": [
+        "TableroIncendios",
+        "Contrato de entrada",
+        "Repositorio documental",
+        "Evidencia"
+      ],
+      "secuencia": "si edad > ventana entonces esperar | degradar | fallar",
+      "ejemplo": {
+        "escena": "Tablero de incendios forestales",
+        "problema": "Un tablero parece actual aunque la última proyección tenga dos horas.",
+        "resultado": "El consumidor acepta, espera o rechaza según la edad declarada."
+      },
+      "codigo": {
+        "TypeScript": "// Tablero de incendios forestales\ntype Solicitud = Record<string, unknown>;\n\nclass TableroIncendios {\n  consultar(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 25, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new TableroIncendios().consultar({ region: \"brunca\", frescuraMaxMin: 10 });",
+        "Python": "# Tablero de incendios forestales\nclass TableroIncendios:\n    def consultar(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 25, \"evidencia\": True, **solicitud}\n\nresultado = TableroIncendios().consultar({\"detalle\": \"region: \\\"brunca\\\", frescuraMaxMin: 10\"})",
+        "Java": "// Tablero de incendios forestales\nrecord Solicitud(String detalle) {}\n\nfinal class TableroIncendios {\n  Resultado consultar(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(25, true, solicitud);\n  }\n}\n\nvar resultado = new TableroIncendios().consultar(new Solicitud(\"region: \\\"brunca\\\", frescuraMaxMin: 10\"));",
+        "Go": "// Tablero de incendios forestales\ntype Solicitud struct { Detalle string }\n\nfunc Consultar(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 25, Evidencia: true}, nil\n}\n\nresultado, err := Consultar(Solicitud{Detalle: \"region: \\\"brunca\\\", frescuraMaxMin: 10\"})"
+      },
+      "casoNegativo": "La solución se introduce sin contrato ni prueba y termina ocultando el problema que Ventana de frescura declarada debía controlar.",
+      "antipatrones": [
+        "Ventana de frescura declarada ceremonial",
+        "aplicación sin medición ni caso negativo"
+      ],
+      "consecuencias": "Mida edad, percentiles de atraso e incumplimientos. Se conecta con Reconstrucción incremental y Frontera lectura-escritura.",
+      "pruebas": [
+        "comprobar: si edad > ventana entonces esperar | degradar | fallar",
+        "resolver y verificar: Supere deliberadamente la ventana de frescura y verifique espera, degradación y fallo según contrato."
+      ],
+      "seguridad": "Conservar actor, capacidad, ámbito y finalidad cuando el flujo accede o transforma información sensible.",
+      "operacion": "Mida edad, percentiles de atraso e incumplimientos. Se conecta con Reconstrucción incremental y Frontera lectura-escritura.",
+      "migracionRetiro": "Introducir detrás de un contrato, comparar el comportamiento y retirar cuando deje de justificar su costo. Úselo en derivados asíncronos. Defina ventanas por decisión, no una cifra universal para todo el sistema.",
+      "relaciones": [
+        {
+          "type": "complementa",
+          "target": "Manifiesto de proyección"
+        },
+        {
+          "type": "complementa",
+          "target": "Objeto canónico"
+        },
+        {
+          "type": "complementa",
+          "target": "Reconstrucción incremental"
+        }
+      ],
+      "ejercicio": {
+        "consigna": "Supere deliberadamente la ventana de frescura y verifique espera, degradación y fallo según contrato.",
+        "resultadoEsperado": "Decisión justificada, caso negativo y evidencia observable."
+      },
+      "procedencia": {
+        "clasificacion": "Acuerdo medible",
+        "fuentes": [
+          "Kleppmann (2017)",
+          "Fowler (2002)"
+        ],
+        "sourceSlug": "ventana-de-frescura-declarada"
+      }
+    },
+    {
+      "id": 26,
+      "slug": "manifiesto-de-proyeccion",
+      "nombre": "Manifiesto de proyección",
+      "familia": "Reconstrucción",
+      "tipo": "Adaptación COBRIA",
+      "estado": "documentado",
+      "resumen": "Explicar exactamente con qué fuentes y transformación se produjo un derivado.",
+      "problema": "Una copia puede parecer correcta y aun mezclar semillas, versiones o cortes distintos.",
+      "contexto": "Úselo en índices, conjuntos analíticos y publicaciones. El manifiesto referencia secretos sin copiarlos.",
+      "fuerzas": [
+        "simplicidad frente a control",
+        "rendimiento frente a costo total",
+        "autonomía frente a autoridad y trazabilidad"
+      ],
+      "cuandoUsar": "Úselo en índices, conjuntos analíticos y publicaciones.",
+      "cuandoEvitar": "Evítelo cuando el problema descrito no existe o una alternativa más simple satisface el contrato de Manifiesto de proyección.",
+      "estructura": "ManifiestoCorredores → Contrato de entrada → Repositorio documental → Evidencia",
+      "participantes": [
+        "ManifiestoCorredores",
+        "Contrato de entrada",
+        "Repositorio documental",
+        "Evidencia"
+      ],
+      "secuencia": "manifiesto = sellar(fuentes, cortes, versiones, semilla, huellas)",
+      "ejemplo": {
+        "escena": "Mapa de corredores biológicos",
+        "problema": "Nadie recuerda con qué fuentes y filtros se produjo el mapa publicado.",
+        "resultado": "La proyección publica receta, entradas, versión, huellas y responsable."
+      },
+      "codigo": {
+        "TypeScript": "// Mapa de corredores biológicos\ntype Solicitud = Record<string, unknown>;\n\nclass ManifiestoCorredores {\n  crear(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 26, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new ManifiestoCorredores().crear({ version: \"corredores-12\", fuentes: [\"bosque-v7\", \"rios-v3\"] });",
+        "Python": "# Mapa de corredores biológicos\nclass ManifiestoCorredores:\n    def crear(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 26, \"evidencia\": True, **solicitud}\n\nresultado = ManifiestoCorredores().crear({\"detalle\": \"version: \\\"corredores-12\\\", fuentes: [\\\"bosque-v7\\\", \\\"rios-v3\\\"]\"})",
+        "Java": "// Mapa de corredores biológicos\nrecord Solicitud(String detalle) {}\n\nfinal class ManifiestoCorredores {\n  Resultado crear(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(26, true, solicitud);\n  }\n}\n\nvar resultado = new ManifiestoCorredores().crear(new Solicitud(\"version: \\\"corredores-12\\\", fuentes: [\\\"bosque-v7\\\", \\\"rios-v3\\\"]\"));",
+        "Go": "// Mapa de corredores biológicos\ntype Solicitud struct { Detalle string }\n\nfunc Crear(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 26, Evidencia: true}, nil\n}\n\nresultado, err := Crear(Solicitud{Detalle: \"version: \\\"corredores-12\\\", fuentes: [\\\"bosque-v7\\\", \\\"rios-v3\\\"]\"})"
+      },
+      "casoNegativo": "La solución se introduce sin contrato ni prueba y termina ocultando el problema que Manifiesto de proyección debía controlar.",
+      "antipatrones": [
+        "Manifiesto de proyección ceremonial",
+        "aplicación sin medición ni caso negativo"
+      ],
+      "consecuencias": "Mida manifiestos incompletos, huellas inválidas y tiempo de reproducción. Se relaciona con Conjunto reproducible y Reparación verificable.",
+      "pruebas": [
+        "comprobar: manifiesto = sellar(fuentes, cortes, versiones, semilla, huellas)",
+        "resolver y verificar: Reconstruya una proyección únicamente desde su manifiesto y registre cualquier dato implícito faltante."
+      ],
+      "seguridad": "Conservar actor, capacidad, ámbito y finalidad cuando el flujo accede o transforma información sensible.",
+      "operacion": "Mida manifiestos incompletos, huellas inválidas y tiempo de reproducción. Se relaciona con Conjunto reproducible y Reparación verificable.",
+      "migracionRetiro": "Introducir detrás de un contrato, comparar el comportamiento y retirar cuando deje de justificar su costo. Úselo en índices, conjuntos analíticos y publicaciones. El manifiesto referencia secretos sin copiarlos.",
+      "relaciones": [
+        {
+          "type": "complementa",
+          "target": "Partición analítica sin fuga"
+        },
+        {
+          "type": "complementa",
+          "target": "Dato fechado"
+        },
+        {
+          "type": "complementa",
+          "target": "Publicación por versión"
+        }
+      ],
+      "ejercicio": {
+        "consigna": "Reconstruya una proyección únicamente desde su manifiesto y registre cualquier dato implícito faltante.",
+        "resultadoEsperado": "Decisión justificada, caso negativo y evidencia observable."
+      },
+      "procedencia": {
+        "clasificacion": "Procedencia completa",
+        "fuentes": [
+          "Kleppmann (2017)",
+          "Fowler (2002)"
+        ],
+        "sourceSlug": "manifiesto-de-proyeccion"
+      }
+    },
+    {
+      "id": 27,
+      "slug": "particion-analitica-sin-fuga",
+      "nombre": "Partición analítica sin fuga",
+      "familia": "Analítica reproducible",
+      "tipo": "Contrato compuesto",
+      "estado": "documentado",
+      "resumen": "Separar entrenamiento, validación y prueba sin contaminar tiempo, entidad ni ámbito.",
+      "problema": "Una partición aleatoria puede colocar revisiones de la misma entidad a ambos lados y exagerar la calidad del modelo.",
+      "contexto": "Úselo en minería de datos y aprendizaje automático. Documente exclusiones y conserve una prueba negativa de contaminación.",
+      "fuerzas": [
+        "simplicidad frente a control",
+        "rendimiento frente a costo total",
+        "autonomía frente a autoridad y trazabilidad"
+      ],
+      "cuandoUsar": "Úselo en minería de datos y aprendizaje automático.",
+      "cuandoEvitar": "Evítelo cuando el problema descrito no existe o una alternativa más simple satisface el contrato de Partición analítica sin fuga.",
+      "estructura": "ParticionFloracion → Contrato de entrada → Repositorio documental → Evidencia",
+      "participantes": [
+        "ParticionFloracion",
+        "Contrato de entrada",
+        "Repositorio documental",
+        "Evidencia"
+      ],
+      "secuencia": "partirPor(entidad, tiempo, ámbito); exigir(intersección = ∅)",
+      "ejemplo": {
+        "escena": "Predicción de floración",
+        "problema": "Observaciones futuras del mismo árbol aparecen en entrenamiento y validación.",
+        "resultado": "La partición respeta grupos y tiempo antes de calcular características."
+      },
+      "codigo": {
+        "TypeScript": "// Predicción de floración\ntype Solicitud = Record<string, unknown>;\n\nclass ParticionFloracion {\n  dividir(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 27, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new ParticionFloracion().dividir({ grupo: \"arbolId\", corte: \"2025-12-31\", semilla: 73 });",
+        "Python": "# Predicción de floración\nclass ParticionFloracion:\n    def dividir(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 27, \"evidencia\": True, **solicitud}\n\nresultado = ParticionFloracion().dividir({\"detalle\": \"grupo: \\\"arbolId\\\", corte: \\\"2025-12-31\\\", semilla: 73\"})",
+        "Java": "// Predicción de floración\nrecord Solicitud(String detalle) {}\n\nfinal class ParticionFloracion {\n  Resultado dividir(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(27, true, solicitud);\n  }\n}\n\nvar resultado = new ParticionFloracion().dividir(new Solicitud(\"grupo: \\\"arbolId\\\", corte: \\\"2025-12-31\\\", semilla: 73\"));",
+        "Go": "// Predicción de floración\ntype Solicitud struct { Detalle string }\n\nfunc Dividir(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 27, Evidencia: true}, nil\n}\n\nresultado, err := Dividir(Solicitud{Detalle: \"grupo: \\\"arbolId\\\", corte: \\\"2025-12-31\\\", semilla: 73\"})"
+      },
+      "casoNegativo": "La solución se introduce sin contrato ni prueba y termina ocultando el problema que Partición analítica sin fuga debía controlar.",
+      "antipatrones": [
+        "Partición analítica sin fuga ceremonial",
+        "aplicación sin medición ni caso negativo"
+      ],
+      "consecuencias": "Mida intersecciones, deriva temporal y rendimiento por ámbito. Se conecta con Conjunto reproducible y Característica versionada.",
+      "pruebas": [
+        "comprobar: partirPor(entidad, tiempo, ámbito); exigir(intersección = ∅)",
+        "resolver y verificar: Particione un conjunto por entidad y tiempo; escriba una prueba que falle ante cualquier intersección."
+      ],
+      "seguridad": "Conservar actor, capacidad, ámbito y finalidad cuando el flujo accede o transforma información sensible.",
+      "operacion": "Mida intersecciones, deriva temporal y rendimiento por ámbito. Se conecta con Conjunto reproducible y Característica versionada.",
+      "migracionRetiro": "Introducir detrás de un contrato, comparar el comportamiento y retirar cuando deje de justificar su costo. Úselo en minería de datos y aprendizaje automático. Documente exclusiones y conserve una prueba negativa de contaminación.",
+      "relaciones": [
+        {
+          "type": "complementa",
+          "target": "Abstención con evidencia"
+        },
+        {
+          "type": "complementa",
+          "target": "Repositorio con ámbito"
+        },
+        {
+          "type": "complementa",
+          "target": "Procesamiento idempotente"
+        }
+      ],
+      "ejercicio": {
+        "consigna": "Particione un conjunto por entidad y tiempo; escriba una prueba que falle ante cualquier intersección.",
+        "resultadoEsperado": "Decisión justificada, caso negativo y evidencia observable."
+      },
+      "procedencia": {
+        "clasificacion": "Evaluación válida",
+        "fuentes": [
+          "Kleppmann (2017)",
+          "composición COBRIA"
+        ],
+        "sourceSlug": "particion-analitica-sin-fuga"
+      }
+    },
+    {
+      "id": 28,
+      "slug": "abstencion-con-evidencia",
+      "nombre": "Abstención con evidencia",
+      "familia": "IA con procedencia",
+      "tipo": "Control de IA",
+      "estado": "documentado",
+      "resumen": "Responder solo cuando la evidencia autorizada sostiene la salida.",
+      "problema": "Un sistema generativo puede completar vacíos con lenguaje plausible o citar fragmentos inexistentes.",
+      "contexto": "Úselo en asistentes y automatizaciones. La abstención debe ser útil: explique qué falta sin revelar material prohibido.",
+      "fuerzas": [
+        "simplicidad frente a control",
+        "rendimiento frente a costo total",
+        "autonomía frente a autoridad y trazabilidad"
+      ],
+      "cuandoUsar": "Úselo en asistentes y automatizaciones.",
+      "cuandoEvitar": "Evítelo cuando el problema descrito no existe o una alternativa más simple satisface el contrato de Abstención con evidencia.",
+      "estructura": "IdentificadorEspecies → Contrato de entrada → Repositorio documental → Evidencia",
+      "participantes": [
+        "IdentificadorEspecies",
+        "Contrato de entrada",
+        "Repositorio documental",
+        "Evidencia"
+      ],
+      "secuencia": "si evidenciaInsuficiente entonces abstener(causaSegura)",
+      "ejemplo": {
+        "escena": "Asistente identifica una especie en una foto borrosa",
+        "problema": "El modelo podría inventar una respuesta segura sin evidencia suficiente.",
+        "resultado": "El asistente se abstiene, explica qué falta y conserva candidatos."
+      },
+      "codigo": {
+        "TypeScript": "// Asistente identifica una especie en una foto borrosa\ntype Solicitud = Record<string, unknown>;\n\nclass IdentificadorEspecies {\n  responder(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 28, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new IdentificadorEspecies().responder({ confianza: 0.41, minimo: 0.78, candidatos: [\"tangara\", \"mielero\"] });",
+        "Python": "# Asistente identifica una especie en una foto borrosa\nclass IdentificadorEspecies:\n    def responder(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 28, \"evidencia\": True, **solicitud}\n\nresultado = IdentificadorEspecies().responder({\"detalle\": \"confianza: 0.41, minimo: 0.78, candidatos: [\\\"tangara\\\", \\\"mielero\\\"]\"})",
+        "Java": "// Asistente identifica una especie en una foto borrosa\nrecord Solicitud(String detalle) {}\n\nfinal class IdentificadorEspecies {\n  Resultado responder(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(28, true, solicitud);\n  }\n}\n\nvar resultado = new IdentificadorEspecies().responder(new Solicitud(\"confianza: 0.41, minimo: 0.78, candidatos: [\\\"tangara\\\", \\\"mielero\\\"]\"));",
+        "Go": "// Asistente identifica una especie en una foto borrosa\ntype Solicitud struct { Detalle string }\n\nfunc Responder(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 28, Evidencia: true}, nil\n}\n\nresultado, err := Responder(Solicitud{Detalle: \"confianza: 0.41, minimo: 0.78, candidatos: [\\\"tangara\\\", \\\"mielero\\\"]\"})"
+      },
+      "casoNegativo": "La solución se introduce sin contrato ni prueba y termina ocultando el problema que Abstención con evidencia debía controlar.",
+      "antipatrones": [
+        "Abstención con evidencia ceremonial",
+        "aplicación sin medición ni caso negativo"
+      ],
+      "consecuencias": "Mida precisión, cobertura, citas válidas, fugas y abstención apropiada. Se relaciona con Recuperación limitada por ámbito.",
+      "pruebas": [
+        "comprobar: si evidenciaInsuficiente entonces abstener(causaSegura)",
+        "resolver y verificar: Retire evidencia suficiente y compruebe que la respuesta se abstiene con una explicación segura."
+      ],
+      "seguridad": "Conservar actor, capacidad, ámbito y finalidad cuando el flujo accede o transforma información sensible.",
+      "operacion": "Mida precisión, cobertura, citas válidas, fugas y abstención apropiada. Se relaciona con Recuperación limitada por ámbito.",
+      "migracionRetiro": "Introducir detrás de un contrato, comparar el comportamiento y retirar cuando deje de justificar su costo. Úselo en asistentes y automatizaciones. La abstención debe ser útil: explique qué falta sin revelar material prohibido.",
+      "relaciones": [
+        {
+          "type": "complementa",
+          "target": "Presupuesto de derivados"
+        },
+        {
+          "type": "complementa",
+          "target": "Catálogo versionado"
+        },
+        {
+          "type": "complementa",
+          "target": "Revisión obsoleta rechazada"
+        }
+      ],
+      "ejercicio": {
+        "consigna": "Retire evidencia suficiente y compruebe que la respuesta se abstiene con una explicación segura.",
+        "resultadoEsperado": "Decisión justificada, caso negativo y evidencia observable."
+      },
+      "procedencia": {
+        "clasificacion": "Seguridad y honestidad",
+        "fuentes": [
+          "Kleppmann (2017)",
+          "composición COBRIA"
+        ],
+        "sourceSlug": "abstencion-con-evidencia"
+      }
+    },
+    {
+      "id": 29,
+      "slug": "presupuesto-de-derivados",
+      "nombre": "Presupuesto de derivados",
+      "familia": "Gobernanza del ciclo de vida",
+      "tipo": "Adaptación COBRIA",
+      "estado": "documentado",
+      "resumen": "Limitar cuántas copias optimizadas puede sostener responsablemente un sistema.",
+      "problema": "Cada proyección mejora una lectura local, pero añade escritura, almacenamiento, monitoreo y carga cognitiva.",
+      "contexto": "Úselo al diseñar o revisar proyecciones. Agrupe necesidades compatibles antes de crear otra copia.",
+      "fuerzas": [
+        "simplicidad frente a control",
+        "rendimiento frente a costo total",
+        "autonomía frente a autoridad y trazabilidad"
+      ],
+      "cuandoUsar": "Úselo al diseñar o revisar proyecciones.",
+      "cuandoEvitar": "Evítelo cuando el problema descrito no existe o una alternativa más simple satisface el contrato de Presupuesto de derivados.",
+      "estructura": "PresupuestoProyecciones → Contrato de entrada → Repositorio documental → Evidencia",
+      "participantes": [
+        "PresupuestoProyecciones",
+        "Contrato de entrada",
+        "Repositorio documental",
+        "Evidencia"
+      ],
+      "secuencia": "autorizarDerivado soloSi beneficio > costoTotal y tieneRetiro",
+      "ejemplo": {
+        "escena": "Cada equipo solicita su propio tablero",
+        "problema": "Diez proyecciones similares multiplican escritura, costo y mantenimiento.",
+        "resultado": "La copia solo se aprueba con propietario, beneficio y criterio de retiro."
+      },
+      "codigo": {
+        "TypeScript": "// Cada equipo solicita su propio tablero\ntype Solicitud = Record<string, unknown>;\n\nclass PresupuestoProyecciones {\n  evaluar(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 29, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new PresupuestoProyecciones().evaluar({ beneficioMensual: 18, costoMensual: 31, consumidores: 1 });",
+        "Python": "# Cada equipo solicita su propio tablero\nclass PresupuestoProyecciones:\n    def evaluar(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 29, \"evidencia\": True, **solicitud}\n\nresultado = PresupuestoProyecciones().evaluar({\"detalle\": \"beneficioMensual: 18, costoMensual: 31, consumidores: 1\"})",
+        "Java": "// Cada equipo solicita su propio tablero\nrecord Solicitud(String detalle) {}\n\nfinal class PresupuestoProyecciones {\n  Resultado evaluar(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(29, true, solicitud);\n  }\n}\n\nvar resultado = new PresupuestoProyecciones().evaluar(new Solicitud(\"beneficioMensual: 18, costoMensual: 31, consumidores: 1\"));",
+        "Go": "// Cada equipo solicita su propio tablero\ntype Solicitud struct { Detalle string }\n\nfunc Evaluar(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 29, Evidencia: true}, nil\n}\n\nresultado, err := Evaluar(Solicitud{Detalle: \"beneficioMensual: 18, costoMensual: 31, consumidores: 1\"})"
+      },
+      "casoNegativo": "La solución se introduce sin contrato ni prueba y termina ocultando el problema que Presupuesto de derivados debía controlar.",
+      "antipatrones": [
+        "Presupuesto de derivados ceremonial",
+        "aplicación sin medición ni caso negativo"
+      ],
+      "consecuencias": "Mida uso, costo por consulta, atraso e incidentes. Se conecta con Frontera lectura-escritura y Retiro de proyección.",
+      "pruebas": [
+        "comprobar: autorizarDerivado soloSi beneficio > costoTotal y tieneRetiro",
+        "resolver y verificar: Calcule el costo anual de tres derivados y retire o combine el que no justifique su mantenimiento."
+      ],
+      "seguridad": "Conservar actor, capacidad, ámbito y finalidad cuando el flujo accede o transforma información sensible.",
+      "operacion": "Mida uso, costo por consulta, atraso e incidentes. Se conecta con Frontera lectura-escritura y Retiro de proyección.",
+      "migracionRetiro": "Introducir detrás de un contrato, comparar el comportamiento y retirar cuando deje de justificar su costo. Úselo al diseñar o revisar proyecciones. Agrupe necesidades compatibles antes de crear otra copia.",
+      "relaciones": [
+        {
+          "type": "complementa",
+          "target": "Auditoría narrativa reconstruible"
+        },
+        {
+          "type": "complementa",
+          "target": "Proyección de lectura"
+        },
+        {
+          "type": "complementa",
+          "target": "Cola de salida transaccional"
+        }
+      ],
+      "ejercicio": {
+        "consigna": "Calcule el costo anual de tres derivados y retire o combine el que no justifique su mantenimiento.",
+        "resultadoEsperado": "Decisión justificada, caso negativo y evidencia observable."
+      },
+      "procedencia": {
+        "clasificacion": "Costo gobernado",
+        "fuentes": [
+          "Kleppmann (2017)",
+          "Sadalage y Fowler (2012)"
+        ],
+        "sourceSlug": "presupuesto-de-derivados"
+      }
+    },
+    {
+      "id": 30,
+      "slug": "auditoria-narrativa-reconstruible",
+      "nombre": "Auditoría narrativa reconstruible",
+      "familia": "Modelado documental",
+      "tipo": "Experimental",
+      "estado": "documentado",
+      "resumen": "Convertir eventos técnicos en una historia verificable de decisión y cambio.",
+      "problema": "Los registros aislados muestran acciones, pero no siempre explican quién autorizó, qué versión se usó y qué consecuencia ocurrió.",
+      "contexto": "Úselo en incidentes, decisiones asistidas y revisión regulatoria. Proteja datos sensibles y aplique retención diferenciada.",
+      "fuerzas": [
+        "simplicidad frente a control",
+        "rendimiento frente a costo total",
+        "autonomía frente a autoridad y trazabilidad"
+      ],
+      "cuandoUsar": "Úselo en incidentes, decisiones asistidas y revisión regulatoria.",
+      "cuandoEvitar": "Evítelo cuando el problema descrito no existe o una alternativa más simple satisface el contrato de Auditoría narrativa reconstruible.",
+      "estructura": "HistoriaCierreReserva → Contrato de entrada → Repositorio documental → Evidencia",
+      "participantes": [
+        "HistoriaCierreReserva",
+        "Contrato de entrada",
+        "Repositorio documental",
+        "Evidencia"
+      ],
+      "secuencia": "narrar(eventosOrdenados); exigirEnlace(documento, revisión, política)",
+      "ejemplo": {
+        "escena": "Explicar por qué se cerró una reserva",
+        "problema": "Registros aislados no cuentan qué lluvia, regla y aprobación produjeron la decisión.",
+        "resultado": "Una línea temporal enlaza eventos, revisiones, política, responsable y resultado."
+      },
+      "codigo": {
+        "TypeScript": "// Explicar por qué se cerró una reserva\ntype Solicitud = Record<string, unknown>;\n\nclass HistoriaCierreReserva {\n  reconstruir(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 30, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new HistoriaCierreReserva().reconstruir({ reservaId: \"la-amistad\", desde: \"2026-08-23T18:00:00Z\" });",
+        "Python": "# Explicar por qué se cerró una reserva\nclass HistoriaCierreReserva:\n    def reconstruir(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 30, \"evidencia\": True, **solicitud}\n\nresultado = HistoriaCierreReserva().reconstruir({\"detalle\": \"reservaId: \\\"la-amistad\\\", desde: \\\"2026-08-23T18:00:00Z\\\"\"})",
+        "Java": "// Explicar por qué se cerró una reserva\nrecord Solicitud(String detalle) {}\n\nfinal class HistoriaCierreReserva {\n  Resultado reconstruir(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(30, true, solicitud);\n  }\n}\n\nvar resultado = new HistoriaCierreReserva().reconstruir(new Solicitud(\"reservaId: \\\"la-amistad\\\", desde: \\\"2026-08-23T18:00:00Z\\\"\"));",
+        "Go": "// Explicar por qué se cerró una reserva\ntype Solicitud struct { Detalle string }\n\nfunc Reconstruir(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 30, Evidencia: true}, nil\n}\n\nresultado, err := Reconstruir(Solicitud{Detalle: \"reservaId: \\\"la-amistad\\\", desde: \\\"2026-08-23T18:00:00Z\\\"\"})"
+      },
+      "casoNegativo": "La solución se introduce sin contrato ni prueba y termina ocultando el problema que Auditoría narrativa reconstruible debía controlar.",
+      "antipatrones": [
+        "Auditoría narrativa reconstruible ceremonial",
+        "aplicación sin medición ni caso negativo"
+      ],
+      "consecuencias": "Mida eventos sin enlace, secuencias imposibles y tiempo de explicación. Se conecta con Dato fechado, Cola de salida y Herramienta gobernada.",
+      "pruebas": [
+        "comprobar: narrar(eventosOrdenados); exigirEnlace(documento, revisión, política)",
+        "resolver y verificar: Reconstruya la narración de un incidente desde eventos y señale cada afirmación sin evidencia enlazada."
+      ],
+      "seguridad": "Conservar actor, capacidad, ámbito y finalidad cuando el flujo accede o transforma información sensible.",
+      "operacion": "Mida eventos sin enlace, secuencias imposibles y tiempo de explicación. Se conecta con Dato fechado, Cola de salida y Herramienta gobernada.",
+      "migracionRetiro": "Introducir detrás de un contrato, comparar el comportamiento y retirar cuando deje de justificar su costo. Úselo en incidentes, decisiones asistidas y revisión regulatoria. Proteja datos sensibles y aplique retención diferenciada.",
+      "relaciones": [
+        {
+          "type": "complementa",
+          "target": "Objeto canónico"
+        },
+        {
+          "type": "complementa",
+          "target": "Proyección de cobertura"
+        },
+        {
+          "type": "complementa",
+          "target": "Reparación verificable"
+        }
+      ],
+      "ejercicio": {
+        "consigna": "Reconstruya la narración de un incidente desde eventos y señale cada afirmación sin evidencia enlazada.",
+        "resultadoEsperado": "Decisión justificada, caso negativo y evidencia observable."
+      },
+      "procedencia": {
+        "clasificacion": "Explicación reproducible",
+        "fuentes": [
+          "Evans (2003)",
+          "Fowler (2002)",
+          "Kleppmann (2017)"
+        ],
+        "sourceSlug": "auditoria-narrativa-reconstruible"
+      }
+    }
+  ]
+}

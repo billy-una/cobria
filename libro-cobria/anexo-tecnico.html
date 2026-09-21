@@ -1,0 +1,158 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="author" content="Billy Jak Cordero Porras"><meta name="description" content="Anexo técnico · evidencia, revisión y cierre"><title>COBRIA: anexo técnico de trazabilidad</title><style>:root {
+  --bosque: #174a3a;
+  --musgo: #5f7a3d;
+  --jade: #2f8f71;
+  --guaria: #e6b84a;
+  --rana: #d95d45;
+  --rio: #3d7ea6;
+  --marfil: #f6f0df;
+  --papel: #fffdf7;
+  --carbon: #24302c;
+}
+
+@page { size: letter; margin: 17mm 18mm 18mm; }
+@page :first { margin: 0; }
+* { box-sizing: border-box; }
+html { background: #d9d6cc; }
+body {
+  margin: 0 auto; color: var(--carbon); background: var(--papel);
+  font-family: Inter, "Avenir Next", Avenir, Helvetica, Arial, sans-serif; font-size: 10.2pt;
+  line-height: 1.48; max-width: 216mm;
+}
+p { margin: 0 0 0.75rem; }
+h1, h2, h3, .sans { font-family: inherit; }
+.cover {
+  height: 279.4mm; position: relative; overflow: hidden; color: white;
+  page-break-after: always; background: var(--bosque);
+}
+.cover img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.88) brightness(.68); }
+.cover::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg,rgba(23,74,58,.78) 0%,rgba(23,74,58,.1) 48%,rgba(20,36,31,.72) 100%); }
+.cover-title { position: absolute; z-index: 2; inset: 17mm 18mm auto; }
+.cover-title .kicker { color: var(--guaria); letter-spacing: .18em; font: 700 9pt/1.2 Inter,Arial,sans-serif; text-transform: uppercase; }
+.cover-title h1 { font-size: 46pt; line-height: .95; margin: 4mm 0 3mm; letter-spacing: -.035em; }
+.cover-title h2 { font-size: 17pt; line-height: 1.18; max-width: 155mm; font-weight: 600; margin: 0; }
+.cover-author { position: absolute; z-index: 2; left: 18mm; bottom: 15mm; font: 600 11pt/1.5 Inter,Arial,sans-serif; }
+.edition-chip { position: absolute; z-index: 3; right: 0; bottom: 0; min-width: 47mm; padding: 13mm 7mm 3mm 9mm; text-align: right; color: var(--guaria); background: var(--bosque); border-radius: 18mm 0 0 0; font: 700 7.5pt/1 Inter,Arial,sans-serif; letter-spacing: .08em; text-transform: uppercase; }
+.opening, .catalog-map, .pattern, .lab-page, .book-page, .closing { page-break-before: always; }
+.opening h1, .catalog-map h1, .closing h1 { color: var(--bosque); font-size: 31pt; line-height: 1.05; margin: 3mm 0 7mm; }
+.eyebrow { color: var(--rana); font: 700 8.5pt/1.2 Inter,Arial,sans-serif; letter-spacing: .15em; text-transform: uppercase; }
+.lead { font-size: 15pt; line-height: 1.42; color: var(--bosque); }
+.note { border-left: 4px solid var(--guaria); background: #fbf3d8; padding: 4mm 5mm; margin: 5mm 0; }
+.nosql { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; margin-top: 5mm; }
+.nosql > div { border-radius: 4mm; padding: 5mm; background: #e9f1eb; }
+.nosql h3 { color: var(--bosque); margin: 0 0 2mm; font-size: 13pt; }
+.legend { display: grid; grid-template-columns: repeat(2,1fr); gap: 4mm; }
+.legend article { border-top: 5px solid var(--jade); background: #edf3ef; padding: 4mm; border-radius: 0 0 3mm 3mm; }
+.legend article:nth-child(2) { border-color: var(--rio); }
+.legend article:nth-child(3) { border-color: var(--guaria); }
+.legend article:nth-child(4) { border-color: var(--rana); }
+.legend h3 { font-size: 12pt; margin: 0 0 1mm; }
+.pattern { min-height: 240mm; }
+.pattern-head { display: grid; grid-template-columns: 17mm 1fr; gap: 5mm; align-items: center; border-bottom: 2px solid var(--bosque); padding-bottom: 4mm; }
+.pattern-number { width: 17mm; height: 17mm; border-radius: 50%; display: grid; place-items: center; color: white; background: var(--bosque); font: 800 15pt Inter,Arial,sans-serif; }
+.pattern h1 { color: var(--bosque); font-size: 28pt; line-height: 1; margin: 0; }
+.badges { margin: 3mm 0 5mm 22mm; font-family: Inter,Arial,sans-serif; font-size: 8pt; }
+.badge { display: inline-block; border: 1px solid var(--jade); color: var(--bosque); border-radius: 999px; padding: 1.2mm 3mm; margin-right: 2mm; background: #edf5f0; }
+.pattern-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm 6mm; }
+.block { break-inside: avoid; }
+.block h2 { font-size: 11.5pt; color: var(--bosque); margin: 0 0 1.5mm; }
+.block h2::before { content: ""; display: inline-block; width: 2.6mm; height: 2.6mm; border: 1.2mm solid var(--jade); border-radius: 50%; margin-right: 2.2mm; vertical-align: -.3mm; }
+.analogy { grid-column: 1 / -1; background: #eef4f7; border-radius: 4mm; padding: 4mm 5mm; border-left: 5px solid var(--rio); }
+.solution { grid-column: 1 / -1; background: #eef4ef; border-radius: 4mm; padding: 4mm 5mm; }
+.contract { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 8.4pt; line-height: 1.5; background: var(--carbon); color: #f7f3e7; padding: 3mm 4mm; border-radius: 2mm; }
+.story-illustration { grid-column: 1 / -1; display: grid; grid-template-columns: 3fr 2fr; min-height: 65mm; margin: 1mm 0 3mm; border-radius: 4mm; overflow: hidden; border: 1px solid #bac9bd; background: var(--marfil); }
+.story-illustration img { display: block; width: 100%; height: 65mm; object-fit: contain; object-position: center; background: #dfe9e2; }
+.story-illustration figcaption { display: flex; align-items: center; padding: 6mm; color: var(--bosque); background: #edf3ef; border-left: 4px solid var(--jade); font: 650 10pt/1.45 Inter,Arial,sans-serif; }
+.pattern.illustrated { font-size: 9.1pt; line-height: 1.28; }
+.illustrated .story-illustration { margin-bottom: 1mm; }
+.illustrated .story-illustration { min-height: 61mm; }
+.illustrated .story-illustration img { height: 61mm; object-fit: contain; object-position: center; }
+.illustrated .story-illustration figcaption { padding: 5mm; font-size: 8.6pt; }
+.illustrated .pattern-grid { gap: 2.2mm 5mm; }
+.illustrated .analogy, .illustrated .solution { padding: 2.4mm 4mm; }
+.illustrated .block h2 { margin-bottom: .8mm; font-size: 10.2pt; }
+.lab-page { min-height: 240mm; }
+.lab-page h1 { margin: 2mm 0 3mm; color: var(--bosque); font-size: 27pt; line-height: 1.05; }
+.lab-lead { margin-bottom: 5mm; color: var(--bosque); font-size: 13.5pt; }
+.lab-page h2 { margin: 0 0 1.8mm; color: var(--bosque); font-size: 11.5pt; }
+.lab-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; margin: 4mm 0; }
+.lab-grid > section { break-inside: avoid; padding: 4mm; border-top: 4px solid var(--guaria); background: #fbf8ed; border-radius: 0 0 3mm 3mm; }
+.field-card { margin: 4mm 0; padding: 4mm 5mm; border-left: 5px solid var(--rio); border-radius: 3mm; background: #eef4f7; }
+.field-card.relation { border-color: var(--jade); background: #edf4ef; }
+.lab-page pre { white-space: pre-wrap; margin: 2mm 0 4mm; padding: 4mm 5mm; color: #f7f3e7; background: var(--carbon); border-radius: 3mm; font: 9pt/1.45 ui-monospace,SFMono-Regular,Menlo,monospace; }
+.lab-page ul { margin: 0; padding-left: 5mm; }
+.lab-page li { margin-bottom: 1.2mm; }
+.closing .roadmap { border-collapse: collapse; width: 100%; }
+.closing th, .closing td { border-bottom: 1px solid #b9c7be; text-align: left; padding: 3mm; }
+.closing th { background: var(--bosque); color: white; font-family: Inter,Arial,sans-serif; }
+footer { margin-top: 8mm; padding-top: 3mm; border-top: 1px solid #b9c7be; color: #617069; font-size: 8pt; }
+.bibliographic-page { font-size: 9.4pt; }
+.bibliographic-page h1 { margin-bottom: 5mm; }
+.bibliographic-grid { display: grid; grid-template-columns: 42mm 1fr; gap: 2.2mm 5mm; margin: 5mm 0; }
+.bibliographic-grid dt { color: var(--bosque); font-weight: 800; }
+.bibliographic-grid dd { margin: 0; }
+.synopsis-box { margin: 5mm 0; padding: 6mm; border-left: 5px solid var(--jade); border-radius: 0 4mm 4mm 0; background: #edf4ef; }
+.author-profile { display: grid; grid-template-columns: 34mm 1fr; gap: 6mm; align-items: start; }
+.author-monogram { width: 30mm; height: 30mm; display: grid; place-items: center; border-radius: 50%; color: white; background: var(--bosque); font-size: 18pt; font-weight: 850; }
+.apa-reference { padding-left: 10mm; text-indent: -10mm; }
+.rights-box { margin-top: 6mm; padding: 5mm; border: 1px solid #b9c7be; border-radius: 3mm; background: #f7f4ea; }
+.book-page { min-height: 240mm; }
+.book-page h1 { color: var(--bosque); font-size: 29pt; line-height: 1.05; margin: 3mm 0 7mm; }
+.book-page h2 { color: var(--bosque); font-size: 13pt; margin: 5mm 0 2mm; }
+.book-page table { width: 100%; border-collapse: collapse; margin: 5mm 0; }
+.book-page th, .book-page td { padding: 3mm; border-bottom: 1px solid #bdc9c0; text-align: left; vertical-align: top; }
+.book-page th { color: white; background: var(--bosque); font-family: Inter,Arial,sans-serif; }
+.book-page pre { white-space: pre-wrap; padding: 4mm 5mm; color: #f7f3e7; background: var(--carbon); border-radius: 3mm; font: 9pt/1.45 ui-monospace,SFMono-Regular,Menlo,monospace; }
+.code-page h1 { margin-bottom: 3mm; }
+.code-lead { color: var(--bosque); font-size: 11.5pt; line-height: 1.35; }
+.book-story { margin: 0 0 3mm; padding: 3mm 4mm; border-left: 5px solid var(--jade); border-radius: 2mm; background: #edf4ef; }
+.book-story strong { color: var(--bosque); font: 750 10pt/1.2 Inter,Arial,sans-serif; }
+.book-story p { margin: 1mm 0; font-size: 8.7pt; line-height: 1.3; }
+.book-story small { color: #49685b; font: 650 7.5pt/1.25 Inter,Arial,sans-serif; }
+.code-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; }
+.code-grid section { min-width: 0; break-inside: avoid; }
+.code-grid h2 { margin: 0; padding: 2.2mm 3mm; color: white; background: var(--bosque); border-radius: 3mm 3mm 0 0; font-size: 10pt; }
+.code-grid pre { min-height: 50mm; max-height: 50mm; overflow: hidden; margin: 0; border-radius: 0 0 3mm 3mm; font-size: 5.7pt; line-height: 1.28; }
+.title-page { display: flex; flex-direction: column; justify-content: center; }
+.title-page h1 { font-size: 62pt; margin-bottom: 2mm; }
+.title-rule { width: 45mm; height: 3mm; margin: 12mm 0; background: var(--guaria); border-radius: 2mm; }
+.concept-grid, .family-map { display: grid; grid-template-columns: repeat(2,1fr); gap: 4mm; }
+.concept-grid article, .family-map article { padding: 4mm; border-top: 4px solid var(--jade); background: #edf4ef; border-radius: 0 0 3mm 3mm; }
+.concept-grid h2, .family-map h2 { margin-top: 0; }
+.family-map { grid-template-columns: repeat(3,1fr); }
+.family-map article { min-height: 43mm; }
+.family-map b { color: var(--rana); font-family: Inter,Arial,sans-serif; }
+.route-grid { display: grid; gap: 5mm; }
+.route-grid article { padding: 5mm 6mm; border-left: 6px solid var(--rio); background: #eef4f7; }
+.big-steps { counter-reset: route; list-style: none; padding: 0; }
+.big-steps li { padding: 4mm 4mm 4mm 16mm; margin: 3mm 0; position: relative; background: #f7f3e7; border-radius: 3mm; }
+.big-steps li::before { counter-increment: route; content: counter(route); position: absolute; left: 4mm; top: 3mm; width: 8mm; height: 8mm; color: white; background: var(--bosque); border-radius: 50%; display: grid; place-items: center; font: 700 8pt Inter,Arial,sans-serif; }
+.flow { display: flex; align-items: stretch; gap: 2mm; margin: 6mm 0; }
+.flow div { position: relative; flex: 1; min-height: 26mm; padding: 4mm 2mm; text-align: center; color: var(--bosque); background: #eaf2ed; border-radius: 3mm; font-family: Inter,Arial,sans-serif; }
+.flow div:not(:last-child)::after { content: "→"; position: absolute; right: -3.5mm; top: 8mm; color: var(--rana); font-size: 14pt; z-index: 2; }
+.flow b { display: block; margin-bottom: 2mm; color: var(--rana); }
+.flow span { font-size: 8.5pt; font-weight: 700; }
+.steps { padding-left: 7mm; }
+.steps li { margin: 2mm 0; padding-left: 2mm; }
+.decision-grid, .reference-grid, .question-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; }
+.decision-grid section { padding: 4mm 5mm; border-top: 5px solid var(--jade); background: #edf4ef; border-radius: 0 0 3mm 3mm; }
+.decision-grid .avoid { border-color: var(--rana); background: #faece8; }
+.connections { margin-top: 5mm; padding: 4mm; color: var(--bosque); background: #fbf3d8; border-radius: 3mm; }
+.reference-grid section { padding: 4mm; background: #f6f2e6; border-radius: 3mm; }
+.checklist { list-style: none; padding: 0; }
+.checklist li { margin: 2mm 0; }
+.checklist li::before { content: "□"; margin-right: 2mm; color: var(--jade); font-weight: 700; }
+.question-grid p { margin: 0; min-height: 24mm; padding: 4mm; border-left: 4px solid var(--guaria); background: #fbf8ed; }
+.case-cover { display: flex; flex-direction: column; justify-content: center; background: linear-gradient(145deg,#edf3e9,#fbf3d8); padding: 15mm; border-radius: 4mm; }
+.case-cover h1 { font-size: 40pt; }
+.term { margin: 7mm 0; padding: 5mm; border-left: 5px solid var(--jade); background: #edf4ef; }
+.term h2 { margin: 0 0 2mm; font-size: 20pt; }
+.term small { color: #65746c; font-family: Inter,Arial,sans-serif; }
+.rubric { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm; }
+.rubric div { display: flex; justify-content: space-between; padding: 4mm; background: #eef4ef; border-bottom: 2px solid var(--jade); }
+.rubric b { color: var(--rana); font-family: Inter,Arial,sans-serif; }
+@media print { html { background: white; } body { max-width: none; } .pattern { break-after: page; } }
+</style></head><body>
+<section class="cover"><img src="assets/ecosistema-cobria-sin-felinos-v3.png" alt="Ecosistema COBRIA ilustrado"><div class="cover-title"><div class="kicker">Edición ecosistema 1.0.0</div><h1>COBRIA</h1><h2>Anexo técnico · evidencia, revisión y cierre</h2></div><div class="cover-author">Billy Jak Cordero Porras<br>Coto Brus, Costa Rica · 2026</div><div class="edition-chip">Propuesta independiente · 1.0.0</div></section>
+<section class="book-page title-page"><div class="eyebrow">Anexo técnico</div><h1>Trazabilidad del programa de investigación</h1><p class="lead">Registro separado de transferencia, revisión, operación y preparación responsable. No forma parte del recorrido pedagógico principal.</p><div class="note"><strong>Estado.</strong> Propuesta independiente. Las actividades humanas o externas conservan el estado pendiente cuando no existe evidencia válida.</div></section><section class="book-page"><div class="eyebrow">Fase 23 · Transferencia estructural</div><h1>Comparar sin clasificar</h1><p class="lead">Una misma rúbrica inspeccionó commits congelados de tres sistemas con dominios y estructuras diferentes.</p><table><tr><th>Proyecto</th><th>Evidencia estructural</th><th>Operacional</th></tr><tr><td>POS Guápiles</td><td>8/8</td><td>0</td></tr><tr><td>CRMHotel</td><td>5/8</td><td>0</td></tr><tr><td>BSHandball</td><td>4/8</td><td>0</td></tr></table><div class="decision-grid"><section><h2>Qué aprendemos</h2><p>Estado, autoridad y control del legado dejaron evidencia reconocible en los tres repositorios.</p></section><section class="avoid"><h2>Qué no concluimos</h2><p>Una brecha no prueba incumplimiento y la cobertura no mide calidad, madurez ni rendimiento.</p></section></div><div class="note"><strong>Siguiente prueba.</strong> Equipos independientes deben redactar los manifiestos y revisar semánticamente cada coincidencia.</div></section><section class="book-page"><div class="eyebrow">Fase 24 · Revisión semántica</div><h1>La independencia no se simula</h1><p class="lead">La coincidencia de rutas y palabras se transforma en una pregunta para personas ajenas al diseño.</p><div class="concept-grid"><article><h2>3 muestras</h2><p>Identidades M-01, M-02 y M-03 separadas de la clave del coordinador.</p></article><article><h2>2 revisores</h2><p>Trabajo independiente, conflictos declarados y código seudónimo.</p></article><article><h2>8 decisiones</h2><p>Respaldado, no respaldado o evidencia insuficiente, con justificación.</p></article><article><h2>Acuerdo</h2><p>Porcentaje observado y kappa de Cohen, sin borrar discrepancias.</p></article><article><h2>Adjudicación</h2><p>Una tercera persona revisa desacuerdos después del cierre.</p></article><article><h2>Estado</h2><p>0/6 respuestas humanas; infraestructura preparada, estudio pendiente.</p></article></div><div class="note"><strong>Integridad científica.</strong> Los perfiles sintéticos prueban el software, pero jamás cuentan como revisores ni evidencia externa.</div></section><section class="book-page"><div class="eyebrow">Fase 25 · Calibración</div><h1>Evidencia por dimensión</h1><p class="lead">Una coincidencia textual no demuestra un contrato completo.</p><div class="concept-grid"><article><h2>Frontera</h2><p>El legado está aislado y sus consumidores conocen el límite.</p></article><article><h2>No crecimiento</h2><p>Una regla ejecutable impide aumentar tamaño o responsabilidades.</p></article><article><h2>Retiro</h2><p>Existe una condición, métrica o ruta para eliminarlo.</p></article></div><table><tr><th>Caso</th><th>Dimensiones</th><th>Lectura</th></tr><tr><td>M-01</td><td>3/3</td><td>Respaldado estructuralmente</td></tr><tr><td>M-02</td><td>2/3</td><td>Evidencia insuficiente</td></tr><tr><td>M-03</td><td>3/3</td><td>Respaldado estructuralmente</td></tr></table><div class="note"><strong>Alcance.</strong> Es una calibración de la propuesta, no certificación oficial ni validación de producción.</div></section><section class="book-page"><div class="eyebrow">Fase 26 · Rúbrica general</div><h1>Ocho contratos, veinticuatro dimensiones</h1><p class="lead">Cada contrato Engineering se evalúa mediante tres condiciones que deben aparecer juntas.</p><div class="concept-grid"><article><h2>Experiencia</h2><p>Estados, transiciones y recuperación.</p></article><article><h2>Autoridad</h2><p>Contexto confiable, efecto único y salida trazable.</p></article><article><h2>Resiliencia</h2><p>Política, reintento acotado y recuperación visible.</p></article><article><h2>Entrega</h2><p>Artefacto inmutable, gates y rollback.</p></article><article><h2>Operación</h2><p>Privacidad, límites y comportamiento no bloqueante.</p></article><article><h2>Evolución</h2><p>Medición, presupuesto, legado e incidentes reutilizables.</p></article></div><div class="note"><strong>Plantilla honesta.</strong> Empieza con 24 decisiones nulas. No evaluado no significa incumplimiento y ninguna salida constituye certificación.</div></section><section class="book-page"><div class="eyebrow">Fase 27 · Expediente comparativo</div><h1>Setenta y dos preguntas, ninguna respuesta inventada</h1><p class="lead">Tres proyectos por ocho contratos por tres dimensiones producen una cola explícita de revisión semántica.</p><div class="decision-grid"><section><h2>Lo que conserva</h2><ul><li>commit congelado;</li><li>ruta y huella del archivo;</li><li>términos observados;</li><li>criterio dimensional;</li><li>razón de revisión.</li></ul></section><section class="avoid"><h2>Lo que no produce</h2><ul><li>ranking de proyectos;</li><li>porcentaje de calidad;</li><li>certificación oficial;</li><li>validación operacional;</li><li>juicio automático.</li></ul></section></div><table><tr><th>Unidad</th><th>Cantidad</th><th>Estado inicial</th></tr><tr><td>Proyectos</td><td>3</td><td>Commits congelados</td></tr><tr><td>Contratos observados</td><td>24</td><td>Evidencia candidata</td></tr><tr><td>Decisiones dimensionales</td><td>72</td><td>Pendientes</td></tr></table><div class="note"><strong>Principio.</strong> La automatización reúne evidencia; la interpretación debe justificar cada dimensión.</div></section><section class="book-page"><div class="eyebrow">Fase 28 · Revisión ciega</div><h1>Independencia antes que acuerdo</h1><p class="lead">Dos personas examinan el mismo material sin conocer la identidad de las muestras ni las respuestas de la otra.</p><div class="concept-grid"><article><h2>3 muestras</h2><p>Seudónimos M-01, M-02 y M-03; la clave queda fuera.</p></article><article><h2>24 dimensiones</h2><p>Criterio y ejemplo insuficiente para cada contrato.</p></article><article><h2>2 revisores</h2><p>Formularios iguales, trabajo separado y conflictos declarados.</p></article><article><h2>144 juicios</h2><p>Decisión, confianza y justificación por cada dimensión.</p></article><article><h2>0 precargados</h2><p>Ninguna respuesta o atestación se inventa.</p></article><article><h2>Acuerdo posterior</h2><p>Solo se calcula cuando ambos formularios estén completos.</p></article></div><div class="note"><strong>Límite.</strong> El instrumento está preparado; la revisión humana continúa pendiente y no constituye certificación.</div></section><section class="book-page"><div class="eyebrow">Fase 29 · Ingesta y acuerdo</div><h1>Sin respuestas, la métrica correcta es nula</h1><p class="lead">El sistema distingue entre estar preparado para calcular y haber recibido evidencia humana suficiente.</p><div class="decision-grid"><section><h2>Antes del cálculo</h2><ul><li>dos revisores distintos;</li><li>72 dimensiones alineadas;</li><li>atestación humana;</li><li>trabajo independiente;</li><li>conflictos declarados.</li></ul></section><section><h2>Después del cálculo</h2><ul><li>acuerdo observado;</li><li>acuerdo esperado;</li><li>kappa de Cohen;</li><li>distribución por decisión;</li><li>desacuerdos íntegros.</li></ul></section></div><table><tr><th>Estado actual</th><th>Valor</th></tr><tr><td>Respuestas recibidas</td><td>0 de 2</td></tr><tr><td>Juicios pareados</td><td>0</td></tr><tr><td>Acuerdo y kappa</td><td>No calculados</td></tr><tr><td>Certificación oficial</td><td>No</td></tr></table><div class="note"><strong>Propuesta independiente.</strong> Incluso con respuestas completas, el acuerdo mediría consistencia entre revisores, no verdad universal ni certificación.</div></section><section class="book-page"><div class="eyebrow">Fase 30 · Adjudicación</div><h1>Resolver no significa borrar</h1><p class="lead">La tercera mirada interviene únicamente donde dos revisores auténticos discrepan.</p><div class="decision-grid"><section><h2>Entrada protegida</h2><ul><li>clave dimensional;</li><li>decisión del revisor A;</li><li>decisión del revisor B;</li><li>evidencia ya examinada;</li><li>acuerdo previo intacto.</li></ul></section><section><h2>Salida trazable</h2><ul><li>decisión adjudicada;</li><li>justificación específica;</li><li>atestación humana;</li><li>conflicto descartado;</li><li>identidad distinta del par.</li></ul></section></div><table><tr><th>Estado actual</th><th>Valor</th></tr><tr><td>Par de revisión disponible</td><td>No</td></tr><tr><td>Desacuerdos disponibles</td><td>0</td></tr><tr><td>Adjudicaciones completas</td><td>0</td></tr><tr><td>Certificación oficial</td><td>No</td></tr></table><div class="note"><strong>Propuesta independiente.</strong> El mecanismo está listo; no se inventan discrepancias ni una tercera persona para aparentar validación.</div></section><section class="book-page"><div class="eyebrow">Fase 31 · Operación controlada</div><h1>Preparar el fallo antes de provocarlo</h1><p class="lead">Un ensayo operacional necesita hipótesis, límites y evidencia antes de tocar un ambiente.</p><div class="concept-grid"><article><h2>Rollback</h2><p>Mismo digest, humo verificable y regreso al estado anterior.</p></article><article><h2>Reintentos</h2><p>Efecto único, espera acotada y dead-letter observable.</p></article><article><h2>Telemetría</h2><p>Sanitización, límites y negocio no bloqueado.</p></article><article><h2>Reconstrucción</h2><p>Fuente declarada, candidata equivalente y publicación segura.</p></article><article><h2>Ámbito</h2><p>Acceso cruzado rechazado antes del almacén.</p></article><article><h2>Aborto</h2><p>Cada escenario define cuándo detenerse sin improvisar.</p></article></div><table><tr><th>Estado actual</th><th>Valor</th></tr><tr><td>Escenarios preparados</td><td>5</td></tr><tr><td>Escenarios ejecutados</td><td>0</td></tr><tr><td>Ambiente autorizado usado</td><td>No</td></tr><tr><td>Certificación oficial</td><td>No</td></tr></table><div class="note"><strong>Propuesta independiente.</strong> Una plantilla completa no equivale a una corrida: la evidencia operacional sigue pendiente.</div></section><section class="book-page"><div class="eyebrow">Fase 32 · Réplica externa</div><h1>Otra computadora, otra persona</h1><p class="lead">La reproducibilidad exige salir del equipo y del conocimiento tácito del autor.</p><ol class="big-steps"><li>Instalación limpia.</li><li>Pruebas de la réplica científica.</li><li>Aplicación neutral.</li><li>Construcción del sitio.</li><li>Reconstrucción editorial.</li></ol><div class="note"><strong>Estado.</strong> Cinco tareas preparadas, cero repeticiones externas recibidas y ninguna certificación.</div></section><section class="book-page"><div class="eyebrow">Fase 33 · Síntesis</div><h1>Lo ausente permanece ausente</h1><p class="lead">Una síntesis rigurosa no rellena celdas con expectativas.</p><div class="concept-grid"><article><h2>Disponible</h2><p>Contratos, herramientas, gates y pruebas locales.</p></article><article><h2>Pendiente</h2><p>Revisión humana independiente.</p></article><article><h2>Pendiente</h2><p>Ejecución operacional autorizada.</p></article><article><h2>Pendiente</h2><p>Repetición en otra computadora.</p></article></div><div class="note"><strong>Límite.</strong> Efectos e intervalos externos continúan nulos; no se infieren.</div></section><section class="book-page"><div class="eyebrow">Fase 34 · Sincronización editorial</div><h1>Cuatro productos, un mismo estado</h1><p class="lead">Artículo, documento maestro, libro y sitio no deben contar historias distintas.</p><table><tr><th>Producto</th><th>Puede explicar</th><th>No puede afirmar</th></tr><tr><td>Artículo</td><td>Contribución y evidencia local</td><td>Validación externa inexistente</td></tr><tr><td>Maestro</td><td>Método y limitaciones</td><td>Resultados humanos inventados</td></tr><tr><td>Libro</td><td>Enseñanza y aplicación</td><td>Norma universal</td></tr><tr><td>Sitio</td><td>Exploración y recursos</td><td>Certificación oficial</td></tr></table><div class="note"><strong>Estado.</strong> Instantánea común sincronizada con cero evidencia externa atribuida.</div></section><section class="book-page"><div class="eyebrow">Fase 35 · Candidato local</div><h1>Huellas antes que etiquetas</h1><p class="lead">Un candidato reproducible identifica exactamente qué fuentes lo componen.</p><div class="decision-grid"><section><h2>Incluye</h2><ul><li>rutas;</li><li>tamaños;</li><li>SHA-256;</li><li>estado de propuesta;</li><li>comandos de verificación.</li></ul></section><section class="avoid"><h2>No incluye</h2><ul><li>firma inventada;</li><li>release oficial;</li><li>publicación remota;</li><li>DOI ficticio;</li><li>certificación.</li></ul></section></div><div class="note"><strong>Estado.</strong> Candidato local construido, no firmado y no publicado.</div></section><section class="book-page"><div class="eyebrow">Fase 36 · Publicación responsable</div><h1>Preparar no es publicar</h1><p class="lead">La última puerta enumera la autoridad que todavía falta.</p><div class="rubric"><div><span>Revisión humana independiente</span><b>Pendiente</b></div><div><span>Corrida operacional autorizada</span><b>Pendiente</b></div><div><span>Réplica externa</span><b>Pendiente</b></div><div><span>Firma de release</span><b>Pendiente</b></div><div><span>Depósito público o DOI</span><b>Pendiente</b></div></div><div class="note"><strong>Propuesta independiente.</strong> Estado: preparada, no publicada. Solo una persona o servicio autorizado puede completar estos actos.</div></section>
+</body></html>

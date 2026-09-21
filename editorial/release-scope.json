@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.0.0",
+  "baselineDate": "2026-09-21",
+  "targetRelease": "ecosistema-1.0.0",
+  "status": "preparacion",
+  "protectedCore": "specification/COBRIA-CORE-1.0.md",
+  "inventoryOutput": "editorial/generated/release-baseline.json",
+  "publicProducts": [
+    "specification",
+    "article",
+    "master",
+    "book",
+    "site",
+    "toolkit",
+    "evidence"
+  ],
+  "classifications": [
+    {"id": "source", "paths": ["specification", "manuales", "partes", "editorial", "libro-cobria", "sitio/app", "replication/src", "replication/scripts", "replication/tests"]},
+    {"id": "evidence", "paths": ["replication/results", "replication/analysis", "replication/traceability"]},
+    {"id": "generated", "paths": ["build", "tmp", "sitio/dist", "output/pdf", "output/qa"]},
+    {"id": "review-package", "paths": ["output/release", "output/review", "review"]},
+    {"id": "archive-candidate", "paths": ["prelibro-catalogo-cobria.tex", "blind-main.tex"]}
+  ],
+  "excludedFromPublicDownloads": [
+    "*borrador*",
+    "*prelibro*",
+    "build/**",
+    "output/qa/**",
+    "output/review/**",
+    "output/release/phase*/**"
+  ]
+}

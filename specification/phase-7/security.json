@@ -1,0 +1,64 @@
+{
+  "schemaVersion": "1.0.0",
+  "phase": 7,
+  "principles": [
+    "denegar-por-defecto", "minimo-privilegio", "ambito-obligatorio",
+    "finalidad-declarada", "auditoria-minima", "secretos-fuera-del-codigo",
+    "datos-minimos", "dependencias-verificables"
+  ],
+  "actors": [
+    {"id": "ACT-01", "name": "persona-lectora"},
+    {"id": "ACT-02", "name": "persona-operadora"},
+    {"id": "ACT-03", "name": "servicio-de-proyeccion"},
+    {"id": "ACT-04", "name": "agente-automatizado"},
+    {"id": "ACT-05", "name": "administrador-de-seguridad"}
+  ],
+  "assets": [
+    "documentos-canonicos", "proyecciones", "catalogos-versionados", "identidades",
+    "secretos", "evidencia-de-auditoria", "conjuntos-analiticos", "artefactos-de-construccion"
+  ],
+  "trustBoundaries": [
+    "cliente-api", "api-aplicacion", "aplicacion-adaptador", "adaptador-motor-nosql",
+    "sistema-webhook", "pipeline-registro-de-artefactos"
+  ],
+  "sensitiveOperations": [
+    {
+      "id": "SEC-OP-001", "name": "registrar-observacion", "actor": "ACT-02",
+      "capability": "observaciones:escribir", "scope": "obligatorio-y-exacto",
+      "purpose": "obligatoria", "audit": ["actorId", "capacidad", "ambito", "finalidad", "resultado", "codigo", "ocurridoEn"],
+      "negativeTest": "SEC-NEG-001"
+    },
+    {
+      "id": "SEC-OP-002", "name": "reconstruir-resumen", "actor": "ACT-03",
+      "capability": "observaciones:leer", "scope": "obligatorio-y-exacto",
+      "purpose": "obligatoria", "audit": ["actorId", "capacidad", "ambito", "finalidad", "resultado", "codigo", "ocurridoEn"],
+      "negativeTest": "SEC-NEG-002"
+    }
+  ],
+  "negativeTests": [
+    {"id": "SEC-NEG-001", "case": "identidad-finalidad-capacidad-o-ambito-ausente", "expected": "ACCESS_DENIED-y-cero-escrituras"},
+    {"id": "SEC-NEG-002", "case": "ambito-manipulado-o-fuera-del-conjunto", "expected": "SCOPE_INVALID-o-ACCESS_DENIED-y-cero-lecturas"},
+    {"id": "SEC-NEG-003", "case": "capacidad-comodin", "expected": "ACCESS_DENIED"},
+    {"id": "SEC-NEG-004", "case": "repeticion-con-entrada-distinta", "expected": "IDEMPOTENCY_CONFLICT"}
+  ],
+  "nodePolicies": [
+    {"node": "documento-canonico", "write": "solo-caso-de-uso-autorizado", "read": "por-ambito", "retention": "segun-finalidad-y-regla-del-dominio"},
+    {"node": "dato-fechado", "write": "inmutable", "read": "por-ambito-y-periodo", "retention": "explicita"},
+    {"node": "catalogo-versionado", "write": "capacidad-administrativa-y-revision", "read": "version-fijada", "retention": "conservar-versiones-referenciadas"},
+    {"node": "proyeccion", "write": "solo-servicio-de-proyeccion", "read": "por-ambito", "retention": "reconstruible-y-retirable"},
+    {"node": "evento-salida", "write": "transaccional-o-reconciliable", "read": "consumidor-identificado", "retention": "hasta-confirmacion-y-ventana-forense"},
+    {"node": "conjunto-analitico", "write": "pipeline-versionado", "read": "finalidad-analitica", "retention": "ventana-declarada-y-borrado-verificable"}
+  ],
+  "privacy": {
+    "classes": ["publico", "interno", "confidencial", "restringido"],
+    "requirements": ["inventario", "minimizacion", "finalidad", "retencion", "borrado-verificable", "procedencia", "revision-humana-para-datos-personales"]
+  },
+  "secrets": {
+    "forbidden": ["repositorio", "imagen-contenedor", "registro", "captura", "mensaje-error"],
+    "required": ["gestor-externo", "identidad-de-carga", "rotacion", "alcance-minimo", "registro-de-acceso", "revocacion-probada"]
+  },
+  "webhooks": ["firma-verificada", "marca-temporal", "ventana-antirepeticion", "idempotencia", "limite-de-tamano", "lista-de-eventos-permitidos"],
+  "abuseControls": ["limite-por-identidad-y-ambito", "cuotas", "tamano-maximo", "tiempo-maximo", "cancelacion", "costo-observable", "degradacion-segura"],
+  "supplyChain": ["lockfile", "SBOM-CycloneDX", "revision-de-dependencias", "artefactos-inmutables", "procedencia-de-build", "escaneo-de-secretos", "actualizaciones-controladas", "respuesta-a-vulnerabilidades"],
+  "incidentSeverities": ["SEV-1", "SEV-2", "SEV-3", "SEV-4"]
+}

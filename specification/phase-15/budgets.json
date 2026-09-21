@@ -1,0 +1,10 @@
+{
+  "version": "1.0.0",
+  "unit": "maximum",
+  "bySize": {
+    "1000": { "queryP99Ms": 1, "recoveryP50Ms": 2, "writeAmplification": 1.21, "storageRatio": 0.25 },
+    "10000": { "queryP99Ms": 2, "recoveryP50Ms": 5, "writeAmplification": 1.21, "storageRatio": 0.25 },
+    "50000": { "queryP99Ms": 8, "recoveryP50Ms": 20, "writeAmplification": 1.21, "storageRatio": 0.25 }
+  },
+  "policy": "Un incumplimiento impide afirmar que la configuración satisface este presupuesto; no demuestra por sí solo que COBRIA sea incorrecta."
+}

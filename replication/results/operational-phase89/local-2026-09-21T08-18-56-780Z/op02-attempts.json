@@ -1,0 +1,14 @@
+[
+  {
+    "attempt": 1,
+    "result": "provider-failure"
+  },
+  {
+    "attempt": 2,
+    "result": "provider-failure"
+  },
+  {
+    "attempt": 3,
+    "result": "provider-failure"
+  }
+]

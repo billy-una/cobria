@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "1.0.0",
+  "baselineDate": "2026-09-21",
+  "targetRelease": "ecosistema-1.0.0",
+  "repository": {
+    "head": "0c2b74797a134693065163af87422a9f57a46771",
+    "branch": "main",
+    "clean": false,
+    "statusCounts": {
+      "modified": 22,
+      "deleted": 12,
+      "untracked": 1236,
+      "other": 0
+    },
+    "classificationCounts": {
+      "repository": 222,
+      "archive-candidate": 2,
+      "generated": 11,
+      "source": 408,
+      "review-package": 593,
+      "evidence": 34
+    }
+  },
+  "protectedCore": {
+    "path": "specification/COBRIA-CORE-1.0.md",
+    "sha256": "9db3b0fffdee83ddf6c7ec8ede7e8f5d675d1e152e0614cadecba884eae1c179"
+  },
+  "canonicalHashes": {
+    "MANIFESTO.md": "1e1414929acb2287cfd5d2fd3b8ebda15ee71572ea75b7b88ff71542e0186580",
+    "IDENTIDAD-ECOSISTEMA-COBRIA.md": "2f5e7846d16429afd1c9eec77c98c90e08ace6d40ce7530f5450b27a207297ac",
+    "ROADMAP-CIERRE-ECOSISTEMA-COBRIA.md": "7ae3ce97f5693071ca4d101924ca37c3d3c7bc94a51bedaf370f27daf95b3190",
+    "editorial/canonical.json": "2974d917bd5c7281647b3c37df76e30b56373e54e3092753e1716d01acbdb117",
+    "editorial/products.json": "ae0bdd215272de10b304a1536c56305f0465672a91aba5c9f24af7a35d5af3c2",
+    "specification/COBRIA-CORE-1.0.md": "9db3b0fffdee83ddf6c7ec8ede7e8f5d675d1e152e0614cadecba884eae1c179"
+  },
+  "publicProducts": [
+    "specification",
+    "article",
+    "master",
+    "book",
+    "site",
+    "toolkit",
+    "evidence"
+  ],
+  "blockers": [
+    "El árbol de trabajo no representa todavía una release confirmada.",
+    "La publicación estable y el despliegue en producción requieren autoridad humana."
+  ]
+}

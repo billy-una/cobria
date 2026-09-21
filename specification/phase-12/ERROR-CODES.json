@@ -1,0 +1,13 @@
+{
+  "version":"1.0.0","codes":[
+    {"code":"CLI_PATH_NOT_FOUND","exit":3},{"code":"CLI_MANIFEST_PARSE_ERROR","exit":1},
+    {"code":"CLI_MANIFEST_ENVELOPE_INVALID","exit":1},{"code":"CLI_RECORD_FIELD_REQUIRED","exit":1},
+    {"code":"CLI_ID_DUPLICATED","exit":1},{"code":"CLI_VERSION_INVALID","exit":1},
+    {"code":"CLI_INIT_CONFLICT","exit":4},{"code":"CLI_OPTION_UNKNOWN","exit":2},
+    {"code":"CLI_COMMAND_UNKNOWN","exit":2},{"code":"CLI_ID_REQUIRED","exit":2},
+    {"code":"CLI_CONCEPT_NOT_FOUND","exit":3},{"code":"CLI_INTERNAL_ERROR","exit":1},
+    {"code":"CLI_GENERATOR_ARGUMENT_REQUIRED","exit":2},{"code":"CLI_GENERATOR_TYPE_INVALID","exit":2},
+    {"code":"CLI_GENERATOR_NAME_INVALID","exit":2},{"code":"CLI_GENERATOR_CONFLICT","exit":4},
+    {"code":"CLI_PUBLISH_SIMULATION_REQUIRED","exit":2},{"code":"CLI_PUBLISH_ARGUMENT_INVALID","exit":2}
+  ]
+}

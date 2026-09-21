@@ -1,0 +1,16 @@
+{
+  "schemaVersion":"1.0.0",
+  "project":{"repository":"https://github.com/billy-una/posguapiles.git","ref":"ae8d63ce535ecff40059b49d8b8c9f050c353d96","expectedRemote":"https://github.com/billy-una/posguapiles.git","expectedCommit":"ae8d63ce535ecff40059b49d8b8c9f050c353d96"},
+  "scope":"comparación de transferencia Engineering desde objetos Git",
+  "contracts":[
+    {"id":"ENG-001","name":"Estado operativo explícito","owner":"producto","evidence":[{"path":"src/public/presentationLayer/js/services/PageStateService.js","containsAll":["loading","empty","error"]}]},
+    {"id":"ENG-002","name":"Autoridad transaccional","owner":"aplicación","evidence":[{"path":"functions/handlers/commit-sale.js","containsAll":["requestId","scope"]}]},
+    {"id":"ENG-003","name":"Cola fuera de línea gobernada","owner":"plataforma","evidence":[{"path":"src/public/dataLayer/offline/OfflinePolicy.js","containsAll":["online-only"]},{"path":"test/offline-resilience.test.mjs","containsAll":["dead"]}]},
+    {"id":"ENG-004","name":"Promoción ligada al artefacto","owner":"release","evidence":[{"path":"documentacion/OPERATIONS/RELEASE_PROMOTION_RUNBOOK.md","containsAll":["SHA","rollback"]}]},
+    {"id":"ENG-005","name":"Telemetría privada y no bloqueante","owner":"operación","evidence":[{"path":"test/telemetry-policy.test.mjs","containsAll":["sanitiz"]}]},
+    {"id":"ENG-006","name":"Optimización con presupuesto","owner":"módulo","evidence":[{"path":"tools/check-performance-budget.mjs","containsAll":["budget"]}]},
+    {"id":"ENG-007","name":"Estrangulamiento verificable de legado","owner":"mantenimiento","evidence":[{"path":"functions/test/functions-legacy-isolation-contract.test.js","containsAll":["legacy"]}]},
+    {"id":"ENG-008","name":"Incidente como conocimiento","owner":"incidente","evidence":[{"path":"documentacion/DEVELOPMENT/INCIDENTES_SOLUCIONES_2026-09-20.md","containsAll":["causa raíz"]}]}
+  ],
+  "limits":["no ejecuta el código del proyecto","no evalúa producción ni seguridad integral","la presencia textual requiere revisión humana","gap no significa incumplimiento"]
+}

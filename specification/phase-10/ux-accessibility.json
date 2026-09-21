@@ -1,0 +1,7 @@
+{
+  "schemaVersion":"1.0.0","target":"WCAG-2.2-AA","claim":"partial-automated-evidence-not-full-conformance",
+  "requiredStates":["initial","loading","empty","success","recoverable-error","fatal-error","unauthorized","offline"],
+  "automatedChecks":["html-lang","skip-link","main-landmark","named-navigation","unique-h1","focus-visible","reduced-motion","mobile-navigation-preserved","code-scroll","no-color-only-status"],
+  "manualChecks":["keyboard-only","voiceover","nvda","zoom-200","zoom-400","reflow-320-css-px","high-contrast","focus-order","dynamic-announcements","user-comprehension"],
+  "supportedLocales":["es"],"responsiveWidths":[320,375,768,1024,1440]
+}

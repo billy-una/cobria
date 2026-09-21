@@ -250,7 +250,15 @@ información que todavía no estaba disponible.
 Esta condición reduce fuga temporal. Las etiquetas usan una ventana futura separada y
 no participan en la construcción de características del mismo corte.
 
-\input{replication/results/context-figures/contratos-ia.tex}
+\IfFileExists{replication/results/context-figures/contratos-ia.tex}{%
+  \input{replication/results/context-figures/contratos-ia.tex}%
+}{%
+  \begin{quote}\small
+  \textbf{Evidencia contextual no disponible.} La figura generada no forma parte del
+  paquete actual. Esta ausencia se conserva explícitamente y no se reemplaza con cifras
+  inferidas. El análisis conceptual continúa sin atribuir resultados a ese artefacto.
+  \end{quote}%
+}
 
 \section{Eventos tardíos y marcas de avance temporal}
 

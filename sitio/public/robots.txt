@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+Sitemap: https://cobria-atlas.sectagpt.chatgpt.site/sitemap.xml

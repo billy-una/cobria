@@ -1,0 +1,18 @@
+{
+  "safeLog": {
+    "timestamp": "2026-09-21T08:18:29.720Z",
+    "level": "info",
+    "event": "operacion.completa",
+    "service": "ecosistema-api",
+    "traceId": "tr-op-03",
+    "result": "ok",
+    "scope": "reserva-sur"
+  },
+  "metrics": {
+    "counters": {
+      "operations_total{result=ok,service=ecosistema-api}": 1
+    },
+    "observations": {}
+  },
+  "queueSize": 0
+}

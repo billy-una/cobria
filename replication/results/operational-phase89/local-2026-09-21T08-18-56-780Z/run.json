@@ -1,0 +1,127 @@
+{
+  "schemaVersion": "1.0.0",
+  "phase": 31,
+  "status": "controlled-local-operational-run",
+  "proposalIndependent": true,
+  "officialCertification": false,
+  "environment": {
+    "kind": "controlled",
+    "name": "local-node-filesystem",
+    "authorized": true,
+    "containsProductionPersonalData": false
+  },
+  "execution": {
+    "runId": "local-2026-09-21T08-18-56-780Z",
+    "actor": "ejecutor-automatizado-local",
+    "startedAt": "2026-09-21T08:18:56.780Z",
+    "endedAt": "2026-09-21T08:18:56.803Z",
+    "artifactSha256": "2467b854e7eeb9a6e1ae0a23c7111d7530abdad1a38bfd6ddd47a547dc601554",
+    "synthetic": false,
+    "syntheticData": true
+  },
+  "scenarios": [
+    {
+      "id": "OP-01",
+      "result": "pass",
+      "observations": "La promoción local conservó la huella, respondió a un humo HTTP real y registró reversión sin recompilar.",
+      "evidence": [
+        {
+          "type": "json",
+          "path": "replication/results/operational-phase89/local-2026-09-21T08-18-56-780Z/op01-artifact.json",
+          "sha256": "2467b854e7eeb9a6e1ae0a23c7111d7530abdad1a38bfd6ddd47a547dc601554"
+        },
+        {
+          "type": "json",
+          "path": "replication/results/operational-phase89/local-2026-09-21T08-18-56-780Z/op01-promotion.json",
+          "sha256": "65f11b34c7321bc1e8f53fa0fda2381138e994edc934b2990fcb184bf4cae0e3"
+        }
+      ],
+      "incident": null
+    },
+    {
+      "id": "OP-02",
+      "result": "pass",
+      "observations": "El fallo persistente terminó tras tres intentos y produjo una sola entrada dead-letter inspeccionable.",
+      "evidence": [
+        {
+          "type": "json",
+          "path": "replication/results/operational-phase89/local-2026-09-21T08-18-56-780Z/op02-attempts.json",
+          "sha256": "2924908401b6ab82378c9bd485edb66b1c73bef883892ce807372c8e133079eb"
+        },
+        {
+          "type": "json",
+          "path": "replication/results/operational-phase89/local-2026-09-21T08-18-56-780Z/op02-dead-letter.json",
+          "sha256": "8dd16c154c2073e1c549fcf8083ffc97cfb1f4bdb1c68f75f9134e96100dae63"
+        }
+      ],
+      "incident": null
+    },
+    {
+      "id": "OP-03",
+      "result": "pass",
+      "observations": "La caída declarada del colector no bloqueó el negocio y la lista positiva excluyó payload y token.",
+      "evidence": [
+        {
+          "type": "json",
+          "path": "replication/results/operational-phase89/local-2026-09-21T08-18-56-780Z/op03-business.json",
+          "sha256": "3d1b019226cdf94aa06c55392ac306fb99ec7d87998bce035d7f08132e43d92f"
+        },
+        {
+          "type": "json",
+          "path": "replication/results/operational-phase89/local-2026-09-21T08-18-56-780Z/op03-telemetry.json",
+          "sha256": "e470c9a8773fe9afe9597c18a9d0a31466b89e633585a9d8c0470ece963c99f6"
+        }
+      ],
+      "incident": null
+    },
+    {
+      "id": "OP-04",
+      "result": "pass",
+      "observations": "Se restauraron 2 canónicos con RPO=0 registros y RTO local medido de 0.214 ms.",
+      "evidence": [
+        {
+          "type": "json",
+          "path": "replication/results/operational-phase89/local-2026-09-21T08-18-56-780Z/op04-backup.json",
+          "sha256": "f0e5587d62c4a8106dc6675facd4f5e8d27efe2c99df8dec15b59aac5b8a1d45"
+        },
+        {
+          "type": "json",
+          "path": "replication/results/operational-phase89/local-2026-09-21T08-18-56-780Z/op04-restoration.json",
+          "sha256": "a81db9330a57099fa2aa764f04c52ee44ab9671513cbcc90a6cccfd0d6d0ba1f"
+        }
+      ],
+      "incident": null
+    },
+    {
+      "id": "OP-05",
+      "result": "pass",
+      "observations": "Los accesos con ámbito cruzado o contexto manipulado fueron rechazados y dejaron auditoría sanitizada.",
+      "evidence": [
+        {
+          "type": "json",
+          "path": "replication/results/operational-phase89/local-2026-09-21T08-18-56-780Z/op05-negative-cases.json",
+          "sha256": "cfca92d4541463f49af82d66e49c2f475d71ea28bdaad6223ae8e20e8a64f55d"
+        },
+        {
+          "type": "json",
+          "path": "replication/results/operational-phase89/local-2026-09-21T08-18-56-780Z/op05-audit.json",
+          "sha256": "9d61f7243b56c7429740890cff8d9d45f72cc71f8f901ad577a3633931960690"
+        }
+      ],
+      "incident": null
+    }
+  ],
+  "summary": {
+    "executed": 5,
+    "passed": 5,
+    "failed": 0
+  },
+  "limitations": [
+    "sin contenedores",
+    "sin red distribuida",
+    "sin proveedor administrado",
+    "sin tráfico productivo",
+    "RPO/RTO solo del fixture local"
+  ],
+  "interpretation": "Ejecución operacional automatizada y acotada con datos sintéticos; no constituye certificación, producción ni validación externa."
+}

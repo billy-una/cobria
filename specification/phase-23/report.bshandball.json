@@ -1,0 +1,208 @@
+{
+  "schemaVersion": "1.0.0",
+  "method": "cobria-engineering-manifest-v1",
+  "project": {
+    "remote": "https://github.com/billy-una/BSHandball.git",
+    "ref": "09c15acd14ab806abe436a8176ef3247c61a2df6",
+    "commit": "09c15acd14ab806abe436a8176ef3247c61a2df6",
+    "sourceMode": "git-ref"
+  },
+  "scope": "comparación de transferencia Engineering desde objetos Git",
+  "summary": {
+    "contracts": 8,
+    "implementedLocal": 4,
+    "operationallyValidated": 0
+  },
+  "checks": [
+    {
+      "id": "ENG-001",
+      "name": "Estado operativo explícito",
+      "owner": "producto",
+      "structuralStatus": "implemented-local",
+      "operationalStatus": "not-assessed",
+      "evidence": [
+        {
+          "path": "src/public/logicLayer/services/servicesThing/general/UIStateManager.js",
+          "exists": true,
+          "sha256": "7352ec615c3e247cc45af9d2ccd3edd221461b929c5acd499d9c169796530fdd",
+          "tokens": [
+            {
+              "token": "loading",
+              "found": true
+            },
+            {
+              "token": "empty",
+              "found": true
+            },
+            {
+              "token": "error",
+              "found": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ENG-002",
+      "name": "Autoridad transaccional",
+      "owner": "aplicación",
+      "structuralStatus": "implemented-local",
+      "operationalStatus": "not-assessed",
+      "evidence": [
+        {
+          "path": "src/server/lib/trusted-team-context.js",
+          "exists": true,
+          "sha256": "8d01b6fe9df959d6beceb34416483db84e13a344d69e7f7bd76df3bb425199ba",
+          "tokens": [
+            {
+              "token": "teamId",
+              "found": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ENG-003",
+      "name": "Cola fuera de línea gobernada",
+      "owner": "plataforma",
+      "structuralStatus": "gap",
+      "operationalStatus": "not-assessed",
+      "evidence": [
+        {
+          "path": "src/public/logicLayer/services/servicesOffline/OfflineSyncQueue.js",
+          "exists": true,
+          "sha256": "cdb0df84b0fef99820cd7737db70506857fbfe7727675fbff4900f1793bfe214",
+          "tokens": [
+            {
+              "token": "retry",
+              "found": false
+            },
+            {
+              "token": "queue",
+              "found": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ENG-004",
+      "name": "Promoción ligada al artefacto",
+      "owner": "release",
+      "structuralStatus": "gap",
+      "operationalStatus": "not-assessed",
+      "evidence": [
+        {
+          "path": "documentacion/INFRASTRUCTURE/deployment-devops.md",
+          "exists": true,
+          "sha256": "422039528ed0ff65470148e290aa423e670953c68673c0b99ba0873341312aa0",
+          "tokens": [
+            {
+              "token": "rollback",
+              "found": true
+            },
+            {
+              "token": "artifact",
+              "found": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ENG-005",
+      "name": "Telemetría privada y no bloqueante",
+      "owner": "operación",
+      "structuralStatus": "gap",
+      "operationalStatus": "not-assessed",
+      "evidence": [
+        {
+          "path": "src/server/analytics/ErrorTelemetryService.js",
+          "exists": true,
+          "sha256": "619ad8a8db29aea202ecdc019d4680c29b4a3b62bc190e5fd25d45db42283afe",
+          "tokens": [
+            {
+              "token": "sanit",
+              "found": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ENG-006",
+      "name": "Optimización con presupuesto",
+      "owner": "módulo",
+      "structuralStatus": "implemented-local",
+      "operationalStatus": "not-assessed",
+      "evidence": [
+        {
+          "path": "src/public/tools/frontend/check-bundle-budgets.mjs",
+          "exists": true,
+          "sha256": "e925759f88b9506723529eb08d5ea143a0aa48c34a1a4c4d68f62779b04d5973",
+          "tokens": [
+            {
+              "token": "budget",
+              "found": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ENG-007",
+      "name": "Estrangulamiento verificable de legado",
+      "owner": "mantenimiento",
+      "structuralStatus": "implemented-local",
+      "operationalStatus": "not-assessed",
+      "evidence": [
+        {
+          "path": "documentacion/DEVELOPMENT/MODULES/CLIPS_LEGACY_BOUNDARY.md",
+          "exists": true,
+          "sha256": "89a4a387c31af6cf3fb753dd1b4129214f3f0f5bf04647434c22d30e1bea2b99",
+          "tokens": [
+            {
+              "token": "no puede crecer",
+              "found": true
+            },
+            {
+              "token": "funcionalidad nueva",
+              "found": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ENG-008",
+      "name": "Incidente como conocimiento",
+      "owner": "incidente",
+      "structuralStatus": "gap",
+      "operationalStatus": "not-assessed",
+      "evidence": [
+        {
+          "path": "documentacion/INFRASTRUCTURE/production-runbook.md",
+          "exists": true,
+          "sha256": "07d8e0835f38a56ffec6e74e45142702f0b15aa275c3dc6782e99922c2013c4e",
+          "tokens": [
+            {
+              "token": "causa raíz",
+              "found": false
+            },
+            {
+              "token": "riesgo residual",
+              "found": false
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "no ejecuta el código del proyecto",
+    "no evalúa producción ni seguridad integral",
+    "la presencia textual requiere revisión humana",
+    "gap no significa incumplimiento"
+  ]
+}

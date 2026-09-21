@@ -1,0 +1,375 @@
+{
+  "generatedFrom": [
+    "specification/phase-3/data-dictionary.yaml"
+  ],
+  "manifestId": "cobria-data-dictionary",
+  "records": [
+    {
+      "data": {
+        "authority": "canonical",
+        "conceptualName": "Observación ambiental",
+        "id": "ENT-OBSERVACION",
+        "logicalName": "Observacion",
+        "owner": "Equipo responsable de datos del ámbito",
+        "physicalNode": "n8",
+        "retention": "Según finalidad y política del ámbito; no se fija un plazo universal.",
+        "schemaVersion": 3,
+        "scopeRule": "Toda identidad y operación incluye ambitoId."
+      },
+      "id": "ENT-OBSERVACION",
+      "owner": "Equipo responsable de datos del ámbito",
+      "references": [
+        "specification/phase-3/DICCIONARIO-DATOS.md"
+      ],
+      "source": "specification/phase-3/data-dictionary.yaml",
+      "version": "1.0.0"
+    },
+    {
+      "data": {
+        "conceptualName": "Identidad de observación",
+        "consumers": [
+          "RepositorioObservaciones",
+          "ProyeccionBusqueda"
+        ],
+        "example": "observacion-0042",
+        "format": "^[a-z0-9][a-z0-9-]{2,63}$",
+        "id": "DAT-OBS-ID",
+        "indexes": [
+          "unique(ambitoId, observacionId)"
+        ],
+        "introducedIn": 1,
+        "logicalName": "observacionId",
+        "owner": "Dominio de observaciones",
+        "physicalKey": "a",
+        "provenance": "asignada al registrar; no deriva de un nombre mutable",
+        "required": true,
+        "retention": "igual al documento",
+        "rules": [
+          "inmutable",
+          "no reutilizable"
+        ],
+        "scope": "global dentro del ámbito",
+        "sensitivity": "internal",
+        "timeMeaning": null,
+        "type": "string",
+        "unit": null
+      },
+      "id": "DAT-OBS-ID",
+      "owner": "Dominio de observaciones",
+      "references": [
+        "specification/phase-3/DICCIONARIO-DATOS.md",
+        "ENT-OBSERVACION"
+      ],
+      "source": "specification/phase-3/data-dictionary.yaml",
+      "version": "1.0.0"
+    },
+    {
+      "data": {
+        "conceptualName": "Ámbito autorizado",
+        "consumers": [
+          "AutorizadorAmbito",
+          "RepositorioObservaciones"
+        ],
+        "example": "bosque-sur",
+        "format": "^[a-z0-9][a-z0-9-]{2,63}$",
+        "id": "DAT-OBS-AMBITO",
+        "indexes": [
+          "prefix/partition",
+          "unique(ambitoId, observacionId)"
+        ],
+        "introducedIn": 1,
+        "logicalName": "ambitoId",
+        "owner": "Responsable de seguridad y datos",
+        "physicalKey": "b",
+        "provenance": "contexto autorizado de la operación",
+        "required": true,
+        "retention": "igual al documento y registros de auditoría aplicables",
+        "rules": [
+          "obligatorio antes de leer o escribir",
+          "no inferir desde la interfaz"
+        ],
+        "scope": "partición de seguridad",
+        "sensitivity": "restricted",
+        "timeMeaning": null,
+        "type": "string",
+        "unit": null
+      },
+      "id": "DAT-OBS-AMBITO",
+      "owner": "Responsable de seguridad y datos",
+      "references": [
+        "specification/phase-3/DICCIONARIO-DATOS.md",
+        "ENT-OBSERVACION"
+      ],
+      "source": "specification/phase-3/data-dictionary.yaml",
+      "version": "1.0.0"
+    },
+    {
+      "data": {
+        "conceptualName": "Revisión lógica",
+        "consumers": [
+          "ControlConcurrencia",
+          "ProyeccionBusqueda"
+        ],
+        "example": 3,
+        "format": "positive-integer",
+        "id": "DAT-OBS-REVISION",
+        "indexes": [],
+        "introducedIn": 1,
+        "logicalName": "revision",
+        "owner": "RepositorioObservaciones",
+        "physicalKey": "c",
+        "provenance": "repositorio canónico",
+        "required": true,
+        "retention": "igual al documento",
+        "rules": [
+          "monotónica",
+          "rechazar revisiones obsoletas"
+        ],
+        "scope": "por observacionId y ambitoId",
+        "sensitivity": "internal",
+        "timeMeaning": "orden lógico, no instante",
+        "type": "integer",
+        "unit": "revision"
+      },
+      "id": "DAT-OBS-REVISION",
+      "owner": "RepositorioObservaciones",
+      "references": [
+        "specification/phase-3/DICCIONARIO-DATOS.md",
+        "ENT-OBSERVACION"
+      ],
+      "source": "specification/phase-3/data-dictionary.yaml",
+      "version": "1.0.0"
+    },
+    {
+      "data": {
+        "conceptualName": "Versión del esquema documental",
+        "consumers": [
+          "DaterObservacion",
+          "MigradorObservacion"
+        ],
+        "example": 3,
+        "format": "positive-integer",
+        "id": "DAT-OBS-ESQUEMA",
+        "indexes": [],
+        "introducedIn": 1,
+        "logicalName": "versionEsquema",
+        "owner": "COBRIA Data",
+        "physicalKey": "d",
+        "provenance": "contrato de persistencia",
+        "required": true,
+        "retention": "permanente con el documento",
+        "rules": [
+          "migración explícita",
+          "no confundir con revisión"
+        ],
+        "scope": "tipo documental",
+        "sensitivity": "public-metadata",
+        "timeMeaning": null,
+        "type": "integer",
+        "unit": "version"
+      },
+      "id": "DAT-OBS-ESQUEMA",
+      "owner": "COBRIA Data",
+      "references": [
+        "specification/phase-3/DICCIONARIO-DATOS.md",
+        "ENT-OBSERVACION"
+      ],
+      "source": "specification/phase-3/data-dictionary.yaml",
+      "version": "1.0.0"
+    },
+    {
+      "data": {
+        "conceptualName": "Instante en que ocurrió la observación",
+        "consumers": [
+          "AnaliticaTemporal",
+          "ProyeccionBusqueda"
+        ],
+        "example": "2026-08-24T14:10:00-06:00",
+        "format": "date-time RFC 3339 con zona",
+        "id": "DAT-OBS-TIEMPO-EVENTO",
+        "indexes": [
+          "(ambitoId, ocurrioEn desc)"
+        ],
+        "introducedIn": 1,
+        "logicalName": "ocurrioEn",
+        "owner": "Dominio de observaciones",
+        "physicalKey": "e",
+        "provenance": "persona o dispositivo que registra",
+        "required": true,
+        "retention": "según finalidad científica y privacidad",
+        "rules": [
+          "conservar zona u offset",
+          "no sustituir con hora de escritura"
+        ],
+        "scope": "hecho observado",
+        "sensitivity": "restricted",
+        "timeMeaning": "tiempo válido",
+        "type": "string",
+        "unit": "instant"
+      },
+      "id": "DAT-OBS-TIEMPO-EVENTO",
+      "owner": "Dominio de observaciones",
+      "references": [
+        "specification/phase-3/DICCIONARIO-DATOS.md",
+        "ENT-OBSERVACION"
+      ],
+      "source": "specification/phase-3/data-dictionary.yaml",
+      "version": "1.0.0"
+    },
+    {
+      "data": {
+        "conceptualName": "Especie observada",
+        "consumers": [
+          "CatalogoEspecies",
+          "AnaliticaEspecies"
+        ],
+        "example": "AVE-003",
+        "format": "catalog-code",
+        "id": "DAT-OBS-ESPECIE",
+        "indexes": [
+          "(ambitoId, especieCodigo)"
+        ],
+        "introducedIn": 1,
+        "logicalName": "especieCodigo",
+        "owner": "Responsable del catálogo de especies",
+        "physicalKey": "f",
+        "provenance": "clasificación registrada",
+        "required": true,
+        "retention": "igual al documento",
+        "rules": [
+          "debe existir en la versión declarada",
+          "desconocidos van a cuarentena"
+        ],
+        "scope": "catálogo declarado",
+        "sensitivity": "restricted",
+        "timeMeaning": "interpretado según catalogoVersion",
+        "type": "string",
+        "unit": null
+      },
+      "id": "DAT-OBS-ESPECIE",
+      "owner": "Responsable del catálogo de especies",
+      "references": [
+        "specification/phase-3/DICCIONARIO-DATOS.md",
+        "ENT-OBSERVACION"
+      ],
+      "source": "specification/phase-3/data-dictionary.yaml",
+      "version": "1.0.0"
+    },
+    {
+      "data": {
+        "conceptualName": "Versión del catálogo usada para interpretar la especie",
+        "consumers": [
+          "DaterObservacion",
+          "Reconstruccion"
+        ],
+        "example": "2026.1",
+        "format": "semantic-or-date-version",
+        "id": "DAT-OBS-CATALOGO",
+        "indexes": [],
+        "introducedIn": 2,
+        "logicalName": "catalogoVersion",
+        "owner": "Responsable del catálogo de especies",
+        "physicalKey": "g",
+        "provenance": "CatalogoEspecies",
+        "required": true,
+        "retention": "permanente para interpretación histórica",
+        "rules": [
+          "inmutable para una revisión publicada"
+        ],
+        "scope": "catálogo de especies",
+        "sensitivity": "public-metadata",
+        "timeMeaning": "edición efectiva al validar",
+        "type": "string",
+        "unit": null
+      },
+      "id": "DAT-OBS-CATALOGO",
+      "owner": "Responsable del catálogo de especies",
+      "references": [
+        "specification/phase-3/DICCIONARIO-DATOS.md",
+        "ENT-OBSERVACION"
+      ],
+      "source": "specification/phase-3/data-dictionary.yaml",
+      "version": "1.0.0"
+    },
+    {
+      "data": {
+        "conceptualName": "Estado de verificación",
+        "consumers": [
+          "FlujoVerificacion",
+          "ProyeccionBusqueda"
+        ],
+        "example": "verificada",
+        "format": "enum",
+        "id": "DAT-OBS-ESTADO",
+        "indexes": [
+          "(ambitoId, estado, ocurrioEn desc)"
+        ],
+        "introducedIn": 1,
+        "logicalName": "estado",
+        "owner": "Dominio de observaciones",
+        "physicalKey": "h",
+        "provenance": "caso de uso de verificación",
+        "required": true,
+        "retention": "igual al documento y auditoría aplicable",
+        "rules": [
+          "valor de CAT-ESTADO-OBSERVACION"
+        ],
+        "scope": "dominio de observaciones",
+        "sensitivity": "internal",
+        "timeMeaning": "estado de la revisión actual",
+        "type": "string",
+        "unit": null
+      },
+      "id": "DAT-OBS-ESTADO",
+      "owner": "Dominio de observaciones",
+      "references": [
+        "specification/phase-3/DICCIONARIO-DATOS.md",
+        "ENT-OBSERVACION"
+      ],
+      "source": "specification/phase-3/data-dictionary.yaml",
+      "version": "1.0.0"
+    },
+    {
+      "data": {
+        "conceptualName": "Procedencia de la revisión",
+        "consumers": [
+          "Auditoria",
+          "AnaliticaReproducible"
+        ],
+        "example": {
+          "fuenteId": "sensor-17",
+          "metodo": "manual",
+          "registradoEn": "2026-08-24T14:12:00-06:00"
+        },
+        "format": "source-id + recorded-at + method",
+        "id": "DAT-OBS-PROCEDENCIA",
+        "indexes": [],
+        "introducedIn": 3,
+        "logicalName": "procedencia",
+        "owner": "Gobernanza de datos",
+        "physicalKey": "i",
+        "provenance": "frontera de entrada",
+        "required": true,
+        "retention": "igual al documento o registro seudonimizado",
+        "rules": [
+          "no incluir secretos",
+          "minimizar identificadores personales"
+        ],
+        "scope": "revisión documental",
+        "sensitivity": "restricted",
+        "timeMeaning": "tiempo conocido",
+        "type": "object",
+        "unit": null
+      },
+      "id": "DAT-OBS-PROCEDENCIA",
+      "owner": "Gobernanza de datos",
+      "references": [
+        "specification/phase-3/DICCIONARIO-DATOS.md",
+        "ENT-OBSERVACION"
+      ],
+      "source": "specification/phase-3/data-dictionary.yaml",
+      "version": "1.0.0"
+    }
+  ],
+  "schemaVersion": "1.0.0"
+}

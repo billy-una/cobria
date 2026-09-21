@@ -1,0 +1,8 @@
+{
+  "sourceDigest": "2467b854e7eeb9a6e1ae0a23c7111d7530abdad1a38bfd6ddd47a547dc601554",
+  "promotedDigest": "2467b854e7eeb9a6e1ae0a23c7111d7530abdad1a38bfd6ddd47a547dc601554",
+  "smoke": "pass",
+  "rollbackArtifact": "previous-local-fixture",
+  "rollback": "pass",
+  "recompiled": false
+}

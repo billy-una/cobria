@@ -1,11 +1,11 @@
 {
   "title": "Paquete de reproducción de COBRIA",
   "upload_type": "software",
-  "description": "Implementaciones neutrales, protocolos congelados, cargas sintéticas y semirrealistas, mediciones crudas, análisis y evidencia longitudinal de COBRIA.",
+  "description": "Especificación, implementaciones neutrales, protocolos, cargas sintéticas, mediciones, análisis y evidencia histórica de COBRIA.",
   "creators": [{"name": "Cordero Porras, Billy Jak"}],
-  "license": "MIT",
-  "keywords": ["NoSQL", "datos canónicos", "vistas materializadas", "reconstruibilidad", "multiinquilinato", "inteligencia artificial"],
-  "version": "3.0.0",
+  "license": "Apache-2.0",
+  "keywords": ["NoSQL", "datos canónicos", "proyecciones reconstruibles", "multiinquilinato", "inteligencia artificial"],
+  "version": "1.0.0-rc1",
   "access_right": "open",
-  "notes": "El DOI depende de un depósito externo autenticado todavía pendiente. No se incluyen datos privados de producción."
+  "notes": "El código usa Apache-2.0; textos y datos propios usan CC BY 4.0. Consulte LICENSES.md. El DOI, la firma y la réplica externa permanecen pendientes."
 }

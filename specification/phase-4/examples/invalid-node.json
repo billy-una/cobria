@@ -1,0 +1,15 @@
+{
+  "id": "NODE-INVALID",
+  "logicalName": "VistaRapida",
+  "physicalPath": "n99/{id}",
+  "kind": "projection",
+  "need": "Acelerar una pantalla",
+  "owner": "",
+  "writeAuthority": "ClienteWeb",
+  "identity": ["id"],
+  "scope": null,
+  "queries": [],
+  "indexes": [],
+  "tests": [],
+  "rebuild": null
+}

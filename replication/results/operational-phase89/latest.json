@@ -1,0 +1,9 @@
+{
+  "runId": "local-2026-09-21T08-18-56-780Z",
+  "path": "replication/results/operational-phase89/local-2026-09-21T08-18-56-780Z/run.json",
+  "summary": {
+    "executed": 5,
+    "passed": 5,
+    "failed": 0
+  }
+}

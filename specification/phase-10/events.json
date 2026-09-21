@@ -1,0 +1,8 @@
+{
+  "schemaVersion":"1.0.0","compatibility":"consumidores ignoran campos desconocidos; campos requeridos no se eliminan dentro de v1",
+  "events":[
+    {"id":"EVT-OBS-001","name":"observacion.registrada.v1","producer":"ecosistema-api","consumers":["projection-worker"],"required":["eventId","eventType","occurredAt","scope","sourceRevision","schemaVersion","data"],"idempotency":"eventId","ordering":"solo por scope+aggregateId","retention":"segun outbox y ventana forense","pii":"prohibida salvo contrato explícito","deadLetter":"observaciones-fallidas"},
+    {"id":"EVT-PROJ-001","name":"proyeccion.publicada.v1","producer":"projection-worker","consumers":["operacion","auditoria"],"required":["eventId","eventType","occurredAt","scope","sourceRevision","projectionVersion","verificationHash","schemaVersion"],"idempotency":"eventId","ordering":"por scope+projectionId","retention":"ventana de auditoría","pii":"prohibida","deadLetter":"publicaciones-fallidas"}
+  ],
+  "envelopeExample":{"eventId":"evt-01","eventType":"observacion.registrada.v1","occurredAt":"2026-09-19T12:00:00Z","scope":"bosque-a","aggregateId":"obs-1","sourceRevision":1,"schemaVersion":1,"traceId":"tr-01","data":{"speciesCode":"colibri","quantity":2}}
+}

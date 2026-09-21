@@ -6,6 +6,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{newtxtext,newtxmath}
 \usepackage{microtype}
+\setlength{\emergencystretch}{2em}
 \usepackage{geometry}
 \geometry{letterpaper,top=2.7cm,bottom=2.7cm,left=3.2cm,right=2.7cm}
 \usepackage{setspace}
@@ -31,6 +32,7 @@
 \usepackage[nameinlink,noabbrev,spanish]{cleveref}
 \usepackage[backend=biber,style=apa,sorting=nyt,maxcitenames=2]{biblatex}
 \addbibresource{referencias.bib}
+\input{editorial/generated/identity.tex}
 
 \definecolor{cobriaBlue}{gray}{0}
 \definecolor{cobriaGreen}{gray}{0}
@@ -39,8 +41,10 @@
 
 \hypersetup{
   hidelinks,
-  pdftitle={COBRIA: diseño y evaluación de una arquitectura de datos canónicos y proyecciones reconstruibles},
-  pdfauthor={\ifnum\blindreview=1 Autor anonimizado\else Billy Jak Cordero Porras\fi}
+  pdftitle={COBRIA: diseño y evaluación de contratos reconstruibles para sistemas NoSQL documentales},
+  pdfauthor={\ifnum\blindreview=1 Autor anonimizado\else \COBRIAAutor\fi},
+  pdfsubject={Documento maestro de investigación de la propuesta independiente COBRIA},
+  pdfkeywords={COBRIA, NoSQL documental, proyecciones reconstruibles, arquitectura de software, procedencia}
 }
 
 \pagestyle{fancy}
@@ -55,7 +59,7 @@
   {\normalfont\bfseries}
   {\filleft\Large\chaptername\ \thechapter}
   {1ex}
-  {\titlerule[0.6pt]\vspace{1.5ex}\Huge}
+  {\titlerule[0.6pt]\vspace{1.5ex}\huge}
 
 \newcommand{\COBRIA}{\textsf{COBRIA}}
 \newcommand{\pendiente}[1]{\textit{[Pendiente: #1]}}
@@ -97,14 +101,15 @@ el acceso mediante repositorios, servicios y casos de uso; clasifica las proyecc
 según sus requisitos de consistencia; y exige que todo dato derivado declare su origen,
 versión y mecanismo de reconstrucción. La investigación siguió ciencia del diseño y
 examinó la propuesta en tres aplicaciones documentales anonimizadas. La evaluación
-activa comprende inspección de contratos, pruebas con emuladores NoSQL, reconstrucción
-de proyecciones, aislamiento por ámbito, evolución de esquemas y recuperación autorizada
-para analítica e inteligencia artificial. Los resultados disponibles apoyan la
-viabilidad estructural de la reconstrucción y la separación entre autoridad y derivados.
-Las mediciones obtenidas fuera de motores NoSQL fueron excluidas de esta edición y no se
-utilizan para sostener afirmaciones de rendimiento. Permanecen pendientes una réplica
-multirregión sobre motores documentales, evaluación humana de mantenibilidad y revisión
-independiente.
+comprende inspección de contratos, pruebas NoSQL, reconstrucción de proyecciones,
+aislamiento por ámbito, evolución de esquemas y recuperación autorizada para analítica e
+inteligencia artificial. El repositorio conserva 270 corridas históricas distribuidas
+sobre MongoDB, CouchDB y OpenSearch, además de una repetición preliminar del arnés
+corregido en MongoDB y CouchDB. Las corridas históricas no se presentan como
+certificación vigente porque una auditoría posterior fortaleció el oráculo. Las
+mediciones SQL permanecen segregadas y no sostienen afirmaciones de rendimiento NoSQL.
+Permanecen pendientes la repetición distribuida confirmatoria, la evaluación humana de
+transferencia y la revisión independiente.
 
 \noindent\textbf{Palabras clave:} NoSQL; datos canónicos; proyecciones reconstruibles;
 multiinquilinato; vistas materializadas; minería de datos; inteligencia artificial;
@@ -139,8 +144,16 @@ arquitectura dirigida por metadatos.
 \part{Manual de réplica y operación NoSQL}
 \input{partes/parte-viii-manual-replica-nosql}
 
-\part{Anexos técnicos y reproducibilidad}
-\input{partes/parte-viii-anexos-reproducibilidad}
+\IfFileExists{partes/parte-viii-anexos-reproducibilidad.tex}{%
+  \part{Anexos técnicos y reproducibilidad}
+  \input{partes/parte-viii-anexos-reproducibilidad}%
+}{%
+  \part{Nota sobre anexos históricos}
+  \chapter{Material no incluido en esta edición}
+  El anexo histórico independiente no forma parte del paquete actual. Los procedimientos
+  vigentes de réplica y operación se conservan en la parte anterior; no se reconstruyen
+  anexos eliminados ni resultados ausentes mediante inferencias editoriales.
+}
 
 \backmatter
 \printbibliography[heading=bibintoc,title={Referencias}]

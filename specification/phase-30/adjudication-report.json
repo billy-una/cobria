@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "1.0.0",
+  "phase": 30,
+  "status": "prepared-awaiting-review-pair",
+  "proposalIndependent": true,
+  "officialCertification": false,
+  "sourcePhase": 29,
+  "responseFilesReceived": 0,
+  "disagreementsAvailable": 0,
+  "adjudicationsCompleted": 0,
+  "adjudicatorAttested": false,
+  "interpretation": "Mecanismo de una propuesta independiente; sin un par humano válido no existen desacuerdos adjudicables."
+}

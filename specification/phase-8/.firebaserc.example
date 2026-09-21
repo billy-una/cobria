@@ -1,0 +1,10 @@
+{
+  "projects": {
+    "local": "cobria-local",
+    "test": "cobria-test",
+    "preview": "cobria-preview",
+    "staging": "cobria-staging",
+    "production": "cobria-production",
+    "recovery": "cobria-recovery"
+  }
+}

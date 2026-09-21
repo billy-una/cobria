@@ -1,0 +1,165 @@
+{
+  "generatedFrom": [
+    "specification/MAPA-ECOSISTEMA.md"
+  ],
+  "manifestId": "cobria-project",
+  "records": [
+    {
+      "data": {
+        "kind": "ecosystem-product",
+        "name": "COBRIA Manifesto"
+      },
+      "id": "PROD-MANIFESTO",
+      "owner": "Gobernanza COBRIA",
+      "references": [
+        "MANIFESTO.md"
+      ],
+      "source": "specification/MAPA-ECOSISTEMA.md",
+      "version": "1.0.0"
+    },
+    {
+      "data": {
+        "kind": "ecosystem-product",
+        "name": "COBRIA Core"
+      },
+      "id": "PROD-CORE",
+      "owner": "Gobernanza COBRIA",
+      "references": [
+        "specification/COBRIA-CORE-1.0.md"
+      ],
+      "source": "specification/MAPA-ECOSISTEMA.md",
+      "version": "1.0.0"
+    },
+    {
+      "data": {
+        "kind": "ecosystem-product",
+        "name": "COBRIA Data"
+      },
+      "id": "PROD-DATA",
+      "owner": "Gobernanza COBRIA",
+      "references": [
+        "manuales/04-bases-de-datos.md"
+      ],
+      "source": "specification/MAPA-ECOSISTEMA.md",
+      "version": "1.0.0"
+    },
+    {
+      "data": {
+        "kind": "ecosystem-product",
+        "name": "COBRIA Layers"
+      },
+      "id": "PROD-LAYERS",
+      "owner": "Gobernanza COBRIA",
+      "references": [
+        "manuales/02-layers.md"
+      ],
+      "source": "specification/MAPA-ECOSISTEMA.md",
+      "version": "1.0.0"
+    },
+    {
+      "data": {
+        "kind": "ecosystem-product",
+        "name": "COBRIA Pattern Design"
+      },
+      "id": "PROD-PATTERNS",
+      "owner": "Gobernanza COBRIA",
+      "references": [
+        "manuales/03-pattern-design.md"
+      ],
+      "source": "specification/MAPA-ECOSISTEMA.md",
+      "version": "1.0.0"
+    },
+    {
+      "data": {
+        "kind": "ecosystem-product",
+        "name": "COBRIA Build"
+      },
+      "id": "PROD-BUILD",
+      "owner": "Gobernanza COBRIA",
+      "references": [
+        "manuales/07-build.md"
+      ],
+      "source": "specification/MAPA-ECOSISTEMA.md",
+      "version": "1.0.0"
+    },
+    {
+      "data": {
+        "kind": "ecosystem-product",
+        "name": "COBRIA Security"
+      },
+      "id": "PROD-SECURITY",
+      "owner": "Gobernanza COBRIA",
+      "references": [
+        "specification/phase-7/security.json"
+      ],
+      "source": "specification/MAPA-ECOSISTEMA.md",
+      "version": "1.0.0"
+    },
+    {
+      "data": {
+        "kind": "ecosystem-product",
+        "name": "COBRIA Cloud & Operations"
+      },
+      "id": "PROD-OPERATIONS",
+      "owner": "Gobernanza COBRIA",
+      "references": [
+        "specification/phase-8/environments.json"
+      ],
+      "source": "specification/MAPA-ECOSISTEMA.md",
+      "version": "1.0.0"
+    },
+    {
+      "data": {
+        "kind": "ecosystem-product",
+        "name": "COBRIA Quality"
+      },
+      "id": "PROD-QUALITY",
+      "owner": "Gobernanza COBRIA",
+      "references": [
+        "specification/phase-9/quality.json"
+      ],
+      "source": "specification/MAPA-ECOSISTEMA.md",
+      "version": "1.0.0"
+    },
+    {
+      "data": {
+        "kind": "ecosystem-product",
+        "name": "COBRIA API & UX"
+      },
+      "id": "PROD-API-UX",
+      "owner": "Gobernanza COBRIA",
+      "references": [
+        "specification/phase-10/openapi.json"
+      ],
+      "source": "specification/MAPA-ECOSISTEMA.md",
+      "version": "1.0.0"
+    },
+    {
+      "data": {
+        "kind": "ecosystem-product",
+        "name": "COBRIA Evidence"
+      },
+      "id": "PROD-EVIDENCE",
+      "owner": "Gobernanza COBRIA",
+      "references": [
+        "replication/README.md"
+      ],
+      "source": "specification/MAPA-ECOSISTEMA.md",
+      "version": "1.0.0"
+    },
+    {
+      "data": {
+        "kind": "ecosystem-product",
+        "name": "COBRIA Knowledge"
+      },
+      "id": "PROD-KNOWLEDGE",
+      "owner": "Gobernanza COBRIA",
+      "references": [
+        "main.tex"
+      ],
+      "source": "specification/MAPA-ECOSISTEMA.md",
+      "version": "1.0.0"
+    }
+  ],
+  "schemaVersion": "1.0.0"
+}

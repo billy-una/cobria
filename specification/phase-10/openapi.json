@@ -1,0 +1,31 @@
+{
+  "openapi":"3.1.0","info":{"title":"API neutral COBRIA","version":"1.0.0","description":"Contrato pedagógico; no identifica un proveedor."},
+  "servers":[{"url":"https://api.example.invalid/v1","description":"Plantilla; no es un endpoint desplegado"}],
+  "security":[{"bearerAuth":[]}],
+  "paths":{
+    "/ambitos/{ambito}/observaciones":{
+      "parameters":[{"$ref":"#/components/parameters/Ambito"},{"$ref":"#/components/parameters/RequestId"},{"$ref":"#/components/parameters/ScopeHeader"}],
+      "get":{"operationId":"listarObservaciones","x-timeout-ms":5000,"x-retry":"cliente puede reintentar GET con retroceso exponencial y jitter","parameters":[{"$ref":"#/components/parameters/Limite"},{"$ref":"#/components/parameters/Cursor"}],"responses":{"200":{"description":"Página estable","content":{"application/json":{"schema":{"$ref":"#/components/schemas/PaginaObservaciones"}}}},"400":{"$ref":"#/components/responses/Problema"},"403":{"$ref":"#/components/responses/Problema"},"429":{"$ref":"#/components/responses/Problema"},"503":{"$ref":"#/components/responses/Problema"}}},
+      "post":{"operationId":"registrarObservacion","x-timeout-ms":5000,"x-retry":"solo con la misma Idempotency-Key","parameters":[{"$ref":"#/components/parameters/IdempotencyKey"}],"requestBody":{"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/ObservacionEntrada"}}}},"responses":{"201":{"description":"Creada","content":{"application/json":{"schema":{"$ref":"#/components/schemas/Observacion"}}}},"400":{"$ref":"#/components/responses/Problema"},"403":{"$ref":"#/components/responses/Problema"},"409":{"$ref":"#/components/responses/Problema"},"422":{"$ref":"#/components/responses/Problema"},"429":{"$ref":"#/components/responses/Problema"},"503":{"$ref":"#/components/responses/Problema"}}}
+    },
+    "/salud":{"get":{"operationId":"leerSalud","security":[],"x-timeout-ms":1000,"responses":{"200":{"description":"Proceso listo"},"503":{"$ref":"#/components/responses/Problema"}}}}
+  },
+  "components":{
+    "securitySchemes":{"bearerAuth":{"type":"http","scheme":"bearer","bearerFormat":"JWT"}},
+    "parameters":{
+      "Ambito":{"name":"ambito","in":"path","required":true,"schema":{"type":"string","pattern":"^[a-z0-9][a-z0-9-]{2,63}$"}},
+      "RequestId":{"name":"X-Request-Id","in":"header","required":true,"schema":{"type":"string","maxLength":128}},
+      "ScopeHeader":{"name":"X-Cobria-Scope","in":"header","required":true,"schema":{"type":"string"},"description":"Debe coincidir con el ámbito autorizado y el path."},
+      "IdempotencyKey":{"name":"Idempotency-Key","in":"header","required":true,"schema":{"type":"string","minLength":8,"maxLength":128}},
+      "Limite":{"name":"limite","in":"query","schema":{"type":"integer","minimum":1,"maximum":100,"default":20}},
+      "Cursor":{"name":"cursor","in":"query","schema":{"type":"string","maxLength":256},"description":"Opaco para el cliente; no construir ni interpretar."}
+    },
+    "schemas":{
+      "ObservacionEntrada":{"type":"object","required":["id","especie","cantidad","revision","observadaEn"],"properties":{"id":{"type":"string"},"especie":{"type":"string"},"cantidad":{"type":"integer","minimum":1},"revision":{"type":"integer","minimum":1},"observadaEn":{"type":"string","format":"date-time"}},"additionalProperties":false},
+      "Observacion":{"allOf":[{"$ref":"#/components/schemas/ObservacionEntrada"},{"type":"object","required":["ambito"],"properties":{"ambito":{"type":"string"}}}]},
+      "PaginaObservaciones":{"type":"object","required":["datos","pagina"],"properties":{"datos":{"type":"array","items":{"$ref":"#/components/schemas/Observacion"}},"pagina":{"type":"object","required":["siguienteCursor"],"properties":{"siguienteCursor":{"type":["string","null"]}}}}},
+      "Problema":{"type":"object","required":["type","title","status","code","traceId"],"properties":{"type":{"type":"string","format":"uri"},"title":{"type":"string"},"status":{"type":"integer"},"detail":{"type":"string"},"code":{"type":"string"},"traceId":{"type":"string"}},"additionalProperties":false}
+    },
+    "responses":{"Problema":{"description":"Problema estable según RFC 9457; sin detalles internos","content":{"application/problem+json":{"schema":{"$ref":"#/components/schemas/Problema"}}}}}
+  }
+}

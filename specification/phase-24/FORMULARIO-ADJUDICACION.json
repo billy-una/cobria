@@ -1,0 +1,11 @@
+{
+  "schemaVersion":"1.0.0",
+  "adjudicatorCode":"A-REEMPLAZAR",
+  "conflictStatement":"Reemplace con una declaración verdadera de independencia y conflictos.",
+  "decisions":[
+    {"sample":"M-01","contract":"ENG-007","decision":"insufficient","confidence":1,"rationale":"Reemplace con una justificación que examine evidencia y ambas revisiones.","addressesBothReviews":false},
+    {"sample":"M-02","contract":"ENG-007","decision":"insufficient","confidence":1,"rationale":"Reemplace con una justificación que examine evidencia y ambas revisiones.","addressesBothReviews":false},
+    {"sample":"M-03","contract":"ENG-007","decision":"insufficient","confidence":1,"rationale":"Reemplace con una justificación que examine evidencia y ambas revisiones.","addressesBothReviews":false}
+  ],
+  "attestation":{"type":"human","date":"AAAA-MM-DD","independentWork":true,"reviewedOriginalEvidence":true}
+}
