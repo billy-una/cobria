@@ -26,6 +26,23 @@ export class PouchDbAdapter {
     this.metrics.writes++;
     this.metrics.bytesWritten += Buffer.byteLength(JSON.stringify(value));
   }
+  async compareAndSwap(kind, scope, id, expectedRevision, value) {
+    exigirCoincidenciaAmbito(scope, value);
+    const _id = this.key(kind, scope, id);
+    let current = null;
+    try { current = await this.db.get(_id); } catch (error) { if (error.status !== 404) throw error; }
+    const actualRevision = current?.revision ?? null;
+    if (actualRevision !== expectedRevision) return false;
+    try {
+      await this.db.put({ ...value, _id, ...(current?._rev ? { _rev: current._rev } : {}) });
+    } catch (error) {
+      if (error.status === 409) return false;
+      throw error;
+    }
+    this.metrics.writes++;
+    this.metrics.bytesWritten += Buffer.byteLength(JSON.stringify(value));
+    return true;
+  }
   async list(kind, scope) {
     if (!scope) throw new Error("scope required");
     const prefix = `${kind}:${encodeURIComponent(scope)}:`;

@@ -1,0 +1,87 @@
+{
+  "protocol": "COBRIA-Phases-4-8-1.0",
+  "frozenAt": "2026-09-06",
+  "phases": {
+    "4": {
+      "name": "revision-independiente",
+      "goal": "Obtener revision externa real del paquete, especificacion y evidencia.",
+      "internalRequirements": [
+        "review/INDEPENDENT-REVIEW-1.1.md",
+        "review/RUBRICA-REVISION-CIEGA.md",
+        "review/RESPONSE-MATRIX.md"
+      ],
+      "externalEvidence": [
+        "evidence/phase4/reviewer-conflict-declarations.json",
+        "evidence/phase4/review-results.json",
+        "evidence/phase4/external-replication.json"
+      ],
+      "completionRule": "Al menos un dictamen independiente, sin conflictos de autoria, una replica externa ejecutada y ningun hallazgo mayor abierto."
+    },
+    "5": {
+      "name": "estudio-humano-y-evaluacion-ia",
+      "goal": "Evaluar mantenibilidad y calidad de la evidencia IA con participantes reales.",
+      "internalRequirements": [
+        "human-study/PROTOCOL.md",
+        "human-study/CONSENT-DRAFT.md",
+        "human-study/TASKS.md",
+        "human-study/data-template.csv"
+      ],
+      "externalEvidence": [
+        "evidence/phase5/ethics-or-exemption.json",
+        "evidence/phase5/participant-summary.json",
+        "evidence/phase5/analysis.json",
+        "evidence/phase5/ai-human-evaluation.json"
+      ],
+      "completionRule": "Participantes reales con consentimiento, aprobacion o exencion etica cuando corresponda, analisis congelado y evaluacion humana de IA; no se aceptan datos sinteticos como sustituto."
+    },
+    "6": {
+      "name": "replica-distribuida-real",
+      "goal": "Repetir la conformidad en nodos reales para al menos dos motores documentales.",
+      "internalRequirements": [
+        "replication/infrastructure/docker-compose.core12.yml",
+        "replication/scripts/run-phase2-confirmatory.mjs",
+        "replication/scripts/run-phase3-confirmatory.mjs"
+      ],
+      "externalEvidence": [
+        "evidence/phase6/environment-manifest.json",
+        "evidence/phase6/mongodb-summary.json",
+        "evidence/phase6/couchdb-summary.json",
+        "evidence/phase6/failure-and-rollback.json"
+      ],
+      "completionRule": "Dos motores documentales en nodos reales, manifiesto de entorno, configuracion congelada, corridas completas y pruebas de fallo/rollback sin violaciones de ambito."
+    },
+    "7": {
+      "name": "comparacion-industrial-y-transferencia",
+      "goal": "Contrastar COBRIA con alternativas industriales y medir implementabilidad por equipos externos.",
+      "internalRequirements": [
+        "review/TRANSFER-STUDY-1.2.md",
+        "review/LITERATURE-MAP-1.2.md",
+        "specification/ADOPTION-METHOD-1.1.md"
+      ],
+      "externalEvidence": [
+        "evidence/phase7/industrial-comparison.json",
+        "evidence/phase7/transfer-teams.json",
+        "evidence/phase7/transfer-analysis.json"
+      ],
+      "completionRule": "Comparacion independiente con CQRS/Event Sourcing/indices nativos y al menos tres equipos externos que intenten implementar C2 sin asistencia del autor."
+    },
+    "8": {
+      "name": "release-archivado-y-firmado",
+      "goal": "Congelar y publicar un release citable, verificable e inmutable.",
+      "internalRequirements": [
+        "replication/CITATION.cff",
+        "replication/.zenodo.json",
+        "replication/SBOM.cdx.json",
+        "replication/RELEASE-MANIFEST.json",
+        "preregistration/DEPOSIT-CHECKLIST.md"
+      ],
+      "externalEvidence": [
+        "evidence/phase8/release.json",
+        "evidence/phase8/doi.json",
+        "evidence/phase8/signatures.json",
+        "evidence/phase8/container-digests.json"
+      ],
+      "completionRule": "Release publico, deposito con DOI, artefactos por digest y firmas verificables; CITATION.cff y manuscrito sin placeholders de DOI."
+    }
+  }
+}

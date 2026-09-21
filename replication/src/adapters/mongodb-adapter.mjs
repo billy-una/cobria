@@ -20,6 +20,25 @@ export class MongoDbAdapter {
     this.metrics.writes++;
     this.metrics.bytesWritten += Buffer.byteLength(JSON.stringify(value));
   }
+  async compareAndSwap(kind, scope, id, expectedRevision, value) {
+    const safeScope = exigirCoincidenciaAmbito(scope, value);
+    const _id = this.key(kind, safeScope, id);
+    const replacement = {_id, cobriaManaged:true, kind, scope:safeScope, payload:value};
+    if (expectedRevision === null) {
+      try {
+        await this.collection.insertOne(replacement);
+      } catch (error) {
+        if (error?.code === 11000) return false;
+        throw error;
+      }
+    } else {
+      const result = await this.collection.replaceOne({_id, "payload.revision":expectedRevision}, replacement, {upsert:false});
+      if (result.matchedCount !== 1) return false;
+    }
+    this.metrics.writes++;
+    this.metrics.bytesWritten += Buffer.byteLength(JSON.stringify(value));
+    return true;
+  }
   async putMany(kind, scope, values) {
     const safeScope=exigirAmbito(scope);
     values.forEach(value=>exigirCoincidenciaAmbito(safeScope,value));

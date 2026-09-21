@@ -25,6 +25,18 @@ export class LokiJsAdapter {
     this.metrics.writes++;
     this.metrics.bytesWritten += Buffer.byteLength(JSON.stringify(value));
   }
+  async compareAndSwap(kind, scope, id, expectedRevision, value) {
+    exigirCoincidenciaAmbito(scope, value);
+    const key = this.key(kind, scope, id);
+    const current = this.docs.by("key", key);
+    const actualRevision = current?.value?.revision ?? null;
+    if (actualRevision !== expectedRevision) return false;
+    if (current) { current.value = structuredClone(value); this.docs.update(current); }
+    else this.docs.insert({ key, kind, scope, id, value: structuredClone(value) });
+    this.metrics.writes++;
+    this.metrics.bytesWritten += Buffer.byteLength(JSON.stringify(value));
+    return true;
+  }
   async list(kind, scope) {
     if (!scope) throw new Error("scope required");
     const values = this.docs.find({ kind, scope }).map(item => structuredClone(item.value));

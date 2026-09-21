@@ -44,14 +44,26 @@ facturación administrada.
 Los controles exploratorios con SQLite y PostgreSQL se preservan únicamente en
 `historical/sql-controls/`; están fuera del corpus confirmatorio NoSQL.
 
+## Endurecimiento posterior a 1.3
+
+- La huella SHA-256 se calcula sobre una serialización JSON canónica con claves de objeto ordenadas; el orden de propiedades ya no altera la identidad del documento.
+- Una escritura con la misma revisión solo es idempotente cuando el contenido canónico coincide. Misma revisión con contenido distinto se rechaza como `COBRIA-REV-002`.
+- El catálogo de publicación usa revisión lógica monotónica y compare-and-swap cuando el adaptador lo soporta. LokiJS, PouchDB, MongoDB, CouchDB y OpenSearch implementan CAS con el mecanismo nativo disponible.
+- MongoDB condiciona el reemplazo a `payload.revision`; CouchDB/PouchDB usan sus revisiones de documento; OpenSearch usa `if_seq_no` e `if_primary_term`.
+- `RepositorioCobria`, `ProyeccionCobria` y `PublicadorVersionado` pueden recibir `authorizer` y `principal` para aplicar autorización en la operación real, no únicamente en un helper aislado.
+- Las pruebas cubren hash canónico, conflicto de misma revisión, idempotencia, escritor obsoleto, fallo de publicación y autorización integrada.
+- CI mantiene los checks rápidos y añade smoke tests de integración para MongoDB, CouchDB y OpenSearch en contenedores, una corrida de 30 documentos por motor.
+
+Estas mejoras endurecen el contrato funcional y la concurrencia del catálogo. No convierten la capa de aplicación en seguridad operacional completa: ACL del motor, autenticación del servicio, TLS/cifrado, gestión de secretos, canales laterales y pentesting siguen siendo gates de infraestructura externos.
+
 ## Estado de la fase 1.3
 
 - Publicación versionada, verificación de huella y rollback: probado localmente con LokiJS.
 - Autorización por ámbito: probado con permisos separados de lectura y escritura.
 - Oráculo y datos adversariales: disponibles en `src/oracle.mjs` y `src/adversarial-generator.mjs`.
-- CI: `.github/workflows/ci.yml` ejecuta pruebas y verificación de integridad.
+- CI: `.github/workflows/ci.yml` ejecuta pruebas, verificación de integridad y smoke tests distribuidos.
 - SBOM: `npm run sbom` genera `SBOM.cdx.json` desde `package-lock.json`.
-- Integración con clúster, ACL del motor, red y servicios administrados: pendiente de infraestructura externa.
+- Integración con clúster real, ACL del motor, red y servicios administrados: pendiente de infraestructura externa.
 - OpenSearch recupera listados grandes mediante paginación `search_after`; la prueba local cubre más de 10.000 documentos.
 - `run-distributed-core12.mjs` acepta `COBRIA_OUTPUT_DIR` para no sobrescribir resultados históricos.
 
