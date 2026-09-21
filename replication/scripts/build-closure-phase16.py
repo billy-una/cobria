@@ -12,6 +12,7 @@ import zipfile
 
 ROOT = Path(__file__).resolve().parents[2]
 NAME = "COBRIA-Ecosistema-1.0.0-rc1"
+TAG = "ecosistema-1.0.0-rc1"
 PDF_FILES = [
     "COBRIA-especificacion-ecosistema-1.0.pdf",
     "COBRIA-articulo-cientifico-actualizado.pdf",
@@ -63,7 +64,7 @@ if output == ROOT or ROOT in output.parents and output.name == "":
 shutil.rmtree(output, ignore_errors=True)
 stage.mkdir(parents=True)
 
-commit = run("git", "rev-parse", "--verify", "HEAD")
+commit = run("git", "rev-parse", "--verify", f"refs/tags/{TAG}^{{commit}}")
 if run("git", "status", "--porcelain"):
     raise SystemExit("El árbol de trabajo debe estar limpio antes de construir la candidata")
 
@@ -79,11 +80,12 @@ for name in PDF_FILES:
     shutil.copyfile(source, stage / name)
 
 for relative in DOCUMENTS:
-    source = ROOT / relative
-    if not source.is_file():
-        raise SystemExit(f"Falta documento de release: {relative}")
+    try:
+        content = subprocess.check_output(["git", "show", f"{TAG}:{relative}"], cwd=ROOT)
+    except subprocess.CalledProcessError as error:
+        raise SystemExit(f"Falta documento de release en {TAG}: {relative}") from error
     destination = stage / Path(relative).name
-    shutil.copyfile(source, destination)
+    destination.write_bytes(content)
 
 entries = []
 for path in sorted(item for item in stage.iterdir() if item.is_file()):

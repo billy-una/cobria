@@ -1,0 +1,33 @@
+name: Reproducción o evidencia externa
+description: Comunicar una ejecución independiente sin convertirla en certificación
+title: "[Evidencia externa] "
+labels: ["evidencia"]
+body:
+  - type: input
+    id: artifact
+    attributes:
+      label: Artefacto, etiqueta y huella verificados
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Ambiente y procedimiento
+    validations:
+      required: true
+  - type: textarea
+    id: result
+    attributes:
+      label: Resultado, fallos y desviaciones
+    validations:
+      required: true
+  - type: checkboxes
+    id: declaration
+    attributes:
+      label: Declaración
+      options:
+        - label: Trabajé de forma independiente y declaro posibles conflictos.
+          required: true
+        - label: Comprendo que este informe no es una certificación oficial.
+          required: true
+

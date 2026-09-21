@@ -67,6 +67,8 @@ ayuda:
 	@echo "  make construir-sitio        Genera la versión publicable del sitio"
 	@echo "  make construir-maestro      Compila el documento maestro"
 	@echo "  make construir-articulo     Compila el artículo científico"
+	@echo "  make verificar-cierre-18   Valida publicación y retiene la etiqueta estable si faltan personas"
+	@echo "  make preparar-estable      Rechaza la promoción mientras existan puertas humanas pendientes"
 
 verificar: verificar-fase-2 verificar-fase-3 verificar-fase-4 verificar-fase-5 verificar-fase-6 verificar-fase-7 verificar-fase-8 verificar-fase-9 verificar-fase-10 verificar-fase-11 verificar-fase-12 verificar-fase-13 verificar-fase-14 verificar-fase-15 verificar-fase-16 verificar-fase-17 verificar-fase-18 verificar-fase-19 verificar-fase-20 verificar-fase-21 verificar-fase-22 verificar-fase-23 verificar-fase-24 verificar-fase-25 verificar-fase-26 verificar-fase-27 verificar-fase-28 verificar-fase-29 verificar-fase-30 verificar-fase-31 verificar-fase-32 verificar-fase-33 verificar-fase-34 verificar-fase-35 verificar-fase-36 verificar-replica verificar-sitio
 
@@ -298,6 +300,12 @@ auditar-rc1:
 
 verificar-cierre-17: auditar-rc1
 
+verificar-cierre-18:
+	python3 replication/scripts/validate-closure-phase18.py
+
+preparar-estable:
+	python3 replication/scripts/prepare-stable-release.py
+
 construir-articulo-ciego:
 	mkdir -p build/review
 	latexmk -pdf -interaction=nonstopmode -halt-on-error -outdir=build/review review/blind-article.tex
@@ -307,4 +315,4 @@ construir-articulo-ciego:
 .PHONY: verificar-cierre-10-11
 .PHONY: generar-inventario-cientifico verificar-cierre-12-13
 .PHONY: construir-editorial verificar-cierre-14-15
-.PHONY: construir-rc1 verificar-cierre-16 auditar-rc1 verificar-cierre-17
+.PHONY: construir-rc1 verificar-cierre-16 auditar-rc1 verificar-cierre-17 verificar-cierre-18 preparar-estable

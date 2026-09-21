@@ -409,6 +409,10 @@ y no se sustituye por revisores inventados.
 
 **Objetivo:** publicar una propuesta independiente honesta, utilizable y sostenible.
 
+**Estado al 21 de septiembre de 2026:** infraestructura de mantenimiento y publicación
+preparada; candidata pública reproducible; etiqueta estable retenida correctamente por
+las puertas humanas y externas pendientes.
+
 **Entregables:**
 
 - etiqueta `ecosistema-1.0.0`;

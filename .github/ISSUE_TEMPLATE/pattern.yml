@@ -1,0 +1,29 @@
+name: Propuesta de patrón o mejora
+description: Proponer una solución a un problema repetido
+title: "[Propuesta] "
+labels: ["propuesta"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problema repetido
+      description: Describa el contexto sin mencionar información privada.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternativa más simple y opciones consideradas
+    validations:
+      required: true
+  - type: textarea
+    id: contract
+    attributes:
+      label: Contrato, costo y criterio de retiro
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidencia disponible y evidencia pendiente
+

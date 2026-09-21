@@ -2,7 +2,16 @@
   "schemaVersion": "1.0.0",
   "baselineDate": "2026-09-21",
   "targetRelease": "ecosistema-1.0.0",
-  "status": "preparacion",
+  "status": "candidata-publica-estable-bloqueada",
+  "candidateTag": "ecosistema-1.0.0-rc1",
+  "stableTag": "ecosistema-1.0.0",
+  "stableBlockedBy": [
+    "review-human",
+    "double-screening-human",
+    "transfer-participants",
+    "external-replication",
+    "authorized-publication"
+  ],
   "protectedCore": "specification/COBRIA-CORE-1.0.md",
   "inventoryOutput": "editorial/generated/release-baseline.json",
   "publicProducts": [

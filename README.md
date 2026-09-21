@@ -22,6 +22,10 @@ Proyecto LaTeX del trabajo:
 - `IDENTIDAD-ECOSISTEMA-COBRIA.md`: definición, promesa, audiencias, nombres y versiones.
 - `ARCHIVO-Y-FUENTES-CANONICAS.md`: clasificación y autoridad de fuentes, derivados,
   evidencia, paquetes de revisión e históricos.
+- `MAINTENANCE.md`, `CONTRIBUTING.md` y `SECURITY.md`: mantenimiento, colaboración y
+  reporte responsable de vulnerabilidades.
+- `CHANGELOG.md`, `CITATION.cff` y `ROADMAP-1.X.md`: historia, cita y evolución pública.
+- `PUBLICATION-READINESS-1.0.0.md`: puerta honesta entre candidata y versión estable.
 - `specification/MAPA-ECOSISTEMA.md`: responsabilidades y dependencias entre productos COBRIA.
 - `specification/phase-2/`: actores, casos de uso, requisitos y trazabilidad del ecosistema.
 - `specification/phase-3/`: diccionario de datos, catálogos, migraciones y ejemplos validables.

@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+title: "COBRIA: patrones, capas, datos y software verificable"
+message: "Si utiliza COBRIA, cite la versión y el artefacto exactos consultados."
+type: software
+authors:
+  - family-names: "Cordero Porras"
+    given-names: "Billy Jak"
+date-released: 2026-09-21
+version: "1.0.0-rc1"
+repository-code: "https://github.com/billy-una/cobria"
+url: "https://cobria-atlas.sectagpt.chatgpt.site"
+abstract: >-
+  Propuesta independiente de patrones, contratos, capas y herramientas para construir
+  software verificable, con especialización en autoridad, ámbito, derivación y
+  reconstrucción de datos documentales NoSQL.
+keywords:
+  - arquitectura de software
+  - patrones de diseño
+  - NoSQL
+  - datos canónicos
+  - proyecciones reconstruibles
+  - ingeniería de software
