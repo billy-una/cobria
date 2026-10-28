@@ -1,0 +1,10 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {analyzeCell,describe,holm} from '../src/pc3/analysis.mjs';
+const fixture=delta=>Array.from({length:30},(_,i)=>({run:i+1,canonicalMs:Array(10).fill(2),projectionMs:Array(10).fill(2+delta)}));
+test('PC3 admite igualdad sin inventar tamaño de efecto',()=>{const r=analyzeCell(fixture(0));assert.equal(r.primary.p,1);assert.equal(r.dz,null);assert.deepEqual(r.differenceCI95,[0,0]);assert.equal(r.medianPairedRatio,1);});
+test('PC3 conserva resultado desfavorable y unidades',()=>{const r=analyzeCell(fixture(1));assert.equal(r.meanDifferenceMs,1);assert.equal(r.primary.positive,30);assert.equal(r.canonical.n,300);assert.equal(r.trials,30);});
+test('PC3 resultado favorable no es requisito de aceptación',()=>{assert.equal(analyzeCell(fixture(-1)).primary.negative,30);});
+test('PC3 rechaza celdas incompletas, duplicadas y tiempos inválidos',()=>{assert.throws(()=>analyzeCell(fixture(0).slice(1)));const a=fixture(0);a[0].run=2;assert.throws(()=>analyzeCell(a));const b=fixture(0);b[0].canonicalMs[0]=0;assert.throws(()=>analyzeCell(b));});
+test('PC3 Holm requiere nueve celdas y conserva orden original',()=>{assert.throws(()=>holm([.01]));assert.deepEqual(holm(Array(9).fill(1)),Array(9).fill(1));assert.equal(holm([.001,...Array(8).fill(1)])[0],.009000000000000001);});
+test('PC3 percentiles y dispersión no mutan datos',()=>{const a=[3,1,2];assert.equal(describe(a).p50,2);assert.deepEqual(a,[3,1,2]);});

@@ -1,0 +1,11 @@
+{
+  "id": "COBRIA-PC2-analisis-01",
+  "frozenAt": "2026-10-19T00:17:23.386Z",
+  "scope": "adenda-local-antes-de-PC3",
+  "files": {
+    "replication/protocol/pc2-analysis-01.json": "bdf1267ce74f21dedbe6e008682fe377b3cfb931e15215374895785105fd9c91",
+    "replication/src/pc2/sign-test.mjs": "10b2292a354d651a13748b49084ce73710dba17068abc5eea94213c4a4d62028",
+    "replication/scripts/check-pc2-analysis.mjs": "60e469741a4bdc1536713114165a1780a2bcc809e94de58dfb60a5d06fbb4887",
+    "replication/tests/pc2-analysis.test.mjs": "78950143452649cc804c9a3a6fb0d73f3eeceb7299458bbe5f47729b23559712"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.0.0",
+  "engine": "couchdb",
+  "capturedAt": "2026-09-23T08:21:43.146Z",
+  "engineInfo": {
+    "version": "3.4.3",
+    "vendor": "The Apache Software Foundation"
+  },
+  "container": {
+    "name": "cobria-couchdb-confirmatory",
+    "image": "couchdb:3.4",
+    "imageId": "sha256:628c4952c1cf668489fb668fbd24013bf61ff25add0a3643253dde0d47cae449",
+    "architecture": "amd64",
+    "os": "linux",
+    "repoDigests": [
+      "couchdb@sha256:628c4952c1cf668489fb668fbd24013bf61ff25add0a3643253dde0d47cae449"
+    ]
+  },
+  "runtime": {
+    "dockerContext": "colima",
+    "serverVersion": "29.5.2",
+    "architecture": "x86_64",
+    "operatingSystem": "Ubuntu 24.04.4 LTS",
+    "cpus": 4,
+    "totalMemoryBytes": 6207385600
+  },
+  "client": {
+    "node": "v24.2.0",
+    "platform": "darwin",
+    "architecture": "arm64"
+  }
+}

@@ -1,0 +1,272 @@
+% Generado desde specification/requirements-1.0.json. No editar a mano.
+\newcommand{\ConteoRequisitos}{18}
+\subsection{Nivel C1: Fundamental}
+\label{nivel:c1}
+\begin{requisito}{AUT-001 --- Autoridad canónica única}
+\textbf{Obligación normativa (DEBE).} Cada hecho mutable de dominio debe tener una representación canónica declarada; índices, cachés, proyecciones, exportaciones y respuestas de IA no deben aceptar cambios autoritativos.\par
+\textbf{Criterios de aceptación.}
+\begin{itemize}
+\item La matriz de lectura y escritura identifica un único escritor autoritativo.
+\item Una escritura dirigida a un derivado es rechazada o traducida a un caso de uso canónico.
+\end{itemize}
+\textbf{Responsable.} responsable de dominio.\par
+\textbf{Verificación.} pruebas de frontera del repositorio y revisión arquitectónica.\par
+\textbf{Comando reproducible.} \texttt{\detokenize{cd replication && npm test}}\par
+\textbf{Evidencia resoluble.} \path{replication/tests/core11.test.mjs}; \path{specification/phase-4/MATRIZ-LECTURA-ESCRITURA.md}.\par
+\textbf{Amenaza residual.} Una ruta administrativa o integración puede crear una autoridad paralela.\par
+\textbf{Origen normativo.} COBRIA-CORE-1.0.md §3.1.
+\end{requisito}
+\begin{requisito}{ID-001 --- Identidad documental estable}
+\textbf{Obligación normativa (DEBE).} La identidad lógica debe permanecer estable frente a cambios de motor, colección, partición, versión de esquema o proyección.\par
+\textbf{Criterios de aceptación.}
+\begin{itemize}
+\item La clave lógica se define fuera del SDK y de la ubicación física.
+\item Reconstruir o migrar conserva la misma identidad observable.
+\end{itemize}
+\textbf{Responsable.} responsable de datos.\par
+\textbf{Verificación.} casos positivos y negativos de identidad requerida.\par
+\textbf{Comando reproducible.} \texttt{\detokenize{cd replication && npm test}}\par
+\textbf{Evidencia resoluble.} \path{replication/src/core/cobria.mjs}; \path{replication/tests/core11.test.mjs}.\par
+\textbf{Amenaza residual.} Una clave generada por infraestructura puede filtrarse al dominio.\par
+\textbf{Origen normativo.} COBRIA-CORE-1.0.md §5 C1.
+\end{requisito}
+\begin{requisito}{SCP-001 --- Ámbito obligatorio}
+\textbf{Obligación normativa (DEBE).} Toda lectura, escritura, clave, consulta, caché, evento, trabajo de fondo y recuperación debe incorporar un ámbito autorizado antes de acceder al almacén.\par
+\textbf{Criterios de aceptación.}
+\begin{itemize}
+\item Una operación sin ámbito falla cerrada.
+\item Una identidad válida no observa documentos de otro ámbito.
+\item El ámbito participa en claves e índices cuando evita colisiones.
+\end{itemize}
+\textbf{Responsable.} responsable de seguridad y datos.\par
+\textbf{Verificación.} S1 y mutante deliberado de fuga.\par
+\textbf{Comando reproducible.} \texttt{\detokenize{cd replication && npm test}}\par
+\textbf{Evidencia resoluble.} \path{replication/tests/adversarial.test.mjs}; \path{replication/tests/core11.test.mjs}.\par
+\textbf{Amenaza residual.} Filtrar después de recuperar puede exponer existencia, conteos o trazas.\par
+\textbf{Origen normativo.} COBRIA-CORE-1.0.md §3.2.
+\end{requisito}
+\begin{requisito}{REV-001 --- Revisión monotónica}
+\textbf{Obligación normativa (NO DEBE).} Una escritura con revisión obsoleta no debe reducir la revisión visible ni reemplazar silenciosamente un estado más reciente.\par
+\textbf{Criterios de aceptación.}
+\begin{itemize}
+\item La revisión esperada forma parte de la precondición de escritura.
+\item El rechazo utiliza un código estable y deja evidencia mínima.
+\end{itemize}
+\textbf{Responsable.} responsable de persistencia.\par
+\textbf{Verificación.} entrega fuera de orden y carrera local.\par
+\textbf{Comando reproducible.} \texttt{\detokenize{cd replication && npm test}}\par
+\textbf{Evidencia resoluble.} \path{replication/tests/core11.test.mjs}; \path{replication/results/core-1.2-failure-bank/summary.json}.\par
+\textbf{Amenaza residual.} Relojes, reintentos o consumidores concurrentes pueden reintroducir versiones antiguas.\par
+\textbf{Origen normativo.} COBRIA-CORE-1.0.md §3.7.
+\end{requisito}
+\begin{requisito}{WRT-001 --- Frontera única de escritura}
+\textbf{Obligación normativa (DEBE).} Los cambios autoritativos deben atravesar un caso de uso o repositorio que aplique validación, capacidad, ámbito, revisión e idempotencia antes de persistir.\par
+\textbf{Criterios de aceptación.}
+\begin{itemize}
+\item No existe acceso de escritura de presentación a infraestructura.
+\item Las rutas administrativas obedecen la misma frontera que las rutas ordinarias.
+\end{itemize}
+\textbf{Responsable.} responsable de aplicación.\par
+\textbf{Verificación.} auditoría de dependencias y prueba negativa de acceso directo.\par
+\textbf{Comando reproducible.} \texttt{\detokenize{make verificar-fase-5}}\par
+\textbf{Evidencia resoluble.} \path{specification/phase-5/REGLAS-DE-DEPENDENCIA.md}; \path{replication/scripts/validate-phase5.py}.\par
+\textbf{Amenaza residual.} Una excepción operacional puede convertirse en ruta permanente sin controles.\par
+\textbf{Origen normativo.} COBRIA-CORE-1.0.md §5 C1.
+\end{requisito}
+\subsection{Nivel C2: Reconstruible}
+\label{nivel:c2}
+Este nivel hereda todos los requisitos de C1.
+\begin{requisito}{TRN-001 --- Transformación versionada}
+\textbf{Obligación normativa (DEBE).} Cada derivado debe declarar transformación, versión, parámetros, catálogos, fuentes y reglas de normalización necesarias para repetirlo.\par
+\textbf{Criterios de aceptación.}
+\begin{itemize}
+\item El manifiesto identifica entradas y versión de transformación.
+\item Cambiar semántica produce una versión nueva y no una mutación silenciosa.
+\end{itemize}
+\textbf{Responsable.} responsable de proyección.\par
+\textbf{Verificación.} reconstrucción con catálogo y cambio de esquema.\par
+\textbf{Comando reproducible.} \texttt{\detokenize{cd replication && npm test}}\par
+\textbf{Evidencia resoluble.} \path{replication/src/core/cobria.mjs}; \path{replication/results/core-1.2-failure-bank/summary.json}.\par
+\textbf{Amenaza residual.} Dependencias ambientales no registradas pueden volver no determinista el resultado.\par
+\textbf{Origen normativo.} COBRIA-CORE-1.0.md §2.
+\end{requisito}
+\begin{requisito}{IDM-001 --- Procesamiento idempotente}
+\textbf{Obligación normativa (NO DEBE).} Repetir la misma entrega lógica no debe crear efectos observables adicionales ni ocultar una entrada diferente bajo la misma clave.\par
+\textbf{Criterios de aceptación.}
+\begin{itemize}
+\item La clave incluye ámbito y operación.
+\item Una repetición equivalente devuelve el resultado previo.
+\item Una repetición divergente se rechaza.
+\end{itemize}
+\textbf{Responsable.} responsable de aplicación.\par
+\textbf{Verificación.} entrega duplicada y colisión semántica.\par
+\textbf{Comando reproducible.} \texttt{\detokenize{cd replication/examples/ecosistema-app && npm test}}\par
+\textbf{Evidencia resoluble.} \path{replication/examples/ecosistema-app/test/app.test.mjs}.\par
+\textbf{Amenaza residual.} La deduplicación con caducidad corta puede aceptar duplicados tardíos.\par
+\textbf{Origen normativo.} COBRIA-CORE-1.0.md §3.6.
+\end{requisito}
+\begin{requisito}{EQV-001 --- Equivalencia congelada}
+\textbf{Obligación normativa (DEBE).} Antes de construir, el proyecto debe declarar una relación de equivalencia que compare el significado relevante entre la candidata y la autoridad.\par
+\textbf{Criterios de aceptación.}
+\begin{itemize}
+\item La normalización excluye solo campos no semánticos declarados.
+\item Una candidata corrupta o incompleta falla la verificación.
+\item Las tolerancias numéricas están versionadas.
+\end{itemize}
+\textbf{Responsable.} responsable de calidad de datos.\par
+\textbf{Verificación.} R1 y mutante de candidata corrupta.\par
+\textbf{Comando reproducible.} \texttt{\detokenize{cd replication && npm test}}\par
+\textbf{Evidencia resoluble.} \path{replication/tests/adversarial.test.mjs}; \path{specification/COBRIA-FORMAL-1.2.md}.\par
+\textbf{Amenaza residual.} Un oráculo incompleto puede aprobar pérdidas semánticas.\par
+\textbf{Origen normativo.} COBRIA-CORE-1.0.md §3.5.
+\end{requisito}
+\begin{requisito}{REC-001 --- Reconstrucción independiente}
+\textbf{Obligación normativa (DEBE).} Una proyección debe poder regenerarse desde fuentes autorizadas y entradas declaradas sin depender de la proyección activa o dañada.\par
+\textbf{Criterios de aceptación.}
+\begin{itemize}
+\item La construcción ocurre en una candidata separada.
+\item Eliminar el derivado no elimina la capacidad de reconstrucción.
+\item La ejecución repetida produce un resultado equivalente.
+\end{itemize}
+\textbf{Responsable.} responsable de proyección.\par
+\textbf{Verificación.} R1 total e incremental.\par
+\textbf{Comando reproducible.} \texttt{\detokenize{cd replication && npm test}}\par
+\textbf{Evidencia resoluble.} \path{replication/tests/core11.test.mjs}; \path{replication/examples/ecosistema-app/test/app.test.mjs}.\par
+\textbf{Amenaza residual.} Una fuente mutable externa puede impedir reproducir un corte histórico.\par
+\textbf{Origen normativo.} COBRIA-CORE-1.0.md §3.4.
+\end{requisito}
+\begin{requisito}{PUB-001 --- Publicación segura por versión}
+\textbf{Obligación normativa (DEBE).} Solo una candidata completa y verificada debe sustituir la versión activa; cualquier fallo previo debe conservar la versión anterior legible.\par
+\textbf{Criterios de aceptación.}
+\begin{itemize}
+\item Solo VERIFICADA transiciona a PUBLICADA.
+\item El cambio activo registra versión, huella y versión previa.
+\item Existe rollback comprobable.
+\end{itemize}
+\textbf{Responsable.} responsable de publicación.\par
+\textbf{Verificación.} fallo durante publicación, huella incorrecta y rollback.\par
+\textbf{Comando reproducible.} \texttt{\detokenize{cd replication && npm test}}\par
+\textbf{Evidencia resoluble.} \path{replication/tests/core11.test.mjs}; \path{replication/results/core-1.2-failure-bank/summary.json}.\par
+\textbf{Amenaza residual.} La garantía local no demuestra intercambio atómico distribuido.\par
+\textbf{Origen normativo.} COBRIA-CORE-1.0.md §3.8.
+\end{requisito}
+\subsection{Nivel C3: Gobernado}
+\label{nivel:c3}
+Este nivel hereda todos los requisitos de C1 y C2.
+\begin{requisito}{PRV-001 --- Procedencia completa}
+\textbf{Obligación normativa (DEBE).} Cada derivado debe enlazar fuente, identidad, revisión, versión de transformación, catálogos, tiempo de corte y huellas necesarias para explicarlo.\par
+\textbf{Criterios de aceptación.}
+\begin{itemize}
+\item El manifiesto permite resolver todas las referencias.
+\item Una fuente o versión ausente impide declarar reproducibilidad.
+\end{itemize}
+\textbf{Responsable.} custodio de datos.\par
+\textbf{Verificación.} integridad del manifiesto A1.\par
+\textbf{Comando reproducible.} \texttt{\detokenize{cd replication && npm test}}\par
+\textbf{Evidencia resoluble.} \path{replication/tests/core11.test.mjs}; \path{replication/results/core-1.1-analytics-ai/summary.json}.\par
+\textbf{Amenaza residual.} Una fuente puede cambiar conservando la misma ubicación.\par
+\textbf{Origen normativo.} COBRIA-CORE-1.0.md §3.3.
+\end{requisito}
+\begin{requisito}{FRS-001 --- Presupuesto de frescura y costo}
+\textbf{Obligación normativa (DEBE).} Toda representación derivada debe declarar frescura permitida, costo esperado, condición de degradación y respuesta cuando incumple el presupuesto.\par
+\textbf{Criterios de aceptación.}
+\begin{itemize}
+\item Las métricas comparan edad observable con el presupuesto.
+\item El incumplimiento alerta, degrada o impide publicar según política.
+\end{itemize}
+\textbf{Responsable.} responsable de operación.\par
+\textbf{Verificación.} evaluación de presupuesto con caso conforme y excedido.\par
+\textbf{Comando reproducible.} \texttt{\detokenize{make verificar-fase-15}}\par
+\textbf{Evidencia resoluble.} \path{specification/phase-15/budgets.json}; \path{replication/scripts/validate-phase15.py}.\par
+\textbf{Amenaza residual.} Un presupuesto sin medición se convierte en documentación decorativa.\par
+\textbf{Origen normativo.} COBRIA-CORE-1.0.md §2 y §3.9.
+\end{requisito}
+\begin{requisito}{OBS-001 --- Observabilidad verificable}
+\textbf{Obligación normativa (DEBE).} Construcción, verificación, publicación, rechazo, reparación y retiro deben emitir evidencia suficiente sin exponer secretos ni datos sensibles.\par
+\textbf{Criterios de aceptación.}
+\begin{itemize}
+\item Existen métricas de duración, cobertura, frescura y fallos.
+\item Los registros usan lista positiva y correlación estable.
+\item La caída de telemetría no bloquea el negocio.
+\end{itemize}
+\textbf{Responsable.} responsable de operación.\par
+\textbf{Verificación.} escenarios de telemetría sanitizada y no bloqueante.\par
+\textbf{Comando reproducible.} \texttt{\detokenize{make verificar-cierre-8-9}}\par
+\textbf{Evidencia resoluble.} \path{specification/phase-9/observability.json}; \path{replication/results/operational-phase89/latest.json}.\par
+\textbf{Amenaza residual.} Etiquetas de alta cardinalidad o cargas completas pueden causar costo y fuga.\par
+\textbf{Origen normativo.} COBRIA-CORE-1.0.md §3.9.
+\end{requisito}
+\begin{requisito}{OWN-001 --- Propiedad operacional}
+\textbf{Obligación normativa (DEBE).} Cada proyección debe declarar una persona o rol responsable de su contrato, operación, incidentes, evolución y retiro.\par
+\textbf{Criterios de aceptación.}
+\begin{itemize}
+\item El responsable es resoluble desde el manifiesto.
+\item Existe una ruta de escalamiento y un runbook mínimo.
+\end{itemize}
+\textbf{Responsable.} responsable de arquitectura.\par
+\textbf{Verificación.} inspección de manifiesto y runbook.\par
+\textbf{Comando reproducible.} \texttt{\detokenize{make verificar-fase-11}}\par
+\textbf{Evidencia resoluble.} \path{specification/phase-11/architecture.yaml}; \path{specification/phase-6/PLANTILLA-RUNBOOK.md}.\par
+\textbf{Amenaza residual.} Un nombre desactualizado puede simular propiedad sin capacidad real de respuesta.\par
+\textbf{Origen normativo.} COBRIA-CORE-1.0.md §2 y §3.9.
+\end{requisito}
+\begin{requisito}{RET-001 --- Retiro gobernado}
+\textbf{Obligación normativa (DEBE).} Toda proyección debe declarar condiciones de retiro, consumidores, retención, eliminación verificable y comportamiento posterior al retiro.\par
+\textbf{Criterios de aceptación.}
+\begin{itemize}
+\item Una versión retirada no recibe escrituras.
+\item Los consumidores tienen una ruta de migración.
+\item Retirar no elimina las fuentes requeridas por la política vigente.
+\end{itemize}
+\textbf{Responsable.} responsable de proyección.\par
+\textbf{Verificación.} retiro y reconstrucción posterior.\par
+\textbf{Comando reproducible.} \texttt{\detokenize{cd replication/examples/ecosistema-app && npm test}}\par
+\textbf{Evidencia resoluble.} \path{replication/examples/ecosistema-app/test/app.test.mjs}; \path{specification/phase-7/PRIVACIDAD-Y-RETENCION.md}.\par
+\textbf{Amenaza residual.} Retención legal, copias y cachés pueden sobrevivir al retiro lógico.\par
+\textbf{Origen normativo.} COBRIA-CORE-1.0.md §4.
+\end{requisito}
+\begin{requisito}{ANA-001 --- Conjunto analítico reproducible}
+\textbf{Obligación normativa (DEBE).} Un conjunto analítico debe conservar fuentes autorizadas, consulta, transformación, tiempo de corte, partición, semilla, esquema, consentimiento aplicable y huella.\par
+\textbf{Criterios de aceptación.}
+\begin{itemize}
+\item El mismo manifiesto reconstruye selección y partición equivalentes.
+\item Una entidad no cruza particiones cuando produciría fuga.
+\item El contenido restringido se separa de los metadatos reproducibles.
+\end{itemize}
+\textbf{Responsable.} responsable de analítica.\par
+\textbf{Verificación.} A1, reconstrucción y fuga temporal.\par
+\textbf{Comando reproducible.} \texttt{\detokenize{cd replication/examples/ecosistema-app && npm test}}\par
+\textbf{Evidencia resoluble.} \path{replication/examples/ecosistema-app/test/app.test.mjs}; \path{replication/results/core-1.1-analytics-ai/summary.json}.\par
+\textbf{Amenaza residual.} La reproducibilidad no autoriza divulgar datos personales.\par
+\textbf{Origen normativo.} COBRIA-CORE-1.0.md §6 A1.
+\end{requisito}
+\begin{requisito}{AI-001 --- IA con evidencia y abstención}
+\textbf{Obligación normativa (DEBE).} Una salida de IA debe limitar recuperación por ámbito, citar procedencia suficiente y abstenerse cuando la evidencia autorizada no permita sostener la respuesta.\par
+\textbf{Criterios de aceptación.}
+\begin{itemize}
+\item El ámbito restringe candidatos antes de similitud.
+\item La salida enlaza revisiones de fuente.
+\item Sin evidencia suficiente se produce una abstención observable y útil.
+\end{itemize}
+\textbf{Responsable.} responsable de IA y seguridad.\par
+\textbf{Verificación.} recuperación cruzada, ausencia de evidencia y escritura prohibida.\par
+\textbf{Comando reproducible.} \texttt{\detokenize{cd replication/examples/ecosistema-app && npm test}}\par
+\textbf{Evidencia resoluble.} \path{replication/examples/ecosistema-app/test/app.test.mjs}; \path{specification/analytics-ai/policy.json}.\par
+\textbf{Amenaza residual.} Una cita presente no demuestra exactitud, ausencia de sesgo ni seguridad del modelo.\par
+\textbf{Origen normativo.} COBRIA-CORE-1.0.md §6 A1.
+\end{requisito}
+\begin{requisito}{SEC-001 --- Fallo cerrado y capacidad mínima}
+\textbf{Obligación normativa (DEBE).} La ausencia o contradicción de identidad, capacidad, ámbito, finalidad, revisión o procedencia requerida debe rechazarse antes del acceso; una herramienta automatizada recibe solo capacidades mínimas.\par
+\textbf{Criterios de aceptación.}
+\begin{itemize}
+\item Los casos negativos demuestran que el almacén no fue consultado.
+\item Lectura y escritura utilizan capacidades separadas.
+\item La auditoría no copia cargas sensibles.
+\end{itemize}
+\textbf{Responsable.} responsable de seguridad.\par
+\textbf{Verificación.} S1, capacidades y contexto manipulado.\par
+\textbf{Comando reproducible.} \texttt{\detokenize{cd replication/examples/ecosistema-app && npm test}}\par
+\textbf{Evidencia resoluble.} \path{replication/examples/ecosistema-app/test/app.test.mjs}; \path{specification/phase-7/security.json}.\par
+\textbf{Amenaza residual.} La conformidad lógica no prueba ACL, red o aislamiento del proveedor.\par
+\textbf{Origen normativo.} COBRIA-CORE-1.0.md §3.10.
+\end{requisito}

@@ -1,0 +1,130 @@
+{
+  "schemaVersion": "1.0.0",
+  "status": "orientacion-pedagogica",
+  "title": "Del proyecto organizado a la operación verificable",
+  "intro": "Doce prácticas para construir una reserva natural digital: carpetas comprensibles, datos documentados, consultas acotadas y una entrega que otra persona pueda comprobar.",
+  "source": "manuales/24-organizacion-y-operacion-del-proyecto.md",
+  "example": "replication/examples/operacion-documental",
+  "practices": [
+    {
+      "id": "OP01", "modules": ["arquitectura", "documentacion", "construir"],
+      "title": "Organizar por responsabilidad y necesidad de lectura",
+      "situation": "La persona nueva encuentra cientos de carpetas, pero no sabe dónde corregir una observación ni cuál documento está vigente.",
+      "rule": "La raíz explica cómo comenzar; cada carpeta declara responsabilidad y cada documento tiene una audiencia y una autoridad.",
+      "steps": ["Separe código, pruebas, herramientas y documentación.", "Organice dominio, aplicación, datos, presentación y composición según dependencias.", "Prepare índices por tarea: comenzar, decidir, implementar, operar y recuperar."],
+      "code": "src/\n  domain/       # reglas del negocio\n  application/  # casos de uso y puertos\n  data/         # Daters y adaptadores\n  presentation/ # vistas y controles\n  composition/  # conecta implementaciones\ndocs/           # índices y decisiones\ntest/           # contratos y recorridos",
+      "verification": "Una persona ubica el caso de uso, su adaptador, prueba y runbook partiendo del README.",
+      "limit": "No cree una carpeta o clase por obligación ornamental. Un proyecto pequeño puede combinar módulos conservando responsabilidades explícitas."
+    },
+    {
+      "id": "OP02", "modules": ["datos", "capas", "codigo"],
+      "title": "Vincular diccionario, Dater y validación",
+      "situation": "El diccionario llama especie a un campo, el Dater lo traduce distinto y el servidor acepta atributos desconocidos.",
+      "rule": "Cada atributo declara significado, tipo, obligatoriedad, autoridad, versión y representación física; su traducción se comprueba en la frontera de datos.",
+      "steps": ["Defina nombres semánticos primero.", "Registre colección, clave física y transformación en el Dater.", "Compruebe ida y vuelta, campos desconocidos y coherencia de validación de servidor."],
+      "code": "// Diccionario de observaciones, versión 1\nconst campos = {\n  ambito: { fisico: 'a', tipo: 'string' },\n  especie: { fisico: 'b', tipo: 'string' },\n  revision: { fisico: 'c', tipo: 'entero' }\n};\n// El dominio conserva ambito, especie y revision.",
+      "verification": "Dater y contrato comparten casos válidos e inválidos; una nueva clave desconocida produce un error definido.",
+      "limit": "Las letras no son requisito de COBRIA ni garantizan ahorro global. El dominio no necesita conocerlas; mida bytes y costo de mantenimiento."
+    },
+    {
+      "id": "OP03", "modules": ["datos", "documentacion", "apiux"],
+      "title": "Separar códigos de catálogo y etiquetas traducidas",
+      "situation": "Cambiar el idioma convierte el estado guardado de una muestra en una palabra que las reglas ya no reconocen.",
+      "rule": "El catálogo guarda un código estable. El gestor de idioma lo presenta; las reglas y referencias no dependen del texto visible.",
+      "steps": ["Versione el vocabulario permitido.", "Conserve códigos como observacion-validada.", "Resuelva etiquetas por idioma y pruebe el idioma ausente."],
+      "code": "const estado = 'observacion-validada';\nconst etiquetas = {\n  es: { [estado]: 'Observación validada' }\n};\nconst etiqueta = idioma =>\n  etiquetas[idioma]?.[estado] ?? etiquetas.es[estado];",
+      "verification": "Cambiar la etiqueta no modifica documentos, referencias ni autorización.",
+      "limit": "La traducción no sustituye una migración de significado; cambiar un estado requiere contrato y versión."
+    },
+    {
+      "id": "OP04", "modules": ["datos", "calidad", "core"],
+      "title": "Acotar lecturas antes de añadir proyecciones",
+      "situation": "El mapa descarga todas las observaciones para mostrar veinte registros y multiplica consultas de detalle sin límite.",
+      "rule": "Use identidad exacta, índice con cursor y límite, deduplicación y detalle bajo demanda; una proyección se justifica después de comparar costos.",
+      "steps": ["Declare el orden estable y cursor de la consulta.", "Acote tamaño, IDs y concurrencia de detalle.", "Mida bytes, lecturas, tiempo y escrituras adicionales antes y después."],
+      "code": "const consulta = {\n  ambito: 'reserva-sur',\n  orden: ['fecha', 'id'],\n  limite: 20,\n  cursor: null\n};\n// El adaptador aplica el límite en el motor.",
+      "verification": "La segunda página no repite la primera y la consulta tiene límite en el servidor, no solo en el navegador.",
+      "limit": "Una clave puntual no implica latencia O(1) de extremo a extremo. Índices, red, tamaño y proveedor influyen; los límites del caso de origen no son universales."
+    },
+    {
+      "id": "OP05", "modules": ["datos", "seguridad", "construir"],
+      "title": "Una caché con ámbito, permisos y vencimiento",
+      "situation": "Dos pantallas repiten la misma lectura o una sesión recibe una respuesta almacenada para otro permiso.",
+      "rule": "Autorice antes de leer. La clave contiene ámbito, versión de política y consulta; TTL, invalidación y capacidad forman parte del contrato.",
+      "steps": ["Deduzca el contexto desde la identidad confiable.", "Comparta peticiones equivalentes en vuelo y limite entradas.", "Invalide al escribir o cambiar sesión; pruebe una respuesta antigua tardía."],
+      "code": "const contexto = {\n  ambito: 'reserva-sur',\n  politica: 'lectura-v1',\n  recurso: 'observaciones:pagina-1'\n};\nconst valor = await cache.leer(contexto, cargar);\ncache.invalidar({ ambito: contexto.ambito });",
+      "verification": "El ejemplo ejecutable prueba deduplicación, aislamiento por contexto, TTL, capacidad, rechazo y respuesta antigua tras invalidar.",
+      "limit": "La caché no autoriza y no cancela datos ya entregados a un consumidor. Cancele o descarte respuestas en la vista al cambiar sesión."
+    },
+    {
+      "id": "OP06", "modules": ["capas", "apiux", "calidad"],
+      "title": "Dar ciclo de vida a servicios y listeners",
+      "situation": "Cada apertura del mapa crea un listener nuevo y el anterior permanece leyendo después de salir.",
+      "rule": "Quien crea una suscripción conserva su función de cierre. Los servicios de sesión y sus cachés se retiran al cambiar usuario o ámbito.",
+      "steps": ["Declare propietario y momento de apertura.", "Conserve un cierre idempotente.", "Pruebe abrir, cerrar, reabrir y cambiar de sesión."],
+      "code": "const cierres = new Set();\nconst registrar = cerrar => cierres.add(cerrar);\nfunction retirarVista() {\n  for (const cerrar of cierres) cerrar();\n  cierres.clear();\n}\n// registrar(repositorio.suscribir(ambito, pintar));",
+      "verification": "Al salir no quedan suscripciones propias activas; volver a entrar crea solo las necesarias.",
+      "limit": "Un Singleton global no equivale a aislamiento multiinquilino. El cierre no debe interrumpir suscripciones de otros propietarios."
+    },
+    {
+      "id": "OP07", "modules": ["operaciones", "seguridad", "datos"],
+      "title": "Offline como capacidad aprobada, no permiso general",
+      "situation": "La aplicación intenta guardar un borrador y una modificación sensible en el mismo lote sin conexión.",
+      "rule": "Los nodos desconocidos y las operaciones sensibles requieren conexión. Valide todo el lote antes de encolar y acote capacidad, edad e intentos.",
+      "steps": ["Clasifique borradores y autoridad de negocio.", "Rechace el lote completo si una ruta no está aprobada.", "Muestre vencidos y fallos definitivos sin replay automático."],
+      "code": "cola.encolarLote([\n  { ruta: 'borradores/sur/obs-1', valor: muestra }\n]);\n// Un lote con inventario u otro nodo desconocido\n// falla completo, antes de modificar la cola.",
+      "verification": "El ejemplo prueba rechazo de lote mixto, nodo desconocido, ruta ambigua, cola llena y vencimiento.",
+      "limit": "El ejemplo guarda solo borradores locales y no implementa sincronización remota. Revalidar permisos al sincronizar sigue siendo obligatorio."
+    },
+    {
+      "id": "OP08", "modules": ["apiux", "calidad", "construir"],
+      "title": "Estados asíncronos y acciones sin doble envío",
+      "situation": "Un doble clic registra dos muestras y un error de permisos se presenta como lista vacía.",
+      "rule": "Distinga carga, éxito, vacío, error y desconexión. Agrupe acciones locales en vuelo y conserve idempotencia en el servidor.",
+      "steps": ["Deshabilite y anuncie la acción pendiente de forma accesible.", "Ofrezca reintento sin ocultar el error.", "Descarte respuestas viejas y restaure foco al cerrar un modal."],
+      "code": "const resultado = await acciones.ejecutar(\n  'registrar:obs-1',\n  () => registrarObservacion(solicitud)\n);\n// La identidad de operación viaja al servidor.",
+      "verification": "La prueba de doble acción ejecuta una tarea; la de error permite reintentar. El recorrido visual comprueba foco, estado y mensaje.",
+      "limit": "La deduplicación local no protege otros dispositivos, reintentos de red ni procesos concurrentes del backend."
+    },
+    {
+      "id": "OP09", "modules": ["capas", "arquitectura", "operaciones"],
+      "title": "Funciones modulares con una sola autoridad",
+      "situation": "Extraer un handler deja activa la implementación antigua y dos funciones pueden cambiar la misma regla de reserva.",
+      "rule": "La composición publica una autoridad por operación; el handler autoriza y coordina, y las políticas puras se prueban sin el proveedor.",
+      "steps": ["Extraiga la operación completa y conserve su contrato.", "Separe handler, política pura y adaptador.", "Retire el export anterior y reduzca el presupuesto de deuda."],
+      "code": "functions/\n  bootstrap.js          # composición\n  handlers/\n    registrar-muestra.js # autorización y flujo\n  lib/\n    politica-muestra.js  # regla pura\n  test/                  # contrato y regresión",
+      "verification": "El contrato externo permanece; cada nombre publicado apunta a una sola implementación y la regla pura tiene casos adversos.",
+      "limit": "La ubicación de archivos no demuestra consistencia. Compruebe transacciones, idempotencia y capacidades efectivas."
+    },
+    {
+      "id": "OP10", "modules": ["core", "datos", "evidencia"],
+      "title": "Reconciliar proyecciones con cobertura declarada",
+      "situation": "El resumen parece correcto, pero omite relaciones antiguas de algunas observaciones.",
+      "rule": "La proyección declara versión, fuentes, revisión y cobertura; la reconciliación diagnostica diferencias antes de reparar y publicar.",
+      "steps": ["Clasifique faltante, vacío, error y fuera de cobertura.", "Haga una simulación con límites y checkpoints.", "Reconstruya candidata, compare equivalencia y publique o rechace."],
+      "code": "const manifiesto = {\n  version: 2, ambito: 'reserva-sur',\n  revisionFuente: 12, cobertura: 'periodo-2026',\n  transformacion: 'resumen-v2'\n};\n// No interpretar cobertura parcial como total.",
+      "verification": "Una fuente omitida o una candidata corrupta impide declarar equivalencia completa.",
+      "limit": "La existencia de un índice no acredita cobertura histórica. El diagnóstico debe conservar exclusiones y riesgos residuales."
+    },
+    {
+      "id": "OP11", "modules": ["calidad", "seguridad", "operaciones"],
+      "title": "Telemetría útil, acotada y sin datos personales",
+      "situation": "El reporte de rendimiento guarda URLs con identificadores y su cola crece cuando falla el servidor.",
+      "rule": "Las métricas usan vocabulario cerrado, unidades explícitas y retención; reportarlas no puede bloquear el negocio.",
+      "steps": ["Permita campos y nombres conocidos, no identificadores libres.", "Acote muestras y declare pérdidas o muestreo.", "Registre bytes, duración y resultado sin convertir un score en SLO."],
+      "code": "telemetria.registrar({\n  metrica: 'lectura-observaciones',\n  duracionMs: 12,\n  ok: true\n});\n// No enviar correo, UID, URL ni ruta de negocio.",
+      "verification": "Las pruebas excluyen campos personales, rechazan métricas arbitrarias y limitan la cola.",
+      "limit": "Una prueba de sanitización no demuestra anonimato absoluto. Percentiles de histogramas y muestreo tienen precisión y sesgos declarados."
+    },
+    {
+      "id": "OP12", "modules": ["operaciones", "documentacion", "evidencia"],
+      "title": "Entregar con evidencias del mismo candidato",
+      "situation": "Las pruebas son de ayer, staging tiene otro commit y la aprobación se reutiliza para una nueva compilación.",
+      "rule": "Cada entrega liga SHA real, digest, ambiente, registros frescos, respaldo probado y aprobación; una evidencia histórica no autoriza otra entrega.",
+      "steps": ["Prepare un checkout limpio y una configuración explícita.", "Vincule pruebas, staging, respaldo, restauración y aprobación.", "Compruebe SHA y recursos tras entregar; conserve reversión y cierre."],
+      "code": "const resultado = verificarEntrega({\n  sha, digest, evidencias,\n  ahora: Date.now(),\n  maxEdadMs: 60 * 60 * 1000\n});\n// Registros sintéticos solo en las pruebas.",
+      "verification": "El ejemplo rechaza SHA/digest mezclados, evidencia vieja o futura, registros duplicados y fallos.",
+      "limit": "La coherencia de un JSON no acredita autenticidad, firma ni ejecución de un despliegue. Una aprobación real exige identidad y procedimiento propios."
+    }
+  ]
+}

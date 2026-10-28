@@ -1,0 +1,1052 @@
+{
+  "version": "1.0.0",
+  "title": "Ruta pedagógica COBRIA",
+  "promise": "Aprender a construir software comprensible, seguro y recuperable sin necesitar formación previa en arquitectura.",
+  "lessonModel": [
+    "situación",
+    "idea sencilla",
+    "pasos",
+    "ejemplo",
+    "error frecuente",
+    "evidencia"
+  ],
+  "modules": [
+    {
+      "number": "01",
+      "key": "inicio",
+      "route": "/comenzar",
+      "title": "Primeros pasos",
+      "part": "Orientación",
+      "intro": "Abra una terminal, ejecute una aplicación pequeña en memoria y compruebe qué ocurre cuando una entrada es válida, repetida o rechazada.",
+      "outcomes": [
+        "Delimitar un problema",
+        "Escribir un primer contrato",
+        "Terminar un recorrido vertical"
+      ],
+      "project": "Registrar una observación de un colibrí y poder consultarla sin mezclar reservas.",
+      "deliverable": "Una historia de usuario, un ejemplo válido, un ejemplo rechazado y una prueba.",
+      "lessons": [
+        {
+          "title": "De una idea a una conducta observable",
+          "situation": "Una idea como ‘quiero una aplicación de naturaleza’ no indica qué construir ni cómo saber si funciona.",
+          "simple": "Una primera entrega describe quién registra, qué datos usa y qué resultado o rechazo se puede observar.",
+          "steps": [
+            "Describa a una persona guardaparques y su reserva.",
+            "Use cantidad entera positiva: tres colibríes es válido; cero no es una observación válida.",
+            "Exija identidad, capacidad, ámbito, finalidad y clave de idempotencia; la demo usa valores sintéticos.",
+            "Compare el caso válido con un intento de otra reserva."
+          ],
+          "example": "Una persona guardaparques registra tres colibríes en reserva-sur; una solicitud sin reserva se rechaza.",
+          "mistake": "Comenzar por elegir base de datos, nube o framework.",
+          "evidence": "Dos ejemplos concretos que cualquier lector pueda convertir en pruebas.",
+          "code": "entrada = { id, ambito, especie, cantidad: 3, revision: 1, observadaEn }\ncontexto = { actorId, finalidad, ambitos, permisos, claveIdempotencia }\n// Lectura guiada; el archivo ejecutable se indica en la práctica.",
+          "execution": {
+            "cwd": ".",
+            "binary": "node",
+            "argv": [
+              "--test",
+              "--test-reporter=tap",
+              "--test-name-pattern=^registra un documento canónico válido$",
+              "replication/examples/ecosistema-app/test/app.test.mjs"
+            ],
+            "command": "node --test --test-reporter=tap --test-name-pattern='^registra un documento canónico válido$' replication/examples/ecosistema-app/test/app.test.mjs",
+            "kind": "prueba-local",
+            "expected": "Se registra una observación válida, con identidad y revisión 1. La salida termina con pass 1 y fail 0.",
+            "minimumPassed": 1,
+            "prerequisites": [
+              "Node.js 22.13 o superior.",
+              "Terminal en la raíz de COBRIA. No hace falta instalar dependencias para esta aplicación."
+            ],
+            "tests": [
+              "replication/examples/ecosistema-app/test/app.test.mjs"
+            ],
+            "troubleshooting": [
+              "fail distinto de cero indica un fallo: lea el primer mensaje, no solamente la última línea.",
+              "pass 0 no demuestra la conducta: revise el nombre exacto de la prueba y la ruta.",
+              "No cambie la regla para obtener verde; compare la entrada con el contrato."
+            ]
+          },
+          "codeKind": "lectura-guiada",
+          "guide": "manuales/26-primer-proyecto-paso-a-paso.md"
+        },
+        {
+          "title": "El recorrido vertical más pequeño",
+          "situation": "Crear todas las carpetas antes de entregar valor produce una estructura vacía difícil de validar.",
+          "simple": "Haga pasar una sola acción por interfaz, aplicación, dominio y datos.",
+          "steps": [
+            "Valide una entrada.",
+            "Ejecute una regla.",
+            "Guarde mediante un puerto.",
+            "Devuelva un resultado legible."
+          ],
+          "example": "Registrar una observación completa antes de construir informes, mapas o IA.",
+          "mistake": "Confundir cantidad de archivos con avance.",
+          "evidence": "Una prueba que atraviesa el recorrido y otra que demuestra el rechazo.",
+          "code": "entrada → validar → caso de uso → repositorio → resultado",
+          "execution": {
+            "cwd": ".",
+            "binary": "node",
+            "argv": [
+              "--test",
+              "--test-reporter=tap",
+              "--test-name-pattern=^el controlador traduce protocolo sin conocer infraestructura$",
+              "replication/examples/ecosistema-app/test/app.test.mjs"
+            ],
+            "command": "node --test --test-reporter=tap --test-name-pattern='^el controlador traduce protocolo sin conocer infraestructura$' replication/examples/ecosistema-app/test/app.test.mjs",
+            "kind": "prueba-local",
+            "expected": "La entrada llega al caso de uso y vuelve como resultado 201. La salida termina con pass 1 y fail 0.",
+            "minimumPassed": 1,
+            "prerequisites": [
+              "Node.js 22.13 o superior.",
+              "Terminal en la raíz de COBRIA. No hace falta instalar dependencias para esta aplicación."
+            ],
+            "tests": [
+              "replication/examples/ecosistema-app/test/app.test.mjs"
+            ],
+            "troubleshooting": [
+              "fail distinto de cero indica un fallo: lea el primer mensaje, no solamente la última línea.",
+              "pass 0 no demuestra la conducta: revise el nombre exacto de la prueba y la ruta.",
+              "No cambie la regla para obtener verde; compare la entrada con el contrato."
+            ]
+          },
+          "codeKind": "lectura-guiada",
+          "guide": "manuales/26-primer-proyecto-paso-a-paso.md"
+        }
+      ],
+      "sources": [
+        "manuales/26-primer-proyecto-paso-a-paso.md",
+        "replication/examples/ecosistema-app/src/primer-recorrido.mjs"
+      ]
+    },
+    {
+      "number": "02",
+      "key": "fundamentos",
+      "route": "/fundamentos",
+      "title": "Fundamentos de software",
+      "part": "Fundamentos",
+      "intro": "Aprenda el vocabulario mínimo para hablar de datos, reglas, contratos y evidencia sin depender de tecnicismos.",
+      "outcomes": [
+        "Distinguir dato y regla",
+        "Reconocer autoridad",
+        "Elegir la opción más simple"
+      ],
+      "project": "Definir qué significa una observación válida y quién puede corregirla.",
+      "deliverable": "Glosario del proyecto y siete respuestas a la regla de decisión COBRIA.",
+      "lessons": [
+        {
+          "title": "Dato, objeto y regla",
+          "situation": "Una fecha, una observación y la regla ‘cantidad no negativa’ cumplen responsabilidades diferentes.",
+          "simple": "El dato describe; la entidad conserva identidad; su constructor protege reglas antes de guardar.",
+          "steps": [
+            "Liste los datos.",
+            "Agrupe los que cambian juntos.",
+            "Escriba las reglas sin mencionar pantallas ni motores."
+          ],
+          "example": "Observacion se construye con new Observacion(entrada). Su cantidad es un entero mayor o igual que uno; cero y negativos se rechazan.",
+          "mistake": "Guardar toda validación únicamente en el formulario.",
+          "evidence": "Pruebas de la regla desde cualquier entrada.",
+          "code": "import { Observacion } from './src/domain/observacion.mjs';\nconst entrada = { id: 'obs-001', ambito: 'reserva-sur', especie: 'colibri',\n  cantidad: 3, revision: 1, observadaEn: '2026-10-17T12:00:00Z' };\nconst observacion = new Observacion(entrada);",
+          "execution": {
+            "cwd": ".",
+            "binary": "node",
+            "argv": [
+              "--test",
+              "--test-reporter=tap",
+              "--test-name-pattern=^el problema HTTP conserva traceId sin exponer detalles internos$",
+              "replication/examples/ecosistema-app/test/app.test.mjs"
+            ],
+            "command": "node --test --test-reporter=tap --test-name-pattern='^el problema HTTP conserva traceId sin exponer detalles internos$' replication/examples/ecosistema-app/test/app.test.mjs",
+            "kind": "prueba-local",
+            "expected": "La cantidad debe ser un entero positivo; cero se rechaza. La salida termina con pass 1 y fail 0.",
+            "minimumPassed": 1,
+            "prerequisites": [
+              "Node.js 22.13 o superior.",
+              "Terminal en la raíz de COBRIA. No hace falta instalar dependencias para esta aplicación."
+            ],
+            "tests": [
+              "replication/examples/ecosistema-app/test/app.test.mjs"
+            ],
+            "troubleshooting": [
+              "fail distinto de cero indica un fallo: lea el primer mensaje, no solamente la última línea.",
+              "pass 0 no demuestra la conducta: revise el nombre exacto de la prueba y la ruta.",
+              "No cambie la regla para obtener verde; compare la entrada con el contrato."
+            ]
+          },
+          "codeKind": "lectura-guiada",
+          "guide": "manuales/26-primer-proyecto-paso-a-paso.md"
+        },
+        {
+          "title": "Contrato y evidencia",
+          "situation": "Decir ‘el repositorio es seguro’ no especifica entradas, resultados ni fallos.",
+          "simple": "Un contrato declara lo que recibe, lo que garantiza y cómo falla; la evidencia demuestra un caso concreto.",
+          "steps": [
+            "Escriba precondiciones.",
+            "Defina resultado.",
+            "Defina rechazo.",
+            "Asocie una prueba o medición."
+          ],
+          "example": "obtener exige ámbito; devuelve solo documentos de ese ámbito o rechaza antes de consultar.",
+          "mistake": "Usar una captura de pantalla como única prueba.",
+          "evidence": "Prueba automática, versión y salida reproducible.",
+          "code": "obtener(ambito, id) → documento | NoAutorizado",
+          "execution": {
+            "cwd": ".",
+            "binary": "node",
+            "argv": [
+              "--test",
+              "--test-reporter=tap",
+              "--test-name-pattern=^rechaza el acceso a otro ámbito antes de tocar el repositorio$",
+              "replication/examples/ecosistema-app/test/app.test.mjs"
+            ],
+            "command": "node --test --test-reporter=tap --test-name-pattern='^rechaza el acceso a otro ámbito antes de tocar el repositorio$' replication/examples/ecosistema-app/test/app.test.mjs",
+            "kind": "prueba-local",
+            "expected": "Un ámbito ajeno no produce escrituras. La salida termina con pass 1 y fail 0.",
+            "minimumPassed": 1,
+            "prerequisites": [
+              "Node.js 22.13 o superior.",
+              "Terminal en la raíz de COBRIA. No hace falta instalar dependencias para esta aplicación."
+            ],
+            "tests": [
+              "replication/examples/ecosistema-app/test/app.test.mjs"
+            ],
+            "troubleshooting": [
+              "fail distinto de cero indica un fallo: lea el primer mensaje, no solamente la última línea.",
+              "pass 0 no demuestra la conducta: revise el nombre exacto de la prueba y la ruta.",
+              "No cambie la regla para obtener verde; compare la entrada con el contrato."
+            ]
+          },
+          "codeKind": "lectura-guiada",
+          "guide": "manuales/26-primer-proyecto-paso-a-paso.md"
+        }
+      ]
+    },
+    {
+      "number": "03",
+      "key": "arquitectura",
+      "route": "/arquitectura",
+      "title": "Arquitectura de software",
+      "part": "Diseño",
+      "intro": "La arquitectura no es un dibujo elegante: son decisiones que limitan dependencias y hacen posible cambiar una pieza sin romper todas las demás.",
+      "outcomes": [
+        "Dibujar fronteras",
+        "Comparar alternativas",
+        "Registrar decisiones"
+      ],
+      "project": "Separar la regla de observaciones del motor documental y de la interfaz.",
+      "deliverable": "Mapa de contexto, diagrama de dependencias y una decisión arquitectónica breve.",
+      "lessons": [
+        {
+          "title": "Fronteras que protegen cambios",
+          "situation": "Una pantalla que consulta y modifica documentos directamente queda unida al proveedor y replica reglas.",
+          "simple": "La interfaz pide una acción; la aplicación la coordina; el dominio decide; la infraestructura conecta.",
+          "steps": [
+            "Marque las reglas.",
+            "Marque las entradas externas.",
+            "Trace dependencias hacia las reglas.",
+            "Prohíba atajos."
+          ],
+          "example": "Cambiar MongoDB por CouchDB no modifica RegistrarObservacion.",
+          "mistake": "Dibujar capas sin comprobar imports reales.",
+          "evidence": "Prueba de arquitectura que detecta una dependencia prohibida.",
+          "code": "presentación → aplicación → dominio\ninfraestructura → puertos → dominio"
+        },
+        {
+          "title": "Decidir con alternativas y costo",
+          "situation": "Una proyección puede acelerar lecturas y al mismo tiempo aumentar escritura, almacenamiento y operación.",
+          "simple": "Compare al menos la solución actual, un índice y una proyección antes de añadir complejidad.",
+          "steps": [
+            "Declare el problema medible.",
+            "Liste alternativas.",
+            "Mida el cambio mínimo.",
+            "Defina cuándo retirar."
+          ],
+          "example": "La consulta indexada cumple 200 ms; no se crea otra copia.",
+          "mistake": "Adoptar una técnica porque es popular.",
+          "evidence": "Registro de decisión con métricas, riesgos y fecha de revisión.",
+          "code": "adoptar si beneficio > costoTotal y existeRetiro"
+        }
+      ]
+    },
+    {
+      "number": "04",
+      "key": "capas",
+      "route": "/capas",
+      "title": "Capas, carpetas y responsabilidades",
+      "part": "Diseño",
+      "intro": "Organice el proyecto para que una persona pueda encontrar una regla, una entrada o un adaptador sin adivinar.",
+      "outcomes": [
+        "Asignar responsabilidades",
+        "Diseñar carpetas útiles",
+        "Evitar dependencias circulares"
+      ],
+      "project": "Ubicar el registro de observaciones en una estructura que explique sus límites.",
+      "deliverable": "Árbol de carpetas comentado y matriz archivo–responsabilidad.",
+      "lessons": [
+        {
+          "title": "Una carpeta responde una pregunta",
+          "situation": "Carpetas como utils, helpers o common terminan mezclando reglas, acceso a datos y presentación.",
+          "simple": "Nombre carpetas por responsabilidad estable, no por comodidad temporal.",
+          "steps": [
+            "Separe dominio y aplicación.",
+            "Declare puertos junto al consumidor.",
+            "Coloque adaptadores fuera del núcleo.",
+            "Mantenga composición en la frontera."
+          ],
+          "example": "observaciones/dominio, observaciones/aplicacion y infraestructura/documentos.",
+          "mistake": "Crear una carpeta por cada clase.",
+          "evidence": "Cada archivo posee una razón principal de cambio.",
+          "code": "src/\n  observaciones/dominio/\n  observaciones/aplicacion/\n  infraestructura/documentos/\n  interfaces/http/"
+        },
+        {
+          "title": "Quién puede importar a quién",
+          "situation": "Aunque las carpetas parezcan limpias, un import desde dominio hacia el SDK de nube rompe la frontera.",
+          "simple": "Las dependencias apuntan hacia las reglas; el detalle implementa interfaces del núcleo.",
+          "steps": [
+            "Defina imports permitidos.",
+            "Automatice la regla.",
+            "Revise excepciones como decisiones.",
+            "Elimine ciclos."
+          ],
+          "example": "El caso de uso conoce RepositorioObservaciones, no el cliente del proveedor.",
+          "mistake": "Resolver ciclos moviendo todo a common.",
+          "evidence": "Auditor de dependencias sin violaciones.",
+          "code": "dominio ← aplicación ← presentación\ndominio ← puertos ← infraestructura"
+        }
+      ]
+    },
+    {
+      "number": "05",
+      "key": "codigo",
+      "route": "/codigo",
+      "title": "Código, nombres y comentarios",
+      "part": "Construcción",
+      "intro": "Escriba código que explique la intención, reserve comentarios para decisiones y produzca errores que ayuden a actuar.",
+      "outcomes": [
+        "Nombrar por intención",
+        "Comentar decisiones",
+        "Diseñar errores útiles"
+      ],
+      "project": "Hacer comprensible el caso de uso sin abrir la implementación del motor.",
+      "deliverable": "Convenciones de código, errores y comentarios con ejemplos aceptados y rechazados.",
+      "lessons": [
+        {
+          "title": "Nombres que cuentan una historia",
+          "situation": "procesarData, manager o x obligan a leer la implementación para descubrir su propósito.",
+          "simple": "Use verbos para acciones, sustantivos para conceptos y unidades en cantidades ambiguas.",
+          "steps": [
+            "Nombre la intención.",
+            "Quite abreviaturas locales.",
+            "Incluya unidad o zona cuando importe.",
+            "Mantenga el vocabulario del dominio."
+          ],
+          "example": "registrarObservacion y frescuraMaximaMinutos explican más que process y ttl.",
+          "mistake": "Usar nombres largos que solo repiten el tipo.",
+          "evidence": "Otra persona puede predecir el resultado desde la firma.",
+          "code": "registrarObservacion(entrada, contexto)\nfrescuraMaximaMinutos = 5"
+        },
+        {
+          "title": "Comentarios que explican por qué",
+          "situation": "Un comentario que repite ‘incrementa i’ envejece junto al código y no conserva una decisión.",
+          "simple": "Comente una restricción, riesgo, fuente o razón que el código no puede expresar.",
+          "steps": [
+            "Elimine narraciones obvias.",
+            "Enlace decisión o requisito.",
+            "Declare el límite.",
+            "Actualice comentario y prueba juntos."
+          ],
+          "example": "Se conserva la revisión antigua para detectar entregas fuera de orden.",
+          "mistake": "Desactivar código dejándolo comentado.",
+          "evidence": "Comentario enlazado a prueba, ADR o requisito.",
+          "code": "// Rechaza regresiones: INV-REV-01\nif (entrada.revision < actual.revision) rechazar()"
+        }
+      ]
+    },
+    {
+      "number": "06",
+      "key": "datos",
+      "route": "/datos",
+      "title": "Bases de datos y diccionario de datos",
+      "part": "Datos",
+      "intro": "Diseñe documentos NoSQL desde reglas y consultas; documente significado, tiempo, ámbito y evolución desde el primer campo.",
+      "outcomes": [
+        "Crear un diccionario desde cero",
+        "Separar nodos y agregados",
+        "Diseñar índices antes que copias"
+      ],
+      "project": "Modelar observaciones, especies y reservas sin perder identidad ni historia.",
+      "deliverable": "Diccionario versionado, catálogo, ejemplos JSON, índices y plan de migración.",
+      "lessons": [
+        {
+          "title": "Diccionario de datos desde cero",
+          "situation": "Un campo a o status puede guardar significados distintos según la pantalla o la época.",
+          "simple": "Cada dato necesita nombre de negocio, tipo, regla, origen, sensibilidad y versión.",
+          "steps": [
+            "Liste decisiones del usuario.",
+            "Nombre campos semánticos.",
+            "Declare requerido, formato y regla.",
+            "Añada ámbito, tiempo y procedencia.",
+            "Cree ejemplos válidos e inválidos."
+          ],
+          "example": "cantidadObservada: entero ≥ 1; origen: persona; sensible: no; esquema: 1.",
+          "mistake": "Documentar solo el tipo técnico.",
+          "evidence": "Esquema validable y tabla legible que coinciden.",
+          "code": "{\n  \"id\": \"obs-001\",\n  \"ambito\": \"reserva-sur\",\n  \"revision\": 1,\n  \"esquema\": 1\n}"
+        },
+        {
+          "title": "Incrustar, referenciar e indexar",
+          "situation": "Separar cada atributo crea demasiadas lecturas; incrustar todo duplica datos y dificulta cambios.",
+          "simple": "Incruste lo que cambia y se lee junto; referencie lo que tiene ciclo de vida propio.",
+          "steps": [
+            "Identifique el agregado.",
+            "Liste consultas reales.",
+            "Estime tamaño y frecuencia de cambio.",
+            "Diseñe índice.",
+            "Mida antes de proyectar."
+          ],
+          "example": "La observación incrusta ubicación capturada; referencia el catálogo versionado de especies.",
+          "mistake": "Copiar una normalización relacional o desnormalizar sin límite.",
+          "evidence": "Consultas, cardinalidad, índices y costo medidos.",
+          "code": "indice: { ambito: 1, fecha: -1, especieId: 1 }"
+        }
+      ]
+    },
+    {
+      "number": "07",
+      "key": "core",
+      "route": "/core",
+      "title": "COBRIA Core",
+      "part": "Núcleo normativo",
+      "intro": "Aplique autoridad, ámbito, revisión, reconstrucción y procedencia en sistemas documentales sin imponer un proveedor.",
+      "outcomes": [
+        "Comprender C1–C3",
+        "Separar autoridad y derivado",
+        "Verificar conformidad"
+      ],
+      "project": "Crear un resumen por especie que pueda eliminarse y reconstruirse.",
+      "deliverable": "Manifiesto C1, C2 o C3 con pruebas y límites.",
+      "lessons": [
+        {
+          "title": "Autoridad y ámbito",
+          "situation": "Si la pantalla y el índice pueden corregir una observación, existen dos verdades; si el ámbito se filtra al final, ya hubo exposición.",
+          "simple": "Una sola ruta cambia el hecho y toda operación exige su límite antes de acceder.",
+          "steps": [
+            "Nombre la fuente canónica.",
+            "Cierre escrituras paralelas.",
+            "Propague ámbito.",
+            "Pruebe ausencia y cruce."
+          ],
+          "example": "El índice de búsqueda nunca corrige especie ni cantidad.",
+          "mistake": "Confiar en que cada consulta recuerde añadir el filtro.",
+          "evidence": "Cero escrituras directas y cero candidatos cruzados.",
+          "code": "guardar → canónico → revisión → derivados\nconsultar(ambito, criterio)"
+        },
+        {
+          "title": "Reconstrucción y publicación segura",
+          "situation": "Vaciar el índice activo antes de reconstruir deja a usuarios sin datos o con una versión parcial.",
+          "simple": "Construya una candidata, verifíquela y cambie la referencia activa al final.",
+          "steps": [
+            "Congele versión y corte.",
+            "Construya candidata.",
+            "Compare equivalencia.",
+            "Cambie alias.",
+            "Conserve reversión."
+          ],
+          "example": "resumen-especies-v2 sustituye v1 solo después de comparar conteos y huellas.",
+          "mistake": "Reparar manualmente el derivado.",
+          "evidence": "Reconstrucción repetible e interrupción sin afectar la versión activa.",
+          "code": "candidata = reconstruir(fuente)\nverificar(candidata)\npublicar(candidata)"
+        }
+      ]
+    },
+    {
+      "number": "08",
+      "key": "patrones",
+      "route": "/patrones-diseno",
+      "title": "Patrones de diseño",
+      "part": "Catálogo",
+      "intro": "Use patrones como respuestas comparables a tensiones repetidas, no como adornos ni recetas obligatorias.",
+      "outcomes": [
+        "Reconocer una tensión",
+        "Elegir una familia",
+        "Probar consecuencias"
+      ],
+      "project": "Elegir patrones para identidad, validación, lectura, reconstrucción y retiro.",
+      "deliverable": "Ficha problema–contexto–solución–costo–prueba para una decisión real.",
+      "lessons": [
+        {
+          "title": "Cómo leer una ficha",
+          "situation": "Copiar la estructura de un patrón sin su problema añade complejidad sin beneficio.",
+          "simple": "Primero confirme contexto y tensión; después compare solución, consecuencias y alternativas.",
+          "steps": [
+            "Nombre el problema.",
+            "Confirme fuerzas opuestas.",
+            "Revise cuándo no usar.",
+            "Implemente el ejemplo mínimo.",
+            "Mida la consecuencia."
+          ],
+          "example": "Repositorio con ámbito solo aparece cuando existe un límite real de acceso.",
+          "mistake": "Aplicar los treinta patrones a todos los proyectos.",
+          "evidence": "Una decisión justificada y una alternativa descartada.",
+          "code": "problema → contexto → patrón → costo → prueba"
+        },
+        {
+          "title": "Combinar patrones sin crear una megasolución",
+          "situation": "Un patrón puede necesitar otro, pero agruparlos todos en una clase elimina sus límites.",
+          "simple": "Conecte contratos pequeños mediante un caso de uso y mantenga cada responsabilidad comprobable.",
+          "steps": [
+            "Elija patrón principal.",
+            "Añada solo colaboradores necesarios.",
+            "Pruebe cada frontera.",
+            "Registre el costo conjunto."
+          ],
+          "example": "Objeto canónico + repositorio con ámbito + cola de salida + proyección reconstruible.",
+          "mistake": "Crear un servicio universal que valida, autoriza, persiste y publica.",
+          "evidence": "Pruebas unitarias de contratos y una prueba del recorrido.",
+          "code": "casoDeUso = new Registrar(repo, salida, reloj)"
+        }
+      ]
+    },
+    {
+      "number": "09",
+      "key": "apiux",
+      "route": "/api-ux",
+      "title": "API, experiencia e internacionalización",
+      "part": "Interfaces",
+      "intro": "Una interfaz correcta comunica estados, errores y decisiones en el idioma del usuario sin filtrar detalles internos.",
+      "outcomes": [
+        "Diseñar contratos HTTP",
+        "Representar todos los estados",
+        "Preparar idioma y accesibilidad"
+      ],
+      "project": "Exponer registro y consulta de observaciones para web y automatización.",
+      "deliverable": "Contrato de API, tabla de estados, mensajes localizables y prueba accesible.",
+      "lessons": [
+        {
+          "title": "Una API expresa intención",
+          "situation": "Endpoints que exponen colecciones físicas obligan a clientes a conocer detalles del almacenamiento.",
+          "simple": "Diseñe recursos y acciones desde el lenguaje del dominio, con errores estructurados.",
+          "steps": [
+            "Defina entrada y salida.",
+            "Añada ámbito desde identidad confiable.",
+            "Use idempotencia.",
+            "Documente errores y cursores."
+          ],
+          "example": "POST /observaciones registra; no permite escribir directamente resumen-especies.",
+          "mistake": "Devolver 200 con un mensaje de error ambiguo.",
+          "evidence": "Pruebas de contrato y ejemplos de error.",
+          "code": "POST /observaciones\nIdempotency-Key: obs-001\n→ 201 | 409 | 422"
+        },
+        {
+          "title": "Estados visibles, idioma y accesibilidad",
+          "situation": "Una interfaz que solo diseña el estado exitoso confunde durante carga, vacío, error o permiso insuficiente.",
+          "simple": "Cada acción representa inicio, progreso, éxito, vacío, error y recuperación.",
+          "steps": [
+            "Liste estados.",
+            "Escriba mensajes accionables.",
+            "Separe código de traducciones.",
+            "Pruebe teclado, foco y contraste."
+          ],
+          "example": "‘No hay observaciones en esta reserva’ es distinto de ‘No se pudo consultar’.",
+          "mistake": "Usar color o icono como única señal.",
+          "evidence": "Prueba de teclado, lector y mensajes en dos locales.",
+          "code": "t('observaciones.vacio', { reserva })"
+        }
+      ]
+    },
+    {
+      "number": "10",
+      "key": "documentacion",
+      "route": "/documentacion",
+      "title": "Documentación y comunicación",
+      "part": "Conocimiento",
+      "intro": "Documente para que otra persona pueda comprender, ejecutar, operar y modificar el sistema sin depender de una conversación privada.",
+      "outcomes": [
+        "Distinguir tipos de documento",
+        "Mantener decisiones",
+        "Preparar transferencia"
+      ],
+      "project": "Crear la guía mínima que permite ejecutar y cambiar el ejemplo de observaciones.",
+      "deliverable": "README, tutorial, referencia, ADR, runbook, diccionario y mapa de trazabilidad.",
+      "lessons": [
+        {
+          "title": "Cuatro documentos, cuatro necesidades",
+          "situation": "Un README gigante mezcla instalación, conceptos, decisiones y emergencias hasta que nada se encuentra.",
+          "simple": "Tutorial enseña; guía resuelve una tarea; referencia describe; explicación justifica.",
+          "steps": [
+            "Identifique al lector.",
+            "Declare el resultado.",
+            "Separe pasos de conceptos.",
+            "Enlace la fuente autoritativa."
+          ],
+          "example": "README inicia; tutorial registra; referencia define API; ADR explica la base documental.",
+          "mistake": "Copiar el mismo párrafo en libro, artículo y sitio.",
+          "evidence": "Cada página tiene audiencia, autoridad, versión y responsable.",
+          "code": "docs/\n  tutoriales/\n  guias/\n  referencia/\n  decisiones/\n  operacion/"
+        },
+        {
+          "title": "Documentación que no se desactualiza en silencio",
+          "situation": "Una guía puede prometer un comando que ya no existe.",
+          "simple": "Ejecute ejemplos, genere tablas desde fuentes y compruebe enlaces en integración continua.",
+          "steps": [
+            "Marque fuentes canónicas.",
+            "Genere derivados.",
+            "Pruebe comandos.",
+            "Falle ante diferencias.",
+            "Archive lo obsoleto."
+          ],
+          "example": "El libro y la web leen la misma ruta pedagógica.",
+          "mistake": "Editar a mano resultados o versiones en varias copias.",
+          "evidence": "Construcción limpia y comparación sin diferencias.",
+          "code": "fuente → generar → verificar → publicar"
+        }
+      ]
+    },
+    {
+      "number": "11",
+      "key": "seguridad",
+      "route": "/seguridad",
+      "title": "Seguridad y privacidad",
+      "part": "Protección",
+      "intro": "Proteja cada flujo con identidad, capacidad, ámbito, validación, mínimo privilegio y evidencia sin prometer seguridad absoluta.",
+      "outcomes": [
+        "Modelar amenazas",
+        "Aplicar capacidades",
+        "Probar rechazos"
+      ],
+      "project": "Impedir que una reserva consulte o modifique datos de otra.",
+      "deliverable": "Modelo de amenazas, matriz de capacidades, inventario de datos y pruebas negativas.",
+      "lessons": [
+        {
+          "title": "Amenazas desde el flujo",
+          "situation": "Una lista genérica de controles no muestra dónde puede ocurrir una fuga.",
+          "simple": "Siga el dato desde entrada hasta registro, caché, búsqueda, respaldo y eliminación.",
+          "steps": [
+            "Dibuje activos y actores.",
+            "Marque fronteras.",
+            "Enumere abuso.",
+            "Asigne control.",
+            "Pruebe el fallo."
+          ],
+          "example": "Un id válido de otra reserva no debe revelar existencia, tiempo ni conteo.",
+          "mistake": "Proteger la API y olvidar tareas, exportaciones o índices.",
+          "evidence": "Pruebas negativas por cada frontera.",
+          "code": "autorizar(actor, capacidad, ambito, recurso)"
+        },
+        {
+          "title": "Secretos, suministro y respuesta",
+          "situation": "Una dependencia vulnerable o una clave en el repositorio puede eludir una aplicación bien diseñada.",
+          "simple": "Reduzca privilegios, fije dependencias, escanee artefactos y prepare rotación e incidente.",
+          "steps": [
+            "Inventarie secretos.",
+            "Use identidad de carga.",
+            "Fije y audite dependencias.",
+            "Genere SBOM.",
+            "Ensaye respuesta."
+          ],
+          "example": "Staging usa credenciales distintas y nunca copia datos sensibles de producción.",
+          "mistake": "Considerar .env una estrategia completa.",
+          "evidence": "Escaneo, procedencia de construcción y ejercicio de rotación.",
+          "code": "secreto → gestor → identidad mínima → rotación → auditoría"
+        }
+      ]
+    },
+    {
+      "number": "12",
+      "key": "calidad",
+      "route": "/calidad",
+      "title": "Calidad, pruebas y rendimiento",
+      "part": "Verificación",
+      "intro": "Convierta requisitos en pruebas y optimice a partir de mediciones comparables, no de intuiciones.",
+      "outcomes": [
+        "Diseñar una pirámide útil",
+        "Medir percentiles",
+        "Controlar regresiones"
+      ],
+      "project": "Demostrar corrección y costo del registro y del resumen por especie.",
+      "deliverable": "Matriz requisito–prueba, carga reproducible y presupuesto de rendimiento.",
+      "lessons": [
+        {
+          "title": "Pruebas que cubren decisiones",
+          "situation": "Muchas pruebas de líneas no garantizan reglas, contratos ni recuperación.",
+          "simple": "Una prueba debe explicar qué riesgo reduce y qué resultado observa.",
+          "steps": [
+            "Liste invariantes.",
+            "Añada casos válidos y adversos.",
+            "Pruebe contratos en adaptadores.",
+            "Reserve recorridos completos para riesgos clave."
+          ],
+          "example": "Repetir el mismo id no duplica; revisión antigua no retrocede.",
+          "mistake": "Simular el componente que se desea comprobar.",
+          "evidence": "Matriz trazable y fallos reproducibles.",
+          "code": "requisito → caso → prueba → resultado → evidencia"
+        },
+        {
+          "title": "Optimizar sin engañarse",
+          "situation": "Una sola medición local puede favorecer caché, orden o ruido.",
+          "simple": "Congele carga, caliente, rote orden, repita y reporte distribución y costo total.",
+          "steps": [
+            "Defina objetivo.",
+            "Mida línea base.",
+            "Cambie una cosa.",
+            "Registre p50, p95 y p99.",
+            "Verifique corrección."
+          ],
+          "example": "Índice y proyección reciben el mismo conjunto y orden alternado.",
+          "mistake": "Elegir solo el mejor tiempo.",
+          "evidence": "Eventos crudos, ambiente, semillas e intervalos.",
+          "code": "baseline → cambio mínimo → misma carga → comparar → decidir"
+        }
+      ]
+    },
+    {
+      "number": "13",
+      "key": "operaciones",
+      "route": "/operaciones",
+      "title": "Nube, ambientes y operaciones",
+      "part": "Operación",
+      "intro": "Diseñe desarrollo, pruebas, staging y producción como ambientes aislados que promueven el mismo artefacto y pueden recuperarse.",
+      "outcomes": [
+        "Separar ambientes",
+        "Desplegar con reversión",
+        "Operar funciones y trabajos"
+      ],
+      "project": "Publicar el servicio de observaciones y reconstruir su proyección sin interrumpir lectura.",
+      "deliverable": "Matriz de ambientes, pipeline, observabilidad, runbook y prueba de recuperación.",
+      "lessons": [
+        {
+          "title": "Del desarrollo a producción",
+          "situation": "Reconstruir distinto en cada ambiente introduce cambios invisibles y secretos compartidos.",
+          "simple": "Construya una vez, identifique el artefacto y promueva exactamente el mismo contenido.",
+          "steps": [
+            "Aísle proyectos y credenciales.",
+            "Construya artefacto inmutable.",
+            "Pruebe en staging.",
+            "Apruebe producción.",
+            "Ejecute humo y reversión."
+          ],
+          "example": "firebase-staging y producción usan proyectos y datos distintos pero el mismo digest.",
+          "mistake": "Usar staging como copia permanente de producción.",
+          "evidence": "Digest, aprobación, prueba de humo y tiempo de rollback.",
+          "code": "commit → artefacto → preview → staging → producción"
+        },
+        {
+          "title": "Funciones, colas y tareas idempotentes",
+          "situation": "Una función en la nube puede reintentarse, duplicarse, llegar tarde o agotarse.",
+          "simple": "Diseñe cada efecto para repetición, límite de tiempo, observabilidad y recuperación.",
+          "steps": [
+            "Defina clave idempotente.",
+            "Limite lote y tiempo.",
+            "Guarde punto de control.",
+            "Mande fallos a cuarentena.",
+            "Alerte por objetivo."
+          ],
+          "example": "actualizarResumen procesa cada revisión una vez aunque la cola reentregue.",
+          "mistake": "Suponer ejecución exactamente una vez.",
+          "evidence": "Prueba de duplicado, interrupción y reanudación.",
+          "code": "evento → validar → deduplicar → aplicar → checkpoint → métrica"
+        },
+        {
+          "title": "Laboratorio ejecutable de ingeniería",
+          "situation": "Una recomendación operativa no enseña qué ocurre cuando hay reintentos, telemetría o una publicación bloqueada.",
+          "simple": "Ejecute contratos operativos en un laboratorio neutral antes de trasladarlos a la nube.",
+          "steps": [
+            "Ejecute las nueve pruebas.",
+            "Lea el contrato que cubre cada una.",
+            "Provoque un fallo.",
+            "Compare evidencia local y producción."
+          ],
+          "example": "El laboratorio cubre ocho contratos Engineering sin credenciales ni servicios externos.",
+          "mistake": "Presentar la simulación local como validación de producción.",
+          "evidence": "Nueve pruebas aprobadas y estado local explícito.",
+          "code": "make verificar-fase-20\n# 9 pruebas · 8 contratos · sin nube"
+        },
+        {
+          "title": "Piloto de adopción estructural",
+          "situation": "Encontrar archivos parecidos a un patrón no prueba que el sistema opere correctamente.",
+          "simple": "Separe evidencia estructural, evidencia operacional y juicio humano.",
+          "steps": [
+            "Congele commit.",
+            "Defina rutas candidatas.",
+            "Aplique la rúbrica.",
+            "Marque lo no ejecutado."
+          ],
+          "example": "Un piloto encontró 8/8 contratos estructurales y no afirmó operación real.",
+          "mistake": "Convertir cobertura de archivos en certificación.",
+          "evidence": "8/8 estructurales · 0 operacionales.",
+          "code": "make verificar-fase-21\n# 8/8 estructurales · 0 operacionales"
+        },
+        {
+          "title": "Manifiesto de adopción",
+          "situation": "Un análisis sin commit, rutas y vocabulario congelados cambia silenciosamente entre ejecuciones.",
+          "simple": "Cada evaluación declara exactamente qué repositorio, revisión y evidencia observa.",
+          "steps": [
+            "Registre URL y commit.",
+            "Asigne responsables.",
+            "Enumere rutas seguras.",
+            "Evalúe sin ejecutar el proyecto."
+          ],
+          "example": "El motor inspecciona objetos Git y rechaza rutas que escapan del repositorio.",
+          "mistake": "Analizar la rama móvil como si fuera una muestra fija.",
+          "evidence": "Manifiesto con huella y resultados reproducibles.",
+          "code": "cobria engineering evaluar --manifiesto adoption-manifest.json"
+        },
+        {
+          "title": "Tres proyectos, una misma rúbrica",
+          "situation": "Una rúbrica aplicada a un solo caso puede estar adaptada accidentalmente a ese proyecto.",
+          "simple": "Use el mismo contrato y conserve diferencias sin convertirlas en ranking.",
+          "steps": [
+            "Congele tres muestras.",
+            "Aplique criterios idénticos.",
+            "Registre evidencia faltante.",
+            "Declare límites."
+          ],
+          "example": "Se observaron 8/8, 5/8 y 4/8 contratos estructurales en muestras distintas.",
+          "mistake": "Interpretar menos coincidencias como menor calidad general.",
+          "evidence": "Resultados trazables y cero validaciones operacionales implícitas.",
+          "code": "make verificar-fase-23"
+        },
+        {
+          "title": "Revisión semántica preparada",
+          "situation": "Una herramienta puede encontrar texto, pero no decidir por sí sola si la evidencia realmente sostiene un contrato.",
+          "simple": "Prepare muestras ciegas y preserve la decisión independiente de cada revisor.",
+          "steps": [
+            "Seudonimice muestras.",
+            "Entregue criterios.",
+            "Recoja justificación.",
+            "Conserve desacuerdos."
+          ],
+          "example": "Dos personas clasifican respaldado, no respaldado o insuficiente.",
+          "mistake": "Inventar revisores o completar sus formularios con IA.",
+          "evidence": "Atestación humana y formularios originales.",
+          "code": "make preparar-revision-fase-24"
+        },
+        {
+          "title": "Tres dimensiones, no una palabra",
+          "situation": "Una etiqueta como ‘legado controlado’ oculta qué evidencia existe y cuál falta.",
+          "simple": "Divida cada contrato complejo en criterios conjuntivos y observables.",
+          "steps": [
+            "Defina frontera.",
+            "Compruebe control de crecimiento.",
+            "Exija ruta de retiro.",
+            "Evite promediar ausencias."
+          ],
+          "example": "ENG-007 requiere las tres dimensiones, no una mención parcial.",
+          "mistake": "Aprobar por promedio un criterio crítico ausente.",
+          "evidence": "Resultado por dimensión y justificación.",
+          "code": "make verificar-fase-25"
+        },
+        {
+          "title": "Veinticuatro dimensiones",
+          "situation": "Ocho contratos amplios todavía permiten interpretaciones diferentes entre revisores.",
+          "simple": "Descomponga cada contrato en tres preguntas y deje toda decisión inicial vacía.",
+          "steps": [
+            "Genere 24 criterios.",
+            "Enlace candidatos.",
+            "Solicite juicio humano.",
+            "Calcule acuerdo solo al recibirlo."
+          ],
+          "example": "La plantilla produce 72 celdas para tres proyectos sin precargar aprobación.",
+          "mistake": "Tratar pendiente como incumplimiento o conformidad.",
+          "evidence": "24 dimensiones, decisiones originales y adjudicación separada.",
+          "code": "make verificar-fase-26\n# 24 dimensiones · 0 decisiones precargadas"
+        }
+      ]
+    },
+    {
+      "number": "14",
+      "key": "ia",
+      "route": "/ia",
+      "title": "Analítica e inteligencia artificial",
+      "part": "Datos derivados",
+      "intro": "Prepare conjuntos, características, recuperación y herramientas con procedencia, separación temporal, ámbito y abstención.",
+      "outcomes": [
+        "Evitar fuga",
+        "Rastrear evidencia",
+        "Gobernar herramientas"
+      ],
+      "project": "Crear un conjunto de observaciones y un asistente que cite solo material autorizado.",
+      "deliverable": "Manifiesto de conjunto/modelo, evaluación, política de abstención y auditoría de herramientas.",
+      "lessons": [
+        {
+          "title": "Conjuntos reproducibles y sin fuga",
+          "situation": "Dividir filas al azar puede poner revisiones de la misma observación en entrenamiento y prueba.",
+          "simple": "Particione por entidad, tiempo y ámbito antes de calcular transformaciones.",
+          "steps": [
+            "Congele corte.",
+            "Separe entidades.",
+            "Respete tiempo conocido.",
+            "Versione catálogo y transformación.",
+            "Selle huellas."
+          ],
+          "example": "Observaciones futuras nunca ayudan a predecir el pasado.",
+          "mistake": "Normalizar con estadísticas calculadas sobre todo el conjunto.",
+          "evidence": "Manifiesto, intersección cero y reconstrucción idéntica.",
+          "code": "partirPor(entidad, tiempo, ambito)\nexigir(interseccion === 0)"
+        },
+        {
+          "title": "IA con procedencia y capacidad mínima",
+          "situation": "Un modelo puede responder con fragmentos prohibidos o ejecutar una acción más amplia de lo solicitado.",
+          "simple": "Filtre antes de recuperar, cite evidencia y permita abstención; cada herramienta recibe capacidad mínima.",
+          "steps": [
+            "Autorice candidatos.",
+            "Recupere dentro del ámbito.",
+            "Enlace citas.",
+            "Calcule suficiencia.",
+            "Confirme efectos de riesgo."
+          ],
+          "example": "Si no hay evidencia de una especie en reserva-sur, el asistente no usa otra reserva.",
+          "mistake": "Filtrar la respuesta después de que el modelo vio el contenido.",
+          "evidence": "Cero fugas, citas válidas y abstención apropiada.",
+          "code": "candidatos = buscar(permitidos(actor, ambito))\nsi insuficiente → abstener()"
+        }
+      ]
+    },
+    {
+      "number": "15",
+      "key": "construir",
+      "route": "/construir",
+      "title": "Aplicación completa",
+      "part": "Laboratorio",
+      "intro": "Una aplicación neutral conecta requisitos, carpetas, documentos, API, seguridad, pruebas, operación e IA en un recorrido ejecutable.",
+      "outcomes": [
+        "Seguir código real",
+        "Romperlo con propósito",
+        "Extender sin atajos"
+      ],
+      "project": "Aplicación de observaciones de biodiversidad sin datos ni marcas de los proyectos de origen.",
+      "deliverable": "Aplicación ejecutable con pruebas del recorrido y guía de extensión; registre el conteo actual al ejecutarlas.",
+      "lessons": [
+        {
+          "title": "Del caso de uso al adaptador",
+          "situation": "Los ejemplos aislados enseñan sintaxis, pero no cómo se conectan las piezas.",
+          "simple": "Siga una solicitud desde controlador hasta documento y de vuelta.",
+          "steps": [
+            "Lea la prueba.",
+            "Abra el caso de uso.",
+            "Identifique el puerto.",
+            "Compare dos adaptadores.",
+            "Ejecute el fallo."
+          ],
+          "example": "RegistrarObservacion funciona con memoria y con adaptador documental.",
+          "mistake": "Leer primero todos los archivos en orden alfabético.",
+          "evidence": "La misma suite pasa con ambos adaptadores.",
+          "code": "cd replication/examples/ecosistema-app\nnpm test"
+        },
+        {
+          "title": "Extender sin romper contratos",
+          "situation": "Añadir fotografía o clasificación automática puede saltarse ámbito, revisión o procedencia.",
+          "simple": "Cambie primero contrato y pruebas; después implemente la ruta mínima.",
+          "steps": [
+            "Escriba escenario.",
+            "Actualice diccionario.",
+            "Versione contrato.",
+            "Implemente.",
+            "Ejecute conformidad."
+          ],
+          "example": "Una clasificación de IA queda como sugerencia derivada, no cambia la especie canónica.",
+          "mistake": "Añadir campos al documento desde el controlador.",
+          "evidence": "Pruebas anteriores y nuevas pasan; migración es repetible.",
+          "code": "prueba → contrato → migracion → codigo → evidencia"
+        }
+      ]
+    },
+    {
+      "number": "16",
+      "key": "toolkit",
+      "route": "/herramientas",
+      "title": "Herramientas para personas e IA",
+      "part": "Automatización",
+      "intro": "Automatice generación, validación y auditoría sin sobrescribir trabajo, ocultar diferencias ni convertir una herramienta en autoridad.",
+      "outcomes": [
+        "Usar CLI segura",
+        "Generar sin perder cambios",
+        "Producir informes duales"
+      ],
+      "project": "Validar el manifiesto de la aplicación y explicar sus incumplimientos.",
+      "deliverable": "Informe HTML para personas y JSON verificable para integración continua.",
+      "lessons": [
+        {
+          "title": "Automatización conservadora",
+          "situation": "Un generador que reemplaza archivos divergentes puede destruir decisiones humanas.",
+          "simple": "Muestre impacto, escriba de forma idempotente y deténgase ante conflicto.",
+          "steps": [
+            "Valide rutas.",
+            "Calcule plan.",
+            "Permita simulación.",
+            "Compare contenido.",
+            "Registre resultado."
+          ],
+          "example": "cobria generar no toca un archivo modificado sin confirmación y estrategia explícita.",
+          "mistake": "Interpretar salida generada como certificación.",
+          "evidence": "Misma entrada produce mismos bytes y conflicto no produce escritura parcial.",
+          "code": "node replication/src/cli.mjs validar --json\nnode replication/src/cli.mjs impacto --archivo replication/examples/ecosistema-app/src/domain/observacion.mjs --raiz ."
+        },
+        {
+          "title": "Contexto seguro para agentes",
+          "situation": "Una IA sin autoridad y límites puede editar norma congelada o afirmar resultados no ejecutados.",
+          "simple": "Entregue objetivo, alcance, fuentes, invariantes, pruebas, riesgos y acciones humanas.",
+          "steps": [
+            "Declare autoridad.",
+            "Proteja rutas.",
+            "Enumere pruebas.",
+            "Separe hecho de propuesta.",
+            "Revise el diff."
+          ],
+          "example": "El agente puede mejorar una guía pero no publicar release ni inventar participantes.",
+          "mistake": "Dar acceso amplio sin contrato de cambio.",
+          "evidence": "Registro de cambios, pruebas y pendientes humanos.",
+          "code": "objetivo + alcance + autoridad + archivos\n+ invariantes + pruebas + riesgos"
+        }
+      ]
+    },
+    {
+      "number": "17",
+      "key": "evidencia",
+      "route": "/evidencia",
+      "title": "Evidencia, evolución y publicación",
+      "part": "Cierre",
+      "intro": "Termine el proyecto enlazando afirmaciones, requisitos, pruebas, resultados, límites y versiones sin presentar una propuesta como estándar oficial.",
+      "outcomes": [
+        "Construir trazabilidad",
+        "Versionar cambios",
+        "Publicar responsablemente"
+      ],
+      "project": "Preparar una candidata reproducible del ecosistema COBRIA.",
+      "deliverable": "Matriz integral, paquete reproducible, registro de cambios y puerta de publicación.",
+      "lessons": [
+        {
+          "title": "De una afirmación a su evidencia",
+          "situation": "Una cifra en el artículo pierde valor si nadie puede encontrar configuración, eventos y análisis que la produjeron.",
+          "simple": "Cada afirmación importante enlaza requisito, implementación, prueba, resultado y amenaza.",
+          "steps": [
+            "Asigne identificador.",
+            "Enlace fuente.",
+            "Registre ambiente.",
+            "Conserve datos crudos.",
+            "Declare límite."
+          ],
+          "example": "‘cero cruces’ apunta a S1, eventos crudos, script y configuración.",
+          "mistake": "Confundir prueba local con validación universal.",
+          "evidence": "Matriz navegable y regeneración desde cero.",
+          "code": "afirmacion → requisito → prueba → resultado → amenaza"
+        },
+        {
+          "title": "Versionar, retirar y comunicar",
+          "situation": "Publicar sin distinguir propuesta, candidata y estable hace que lectores atribuyan garantías inexistentes.",
+          "simple": "Cada versión declara estado, cambios, compatibilidad, evidencia y pendientes humanos.",
+          "steps": [
+            "Congele fuentes.",
+            "Genere derivados.",
+            "Verifique construcción limpia.",
+            "Obtenga revisión independiente.",
+            "Publique con límites."
+          ],
+          "example": "Core 1.0 permanece congelado; el manual puede crecer sin cambiar conformidad.",
+          "mistake": "Actualizar PDF, web y artículo a mano por separado.",
+          "evidence": "Huellas, changelog, archivo de versiones y paquete reconstruible.",
+          "code": "fuente congelada → construir → verificar → revisar → publicar"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,325 @@
+{
+  "schemaVersion": "1.0.0",
+  "status": "orientacion-tematica-no-conformidad",
+  "checkedAt": "2026-10-16",
+  "coreChanged": false,
+  "certified": false,
+  "accessBasis": "Fichas y alcances públicos oficiales; no revisión íntegra de todas las normas.",
+  "guide": "manuales/25-normas-y-evaluacion-de-calidad.md",
+  "antecedent": {
+    "title": "Norma ISO/IEC 25000",
+    "authors": ["Paola Roa Molina", "Claribel Morales", "Patricia Gutiérrez"],
+    "year": 2015,
+    "publication": "TIA, 3(2), 26–32",
+    "type": "articulo-secundario-no-norma",
+    "sha256": "cc0edee1274b96c7271debe62ba2cf54db0f9799f343f8a3c6663b68feb6ad99",
+    "redistributed": false
+  },
+  "references": [
+    {
+      "id": "SQ-00",
+      "reference": "ISO/IEC 25000:2014",
+      "url": "https://www.iso.org/standard/64764.html",
+      "modules": [
+        "calidad",
+        "evidencia"
+      ],
+      "priority": "prioritaria",
+      "practice": "Organizar modelos, requisitos, medidas y evaluación.",
+      "evidence": "Plan de evaluación con alcance y fuentes.",
+      "limit": "La guía no acredita certificación.",
+      "localSource": "manuales/17-quality-performance.md",
+      "status": "seleccionada-para-adopcion-no-evaluada",
+      "clauseMappingReviewed": false
+    },
+    {
+      "id": "SQ-10",
+      "reference": "ISO/IEC 25010:2023",
+      "url": "https://www.iso.org/standard/78176.html",
+      "modules": [
+        "calidad",
+        "core",
+        "patrones"
+      ],
+      "priority": "prioritaria",
+      "practice": "Seleccionar atributos de calidad del producto según contexto.",
+      "evidence": "Requisitos medibles y criterios justificados.",
+      "limit": "No reutilizar sin revisión el modelo de 2011.",
+      "localSource": "manuales/17-quality-performance.md",
+      "status": "seleccionada-para-adopcion-no-evaluada",
+      "clauseMappingReviewed": false
+    },
+    {
+      "id": "SQ-19",
+      "reference": "ISO/IEC 25019:2023",
+      "url": "https://www.iso.org/standard/78177.html",
+      "modules": [
+        "apiux",
+        "construir"
+      ],
+      "priority": "prioritaria",
+      "practice": "Evaluar tareas con usuarios y contexto definidos.",
+      "evidence": "Protocolo y resultados de uso con límites.",
+      "limit": "Una prueba de interfaz no sustituye evaluación con personas.",
+      "localSource": "manuales/15-api-ux.md",
+      "status": "seleccionada-para-adopcion-no-evaluada",
+      "clauseMappingReviewed": false
+    },
+    {
+      "id": "SQ-12",
+      "reference": "ISO/IEC 25012:2008",
+      "url": "https://www.iso.org/standard/35736.html",
+      "modules": [
+        "datos",
+        "ia"
+      ],
+      "priority": "prioritaria",
+      "practice": "Definir reglas de calidad para datos y procedencia.",
+      "evidence": "Validaciones con población y denominador.",
+      "limit": "Datos estructurados no significa solo SQL.",
+      "localSource": "manuales/04-bases-de-datos.md",
+      "status": "seleccionada-para-adopcion-no-evaluada",
+      "clauseMappingReviewed": false
+    },
+    {
+      "id": "SQ-24",
+      "reference": "ISO/IEC 25024:2015",
+      "url": "https://www.iso.org/standard/35749.html",
+      "modules": [
+        "datos",
+        "ia"
+      ],
+      "priority": "prioritaria",
+      "practice": "Especificar medidas de calidad de datos.",
+      "evidence": "Resultados por lote con exclusiones y unidad.",
+      "limit": "La métrica depende de la finalidad del dato.",
+      "localSource": "manuales/04-bases-de-datos.md",
+      "status": "seleccionada-para-adopcion-no-evaluada",
+      "clauseMappingReviewed": false
+    },
+    {
+      "id": "SQ-23",
+      "reference": "ISO/IEC 25023:2016",
+      "url": "https://www.iso.org/standard/35747.html",
+      "modules": [
+        "calidad",
+        "operaciones"
+      ],
+      "priority": "prioritaria",
+      "practice": "Definir medidas de producto y contexto de cálculo.",
+      "evidence": "Datos crudos, fórmula y umbral decidido antes de medir.",
+      "limit": "Publicada y en revisión; no se asume correspondencia íntegra con 25010:2023.",
+      "localSource": "manuales/17-quality-performance.md",
+      "status": "seleccionada-para-adopcion-no-evaluada",
+      "clauseMappingReviewed": false
+    },
+    {
+      "id": "SQ-30",
+      "reference": "ISO/IEC 25030:2019",
+      "url": "https://www.iso.org/standard/72116.html",
+      "modules": [
+        "construir",
+        "calidad"
+      ],
+      "priority": "prioritaria",
+      "practice": "Transformar necesidades en requisitos de calidad verificables.",
+      "evidence": "Requisito, responsable, criterio y prueba.",
+      "limit": "Los umbrales del ejemplo son locales.",
+      "localSource": "manuales/20-build-reference.md",
+      "status": "seleccionada-para-adopcion-no-evaluada",
+      "clauseMappingReviewed": false
+    },
+    {
+      "id": "SQ-40",
+      "reference": "ISO/IEC 25040:2024",
+      "url": "https://www.iso.org/standard/83467.html",
+      "modules": [
+        "calidad",
+        "evidencia"
+      ],
+      "priority": "prioritaria",
+      "practice": "Planificar y registrar evaluación de calidad.",
+      "evidence": "Plan, medidas, decisión, límites y revisión.",
+      "limit": "El marco no proporciona métodos de prueba específicos.",
+      "localSource": "manuales/22-evidence-transfer.md",
+      "status": "seleccionada-para-adopcion-no-evaluada",
+      "clauseMappingReviewed": false
+    },
+    {
+      "id": "ARQ-10",
+      "reference": "ISO/IEC/IEEE 42010:2022",
+      "url": "https://standards.ieee.org/ieee/42010/6846/",
+      "modules": [
+        "arquitectura",
+        "capas",
+        "patrones"
+      ],
+      "priority": "prioritaria",
+      "practice": "Describir interesados, preocupaciones y vistas de arquitectura.",
+      "evidence": "Vistas y decisiones con alternativas y trazabilidad.",
+      "limit": "Un diagrama o carpetas no demuestran conformidad.",
+      "localSource": "manuales/02-layers.md",
+      "status": "seleccionada-para-adopcion-no-evaluada",
+      "clauseMappingReviewed": false
+    },
+    {
+      "id": "REQ-48",
+      "reference": "ISO/IEC/IEEE 29148:2018",
+      "url": "https://www.iso.org/obp/ui#iso:std:iso-iec-ieee:29148:ed-2:v1:en",
+      "modules": [
+        "construir",
+        "inicio"
+      ],
+      "priority": "prioritaria",
+      "practice": "Identificar necesidades, requisitos y cambios.",
+      "evidence": "Aceptación y trazabilidad hasta pruebas.",
+      "limit": "No se confunde una historia con la especificación completa.",
+      "localSource": "manuales/20-build-reference.md",
+      "status": "seleccionada-para-adopcion-no-evaluada",
+      "clauseMappingReviewed": false
+    },
+    {
+      "id": "DOC-89",
+      "reference": "ISO/IEC/IEEE 15289:2019",
+      "url": "https://www.iso.org/standard/74909.html",
+      "modules": [
+        "documentacion",
+        "codigo"
+      ],
+      "priority": "prioritaria",
+      "practice": "Definir información del ciclo de vida por propósito y audiencia.",
+      "evidence": "Inventario con dueño, versión, revisión y consumidores.",
+      "limit": "Documentos existentes necesitan revisión semántica.",
+      "localSource": "manuales/README.md",
+      "status": "seleccionada-para-adopcion-no-evaluada",
+      "clauseMappingReviewed": false
+    },
+    {
+      "id": "TEST-19",
+      "reference": "ISO/IEC/IEEE 29119-2:2021",
+      "url": "https://www.iso.org/standard/79428.html",
+      "modules": [
+        "calidad",
+        "evidencia"
+      ],
+      "priority": "prioritaria",
+      "practice": "Planificar, seguir y cerrar pruebas según riesgo.",
+      "evidence": "Plan y resultados con anomalías y alcance.",
+      "limit": "Conteo de pruebas no es cobertura completa.",
+      "localSource": "manuales/17-quality-performance.md",
+      "status": "seleccionada-para-adopcion-no-evaluada",
+      "clauseMappingReviewed": false
+    },
+    {
+      "id": "SEG-01",
+      "reference": "ISO/IEC 27001:2022",
+      "url": "https://www.iso.org/standard/27001",
+      "modules": [
+        "seguridad",
+        "operaciones"
+      ],
+      "priority": "segun-riesgo",
+      "practice": "Asignar riesgos, responsables y tratamiento de seguridad.",
+      "evidence": "Inventario, controles y revisiones organizacionales.",
+      "limit": "SGSI organizacional; no se certifica código mediante esta guía.",
+      "localSource": "manuales/16-security.md",
+      "status": "seleccionada-para-adopcion-no-evaluada",
+      "clauseMappingReviewed": false
+    },
+    {
+      "id": "PRIV-01",
+      "reference": "ISO/IEC 27701:2025",
+      "url": "https://www.iso.org/es/norma/27701",
+      "modules": [
+        "seguridad",
+        "datos",
+        "ia"
+      ],
+      "priority": "segun-riesgo",
+      "practice": "Gobernar finalidad, acceso, minimización y retención.",
+      "evidence": "Inventario y decisiones de tratamiento contextual.",
+      "limit": "Sistema de gestión; no es dictamen jurídico ni lista de flags.",
+      "localSource": "manuales/16-security.md",
+      "status": "seleccionada-para-adopcion-no-evaluada",
+      "clauseMappingReviewed": false
+    },
+    {
+      "id": "OPS-00",
+      "reference": "ISO/IEC 20000-1:2018",
+      "url": "https://www.iso.org/standard/70636.html",
+      "modules": [
+        "operaciones"
+      ],
+      "priority": "segun-riesgo",
+      "practice": "Gobernar servicios, cambios, incidentes y recuperación.",
+      "evidence": "Responsables, registros y simulacros reales.",
+      "limit": "No se acredita el sistema de gestión con un deploy.",
+      "localSource": "manuales/18-cloud-operations.md",
+      "status": "seleccionada-para-adopcion-no-evaluada",
+      "clauseMappingReviewed": false
+    },
+    {
+      "id": "IA-01",
+      "reference": "ISO/IEC 42001:2023",
+      "url": "https://www.iso.org/standard/42001",
+      "modules": [
+        "ia"
+      ],
+      "priority": "segun-riesgo",
+      "practice": "Inventariar usos de IA, responsables, supervisión y retiro.",
+      "evidence": "Evaluaciones y seguimiento del sistema de gestión.",
+      "limit": "Una aplicación con IA no equivale a un sistema de gestión evaluado.",
+      "localSource": "manuales/19-analytics-ai.md",
+      "status": "seleccionada-para-adopcion-no-evaluada",
+      "clauseMappingReviewed": false
+    },
+    {
+      "id": "IA-94",
+      "reference": "ISO/IEC 23894:2023",
+      "url": "https://www.iso.org/standard/77304.html",
+      "modules": [
+        "ia",
+        "seguridad"
+      ],
+      "priority": "segun-riesgo",
+      "practice": "Identificar y tratar riesgos de IA según contexto.",
+      "evidence": "Riesgos, pruebas adversas, abstención y seguimiento.",
+      "limit": "Es orientación de riesgos; no garantía de exactitud.",
+      "localSource": "manuales/19-analytics-ai.md",
+      "status": "seleccionada-para-adopcion-no-evaluada",
+      "clauseMappingReviewed": false
+    },
+    {
+      "id": "UX-22",
+      "reference": "WCAG 2.2",
+      "url": "https://www.w3.org/TR/WCAG22/",
+      "modules": [
+        "apiux"
+      ],
+      "priority": "prioritaria",
+      "practice": "Definir alcance y objetivo de accesibilidad y probar recorridos.",
+      "evidence": "Pruebas automáticas y manuales, teclado, foco y errores.",
+      "limit": "Un recorrido o un escáner no acreditan por sí solos nivel AA.",
+      "localSource": "manuales/15-api-ux.md",
+      "status": "seleccionada-para-adopcion-no-evaluada",
+      "clauseMappingReviewed": false
+    },
+    {
+      "id": "DEV-18",
+      "reference": "NIST SP 800-218, SSDF 1.1",
+      "url": "https://csrc.nist.gov/pubs/sp/800/218/final",
+      "modules": [
+        "seguridad",
+        "codigo",
+        "toolkit"
+      ],
+      "priority": "prioritaria",
+      "practice": "Integrar desarrollo seguro, protección del código y respuesta a vulnerabilidades.",
+      "evidence": "Dependencias revisadas, cambios trazables y pruebas de controles.",
+      "limit": "Guía NIST, no norma ISO ni certificación automática.",
+      "localSource": "manuales/16-security.md",
+      "status": "seleccionada-para-adopcion-no-evaluada",
+      "clauseMappingReviewed": false
+    }
+  ]
+}

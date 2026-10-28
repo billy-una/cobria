@@ -1,0 +1,341 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="author" content="Billy Jak Cordero Porras"><meta name="description" content="Taller ejecutable para principiantes"><meta name="viewport" content="width=device-width, initial-scale=1"><title>De una idea a tu primera prueba</title><style>@font-face { font-family: Inter; src: url('./fonts/Inter-400.ttf') format('truetype'); font-weight: 400; font-display: block; }
+@font-face { font-family: Inter; src: url('./fonts/Inter-600.ttf') format('truetype'); font-weight: 600; font-display: block; }
+@font-face { font-family: Inter; src: url('./fonts/Inter-700.ttf') format('truetype'); font-weight: 700; font-display: block; }
+@font-face { font-family: Inter; src: url('./fonts/Inter-900.ttf') format('truetype'); font-weight: 900; font-display: block; }
+@font-face { font-family: 'COBRIA Mono'; src: url('./fonts/RobotoMono-400.ttf') format('truetype'); font-weight: 400; font-display: block; }
+@font-face { font-family: 'COBRIA Mono'; src: url('./fonts/RobotoMono-700.ttf') format('truetype'); font-weight: 700; font-display: block; }
+:root {
+  --bosque: #174a3a;
+  --musgo: #5f7a3d;
+  --jade: #2f8f71;
+  --guaria: #e6b84a;
+  --rana: #a84330;
+  --rio: #3d7ea6;
+  --marfil: #f6f0df;
+  --papel: #fffdf7;
+  --carbon: #24302c;
+}
+
+@page { size: letter; margin: 17mm 18mm 18mm; }
+@page :first { margin: 0; }
+* { box-sizing: border-box; }
+* { font-feature-settings: 'calt' 0, 'liga' 0 !important; }
+html { background: #d9d6cc; }
+body {
+  margin: 0 auto; color: var(--carbon); background: var(--papel);
+  font-family: Inter, Arial, sans-serif; font-size: 10.2pt;
+  line-height: 1.48; max-width: 216mm;
+}
+a { color: #1f6f59; text-decoration-thickness: 1px; text-underline-offset: 2px; }
+a:focus-visible { outline: 3px solid var(--guaria); outline-offset: 2px; }
+p { margin: 0 0 0.75rem; }
+h1, h2, h3, .sans { font-family: inherit; }
+.cover {
+  height: 279.4mm; position: relative; overflow: hidden; color: white;
+  page-break-after: always; background: var(--bosque);
+}
+.cover img { display: block; width: 100%; height: 100%; object-fit: cover; filter: saturate(.88) brightness(.68); }
+.cover::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg,rgba(23,74,58,.78) 0%,rgba(23,74,58,.1) 48%,rgba(20,36,31,.72) 100%); }
+.cover-title { position: absolute; z-index: 2; inset: 17mm 18mm auto; }
+.cover-title .kicker { color: var(--guaria); letter-spacing: .18em; font: 700 9pt/1.2 Inter,Arial,sans-serif; text-transform: uppercase; }
+.cover-title h1 { font-size: 46pt; line-height: .95; margin: 4mm 0 3mm; letter-spacing: -.035em; }
+.cover-title h2 { font-size: 17pt; line-height: 1.18; max-width: 155mm; font-weight: 600; margin: 0; }
+.cover-author { position: absolute; z-index: 2; left: 18mm; bottom: 15mm; font: 600 11pt/1.5 Inter,Arial,sans-serif; }
+.edition-chip { position: absolute; z-index: 3; right: 0; bottom: 0; min-width: 47mm; padding: 13mm 7mm 3mm 9mm; text-align: right; color: var(--guaria); background: var(--bosque); border-radius: 18mm 0 0 0; font: 700 7.5pt/1 Inter,Arial,sans-serif; letter-spacing: .08em; text-transform: uppercase; }
+.opening, .catalog-map, .pattern, .lab-page, .book-page, .closing { page-break-before: always; }
+@media print { .opening, .catalog-map, .pattern, .lab-page, .book-page, .closing { break-after: page; } }
+/* Alejar los diacríticos de la frontera evita que Chromium los pinte en la
+   página anterior. No aumenta la altura del bloque ni cambia su flujo. */
+@media print { .eyebrow:first-child { position: relative; top: .8mm; } }
+.opening h1, .catalog-map h1, .closing h1 { color: var(--bosque); font-size: 31pt; line-height: 1.05; margin: 3mm 0 7mm; }
+.eyebrow { color: var(--rana); font: 700 8.5pt/1.2 Inter,Arial,sans-serif; letter-spacing: .15em; text-transform: uppercase; }
+.lead { font-size: 15pt; line-height: 1.42; color: var(--bosque); }
+.note { border-left: 4px solid var(--guaria); background: #fbf3d8; padding: 4mm 5mm; margin: 5mm 0; }
+.nosql { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; margin-top: 5mm; }
+.nosql > div { border-radius: 4mm; padding: 5mm; background: #e9f1eb; }
+.nosql h3 { color: var(--bosque); margin: 0 0 2mm; font-size: 13pt; }
+.legend { display: grid; grid-template-columns: repeat(2,1fr); gap: 4mm; }
+.legend article { border-top: 5px solid var(--jade); background: #edf3ef; padding: 4mm; border-radius: 0 0 3mm 3mm; }
+.legend article:nth-child(2) { border-color: var(--rio); }
+.legend article:nth-child(3) { border-color: var(--guaria); }
+.legend article:nth-child(4) { border-color: var(--rana); }
+.legend h3 { font-size: 12pt; margin: 0 0 1mm; }
+.pattern { min-height: 240mm; }
+.pattern-head { display: grid; grid-template-columns: 17mm 1fr; gap: 5mm; align-items: center; border-bottom: 2px solid var(--bosque); padding-bottom: 4mm; }
+.pattern-number { width: 17mm; height: 17mm; border-radius: 50%; display: grid; place-items: center; color: white; background: var(--bosque); font: 800 15pt Inter,Arial,sans-serif; }
+.pattern h1 { color: var(--bosque); font-size: 28pt; line-height: 1; margin: 0; }
+.badges { margin: 3mm 0 5mm 22mm; font-family: Inter,Arial,sans-serif; font-size: 8pt; }
+.badge { display: inline-block; border: 1px solid var(--jade); color: var(--bosque); border-radius: 999px; padding: 1.2mm 3mm; margin-right: 2mm; background: #edf5f0; }
+.pattern-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm 6mm; }
+.block { break-inside: avoid; }
+.block h2 { font-size: 11.5pt; color: var(--bosque); margin: 0 0 1.5mm; }
+.block h2::before { content: ""; display: inline-block; width: 2.6mm; height: 2.6mm; border: 1.2mm solid var(--jade); border-radius: 50%; margin-right: 2.2mm; vertical-align: -.3mm; }
+.analogy { grid-column: 1 / -1; background: #eef4f7; border-radius: 4mm; padding: 4mm 5mm; border-left: 5px solid var(--rio); }
+.solution { grid-column: 1 / -1; background: #eef4ef; border-radius: 4mm; padding: 4mm 5mm; }
+.contract { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 8.4pt; line-height: 1.5; background: var(--carbon); color: #f7f3e7; padding: 3mm 4mm; border-radius: 2mm; }
+.story-illustration { grid-column: 1 / -1; display: grid; grid-template-columns: 3fr 2fr; min-height: 65mm; margin: 1mm 0 3mm; border-radius: 4mm; overflow: hidden; border: 1px solid #bac9bd; background: var(--marfil); }
+.story-illustration img { display: block; width: 100%; height: 65mm; object-fit: contain; object-position: center; background: #dfe9e2; }
+.story-illustration figcaption { display: flex; align-items: center; padding: 6mm; color: var(--bosque); background: #edf3ef; border-left: 4px solid var(--jade); font: 650 10pt/1.45 Inter,Arial,sans-serif; }
+.pattern.illustrated { font-size: 9.1pt; line-height: 1.28; }
+.illustrated .story-illustration { margin-bottom: 1mm; }
+.illustrated .story-illustration { min-height: 61mm; }
+.illustrated .story-illustration img { height: 61mm; object-fit: contain; object-position: center; }
+.illustrated .story-illustration figcaption { padding: 5mm; font-size: 8.6pt; }
+.illustrated .pattern-grid { gap: 2.2mm 5mm; }
+.illustrated .analogy, .illustrated .solution { padding: 2.4mm 4mm; }
+.illustrated .block h2 { margin-bottom: .8mm; font-size: 10.2pt; }
+.lab-page { min-height: 240mm; }
+.lab-page h1 { margin: 2mm 0 3mm; color: var(--bosque); font-size: 27pt; line-height: 1.05; }
+.lab-lead { margin-bottom: 5mm; color: var(--bosque); font-size: 13.5pt; }
+.lab-page h2 { margin: 0 0 1.8mm; color: var(--bosque); font-size: 11.5pt; }
+.lab-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; margin: 4mm 0; }
+.lab-grid > section { break-inside: avoid; padding: 4mm; border-top: 4px solid var(--guaria); background: #fbf8ed; border-radius: 0 0 3mm 3mm; }
+.field-card { margin: 4mm 0; padding: 4mm 5mm; border-left: 5px solid var(--rio); border-radius: 3mm; background: #eef4f7; }
+.field-card.relation { border-color: var(--jade); background: #edf4ef; }
+.lab-page pre { white-space: pre-wrap; margin: 2mm 0 4mm; padding: 4mm 5mm; color: #f7f3e7; background: var(--carbon); border-radius: 3mm; font: 9pt/1.45 ui-monospace,SFMono-Regular,Menlo,monospace; }
+.lab-page ul { margin: 0; padding-left: 5mm; }
+.lab-page li { margin-bottom: 1.2mm; }
+.lab-page details { margin: 5mm 0; padding: 4mm 5mm; border: 1px solid #b9c7be; border-radius: 3mm; background: #edf4ef; }
+.lab-page summary { color: var(--bosque); font-weight: 800; cursor: pointer; }
+.lab-page details p { margin: 3mm 0 0; }
+.closing .roadmap { border-collapse: collapse; width: 100%; }
+.closing th, .closing td { border-bottom: 1px solid #b9c7be; text-align: left; padding: 3mm; }
+.closing th { background: var(--bosque); color: white; font-family: Inter,Arial,sans-serif; }
+footer { margin-top: 8mm; padding-top: 3mm; border-top: 1px solid #b9c7be; color: #617069; font-size: 8pt; }
+.bibliographic-page { font-size: 9.4pt; }
+.bibliographic-page h1 { margin-bottom: 5mm; }
+.bibliographic-grid { display: grid; grid-template-columns: 42mm 1fr; gap: 2.2mm 5mm; margin: 5mm 0; }
+.bibliographic-grid dt { color: var(--bosque); font-weight: 800; }
+.bibliographic-grid dd { margin: 0; }
+.synopsis-box { margin: 5mm 0; padding: 6mm; border-left: 5px solid var(--jade); border-radius: 0 4mm 4mm 0; background: #edf4ef; }
+.author-profile { display: grid; grid-template-columns: 34mm 1fr; gap: 6mm; align-items: start; }
+.author-monogram { width: 30mm; height: 30mm; display: grid; place-items: center; border-radius: 50%; color: white; background: var(--bosque); font-size: 18pt; font-weight: 850; }
+.apa-reference { padding-left: 10mm; text-indent: -10mm; }
+.rights-box { margin-top: 6mm; padding: 5mm; border: 1px solid #b9c7be; border-radius: 3mm; background: #f7f4ea; }
+.book-page { min-height: 240mm; }
+.book-page h1 { color: var(--bosque); font-size: 29pt; line-height: 1.05; margin: 3mm 0 7mm; }
+.book-page h2 { color: var(--bosque); font-size: 13pt; margin: 5mm 0 2mm; }
+.operation-workshop h1, .analytics-workshop h1, .integral-workshop h1 { margin-bottom: 4mm; }
+.operation-workshop h2, .analytics-workshop h2, .integral-workshop h2 { margin-top: 3mm; }
+.operation-workshop p, .analytics-workshop p, .integral-workshop p { margin-bottom: 2mm; }
+.operation-workshop h1 { font-size: 27pt; }
+.operation-workshop pre { padding-block: 2.5mm; }
+.operation-workshop h2 { margin-top: 2mm; }
+.operation-workshop pre, .analytics-workshop pre, .integral-workshop pre { margin: 2mm 0; padding: 3mm 5mm; }
+.documentation-workshop h1 { margin-bottom: 4mm; }
+.documentation-workshop h2 { margin-top: 3mm; }
+.documentation-workshop p { margin-bottom: 2mm; }
+.documentation-workshop pre { margin: 2mm 0; padding: 3mm 5mm; }
+.book-page table { width: 100%; border-collapse: collapse; margin: 5mm 0; }
+.book-page th, .book-page td { padding: 3mm; border-bottom: 1px solid #bdc9c0; text-align: left; vertical-align: top; }
+.book-page th { color: white; background: var(--bosque); font-family: Inter,Arial,sans-serif; }
+.book-page pre { white-space: pre-wrap; padding: 4mm 5mm; color: #f7f3e7; background: var(--carbon); border-radius: 3mm; font: 9pt/1.45 ui-monospace,SFMono-Regular,Menlo,monospace; }
+.module-meta { display: grid; grid-template-columns: repeat(3,1fr); gap: 3mm; margin: 5mm 0; }
+.module-meta span { padding: 4mm; border-top: 4px solid var(--jade); background: #edf4ef; border-radius: 0 0 3mm 3mm; }
+.module-meta strong { display: block; color: var(--bosque); font-size: 12pt; }
+.module-sources,.lesson-path { margin-top: 5mm; color: #49685b; font-size: 8.5pt; overflow-wrap: anywhere; }
+.beginner-lesson { min-height: 0; }
+.beginner-lesson .lesson-columns { margin-top: 4mm; }
+.beginner-lesson .lesson-proof { margin-top: 4mm; }
+.beginner-practice pre { white-space: pre-wrap; overflow-wrap: anywhere; font-size: 9pt; }
+.beginner-practice h1 { font-size: 25pt; }
+.ep3-page h1 { font-size: 25pt; margin-bottom: 4mm; }
+.ep3-page h2 { margin-top: 3mm; }
+.ep3-page p { margin-bottom: 2.5mm; }
+.ep3-page pre { font-size: 8pt; margin: 2mm 0; padding: 3mm; overflow-wrap: anywhere; }
+.ep3-page .ep3-source { font-size: 8pt; overflow-wrap: anywhere; }
+.code-page h1 { margin-bottom: 3mm; }
+.code-lead { color: var(--bosque); font-size: 11.5pt; line-height: 1.35; }
+.book-story { margin: 0 0 3mm; padding: 3mm 4mm; border-left: 5px solid var(--jade); border-radius: 2mm; background: #edf4ef; }
+.book-story strong { color: var(--bosque); font: 750 10pt/1.2 Inter,Arial,sans-serif; }
+.book-story p { margin: 1mm 0; font-size: 8.7pt; line-height: 1.3; }
+.book-story small { color: #49685b; font: 650 7.5pt/1.25 Inter,Arial,sans-serif; }
+.code-grid { display: grid; grid-template-columns: 1fr; gap: 4mm; }
+.code-grid.single { grid-template-columns: 1fr; }
+.code-grid section { min-width: 0; break-inside: avoid; }
+.code-grid h2 { margin: 0; padding: 2.2mm 3mm; color: white; background: var(--bosque); border-radius: 3mm 3mm 0 0; font-size: 10pt; }
+.code-grid pre { overflow: visible; margin: 0; border-radius: 0 0 3mm 3mm; line-height: 1.28; white-space: pre-wrap; overflow-wrap: anywhere; }
+.code-grid.single pre { min-height: 48mm; font-size: 9pt; }
+.code-grid.multi pre { min-height: 0; font-size: 9pt; }
+.module-review { margin-top: 4mm; padding: 3mm; border-left: 3px solid var(--jade); background: #edf4ef; }
+.module-review h2 { margin-top: 0; }.module-review p { margin-bottom: 2mm; }
+.reader-guide-page .reader-tracks { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; }
+.reader-guide-page h2 { margin-top: 2mm; }.reader-guide-page li { margin-bottom: 1mm; }
+.source-links { margin: 2.5mm 0; font: 650 7.4pt/1.35 Inter,Arial,sans-serif; }
+.source-links a { display: inline-block; margin-right: 2mm; }
+.title-page { display: flex; flex-direction: column; justify-content: center; }
+.title-page h1 { font-size: 62pt; margin-bottom: 2mm; }
+.title-rule { width: 45mm; height: 3mm; margin: 12mm 0; background: var(--guaria); border-radius: 2mm; }
+.concept-grid, .family-map { display: grid; grid-template-columns: repeat(2,1fr); gap: 4mm; }
+.concept-grid article, .family-map article { padding: 4mm; border-top: 4px solid var(--jade); background: #edf4ef; border-radius: 0 0 3mm 3mm; }
+.concept-grid h2, .family-map h2 { margin-top: 0; }
+.family-map { grid-template-columns: repeat(3,1fr); }
+.family-map article { min-height: 43mm; }
+.family-map b { color: var(--rana); font-family: Inter,Arial,sans-serif; }
+.route-grid { display: grid; gap: 5mm; }
+.route-grid article { padding: 5mm 6mm; border-left: 6px solid var(--rio); background: #eef4f7; }
+.big-steps { counter-reset: route; list-style: none; padding: 0; }
+.big-steps li { padding: 4mm 4mm 4mm 16mm; margin: 3mm 0; position: relative; background: #f7f3e7; border-radius: 3mm; }
+.big-steps li::before { counter-increment: route; content: counter(route); position: absolute; left: 4mm; top: 3mm; width: 8mm; height: 8mm; color: white; background: var(--bosque); border-radius: 50%; display: grid; place-items: center; font: 700 8pt Inter,Arial,sans-serif; }
+.flow { display: flex; align-items: stretch; gap: 2mm; margin: 6mm 0; }
+.flow div { position: relative; flex: 1; min-height: 26mm; padding: 4mm 2mm; text-align: center; color: var(--bosque); background: #eaf2ed; border-radius: 3mm; font-family: Inter,Arial,sans-serif; }
+.flow div:not(:last-child)::after { content: "→"; position: absolute; right: -3.5mm; top: 8mm; color: var(--rana); font-size: 14pt; z-index: 2; }
+.flow b { display: block; margin-bottom: 2mm; color: var(--rana); }
+.flow span { font-size: 8.5pt; font-weight: 700; }
+.flow.compact { margin: 3mm 0 4mm; }
+.flow.compact div { min-height: 20mm; padding: 2.5mm 2mm; }
+.learning-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; }
+.learning-grid section { min-height: 47mm; padding: 4mm; border-top: 4px solid var(--jade); border-radius: 0 0 3mm 3mm; background: #edf4ef; }
+.learning-grid section.avoid { border-color: var(--rana); background: #faece8; }
+.learning-grid h2 { margin-top: 0; }
+.learning-page pre { margin: 2mm 0; font-size: 8.2pt; }
+.learning-page .connections { margin-top: 2mm; padding: 3mm; font-size: 8.8pt; line-height: 1.32; }
+.learning-page footer { margin-top: 0; padding-top: 2mm; }
+.family-opening { display: flex; flex-direction: column; }
+.family-opening h1 { font-size: 40pt; margin-bottom: 3mm; }
+.family-flow { display: flex; align-items: center; gap: 3mm; margin: 8mm 0; }
+.family-flow div { position: relative; flex: 1; min-height: 31mm; display: grid; align-content: center; justify-items: center; padding: 3mm; color: var(--bosque); border: 2px solid var(--jade); border-radius: 50% 50% 45% 45%; background: #edf4ef; text-align: center; }
+.family-flow div:not(:last-child)::after { content: "→"; position: absolute; right: -5mm; top: 9mm; color: var(--rana); font-size: 16pt; }
+.family-flow b { color: var(--rana); }
+.family-flow span { font: 750 8pt/1.2 Inter,Arial,sans-serif; }
+.family-summary { display: grid; grid-template-columns: 2fr 3fr; gap: 5mm; }
+.family-summary section { padding: 4mm 5mm; border-left: 5px solid var(--guaria); background: #fbf8ed; }
+.family-summary h2 { margin-top: 0; }
+.family-illustration { display: grid; grid-template-columns: 2fr 3fr; min-height: 67mm; margin: 7mm 0 0; overflow: hidden; border: 1px solid #bac9bd; border-radius: 4mm; background: #e4ece6; }
+.family-illustration img { width: 100%; height: 67mm; object-fit: contain; }
+.family-illustration figcaption { display: flex; align-items: center; margin: 0; padding: 6mm; color: var(--bosque); background: #edf3ef; font: 650 10pt/1.45 Inter,Arial,sans-serif; }
+.toc-page nav { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5mm 5mm; margin: 5mm 0; }
+.toc-page nav a { display: block; padding: 2mm 4mm; border-left: 4px solid var(--jade); border-radius: 0 2mm 2mm 0; background: #edf4ef; font-weight: 700; text-decoration: none; }
+.compact-routes { grid-template-columns: 1fr 1fr; gap: 3mm; }
+.compact-routes article { padding: 3.5mm 4mm; }
+.steps { padding-left: 7mm; }
+.steps li { margin: 2mm 0; padding-left: 2mm; }
+.decision-grid, .reference-grid, .question-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; }
+.decision-grid section { padding: 4mm 5mm; border-top: 5px solid var(--jade); background: #edf4ef; border-radius: 0 0 3mm 3mm; }
+.decision-grid .avoid { border-color: var(--rana); background: #faece8; }
+.connections { margin-top: 5mm; padding: 4mm; color: var(--bosque); background: #fbf3d8; border-radius: 3mm; }
+.reference-grid section { padding: 4mm; background: #f6f2e6; border-radius: 3mm; }
+.checklist { list-style: none; padding: 0; }
+.checklist li { margin: 2mm 0; }
+.checklist li::before { content: "□"; margin-right: 2mm; color: var(--jade); font-weight: 700; }
+.question-grid p { margin: 0; min-height: 24mm; padding: 4mm; border-left: 4px solid var(--guaria); background: #fbf8ed; }
+.case-cover { display: flex; flex-direction: column; justify-content: center; background: linear-gradient(145deg,#edf3e9,#fbf3d8); padding: 15mm; border-radius: 4mm; }
+.case-cover h1 { font-size: 40pt; }
+.term { margin: 7mm 0; padding: 5mm; border-left: 5px solid var(--jade); background: #edf4ef; }
+.term h2 { margin: 0 0 2mm; font-size: 20pt; }
+.term small { color: #65746c; font-family: Inter,Arial,sans-serif; }
+.rubric { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm; }
+.rubric div { display: flex; justify-content: space-between; padding: 4mm; background: #eef4ef; border-bottom: 2px solid var(--jade); }
+.rubric b { color: var(--rana); font-family: Inter,Arial,sans-serif; }
+.module-opening { display: block; min-height: 0; break-inside: avoid-page; }
+.module-opening h1 { font-size: 39pt; margin-bottom: 5mm; }
+/* Las lecturas EP7 comparten la apertura sin crear páginas vacías por el
+   último borde del repaso. Se ajusta espacio, no el tamaño del texto. */
+.module-opening .module-sources { margin-top: 2mm; margin-bottom: 2mm; }
+.module-opening .module-review { margin-top: 2mm; }
+.consultation-index { columns: 2; column-gap: 8mm; padding-left: 6mm; }
+.consultation-index li { margin-block: 2mm; break-inside: avoid; }
+.module-promise { margin: 3mm 0; padding: 3mm 5mm; border-top: 5px solid var(--jade); border-radius: 0 0 4mm 4mm; background: #edf4ef; }
+.module-promise h2 { margin-top: 0; }
+.module-promise ul { columns: 2; padding-left: 5mm; }
+.beginner-lesson h1 { font-size: 27pt; margin-bottom: 3mm; }
+.compact-lead { font-size: 12.5pt; }
+.lesson-situation { margin: 3mm 0; padding: 3mm 5mm; border-left: 5px solid var(--guaria); border-radius: 0 3mm 3mm 0; background: #fbf3d8; font-size: 11pt; line-height: 1.5; }
+.lesson-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; margin: 3mm 0; }
+.lesson-columns section { padding: 3mm 5mm; border: 1px solid #bdc9c0; border-radius: 3mm; background: #fffefa; }
+.lesson-columns h2 { margin-top: 0; }
+.lesson-columns ol { padding-left: 5mm; }
+.lesson-columns li { margin-bottom: 1.4mm; }
+.lesson-proof { display: grid; grid-template-columns: 48mm 1fr; gap: 4mm; margin-top: 4mm; padding: 4mm 5mm; border-left: 5px solid var(--jade); border-radius: 0 3mm 3mm 0; background: #edf4ef; }
+.lesson-proof strong { color: var(--bosque); }
+.beginner-lesson .lesson-proof { margin-top: 3mm; padding-block: 3mm; }
+.practice-page h1 { font-size: 25pt; line-height: 1.18; }
+.practice-page ol { padding-left: 6mm; }
+.practice-page li { margin-bottom: 2mm; }
+.practice-page pre { font-size: 9pt; line-height: 1.45; white-space: pre-wrap; overflow-wrap: anywhere; }
+.practice-reference { margin-top: 4mm; font-size: 8.5pt; overflow-wrap: anywhere; }
+.lesson-practice-page { font-size: 10pt; line-height: 1.4; }
+.lesson-practice-page h1 { font-size: 24pt; margin-bottom: 3mm; }
+.lesson-practice-page h2 { font-size: 12pt; margin: 3mm 0 1.5mm; }
+.lesson-practice-page p, .lesson-practice-page ul { margin-top: 1.5mm; margin-bottom: 2mm; }
+.lesson-practice-page li { margin-bottom: 1mm; }
+pre, code, .contract { font-family: 'COBRIA Mono', monospace !important; font-variant-ligatures: none; }
+@media screen and (max-width: 760px) {
+  .pattern-grid, .learning-grid, .family-summary, .family-illustration, .toc-page nav, .compact-routes, .code-grid, .lesson-columns, .lesson-proof { grid-template-columns: 1fr; }
+  .family-flow { flex-wrap: wrap; }
+  .family-flow div { min-width: 28%; }
+  .family-flow div::after { display: none; }
+}
+@media print { html { background: white; } body { max-width: none; } .pattern { break-after: page; } a { color: inherit; } }
+</style></head><body>
+<section class="cover"><img src="assets/ecosistema-cobria-panoramico-v4.png" alt="Ecosistema COBRIA ilustrado"><div class="cover-title"><div class="kicker">Edición ecosistema 1.0.0-rc2</div><h1>COBRIA</h1><h2>Taller ejecutable para principiantes</h2></div><div class="cover-author">Billy Jak Cordero Porras<br>Coto Brus, Costa Rica · 2026</div><div class="edition-chip">Propuesta independiente · 1.0.0-rc2</div></section>
+<main id="contenido-principal"><section class="book-page ep2-page" id="desde-cero"><div class="eyebrow">Primeros pasos · taller ejecutable</div><h1>De una idea a tu primera prueba</h1><p>Vas a contar colibríes en una reserva ficticia. Primero aprenderás a expresar la tarea; después cambiarás datos y escribirás una prueba. No necesitas conocer arquitectura. Los primeros ocho ejemplos calculan o leen valores: no autorizan ni guardan registros. El noveno conecta con la aplicación existente y mantiene sus controles.</p><h2>Preparar tu copia de trabajo</h2><p>Necesitas una copia autorizada de COBRIA, un editor de texto y Node.js 22.13 o superior. Node ejecuta el lenguaje JavaScript. Un editor modifica texto sin convertirlo en un documento de Word.</p><p>La terminal es una ventana para dar órdenes. Ábrela en la carpeta raíz de COBRIA: contiene README.md y replication/. Comprueba node --version y npm --version. Si no se reconocen, instala Node desde nodejs.org y vuelve a abrir la terminal. No necesitas una cuenta de nube ni instalar una base de datos.</p><p>Crea una carpeta nueva fuera de tu copia original, por ejemplo cobria-mi-inicio. Copia dentro TODO replication/examples/ecosistema-app, no solo taller-inicial. Abre esa copia en el editor y abre allí una terminal. Debes ver package.json, src/, test/, data/ y taller-inicial/. Conserva intacto el original para comparar y recuperar cambios.</p></section><section class="book-page ep2-page" ><h1>Ejecutar sin perder el original</h1><p>En esa carpeta nueva no hace falta npm install: la aplicación inicial no tiene paquetes externos. Todos los comandos de las diez unidades parten de esa carpeta. Escribe solo el comando, sin copiar un símbolo $ o &gt;. Guarda el archivo antes de ejecutarlo. El nombre .mjs identifica un archivo de JavaScript que puede compartir piezas con otros archivos.</p><p>Si aparece MODULE_NOT_FOUND o no se encuentra un archivo, comprueba la carpeta actual y el nombre completo, incluida su extensión. Si el comando no termina, puedes detenerlo con Ctrl+C. Ningún paso necesita datos personales, contraseñas o acceso a producción.</p><h2>El camino</h2><ol><li>Problema y primera salida</li><li>Dato y tipo de valor</li><li>Variable y cambio de estado</li><li>Condición y entrada permitida</li><li>Función y resultado reutilizable</li><li>Objeto e identidad del registro</li><li>Archivo y lectura de un documento</li><li>Módulo y responsabilidad compartida</li><li>Error y registro con controles</li><li>Prueba propia y recuperación de una regresión</li></ol><p>En cada unidad: lee, predice, ejecuta, cambia, provoca un fallo y recupera. Las soluciones están después del ejercicio para poder intentarlo primero.</p></section><section class="book-page ep2-page" id="desde-cero-01"><div class="eyebrow">Unidad 01 · comprender</div><h1>Problema y primera salida</h1><p>Un problema es una necesidad que puedes describir antes de elegir tecnología. Aquí queremos saber cuántos colibríes vimos en una reserva. Todavía no pedimos inteligencia artificial, una pantalla ni una base de datos: primero necesitamos una tarea concreta.</p><p>Un programa es una secuencia de instrucciones que la computadora ejecuta. console.log muestra un valor en la terminal; no crea un registro. El texto entre comillas es literal: se muestra tal como lo escribes. Los paréntesis delimitan lo que pasas a la instrucción. La línea que empieza con // es un comentario para quien lee y no se ejecuta.</p><p><strong>Archivo:</strong> taller-inicial/01-problema.mjs</p><pre>// Todavía describimos una tarea; no estamos guardando observaciones.
+console.log('Quiero contar colibríes en la reserva sur.');</pre></section><section class="book-page ep2-page" ><div class="eyebrow">Unidad 01 · practicar y recuperar</div><h1>Cambiar y comprobar</h1><p>Desde la copia de ecosistema-app, ejecuta:</p><pre>node taller-inicial/01-problema.mjs</pre><h2>Resultado esperado</h2><pre>Quiero contar colibríes en la reserva sur.</pre><h2>Tu cambio</h2><p>Cambia solo la frase para contar tucanes. Conserva console.log, los paréntesis y las comillas. Antes de ejecutar, escribe qué esperas leer.</p><pre>Quiero contar tucanes en la reserva sur.</pre><h2>Provocar un fallo</h2><p>Restaura primero el ejemplo original para no mezclar cambios.</p><p>Quita la comilla de cierre. Node no puede interpretar la instrucción: informa SyntaxError antes de mostrar la frase.</p><p>Texto que debes encontrar en la salida:</p><pre>SyntaxError</pre><h2>Recuperación</h2><p>Recoloca la comilla simple antes del paréntesis: sur.');. Guarda y vuelve a ejecutar. No reinstales Node por un error de escritura.</p><h2>Solución razonada</h2><p>La frase nueva queda entre las mismas comillas: console.log('Quiero contar tucanes en la reserva sur.');. El cambio está en la necesidad expresada, no en la instrucción que muestra el texto.</p></section><section class="book-page ep2-page" id="desde-cero-02"><div class="eyebrow">Unidad 02 · comprender</div><h1>Dato y tipo de valor</h1><p>Un dato es un valor que representa algo del problema. El número 3 representa una cantidad observada. JavaScript distingue números, textos y otros tipos: el tipo explica qué clase de valor tienes. typeof permite consultar ese tipo y aquí imprime number, la palabra que JavaScript usa para número.</p><p>El número 3 no es el texto '3'. Las comillas convierten el contenido en texto. Aunque ambos puedan verse como 3 en la pantalla, calcular con ellos puede producir resultados distintos. Por eso conviene mirar tanto el valor como su tipo antes de procesar datos.</p><p><strong>Archivo:</strong> taller-inicial/02-dato.mjs</p><pre>console.log(3);
+console.log(typeof 3);</pre></section><section class="book-page ep2-page" ><div class="eyebrow">Unidad 02 · practicar y recuperar</div><h1>Cambiar y comprobar</h1><p>Desde la copia de ecosistema-app, ejecuta:</p><pre>node taller-inicial/02-dato.mjs</pre><h2>Resultado esperado</h2><pre>3
+number</pre><h2>Tu cambio</h2><p>Sustituye los dos números 3 por 5. Predice las dos líneas: cambia el valor, pero no su tipo.</p><pre>5
+number</pre><h2>Provocar un fallo</h2><p>Restaura primero el ejemplo original para no mezclar cambios.</p><p>Añade comillas al 3 de typeof. El proceso termina sin error, pero ahora muestra string: has cambiado el significado del dato.</p><p>Texto que debes encontrar en la salida:</p><pre>3
+string</pre><h2>Recuperación</h2><p>Quita las comillas en typeof y recupera number. Un programa que termina sin error también puede entregar un resultado equivocado.</p><h2>Solución razonada</h2><p>console.log(5) muestra 5 y console.log(typeof 5) muestra number. El ejercicio no registra una observación: solo distingue una cantidad numérica de un texto.</p></section><section class="book-page ep2-page" id="desde-cero-03"><div class="eyebrow">Unidad 03 · comprender</div><h1>Variable y cambio de estado</h1><p>Una variable es un nombre para un valor. let cantidad = 3 crea el nombre cantidad y le asigna el valor 3. El signo = asigna; no pregunta si dos valores son iguales. La segunda línea lee el valor anterior, le suma 1 y guarda el resultado en el mismo nombre.</p><p>El estado es el valor que existe en un momento de la ejecución. Después de la asignación, cantidad vale 4. El orden importa: mostrarla antes del cambio daría 3. Esta variable vive solo durante el proceso; cerrar y abrir el programa comienza de nuevo con 3.</p><p><strong>Archivo:</strong> taller-inicial/03-variable.mjs</p><pre>let cantidad = 3;
+cantidad = cantidad + 1;
+console.log(cantidad);</pre></section><section class="book-page ep2-page" ><div class="eyebrow">Unidad 03 · practicar y recuperar</div><h1>Cambiar y comprobar</h1><p>Desde la copia de ecosistema-app, ejecuta:</p><pre>node taller-inicial/03-variable.mjs</pre><h2>Resultado esperado</h2><pre>4</pre><h2>Tu cambio</h2><p>Cambia el incremento de 1 a 2 sin cambiar el valor inicial. Explica por qué la salida será 5.</p><pre>5</pre><h2>Provocar un fallo</h2><p>Restaura primero el ejemplo original para no mezclar cambios.</p><p>Escribe el incremento entre comillas. Al combinar número y texto con +, obtienes 31, no 4.</p><p>Texto que debes encontrar en la salida:</p><pre>31</pre><h2>Recuperación</h2><p>Devuelve el incremento a 1 sin comillas y observa 4. No cambies el resultado esperado para aceptar una suma incorrecta.</p><h2>Solución razonada</h2><p>cantidad = cantidad + 2 toma el 3 anterior y calcula 5. No escribas cantidad = 2: eso reemplazaría el valor en vez de sumarlo.</p></section><section class="book-page ep2-page" id="desde-cero-04"><div class="eyebrow">Unidad 04 · comprender</div><h1>Condición y entrada permitida</h1><p>Una condición decide qué camino ejecutar. if significa si; else indica el camino alternativo. Entre llaves están las instrucciones de cada camino. const crea un nombre que no reasignaremos. Number.isInteger pregunta si un valor es entero; &gt;= compara si es mayor o igual; &amp;&amp; exige que se cumplan ambas comprobaciones.</p><p>Una comparación devuelve true si se cumple y false si no. La regla es una cantidad entera de al menos uno. No basta con que sea positiva: 2.5 no representa nuestro conteo. Mostrar Corrige la cantidad no guarda nada ni sustituye la validación del dominio. Solo empezamos a explicar una decisión que la aplicación también tendrá que proteger.</p><p><strong>Archivo:</strong> taller-inicial/04-condicion.mjs</p><pre>const cantidad = 3;
+if (Number.isInteger(cantidad) &amp;&amp; cantidad &gt;= 1) {
+  console.log('Cantidad permitida');
+} else {
+  console.log('Corrige la cantidad');
+}</pre></section><section class="book-page ep2-page" ><div class="eyebrow">Unidad 04 · practicar y recuperar</div><h1>Cambiar y comprobar</h1><p>Desde la copia de ecosistema-app, ejecuta:</p><pre>node taller-inicial/04-condicion.mjs</pre><h2>Resultado esperado</h2><pre>Cantidad permitida</pre><h2>Tu cambio</h2><p>Sustituye 3 por 4. Luego explica por qué sigue apareciendo Cantidad permitida: el resultado de una condición no tiene que mostrar el número.</p><pre>Cantidad permitida</pre><h2>Provocar un fallo</h2><p>Restaura primero el ejemplo original para no mezclar cambios.</p><p>Prueba cantidad cero. Aparece el camino de corrección; no es un fallo de Node, sino un rechazo válido de la regla.</p><p>Texto que debes encontrar en la salida:</p><pre>Corrige la cantidad</pre><h2>Recuperación</h2><p>Vuelve a una cantidad entera positiva. No borres la condición ni aceptes cero para obtener el mensaje de éxito.</p><h2>Solución razonada</h2><p>Con 4, Number.isInteger devuelve true y 4 &gt;= 1 también. Con 0, la segunda comparación devuelve false y se ejecuta else. true y false representan sí y no.</p></section><section class="book-page ep2-page" id="desde-cero-05"><div class="eyebrow">Unidad 05 · comprender</div><h1>Función y resultado reutilizable</h1><p>Una función reúne instrucciones bajo un nombre. function describirCantidad(cantidad) declara un parámetro: el nombre local que recibirá el valor de cada llamada. return entrega un resultado a quien llamó. Declarar la función no la ejecuta; describirCantidad(3) sí la llama.</p><p>Las comillas invertidas permiten insertar un valor con ${cantidad}. Primero la función produce el texto y luego console.log lo muestra. Separar producir un resultado de mostrarlo permite reutilizar la misma función desde una terminal, una pantalla o una prueba. Aquí solo formatea texto: no valida ni autoriza registros.</p><p><strong>Archivo:</strong> taller-inicial/05-funcion.mjs</p><pre>function describirCantidad(cantidad) {
+  return `Colibríes observados: ${cantidad}`;
+}
+console.log(describirCantidad(3));</pre></section><section class="book-page ep2-page" ><div class="eyebrow">Unidad 05 · practicar y recuperar</div><h1>Cambiar y comprobar</h1><p>Desde la copia de ecosistema-app, ejecuta:</p><pre>node taller-inicial/05-funcion.mjs</pre><h2>Resultado esperado</h2><pre>Colibríes observados: 3</pre><h2>Tu cambio</h2><p>Llama a la misma función con 5 en vez de 3. No cambies el cuerpo de la función para resolver cada cantidad.</p><pre>Colibríes observados: 5</pre><h2>Provocar un fallo</h2><p>Restaura primero el ejemplo original para no mezclar cambios.</p><p>Quita return de la segunda línea. La función calcula un texto, pero no lo entrega: console.log recibe undefined, es decir, un resultado no definido.</p><p>Texto que debes encontrar en la salida:</p><pre>undefined</pre><h2>Recuperación</h2><p>Recoloca return antes del texto. El resultado debe volver a ser Colibríes observados: 3.</p><h2>Solución razonada</h2><p>describirCantidad(5) entrega el parámetro 5 a la misma plantilla. El nombre cantidad dentro de la función no es una variable global ni conserva el valor de la llamada anterior.</p></section><section class="book-page ep2-page" id="desde-cero-06"><div class="eyebrow">Unidad 06 · comprender</div><h1>Objeto e identidad del registro</h1><p>Un objeto agrupa propiedades con nombre. En observacion, id identifica cuál observación es; ambito indica a qué reserva pertenece; especie y cantidad describen lo visto. revision identifica la versión del hecho y observadaEn conserva el instante en texto con zona UTC. La notación observacion.cantidad lee una propiedad.</p><p>No confundas identidad con cantidad: cambiar 3 a 4 describe otro contenido, no otro identificador. El ámbito tampoco es una etiqueta decorativa: más adelante limitará el acceso. Este literal todavía no es una entidad validada ni está guardado; la construcción del dominio, en las últimas unidades, hará obligatorias sus reglas.</p><p><strong>Archivo:</strong> taller-inicial/06-objeto.mjs</p><pre>const observacion = {
+  id: 'obs-taller-001', ambito: 'reserva-sur', especie: 'colibri',
+  cantidad: 3, revision: 1, observadaEn: '2026-10-19T12:00:00Z'
+};
+console.log(`${observacion.id}: ${observacion.cantidad} en ${observacion.ambito}`);</pre></section><section class="book-page ep2-page" ><div class="eyebrow">Unidad 06 · practicar y recuperar</div><h1>Cambiar y comprobar</h1><p>Desde la copia de ecosistema-app, ejecuta:</p><pre>node taller-inicial/06-objeto.mjs</pre><h2>Resultado esperado</h2><pre>obs-taller-001: 3 en reserva-sur</pre><h2>Tu cambio</h2><p>Cambia únicamente cantidad a 4. Conserva id, ámbito, revisión y fecha para reconocer la misma forma de documento.</p><pre>obs-taller-001: 4 en reserva-sur</pre><h2>Provocar un fallo</h2><p>Restaura primero el ejemplo original para no mezclar cambios.</p><p>Quita la d final al leer cantidad. JavaScript permite pedir una propiedad que no existe y devuelve undefined.</p><p>Texto que debes encontrar en la salida:</p><pre>obs-taller-001: undefined en reserva-sur</pre><h2>Recuperación</h2><p>Corrige la lectura a observacion.cantidad. No crees dos propiedades casi iguales para ocultar un error de nombre.</p><h2>Solución razonada</h2><p>El objeto queda con cantidad: 4 y la lectura sigue siendo observacion.cantidad. La salida conserva obs-taller-001 y reserva-sur, porque no modificaste esas propiedades.</p></section><section class="book-page ep2-page" id="desde-cero-07"><div class="eyebrow">Unidad 07 · comprender</div><h1>Archivo y lectura de un documento</h1><p>Un archivo conserva bytes fuera del programa. observacion.json contiene un documento de datos: JSON usa llaves, nombres entre comillas dobles y no admite comentarios ni comas finales. El archivo ya existe; esta unidad lo lee, no escribe una base de datos. Reiniciar el proceso no cambia su contenido.</p><p>import incorpora una función existente. node:fs es el módulo de archivos que viene con Node y readFileSync lee texto de forma síncrona: espera hasta terminar. new URL localiza observacion.json junto al programa mediante import.meta.url, independientemente de la terminal. JSON.parse convierte el texto en un objeto. Son herramientas de infraestructura, no reglas del dominio.</p><p><strong>Archivo:</strong> taller-inicial/07-archivo.mjs</p><pre>import { readFileSync } from 'node:fs';
+const texto = readFileSync(new URL('./observacion.json', import.meta.url), 'utf8');
+const observacion = JSON.parse(texto);
+console.log(`Archivo leído: ${observacion.cantidad} colibríes`);</pre><h2>observacion.json</h2><pre>{
+  &quot;id&quot;: &quot;obs-taller-001&quot;,
+  &quot;ambito&quot;: &quot;reserva-sur&quot;,
+  &quot;especie&quot;: &quot;colibri&quot;,
+  &quot;cantidad&quot;: 3,
+  &quot;revision&quot;: 1,
+  &quot;observadaEn&quot;: &quot;2026-10-19T12:00:00Z&quot;
+}</pre></section><section class="book-page ep2-page" ><div class="eyebrow">Unidad 07 · practicar y recuperar</div><h1>Cambiar y comprobar</h1><p>Desde la copia de ecosistema-app, ejecuta:</p><pre>node taller-inicial/07-archivo.mjs</pre><h2>Resultado esperado</h2><pre>Archivo leído: 3 colibríes</pre><h2>Tu cambio</h2><p>Abre taller-inicial/observacion.json y cambia solo &quot;cantidad&quot;: 3 por &quot;cantidad&quot;: 4. Guarda ese archivo, no el programa lector.</p><pre>Archivo leído: 4 colibríes</pre><h2>Provocar un fallo</h2><p>Restaura primero el ejemplo original para no mezclar cambios.</p><p>Añade una segunda coma después de la cantidad. JSON.parse informa SyntaxError: el documento no tiene una sintaxis válida.</p><p>Texto que debes encontrar en la salida:</p><pre>SyntaxError</pre><h2>Recuperación</h2><p>Deja una sola coma y vuelve a ejecutar el lector. No borres el documento ni reemplaces la lectura por un valor fijo.</p><h2>Solución razonada</h2><p>El lector no cambia: lee la nueva cantidad del archivo. JSON.parse no valida la cantidad positiva, la autorización o la revisión; esas reglas siguen perteneciendo a la aplicación y al dominio.</p></section><section class="book-page ep2-page" id="desde-cero-08"><div class="eyebrow">Unidad 08 · comprender</div><h1>Módulo y responsabilidad compartida</h1><p>Un módulo es un archivo que ofrece piezas a otros archivos. reglas.mjs usa export para ofrecer cantidadPermitida; 08-modulo.mjs la recibe con import. La ruta ./reglas.mjs significa el archivo vecino, con ese nombre y extensión. No requiere descargar un paquete.</p><p>Abre reglas.mjs antes de ejecutar. La función contiene la condición que ya conoces y devuelve true o false. Compartir esta regla evita copiarla en dos pantallas y olvidar actualizar una. No concede acceso ni guarda datos: cada pieza tiene una responsabilidad. La aplicación de referencia conserva su validación propia; este archivo es una pieza didáctica, no una nueva autoridad paralela.</p><p><strong>Archivo:</strong> taller-inicial/08-modulo.mjs</p><pre>import { cantidadPermitida } from './reglas.mjs';
+console.log(`¿Cantidad permitida? ${cantidadPermitida(3)}`);</pre><h2>reglas.mjs</h2><pre>// Una regla pura devuelve un valor: no guarda datos ni concede permisos.
+export function cantidadPermitida(cantidad) {
+  return Number.isInteger(cantidad) &amp;&amp; cantidad &gt;= 1;
+}</pre></section><section class="book-page ep2-page" ><div class="eyebrow">Unidad 08 · practicar y recuperar</div><h1>Cambiar y comprobar</h1><p>Desde la copia de ecosistema-app, ejecuta:</p><pre>node taller-inicial/08-modulo.mjs</pre><h2>Resultado esperado</h2><pre>¿Cantidad permitida? true</pre><h2>Tu cambio</h2><p>Cambia la llamada a cantidadPermitida(0). Explica por qué false es ahora el resultado correcto y no debes cambiar la regla para obtener true.</p><pre>¿Cantidad permitida? false</pre><h2>Provocar un fallo</h2><p>Restaura primero el ejemplo original para no mezclar cambios.</p><p>Cambia la ruta de import por un archivo inexistente. Node informa ERR_MODULE_NOT_FOUND y no ejecuta el cuerpo del módulo.</p><p>Texto que debes encontrar en la salida:</p><pre>ERR_MODULE_NOT_FOUND</pre><h2>Recuperación</h2><p>Restaura ./reglas.mjs. Distingue esta ruta de archivo de un permiso o de una dependencia externa: aquí no hace falta npm install.</p><h2>Solución razonada</h2><p>cantidadPermitida(0) devuelve false porque 0 no cumple &gt;= 1. El archivo consumidor no necesita conocer cómo está escrita la comparación para usar su resultado.</p></section><section class="book-page ep2-page" id="desde-cero-09"><div class="eyebrow">Unidad 09 · comprender</div><h1>Error y registro con controles</h1><p>Un error interrumpe una operación que no puede cumplir su contrato. try intenta ejecutar un bloque; catch recibe el error y permite explicarlo. await espera el resultado de una operación asíncrona antes de seguir. crearAplicacion conecta piezas ya escritas: todavía no necesitas reconstruir cada capa para usar esta entrada.</p><p>Ahora sí registramos un objeto en memoria. El contexto indica actor, finalidad, reservas permitidas, capacidades y claveIdempotencia. Los corchetes [] forman una lista de valores; lista.items.length cuenta los elementos devueltos. Autorizar significa comprobar si ese actor puede realizar esa acción en esa reserva. La identidad es sintética para aprender: en un servidor los permisos deben proceder de una sesión confiable, nunca de un formulario editable.</p><p>Idempotencia significa que repetir la misma intención con la misma clave y contenido no crea un segundo efecto. Aquí se llama dos veces y se lista una observación. La clave no sirve para enviar contenido distinto: eso se rechaza como IDEMPOTENCY_CONFLICT. El ejemplo es secuencial y en memoria: no demuestra atomicidad, autenticación real ni seguridad frente a solicitudes simultáneas.</p><p><strong>Archivo:</strong> taller-inicial/09-error.mjs</p><pre>import { crearAplicacion } from '../src/composition.mjs';
+const app = crearAplicacion();
+const entrada = {
+  id: 'obs-taller-001', ambito: 'reserva-sur', especie: 'colibri',
+  cantidad: 3, revision: 1, observadaEn: '2026-10-19T12:00:00Z'
+};
+// Identidad de aprendizaje; no representa una sesión autenticada.
+const contexto = {
+  actorId: 'aprendiz', finalidad: 'aprendizaje', ambitos: ['reserva-sur'],
+  permisos: ['observaciones:escribir', 'observaciones:leer'],
+  claveIdempotencia: 'visita-taller-001'
+};
+try {
+  const guardada = await app.registrar.ejecutar(entrada, contexto);
+  await app.registrar.ejecutar(entrada, contexto);
+  const lista = await app.listar.ejecutar({ambito: 'reserva-sur', limite: 10}, contexto);
+  console.log(`Registrada: ${guardada.id}; cantidad: ${guardada.cantidad}`);
+  console.log(`Tras repetir: ${lista.items.length} observación`);
+} catch (error) {
+  console.log(`Registro rechazado: ${error.codigo}`);
+  process.exitCode = 1;
+}</pre></section><section class="book-page ep2-page" ><div class="eyebrow">Unidad 09 · practicar y recuperar</div><h1>Cambiar y comprobar</h1><p>Desde la copia de ecosistema-app, ejecuta:</p><pre>node taller-inicial/09-error.mjs</pre><h2>Resultado esperado</h2><pre>Registrada: obs-taller-001; cantidad: 3
+Tras repetir: 1 observación</pre><h2>Tu cambio</h2><p>Cambia cantidad a 4 y ejecuta en un proceso nuevo. Debes conservar un único registro tras la repetición. No cambies permisos ni elimines la segunda llamada.</p><pre>Registrada: obs-taller-001; cantidad: 4
+Tras repetir: 1 observación</pre><h2>Provocar un fallo</h2><p>Restaura primero el ejemplo original para no mezclar cambios.</p><p>Prueba una cantidad cero. El dominio rechaza el registro y catch muestra su código; process.exitCode = 1 comunica a otras herramientas que no fue exitoso.</p><p>Texto que debes encontrar en la salida:</p><pre>Registro rechazado: OBS_QUANTITY_INVALID</pre><h2>Recuperación</h2><p>Restaura cantidad: 3. Si aparece ACCESS_DENIED, revisa el ámbito y la capacidad del contexto; nunca retires el autorizador para forzar éxito.</p><h2>Solución razonada</h2><p>Con cantidad: 4 y el mismo contenido en ambas llamadas aparecen cantidad: 4 y Tras repetir: 1 observación. Cada ejecución crea una memoria nueva: repetir el proceso no demuestra persistencia entre reinicios.</p></section><section class="book-page ep2-page" id="desde-cero-10"><div class="eyebrow">Unidad 10 · comprender</div><h1>Prueba propia y recuperación de una regresión</h1><p>Una prueba ejecuta una conducta y compara lo obtenido con lo esperado. node:test ofrece test para nombrar el caso. assert.equal compara dos valores y falla cuando son distintos. new Observacion construye la entidad que valida el registro; no llama al servicio ni guarda nada. () =&gt; { ... } escribe una función sin nombre que test ejecutará; entre sus llaves están los pasos del caso.</p><p>El caso prepara una entrada de cantidad 3, construye el objeto y comprueba que la cantidad sigue siendo 3. Si cambias una entrada válida a 4 y mantienes la expectativa 3, la prueba falla: has observado una discrepancia real. Revisa primero cuál de las dos representa el requisito antes de cambiar código o expectativa. No cambies una prueba de seguridad para permitir una operación prohibida.</p><p><strong>Archivo:</strong> taller-inicial/10-prueba.test.mjs</p><pre>import test from 'node:test';
+import assert from 'node:assert/strict';
+import { Observacion } from '../src/domain/observacion.mjs';
+
+test('conserva la cantidad observada', () =&gt; {
+  const observacion = new Observacion({
+    id: 'obs-taller-001', ambito: 'reserva-sur', especie: 'colibri',
+    cantidad: 3, revision: 1, observadaEn: '2026-10-19T12:00:00Z'
+  });
+  assert.equal(observacion.cantidad, 3);
+});</pre></section><section class="book-page ep2-page" ><div class="eyebrow">Unidad 10 · practicar y recuperar</div><h1>Cambiar y comprobar</h1><p>Desde la copia de ecosistema-app, ejecuta:</p><pre>node --test --test-reporter=tap taller-inicial/10-prueba.test.mjs</pre><h2>Resultado esperado</h2><pre># pass 1
+# fail 0</pre><h2>Tu cambio</h2><p>Primero cambia solo cantidad: 3 a cantidad: 4 y observa fail 1. Después ajusta la expectativa a 4 porque tu nuevo caso pide conservar cuatro. Vuelve a ejecutar y conserva ambas salidas.</p><pre># pass 1
+# fail 0</pre><h2>Provocar un fallo</h2><p>Restaura primero el ejemplo original para no mezclar cambios.</p><p>Cambia únicamente la cantidad de entrada a 4. Debe haber una prueba fallida, no cero pruebas. El informe muestra que 4 no coincide con 3.</p><p>Texto que debes encontrar en la salida:</p><pre>ERR_ASSERTION</pre><h2>Recuperación</h2><p>Para completar el ejercicio de cuatro, conserva cantidad: 4 y cambia assert.equal(observacion.cantidad, 3) a assert.equal(observacion.cantidad, 4). Para volver al caso original, restaura ambos valores a 3.</p><h2>Solución razonada</h2><p>La solución tiene cantidad: 4 en la entrada y assert.equal(observacion.cantidad, 4) en la comprobación. Una prueba aprobada no demuestra todo el sistema: este caso solo comprueba conservación de una cantidad válida. La suite general añade rechazos y otros controles.</p></section><section class="book-page ep2-page" ><h1>Tu primera entrega independiente</h1><p>Ejecuta npm test desde la copia de ecosistema-app. Deben ejecutarse pruebas y terminar con fail 0. No memorices una cifra total histórica: el proyecto sigue creciendo. El comando de la unidad 10 selecciona una sola prueba; npm test comprueba la aplicación y el taller.</p><p>Realiza una tarea sin mirar la solución: registra cinco colibríes, conserva una sola observación al repetir y escribe una prueba que espere cinco. Explica cuál es el dato, cuál es su identidad, qué reserva lo limita y por qué cero debe rechazarse. Entrega el archivo cambiado, comando y salida, no solo una captura de un mensaje de éxito.</p><p>Si te atascas, registra unidad, paso, mensaje literal y qué entendías antes del fallo; no incluyas información personal. Compara con la recuperación de esa unidad. Puedes restaurar un archivo desde tu copia original sin borrar la carpeta de trabajo.</p><p>Continúa con Tu primer proyecto con COBRIA y Datos desde cero. Este taller no demuestra que una persona principiante haya comprendido el material: esa comprobación requiere observar una tarea real con consentimiento apropiado.</p><p>Continúa con Tu primer proyecto con COBRIA y Datos desde cero. Conserva la misma aplicación: no necesitas crear un proyecto distinto en cada capítulo.</p></section></main>
+</body></html>

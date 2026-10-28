@@ -1,7 +1,10 @@
 # COBRIA Data: manual de bases de datos
 
-La fuente de referencia completa se encuentra en
-`specification/phase-3/data-dictionary.yaml`. El diccionario separa concepto, nombre
+Para empezar con código ejecutable, sigue [Datos desde cero](27-datos-desde-cero.md).
+Su contrato local está en `replication/examples/ecosistema-app/data/diccionario-observaciones.json`.
+La referencia de gobernanza más amplia se encuentra en
+`specification/phase-3/data-dictionary.yaml`; no es el serializador de la aplicación.
+El diccionario separa concepto, nombre
 lógico y clave física; ninguna clave compacta debe atravesar la frontera Dater.
 
 ## Método de diccionario
@@ -31,14 +34,14 @@ Ejemplo lógico:
   "especie": "colibri",
   "cantidad": 2,
   "revision": 1,
-  "ocurrioEn": "2026-09-21T14:00:00Z"
+  "observadaEn": "2026-09-21T14:00:00Z"
 }
 ```
 
-Ejemplo físico dentro de `n8`:
+Ejemplo físico del Dater inicial, formato 1 (no el esquema 3 de la referencia):
 
 ```json
-{"a":"obs-42","b":"bosque-sur","c":"colibri","d":2,"e":1,"f":"2026-09-21T14:00:00Z"}
+{"a":"obs-42","b":"bosque-sur","c":1,"d":1,"e":"2026-09-21T14:00:00.000Z","f":"colibri","g":2}
 ```
 
 `a`–`h` no poseen significado global. Solo el diccionario versionado y el Dater del nodo

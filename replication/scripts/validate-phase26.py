@@ -13,7 +13,7 @@ with tempfile.TemporaryDirectory() as directory:
   elif json.loads(target.read_text())!=template: errors.append('plantilla no reproducible')
 tests=subprocess.run(['node','--test','tests/phase26-engineering-rubric.test.mjs'],cwd=ROOT/'replication',capture_output=True,text=True)
 if tests.returncode: errors.append(tests.stdout+tests.stderr)
-roadmap=(ROOT/'manuales/11-estado-y-roadmap-integral.md').read_text(); site=(ROOT/'sitio/app/manual.tsx').read_text(); book=(ROOT/'libro-cobria/build-book.mjs').read_text()
+roadmap=(ROOT/'manuales/11-estado-y-roadmap-integral.md').read_text(); site=(ROOT/'editorial/pedagogy.json').read_text(); book=(ROOT/'libro-cobria/build-book.mjs').read_text()
 if 'Fase 26 — Rúbrica dimensional' not in roadmap: errors.append('roadmap sin fase 26')
 if 'Veinticuatro dimensiones' not in site: errors.append('sitio sin fase 26')
 if 'Ocho contratos, veinticuatro dimensiones' not in book: errors.append('libro sin fase 26')

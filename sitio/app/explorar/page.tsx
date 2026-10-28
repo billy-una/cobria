@@ -1,7 +1,126 @@
 "use client";
-/* eslint-disable @next/next/no-html-link-for-pages */
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import catalog from "../../public/catalogo.json";
+import curriculum from "../../../editorial/curriculum.json";
+import { SiteFrame } from "../site-frame";
+import guide from "../../../editorial/c10/reader-guide.json";
+import { buscar, learningIndex } from "../../../editorial/ep5/search.mjs";
+import areas from "../../../editorial/ep3/areas.json";
+import initial from "../../../editorial/ep2/recorrido.json";
+import project from "../../../editorial/ep4/recorrido.json";
 
-const levels:Record<string,string>={"Modelado documental":"Fundamentos","Seguridad por ámbito":"Intermedio","Analítica e IA":"Avanzado","Eventos y consistencia":"Avanzado","Gobernanza y retiro":"Intermedio"};
-export default function Page(){const [query,setQuery]=useState("");const [family,setFamily]=useState("Todas");const [level,setLevel]=useState("Todos");const items=catalog.items;const families=["Todas",...new Set(items.map(x=>x.familia))];const filtered=useMemo(()=>items.filter(x=>{const hay=`${x.nombre} ${x.proposito} ${x.problema} ${x.familia}`.toLowerCase().includes(query.toLowerCase());return hay&&(family==="Todas"||x.familia===family)&&(level==="Todos"||(levels[x.familia]??"Intermedio")===level)}),[query,family,level,items]);return <main id="contenido"><header className="nav"><a className="brand" href="/">COBRIA <span>guía de software</span></a><nav><a href="/">Inicio</a><a href="/mapa">Mapa</a><a href="/laboratorio">Laboratorio</a><a href="/recursos">Recursos</a></nav></header><div className="page-shell"><header><p className="eyebrow">Catálogo consultable</p><h1>Encuentra una decisión por su problema.</h1><p className="lead">Busca por necesidad y limita por familia o nivel de aprendizaje. Cada resultado conserva problema, propósito y relación con el catálogo completo.</p></header><div className="search-controls"><label><span className="sr-only">Buscar</span><input value={query} onChange={e=>setQuery(e.target.value)} placeholder="Ej.: ámbito, reconstrucción, catálogo…" /></label><label><span className="sr-only">Familia</span><select value={family} onChange={e=>setFamily(e.target.value)}>{families.map(x=><option key={x}>{x}</option>)}</select></label><label><span className="sr-only">Nivel</span><select value={level} onChange={e=>setLevel(e.target.value)}>{["Todos","Fundamentos","Intermedio","Avanzado"].map(x=><option key={x}>{x}</option>)}</select></label></div><p className="search-count" aria-live="polite">{filtered.length} patrones encontrados</p><section className="search-grid">{filtered.map(x=><article className="search-card" key={x.slug}><p className="eyebrow">{x.familia} · {levels[x.familia]??"Intermedio"}</p><h2>{x.nombre}</h2><p>{x.proposito}</p><a href={`/patrones/${x.slug}`}><b>Leer la ficha →</b></a></article>)}</section></div></main>}
+const all = learningIndex(curriculum, catalog, guide, areas, initial, project);
+
+export default function Page() {
+  const [query, setQuery] = useState("");
+  const [kind, setKind] = useState("Todos");
+  const input = useRef<HTMLInputElement>(null);
+  const filtered = useMemo(() => buscar(all, query, kind), [query, kind]);
+  function reset() {
+    setQuery("");
+    setKind("Todos");
+    input.current?.focus();
+  }
+  return (
+    <SiteFrame>
+      <div className="page-shell">
+        <header>
+          <p className="eyebrow">Buscador de conocimiento</p>
+          <h1>Encuentra una decisión, una lección o una práctica.</h1>
+          <p className="lead">
+            Busque en las {curriculum.lessonCount} lecciones, treinta patrones,
+            treinta laboratorios, {curriculum.practiceCount} prácticas y cinco
+            talleres ejecutables. Puede escribir sin tildes y combinar palabras.
+          </p>
+          <p>Incluye también los {areas.areas.length} casos desarrollados del libro, las {initial.units.length} unidades iniciales y el proyecto integral con código completo.</p>
+          <nav className="search-topics" aria-label="Búsquedas sugeridas">
+            {[
+              "datos",
+              "capas",
+              "seguridad",
+              "reconstruccion",
+              "documentacion",
+              "IA",
+            ].map((topic) => (
+              <button
+                type="button"
+                key={topic}
+                aria-pressed={query === topic}
+                onClick={() => {
+                  setQuery(topic);
+                  input.current?.focus();
+                }}
+              >
+                {topic}
+              </button>
+            ))}
+          </nav>
+        </header>
+        <div className="search-controls">
+          <label>
+            Buscar
+            <input
+              ref={input}
+              value={query}
+              maxLength={200}
+              onChange={(event) => setQuery(event.target.value)}
+              placeholder="Ej.: ambito, persistencia, comentarios…"
+            />
+          </label>
+          <label>
+            <span id="tipo-busqueda-label">Tipo</span>
+            <select
+              aria-labelledby="tipo-busqueda-label"
+              value={kind}
+              onChange={(event) => setKind(event.target.value)}
+            >
+              {[
+                "Todos",
+                "Lección",
+                "Patrón",
+                "Laboratorio",
+                "Práctica",
+                "Taller",
+                "Caso desarrollado",
+                "Unidad inicial",
+                "Proyecto",
+              ].map((value) => (
+                <option key={value}>{value}</option>
+              ))}
+            </select>
+          </label>
+          <button type="button" onClick={reset}>
+            Limpiar búsqueda
+          </button>
+        </div>
+        <p className="search-count" role="status" aria-live="polite">
+          {filtered.length} resultados
+        </p>
+        {filtered.length === 0 && (
+          <section className="search-empty">
+            <h2>No encontramos coincidencias</h2>
+            <p>
+              Pruebe una palabra más general o quite el filtro. No encontrarla
+              no significa que el tema no exista.
+            </p>
+            <a href="/comenzar">Volver a la guía de lectura</a>
+          </section>
+        )}
+        <section className="search-grid" aria-label="Resultados de búsqueda">
+          {filtered.map((item) => (
+            <article className="search-card" key={`${item.kind}-${item.href}`}>
+              <p className="eyebrow">
+                {item.kind} · {item.detail}
+              </p>
+              <h2>{item.title}</h2>
+              <p>{item.description}</p>
+              <a href={item.href}>
+                <b>Abrir {item.title}</b>
+              </a>
+            </article>
+          ))}
+        </section>
+      </div>
+    </SiteFrame>
+  );
+}

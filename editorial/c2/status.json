@@ -1,0 +1,36 @@
+{
+  "phase": "C2",
+  "date": "2026-10-17",
+  "status": "verificada_localmente_validacion_con_lectores_pendiente",
+  "guide": "manuales/27-datos-desde-cero.md",
+  "dictionary": "replication/examples/ecosistema-app/data/diccionario-observaciones.json",
+  "catalogs": "replication/examples/ecosistema-app/data/catalogos-especies.json",
+  "lessonSource": "editorial/data-lessons.json",
+  "executionLessons": 5,
+  "dataTests": 9,
+  "verification": "make verificar-c2",
+  "fullVerification": "make verificar-publicacion COBRIA_SITE_ISOLATED=1",
+  "fullVerificationExitCode": 0,
+  "freshCopyReport": "output/review/c2/cobria-c2-clean-lYAP1t.json",
+  "applicationTestsPassed": 34,
+  "bookPages": 266,
+  "visualReview": {"bookPages": [51,52,53,54,55,56,57,58,59,60,61], "workbookPages": [13], "result": "sin cortes observados en las páginas modificadas"},
+  "scope": [
+    "Contrato local comprobado contra Dater v1; no reemplaza el diccionario de gobernanza de fase 3.",
+    "Formato v2 del taller añade edición de catálogo; no cambia el formato de los adaptadores existentes.",
+    "Consulta funcional en memoria, aislamiento por filtro y orden estable; índice únicamente candidato.",
+    "Migración pura e idempotente con copia v1 legible y rechazos de pérdida de datos.",
+    "Libro y web local comparten cinco contratos de ejecución y la tabla de diccionario."
+  ],
+  "frozenCoreChanged": false,
+  "originalRc2ArchiveChanged": false,
+  "published": false,
+  "remoteEngineValidated": false,
+  "readerComprehensionValidated": false,
+  "humanPending": ["C13: comprensión y tareas de lectores reales sin ayuda del autor."],
+  "remaining": [
+    "C5: autenticación e interfaz real; el filtro de ámbito del taller no autoriza actores.",
+    "C6 y C8: índices medidos, paginación del motor y migraciones por lotes con recuperación real.",
+    "C10 y C11: cierre editorial y científico global; este cambio no aporta nuevas mediciones arquitectónicas."
+  ]
+}

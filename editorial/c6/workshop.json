@@ -1,0 +1,17 @@
+{
+  "title": "Detectar, medir y recuperar sin improvisar",
+  "intro": "Dos reservas usan obs-1. Una caché que solo recuerda el identificador devuelve el ámbito equivocado. El taller reproduce ese defecto deliberado, usa la caché existente con ámbito y política y ensaya la recuperación de documentos ficticios.",
+  "command": "npm start --prefix replication/examples/operacion-c6",
+  "testCommand": "npm test --prefix replication/examples/operacion-c6",
+  "measureCommand": "npm run medir --prefix replication/examples/operacion-c6",
+  "steps": [
+    "Reproduzca el síntoma: una consulta de reserva-norte devuelve reserva-sur. La causa es una clave sin ámbito, no un error del formulario.",
+    "Ejecute la lectura corregida: autoriza cada petición, separa ámbito y política e invalida después de una escritura. Compruebe también permisos revocados y TTL.",
+    "Exporte los documentos permitidos a un archivo temporal exclusivo y restaure en un repositorio nuevo. Compare huella y contenido; no sobrescriba la fuente activa.",
+    "Ensaye staging local con los bytes exactos: una prueba fallida deja la candidata anterior; una prueba válida permite el cambio y una reversión recupera su huella.",
+    "Mida con cinco pares de calentamiento y treinta pares observados. Consulte percentiles, construcción del índice y bytes serializados; no generalice el resultado a producción."
+  ],
+  "checks": "Quince pruebas locales cubren defecto, rechazo, caché, respaldo, restauración, handler, candidata, reversión y protocolo. El handler es un análogo de Function ejecutado en Node, no una Function desplegada.",
+  "limits": "Ensayo local sin nube, producción ni aprobación humana. El respaldo JSON contiene documentos, no sesiones, índices ni registro de idempotencia. SHA-256 detecta cambios, no autentica al autor. La reversión cambia una referencia en memoria, no revierte datos ni infraestructura. Los tiempos locales no son RTO, RPO ni evidencia de superioridad arquitectónica.",
+  "guide": "manuales/31-calidad-rendimiento-y-operacion.md"
+}

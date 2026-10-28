@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "1.0.0",
+  "phase": "EP8",
+  "date": "2026-10-23",
+  "deliveryTarget": "candidata-educativa-y-preprint",
+  "basis": "editorial/ep0/alcance.json",
+  "disposition": "excluida-justificadamente-para-preprint-acotado",
+  "reason": "La entrega mantiene las afirmaciones limitadas a norma, pruebas locales y evidencia histórica R7. No se decide sostener superioridad del contrato, rendimiento distribuido ni calidad generativa que requieran investigación nueva.",
+  "newConfirmatoryObservations": 0,
+  "pc3Closed": false,
+  "stableGatesClosed": false,
+  "externalReplicationDone": false,
+  "preflight": "editorial/ep8/preflight-2026-10-23.json",
+  "families": ["P1", "P2", "R1", "S1", "A1"],
+  "reentry": [
+    "Decidir explícitamente ampliar las afirmaciones científicas y registrar el alcance antes de medir.",
+    "Completar conectores y ejecutor PC3: canónico indexado, resultado equivalente, actualización, recuperación y costo total.",
+    "Verificar versiones, al menos 10 GiB libres, consultas, índices, planes y presupuestos; no basta iniciar motores.",
+    "Conservar los dos congelamientos PC2; cualquier modificación requiere enmienda previa identificada.",
+    "Ejecutar piloto e instrumentación antes de las corridas previstas; conservar incidentes y negativos.",
+    "Validar integridad y elegibilidad del conjunto; generar análisis, intervalos, efectos y figuras desde crudos.",
+    "Reconciliar artículo y maestro con los nuevos resultados, sin reutilizar R7 como relleno.",
+    "Evaluar un modelo generativo solo con protocolo propio; mantener réplica externa y participantes separados."
+  ]
+}

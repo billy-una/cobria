@@ -10,6 +10,7 @@ const titulos = Object.freeze({
 const categorias = Object.freeze({
   ACCESS_DENIED: 'authorization',
   IDEMPOTENCY_CONFLICT: 'conflict',
+  CAT_VERSION_CONFLICT: 'conflict',
   STALE_REVISION: 'conflict',
   PROJECTION_VERIFICATION_FAILED: 'integrity',
   PHYSICAL_VERSION_UNSUPPORTED: 'compatibility',

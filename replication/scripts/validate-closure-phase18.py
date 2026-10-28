@@ -9,7 +9,7 @@ import subprocess
 
 ROOT = Path(__file__).resolve().parents[2]
 BASE_URL = "https://cobria-atlas.sectagpt.chatgpt.site"
-CANDIDATE = "ecosistema-1.0.0-rc1"
+CANDIDATE = json.loads((ROOT / 'editorial/canonical.json').read_text(encoding='utf-8'))['release']['tag']
 STABLE = "ecosistema-1.0.0"
 EXPECTED_DOWNLOADS = {
     "/downloads/COBRIA-libro-web.pdf",

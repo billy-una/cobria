@@ -8,6 +8,10 @@
     {"code":"CLI_CONCEPT_NOT_FOUND","exit":3},{"code":"CLI_INTERNAL_ERROR","exit":1},
     {"code":"CLI_GENERATOR_ARGUMENT_REQUIRED","exit":2},{"code":"CLI_GENERATOR_TYPE_INVALID","exit":2},
     {"code":"CLI_GENERATOR_NAME_INVALID","exit":2},{"code":"CLI_GENERATOR_CONFLICT","exit":4},
-    {"code":"CLI_PUBLISH_SIMULATION_REQUIRED","exit":2},{"code":"CLI_PUBLISH_ARGUMENT_INVALID","exit":2}
+    {"code":"CLI_PUBLISH_SIMULATION_REQUIRED","exit":2},{"code":"CLI_PUBLISH_ARGUMENT_INVALID","exit":2},
+    {"code":"CLI_OPTION_VALUE_REQUIRED","exit":2},{"code":"CLI_OPTION_DUPLICATED","exit":2},
+    {"code":"CLI_SIZE_INVALID","exit":2},{"code":"CLI_DESTINATION_UNSAFE","exit":4},
+    {"code":"CLI_OUTPUT_CONFLICT","exit":4},{"code":"CLI_SIMULATION_UNSUPPORTED","exit":2},
+    {"code":"CLI_DICTIONARY_NAME_INVALID","exit":2}
   ]
 }

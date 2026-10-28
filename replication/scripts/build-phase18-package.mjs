@@ -40,7 +40,10 @@ for (const file of (await files(target)).sort()) {
 let commit = 'unavailable';
 let dirty = 'unknown';
 try { commit = execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root, encoding: 'utf8' }).trim(); } catch {}
-try { dirty = execFileSync('git', ['status', '--porcelain'], { cwd: root, encoding: 'utf8' }).trim().length > 0; } catch {}
+// En árboles con archivos descargables o proveedores de archivos, `git status` puede
+// bloquear una construcción limpia. El estado sucio es metadato informativo: si no
+// puede resolverse en tiempo acotado se conserva explícitamente como desconocido.
+try { dirty = execFileSync('git', ['status', '--porcelain'], { cwd: root, encoding: 'utf8', timeout: 15_000 }).trim().length > 0; } catch {}
 const status = JSON.parse(await fs.readFile(path.join(root, 'specification/phase-18/status.json'), 'utf8'));
 const manifest = { schemaVersion: '1.1.0', generatedAt: new Date().toISOString(), commit, dirty, phaseState: status.state, signed: false, doi: null, files: entries };
 await fs.writeFile(path.join(target, 'MANIFEST-SHA256.json'), `${JSON.stringify(manifest, null, 2)}\n`);

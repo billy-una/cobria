@@ -29,6 +29,12 @@ remoto privado de publicación de Sites. No se presenta como repositorio públic
 
 ## Registro mínimo de una observación
 
+La revisión estructural actualizada de POS Guápiles del 8 de octubre de 2026 está en
+[`../AUDITORIA-POSGUAPILES-COBRIA-2026-10-08.md`](../AUDITORIA-POSGUAPILES-COBRIA-2026-10-08.md).
+Registra el HEAD completo observado, el cambio local preexistente y las rutas con huellas
+en `editorial/sources/posguapiles-2026-10-08.json`. Los SHA de la tabla anterior son
+observaciones históricas y no representan automáticamente el estado actual.
+
 ```yaml
 repository: https://github.com/billy-una/BIOSVA
 commit: <sha-verificado>

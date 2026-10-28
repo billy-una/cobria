@@ -1,0 +1,6 @@
+import workshop from '../../editorial/c6/workshop.json';
+import { CopyCode } from './copy-code';
+
+export function OperationWorkshop() {
+  return <section className="manual-lesson" id="taller-operacion-c6"><p className="lesson-label">Calidad y operación · Taller local C6</p><h2>{workshop.title}</h2><p>{workshop.intro}</p><p>Node.js 22.13 o superior y Git para registrar el commit de base. Desde la raíz del repositorio, sin paquetes externos:</p><CopyCode code={workshop.command}/><ol>{workshop.steps.map(step=><li key={step}>{step}</li>)}</ol><h3>Pruebas de aceptación y rechazo</h3><CopyCode code={workshop.testCommand}/><p>{workshop.checks}</p><h3>Medir con protocolo explícito</h3><CopyCode code={workshop.measureCommand}/><p>Cinco pares de calentamiento, treinta pares observados y cien consultas por lote. El informe conserva muestras, semilla, ambiente, huella del protocolo, p50, p95 y p99. Con treinta pares, p99 es el máximo observado, no una estimación fiable de la cola.</p><h3>Alcance y recuperación</h3><p>{workshop.limits}</p><p>Guía y fuentes: <code>{workshop.guide}</code> y <code>replication/examples/operacion-c6</code>. La web no ejecuta despliegues ni solicita credenciales de nube.</p></section>;
+}

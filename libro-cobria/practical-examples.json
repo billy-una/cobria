@@ -4,6 +4,9 @@
     "nombre": "Objeto canónico",
     "escena": "Expediente de un árbol patrimonial",
     "problema": "Varias brigadas guardan altura, especie y estado en archivos distintos.",
+    "problemaIngenuo": "Cuando varias pantallas, índices o integraciones escriben su propia versión de un hecho, ninguna copia puede explicar cuál manda. Una corrección se convierte en una reconciliación manual.",
+    "solucion": "El objeto canónico declara identidad, ámbito, revisión, versión de esquema y ciclo de vida. Las representaciones derivadas no se modifican como autoridad. Toda proyección apunta a su origen y puede comprobarse contra él.",
+    "contrato": "guardar(cambio) → validar → escribirCanónico → emitirRevisión",
     "participantes": [
       "ArbolPatrimonial",
       "Contrato de entrada",
@@ -11,18 +14,48 @@
       "Evidencia"
     ],
     "resultado": "Un único expediente conserva identidad y reglas; los mapas son derivados.",
+    "costo": "Mida escrituras directas fuera de la frontera, entidades sin revisión y derivados sin origen. Se relaciona con Repositorio con ámbito, Proyección de lectura y Publicación por versión. El costo principal es diseñar migraciones y reglas de autoridad.",
+    "cuandoNoUsar": "Evítelo como capa ceremonial en un CRUD pequeño.",
+    "pruebaPositiva": {
+      "entrada": {
+        "id": "roble-42",
+        "ambito": "reserva-sur",
+        "revision": 1,
+        "especie": "roble"
+      },
+      "esperado": {
+        "autoridad": "canonica",
+        "id": "roble-42"
+      }
+    },
+    "pruebaNegativa": {
+      "entrada": {
+        "id": "",
+        "ambito": "reserva-sur",
+        "revision": 1,
+        "especie": "roble"
+      },
+      "codigoError": "ID_REQUIRED"
+    },
     "code": {
-      "TypeScript": "// Expediente de un árbol patrimonial\ntype Solicitud = Record<string, unknown>;\n\nclass ArbolPatrimonial {\n  registrar(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 1, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new ArbolPatrimonial().registrar({ arbolId: \"roble-42\", especie: \"Quercus costaricensis\" });",
-      "Python": "# Expediente de un árbol patrimonial\nclass ArbolPatrimonial:\n    def registrar(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 1, \"evidencia\": True, **solicitud}\n\nresultado = ArbolPatrimonial().registrar({\"detalle\": \"arbolId: \\\"roble-42\\\", especie: \\\"Quercus costaricensis\\\"\"})",
-      "Java": "// Expediente de un árbol patrimonial\nrecord Solicitud(String detalle) {}\n\nfinal class ArbolPatrimonial {\n  Resultado registrar(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(1, true, solicitud);\n  }\n}\n\nvar resultado = new ArbolPatrimonial().registrar(new Solicitud(\"arbolId: \\\"roble-42\\\", especie: \\\"Quercus costaricensis\\\"\"));",
-      "Go": "// Expediente de un árbol patrimonial\ntype Solicitud struct { Detalle string }\n\nfunc Registrar(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 1, Evidencia: true}, nil\n}\n\nresultado, err := Registrar(Solicitud{Detalle: \"arbolId: \\\"roble-42\\\", especie: \\\"Quercus costaricensis\\\"\"})"
-    }
+      "TypeScript": "export function objetoCanonico(entrada: Entrada): Resultado {\n  const id = texto(entrada, \"id\");\n  const ambito = texto(entrada, \"ambito\");\n  const revision = numero(entrada, \"revision\");\n  exigir(Number.isSafeInteger(revision) && revision > 0, \"REVISION_INVALID\", \"La revisión debe ser positiva y segura\");\n  return Object.freeze({ id, ambito, revision, especie: texto(entrada, \"especie\"), autoridad: \"canonica\" });\n}"
+    },
+    "languagesVerified": [
+      {
+        "language": "TypeScript",
+        "source": "replication/examples/patterns-r4/src/patrones.ts",
+        "test": "replication/examples/patterns-r4/test/patrones.test.ts"
+      }
+    ]
   },
   {
     "id": 2,
     "nombre": "Dato fechado",
     "escena": "Medición de un río después de una tormenta",
     "problema": "Una lectura sin tiempo válido confunde cuándo ocurrió con cuándo se transmitió.",
+    "problemaIngenuo": "Un único campo de fecha no permite reconstruir qué se sabía en un momento ni corregir eventos tardíos sin reescribir historia.",
+    "solucion": "Cada observación declara tiempo de validez, tiempo de registro, revisión y procedencia. Las correcciones añaden conocimiento; no alteran silenciosamente el corte histórico.",
+    "contrato": "registrar(hecho, válidoEn, conocidoEn, procedencia)",
     "participantes": [
       "MedicionRio",
       "Contrato de entrada",
@@ -30,18 +63,45 @@
       "Evidencia"
     ],
     "resultado": "La observación conserva tiempo observado, recibido y procedencia del sensor.",
+    "costo": "Mida eventos tardíos, correcciones, cortes reproducibles y divergencia temporal. Se relaciona con Marca de avance temporal y Conjunto de datos reproducible. Aumenta almacenamiento y exige semántica clara.",
+    "cuandoNoUsar": "No adopte Dato fechado si el problema no fue observado o una alternativa más simple satisface el contrato.",
+    "pruebaPositiva": {
+      "entrada": {
+        "observadoEn": "2026-08-24T06:15:00Z",
+        "conocidoEn": "2026-08-24T06:16:00Z",
+        "procedencia": "sensor-17"
+      },
+      "esperado": {
+        "procedencia": "sensor-17"
+      }
+    },
+    "pruebaNegativa": {
+      "entrada": {
+        "observadoEn": "2026-08-24T06:17:00Z",
+        "conocidoEn": "2026-08-24T06:16:00Z",
+        "procedencia": "sensor-17"
+      },
+      "codigoError": "TIME_ORDER_INVALID"
+    },
     "code": {
-      "TypeScript": "// Medición de un río después de una tormenta\ntype Solicitud = Record<string, unknown>;\n\nclass MedicionRio {\n  registrar(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 2, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new MedicionRio().registrar({ rioId: \"terraba\", nivelCm: 184, observadoEn: \"2026-08-24T06:15:00Z\" });",
-      "Python": "# Medición de un río después de una tormenta\nclass MedicionRio:\n    def registrar(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 2, \"evidencia\": True, **solicitud}\n\nresultado = MedicionRio().registrar({\"detalle\": \"rioId: \\\"terraba\\\", nivelCm: 184, observadoEn: \\\"2026-08-24T06:15:00Z\\\"\"})",
-      "Java": "// Medición de un río después de una tormenta\nrecord Solicitud(String detalle) {}\n\nfinal class MedicionRio {\n  Resultado registrar(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(2, true, solicitud);\n  }\n}\n\nvar resultado = new MedicionRio().registrar(new Solicitud(\"rioId: \\\"terraba\\\", nivelCm: 184, observadoEn: \\\"2026-08-24T06:15:00Z\\\"\"));",
-      "Go": "// Medición de un río después de una tormenta\ntype Solicitud struct { Detalle string }\n\nfunc Registrar(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 2, Evidencia: true}, nil\n}\n\nresultado, err := Registrar(Solicitud{Detalle: \"rioId: \\\"terraba\\\", nivelCm: 184, observadoEn: \\\"2026-08-24T06:15:00Z\\\"\"})"
-    }
+      "TypeScript": "export function datoFechado(entrada: Entrada): Resultado {\n  const observadoEn = fechaIso(texto(entrada, \"observadoEn\"));\n  const conocidoEn = fechaIso(texto(entrada, \"conocidoEn\"));\n  exigir(Number.isFinite(observadoEn) && Number.isFinite(conocidoEn), \"TIME_INVALID\", \"Los tiempos deben ser ISO-8601\");\n  exigir(observadoEn <= conocidoEn, \"TIME_ORDER_INVALID\", \"No puede conocerse antes de observarse\");\n  return { observadoEn: new Date(observadoEn).toISOString(), conocidoEn: new Date(conocidoEn).toISOString(), procedencia: texto(entrada, \"procedencia\") };\n}"
+    },
+    "languagesVerified": [
+      {
+        "language": "TypeScript",
+        "source": "replication/examples/patterns-r4/src/patrones.ts",
+        "test": "replication/examples/patterns-r4/test/patrones.test.ts"
+      }
+    ]
   },
   {
     "id": 3,
     "nombre": "Repositorio con ámbito",
     "escena": "Observaciones privadas de una reserva",
     "problema": "Una consulta sin reservaId puede mezclar registros de áreas protegidas diferentes.",
+    "problemaIngenuo": "Un filtro de organización añadido al final puede olvidarse. Cachés, consultas auxiliares o tareas administrativas terminan mezclando datos.",
+    "solucion": "La interfaz no acepta operaciones sin ámbito. Identidad, claves, consultas, cachés y registros incluyen el mismo límite. La ausencia de ámbito falla antes de acceder al almacén.",
+    "contrato": "obtener(ámbito, identidad) o fallarAntesDeLeer()",
     "participantes": [
       "RepositorioObservaciones",
       "Contrato de entrada",
@@ -49,18 +109,55 @@
       "Evidencia"
     ],
     "resultado": "El repositorio rechaza cualquier lectura que no declare primero la reserva.",
+    "costo": "Mida solicitudes rechazadas, fugas cruzadas y claves de caché incompletas. Se relaciona con Contexto autorizado y Recuperación limitada por ámbito. Añade parámetros, índices y pruebas negativas.",
+    "cuandoNoUsar": "No adopte Repositorio con ámbito si el problema no fue observado o una alternativa más simple satisface el contrato.",
+    "pruebaPositiva": {
+      "entrada": {
+        "ambitoSolicitado": "las-tablas",
+        "documento": {
+          "id": "obs-184",
+          "ambito": "las-tablas"
+        }
+      },
+      "esperado": {
+        "acceso": "permitido"
+      }
+    },
+    "pruebaNegativa": {
+      "entrada": {
+        "ambitoSolicitado": "las-tablas",
+        "documento": {
+          "id": "obs-184",
+          "ambito": "corcovado"
+        }
+      },
+      "codigoError": "SCOPE_DENIED"
+    },
     "code": {
-      "TypeScript": "// Observaciones privadas de una reserva\ntype Solicitud = Record<string, unknown>;\n\nclass RepositorioObservaciones {\n  buscar(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 3, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new RepositorioObservaciones().buscar({ reservaId: \"las-tablas\", observacionId: \"obs-184\" });",
-      "Python": "# Observaciones privadas de una reserva\nclass RepositorioObservaciones:\n    def buscar(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 3, \"evidencia\": True, **solicitud}\n\nresultado = RepositorioObservaciones().buscar({\"detalle\": \"reservaId: \\\"las-tablas\\\", observacionId: \\\"obs-184\\\"\"})",
-      "Java": "// Observaciones privadas de una reserva\nrecord Solicitud(String detalle) {}\n\nfinal class RepositorioObservaciones {\n  Resultado buscar(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(3, true, solicitud);\n  }\n}\n\nvar resultado = new RepositorioObservaciones().buscar(new Solicitud(\"reservaId: \\\"las-tablas\\\", observacionId: \\\"obs-184\\\"\"));",
-      "Go": "// Observaciones privadas de una reserva\ntype Solicitud struct { Detalle string }\n\nfunc Buscar(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 3, Evidencia: true}, nil\n}\n\nresultado, err := Buscar(Solicitud{Detalle: \"reservaId: \\\"las-tablas\\\", observacionId: \\\"obs-184\\\"\"})"
-    }
+      "TypeScript": "export function repositorioConAmbito(entrada: Entrada): Resultado {\n  const ambitoSolicitado = texto(entrada, \"ambitoSolicitado\");\n  const documento = entrada.documento as Entrada | undefined;\n  exigir(documento && tiene(documento, 'ambito') && documento.ambito === ambitoSolicitado, \"SCOPE_DENIED\", \"El documento no pertenece al ámbito autorizado\");\n  return { documento: { ...documento }, acceso: \"permitido\" };\n}",
+      "Python": "\"\"\"Patrón 03: el ámbito se valida antes de entregar un documento.\"\"\"\n\n\nclass AmbitoDenegado(ValueError):\n    pass\n\n\nclass RepositorioObservaciones:\n    def __init__(self, documentos):\n        self._documentos = {documento[\"id\"]: dict(documento) for documento in documentos}\n\n    def buscar(self, observacion_id, ambito_solicitado):\n        if not ambito_solicitado:\n            raise AmbitoDenegado(\"El ámbito es obligatorio\")\n        documento = self._documentos.get(observacion_id)\n        if documento is None or documento[\"ambito\"] != ambito_solicitado:\n            raise AmbitoDenegado(\"El documento no pertenece al ámbito autorizado\")\n        return dict(documento)"
+    },
+    "languagesVerified": [
+      {
+        "language": "TypeScript",
+        "source": "replication/examples/patterns-r4/src/patrones.ts",
+        "test": "replication/examples/patterns-r4/test/patrones.test.ts"
+      },
+      {
+        "language": "Python",
+        "source": "replication/examples/patterns-r4/multilang/python/repositorio_ambito.py",
+        "test": "replication/examples/patterns-r4/multilang/python/test_repositorio_ambito.py"
+      }
+    ]
   },
   {
     "id": 4,
     "nombre": "Catálogo versionado",
     "escena": "Códigos de especies usados durante diez años",
     "problema": "El código AV-03 cambió de significado y los informes históricos quedan ambiguos.",
+    "problemaIngenuo": "Un código como “A” cambia de significado, desaparece o llega desde una versión antigua; las proyecciones mezclan interpretaciones.",
+    "solucion": "El catálogo declara clave estable, versión, vigencia, sustituciones y política para valores desconocidos. Las transformaciones registran la edición consultada.",
+    "contrato": "resolver(clave, versión, fecha) o ponerEnCuarentena()",
     "participantes": [
       "CatalogoEspecies",
       "Contrato de entrada",
@@ -68,18 +165,54 @@
       "Evidencia"
     ],
     "resultado": "Cada observación se interpreta con la edición del catálogo que estaba vigente.",
+    "costo": "Mida valores desconocidos, versiones activas y derivados afectados. Se relaciona con Registro de dependencias y Conjunto reproducible. Su costo es coordinación y compatibilidad.",
+    "cuandoNoUsar": "No adopte Catálogo versionado si el problema no fue observado o una alternativa más simple satisface el contrato.",
+    "pruebaPositiva": {
+      "entrada": {
+        "clave": "AV-03",
+        "version": "2024.2",
+        "catalogos": {
+          "2024.2": {
+            "AV-03": "ave residente"
+          }
+        }
+      },
+      "esperado": {
+        "significado": "ave residente",
+        "version": "2024.2"
+      }
+    },
+    "pruebaNegativa": {
+      "entrada": {
+        "clave": "AV-99",
+        "version": "2024.2",
+        "catalogos": {
+          "2024.2": {
+            "AV-03": "ave residente"
+          }
+        }
+      },
+      "codigoError": "CATALOG_VALUE_UNKNOWN"
+    },
     "code": {
-      "TypeScript": "// Códigos de especies usados durante diez años\ntype Solicitud = Record<string, unknown>;\n\nclass CatalogoEspecies {\n  resolver(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 4, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new CatalogoEspecies().resolver({ codigo: \"AV-03\", version: \"2024.2\" });",
-      "Python": "# Códigos de especies usados durante diez años\nclass CatalogoEspecies:\n    def resolver(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 4, \"evidencia\": True, **solicitud}\n\nresultado = CatalogoEspecies().resolver({\"detalle\": \"codigo: \\\"AV-03\\\", version: \\\"2024.2\\\"\"})",
-      "Java": "// Códigos de especies usados durante diez años\nrecord Solicitud(String detalle) {}\n\nfinal class CatalogoEspecies {\n  Resultado resolver(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(4, true, solicitud);\n  }\n}\n\nvar resultado = new CatalogoEspecies().resolver(new Solicitud(\"codigo: \\\"AV-03\\\", version: \\\"2024.2\\\"\"));",
-      "Go": "// Códigos de especies usados durante diez años\ntype Solicitud struct { Detalle string }\n\nfunc Resolver(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 4, Evidencia: true}, nil\n}\n\nresultado, err := Resolver(Solicitud{Detalle: \"codigo: \\\"AV-03\\\", version: \\\"2024.2\\\"\"})"
-    }
+      "TypeScript": "export function catalogoVersionado(entrada: Entrada): Resultado {\n  const clave = texto(entrada, \"clave\");\n  const version = texto(entrada, \"version\");\n  const catalogos = entrada.catalogos as Record<string, Record<string, string>> | undefined;\n  const edicion = catalogos && tiene(catalogos, version) ? catalogos[version] : undefined;\n  const significado = edicion && tiene(edicion, clave) ? edicion[clave] : undefined;\n  exigir(typeof significado === 'string' && significado.trim(), \"CATALOG_VALUE_UNKNOWN\", \"La clave no existe en la versión solicitada\");\n  return { clave, version, significado };\n}"
+    },
+    "languagesVerified": [
+      {
+        "language": "TypeScript",
+        "source": "replication/examples/patterns-r4/src/patrones.ts",
+        "test": "replication/examples/patterns-r4/test/patrones.test.ts"
+      }
+    ]
   },
   {
     "id": 5,
     "nombre": "Proyección de lectura",
     "escena": "Panel diario de avistamientos",
     "problema": "La pantalla recorre miles de observaciones para contar especies cada vez que abre.",
+    "problemaIngenuo": "El modelo de escritura contiene más campos, relaciones o particiones de las que una consulta necesita. Leerlo directamente consume tiempo y bytes.",
+    "solucion": "La ficha declara consulta beneficiada, fuente, transformación, versión, consistencia, verificador y reconstrucción. La aplicación la trata como descartable.",
+    "contrato": "proyectar(fuente, transformación, versión, ámbito)",
     "participantes": [
       "PanelAvistamientos",
       "Contrato de entrada",
@@ -87,18 +220,64 @@
       "Evidencia"
     ],
     "resultado": "Una vista reconstruible entrega conteos diarios sin reemplazar las observaciones.",
+    "costo": "Mida p95, filas y bytes leídos, frescura, escrituras y almacenamiento. Se relaciona con Proyección de cobertura, Frontera lectura—escritura y Retiro de proyección.",
+    "cuandoNoUsar": "Evítela cuando la fuente ya responde dentro del objetivo o la frescura estricta no puede sostenerse.",
+    "pruebaPositiva": {
+      "entrada": {
+        "ambito": "piedras-blancas",
+        "observaciones": [
+          {
+            "ambito": "piedras-blancas",
+            "especie": "tucan",
+            "cantidad": 2
+          },
+          {
+            "ambito": "otra",
+            "especie": "tucan",
+            "cantidad": 9
+          }
+        ]
+      },
+      "esperado": {
+        "ambito": "piedras-blancas",
+        "conteos": {
+          "tucan": 2
+        },
+        "autoridadEscritura": false
+      }
+    },
+    "pruebaNegativa": {
+      "entrada": {
+        "ambito": "piedras-blancas",
+        "observaciones": [
+          {
+            "ambito": "otra",
+            "especie": "tucan",
+            "cantidad": 9
+          }
+        ]
+      },
+      "codigoError": "PROJECTION_EMPTY"
+    },
     "code": {
-      "TypeScript": "// Panel diario de avistamientos\ntype Solicitud = Record<string, unknown>;\n\nclass PanelAvistamientos {\n  proyectar(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 5, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new PanelAvistamientos().proyectar({ reservaId: \"piedras-blancas\", fecha: \"2026-08-24\" });",
-      "Python": "# Panel diario de avistamientos\nclass PanelAvistamientos:\n    def proyectar(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 5, \"evidencia\": True, **solicitud}\n\nresultado = PanelAvistamientos().proyectar({\"detalle\": \"reservaId: \\\"piedras-blancas\\\", fecha: \\\"2026-08-24\\\"\"})",
-      "Java": "// Panel diario de avistamientos\nrecord Solicitud(String detalle) {}\n\nfinal class PanelAvistamientos {\n  Resultado proyectar(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(5, true, solicitud);\n  }\n}\n\nvar resultado = new PanelAvistamientos().proyectar(new Solicitud(\"reservaId: \\\"piedras-blancas\\\", fecha: \\\"2026-08-24\\\"\"));",
-      "Go": "// Panel diario de avistamientos\ntype Solicitud struct { Detalle string }\n\nfunc Proyectar(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 5, Evidencia: true}, nil\n}\n\nresultado, err := Proyectar(Solicitud{Detalle: \"reservaId: \\\"piedras-blancas\\\", fecha: \\\"2026-08-24\\\"\"})"
-    }
+      "TypeScript": "export function proyeccionLectura(entrada: Entrada): Resultado {\n  const ambito = texto(entrada, \"ambito\");\n  const observaciones = lista(entrada, \"observaciones\") as Entrada[];\n  const conteos = new Map<string, number>();\n  for (const item of observaciones.filter((item) => tiene(item, 'ambito') && item.ambito === ambito)) {\n    const especie = texto(item, \"especie\");\n    const cantidad = numero(item, 'cantidad');\n    exigir(Number.isSafeInteger(cantidad) && cantidad > 0, 'QUANTITY_INVALID', 'La cantidad debe ser un entero positivo seguro');\n    const total = (conteos.get(especie) ?? 0) + cantidad;\n    exigir(Number.isSafeInteger(total), 'QUANTITY_INVALID', 'El total excede el entero seguro');\n    conteos.set(especie, total);\n  }\n  exigir(conteos.size > 0, \"PROJECTION_EMPTY\", \"No hay fuentes autorizadas para proyectar\");\n  return { ambito, conteos: Object.fromEntries(conteos), autoridadEscritura: false };\n}"
+    },
+    "languagesVerified": [
+      {
+        "language": "TypeScript",
+        "source": "replication/examples/patterns-r4/src/patrones.ts",
+        "test": "replication/examples/patterns-r4/test/patrones.test.ts"
+      }
+    ]
   },
   {
     "id": 6,
     "nombre": "Proyección de cobertura",
     "escena": "Ficha breve para guardaparques sin conexión",
     "problema": "La consulta móvil descarga expedientes completos cuando solo necesita ubicación y alerta.",
+    "problemaIngenuo": "Un índice encuentra filas, pero la consulta todavía debe visitar documentos o tablas anchas para completar la respuesta.",
+    "solucion": "La proyección incluye campos necesarios y procedencia mínima. Su índice cubre selección y orden. La equivalencia compara resultados lógicos con la fuente.",
+    "contrato": "cubrir(filtros, orden, salida) sinCamposExtra()",
     "participantes": [
       "FichaGuardaparque",
       "Contrato de entrada",
@@ -106,37 +285,118 @@
       "Evidencia"
     ],
     "resultado": "La proyección contiene exactamente los campos que necesita la ronda de campo.",
+    "costo": "Mida ahorro p95, bytes, penalización de escritura y umbral de equilibrio. El piloto del mecanismo mostró que la proyección no domina siempre al índice nativo; la réplica definitiva debe ejecutarse sobre motores NoSQL documentales.",
+    "cuandoNoUsar": "Evítela si duplica datos sensibles o cambia con demasiada frecuencia.",
+    "pruebaPositiva": {
+      "entrada": {
+        "documento": {
+          "riesgo": "alto",
+          "ubicacion": "quebrada-azul",
+          "detalle": "interno"
+        },
+        "campos": [
+          "riesgo",
+          "ubicacion"
+        ]
+      },
+      "esperado": {
+        "riesgo": "alto",
+        "ubicacion": "quebrada-azul",
+        "autoridadEscritura": false
+      }
+    },
+    "pruebaNegativa": {
+      "entrada": {
+        "documento": {
+          "riesgo": "alto"
+        },
+        "campos": [
+          "riesgo",
+          "ubicacion"
+        ]
+      },
+      "codigoError": "FIELD_NOT_COVERED"
+    },
     "code": {
-      "TypeScript": "// Ficha breve para guardaparques sin conexión\ntype Solicitud = Record<string, unknown>;\n\nclass FichaGuardaparque {\n  crear(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 6, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new FichaGuardaparque().crear({ senderoId: \"quebrada-azul\", incluir: [\"riesgo\", \"ubicacion\"] });",
-      "Python": "# Ficha breve para guardaparques sin conexión\nclass FichaGuardaparque:\n    def crear(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 6, \"evidencia\": True, **solicitud}\n\nresultado = FichaGuardaparque().crear({\"detalle\": \"senderoId: \\\"quebrada-azul\\\", incluir: [\\\"riesgo\\\", \\\"ubicacion\\\"]\"})",
-      "Java": "// Ficha breve para guardaparques sin conexión\nrecord Solicitud(String detalle) {}\n\nfinal class FichaGuardaparque {\n  Resultado crear(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(6, true, solicitud);\n  }\n}\n\nvar resultado = new FichaGuardaparque().crear(new Solicitud(\"senderoId: \\\"quebrada-azul\\\", incluir: [\\\"riesgo\\\", \\\"ubicacion\\\"]\"));",
-      "Go": "// Ficha breve para guardaparques sin conexión\ntype Solicitud struct { Detalle string }\n\nfunc Crear(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 6, Evidencia: true}, nil\n}\n\nresultado, err := Crear(Solicitud{Detalle: \"senderoId: \\\"quebrada-azul\\\", incluir: [\\\"riesgo\\\", \\\"ubicacion\\\"]\"})"
-    }
+      "TypeScript": "export function proyeccionCobertura(entrada: Entrada): Resultado {\n  const documento = entrada.documento as Entrada | undefined;\n  const campos = lista(entrada, \"campos\") as string[];\n  exigir(documento, \"DOCUMENT_REQUIRED\", \"Falta el documento fuente\");\n  const salida = Object.fromEntries(campos.filter((campo) => typeof campo === 'string' && tiene(documento, campo)).map((campo) => [campo, documento[campo]]));\n  exigir(Object.keys(salida).length === campos.length, \"FIELD_NOT_COVERED\", \"La fuente no cubre todos los campos\");\n  return { ...salida, autoridadEscritura: false };\n}"
+    },
+    "languagesVerified": [
+      {
+        "language": "TypeScript",
+        "source": "replication/examples/patterns-r4/src/patrones.ts",
+        "test": "replication/examples/patterns-r4/test/patrones.test.ts"
+      }
+    ]
   },
   {
     "id": 7,
     "nombre": "Reconstrucción total",
     "escena": "Mapa de calor de nacientes",
     "problema": "Una nueva fórmula exige recalcular todo el mapa sin modificar mediciones originales.",
+    "problemaIngenuo": "Sin una reconstrucción probada, la pérdida o corrupción obliga a reparar manualmente una copia que ya no es realmente descartable.",
+    "solucion": "Se construye una versión candidata, se verifica conteo y contenido, y solo después se publica. La versión activa permanece visible durante el proceso.",
+    "contrato": "candidata = reconstruir(canónicos); verificar(candidata); publicar()",
     "participantes": [
       "ReconstruirMapaNacientes",
       "Contrato de entrada",
       "Repositorio documental",
       "Evidencia"
     ],
-    "resultado": "Se construye una versión candidata completa, se verifica y luego se publica.",
+    "resultado": "Calcula una candidata; todavía no comprueba equivalencia ni un corte consistente.",
+    "costo": "Mida duración, exactitud, pico de almacenamiento y tiempo de cambio. Se relaciona con Publicación por versión y Reparación verificable.",
+    "cuandoNoUsar": "No adopte Reconstrucción total si el problema no fue observado o una alternativa más simple satisface el contrato.",
+    "pruebaPositiva": {
+      "entrada": {
+        "fuentes": [
+          {
+            "cantidad": 2
+          },
+          {
+            "cantidad": 3
+          }
+        ],
+        "version": "v3"
+      },
+      "esperado": {
+        "estado": "candidata-calculada",
+        "equivalenciaVerificada": false,
+        "total": 5,
+        "fuentes": 2
+      }
+    },
+    "pruebaNegativa": {
+      "entrada": {
+        "fuentes": [
+          {
+            "cantidad": 2
+          },
+          {
+            "cantidad": -4
+          }
+        ],
+        "version": "v3"
+      },
+      "codigoError": "REBUILD_INVALID"
+    },
     "code": {
-      "TypeScript": "// Mapa de calor de nacientes\ntype Solicitud = Record<string, unknown>;\n\nclass ReconstruirMapaNacientes {\n  ejecutar(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 7, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new ReconstruirMapaNacientes().ejecutar({ cuencaId: \"coto-brus\", version: \"v3\" });",
-      "Python": "# Mapa de calor de nacientes\nclass ReconstruirMapaNacientes:\n    def ejecutar(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 7, \"evidencia\": True, **solicitud}\n\nresultado = ReconstruirMapaNacientes().ejecutar({\"detalle\": \"cuencaId: \\\"coto-brus\\\", version: \\\"v3\\\"\"})",
-      "Java": "// Mapa de calor de nacientes\nrecord Solicitud(String detalle) {}\n\nfinal class ReconstruirMapaNacientes {\n  Resultado ejecutar(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(7, true, solicitud);\n  }\n}\n\nvar resultado = new ReconstruirMapaNacientes().ejecutar(new Solicitud(\"cuencaId: \\\"coto-brus\\\", version: \\\"v3\\\"\"));",
-      "Go": "// Mapa de calor de nacientes\ntype Solicitud struct { Detalle string }\n\nfunc Ejecutar(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 7, Evidencia: true}, nil\n}\n\nresultado, err := Ejecutar(Solicitud{Detalle: \"cuencaId: \\\"coto-brus\\\", version: \\\"v3\\\"\"})"
-    }
+      "TypeScript": "export function reconstruccionTotal(entrada: Entrada): Resultado {\n  const fuentes = lista(entrada, \"fuentes\") as Entrada[];\n  const version = texto(entrada, \"version\");\n  const cantidades = fuentes.map(item => numero(item, 'cantidad'));\n  exigir(cantidades.every(n => Number.isSafeInteger(n) && n > 0), 'REBUILD_INVALID', 'Cantidades positivas y seguras requeridas');\n  const total = cantidades.reduce((suma, cantidad) => suma + cantidad, 0);\n  exigir(Number.isSafeInteger(total), 'REBUILD_INVALID', 'El total excede el entero seguro');\n  return { estado: 'candidata-calculada', equivalenciaVerificada: false, version, total, fuentes: fuentes.length };\n}"
+    },
+    "languagesVerified": [
+      {
+        "language": "TypeScript",
+        "source": "replication/examples/patterns-r4/src/patrones.ts",
+        "test": "replication/examples/patterns-r4/test/patrones.test.ts"
+      }
+    ]
   },
   {
     "id": 8,
     "nombre": "Reconstrucción incremental",
     "escena": "Conteo de visitantes por sendero",
     "problema": "Recalcular cinco años por una entrada nueva desperdicia tiempo y energía.",
+    "problemaIngenuo": "Rehacer todo el conjunto por un cambio pequeño desperdicia recursos y amplía la ventana de obsolescencia.",
+    "solucion": "Un registro de cambios identifica entidades y revisiones desde un punto de control. Cada lote es idempotente; una verificación periódica contrasta contra la ruta total.",
+    "contrato": "desde(puntoDeControl).procesarUnaVezPorRevisión()",
     "participantes": [
       "ActualizarConteoSenderos",
       "Contrato de entrada",
@@ -144,37 +404,115 @@
       "Evidencia"
     ],
     "resultado": "Solo se procesa el cambio nuevo y se conserva un cursor verificable.",
+    "costo": "Mida Δ N/N , duración, omisiones, duplicados y divergencia. Se relaciona con Punto de control, Idempotencia y Reconstrucción total.",
+    "cuandoNoUsar": "Evítela si no existe registro confiable o si la transformación depende globalmente de todos los registros.",
+    "pruebaPositiva": {
+      "entrada": {
+        "cursor": 1,
+        "cambios": [
+          {
+            "id": "paso-991",
+            "revision": 2
+          },
+          {
+            "id": "paso-992",
+            "revision": 3
+          }
+        ]
+      },
+      "esperado": {
+        "procesadas": [
+          "paso-991",
+          "paso-992"
+        ],
+        "cursor": 3
+      }
+    },
+    "pruebaNegativa": {
+      "entrada": {
+        "cursor": 3,
+        "cambios": [
+          {
+            "id": "paso-991",
+            "revision": 2
+          }
+        ]
+      },
+      "codigoError": "NO_NEW_REVISIONS"
+    },
     "code": {
-      "TypeScript": "// Conteo de visitantes por sendero\ntype Solicitud = Record<string, unknown>;\n\nclass ActualizarConteoSenderos {\n  aplicar(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 8, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new ActualizarConteoSenderos().aplicar({ eventoId: \"paso-991\", senderoId: \"cotoncito\" });",
-      "Python": "# Conteo de visitantes por sendero\nclass ActualizarConteoSenderos:\n    def aplicar(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 8, \"evidencia\": True, **solicitud}\n\nresultado = ActualizarConteoSenderos().aplicar({\"detalle\": \"eventoId: \\\"paso-991\\\", senderoId: \\\"cotoncito\\\"\"})",
-      "Java": "// Conteo de visitantes por sendero\nrecord Solicitud(String detalle) {}\n\nfinal class ActualizarConteoSenderos {\n  Resultado aplicar(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(8, true, solicitud);\n  }\n}\n\nvar resultado = new ActualizarConteoSenderos().aplicar(new Solicitud(\"eventoId: \\\"paso-991\\\", senderoId: \\\"cotoncito\\\"\"));",
-      "Go": "// Conteo de visitantes por sendero\ntype Solicitud struct { Detalle string }\n\nfunc Aplicar(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 8, Evidencia: true}, nil\n}\n\nresultado, err := Aplicar(Solicitud{Detalle: \"eventoId: \\\"paso-991\\\", senderoId: \\\"cotoncito\\\"\"})"
-    }
+      "TypeScript": "export function reconstruccionIncremental(entrada: Entrada): Resultado {\n  const cursor = numero(entrada, \"cursor\");\n  const cambios = lista(entrada, \"cambios\") as Entrada[];\n  const nuevos = cambios.filter((cambio) => numero(cambio, \"revision\") > cursor);\n  exigir(nuevos.length > 0, \"NO_NEW_REVISIONS\", \"No hay revisiones posteriores al cursor\");\n  return { procesadas: nuevos.map((cambio) => cambio.id), cursor: Math.max(...nuevos.map((cambio) => numero(cambio, \"revision\"))) };\n}"
+    },
+    "languagesVerified": [
+      {
+        "language": "TypeScript",
+        "source": "replication/examples/patterns-r4/src/patrones.ts",
+        "test": "replication/examples/patterns-r4/test/patrones.test.ts"
+      }
+    ]
   },
   {
     "id": 9,
     "nombre": "Publicación por versión",
     "escena": "Nueva clasificación del estado del bosque",
     "problema": "Los lectores podrían observar una mezcla de datos viejos y nuevos durante el cálculo.",
+    "problemaIngenuo": "Vaciar y llenar la representación activa expone faltantes, mezclas de esquema o resultados transitorios.",
+    "solucion": "Se construye una versión candidata aislada, se valida y se cambia un puntero o alias de forma atómica. La anterior se conserva durante una ventana reversible.",
+    "contrato": "construir(vNueva); verificar(); cambiarAlias(); conservar(vAnterior)",
     "participantes": [
       "PublicadorCoberturaBosque",
       "Contrato de entrada",
       "Repositorio documental",
       "Evidencia"
     ],
-    "resultado": "La versión candidata se activa mediante un único cambio de referencia.",
+    "resultado": "Propone la versión siguiente y la reversión; no cambia la versión persistida.",
+    "costo": "Mida pérdida visible, duración del cambio y almacenamiento máximo. Se relaciona con Reconstrucción total y Migración compatible.",
+    "cuandoNoUsar": "No adopte Publicación por versión si el problema no fue observado o una alternativa más simple satisface el contrato.",
+    "pruebaPositiva": {
+      "entrada": {
+        "activa": "cobertura-v6",
+        "candidata": "cobertura-v7",
+        "verificada": true
+      },
+      "esperado": {
+        "activaPropuesta": "cobertura-v7",
+        "anterior": "cobertura-v6",
+        "persistida": false
+      }
+    },
+    "pruebaNegativa": {
+      "entrada": {
+        "activa": "cobertura-v6",
+        "candidata": "cobertura-v7",
+        "verificada": false
+      },
+      "codigoError": "CANDIDATE_NOT_VERIFIED"
+    },
     "code": {
-      "TypeScript": "// Nueva clasificación del estado del bosque\ntype Solicitud = Record<string, unknown>;\n\nclass PublicadorCoberturaBosque {\n  publicar(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 9, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new PublicadorCoberturaBosque().publicar({ candidata: \"cobertura-v7\", esperada: \"cobertura-v6\" });",
-      "Python": "# Nueva clasificación del estado del bosque\nclass PublicadorCoberturaBosque:\n    def publicar(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 9, \"evidencia\": True, **solicitud}\n\nresultado = PublicadorCoberturaBosque().publicar({\"detalle\": \"candidata: \\\"cobertura-v7\\\", esperada: \\\"cobertura-v6\\\"\"})",
-      "Java": "// Nueva clasificación del estado del bosque\nrecord Solicitud(String detalle) {}\n\nfinal class PublicadorCoberturaBosque {\n  Resultado publicar(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(9, true, solicitud);\n  }\n}\n\nvar resultado = new PublicadorCoberturaBosque().publicar(new Solicitud(\"candidata: \\\"cobertura-v7\\\", esperada: \\\"cobertura-v6\\\"\"));",
-      "Go": "// Nueva clasificación del estado del bosque\ntype Solicitud struct { Detalle string }\n\nfunc Publicar(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 9, Evidencia: true}, nil\n}\n\nresultado, err := Publicar(Solicitud{Detalle: \"candidata: \\\"cobertura-v7\\\", esperada: \\\"cobertura-v6\\\"\"})"
-    }
+      "TypeScript": "export function publicacionPorVersion(entrada: Entrada): Resultado {\n  const activa = texto(entrada, \"activa\");\n  const candidata = texto(entrada, \"candidata\");\n  exigir(entrada.verificada === true, \"CANDIDATE_NOT_VERIFIED\", \"Solo una candidata verificada puede publicarse\");\n  exigir(activa !== candidata, \"VERSION_ALREADY_ACTIVE\", \"La candidata ya está activa\");\n  // Es una propuesta en memoria; el llamador todavía debe persistirla atómicamente.\n  return { activaPropuesta: candidata, anterior: activa, rollbackPropuesto: activa, persistida: false };\n}",
+      "Go": "package publicacionversionada\n\nimport \"errors\"\n\n// Resultado propone un cambio; no realiza persistencia ni un intercambio atómico.\ntype Resultado struct {\n\tActivaPropuesta   string\n\tAnterior          string\n\tRollbackPropuesto string\n\tPersistida        bool\n}\n\nfunc Publicar(activa, candidata string, verificada bool) (Resultado, error) {\n\tif !verificada {\n\t\treturn Resultado{}, errors.New(\"la candidata no fue verificada\")\n\t}\n\tif activa == \"\" || candidata == \"\" || activa == candidata {\n\t\treturn Resultado{}, errors.New(\"las versiones deben ser distintas y explícitas\")\n\t}\n\treturn Resultado{ActivaPropuesta: candidata, Anterior: activa, RollbackPropuesto: activa, Persistida: false}, nil\n}"
+    },
+    "languagesVerified": [
+      {
+        "language": "TypeScript",
+        "source": "replication/examples/patterns-r4/src/patrones.ts",
+        "test": "replication/examples/patterns-r4/test/patrones.test.ts"
+      },
+      {
+        "language": "Go",
+        "source": "replication/examples/patterns-r4/multilang/go/publicacion.go",
+        "test": "replication/examples/patterns-r4/multilang/go/publicacion_test.go"
+      }
+    ]
   },
   {
     "id": 10,
     "nombre": "Procesamiento idempotente",
     "escena": "Sensor que reenvía la misma lectura",
     "problema": "La mala señal hace que una medición llegue tres veces y triplique el promedio.",
+    "problemaIngenuo": "Las redes reintentan y las colas pueden entregar más de una vez. Una operación no protegida duplica reservas, saldos o filas derivadas.",
+    "solucion": "Cada mensaje posee identidad estable. El consumidor registra procesamiento o utiliza una operación naturalmente idempotente dentro de la misma frontera de consistencia.",
+    "contrato": "si procesado(idMensaje) entonces noHacerNada()",
     "participantes": [
       "ProcesadorLecturas",
       "Contrato de entrada",
@@ -182,18 +520,62 @@
       "Evidencia"
     ],
     "resultado": "La clave del evento permite repetir la operación sin duplicar efectos.",
+    "costo": "Mida entregas duplicadas, efectos producidos y tamaño del registro. Se relaciona con Cola de salida y Reconstrucción incremental.",
+    "cuandoNoUsar": "No adopte Procesamiento idempotente si el problema no fue observado o una alternativa más simple satisface el contrato.",
+    "pruebaPositiva": {
+      "entrada": {
+        "eventoId": "sensor-17:8842",
+        "payload": {
+          "humedad": 86
+        },
+        "procesados": {}
+      },
+      "esperado": {
+        "aplicado": true,
+        "repetido": false
+      }
+    },
+    "pruebaNegativa": {
+      "entrada": {
+        "eventoId": "sensor-17:8842",
+        "payload": {
+          "humedad": 86
+        },
+        "procesados": {
+          "sensor-17:8842": "{\"humedad\":40}"
+        }
+      },
+      "codigoError": "IDEMPOTENCY_CONFLICT"
+    },
     "code": {
-      "TypeScript": "// Sensor que reenvía la misma lectura\ntype Solicitud = Record<string, unknown>;\n\nclass ProcesadorLecturas {\n  procesar(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 10, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new ProcesadorLecturas().procesar({ eventoId: \"sensor-17:8842\", humedad: 86 });",
-      "Python": "# Sensor que reenvía la misma lectura\nclass ProcesadorLecturas:\n    def procesar(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 10, \"evidencia\": True, **solicitud}\n\nresultado = ProcesadorLecturas().procesar({\"detalle\": \"eventoId: \\\"sensor-17:8842\\\", humedad: 86\"})",
-      "Java": "// Sensor que reenvía la misma lectura\nrecord Solicitud(String detalle) {}\n\nfinal class ProcesadorLecturas {\n  Resultado procesar(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(10, true, solicitud);\n  }\n}\n\nvar resultado = new ProcesadorLecturas().procesar(new Solicitud(\"eventoId: \\\"sensor-17:8842\\\", humedad: 86\"));",
-      "Go": "// Sensor que reenvía la misma lectura\ntype Solicitud struct { Detalle string }\n\nfunc Procesar(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 10, Evidencia: true}, nil\n}\n\nresultado, err := Procesar(Solicitud{Detalle: \"eventoId: \\\"sensor-17:8842\\\", humedad: 86\"})"
-    }
+      "TypeScript": "export function procesamientoIdempotente(entrada: Entrada): Resultado {\n  const eventoId = texto(entrada, \"eventoId\");\n  const procesados = entrada.procesados as Record<string, string> | undefined;\n  exigir(procesados, \"IDEMPOTENCY_STORE_REQUIRED\", \"Falta el registro idempotente\");\n  let huella;\n  try { huella = JSON.stringify(entrada.payload); }\n  catch { throw new ErrorPatron('PAYLOAD_INVALID', 'El payload no es JSON serializable'); }\n  exigir(typeof huella === 'string', 'PAYLOAD_INVALID', 'Se requiere un payload JSON serializable');\n  const existe = tiene(procesados, eventoId);\n  exigir(!existe || procesados[eventoId] === huella, \"IDEMPOTENCY_CONFLICT\", \"La clave ya protege otra entrada\");\n  const repetido = existe && procesados[eventoId] === huella;\n  Object.defineProperty(procesados, eventoId, {value: huella, enumerable: true, writable: true, configurable: true});\n  return { eventoId, aplicado: !repetido, repetido };\n}",
+      "Java": "public final class ProcesamientoIdempotente {\n    public record Resultado(String eventoId, boolean aplicado, boolean repetido) {}\n\n    private final Map<String, String> procesados = new HashMap<>();\n\n    public Resultado procesar(String eventoId, String cargaCanonica) {\n        if (eventoId == null || eventoId.isBlank() || cargaCanonica == null) {\n            throw new IllegalArgumentException(\"El evento y la carga son obligatorios\");\n        }\n        String huellaAnterior = procesados.get(eventoId);\n        if (huellaAnterior != null && !huellaAnterior.equals(cargaCanonica)) {\n            throw new IllegalStateException(\"La clave ya protege otra carga\");\n        }\n        boolean repetido = huellaAnterior != null;\n        procesados.put(eventoId, cargaCanonica);\n        return new Resultado(eventoId, !repetido, repetido);\n    }"
+    },
+    "languagesVerified": [
+      {
+        "language": "TypeScript",
+        "source": "replication/examples/patterns-r4/src/patrones.ts",
+        "test": "replication/examples/patterns-r4/test/patrones.test.ts"
+      },
+      {
+        "language": "Java",
+        "source": "replication/examples/patterns-r4/multilang/java/ProcesamientoIdempotente.java",
+        "test": "replication/examples/patterns-r4/multilang/java/ProcesamientoIdempotente.java",
+        "bookMarkers": [
+          "// @book-start",
+          "// @book-end"
+        ]
+      }
+    ]
   },
   {
     "id": 11,
     "nombre": "Revisión obsoleta rechazada",
     "escena": "Dos brigadas editan el mismo sendero",
     "problema": "Una tableta sin conexión intenta guardar una descripción anterior sobre una revisión nueva.",
+    "problemaIngenuo": "Dos procesos leen la misma revisión y guardan cambios incompatibles; el último oculta al primero.",
+    "solucion": "La escritura incluye la revisión esperada. Solo avanza si coincide con la actual; de lo contrario rechaza, recarga o aplica una política explícita de combinación.",
+    "contrato": "si revisiónEsperada ≠ revisiónActual entonces rechazar()",
     "participantes": [
       "EditorSendero",
       "Contrato de entrada",
@@ -201,37 +583,100 @@
       "Evidencia"
     ],
     "resultado": "La escritura falla con conflicto y conserva la revisión más reciente.",
+    "costo": "Mida rechazos, reintentos y conflictos resueltos. Se relaciona con Objeto canónico e Idempotencia.",
+    "cuandoNoUsar": "No adopte Revisión obsoleta rechazada si el problema no fue observado o una alternativa más simple satisface el contrato.",
+    "pruebaPositiva": {
+      "entrada": {
+        "revisionActual": 12,
+        "revisionEsperada": 12,
+        "cambio": {
+          "dificultad": "alta"
+        }
+      },
+      "esperado": {
+        "revision": 13
+      }
+    },
+    "pruebaNegativa": {
+      "entrada": {
+        "revisionActual": 13,
+        "revisionEsperada": 12,
+        "cambio": {
+          "dificultad": "alta"
+        }
+      },
+      "codigoError": "STALE_REVISION"
+    },
     "code": {
-      "TypeScript": "// Dos brigadas editan el mismo sendero\ntype Solicitud = Record<string, unknown>;\n\nclass EditorSendero {\n  guardar(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 11, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new EditorSendero().guardar({ senderoId: \"fila-cal\", revisionEsperada: 12, dificultad: \"alta\" });",
-      "Python": "# Dos brigadas editan el mismo sendero\nclass EditorSendero:\n    def guardar(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 11, \"evidencia\": True, **solicitud}\n\nresultado = EditorSendero().guardar({\"detalle\": \"senderoId: \\\"fila-cal\\\", revisionEsperada: 12, dificultad: \\\"alta\\\"\"})",
-      "Java": "// Dos brigadas editan el mismo sendero\nrecord Solicitud(String detalle) {}\n\nfinal class EditorSendero {\n  Resultado guardar(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(11, true, solicitud);\n  }\n}\n\nvar resultado = new EditorSendero().guardar(new Solicitud(\"senderoId: \\\"fila-cal\\\", revisionEsperada: 12, dificultad: \\\"alta\\\"\"));",
-      "Go": "// Dos brigadas editan el mismo sendero\ntype Solicitud struct { Detalle string }\n\nfunc Guardar(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 11, Evidencia: true}, nil\n}\n\nresultado, err := Guardar(Solicitud{Detalle: \"senderoId: \\\"fila-cal\\\", revisionEsperada: 12, dificultad: \\\"alta\\\"\"})"
-    }
+      "TypeScript": "export function revisionObsoletaRechazada(entrada: Entrada): Resultado {\n  const actual = numero(entrada, \"revisionActual\");\n  const esperada = numero(entrada, \"revisionEsperada\");\n  exigir(Number.isSafeInteger(actual) && actual > 0 && actual < Number.MAX_SAFE_INTEGER && Number.isSafeInteger(esperada) && esperada > 0, 'REVISION_INVALID', 'Revisiones positivas sin desbordamiento');\n  exigir(actual === esperada, \"STALE_REVISION\", \"La revisión esperada ya no es vigente\");\n  return { revision: actual + 1, cambio: entrada.cambio };\n}"
+    },
+    "languagesVerified": [
+      {
+        "language": "TypeScript",
+        "source": "replication/examples/patterns-r4/src/patrones.ts",
+        "test": "replication/examples/patterns-r4/test/patrones.test.ts"
+      }
+    ]
   },
   {
     "id": 12,
     "nombre": "Cola de salida transaccional",
     "escena": "Alerta por deslizamiento junto con la medición",
     "problema": "Guardar la alerta después de la medición puede fallar y dejar el riesgo sin notificación.",
+    "problemaIngenuo": "Guardar datos y publicar un mensaje son dos operaciones; una puede tener éxito y la otra fallar.",
+    "solucion": "La transacción escribe entidad y registro de salida. Un publicador reintentable entrega el mensaje y marca progreso. Los consumidores permanecen idempotentes.",
+    "contrato": "enUnaOperación { guardarCanónico(); guardarEventoSalida(); }",
     "participantes": [
       "RegistroConAlerta",
       "Contrato de entrada",
       "Repositorio documental",
       "Evidencia"
     ],
-    "resultado": "Documento y mensaje pendiente nacen juntos; un trabajador publica después.",
+    "resultado": "Prepara documento y evento en memoria; no ejecuta una transacción del motor.",
+    "costo": "Mida retraso, reintentos, mensajes atascados y duplicados. Se relaciona con Proyección asíncrona y Punto de control.",
+    "cuandoNoUsar": "No adopte Cola de salida transaccional si el problema no fue observado o una alternativa más simple satisface el contrato.",
+    "pruebaPositiva": {
+      "entrada": {
+        "documentoId": "sensor-8",
+        "eventoId": "alerta-8",
+        "mismaTransaccion": true
+      },
+      "esperado": {
+        "planCommit": "unico",
+        "persistido": false,
+        "outbox": {
+          "eventoId": "alerta-8",
+          "estado": "pendiente"
+        }
+      }
+    },
+    "pruebaNegativa": {
+      "entrada": {
+        "documentoId": "sensor-8",
+        "eventoId": "alerta-8",
+        "mismaTransaccion": false
+      },
+      "codigoError": "OUTBOX_NOT_ATOMIC"
+    },
     "code": {
-      "TypeScript": "// Alerta por deslizamiento junto con la medición\ntype Solicitud = Record<string, unknown>;\n\nclass RegistroConAlerta {\n  guardar(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 12, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new RegistroConAlerta().guardar({ sensorId: \"ladera-8\", riesgo: \"alto\" });",
-      "Python": "# Alerta por deslizamiento junto con la medición\nclass RegistroConAlerta:\n    def guardar(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 12, \"evidencia\": True, **solicitud}\n\nresultado = RegistroConAlerta().guardar({\"detalle\": \"sensorId: \\\"ladera-8\\\", riesgo: \\\"alto\\\"\"})",
-      "Java": "// Alerta por deslizamiento junto con la medición\nrecord Solicitud(String detalle) {}\n\nfinal class RegistroConAlerta {\n  Resultado guardar(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(12, true, solicitud);\n  }\n}\n\nvar resultado = new RegistroConAlerta().guardar(new Solicitud(\"sensorId: \\\"ladera-8\\\", riesgo: \\\"alto\\\"\"));",
-      "Go": "// Alerta por deslizamiento junto con la medición\ntype Solicitud struct { Detalle string }\n\nfunc Guardar(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 12, Evidencia: true}, nil\n}\n\nresultado, err := Guardar(Solicitud{Detalle: \"sensorId: \\\"ladera-8\\\", riesgo: \\\"alto\\\"\"})"
-    }
+      "TypeScript": "export function colaSalidaTransaccional(entrada: Entrada): Resultado {\n  const documentoId = texto(entrada, \"documentoId\");\n  const eventoId = texto(entrada, \"eventoId\");\n  exigir(entrada.mismaTransaccion === true, \"OUTBOX_NOT_ATOMIC\", \"Documento y evento deben persistirse juntos\");\n  return { documentoId, outbox: { eventoId, estado: \"pendiente\" }, planCommit: \"unico\", persistido: false };\n}"
+    },
+    "languagesVerified": [
+      {
+        "language": "TypeScript",
+        "source": "replication/examples/patterns-r4/src/patrones.ts",
+        "test": "replication/examples/patterns-r4/test/patrones.test.ts"
+      }
+    ]
   },
   {
     "id": 13,
     "nombre": "Reparación verificable",
     "escena": "Índice de especies incompleto",
     "problema": "Una interrupción dejó veinte observaciones fuera del índice de búsqueda.",
+    "problemaIngenuo": "Una proyección puede corromperse aunque la actualización habitual parezca correcta. Sin verificador, el defecto se descubre mediante usuarios.",
+    "solucion": "El verificador calcula faltantes, extras y valores distintos. La reparación genera una nueva versión desde la fuente y conserva evidencia del incidente.",
+    "contrato": "si !equivalente(derivado, esperado) entonces reconstruirYVerificar()",
     "participantes": [
       "ReparadorIndiceEspecies",
       "Contrato de entrada",
@@ -239,18 +684,57 @@
       "Evidencia"
     ],
     "resultado": "La reparación compara fuente e índice, corrige diferencias y vuelve a medir.",
+    "costo": "Mida exactitud, tiempo de detección y recuperación. Se relaciona con Reconstrucción total, Publicación por versión y Registro de procedencia.",
+    "cuandoNoUsar": "No adopte Reparación verificable si el problema no fue observado o una alternativa más simple satisface el contrato.",
+    "pruebaPositiva": {
+      "entrada": {
+        "fuente": [
+          "a",
+          "b"
+        ],
+        "indice": [
+          "a"
+        ]
+      },
+      "esperado": {
+        "reparados": [
+          "b"
+        ],
+        "equivalente": true
+      }
+    },
+    "pruebaNegativa": {
+      "entrada": {
+        "fuente": [
+          "a",
+          "b"
+        ],
+        "indice": [
+          "a",
+          "b"
+        ]
+      },
+      "codigoError": "NO_DIFFERENCE"
+    },
     "code": {
-      "TypeScript": "// Índice de especies incompleto\ntype Solicitud = Record<string, unknown>;\n\nclass ReparadorIndiceEspecies {\n  reparar(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 13, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new ReparadorIndiceEspecies().reparar({ reservaId: \"golfo-dulce\", lote: 100 });",
-      "Python": "# Índice de especies incompleto\nclass ReparadorIndiceEspecies:\n    def reparar(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 13, \"evidencia\": True, **solicitud}\n\nresultado = ReparadorIndiceEspecies().reparar({\"detalle\": \"reservaId: \\\"golfo-dulce\\\", lote: 100\"})",
-      "Java": "// Índice de especies incompleto\nrecord Solicitud(String detalle) {}\n\nfinal class ReparadorIndiceEspecies {\n  Resultado reparar(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(13, true, solicitud);\n  }\n}\n\nvar resultado = new ReparadorIndiceEspecies().reparar(new Solicitud(\"reservaId: \\\"golfo-dulce\\\", lote: 100\"));",
-      "Go": "// Índice de especies incompleto\ntype Solicitud struct { Detalle string }\n\nfunc Reparar(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 13, Evidencia: true}, nil\n}\n\nresultado, err := Reparar(Solicitud{Detalle: \"reservaId: \\\"golfo-dulce\\\", lote: 100\"})"
-    }
+      "TypeScript": "export function reparacionVerificable(entrada: Entrada): Resultado {\n  const fuente = lista(entrada, \"fuente\").map(String);\n  const indice = lista(entrada, \"indice\").map(String);\n  const faltantes = fuente.filter((id) => !indice.includes(id));\n  exigir(faltantes.length > 0, \"NO_DIFFERENCE\", \"No existe una diferencia que reparar\");\n  return { reparados: faltantes, equivalente: JSON.stringify([...new Set([...indice, ...faltantes])].sort()) === JSON.stringify([...new Set(fuente)].sort()) };\n}"
+    },
+    "languagesVerified": [
+      {
+        "language": "TypeScript",
+        "source": "replication/examples/patterns-r4/src/patrones.ts",
+        "test": "replication/examples/patterns-r4/test/patrones.test.ts"
+      }
+    ]
   },
   {
     "id": 14,
     "nombre": "Conjunto de datos reproducible",
     "escena": "Estudio anual de presencia de aves",
     "problema": "El conjunto cambia cada vez que alguien corrige una observación histórica.",
+    "problemaIngenuo": "Un archivo exportado sin contexto no explica qué registros faltan, qué versión utilizó ni cómo repetir un resultado.",
+    "solucion": "El contrato registra fuentes, ámbitos autorizados, tiempo de corte, consulta, transformación, esquema, catálogo, resumen criptográfico y política de faltantes.",
+    "contrato": "conjunto = construir(corte, fuentes, versiones, semilla)",
     "participantes": [
       "ConstructorDatasetAves",
       "Contrato de entrada",
@@ -258,18 +742,59 @@
       "Evidencia"
     ],
     "resultado": "El manifiesto fija consulta, corte, catálogo, transformación y huellas.",
+    "costo": "Mida cobertura de procedencia, diferencias entre reconstrucciones y registros en cuarentena. Se relaciona con Dato fechado y Característica versionada.",
+    "cuandoNoUsar": "No adopte Conjunto de datos reproducible si el problema no fue observado o una alternativa más simple satisface el contrato.",
+    "pruebaPositiva": {
+      "entrada": {
+        "fuentes": [
+          "obs-b",
+          "obs-a"
+        ],
+        "corte": "2026-07-31T23:59:59Z",
+        "semilla": 420,
+        "transformacion": "aves-v5"
+      },
+      "esperado": {
+        "autoridadEscritura": false,
+        "manifiesto": {
+          "fuentes": [
+            "obs-a",
+            "obs-b"
+          ],
+          "semilla": 420
+        }
+      }
+    },
+    "pruebaNegativa": {
+      "entrada": {
+        "fuentes": [
+          "obs-a"
+        ],
+        "corte": "fecha-imposible",
+        "semilla": 420,
+        "transformacion": "aves-v5"
+      },
+      "codigoError": "CUT_INVALID"
+    },
     "code": {
-      "TypeScript": "// Estudio anual de presencia de aves\ntype Solicitud = Record<string, unknown>;\n\nclass ConstructorDatasetAves {\n  construir(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 14, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new ConstructorDatasetAves().construir({ corte: \"2026-07-31\", catalogo: \"aves-5\", semilla: 420 });",
-      "Python": "# Estudio anual de presencia de aves\nclass ConstructorDatasetAves:\n    def construir(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 14, \"evidencia\": True, **solicitud}\n\nresultado = ConstructorDatasetAves().construir({\"detalle\": \"corte: \\\"2026-07-31\\\", catalogo: \\\"aves-5\\\", semilla: 420\"})",
-      "Java": "// Estudio anual de presencia de aves\nrecord Solicitud(String detalle) {}\n\nfinal class ConstructorDatasetAves {\n  Resultado construir(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(14, true, solicitud);\n  }\n}\n\nvar resultado = new ConstructorDatasetAves().construir(new Solicitud(\"corte: \\\"2026-07-31\\\", catalogo: \\\"aves-5\\\", semilla: 420\"));",
-      "Go": "// Estudio anual de presencia de aves\ntype Solicitud struct { Detalle string }\n\nfunc Construir(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 14, Evidencia: true}, nil\n}\n\nresultado, err := Construir(Solicitud{Detalle: \"corte: \\\"2026-07-31\\\", catalogo: \\\"aves-5\\\", semilla: 420\"})"
-    }
+      "TypeScript": "export function conjuntoReproducible(entrada: Entrada): Resultado {\n  const fuentes = lista(entrada, \"fuentes\").map(String).sort();\n  const corte = texto(entrada, \"corte\");\n  const semilla = numero(entrada, \"semilla\");\n  try { fechaIso(corte); } catch { throw new ErrorPatron('CUT_INVALID', 'El corte temporal no es válido'); }\n  return { manifiesto: { fuentes, corte, semilla, transformacion: texto(entrada, \"transformacion\") }, autoridadEscritura: false };\n}"
+    },
+    "languagesVerified": [
+      {
+        "language": "TypeScript",
+        "source": "replication/examples/patterns-r4/src/patrones.ts",
+        "test": "replication/examples/patterns-r4/test/patrones.test.ts"
+      }
+    ]
   },
   {
     "id": 15,
     "nombre": "Característica versionada",
     "escena": "Índice de sequedad para riesgo de incendio",
     "problema": "Cambiar la fórmula altera predicciones sin explicar por qué.",
+    "problemaIngenuo": "Entrenamiento e inferencia calculan valores similares con código, ventanas o catálogos diferentes.",
+    "solucion": "La ficha declara entidad, fórmula, ventana, fuente, versión, valores ausentes, frescura y equivalencia fuera de línea—en línea.",
+    "contrato": "característica = calcular(definición, tiempoEvento, versión)",
     "participantes": [
       "IndiceSequedad",
       "Contrato de entrada",
@@ -277,18 +802,46 @@
       "Evidencia"
     ],
     "resultado": "El valor viaja con la versión exacta de la fórmula que lo produjo.",
+    "costo": "Mida divergencia, frescura, uso y deriva. Se relaciona con Conjunto reproducible y Registro de dependencias.",
+    "cuandoNoUsar": "No adopte Característica versionada si el problema no fue observado o una alternativa más simple satisface el contrato.",
+    "pruebaPositiva": {
+      "entrada": {
+        "humedad": 31,
+        "lluvia7d": 4,
+        "formula": "is-2"
+      },
+      "esperado": {
+        "valor": 61,
+        "formula": "is-2"
+      }
+    },
+    "pruebaNegativa": {
+      "entrada": {
+        "humedad": 31,
+        "lluvia7d": 4,
+        "formula": "is-3"
+      },
+      "codigoError": "FEATURE_VERSION_UNKNOWN"
+    },
     "code": {
-      "TypeScript": "// Índice de sequedad para riesgo de incendio\ntype Solicitud = Record<string, unknown>;\n\nclass IndiceSequedad {\n  calcular(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 15, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new IndiceSequedad().calcular({ humedad: 31, lluvia7d: 4, formula: \"is-2\" });",
-      "Python": "# Índice de sequedad para riesgo de incendio\nclass IndiceSequedad:\n    def calcular(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 15, \"evidencia\": True, **solicitud}\n\nresultado = IndiceSequedad().calcular({\"detalle\": \"humedad: 31, lluvia7d: 4, formula: \\\"is-2\\\"\"})",
-      "Java": "// Índice de sequedad para riesgo de incendio\nrecord Solicitud(String detalle) {}\n\nfinal class IndiceSequedad {\n  Resultado calcular(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(15, true, solicitud);\n  }\n}\n\nvar resultado = new IndiceSequedad().calcular(new Solicitud(\"humedad: 31, lluvia7d: 4, formula: \\\"is-2\\\"\"));",
-      "Go": "// Índice de sequedad para riesgo de incendio\ntype Solicitud struct { Detalle string }\n\nfunc Calcular(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 15, Evidencia: true}, nil\n}\n\nresultado, err := Calcular(Solicitud{Detalle: \"humedad: 31, lluvia7d: 4, formula: \\\"is-2\\\"\"})"
-    }
+      "TypeScript": "export function caracteristicaVersionada(entrada: Entrada): Resultado {\n  const humedad = numero(entrada, \"humedad\");\n  const lluvia7d = numero(entrada, \"lluvia7d\");\n  const formula = texto(entrada, \"formula\");\n  exigir(formula === \"is-2\", \"FEATURE_VERSION_UNKNOWN\", \"La fórmula no está registrada\");\n  return { valor: Math.max(0, 100 - humedad - lluvia7d * 2), formula };\n}"
+    },
+    "languagesVerified": [
+      {
+        "language": "TypeScript",
+        "source": "replication/examples/patterns-r4/src/patrones.ts",
+        "test": "replication/examples/patterns-r4/test/patrones.test.ts"
+      }
+    ]
   },
   {
     "id": 16,
     "nombre": "Recuperación limitada por ámbito",
     "escena": "Asistente sobre una estación biológica",
     "problema": "El asistente podría citar documentos pertenecientes a otra estación.",
+    "problemaIngenuo": "Ordenar primero y filtrar después puede recuperar fragmentos prohibidos, contaminar contexto o revelar existencia.",
+    "solucion": "El ámbito y la política restringen candidatos antes de similitud. Cada fragmento conserva fuente, versión y autorización; la respuesta enlaza evidencia o se abstiene.",
+    "contrato": "candidatos = buscar(dentroDe(ámbito, política), consulta)",
     "participantes": [
       "BuscadorEstacion",
       "Contrato de entrada",
@@ -296,37 +849,124 @@
       "Evidencia"
     ],
     "resultado": "Filtro, búsqueda y citas conservan el mismo ámbito autorizado.",
+    "costo": "Mida precisión, exhaustividad, fugas, abstención y afirmaciones sin fuente. Se relaciona con Repositorio con ámbito y Fragmento con evidencia.",
+    "cuandoNoUsar": "No adopte Recuperación limitada por ámbito si el problema no fue observado o una alternativa más simple satisface el contrato.",
+    "pruebaPositiva": {
+      "entrada": {
+        "ambito": "las-cruces",
+        "corpus": [
+          {
+            "id": "doc-1",
+            "ambito": "las-cruces",
+            "revision": 2
+          },
+          {
+            "id": "doc-2",
+            "ambito": "otra",
+            "revision": 9
+          }
+        ]
+      },
+      "esperado": {
+        "ambito": "las-cruces",
+        "citas": [
+          {
+            "id": "doc-1",
+            "revision": 2
+          }
+        ]
+      }
+    },
+    "pruebaNegativa": {
+      "entrada": {
+        "ambito": "las-cruces",
+        "corpus": [
+          {
+            "id": "doc-2",
+            "ambito": "otra",
+            "revision": 9
+          }
+        ]
+      },
+      "codigoError": "EVIDENCE_INSUFFICIENT"
+    },
     "code": {
-      "TypeScript": "// Asistente sobre una estación biológica\ntype Solicitud = Record<string, unknown>;\n\nclass BuscadorEstacion {\n  recuperar(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 16, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new BuscadorEstacion().recuperar({ estacionId: \"las-cruces\", pregunta: \"¿Qué floreció esta semana?\" });",
-      "Python": "# Asistente sobre una estación biológica\nclass BuscadorEstacion:\n    def recuperar(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 16, \"evidencia\": True, **solicitud}\n\nresultado = BuscadorEstacion().recuperar({\"detalle\": \"estacionId: \\\"las-cruces\\\", pregunta: \\\"¿Qué floreció esta semana?\\\"\"})",
-      "Java": "// Asistente sobre una estación biológica\nrecord Solicitud(String detalle) {}\n\nfinal class BuscadorEstacion {\n  Resultado recuperar(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(16, true, solicitud);\n  }\n}\n\nvar resultado = new BuscadorEstacion().recuperar(new Solicitud(\"estacionId: \\\"las-cruces\\\", pregunta: \\\"¿Qué floreció esta semana?\\\"\"));",
-      "Go": "// Asistente sobre una estación biológica\ntype Solicitud struct { Detalle string }\n\nfunc Recuperar(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 16, Evidencia: true}, nil\n}\n\nresultado, err := Recuperar(Solicitud{Detalle: \"estacionId: \\\"las-cruces\\\", pregunta: \\\"¿Qué floreció esta semana?\\\"\"})"
-    }
+      "TypeScript": "export function recuperacionLimitada(entrada: Entrada): Resultado {\n  const ambito = texto(entrada, \"ambito\");\n  const corpus = lista(entrada, \"corpus\") as Entrada[];\n  const citas = corpus.filter((item) => tiene(item, 'ambito') && item.ambito === ambito).map((item) => ({ id: texto(item, 'id'), revision: numero(item, 'revision') }));\n  exigir(citas.length > 0, \"EVIDENCE_INSUFFICIENT\", \"No existe evidencia autorizada\");\n  return { citas, ambito, autoridadEscritura: false };\n}"
+    },
+    "languagesVerified": [
+      {
+        "language": "TypeScript",
+        "source": "replication/examples/patterns-r4/src/patrones.ts",
+        "test": "replication/examples/patterns-r4/test/patrones.test.ts"
+      }
+    ]
   },
   {
     "id": 17,
     "nombre": "Herramienta de agente gobernada",
     "escena": "Asistente que propone cerrar un sendero",
     "problema": "Un modelo no debe cerrar rutas por sí mismo al detectar lluvia intensa.",
+    "problemaIngenuo": "Un modelo que llama directamente bases o servicios internos convierte una inferencia incierta en efecto real.",
+    "solucion": "Cada herramienta declara entrada, ámbito, riesgo, idempotencia, permisos, evidencia y confirmación. El agente invoca casos de uso; no escribe proyecciones ni fuentes directamente.",
+    "contrato": "herramienta.validar(); exigirCapacidad(); confirmarSiRiesgo(); auditar()",
     "participantes": [
       "AgenteSenderos",
       "Contrato de entrada",
       "Repositorio documental",
       "Evidencia"
     ],
-    "resultado": "La herramienta valida permiso, muestra evidencia y exige aprobación humana.",
+    "resultado": "Valida una propuesta con aprobación declarada; no autentica a una persona ni ejecuta la acción.",
+    "costo": "Mida acciones rechazadas, confirmaciones, efectos duplicados y decisiones sin evidencia. Se relaciona con Contexto autorizado e Idempotencia.",
+    "cuandoNoUsar": "No adopte Herramienta de agente gobernada si el problema no fue observado o una alternativa más simple satisface el contrato.",
+    "pruebaPositiva": {
+      "entrada": {
+        "accion": "cerrar",
+        "capacidades": [
+          "proponer:cerrar"
+        ],
+        "evidencia": {
+          "lluviaMm": 120
+        },
+        "aprobacionHumana": true
+      },
+      "esperado": {
+        "estado": "propuesta-validada",
+        "aprobacionDeclarada": true,
+        "ejecutadaPorModelo": false
+      }
+    },
+    "pruebaNegativa": {
+      "entrada": {
+        "accion": "cerrar",
+        "capacidades": [
+          "proponer:cerrar"
+        ],
+        "evidencia": {
+          "lluviaMm": 120
+        },
+        "aprobacionHumana": false
+      },
+      "codigoError": "HUMAN_APPROVAL_REQUIRED"
+    },
     "code": {
-      "TypeScript": "// Asistente que propone cerrar un sendero\ntype Solicitud = Record<string, unknown>;\n\nclass AgenteSenderos {\n  proponer(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 17, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new AgenteSenderos().proponer({ senderoId: \"cerro-pittier\", accion: \"cerrar\" });",
-      "Python": "# Asistente que propone cerrar un sendero\nclass AgenteSenderos:\n    def proponer(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 17, \"evidencia\": True, **solicitud}\n\nresultado = AgenteSenderos().proponer({\"detalle\": \"senderoId: \\\"cerro-pittier\\\", accion: \\\"cerrar\\\"\"})",
-      "Java": "// Asistente que propone cerrar un sendero\nrecord Solicitud(String detalle) {}\n\nfinal class AgenteSenderos {\n  Resultado proponer(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(17, true, solicitud);\n  }\n}\n\nvar resultado = new AgenteSenderos().proponer(new Solicitud(\"senderoId: \\\"cerro-pittier\\\", accion: \\\"cerrar\\\"\"));",
-      "Go": "// Asistente que propone cerrar un sendero\ntype Solicitud struct { Detalle string }\n\nfunc Proponer(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 17, Evidencia: true}, nil\n}\n\nresultado, err := Proponer(Solicitud{Detalle: \"senderoId: \\\"cerro-pittier\\\", accion: \\\"cerrar\\\"\"})"
-    }
+      "TypeScript": "export function herramientaAgenteGobernada(entrada: Entrada): Resultado {\n  const accion = texto(entrada, \"accion\");\n  exigir(Array.isArray(entrada.capacidades) && entrada.capacidades.includes(`proponer:${accion}`), \"CAPABILITY_DENIED\", \"La herramienta no posee la capacidad\");\n  exigir(entrada.evidencia && entrada.aprobacionHumana === true, \"HUMAN_APPROVAL_REQUIRED\", \"Falta evidencia o aprobación humana\");\n  return { accion, estado: \"propuesta-validada\", aprobacionDeclarada: true, ejecutadaPorModelo: false };\n}"
+    },
+    "languagesVerified": [
+      {
+        "language": "TypeScript",
+        "source": "replication/examples/patterns-r4/src/patrones.ts",
+        "test": "replication/examples/patterns-r4/test/patrones.test.ts"
+      }
+    ]
   },
   {
     "id": 18,
     "nombre": "Frontera lectura—escritura",
     "escena": "Resumen público de calidad del agua",
     "problema": "Editar el resumen directamente lo convertiría en una segunda autoridad.",
+    "problemaIngenuo": "Las proyecciones suelen adoptarse por intuición y permanecen aun cuando un índice nativo sería suficiente.",
+    "solucion": "Si Δ Q=Q_{B1}-Q_{C1}>0 y Δ W=W_{C1}-W_{B1} , C1 compensa temporalmente cuando Q/W>Δ W/Δ Q . Se añaden almacenamiento, personal y riesgo cuando estén disponibles.",
+    "contrato": "adoptar si ahorroLectura > costoEscritura + costoOperacional",
     "participantes": [
       "ResumenCalidadAgua",
       "Contrato de entrada",
@@ -334,18 +974,50 @@
       "Evidencia"
     ],
     "resultado": "El resumen solo se lee; toda corrección entra por la medición canónica.",
+    "costo": "El piloto observó umbrales entre 1.49 y 38.87 lecturas por escritura; son evidencia del método, no parámetros transferibles a NoSQL. Se relaciona con Proyección de cobertura y Retiro de proyección.",
+    "cuandoNoUsar": "No adopte Frontera lectura—escritura si el problema no fue observado o una alternativa más simple satisface el contrato.",
+    "pruebaPositiva": {
+      "entrada": {
+        "operacion": "leer",
+        "resumen": {
+          "calidad": "buena"
+        }
+      },
+      "esperado": {
+        "autoridadEscritura": false,
+        "resumen": {
+          "calidad": "buena"
+        }
+      }
+    },
+    "pruebaNegativa": {
+      "entrada": {
+        "operacion": "escribir",
+        "resumen": {
+          "calidad": "buena"
+        }
+      },
+      "codigoError": "DERIVED_WRITE_FORBIDDEN"
+    },
     "code": {
-      "TypeScript": "// Resumen público de calidad del agua\ntype Solicitud = Record<string, unknown>;\n\nclass ResumenCalidadAgua {\n  consultar(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 18, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new ResumenCalidadAgua().consultar({ cuencaId: \"sixaola\", mes: \"2026-08\" });",
-      "Python": "# Resumen público de calidad del agua\nclass ResumenCalidadAgua:\n    def consultar(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 18, \"evidencia\": True, **solicitud}\n\nresultado = ResumenCalidadAgua().consultar({\"detalle\": \"cuencaId: \\\"sixaola\\\", mes: \\\"2026-08\\\"\"})",
-      "Java": "// Resumen público de calidad del agua\nrecord Solicitud(String detalle) {}\n\nfinal class ResumenCalidadAgua {\n  Resultado consultar(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(18, true, solicitud);\n  }\n}\n\nvar resultado = new ResumenCalidadAgua().consultar(new Solicitud(\"cuencaId: \\\"sixaola\\\", mes: \\\"2026-08\\\"\"));",
-      "Go": "// Resumen público de calidad del agua\ntype Solicitud struct { Detalle string }\n\nfunc Consultar(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 18, Evidencia: true}, nil\n}\n\nresultado, err := Consultar(Solicitud{Detalle: \"cuencaId: \\\"sixaola\\\", mes: \\\"2026-08\\\"\"})"
-    }
+      "TypeScript": "export function fronteraLecturaEscritura(entrada: Entrada): Resultado {\n  exigir(entrada.operacion === \"leer\", \"DERIVED_WRITE_FORBIDDEN\", \"Un resumen derivado no acepta escrituras\");\n  return { resumen: entrada.resumen, autoridadEscritura: false };\n}"
+    },
+    "languagesVerified": [
+      {
+        "language": "TypeScript",
+        "source": "replication/examples/patterns-r4/src/patrones.ts",
+        "test": "replication/examples/patterns-r4/test/patrones.test.ts"
+      }
+    ]
   },
   {
     "id": 19,
     "nombre": "Índice antes que proyección",
     "escena": "Búsqueda de viveros por cantón",
     "problema": "El equipo quiere copiar fichas completas cuando un índice compuesto basta.",
+    "problemaIngenuo": "Comparar solo contra escaneo exagera el beneficio y oculta una solución más sencilla del motor.",
+    "solucion": "B0 diagnostica el costo bruto; B1 usa el mejor índice razonable; C1 debe compararse con ambos y pagar su mantenimiento. La equivalencia lógica de respuestas es obligatoria.",
+    "contrato": "medir(consultaConÍndice) antesDe crearProyección()",
     "participantes": [
       "IndiceViveros",
       "Contrato de entrada",
@@ -353,37 +1025,90 @@
       "Evidencia"
     ],
     "resultado": "Se prueba primero una clave pequeña antes de mantener otra representación.",
+    "costo": "Mida plan, filas, bytes, p95 y escritura. En la fase confirmatoria, C1 solo superó significativamente a B1 en cuatro de nueve celdas.",
+    "cuandoNoUsar": "No adopte Índice antes que proyección si el problema no fue observado o una alternativa más simple satisface el contrato.",
+    "pruebaPositiva": {
+      "entrada": {
+        "ahorroIndice": 80,
+        "ahorroProyeccion": 90,
+        "costoProyeccion": 15
+      },
+      "esperado": {
+        "decision": "indice"
+      }
+    },
+    "pruebaNegativa": {
+      "entrada": {
+        "ahorroIndice": -1,
+        "ahorroProyeccion": 90,
+        "costoProyeccion": 15
+      },
+      "codigoError": "MEASUREMENTS_INVALID"
+    },
     "code": {
-      "TypeScript": "// Búsqueda de viveros por cantón\ntype Solicitud = Record<string, unknown>;\n\nclass IndiceViveros {\n  buscar(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 19, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new IndiceViveros().buscar({ canton: \"coto-brus\", especie: \"roble-sabana\" });",
-      "Python": "# Búsqueda de viveros por cantón\nclass IndiceViveros:\n    def buscar(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 19, \"evidencia\": True, **solicitud}\n\nresultado = IndiceViveros().buscar({\"detalle\": \"canton: \\\"coto-brus\\\", especie: \\\"roble-sabana\\\"\"})",
-      "Java": "// Búsqueda de viveros por cantón\nrecord Solicitud(String detalle) {}\n\nfinal class IndiceViveros {\n  Resultado buscar(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(19, true, solicitud);\n  }\n}\n\nvar resultado = new IndiceViveros().buscar(new Solicitud(\"canton: \\\"coto-brus\\\", especie: \\\"roble-sabana\\\"\"));",
-      "Go": "// Búsqueda de viveros por cantón\ntype Solicitud struct { Detalle string }\n\nfunc Buscar(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 19, Evidencia: true}, nil\n}\n\nresultado, err := Buscar(Solicitud{Detalle: \"canton: \\\"coto-brus\\\", especie: \\\"roble-sabana\\\"\"})"
-    }
+      "TypeScript": "export function indiceAntesQueProyeccion(entrada: Entrada): Resultado {\n  const ahorroIndice = numero(entrada, \"ahorroIndice\");\n  const ahorroProyeccion = numero(entrada, \"ahorroProyeccion\");\n  const costoProyeccion = numero(entrada, \"costoProyeccion\");\n  exigir(ahorroIndice >= 0 && ahorroProyeccion >= 0 && costoProyeccion >= 0, \"MEASUREMENTS_INVALID\", \"Las mediciones no pueden ser negativas\");\n  return { decision: ahorroIndice >= ahorroProyeccion - costoProyeccion ? \"indice\" : \"proyeccion\" };\n}"
+    },
+    "languagesVerified": [
+      {
+        "language": "TypeScript",
+        "source": "replication/examples/patterns-r4/src/patrones.ts",
+        "test": "replication/examples/patterns-r4/test/patrones.test.ts"
+      }
+    ]
   },
   {
     "id": 20,
     "nombre": "Retiro de proyección",
     "escena": "Mapa antiguo que nadie consulta",
     "problema": "Una proyección sin usuarios continúa consumiendo almacenamiento y monitoreo.",
+    "problemaIngenuo": "Las proyecciones se crean para consultas temporales y permanecen como escrituras, almacenamiento y código sin propietario.",
+    "solucion": "El inventario identifica consumidores, frecuencia, propietario, costo y sustituto. Se detienen escritores, se observa una ventana reversible y luego se retiran datos conforme a política.",
+    "contrato": "detenerConsumidores(); retirarProductor(); esperar(); eliminarDerivado()",
     "participantes": [
       "RetirarMapaHistorico",
       "Contrato de entrada",
       "Repositorio documental",
       "Evidencia"
     ],
-    "resultado": "Se confirma ausencia de consumidores, se conserva la fuente y se retira la copia.",
+    "resultado": "Propone retirar la copia según entradas declaradas; no borra datos ni descubre consumidores reales.",
+    "costo": "Mida consultas, costo evitado, dependientes y errores posteriores. Se relaciona con Registro de dependencias y Frontera lectura—escritura.",
+    "cuandoNoUsar": "No adopte Retiro de proyección si el problema no fue observado o una alternativa más simple satisface el contrato.",
+    "pruebaPositiva": {
+      "entrada": {
+        "consumidores": 0,
+        "fuenteDisponible": true
+      },
+      "esperado": {
+        "estado": "retiro-propuesto",
+        "persistido": false
+      }
+    },
+    "pruebaNegativa": {
+      "entrada": {
+        "consumidores": 1,
+        "fuenteDisponible": true
+      },
+      "codigoError": "PROJECTION_IN_USE"
+    },
     "code": {
-      "TypeScript": "// Mapa antiguo que nadie consulta\ntype Solicitud = Record<string, unknown>;\n\nclass RetirarMapaHistorico {\n  ejecutar(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 20, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new RetirarMapaHistorico().ejecutar({ proyeccion: \"mapa-2019\", diasSinUso: 420 });",
-      "Python": "# Mapa antiguo que nadie consulta\nclass RetirarMapaHistorico:\n    def ejecutar(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 20, \"evidencia\": True, **solicitud}\n\nresultado = RetirarMapaHistorico().ejecutar({\"detalle\": \"proyeccion: \\\"mapa-2019\\\", diasSinUso: 420\"})",
-      "Java": "// Mapa antiguo que nadie consulta\nrecord Solicitud(String detalle) {}\n\nfinal class RetirarMapaHistorico {\n  Resultado ejecutar(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(20, true, solicitud);\n  }\n}\n\nvar resultado = new RetirarMapaHistorico().ejecutar(new Solicitud(\"proyeccion: \\\"mapa-2019\\\", diasSinUso: 420\"));",
-      "Go": "// Mapa antiguo que nadie consulta\ntype Solicitud struct { Detalle string }\n\nfunc Ejecutar(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 20, Evidencia: true}, nil\n}\n\nresultado, err := Ejecutar(Solicitud{Detalle: \"proyeccion: \\\"mapa-2019\\\", diasSinUso: 420\"})"
-    }
+      "TypeScript": "export function retiroProyeccion(entrada: Entrada): Resultado {\n  const consumidores = numero(entrada, \"consumidores\");\n  exigir(consumidores === 0, \"PROJECTION_IN_USE\", \"La proyección conserva consumidores\");\n  exigir(entrada.fuenteDisponible === true, \"SOURCE_REQUIRED\", \"La fuente debe conservarse antes del retiro\");\n  return { estado: \"retiro-propuesto\", fuenteDeclarada: true, persistido: false };\n}"
+    },
+    "languagesVerified": [
+      {
+        "language": "TypeScript",
+        "source": "replication/examples/patterns-r4/src/patrones.ts",
+        "test": "replication/examples/patterns-r4/test/patrones.test.ts"
+      }
+    ]
   },
   {
     "id": 21,
     "nombre": "Identidad documental estable",
     "escena": "La misma cámara cambia de ubicación",
     "problema": "Usar la ubicación como identificador crea otro dispositivo al moverla.",
+    "problemaIngenuo": "Claves derivadas de rutas, nombres visibles o posiciones cambian durante una migración y rompen referencias.",
+    "solucion": "Asigne una identidad opaca dentro del ámbito; trate claves externas como atributos versionados y valide colisiones en la frontera.",
+    "contrato": "identidad = asignar(ámbito); referencias.usar(identidad)",
     "participantes": [
       "CamaraTrampa",
       "Contrato de entrada",
@@ -391,37 +1116,94 @@
       "Evidencia"
     ],
     "resultado": "La identidad permanece estable mientras sus atributos pueden cambiar.",
+    "costo": "Mida colisiones, referencias huérfanas y tiempo de resolución. Se relaciona con Objeto canónico, Revisión obsoleta rechazada y Catálogo versionado.",
+    "cuandoNoUsar": "No adopte Identidad documental estable si el problema no fue observado o una alternativa más simple satisface el contrato.",
+    "pruebaPositiva": {
+      "entrada": {
+        "camaraId": "cam-0091",
+        "ubicacionAnterior": "sendero-sur",
+        "ubicacionNueva": "sendero-norte"
+      },
+      "esperado": {
+        "camaraId": "cam-0091",
+        "ubicacion": "sendero-norte",
+        "identidadCambio": false
+      }
+    },
+    "pruebaNegativa": {
+      "entrada": {
+        "camaraId": "cam-0091",
+        "ubicacionAnterior": "sendero-norte",
+        "ubicacionNueva": "sendero-norte"
+      },
+      "codigoError": "NO_IDENTITY_CHANGE"
+    },
     "code": {
-      "TypeScript": "// La misma cámara cambia de ubicación\ntype Solicitud = Record<string, unknown>;\n\nclass CamaraTrampa {\n  registrar(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 21, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new CamaraTrampa().registrar({ camaraId: \"cam-0091\", ubicacion: \"sendero-norte\" });",
-      "Python": "# La misma cámara cambia de ubicación\nclass CamaraTrampa:\n    def registrar(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 21, \"evidencia\": True, **solicitud}\n\nresultado = CamaraTrampa().registrar({\"detalle\": \"camaraId: \\\"cam-0091\\\", ubicacion: \\\"sendero-norte\\\"\"})",
-      "Java": "// La misma cámara cambia de ubicación\nrecord Solicitud(String detalle) {}\n\nfinal class CamaraTrampa {\n  Resultado registrar(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(21, true, solicitud);\n  }\n}\n\nvar resultado = new CamaraTrampa().registrar(new Solicitud(\"camaraId: \\\"cam-0091\\\", ubicacion: \\\"sendero-norte\\\"\"));",
-      "Go": "// La misma cámara cambia de ubicación\ntype Solicitud struct { Detalle string }\n\nfunc Registrar(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 21, Evidencia: true}, nil\n}\n\nresultado, err := Registrar(Solicitud{Detalle: \"camaraId: \\\"cam-0091\\\", ubicacion: \\\"sendero-norte\\\"\"})"
-    }
+      "TypeScript": "export function identidadEstable(entrada: Entrada): Resultado {\n  const camaraId = texto(entrada, \"camaraId\");\n  const ubicacionAnterior = texto(entrada, \"ubicacionAnterior\");\n  const ubicacionNueva = texto(entrada, \"ubicacionNueva\");\n  exigir(ubicacionAnterior !== ubicacionNueva, \"NO_IDENTITY_CHANGE\", \"La prueba requiere un cambio de ubicación\");\n  return { camaraId, ubicacion: ubicacionNueva, identidadCambio: false };\n}"
+    },
+    "languagesVerified": [
+      {
+        "language": "TypeScript",
+        "source": "replication/examples/patterns-r4/src/patrones.ts",
+        "test": "replication/examples/patterns-r4/test/patrones.test.ts"
+      }
+    ]
   },
   {
     "id": 22,
     "nombre": "Validación en frontera",
     "escena": "Formulario ciudadano de avistamientos",
     "problema": "Coordenadas imposibles o especies desconocidas llegan hasta el almacén.",
+    "problemaIngenuo": "Aceptar primero y corregir después dispersa supuestos y convierte cada lector en un validador distinto.",
+    "solucion": "La frontera comprueba forma, ámbito, revisión, vocabulario y reglas invariantes; devuelve errores estructurados sin escritura parcial.",
+    "contrato": "validar(entrada, contrato, ámbito) o rechazarSinEfectos()",
     "participantes": [
       "IngresoAvistamiento",
       "Contrato de entrada",
       "Repositorio documental",
       "Evidencia"
     ],
-    "resultado": "La entrada se normaliza o rechaza antes de crear el documento.",
+    "resultado": "Valida coordenadas y normaliza texto; la existencia de la especie en catálogo se comprueba aparte.",
+    "costo": "Mida rechazos por causa, campos desconocidos y escrituras parciales. Se conecta con Contrato versionado y Herramienta de agente gobernada.",
+    "cuandoNoUsar": "No adopte Validación en frontera si el problema no fue observado o una alternativa más simple satisface el contrato.",
+    "pruebaPositiva": {
+      "entrada": {
+        "latitud": 8.79,
+        "longitud": -82.96,
+        "especie": "TUCAN-PICO-IRIS"
+      },
+      "esperado": {
+        "especie": "tucan-pico-iris",
+        "validada": true
+      }
+    },
+    "pruebaNegativa": {
+      "entrada": {
+        "latitud": 100,
+        "longitud": -82.96,
+        "especie": "tucan"
+      },
+      "codigoError": "COORDINATES_INVALID"
+    },
     "code": {
-      "TypeScript": "// Formulario ciudadano de avistamientos\ntype Solicitud = Record<string, unknown>;\n\nclass IngresoAvistamiento {\n  aceptar(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 22, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new IngresoAvistamiento().aceptar({ latitud: 8.79, longitud: -82.96, especie: \"tucan-pico-iris\" });",
-      "Python": "# Formulario ciudadano de avistamientos\nclass IngresoAvistamiento:\n    def aceptar(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 22, \"evidencia\": True, **solicitud}\n\nresultado = IngresoAvistamiento().aceptar({\"detalle\": \"latitud: 8.79, longitud: -82.96, especie: \\\"tucan-pico-iris\\\"\"})",
-      "Java": "// Formulario ciudadano de avistamientos\nrecord Solicitud(String detalle) {}\n\nfinal class IngresoAvistamiento {\n  Resultado aceptar(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(22, true, solicitud);\n  }\n}\n\nvar resultado = new IngresoAvistamiento().aceptar(new Solicitud(\"latitud: 8.79, longitud: -82.96, especie: \\\"tucan-pico-iris\\\"\"));",
-      "Go": "// Formulario ciudadano de avistamientos\ntype Solicitud struct { Detalle string }\n\nfunc Aceptar(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 22, Evidencia: true}, nil\n}\n\nresultado, err := Aceptar(Solicitud{Detalle: \"latitud: 8.79, longitud: -82.96, especie: \\\"tucan-pico-iris\\\"\"})"
-    }
+      "TypeScript": "export function validacionFrontera(entrada: Entrada): Resultado {\n  const latitud = numero(entrada, \"latitud\");\n  const longitud = numero(entrada, \"longitud\");\n  exigir(latitud >= -90 && latitud <= 90 && longitud >= -180 && longitud <= 180, \"COORDINATES_INVALID\", \"Las coordenadas están fuera de rango\");\n  return { latitud, longitud, especie: texto(entrada, \"especie\").toLowerCase(), validada: true };\n}"
+    },
+    "languagesVerified": [
+      {
+        "language": "TypeScript",
+        "source": "replication/examples/patterns-r4/src/patrones.ts",
+        "test": "replication/examples/patterns-r4/test/patrones.test.ts"
+      }
+    ]
   },
   {
     "id": 23,
     "nombre": "Contrato documental versionado",
     "escena": "Aplicación móvil todavía usa el formato anterior",
     "problema": "Cambiar nombre de campos rompe tabletas que aún no se actualizaron.",
+    "problemaIngenuo": "Cambiar el significado de un campo bajo el mismo nombre produce lectores temporalmente incompatibles.",
+    "solucion": "Cada documento declara versión; lectores admiten un intervalo explícito y las transformaciones entre versiones son deterministas e idempotentes.",
+    "contrato": "leer(según versión); migrar(de, hacia) deFormaIdempotente()",
     "participantes": [
       "ContratoObservacion",
       "Contrato de entrada",
@@ -429,18 +1211,44 @@
       "Evidencia"
     ],
     "resultado": "El lector selecciona el contrato correcto y migra de forma explícita.",
+    "costo": "Mida documentos por versión, fallos de conversión y consumidores antiguos. Se relaciona con Catálogo versionado y Publicación por versión.",
+    "cuandoNoUsar": "No adopte Contrato documental versionado si el problema no fue observado o una alternativa más simple satisface el contrato.",
+    "pruebaPositiva": {
+      "entrada": {
+        "versionEsquema": 1,
+        "codigoEspecie": "AV-12"
+      },
+      "esperado": {
+        "versionEsquema": 2,
+        "especieCodigo": "AV-12"
+      }
+    },
+    "pruebaNegativa": {
+      "entrada": {
+        "versionEsquema": 3,
+        "especieCodigo": "AV-12"
+      },
+      "codigoError": "SCHEMA_VERSION_UNSUPPORTED"
+    },
     "code": {
-      "TypeScript": "// Aplicación móvil todavía usa el formato anterior\ntype Solicitud = Record<string, unknown>;\n\nclass ContratoObservacion {\n  decodificar(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 23, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new ContratoObservacion().decodificar({ schemaVersion: 2, especieCodigo: \"AV-12\" });",
-      "Python": "# Aplicación móvil todavía usa el formato anterior\nclass ContratoObservacion:\n    def decodificar(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 23, \"evidencia\": True, **solicitud}\n\nresultado = ContratoObservacion().decodificar({\"detalle\": \"schemaVersion: 2, especieCodigo: \\\"AV-12\\\"\"})",
-      "Java": "// Aplicación móvil todavía usa el formato anterior\nrecord Solicitud(String detalle) {}\n\nfinal class ContratoObservacion {\n  Resultado decodificar(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(23, true, solicitud);\n  }\n}\n\nvar resultado = new ContratoObservacion().decodificar(new Solicitud(\"schemaVersion: 2, especieCodigo: \\\"AV-12\\\"\"));",
-      "Go": "// Aplicación móvil todavía usa el formato anterior\ntype Solicitud struct { Detalle string }\n\nfunc Decodificar(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 23, Evidencia: true}, nil\n}\n\nresultado, err := Decodificar(Solicitud{Detalle: \"schemaVersion: 2, especieCodigo: \\\"AV-12\\\"\"})"
-    }
+      "TypeScript": "export function contratoVersionado(entrada: Entrada): Resultado {\n  const version = numero(entrada, \"versionEsquema\");\n  if (version === 1) return { versionEsquema: 2, especieCodigo: texto(entrada, \"codigoEspecie\") };\n  if (version === 2) return { versionEsquema: 2, especieCodigo: texto(entrada, \"especieCodigo\") };\n  throw new ErrorPatron(\"SCHEMA_VERSION_UNSUPPORTED\", \"La versión documental no está soportada\");\n}"
+    },
+    "languagesVerified": [
+      {
+        "language": "TypeScript",
+        "source": "replication/examples/patterns-r4/src/patrones.ts",
+        "test": "replication/examples/patterns-r4/test/patrones.test.ts"
+      }
+    ]
   },
   {
     "id": 24,
     "nombre": "Lectura coherente por revisión",
     "escena": "Informe combina mapa y estadísticas",
     "problema": "Leer partes en momentos distintos produce un informe internamente contradictorio.",
+    "problemaIngenuo": "Consultar varias proyecciones puede mezclar estados aunque cada lectura aislada sea correcta.",
+    "solucion": "Propague revisión objetivo o corte; acepte solo fragmentos compatibles y declare degradación cuando no pueda completarse.",
+    "contrato": "leerTodoEn(revisiónObjetivo) o declararDegradación()",
     "participantes": [
       "InformeReserva",
       "Contrato de entrada",
@@ -448,18 +1256,63 @@
       "Evidencia"
     ],
     "resultado": "Todas las piezas declaran la misma revisión o la lectura se repite.",
+    "costo": "Mida mezclas detectadas, abstenciones y atraso por revisión. Se vincula con Reconstrucción incremental y Recuperación limitada por ámbito.",
+    "cuandoNoUsar": "No adopte Lectura coherente por revisión si el problema no fue observado o una alternativa más simple satisface el contrato.",
+    "pruebaPositiva": {
+      "entrada": {
+        "partes": [
+          {
+            "nombre": "mapa",
+            "revision": 884
+          },
+          {
+            "nombre": "estadisticas",
+            "revision": 884
+          }
+        ]
+      },
+      "esperado": {
+        "revision": 884,
+        "partes": [
+          "mapa",
+          "estadisticas"
+        ]
+      }
+    },
+    "pruebaNegativa": {
+      "entrada": {
+        "partes": [
+          {
+            "nombre": "mapa",
+            "revision": 884
+          },
+          {
+            "nombre": "estadisticas",
+            "revision": 885
+          }
+        ]
+      },
+      "codigoError": "MIXED_REVISIONS"
+    },
     "code": {
-      "TypeScript": "// Informe combina mapa y estadísticas\ntype Solicitud = Record<string, unknown>;\n\nclass InformeReserva {\n  cargar(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 24, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new InformeReserva().cargar({ reservaId: \"corcovado\", revision: 884 });",
-      "Python": "# Informe combina mapa y estadísticas\nclass InformeReserva:\n    def cargar(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 24, \"evidencia\": True, **solicitud}\n\nresultado = InformeReserva().cargar({\"detalle\": \"reservaId: \\\"corcovado\\\", revision: 884\"})",
-      "Java": "// Informe combina mapa y estadísticas\nrecord Solicitud(String detalle) {}\n\nfinal class InformeReserva {\n  Resultado cargar(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(24, true, solicitud);\n  }\n}\n\nvar resultado = new InformeReserva().cargar(new Solicitud(\"reservaId: \\\"corcovado\\\", revision: 884\"));",
-      "Go": "// Informe combina mapa y estadísticas\ntype Solicitud struct { Detalle string }\n\nfunc Cargar(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 24, Evidencia: true}, nil\n}\n\nresultado, err := Cargar(Solicitud{Detalle: \"reservaId: \\\"corcovado\\\", revision: 884\"})"
-    }
+      "TypeScript": "export function lecturaCoherente(entrada: Entrada): Resultado {\n  const partes = lista(entrada, \"partes\") as Entrada[];\n  const revisiones = new Set(partes.map((parte) => numero(parte, \"revision\")));\n  exigir(revisiones.size === 1, \"MIXED_REVISIONS\", \"Las piezas no pertenecen a la misma revisión\");\n  return { revision: [...revisiones][0], partes: partes.map((parte) => parte.nombre) };\n}"
+    },
+    "languagesVerified": [
+      {
+        "language": "TypeScript",
+        "source": "replication/examples/patterns-r4/src/patrones.ts",
+        "test": "replication/examples/patterns-r4/test/patrones.test.ts"
+      }
+    ]
   },
   {
     "id": 25,
     "nombre": "Ventana de frescura declarada",
     "escena": "Tablero de incendios forestales",
     "problema": "Un tablero parece actual aunque la última proyección tenga dos horas.",
+    "problemaIngenuo": "Sin un límite declarado, una proyección aparentemente rápida puede entregar información inaceptablemente antigua.",
+    "solucion": "Cada proyección publica última revisión aplicada, tiempo de actualización y límite contratado; el lector decide esperar, degradar o fallar.",
+    "contrato": "si edad > ventana entonces esperar | degradar | fallar",
     "participantes": [
       "TableroIncendios",
       "Contrato de entrada",
@@ -467,18 +1320,46 @@
       "Evidencia"
     ],
     "resultado": "El consumidor acepta, espera o rechaza según la edad declarada.",
+    "costo": "Mida edad, percentiles de atraso e incumplimientos. Se conecta con Reconstrucción incremental y Frontera lectura-escritura.",
+    "cuandoNoUsar": "No adopte Ventana de frescura declarada si el problema no fue observado o una alternativa más simple satisface el contrato.",
+    "pruebaPositiva": {
+      "entrada": {
+        "generadoEn": "2026-08-24T10:00:00Z",
+        "consultadoEn": "2026-08-24T10:05:00Z",
+        "frescuraMaxMin": 10
+      },
+      "esperado": {
+        "edadMin": 5,
+        "vigente": true
+      }
+    },
+    "pruebaNegativa": {
+      "entrada": {
+        "generadoEn": "2026-08-24T10:00:00Z",
+        "consultadoEn": "2026-08-24T12:00:00Z",
+        "frescuraMaxMin": 10
+      },
+      "codigoError": "FRESHNESS_EXCEEDED"
+    },
     "code": {
-      "TypeScript": "// Tablero de incendios forestales\ntype Solicitud = Record<string, unknown>;\n\nclass TableroIncendios {\n  consultar(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 25, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new TableroIncendios().consultar({ region: \"brunca\", frescuraMaxMin: 10 });",
-      "Python": "# Tablero de incendios forestales\nclass TableroIncendios:\n    def consultar(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 25, \"evidencia\": True, **solicitud}\n\nresultado = TableroIncendios().consultar({\"detalle\": \"region: \\\"brunca\\\", frescuraMaxMin: 10\"})",
-      "Java": "// Tablero de incendios forestales\nrecord Solicitud(String detalle) {}\n\nfinal class TableroIncendios {\n  Resultado consultar(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(25, true, solicitud);\n  }\n}\n\nvar resultado = new TableroIncendios().consultar(new Solicitud(\"region: \\\"brunca\\\", frescuraMaxMin: 10\"));",
-      "Go": "// Tablero de incendios forestales\ntype Solicitud struct { Detalle string }\n\nfunc Consultar(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 25, Evidencia: true}, nil\n}\n\nresultado, err := Consultar(Solicitud{Detalle: \"region: \\\"brunca\\\", frescuraMaxMin: 10\"})"
-    }
+      "TypeScript": "export function ventanaFrescura(entrada: Entrada): Resultado {\n  const generadoEn = fechaIso(texto(entrada, \"generadoEn\"));\n  const consultadoEn = fechaIso(texto(entrada, \"consultadoEn\"));\n  const maxMin = numero(entrada, \"frescuraMaxMin\");\n  const edadMin = (consultadoEn - generadoEn) / 60_000;\n  exigir(edadMin >= 0 && edadMin <= maxMin, \"FRESHNESS_EXCEEDED\", \"La proyección excedió su ventana de frescura\");\n  return { edadMin, vigente: true };\n}"
+    },
+    "languagesVerified": [
+      {
+        "language": "TypeScript",
+        "source": "replication/examples/patterns-r4/src/patrones.ts",
+        "test": "replication/examples/patterns-r4/test/patrones.test.ts"
+      }
+    ]
   },
   {
     "id": 26,
     "nombre": "Manifiesto de proyección",
     "escena": "Mapa de corredores biológicos",
     "problema": "Nadie recuerda con qué fuentes y filtros se produjo el mapa publicado.",
+    "problemaIngenuo": "Una copia puede parecer correcta y aun mezclar semillas, versiones o cortes distintos.",
+    "solucion": "Guarde fuentes, cortes, versiones, parámetros, semilla, huellas y resultado de verificación como manifiesto inmutable.",
+    "contrato": "manifiesto = sellar(fuentes, cortes, versiones, semilla, huellas)",
     "participantes": [
       "ManifiestoCorredores",
       "Contrato de entrada",
@@ -486,18 +1367,56 @@
       "Evidencia"
     ],
     "resultado": "La proyección publica receta, entradas, versión, huellas y responsable.",
+    "costo": "Mida manifiestos incompletos, huellas inválidas y tiempo de reproducción. Se relaciona con Conjunto reproducible y Reparación verificable.",
+    "cuandoNoUsar": "No adopte Manifiesto de proyección si el problema no fue observado o una alternativa más simple satisface el contrato.",
+    "pruebaPositiva": {
+      "entrada": {
+        "version": "corredores-12",
+        "fuentes": [
+          "bosque-v7"
+        ],
+        "huellas": {
+          "bosque-v7": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        "responsable": "equipo-cartografia"
+      },
+      "esperado": {
+        "version": "corredores-12",
+        "responsable": "equipo-cartografia"
+      }
+    },
+    "pruebaNegativa": {
+      "entrada": {
+        "version": "corredores-12",
+        "fuentes": [
+          "bosque-v7"
+        ],
+        "huellas": {
+          "bosque-v7": "sin-huella"
+        },
+        "responsable": "equipo-cartografia"
+      },
+      "codigoError": "PROVENANCE_INCOMPLETE"
+    },
     "code": {
-      "TypeScript": "// Mapa de corredores biológicos\ntype Solicitud = Record<string, unknown>;\n\nclass ManifiestoCorredores {\n  crear(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 26, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new ManifiestoCorredores().crear({ version: \"corredores-12\", fuentes: [\"bosque-v7\", \"rios-v3\"] });",
-      "Python": "# Mapa de corredores biológicos\nclass ManifiestoCorredores:\n    def crear(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 26, \"evidencia\": True, **solicitud}\n\nresultado = ManifiestoCorredores().crear({\"detalle\": \"version: \\\"corredores-12\\\", fuentes: [\\\"bosque-v7\\\", \\\"rios-v3\\\"]\"})",
-      "Java": "// Mapa de corredores biológicos\nrecord Solicitud(String detalle) {}\n\nfinal class ManifiestoCorredores {\n  Resultado crear(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(26, true, solicitud);\n  }\n}\n\nvar resultado = new ManifiestoCorredores().crear(new Solicitud(\"version: \\\"corredores-12\\\", fuentes: [\\\"bosque-v7\\\", \\\"rios-v3\\\"]\"));",
-      "Go": "// Mapa de corredores biológicos\ntype Solicitud struct { Detalle string }\n\nfunc Crear(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 26, Evidencia: true}, nil\n}\n\nresultado, err := Crear(Solicitud{Detalle: \"version: \\\"corredores-12\\\", fuentes: [\\\"bosque-v7\\\", \\\"rios-v3\\\"]\"})"
-    }
+      "TypeScript": "export function manifiestoProyeccion(entrada: Entrada): Resultado {\n  const fuentes = lista(entrada, \"fuentes\").map(String);\n  const huellas = entrada.huellas as Record<string, string> | undefined;\n  exigir(huellas && fuentes.every((fuente) => tiene(huellas, fuente) && /^[a-f0-9]{64}$/.test(huellas[fuente] ?? \"\")), \"PROVENANCE_INCOMPLETE\", \"Cada fuente requiere una huella SHA-256\");\n  return { version: texto(entrada, \"version\"), fuentes, huellas, responsable: texto(entrada, \"responsable\") };\n}"
+    },
+    "languagesVerified": [
+      {
+        "language": "TypeScript",
+        "source": "replication/examples/patterns-r4/src/patrones.ts",
+        "test": "replication/examples/patterns-r4/test/patrones.test.ts"
+      }
+    ]
   },
   {
     "id": 27,
     "nombre": "Partición analítica sin fuga",
     "escena": "Predicción de floración",
     "problema": "Observaciones futuras del mismo árbol aparecen en entrenamiento y validación.",
+    "problemaIngenuo": "Una partición aleatoria puede colocar revisiones de la misma entidad a ambos lados y exagerar la calidad del modelo.",
+    "solucion": "Particione primero por entidad y tiempo, luego por ámbito; congele reglas y audite intersecciones antes de calcular métricas.",
+    "contrato": "partirPor(entidad, tiempo, ámbito); exigir(intersección = ∅)",
     "participantes": [
       "ParticionFloracion",
       "Contrato de entrada",
@@ -505,18 +1424,61 @@
       "Evidencia"
     ],
     "resultado": "La partición respeta grupos y tiempo antes de calcular características.",
+    "costo": "Mida intersecciones, deriva temporal y rendimiento por ámbito. Se conecta con Conjunto reproducible y Característica versionada.",
+    "cuandoNoUsar": "No adopte Partición analítica sin fuga si el problema no fue observado o una alternativa más simple satisface el contrato.",
+    "pruebaPositiva": {
+      "entrada": {
+        "entrenamiento": [
+          {
+            "entidadId": "arbol-a"
+          }
+        ],
+        "evaluacion": [
+          {
+            "entidadId": "arbol-b"
+          }
+        ]
+      },
+      "esperado": {
+        "entrenamiento": 1,
+        "evaluacion": 1,
+        "fuga": false
+      }
+    },
+    "pruebaNegativa": {
+      "entrada": {
+        "entrenamiento": [
+          {
+            "entidadId": "arbol-a"
+          }
+        ],
+        "evaluacion": [
+          {
+            "entidadId": "arbol-a"
+          }
+        ]
+      },
+      "codigoError": "ANALYTICS_ENTITY_LEAKAGE"
+    },
     "code": {
-      "TypeScript": "// Predicción de floración\ntype Solicitud = Record<string, unknown>;\n\nclass ParticionFloracion {\n  dividir(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 27, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new ParticionFloracion().dividir({ grupo: \"arbolId\", corte: \"2025-12-31\", semilla: 73 });",
-      "Python": "# Predicción de floración\nclass ParticionFloracion:\n    def dividir(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 27, \"evidencia\": True, **solicitud}\n\nresultado = ParticionFloracion().dividir({\"detalle\": \"grupo: \\\"arbolId\\\", corte: \\\"2025-12-31\\\", semilla: 73\"})",
-      "Java": "// Predicción de floración\nrecord Solicitud(String detalle) {}\n\nfinal class ParticionFloracion {\n  Resultado dividir(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(27, true, solicitud);\n  }\n}\n\nvar resultado = new ParticionFloracion().dividir(new Solicitud(\"grupo: \\\"arbolId\\\", corte: \\\"2025-12-31\\\", semilla: 73\"));",
-      "Go": "// Predicción de floración\ntype Solicitud struct { Detalle string }\n\nfunc Dividir(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 27, Evidencia: true}, nil\n}\n\nresultado, err := Dividir(Solicitud{Detalle: \"grupo: \\\"arbolId\\\", corte: \\\"2025-12-31\\\", semilla: 73\"})"
-    }
+      "TypeScript": "export function particionSinFuga(entrada: Entrada): Resultado {\n  const entrenamiento = lista(entrada, \"entrenamiento\") as Entrada[];\n  const evaluacion = lista(entrada, \"evaluacion\") as Entrada[];\n  const trainIds = new Set(entrenamiento.map((item) => texto(item, \"entidadId\")));\n  exigir(evaluacion.every((item) => !trainIds.has(texto(item, \"entidadId\"))), \"ANALYTICS_ENTITY_LEAKAGE\", \"Una entidad cruza particiones\");\n  return { entrenamiento: entrenamiento.length, evaluacion: evaluacion.length, fuga: false };\n}"
+    },
+    "languagesVerified": [
+      {
+        "language": "TypeScript",
+        "source": "replication/examples/patterns-r4/src/patrones.ts",
+        "test": "replication/examples/patterns-r4/test/patrones.test.ts"
+      }
+    ]
   },
   {
     "id": 28,
     "nombre": "Abstención con evidencia",
     "escena": "Asistente identifica una especie en una foto borrosa",
     "problema": "El modelo podría inventar una respuesta segura sin evidencia suficiente.",
+    "problemaIngenuo": "Un sistema generativo puede completar vacíos con lenguaje plausible o citar fragmentos inexistentes.",
+    "solucion": "Defina umbrales, cobertura mínima, citas válidas y causas de abstención; la generación recibe únicamente evidencia autorizada.",
+    "contrato": "si evidenciaInsuficiente entonces abstener(causaSegura)",
     "participantes": [
       "IdentificadorEspecies",
       "Contrato de entrada",
@@ -524,18 +1486,55 @@
       "Evidencia"
     ],
     "resultado": "El asistente se abstiene, explica qué falta y conserva candidatos.",
+    "costo": "Mida precisión, cobertura, citas válidas, fugas y abstención apropiada. Se relaciona con Recuperación limitada por ámbito.",
+    "cuandoNoUsar": "No adopte Abstención con evidencia si el problema no fue observado o una alternativa más simple satisface el contrato.",
+    "pruebaPositiva": {
+      "entrada": {
+        "confianza": 0.91,
+        "minimo": 0.78,
+        "candidatos": [
+          "tangara",
+          "mielero"
+        ]
+      },
+      "esperado": {
+        "estado": "respuesta",
+        "especie": "tangara"
+      }
+    },
+    "pruebaNegativa": {
+      "entrada": {
+        "confianza": 0.41,
+        "minimo": 0.78,
+        "candidatos": [
+          "tangara",
+          "mielero"
+        ]
+      },
+      "esperado": {
+        "estado": "abstencion",
+        "causa": "EVIDENCIA_INSUFICIENTE"
+      }
+    },
     "code": {
-      "TypeScript": "// Asistente identifica una especie en una foto borrosa\ntype Solicitud = Record<string, unknown>;\n\nclass IdentificadorEspecies {\n  responder(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 28, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new IdentificadorEspecies().responder({ confianza: 0.41, minimo: 0.78, candidatos: [\"tangara\", \"mielero\"] });",
-      "Python": "# Asistente identifica una especie en una foto borrosa\nclass IdentificadorEspecies:\n    def responder(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 28, \"evidencia\": True, **solicitud}\n\nresultado = IdentificadorEspecies().responder({\"detalle\": \"confianza: 0.41, minimo: 0.78, candidatos: [\\\"tangara\\\", \\\"mielero\\\"]\"})",
-      "Java": "// Asistente identifica una especie en una foto borrosa\nrecord Solicitud(String detalle) {}\n\nfinal class IdentificadorEspecies {\n  Resultado responder(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(28, true, solicitud);\n  }\n}\n\nvar resultado = new IdentificadorEspecies().responder(new Solicitud(\"confianza: 0.41, minimo: 0.78, candidatos: [\\\"tangara\\\", \\\"mielero\\\"]\"));",
-      "Go": "// Asistente identifica una especie en una foto borrosa\ntype Solicitud struct { Detalle string }\n\nfunc Responder(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 28, Evidencia: true}, nil\n}\n\nresultado, err := Responder(Solicitud{Detalle: \"confianza: 0.41, minimo: 0.78, candidatos: [\\\"tangara\\\", \\\"mielero\\\"]\"})"
-    }
+      "TypeScript": "export function abstencionConEvidencia(entrada: Entrada): Resultado {\n  const confianza = numero(entrada, \"confianza\");\n  const minimo = numero(entrada, \"minimo\");\n  exigir(confianza >= 0 && confianza <= 1 && minimo >= 0 && minimo <= 1, 'CONFIDENCE_INVALID', 'Confianza y mínimo deben estar entre cero y uno');\n  const candidatos = lista(entrada, \"candidatos\").map(String);\n  return confianza < minimo\n    ? { estado: \"abstencion\", causa: \"EVIDENCIA_INSUFICIENTE\", candidatos }\n    : { estado: \"respuesta\", especie: candidatos[0], confianza };\n}"
+    },
+    "languagesVerified": [
+      {
+        "language": "TypeScript",
+        "source": "replication/examples/patterns-r4/src/patrones.ts",
+        "test": "replication/examples/patterns-r4/test/patrones.test.ts"
+      }
+    ]
   },
   {
     "id": 29,
     "nombre": "Presupuesto de derivados",
     "escena": "Cada equipo solicita su propio tablero",
     "problema": "Diez proyecciones similares multiplican escritura, costo y mantenimiento.",
+    "problemaIngenuo": "Cada proyección mejora una lectura local, pero añade escritura, almacenamiento, monitoreo y carga cognitiva.",
+    "solucion": "Toda propuesta declara beneficio, costo total, propietario, fecha de revisión y criterio de retiro antes de ser publicada.",
+    "contrato": "autorizarDerivado soloSi beneficio > costoTotal y tieneRetiro",
     "participantes": [
       "PresupuestoProyecciones",
       "Contrato de entrada",
@@ -543,18 +1542,46 @@
       "Evidencia"
     ],
     "resultado": "La copia solo se aprueba con propietario, beneficio y criterio de retiro.",
+    "costo": "Mida uso, costo por consulta, atraso e incidentes. Se conecta con Frontera lectura-escritura y Retiro de proyección.",
+    "cuandoNoUsar": "No adopte Presupuesto de derivados si el problema no fue observado o una alternativa más simple satisface el contrato.",
+    "pruebaPositiva": {
+      "entrada": {
+        "beneficioMensual": 18,
+        "costoMensual": 31,
+        "consumidores": 1
+      },
+      "esperado": {
+        "decision": "rechazar",
+        "margen": -13
+      }
+    },
+    "pruebaNegativa": {
+      "entrada": {
+        "beneficioMensual": 18,
+        "costoMensual": 31,
+        "consumidores": 0
+      },
+      "codigoError": "OWNER_OR_CONSUMER_REQUIRED"
+    },
     "code": {
-      "TypeScript": "// Cada equipo solicita su propio tablero\ntype Solicitud = Record<string, unknown>;\n\nclass PresupuestoProyecciones {\n  evaluar(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 29, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new PresupuestoProyecciones().evaluar({ beneficioMensual: 18, costoMensual: 31, consumidores: 1 });",
-      "Python": "# Cada equipo solicita su propio tablero\nclass PresupuestoProyecciones:\n    def evaluar(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 29, \"evidencia\": True, **solicitud}\n\nresultado = PresupuestoProyecciones().evaluar({\"detalle\": \"beneficioMensual: 18, costoMensual: 31, consumidores: 1\"})",
-      "Java": "// Cada equipo solicita su propio tablero\nrecord Solicitud(String detalle) {}\n\nfinal class PresupuestoProyecciones {\n  Resultado evaluar(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(29, true, solicitud);\n  }\n}\n\nvar resultado = new PresupuestoProyecciones().evaluar(new Solicitud(\"beneficioMensual: 18, costoMensual: 31, consumidores: 1\"));",
-      "Go": "// Cada equipo solicita su propio tablero\ntype Solicitud struct { Detalle string }\n\nfunc Evaluar(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 29, Evidencia: true}, nil\n}\n\nresultado, err := Evaluar(Solicitud{Detalle: \"beneficioMensual: 18, costoMensual: 31, consumidores: 1\"})"
-    }
+      "TypeScript": "export function presupuestoDerivados(entrada: Entrada): Resultado {\n  const beneficio = numero(entrada, \"beneficioMensual\");\n  const costo = numero(entrada, \"costoMensual\");\n  const consumidores = numero(entrada, \"consumidores\");\n  exigir(beneficio >= 0 && costo >= 0 && Number.isSafeInteger(consumidores), 'MEASUREMENTS_INVALID', 'Costos no negativos y consumidores enteros');\n  exigir(consumidores > 0, \"OWNER_OR_CONSUMER_REQUIRED\", \"Un derivado sin consumidores no se justifica\");\n  return { decision: beneficio > costo ? \"aprobar\" : \"rechazar\", margen: beneficio - costo };\n}"
+    },
+    "languagesVerified": [
+      {
+        "language": "TypeScript",
+        "source": "replication/examples/patterns-r4/src/patrones.ts",
+        "test": "replication/examples/patterns-r4/test/patrones.test.ts"
+      }
+    ]
   },
   {
     "id": 30,
     "nombre": "Auditoría narrativa reconstruible",
     "escena": "Explicar por qué se cerró una reserva",
     "problema": "Registros aislados no cuentan qué lluvia, regla y aprobación produjeron la decisión.",
+    "problemaIngenuo": "Los registros aislados muestran acciones, pero no siempre explican quién autorizó, qué versión se usó y qué consecuencia ocurrió.",
+    "solucion": "Componga una vista temporal desde eventos inmutables; mantenga enlaces al documento, revisión, ámbito, política y resultado, sin volverla autoridad.",
+    "contrato": "narrar(eventosOrdenados); exigirEnlace(documento, revisión, política)",
     "participantes": [
       "HistoriaCierreReserva",
       "Contrato de entrada",
@@ -562,11 +1589,54 @@
       "Evidencia"
     ],
     "resultado": "Una línea temporal enlaza eventos, revisiones, política, responsable y resultado.",
+    "costo": "Mida eventos sin enlace, secuencias imposibles y tiempo de explicación. Se conecta con Dato fechado, Cola de salida y Herramienta gobernada.",
+    "cuandoNoUsar": "No adopte Auditoría narrativa reconstruible si el problema no fue observado o una alternativa más simple satisface el contrato.",
+    "pruebaPositiva": {
+      "entrada": {
+        "eventos": [
+          {
+            "ocurridoEn": "2026-08-23T19:00:00Z",
+            "revision": 2,
+            "responsable": "guardaparque",
+            "accion": "aprobó cierre"
+          },
+          {
+            "ocurridoEn": "2026-08-23T18:00:00Z",
+            "revision": 1,
+            "responsable": "sensor",
+            "accion": "detectó lluvia"
+          }
+        ]
+      },
+      "esperado": {
+        "historia": [
+          "2026-08-23T18:00:00Z: detectó lluvia",
+          "2026-08-23T19:00:00Z: aprobó cierre"
+        ],
+        "completa": true
+      }
+    },
+    "pruebaNegativa": {
+      "entrada": {
+        "eventos": [
+          {
+            "ocurridoEn": "2026-08-23T18:00:00Z",
+            "revision": 1,
+            "accion": "detectó lluvia"
+          }
+        ]
+      },
+      "codigoError": "AUDIT_EVENT_INCOMPLETE"
+    },
     "code": {
-      "TypeScript": "// Explicar por qué se cerró una reserva\ntype Solicitud = Record<string, unknown>;\n\nclass HistoriaCierreReserva {\n  reconstruir(solicitud: Solicitud) {\n    if (!solicitud) throw new Error(\"Solicitud requerida\");\n    return { patron: 30, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new HistoriaCierreReserva().reconstruir({ reservaId: \"la-amistad\", desde: \"2026-08-23T18:00:00Z\" });",
-      "Python": "# Explicar por qué se cerró una reserva\nclass HistoriaCierreReserva:\n    def reconstruir(self, solicitud):\n        if not solicitud:\n            raise ValueError(\"Solicitud requerida\")\n        return {\"patron\": 30, \"evidencia\": True, **solicitud}\n\nresultado = HistoriaCierreReserva().reconstruir({\"detalle\": \"reservaId: \\\"la-amistad\\\", desde: \\\"2026-08-23T18:00:00Z\\\"\"})",
-      "Java": "// Explicar por qué se cerró una reserva\nrecord Solicitud(String detalle) {}\n\nfinal class HistoriaCierreReserva {\n  Resultado reconstruir(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(30, true, solicitud);\n  }\n}\n\nvar resultado = new HistoriaCierreReserva().reconstruir(new Solicitud(\"reservaId: \\\"la-amistad\\\", desde: \\\"2026-08-23T18:00:00Z\\\"\"));",
-      "Go": "// Explicar por qué se cerró una reserva\ntype Solicitud struct { Detalle string }\n\nfunc Reconstruir(s Solicitud) (Resultado, error) {\n  if s.Detalle == \"\" { return Resultado{}, errors.New(\"solicitud requerida\") }\n  return Resultado{Patron: 30, Evidencia: true}, nil\n}\n\nresultado, err := Reconstruir(Solicitud{Detalle: \"reservaId: \\\"la-amistad\\\", desde: \\\"2026-08-23T18:00:00Z\\\"\"})"
-    }
+      "TypeScript": "export function auditoriaNarrativa(entrada: Entrada): Resultado {\n  const eventos = lista(entrada, \"eventos\") as Entrada[];\n  try {\n    for (const evento of eventos) {\n      fechaIso(texto(evento, 'ocurridoEn')); texto(evento, 'responsable'); texto(evento, 'accion');\n      exigir(Number.isSafeInteger(numero(evento, 'revision')) && Number(evento.revision) > 0, 'AUDIT_EVENT_INCOMPLETE', 'Revisión inválida');\n    }\n  } catch { throw new ErrorPatron('AUDIT_EVENT_INCOMPLETE', 'Fecha, revisión, responsable y acción propios requeridos'); }\n  const ordenados = [...eventos].sort((a, b) => Date.parse(texto(a, \"ocurridoEn\")) - Date.parse(texto(b, \"ocurridoEn\")));\n  exigir(ordenados.every((evento) => evento.revision !== undefined && evento.responsable), \"AUDIT_EVENT_INCOMPLETE\", \"Un evento no explica revisión y responsable\");\n  return { historia: ordenados.map((evento) => `${evento.ocurridoEn}: ${evento.accion}`), completa: true };\n}"
+    },
+    "languagesVerified": [
+      {
+        "language": "TypeScript",
+        "source": "replication/examples/patterns-r4/src/patrones.ts",
+        "test": "replication/examples/patterns-r4/test/patrones.test.ts"
+      }
+    ]
   }
 ]

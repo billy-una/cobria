@@ -1,0 +1,48 @@
+{
+  "schemaVersion": "1.0.0",
+  "scope": "Siete PDF científicos, normativos y pedagógicos de la candidata local; derivados auxiliares no sustituyen estas ediciones.",
+  "products": [
+    {
+      "id": "articulo",
+      "pdf": "output/pdf/COBRIA-articulo-cientifico-actualizado.pdf",
+      "source": "articulo-cobria.tex",
+      "html": "editorial/ep9/generated/articulo.html"
+    },
+    {
+      "id": "maestro",
+      "pdf": "output/pdf/COBRIA-documento-maestro-ecosistema.pdf",
+      "source": "main.tex",
+      "html": "editorial/ep9/generated/maestro.html"
+    },
+    {
+      "id": "ciega",
+      "pdf": "output/pdf/COBRIA-articulo-revision-ciega.pdf",
+      "source": "review/blind-article.tex",
+      "html": "editorial/ep9/generated/ciega.html"
+    },
+    {
+      "id": "especificacion",
+      "pdf": "output/pdf/COBRIA-especificacion-ecosistema-1.0.pdf",
+      "source": "specification/COBRIA-ECOSISTEMA-1.0.tex",
+      "html": "editorial/ep9/generated/especificacion.html"
+    },
+    {
+      "id": "libro",
+      "pdf": "output/pdf/COBRIA-ecosistema-manual-completo.pdf",
+      "source": "libro-cobria/build-book.mjs",
+      "html": "libro-cobria/index.html"
+    },
+    {
+      "id": "cuaderno",
+      "pdf": "output/pdf/COBRIA-cuaderno-de-trabajo.pdf",
+      "source": "libro-cobria/build-book.mjs",
+      "html": "libro-cobria/cuaderno.html"
+    },
+    {
+      "id": "anexo",
+      "pdf": "output/pdf/COBRIA-anexo-tecnico.pdf",
+      "source": "libro-cobria/build-book.mjs",
+      "html": "libro-cobria/anexo-tecnico.html"
+    }
+  ]
+}

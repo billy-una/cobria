@@ -1,0 +1,24 @@
+\chapter{Antecedente local con motores embebidos}
+
+Este capítulo conserva separadamente las mediciones del arnés embebido inicial.
+No son resultados PC3, no se agregan a las 270 corridas R7 y no acreditan controles
+incorporados después. Su fuente es el conjunto
+\path{replication/results/nosql-core-1.0}. Las cantidades siguientes se conservan
+como antecedente de su configuración, no como comparación universal de motores.
+
+La primera réplica local se ejecutó sobre PouchDB y LokiJS, con escalas de 100,
+1\,000 y 5\,000 documentos y treinta corridas por celda: 180 corridas. El informe
+histórico registró aprobación de sus indicadores P1, P2, R1, S1 y A1, con dos
+escrituras lógicas por cambio proyectado y rechazo de ámbito ausente en ese arnés.
+La coincidencia de etiquetas no demuestra equivalencia con los oráculos PC2.
+
+En PouchDB las medianas de lectura canónica fueron 1,186; 13,589 y 69,291 ms, frente a
+0,440; 4,719 y 23,131 ms para la proyección. Las reconstrucciones medianas requirieron
+8,376; 89,301 y 500,070 ms. En LokiJS las lecturas canónicas fueron 0,145; 1,263 y
+7,026 ms, frente a 0,052; 0,409 y 2,220 ms; R1 requirió 0,663; 6,452 y 46,011 ms.
+
+Son tiempos del arnés local. No representan redes, regiones, concurrencia administrada,
+cuotas, facturación, transacciones entre documentos ni validación de las hipótesis
+actuales en toda su extensión. El cuerpo de resultados distingue el conjunto R7,
+las pruebas PC2 y la repetición PC3 pendiente sin utilizar este antecedente para
+completar evidencia ausente.

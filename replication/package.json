@@ -2,11 +2,23 @@
   "name": "cobria-replication",
   "version": "1.2.0",
   "private": true,
+  "license": "Apache-2.0",
   "type": "module",
+  "files": [
+    "src/",
+    "resources/",
+    "templates/",
+    "README.md",
+    "LICENSE",
+    "DATA-LICENSE",
+    "CITATION.cff",
+    "SBOM.cdx.json"
+  ],
   "bin": {
     "cobria": "src/cli.mjs"
   },
   "scripts": {
+    "prepack": "node scripts/prepare-toolkit-resources.mjs",
     "test": "node --test tests/*.test.mjs",
     "pilot": "node scripts/run-experiments.mjs --mode pilot",
     "experiment": "node scripts/run-experiments.mjs --mode full",
@@ -33,7 +45,10 @@
     "editorial:check": "node scripts/sync-editorial.mjs --check",
     "release:phase18": "node scripts/build-phase18-package.mjs",
     "traceability": "node scripts/generate-traceability.mjs",
-    "statistics:core13": "python3 analysis/statistics_core13_confirmatory.py"
+    "statistics:core13": "python3 analysis/statistics_core13_confirmatory.py",
+    "confirmatory:r7": "node scripts/run-r7-confirmatory.mjs",
+    "environment:r7": "node scripts/capture-r7-environment.mjs",
+    "statistics:r7": "python3 analysis/statistics_r7.py"
   },
   "dependencies": {
     "lokijs": "1.5.12",
@@ -42,5 +57,9 @@
   },
   "overrides": {
     "uuid": "11.1.1"
+  },
+  "devDependencies": {
+    "@types/node": "22.19.19",
+    "typescript": "5.9.3"
   }
 }

@@ -2,7 +2,7 @@
 
 ## Versiones cubiertas
 
-La candidata `ecosistema-1.0.0-rc1` recibe correcciones de seguridad mientras se evalúa.
+La candidata `ecosistema-1.0.0-rc2` recibe correcciones de seguridad mientras se evalúa.
 No existe todavía una versión estable del ecosistema. Los borradores y materiales
 históricos no reciben soporte operativo.
 
@@ -27,4 +27,3 @@ sensibles.
 COBRIA ofrece contratos y material pedagógico; no garantiza seguridad, cumplimiento legal
 ni idoneidad para producción. Cada adopción debe realizar su propio modelado de amenazas,
 gestión de dependencias, pruebas negativas y revisión profesional.
-

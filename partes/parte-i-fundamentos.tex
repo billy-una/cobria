@@ -26,9 +26,9 @@ La dificultad aumenta en aplicaciones \emph{multiinquilino}, es decir, aquellas 
 que una misma plataforma sirve a varias organizaciones o contextos lógicos. La
 consolidación puede reducir costos, pero introduce requisitos estrictos de aislamiento,
 configuración, rendimiento y recuperación. La literatura ha mostrado que no existe un
-único diseño físico que sea óptimo para todos los organizaciones y cargas; las alternativas
+único diseño físico que sea óptimo para todas las organizaciones y cargas; las alternativas
 intercambian escalabilidad, espacio, flexibilidad y complejidad operativa
-\parencite{aulbach2009flexibleschemas,yaish2014adaptiveschema,rico2016multitarget}.
+\parencite{aulbach2009flexibleschemas,ni2014adaptiveschema,rico2016multitarget}.
 
 Al mismo tiempo, los datos operacionales han dejado de ser únicamente un registro del
 pasado. Se utilizan para detectar anomalías, descubrir secuencias, construir modelos
@@ -230,7 +230,7 @@ JSON que:
   tarea de mantenimiento ocasional;
   \item conecte el modelo semántico y la representación física compacta mediante un
   mapeo versionado y reversible;
-  \item incorpore el organización en identidad, rutas, consultas, autorización y pruebas;
+  \item incorpore la organización en identidad, rutas, consultas, autorización y pruebas;
   \item incluya proyecciones operacionales y analíticas bajo una taxonomía común;
   \item mida simultáneamente beneficios de lectura y amplificaciones de escritura y
   almacenamiento;
@@ -245,6 +245,28 @@ no afirmará que COBRIA sustituye todas las alternativas documentales ni que su
 complejidad sea preferible para cualquier problema.
 
 \section{Síntesis ampliada de trabajos relacionados}
+
+\COBRIAMetodoLiteratura
+
+La comparación se realiza por mecanismos y límites, no por ausencia de un nombre
+idéntico. PROV-DM distingue entidades, actividades, agentes y derivaciones
+\parencite{w3c2013prov}; COBRIA no declara conformidad formal con esa recomendación.
+La inmutabilidad conserva información para construir representaciones y razonar sobre
+cambios \parencite{helland2015immutability}. Ninguno de estos antecedentes demuestra
+por sí solo eficacia de la composición COBRIA.
+
+Los experimentos de esquemas SaaS de Aulbach y Ni se emplean como antecedentes de
+mapeo y costos, no como pruebas de una implementación documental COBRIA
+\parencite{aulbach2009flexibleschemas,ni2014adaptiveschema}. Las versiones arXiv de
+evolución NoSQL y almacenes de características se identifican explícitamente, sin
+atribuirles arbitraje por el hecho de estar disponibles en ese repositorio.
+
+Para analítica, la fuga temporal o entre entidades puede producir estimaciones
+optimistas \parencite{kapoor2023leakage}. Registrar cortes y procedencia es un control
+que debe comprobarse; A1 no estima calidad predictiva ni generativa. En operación,
+las APIs de actualización y alias aportan capacidades diferentes
+\parencite{mongodbAtomicity,apacheCouchDocumentApi,opensearch32Alias}; el adaptador
+debe demostrar las precondiciones exigidas, no deducirlas de la palabra ``atómico''.
 
 La procedencia de datos antecede a COBRIA: la literatura distingue el origen de un
 resultado y las partes de la fuente responsables de él \parencite{buneman2001provenance}.
@@ -319,8 +341,8 @@ NoSQL.
   \item Examinar la integración segura de modelos y agentes de IA mediante casos de
   uso autorizados, evidencia, consentimiento, auditoría y retroalimentación humana.
 
-  \item Validar la aplicabilidad del artefacto en dos casos de estudio anónimos de
-  diferente escala y naturaleza operacional.
+  \item Caracterizar la aplicabilidad propuesta en tres perfiles anónimos con distinta
+  profundidad de observación, sin presentar esa inspección como validación externa.
 
   \item Identificar límites, antipatrones y condiciones bajo las cuales COBRIA resultaría
   innecesaria o excesivamente compleja.
@@ -366,6 +388,11 @@ gobernanza de IA; y RQ10 sintetizará resultados negativos y costos de adopción
 
 \section{Hipótesis}
 
+H1--H9 conservan el programa exploratorio inicial. Describen objetivos refutables,
+no nueve contrastes confirmatorios ya ejecutados. La evaluación documental usa
+HN1--HN5 para organizar los criterios actuales; el capítulo de resultados distingue
+qué examinó R7, qué comprueban las pruebas PC2 y qué sigue pendiente en PC3.
+
 \begin{longtable}{>{\bfseries}p{1.6cm}p{5.2cm}p{7.1cm}}
 \caption{Hipótesis y evidencia prevista.}\label{tab:hipotesis}\\
 \toprule
@@ -391,13 +418,13 @@ escrituras y memoria para $\Delta N$ frente a $N$. \\
 H5 & La definición compartida de metadatos reduce discrepancias entre modelo lógico,
 representación física, validación, reglas e índices. & Defectos detectados, artefactos
 modificados manualmente, tiempo de evolución y cobertura de contrato. \\
-H6 & La incorporación obligatoria del organización en rutas, consultas y autorización reduce
+H6 & La incorporación obligatoria dla organización en rutas, consultas y autorización reduce
 la superficie de exposición cruzada. & Pruebas negativas, consultas fuera de ámbito,
 registros innecesarios recuperados y violaciones detectadas. \\
 H7 & Las proyecciones analíticas versionadas mejoran la reproducibilidad y el linaje de
 conjuntos de datos frente a exportaciones ad hoc. & Tiempo de preparación, repetibilidad,
 porcentaje de campos con procedencia y diferencias entre ejecuciones. \\
-H8 & COBRIA puede aplicarse a los dos casos anónimos sin cambiar sus principios
+H8 & COBRIA puede aplicarse a los dos casos originales sin cambiar sus principios
 centrales, aunque requiera proyecciones y políticas diferentes. & Correspondencia de
 componentes, adaptaciones necesarias y resultados por caso. \\
 H9 & El beneficio neto disminuye cuando una entidad tiene pocos registros, pocas
@@ -440,9 +467,10 @@ de conjuntos de datos y verificación de linaje.
 
 \subsection{Contribución empírica}
 
-Un conjunto de experimentos sobre dos casos anónimos que mida tanto beneficios como
-costos. Se publicarán configuraciones y datos sintéticos suficientes para permitir la
-replicación sin revelar información privada.
+La evidencia empírica utiliza corpus sintéticos y configuraciones explícitas; no
+experimenta sobre datos operacionales de los casos. Se distinguen mediciones
+históricas de controles funcionales posteriores. Los estudios humanos y las nuevas
+mediciones PC3 permanecen abiertos.
 
 \subsection{Contribución práctica}
 
@@ -452,10 +480,11 @@ organización documental.
 
 \section{Casos de estudio y neutralidad del análisis}
 
-La investigación se apoya en dos implementaciones existentes que comparten una familia
-de decisiones arquitectónicas, pero difieren en dominio, escala y comportamiento. Para
-evitar que el estudio se convierta en documentación de productos particulares, se
-adoptan descripciones neutrales.
+\COBRIAPerfilesCientificos
+La tabla siguiente caracteriza únicamente los dos inventarios originales. El perfil
+comercial N3 procede de una observación complementaria posterior y no recibe por ello
+los mismos conteos o el mismo nivel de inspección. Se adoptan descripciones neutrales
+para no convertir el estudio en documentación de productos particulares.
 
 \begin{table}[H]
 \centering
@@ -499,7 +528,7 @@ El estudio incluye:
   \item complejidad computacional y mediciones de rendimiento;
   \item proyecciones analíticas, series temporales, características y linaje;
   \item integración gobernada de modelos y agentes de IA;
-  \item dos casos de estudio anonimizados y una implementación neutral de referencia.
+  \item tres perfiles anonimizados con alcance declarado y una implementación neutral.
 \end{itemize}
 
 \section{Delimitaciones}
@@ -563,7 +592,7 @@ canónica de negocio mientras no pase por el caso de uso y las confirmaciones re
 
 \section{Organización del documento maestro}
 
-Después de esta introducción, el documento se organizará en siete bloques:
+El desarrollo se organiza en ocho bloques principales y antecedentes segregados:
 
 \begin{enumerate}[leftmargin=*]
   \item \textbf{Fundamentos y literatura:} conceptos necesarios y comparación con
@@ -575,18 +604,22 @@ Después de esta introducción, el documento se organizará en siete bloques:
   \item \textbf{Analítica e IA:} minería, Almacén de características, multimodalidad, RAG, agentes y
   gobernanza.
   \item \textbf{Implementación y casos:} implementación neutral y caracterización
-  anónima de los dos sistemas.
+  anónima de los inventarios originales y del perfil complementario.
   \item \textbf{Evaluación:} protocolo, resultados, análisis estadístico, discusión y
   amenazas a la validez.
   \item \textbf{Síntesis:} guía de adopción, conclusiones y líneas futuras.
+  \item \textbf{Réplica y operación:} procedimientos y requisitos de ejecución.
 \end{enumerate}
+
+Los resultados embebidos iniciales y el archivo metodológico se conservan después
+del desarrollo principal, identificados como antecedentes y no como protocolo vigente.
 
 La estructura seguirá la lógica de la ciencia del diseño: el problema conduce a un
 artefacto; el artefacto se formaliza e implementa; y su utilidad se juzga mediante
 evaluación explícita, no por afirmación del autor \parencite{hevner2004designscience,
 peffers2007dsrm}.
 
-\section{Comparación sistemática con arquitecturas relacionadas}
+\section{Comparación temática con arquitecturas relacionadas}
 
 La revisión ampliada distingue coincidencia de mecanismos y coincidencia de objetivos.
 CQRS separa modelos de lectura y escritura, pero no obliga por sí mismo a declarar
@@ -605,24 +638,7 @@ buneman2001provenance,armbrust2021lakehouse}. COBRIA trata las semánticas parti
 de persistencia, aislamiento e índices como capacidades explícitas de cada adaptador
 NoSQL, no como supuestos universales.
 
-\begin{table}[H]
-\centering
-\caption{Comparación entre COBRIA y enfoques relacionados.}
-\label{tab:comparacion-literatura-ampliada}
-\small
-\begin{tabularx}{\textwidth}{p{2.7cm}p{2.2cm}p{2.1cm}X}
-\toprule
-Enfoque & Autoridad & Reconstrucción & Gobierno y diferencia principal \\
-\midrule
-CQRS & Parcial & Parcial & Separa lectura y escritura; ámbito y linaje no son inherentes.\\
-Vista materializada & Externa & Sí & Optimiza consultas; el ámbito depende del motor y del diseño.\\
-Abastecimiento por eventos & Eventos & Sí & El registro de eventos es autoridad y aporta historia.\\
-Almacén de características & Fuentes analíticas & Parcial & Gobierna variables de modelos y su procedencia.\\
-Arquitectura tipo \emph{lakehouse} & Archivos o tablas & Parcial & Unifica almacenamiento y procesamiento analítico.\\
-COBRIA & Declarada & Obligatoria & Exige ámbito, linaje y gobierno desde operación hasta IA.\\
-\bottomrule
-\end{tabularx}
-\end{table}
+\input{editorial/ep7/comparison.tex}
 
 La matriz no establece superioridad. Muestra que la contribución propuesta reside en
 hacer simultáneamente verificables autoridad, ámbito, reconstrucción, costo y continuidad

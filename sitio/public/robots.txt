@@ -1,8 +1,10 @@
 User-agent: *
 Allow: /
+Disallow: /archivo/
 
 User-agent: OAI-SearchBot
 Allow: /
+Disallow: /archivo/
 
 User-agent: Bingbot
 Allow: /

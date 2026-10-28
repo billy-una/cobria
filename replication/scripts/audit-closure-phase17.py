@@ -14,6 +14,8 @@ REPORT_DIR = ROOT / "output" / "review" / "ecosistema-1.0.0-rc1"
 REPORT_DIR.mkdir(parents=True, exist_ok=True)
 checks = []
 findings = []
+warnings = []
+initial_status = subprocess.check_output(["git", "status", "--porcelain"], cwd=ROOT, text=True).strip()
 
 
 def execute(identifier: str, command: list[str], cwd: Path = ROOT) -> None:
@@ -73,10 +75,19 @@ with TemporaryDirectory() as first, TemporaryDirectory() as second:
         if not same:
             findings.append({"severity": "critical", "check": "double-build-equivalence", "detail": "Las candidatas difieren"})
 
-dirty = subprocess.check_output(["git", "status", "--porcelain"], cwd=ROOT, text=True).strip()
-checks.append({"id": "clean-tree", "status": "passed" if not dirty else "failed", "changedLines": len(dirty.splitlines()) if dirty else 0})
-if dirty:
-    findings.append({"severity": "critical", "check": "clean-tree", "detail": "El árbol cambió durante la auditoría"})
+final_status = subprocess.check_output(["git", "status", "--porcelain"], cwd=ROOT, text=True).strip()
+stable_tree = final_status == initial_status
+checks.append({"id": "tree-stability", "status": "passed" if stable_tree else "failed"})
+if not stable_tree:
+    findings.append({"severity": "critical", "check": "tree-stability", "detail": "La auditoría cambió el árbol de trabajo"})
+clean_tree = not final_status
+checks.append({"id": "clean-tree", "status": "passed" if clean_tree else "warning", "changedLines": len(final_status.splitlines()) if final_status else 0})
+if not clean_tree:
+    detail = "La candidata debe auditarse desde un checkout limpio antes de publicarse."
+    if os.environ.get("CI"):
+        findings.append({"severity": "critical", "check": "clean-tree", "detail": detail})
+    else:
+        warnings.append({"severity": "warning", "check": "clean-tree", "detail": detail})
 
 pending = [
     "lectura editorial independiente por una persona real",
@@ -87,7 +98,7 @@ pending = [
 ]
 report = {
     "schemaVersion": "1.0.0", "release": "ecosistema-1.0.0-rc1",
-    "proposalIndependent": True, "automatedChecks": checks, "findings": findings,
+    "proposalIndependent": True, "automatedChecks": checks, "findings": findings, "warnings": warnings,
     "criticalOpen": sum(1 for item in findings if item["severity"] == "critical"),
     "humanValidationPending": pending,
     "decision": "automatic-gates-passed-human-review-pending" if not findings else "blocked-by-automatic-findings",

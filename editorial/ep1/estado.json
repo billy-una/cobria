@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "1.0.0",
+  "phase": "EP1",
+  "target": "candidata-educativa-y-preprint",
+  "status": "preparada-localmente-pendiente-contraste-publico",
+  "published": false,
+  "deploymentAuthorized": false,
+  "stable": false,
+  "coreChanged": false,
+  "routePolicy": "sitio/worker/routing-policy.json",
+  "localHttpEvidence": "output/review/ep1/local-1792440849319/RESULTADO.json",
+  "localHttpChecksPassed": 47,
+  "retainedFailedAttempt": "output/review/ep1/local-1792440451894/RESULTADO.json",
+  "publicComparisonRequired": {
+    "anonymousAccess": true,
+    "manifestStatus": 200,
+    "canonicalPdfCount": 6,
+    "compare": ["sha256", "bytes", "mediaType", "securityHeaders"],
+    "aliasesStatus": 308,
+    "approvedDeploymentReceiptRequired": true
+  },
+  "limitations": [
+    "La versión guardada 18 no identifica el despliegue activo ni una reversión segura.",
+    "El ensayo local no sustituye un clon limpio, CI remota ni réplica externa.",
+    "La copia web recomprime ilustraciones con pérdida; no es certificación PDF/UA.",
+    "Las incidencias públicas de EP0 siguen pendientes de contraste tras publicación autorizada."
+  ]
+}

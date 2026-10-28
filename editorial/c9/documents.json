@@ -1,0 +1,12 @@
+{
+  "version": "0.1.0",
+  "owner": "Billy Jak Cordero Porras",
+  "status": "propuesta_local",
+  "reviewWhen": "Cambie el contrato de Toolkit o el procedimiento C8.",
+  "documents": [
+    {"kind":"tutorial","path":"manuales/34-documentacion-y-herramientas-practicas.md","sections":["Tutorial con resultados observables","Errores que una persona y una IA pueden interpretar"],"test":"replication/examples/documentacion-c9/recorrido.mjs"},
+    {"kind":"reference","path":"manuales/21-toolkit.md","sections":["Comandos","Seguridad de generación"],"test":"replication/tests/c9-toolkit.test.mjs"},
+    {"kind":"decision","path":"manuales/decisiones/ADR-C8-AGREGADO-LOCAL.md","sections":["Contexto","Decisión","Alternativas","Consecuencias","Evidencia y revisión"],"test":"replication/examples/integral-c8/test/integracion.test.mjs"},
+    {"kind":"runbook","path":"manuales/operacion/RECUPERACION-C8.md","sections":["Síntoma e impacto","Precondiciones y permisos","Diagnóstico y mitigación","Recuperación ensayada","Verificación","Escalamiento y evidencia"],"test":"replication/examples/integral-c8/verificar.mjs"}
+  ]
+}

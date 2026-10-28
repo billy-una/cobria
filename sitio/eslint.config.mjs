@@ -23,6 +23,13 @@ const eslintConfig = defineConfig([
   jsxA11y.flatConfigs.recommended,
   next.configs["core-web-vitals"],
   {
+    files: ["vendor/glob-compat/index.cjs"],
+    rules: {
+      // Interfaz CJS exigida por los consumidores; no se desactiva la regla global.
+      "@typescript-eslint/no-require-imports": ["error", { allow: ["^tinyglobby$", "^node:path$"] }],
+    },
+  },
+  {
     languageOptions: {
       globals: {
         ...globals.browser,

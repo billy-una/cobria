@@ -1,0 +1,31 @@
+import assert from 'node:assert/strict';
+import { mkdtemp } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import path from 'node:path';
+import { abrirIntegral } from './composition.mjs';
+import {loadBrowserRuntime} from '../../scripts/browser-runtime.mjs';
+const {chromium}=loadBrowserRuntime();
+const directory=await mkdtemp(path.join(tmpdir(),'cobria-c8-browser-'));
+const token='sesion_demo_browser_c8_123456';
+const sesiones=new Map([[token,{actorId:'browser-demo',permisos:['observaciones:leer','observaciones:escribir','observaciones:respaldar'],ambitos:['reserva-sur'],expiraEn:Date.now()+600000}]]);
+let app=await abrirIntegral({directory:path.join(directory,'motor'),sesiones});
+const browser=await chromium.launch({headless:true});let checks=0;
+try{
+  const page=await browser.newPage({viewport:{width:390,height:844}}),errores=[];page.on('pageerror',e=>errores.push(e.message));
+  await page.goto(app.url);await page.getByLabel('Sesión DEMO temporal de la terminal').fill(token);
+  await page.getByRole('button',{name:'Guardar en disco'}).click();await page.getByRole('status').filter({hasText:'confirmada en disco'}).waitFor();checks++;
+  await page.getByRole('button',{name:'Ver proyección'}).click();await page.locator('#resultado').filter({hasText:'revisionFuente'}).waitFor();assert.match(await page.locator('#resultado').innerText(),/"colibri": 3/);checks++;
+  await page.getByRole('button',{name:'Buscar con procedencia'}).click();await page.locator('#resultado').filter({hasText:'versionRecuperador'}).waitFor();checks++;
+  await page.getByRole('button',{name:'Preparar copia verificable'}).click();await page.locator('#resultado').filter({hasText:'operaciones'}).waitFor();checks++;
+  await app.cerrar();app=null;app=await abrirIntegral({directory:path.join(directory,'motor'),sesiones});
+  await page.goto(app.url);await page.getByLabel('Sesión DEMO temporal de la terminal').fill(token);
+  await page.getByRole('button',{name:'Consultar documentos'}).click();await page.locator('#resultado').filter({hasText:'obs-c8-01'}).waitFor();checks++;
+  await page.getByLabel('Ámbito autorizado').fill('reserva-norte');await page.getByRole('button',{name:'Ver proyección'}).click();await page.getByRole('status').filter({hasText:'No tiene permiso'}).waitFor();checks++;
+  assert.equal(await page.locator('#estado').evaluate(el=>el===document.activeElement),true);checks++;
+  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);checks++;
+  assert.deepEqual(await page.evaluate(()=>({cookies:document.cookie,local:localStorage.length,session:sessionStorage.length})),{cookies:'',local:0,session:0});checks++;
+  await page.getByLabel('Sesión DEMO temporal de la terminal').fill('');await page.getByLabel('Ámbito autorizado').fill('reserva-sur');
+  if(process.env.COBRIA_C8_SCREENSHOT)await page.screenshot({path:process.env.COBRIA_C8_SCREENSHOT,fullPage:true});
+  assert.deepEqual(errores,[]);checks++;
+  console.log(JSON.stringify({kind:'navegador-con-motor-real-local',directory,checksPassed:checks,reopenVerified:true,manualAccessibilityReview:false,published:false},null,2));
+}finally{await browser.close();if(app)await app.cerrar();}

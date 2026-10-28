@@ -10,8 +10,11 @@ import { AuditoriaMemoria } from './infrastructure/security/auditoria-memoria.mj
 import { ListarObservacionesController } from './presentation/listar-observaciones-controller.mjs';
 import { RecuperarEvidencia } from './application/ai/recuperar-evidencia.mjs';
 
-export function crearAplicacion() {
-  const repositorio = new RepositorioMemoria();
+export function crearAplicacion({ repositorio = new RepositorioMemoria() } = {}) {
+  // Comprueba la forma del puerto, no su corrección semántica ni su seguridad.
+  for (const metodo of ['guardar', 'listar', 'buscarOperacion', 'registrarOperacion']) {
+    if (typeof repositorio?.[metodo] !== 'function') throw new TypeError(`Repositorio sin método ${metodo}`);
+  }
   const proyecciones = new AlmacenProyeccionesMemoria();
   const auditoria = new AuditoriaMemoria();
   const autorizar = crearAutorizador({ auditar: (evento) => auditoria.registrar(evento) });

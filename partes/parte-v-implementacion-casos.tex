@@ -1,7 +1,8 @@
 \chapter{Método de análisis de las implementaciones}
 
-Esta parte estudia cómo los principios de COBRIA aparecen en dos sistemas existentes sin
-convertir el manuscrito en documentación de productos. Los casos se mantienen anonimizados
+Esta parte conserva el análisis original de dos sistemas y una observación
+complementaria posterior, sin convertir el manuscrito en documentación de productos.
+Los dos inventarios detallados se mantienen anonimizados
 como Sistema A y Sistema B. El primero está orientado a eventos, secuencias, contenido
 multimodal y componentes de inteligencia; el segundo es una plataforma empresarial
 multiinquilino con un dominio amplio, operaciones críticas y una cantidad elevada de
@@ -12,6 +13,17 @@ El análisis se realizó sobre una instantánea del código disponible el 20 de 
 usuarios, transacciones, cobertura funcional ni calidad. Los nombres de clases,
 organizaciones, personas, rutas físicas, credenciales y reglas comerciales particulares
 no se publican.
+
+\section{Correspondencia de perfiles y profundidad}
+
+\COBRIAPerfilesCientificos
+A corresponde a N1, eventos y multimedia; B corresponde a N2, operación hotelera
+multiinquilino. N3 corresponde a operación comercial. Su observación complementaria
+del 8 de octubre de 2026 conserva identidad del corte y huellas de archivos en un
+registro interno; no redistribuye fuentes privadas ni rehace los inventarios de agosto.
+Incluye referencias a organización de capas, autorización en funciones, caché y
+proyecciones operacionales. La presencia de esos archivos es evidencia estructural,
+no ejecución de sus flujos en producción ni conformidad científica de todo el sistema.
 
 \section{Preguntas del estudio de implementación}
 
@@ -91,7 +103,7 @@ depender de los dominios originales ni de un proveedor. Puede ejecutarse con
 
 \section{Comportamientos comprobados de la aplicación pedagógica}
 
-El ejemplo contiene seis pruebas automatizadas: registro de un documento canónico
+Las pruebas de la aplicación cubren, entre otros casos, el registro de un documento canónico
 válido; rechazo de un ámbito ajeno antes de acceder al repositorio; repetición
 idempotente sin duplicación; rechazo de una clave reutilizada con otra entrada; rechazo
 de revisiones obsoletas; y equivalencia después de retirar y reconstruir la proyección.
@@ -166,7 +178,9 @@ El Repositorio ofrece operaciones en lenguaje del dominio y exige ámbito en tod
 
 \begin{verbatim}
 class EntityMapper {
-  toDomain(id, ámbito, crudo) { /* mapeo, valores predeterminados y versión */ }
+  toDomain(id, ámbito, crudo) {
+    /* mapeo, valores predeterminados y versión */
+  }
   toRaw(entity)            { /* representación persistible */ }
 }
 
@@ -331,7 +345,7 @@ produce varias escrituras físicas para acelerar lecturas.
 \end{figure}
 
 La ruta principal se aproxima al canónico y los índices a proyecciones, pero esa
-clasificación debe verificarse por entidad. Un carga útil duplicado puede contener campos
+clasificación debe verificarse por entidad. Una carga útil duplicada puede contener campos
 que otro módulo modifica directamente; en tal caso existe autoridad compartida y no una
 proyección COBRIA válida.
 
@@ -508,7 +522,7 @@ crudo y objeto mediante el modelo.
 Esta base reduce duplicación y ofrece una API uniforme. Sin embargo, el argumento de
 ruta debe incorporar ámbito de forma no opcional. Una ruta base global o una clave de
 caché basada solo en ID podría romper aislamiento aunque el resto de la aplicación
-conozca el organización.
+conozca la organización.
 
 \section{Metadatos, relaciones y catálogos}
 

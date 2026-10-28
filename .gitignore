@@ -1,4 +1,6 @@
 build/*
+output/tools/
+__pycache__/
 !build/.gitkeep
 tmp/
 output/**/build*/
@@ -7,13 +9,18 @@ output/release/**
 output/review/**
 libro-cobria/output/*.pdf
 replication/node_modules/
+replication/qa/node_modules/
+replication/resources/
+libro-cobria/node_modules/
 sitio/node_modules/
 sitio/.next/
 sitio/.vinext/
 sitio/.wrangler/
 sitio/dist/
+sitio/public/lecturas/
 sitio/.env*
 replication/**/test.db
+replication/examples/patterns-r4/dist/
 .DS_Store
 *.aux
 *.bbl

@@ -1,0 +1,119 @@
+{
+  "phase": "EP10",
+  "date": "2026-10-28",
+  "reviewType": "revision-tecnica-asistida-por-IA-no-dictamen-legal",
+  "scope": "distribucion-documental-y-cambios-de-fuentes",
+  "findingsReviewed": 11,
+  "findings": [
+    {
+      "path": "replication/historical/sql-controls/results/phase3/processed/analysis-report.json",
+      "kind": "ruta-personal-requiere-revision",
+      "sha256": "2dcd627d55e39d44b0d1f3d7d2b6e7ef7508fc363dc4ac07558d53efb989154a",
+      "decision": "conservar-evidencia-historica-excluir-distribucion-documental",
+      "reason": "Ruta local del autor en metadatos históricos; no es una credencial. No se altera el resultado original ni se incluye en el ZIP documental.",
+      "alreadyInRemoteMain": true
+    },
+    {
+      "path": "replication/tests/test_ep10_candidate.py",
+      "kind": "ruta-personal-requiere-revision",
+      "sha256": "297e180df3b2e007ca4aee5682bb3865eb8cad4c75ec505aa0dd1c7b016101db",
+      "decision": "conservar-fixture-sintetico",
+      "reason": "Ruta de ejemplo dentro de una prueba del detector; no es una identidad real.",
+      "alreadyInRemoteMain": false
+    },
+    {
+      "path": "specification/phase-24/CLAVE-COORDINACION.md",
+      "kind": "revision-historica-o-clave-de-coordinacion-no-distribuir-automaticamente",
+      "sha256": "319874aeeca2079a760583209fd41aa571038ccf02388f30206624886f5be4ed",
+      "decision": "excluir-distribucion-documental-y-revision-ciega",
+      "reason": "Relaciona códigos de muestras con repositorios y commits; no contiene una clave de acceso. Debe conservarse separada del material para revisores.",
+      "alreadyInRemoteMain": true
+    },
+    {
+      "path": "specification/phase-24/responses/AGREEMENT.json",
+      "kind": "revision-historica-o-clave-de-coordinacion-no-distribuir-automaticamente",
+      "sha256": "932423d9fa67c561e7aebf3aca9244ef12d77c7f38112ea65727bacaade6d4e5",
+      "decision": "excluir-distribucion-documental",
+      "reason": "Registro histórico codificado; las atestaciones declaradas no verifican por sí solas independencia ni consentimiento para una distribución nueva.",
+      "alreadyInRemoteMain": true
+    },
+    {
+      "path": "specification/phase-24/responses/MANIFEST.json",
+      "kind": "revision-historica-o-clave-de-coordinacion-no-distribuir-automaticamente",
+      "sha256": "984fcf31e5ba91241ce5c884abd12c37b2425d58a6e6ef23fc48ecd73357789b",
+      "decision": "excluir-distribucion-documental",
+      "reason": "Registro histórico codificado; las atestaciones declaradas no verifican por sí solas independencia ni consentimiento para una distribución nueva.",
+      "alreadyInRemoteMain": true
+    },
+    {
+      "path": "specification/phase-24/responses/respuesta-R-ARCH24-M-01.json",
+      "kind": "revision-historica-o-clave-de-coordinacion-no-distribuir-automaticamente",
+      "sha256": "de52d9ded273a315e6cbdb709301058bdf8362aa9bc1d1142c04bf595d6bf406",
+      "decision": "excluir-distribucion-documental",
+      "reason": "Registro histórico codificado; las atestaciones declaradas no verifican por sí solas independencia ni consentimiento para una distribución nueva.",
+      "alreadyInRemoteMain": true
+    },
+    {
+      "path": "specification/phase-24/responses/respuesta-R-ARCH24-M-02.json",
+      "kind": "revision-historica-o-clave-de-coordinacion-no-distribuir-automaticamente",
+      "sha256": "121e2375bff15515becd9709c09478b5949da9715002493f094ed30c15b57bbd",
+      "decision": "excluir-distribucion-documental",
+      "reason": "Registro histórico codificado; las atestaciones declaradas no verifican por sí solas independencia ni consentimiento para una distribución nueva.",
+      "alreadyInRemoteMain": true
+    },
+    {
+      "path": "specification/phase-24/responses/respuesta-R-ARCH24-M-03.json",
+      "kind": "revision-historica-o-clave-de-coordinacion-no-distribuir-automaticamente",
+      "sha256": "e0abc1aec43aab95fb952e56d7dcd65fee59818e6ad4529c69f24f29f2f2fce4",
+      "decision": "excluir-distribucion-documental",
+      "reason": "Registro histórico codificado; las atestaciones declaradas no verifican por sí solas independencia ni consentimiento para una distribución nueva.",
+      "alreadyInRemoteMain": true
+    },
+    {
+      "path": "specification/phase-24/responses/respuesta-R-QAOPS-M-01.json",
+      "kind": "revision-historica-o-clave-de-coordinacion-no-distribuir-automaticamente",
+      "sha256": "316251eafbb0381b99ecd1c3813bcc668303927d666e102b922fd818abcbd9fc",
+      "decision": "excluir-distribucion-documental",
+      "reason": "Registro histórico codificado; las atestaciones declaradas no verifican por sí solas independencia ni consentimiento para una distribución nueva.",
+      "alreadyInRemoteMain": true
+    },
+    {
+      "path": "specification/phase-24/responses/respuesta-R-QAOPS-M-02.json",
+      "kind": "revision-historica-o-clave-de-coordinacion-no-distribuir-automaticamente",
+      "sha256": "64f289dd9c6a819cd75376cc6dc27307f633f3f0c6acd8703eff7ad46d88f447",
+      "decision": "excluir-distribucion-documental",
+      "reason": "Registro histórico codificado; las atestaciones declaradas no verifican por sí solas independencia ni consentimiento para una distribución nueva.",
+      "alreadyInRemoteMain": true
+    },
+    {
+      "path": "specification/phase-24/responses/respuesta-R-QAOPS-M-03.json",
+      "kind": "revision-historica-o-clave-de-coordinacion-no-distribuir-automaticamente",
+      "sha256": "1c2617d1e8c8e5edd00a2cf9a9e07ccda87f461046dc4c4c1f5459773a07f7d6",
+      "decision": "excluir-distribucion-documental",
+      "reason": "Registro histórico codificado; las atestaciones declaradas no verifican por sí solas independencia ni consentimiento para una distribución nueva.",
+      "alreadyInRemoteMain": true
+    }
+  ],
+  "documentPackage": {
+    "path": "output/review/ep10/20261028T211258785478Z/COBRIA-documentos-candidata-local.zip",
+    "sha256": "0fbe6532650a5e338ab33c078868d0cbd61091e3617c2842ee511e0bb2c7ac69",
+    "bytes": 86240822,
+    "files": 55,
+    "published": false,
+    "completeSourceReplica": false
+  },
+  "documentPackageContainsFlaggedFiles": false,
+  "sourceRedistributionApproved": false,
+  "rightsBasis": [
+    "LICENSES.md",
+    "PROVENANCE.md",
+    "editorial/provenance.json",
+    "editorial/ep7/provenance-audit.json"
+  ],
+  "limits": [
+    "No se infiere consentimiento de terceros desde una atestación histórica.",
+    "Los originales históricos se conservan; no se modifican cifras ni se eliminan desacuerdos.",
+    "La ausencia de patrones de secretos no acredita una auditoría exhaustiva."
+  ],
+  "decision": "El paquete documental excluye los registros señalados; la distribución completa de fuentes conserva revisión pendiente."
+}

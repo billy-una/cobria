@@ -2,6 +2,7 @@
 """Valida la comparación de transferencia Engineering en tres proyectos."""
 import json, subprocess, tempfile, sys
 from pathlib import Path
+from frozen_project import frozen_project
 ROOT=Path(__file__).resolve().parents[2]; BASE=ROOT/'specification/phase-23'
 projects={'posguapiles':ROOT.parent/'POSGUAPILES-1','crmhotel':ROOT.parent/'CRMHOTEL_NUEVO','bshandball':ROOT.parent/'BSHandball'}
 errors=[]; expected={f'ENG-{i:03d}' for i in range(1,9)}
@@ -14,11 +15,14 @@ with tempfile.TemporaryDirectory() as directory:
   fresh=[]
   for name,repo in projects.items():
     manifest=BASE/f'adoption-manifest.{name}.json'; report=BASE/f'report.{name}.json'; target=Path(directory)/f'{name}.json'
-    if not repo.is_dir(): errors.append(f'checkout ausente: {name}'); continue
     data=json.loads(manifest.read_text())
     if len(data.get('project',{}).get('expectedCommit',''))!=40: errors.append(f'commit no congelado: {name}')
     if {item.get('id') for item in data.get('contracts',[])}!=expected: errors.append(f'manifiesto incompleto: {name}')
-    run=subprocess.run(['node','replication/scripts/assess-engineering-manifest.mjs','--project',str(repo),'--manifest',str(manifest),'--output',str(target)],cwd=ROOT,capture_output=True,text=True)
+    try:
+      with frozen_project(repo, data['project']['repository'], data['project']['expectedCommit']) as source:
+        run=subprocess.run(['node','replication/scripts/assess-engineering-manifest.mjs','--project',str(source),'--manifest',str(manifest),'--output',str(target)],cwd=ROOT,capture_output=True,text=True)
+    except RuntimeError as error:
+      errors.append(str(error)); continue
     if run.returncode: errors.append(run.stderr or run.stdout); continue
     regenerated=json.loads(target.read_text()); fresh.append(target)
     if regenerated!=json.loads(report.read_text()): errors.append(f'informe no reproducible: {name}')
@@ -30,7 +34,7 @@ with tempfile.TemporaryDirectory() as directory:
     elif json.loads(target.read_text())!=comparison: errors.append('comparación no reproducible')
 tests=subprocess.run(['node','--test','tests/phase23-engineering-transfer.test.mjs'],cwd=ROOT/'replication',capture_output=True,text=True)
 if tests.returncode: errors.append(tests.stdout+tests.stderr)
-roadmap=(ROOT/'manuales/11-estado-y-roadmap-integral.md').read_text(); site=(ROOT/'sitio/app/manual.tsx').read_text(); book=(ROOT/'libro-cobria/build-book.mjs').read_text()
+roadmap=(ROOT/'manuales/11-estado-y-roadmap-integral.md').read_text(); site=(ROOT/'editorial/pedagogy.json').read_text(); book=(ROOT/'libro-cobria/build-book.mjs').read_text()
 if 'Fase 23 — Comparación de transferencia' not in roadmap: errors.append('roadmap sin fase 23')
 if 'Tres proyectos, una misma rúbrica' not in site: errors.append('sitio sin fase 23')
 if 'Comparar sin clasificar' not in book: errors.append('libro sin fase 23')

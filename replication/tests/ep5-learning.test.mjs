@@ -1,0 +1,15 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import {lessonsOf,readProgress,toggleProgress} from '../../editorial/ep5/progress.mjs';
+import {learningIndex,buscar} from '../../editorial/ep5/search.mjs';
+import {buildParity} from '../../editorial/ep5/build.mjs';
+const read=relative=>JSON.parse(fs.readFileSync(new URL('../../'+relative,import.meta.url)));
+const curriculum=read('editorial/curriculum.json'),lessons=lessonsOf(curriculum),ids=lessons.map(l=>l.id);
+test('EP5 85 marcas identifican título y posición sin acreditar comprensión',()=>{assert.equal(lessons.length,85);assert.equal(new Set(ids).size,85);assert.equal(readProgress(toggleProgress('',ids[0],ids),ids).length,1);});
+for(const raw of ['',null,'{','[]','null','{"version":2,"completed":[]}', 'x'.repeat(64001)])test(`EP5 ignora estado inválido ${String(raw).slice(0,20)}`,()=>assert.deepEqual(readProgress(raw,ids),[]));
+test('EP5 filtra identificadores ajenos, obsoletos y duplicados',()=>assert.deepEqual(readProgress(JSON.stringify({version:1,completed:[ids[0],ids[0],'otra-leccion',3]}),ids),[ids[0]]));
+test('EP5 marcar y desmarcar es reversible',()=>{const first=toggleProgress('',ids[0],ids);assert.deepEqual(readProgress(toggleProgress(first,ids[0],ids),ids),[]);assert.throws(()=>toggleProgress('','ajena',ids));});
+const index=learningIndex(curriculum,read('sitio/public/catalogo.json'),read('editorial/c10/reader-guide.json'),read('editorial/ep3/areas.json'),read('editorial/ep2/recorrido.json'),read('editorial/ep4/recorrido.json'));
+test('EP5 busca capítulos desarrollados sin sustituir la fuente del libro',()=>{assert.equal(buscar(index,'','Caso desarrollado').length,17);assert.equal(buscar(index,'','Unidad inicial').length,10);assert.equal(buscar(index,'','Proyecto').length,1);assert.ok(buscar(index,'pouchdb reconstruccion','Proyecto').length);assert.deepEqual(buscar(index,'ÁMBITO'),buscar(index,'ambito'));assert.equal(buscar(index,'qzxz-inexistente').length,0);});
+test('EP5 paridad cubre 17 partes y 85 lecciones del libro',()=>{const parity=buildParity();assert.equal(parity.modules.length,17);assert.equal(parity.modules.flatMap(m=>m.lessons).length,85);const html=fs.readFileSync(new URL('../../libro-cobria/index.html',import.meta.url),'utf8');for(const m of parity.modules){assert.ok(html.includes(m.caseTitle),m.key);assert.ok(m.checkpoint);assert.match(m.projectRoute,/proyecto-integral/);for(const l of m.lessons)assert.match(l.sharedContentSha256,/^[a-f0-9]{64}$/);}});

@@ -1,0 +1,619 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="author" content="Billy Jak Cordero Porras"><meta name="description" content="Diecisiete áreas para construir la misma reserva digital"><meta name="viewport" content="width=device-width, initial-scale=1"><title>COBRIA: casos desarrollados por áreas</title><style>@font-face { font-family: Inter; src: url('./fonts/Inter-400.ttf') format('truetype'); font-weight: 400; font-display: block; }
+@font-face { font-family: Inter; src: url('./fonts/Inter-600.ttf') format('truetype'); font-weight: 600; font-display: block; }
+@font-face { font-family: Inter; src: url('./fonts/Inter-700.ttf') format('truetype'); font-weight: 700; font-display: block; }
+@font-face { font-family: Inter; src: url('./fonts/Inter-900.ttf') format('truetype'); font-weight: 900; font-display: block; }
+@font-face { font-family: 'COBRIA Mono'; src: url('./fonts/RobotoMono-400.ttf') format('truetype'); font-weight: 400; font-display: block; }
+@font-face { font-family: 'COBRIA Mono'; src: url('./fonts/RobotoMono-700.ttf') format('truetype'); font-weight: 700; font-display: block; }
+:root {
+  --bosque: #174a3a;
+  --musgo: #5f7a3d;
+  --jade: #2f8f71;
+  --guaria: #e6b84a;
+  --rana: #a84330;
+  --rio: #3d7ea6;
+  --marfil: #f6f0df;
+  --papel: #fffdf7;
+  --carbon: #24302c;
+}
+
+@page { size: letter; margin: 17mm 18mm 18mm; }
+@page :first { margin: 0; }
+* { box-sizing: border-box; }
+* { font-feature-settings: 'calt' 0, 'liga' 0 !important; }
+html { background: #d9d6cc; }
+body {
+  margin: 0 auto; color: var(--carbon); background: var(--papel);
+  font-family: Inter, Arial, sans-serif; font-size: 10.2pt;
+  line-height: 1.48; max-width: 216mm;
+}
+a { color: #1f6f59; text-decoration-thickness: 1px; text-underline-offset: 2px; }
+a:focus-visible { outline: 3px solid var(--guaria); outline-offset: 2px; }
+p { margin: 0 0 0.75rem; }
+h1, h2, h3, .sans { font-family: inherit; }
+.cover {
+  height: 279.4mm; position: relative; overflow: hidden; color: white;
+  page-break-after: always; background: var(--bosque);
+}
+.cover img { display: block; width: 100%; height: 100%; object-fit: cover; filter: saturate(.88) brightness(.68); }
+.cover::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg,rgba(23,74,58,.78) 0%,rgba(23,74,58,.1) 48%,rgba(20,36,31,.72) 100%); }
+.cover-title { position: absolute; z-index: 2; inset: 17mm 18mm auto; }
+.cover-title .kicker { color: var(--guaria); letter-spacing: .18em; font: 700 9pt/1.2 Inter,Arial,sans-serif; text-transform: uppercase; }
+.cover-title h1 { font-size: 46pt; line-height: .95; margin: 4mm 0 3mm; letter-spacing: -.035em; }
+.cover-title h2 { font-size: 17pt; line-height: 1.18; max-width: 155mm; font-weight: 600; margin: 0; }
+.cover-author { position: absolute; z-index: 2; left: 18mm; bottom: 15mm; font: 600 11pt/1.5 Inter,Arial,sans-serif; }
+.edition-chip { position: absolute; z-index: 3; right: 0; bottom: 0; min-width: 47mm; padding: 13mm 7mm 3mm 9mm; text-align: right; color: var(--guaria); background: var(--bosque); border-radius: 18mm 0 0 0; font: 700 7.5pt/1 Inter,Arial,sans-serif; letter-spacing: .08em; text-transform: uppercase; }
+.opening, .catalog-map, .pattern, .lab-page, .book-page, .closing { page-break-before: always; }
+@media print { .opening, .catalog-map, .pattern, .lab-page, .book-page, .closing { break-after: page; } }
+/* Alejar los diacríticos de la frontera evita que Chromium los pinte en la
+   página anterior. No aumenta la altura del bloque ni cambia su flujo. */
+@media print { .eyebrow:first-child { position: relative; top: .8mm; } }
+.opening h1, .catalog-map h1, .closing h1 { color: var(--bosque); font-size: 31pt; line-height: 1.05; margin: 3mm 0 7mm; }
+.eyebrow { color: var(--rana); font: 700 8.5pt/1.2 Inter,Arial,sans-serif; letter-spacing: .15em; text-transform: uppercase; }
+.lead { font-size: 15pt; line-height: 1.42; color: var(--bosque); }
+.note { border-left: 4px solid var(--guaria); background: #fbf3d8; padding: 4mm 5mm; margin: 5mm 0; }
+.nosql { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; margin-top: 5mm; }
+.nosql > div { border-radius: 4mm; padding: 5mm; background: #e9f1eb; }
+.nosql h3 { color: var(--bosque); margin: 0 0 2mm; font-size: 13pt; }
+.legend { display: grid; grid-template-columns: repeat(2,1fr); gap: 4mm; }
+.legend article { border-top: 5px solid var(--jade); background: #edf3ef; padding: 4mm; border-radius: 0 0 3mm 3mm; }
+.legend article:nth-child(2) { border-color: var(--rio); }
+.legend article:nth-child(3) { border-color: var(--guaria); }
+.legend article:nth-child(4) { border-color: var(--rana); }
+.legend h3 { font-size: 12pt; margin: 0 0 1mm; }
+.pattern { min-height: 240mm; }
+.pattern-head { display: grid; grid-template-columns: 17mm 1fr; gap: 5mm; align-items: center; border-bottom: 2px solid var(--bosque); padding-bottom: 4mm; }
+.pattern-number { width: 17mm; height: 17mm; border-radius: 50%; display: grid; place-items: center; color: white; background: var(--bosque); font: 800 15pt Inter,Arial,sans-serif; }
+.pattern h1 { color: var(--bosque); font-size: 28pt; line-height: 1; margin: 0; }
+.badges { margin: 3mm 0 5mm 22mm; font-family: Inter,Arial,sans-serif; font-size: 8pt; }
+.badge { display: inline-block; border: 1px solid var(--jade); color: var(--bosque); border-radius: 999px; padding: 1.2mm 3mm; margin-right: 2mm; background: #edf5f0; }
+.pattern-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm 6mm; }
+.block { break-inside: avoid; }
+.block h2 { font-size: 11.5pt; color: var(--bosque); margin: 0 0 1.5mm; }
+.block h2::before { content: ""; display: inline-block; width: 2.6mm; height: 2.6mm; border: 1.2mm solid var(--jade); border-radius: 50%; margin-right: 2.2mm; vertical-align: -.3mm; }
+.analogy { grid-column: 1 / -1; background: #eef4f7; border-radius: 4mm; padding: 4mm 5mm; border-left: 5px solid var(--rio); }
+.solution { grid-column: 1 / -1; background: #eef4ef; border-radius: 4mm; padding: 4mm 5mm; }
+.contract { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 8.4pt; line-height: 1.5; background: var(--carbon); color: #f7f3e7; padding: 3mm 4mm; border-radius: 2mm; }
+.story-illustration { grid-column: 1 / -1; display: grid; grid-template-columns: 3fr 2fr; min-height: 65mm; margin: 1mm 0 3mm; border-radius: 4mm; overflow: hidden; border: 1px solid #bac9bd; background: var(--marfil); }
+.story-illustration img { display: block; width: 100%; height: 65mm; object-fit: contain; object-position: center; background: #dfe9e2; }
+.story-illustration figcaption { display: flex; align-items: center; padding: 6mm; color: var(--bosque); background: #edf3ef; border-left: 4px solid var(--jade); font: 650 10pt/1.45 Inter,Arial,sans-serif; }
+.pattern.illustrated { font-size: 9.1pt; line-height: 1.28; }
+.illustrated .story-illustration { margin-bottom: 1mm; }
+.illustrated .story-illustration { min-height: 61mm; }
+.illustrated .story-illustration img { height: 61mm; object-fit: contain; object-position: center; }
+.illustrated .story-illustration figcaption { padding: 5mm; font-size: 8.6pt; }
+.illustrated .pattern-grid { gap: 2.2mm 5mm; }
+.illustrated .analogy, .illustrated .solution { padding: 2.4mm 4mm; }
+.illustrated .block h2 { margin-bottom: .8mm; font-size: 10.2pt; }
+.lab-page { min-height: 240mm; }
+.lab-page h1 { margin: 2mm 0 3mm; color: var(--bosque); font-size: 27pt; line-height: 1.05; }
+.lab-lead { margin-bottom: 5mm; color: var(--bosque); font-size: 13.5pt; }
+.lab-page h2 { margin: 0 0 1.8mm; color: var(--bosque); font-size: 11.5pt; }
+.lab-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; margin: 4mm 0; }
+.lab-grid > section { break-inside: avoid; padding: 4mm; border-top: 4px solid var(--guaria); background: #fbf8ed; border-radius: 0 0 3mm 3mm; }
+.field-card { margin: 4mm 0; padding: 4mm 5mm; border-left: 5px solid var(--rio); border-radius: 3mm; background: #eef4f7; }
+.field-card.relation { border-color: var(--jade); background: #edf4ef; }
+.lab-page pre { white-space: pre-wrap; margin: 2mm 0 4mm; padding: 4mm 5mm; color: #f7f3e7; background: var(--carbon); border-radius: 3mm; font: 9pt/1.45 ui-monospace,SFMono-Regular,Menlo,monospace; }
+.lab-page ul { margin: 0; padding-left: 5mm; }
+.lab-page li { margin-bottom: 1.2mm; }
+.lab-page details { margin: 5mm 0; padding: 4mm 5mm; border: 1px solid #b9c7be; border-radius: 3mm; background: #edf4ef; }
+.lab-page summary { color: var(--bosque); font-weight: 800; cursor: pointer; }
+.lab-page details p { margin: 3mm 0 0; }
+.closing .roadmap { border-collapse: collapse; width: 100%; }
+.closing th, .closing td { border-bottom: 1px solid #b9c7be; text-align: left; padding: 3mm; }
+.closing th { background: var(--bosque); color: white; font-family: Inter,Arial,sans-serif; }
+footer { margin-top: 8mm; padding-top: 3mm; border-top: 1px solid #b9c7be; color: #617069; font-size: 8pt; }
+.bibliographic-page { font-size: 9.4pt; }
+.bibliographic-page h1 { margin-bottom: 5mm; }
+.bibliographic-grid { display: grid; grid-template-columns: 42mm 1fr; gap: 2.2mm 5mm; margin: 5mm 0; }
+.bibliographic-grid dt { color: var(--bosque); font-weight: 800; }
+.bibliographic-grid dd { margin: 0; }
+.synopsis-box { margin: 5mm 0; padding: 6mm; border-left: 5px solid var(--jade); border-radius: 0 4mm 4mm 0; background: #edf4ef; }
+.author-profile { display: grid; grid-template-columns: 34mm 1fr; gap: 6mm; align-items: start; }
+.author-monogram { width: 30mm; height: 30mm; display: grid; place-items: center; border-radius: 50%; color: white; background: var(--bosque); font-size: 18pt; font-weight: 850; }
+.apa-reference { padding-left: 10mm; text-indent: -10mm; }
+.rights-box { margin-top: 6mm; padding: 5mm; border: 1px solid #b9c7be; border-radius: 3mm; background: #f7f4ea; }
+.book-page { min-height: 240mm; }
+.book-page h1 { color: var(--bosque); font-size: 29pt; line-height: 1.05; margin: 3mm 0 7mm; }
+.book-page h2 { color: var(--bosque); font-size: 13pt; margin: 5mm 0 2mm; }
+.operation-workshop h1, .analytics-workshop h1, .integral-workshop h1 { margin-bottom: 4mm; }
+.operation-workshop h2, .analytics-workshop h2, .integral-workshop h2 { margin-top: 3mm; }
+.operation-workshop p, .analytics-workshop p, .integral-workshop p { margin-bottom: 2mm; }
+.operation-workshop h1 { font-size: 27pt; }
+.operation-workshop pre { padding-block: 2.5mm; }
+.operation-workshop h2 { margin-top: 2mm; }
+.operation-workshop pre, .analytics-workshop pre, .integral-workshop pre { margin: 2mm 0; padding: 3mm 5mm; }
+.documentation-workshop h1 { margin-bottom: 4mm; }
+.documentation-workshop h2 { margin-top: 3mm; }
+.documentation-workshop p { margin-bottom: 2mm; }
+.documentation-workshop pre { margin: 2mm 0; padding: 3mm 5mm; }
+.book-page table { width: 100%; border-collapse: collapse; margin: 5mm 0; }
+.book-page th, .book-page td { padding: 3mm; border-bottom: 1px solid #bdc9c0; text-align: left; vertical-align: top; }
+.book-page th { color: white; background: var(--bosque); font-family: Inter,Arial,sans-serif; }
+.book-page pre { white-space: pre-wrap; padding: 4mm 5mm; color: #f7f3e7; background: var(--carbon); border-radius: 3mm; font: 9pt/1.45 ui-monospace,SFMono-Regular,Menlo,monospace; }
+.module-meta { display: grid; grid-template-columns: repeat(3,1fr); gap: 3mm; margin: 5mm 0; }
+.module-meta span { padding: 4mm; border-top: 4px solid var(--jade); background: #edf4ef; border-radius: 0 0 3mm 3mm; }
+.module-meta strong { display: block; color: var(--bosque); font-size: 12pt; }
+.module-sources,.lesson-path { margin-top: 5mm; color: #49685b; font-size: 8.5pt; overflow-wrap: anywhere; }
+.beginner-lesson { min-height: 0; }
+.beginner-lesson .lesson-columns { margin-top: 4mm; }
+.beginner-lesson .lesson-proof { margin-top: 4mm; }
+.beginner-practice pre { white-space: pre-wrap; overflow-wrap: anywhere; font-size: 9pt; }
+.beginner-practice h1 { font-size: 25pt; }
+.ep3-page h1 { font-size: 25pt; margin-bottom: 4mm; }
+.ep3-page h2 { margin-top: 3mm; }
+.ep3-page p { margin-bottom: 2.5mm; }
+.ep3-page pre { font-size: 8pt; margin: 2mm 0; padding: 3mm; overflow-wrap: anywhere; }
+.ep3-page .ep3-source { font-size: 8pt; overflow-wrap: anywhere; }
+.code-page h1 { margin-bottom: 3mm; }
+.code-lead { color: var(--bosque); font-size: 11.5pt; line-height: 1.35; }
+.book-story { margin: 0 0 3mm; padding: 3mm 4mm; border-left: 5px solid var(--jade); border-radius: 2mm; background: #edf4ef; }
+.book-story strong { color: var(--bosque); font: 750 10pt/1.2 Inter,Arial,sans-serif; }
+.book-story p { margin: 1mm 0; font-size: 8.7pt; line-height: 1.3; }
+.book-story small { color: #49685b; font: 650 7.5pt/1.25 Inter,Arial,sans-serif; }
+.code-grid { display: grid; grid-template-columns: 1fr; gap: 4mm; }
+.code-grid.single { grid-template-columns: 1fr; }
+.code-grid section { min-width: 0; break-inside: avoid; }
+.code-grid h2 { margin: 0; padding: 2.2mm 3mm; color: white; background: var(--bosque); border-radius: 3mm 3mm 0 0; font-size: 10pt; }
+.code-grid pre { overflow: visible; margin: 0; border-radius: 0 0 3mm 3mm; line-height: 1.28; white-space: pre-wrap; overflow-wrap: anywhere; }
+.code-grid.single pre { min-height: 48mm; font-size: 9pt; }
+.code-grid.multi pre { min-height: 0; font-size: 9pt; }
+.module-review { margin-top: 4mm; padding: 3mm; border-left: 3px solid var(--jade); background: #edf4ef; }
+.module-review h2 { margin-top: 0; }.module-review p { margin-bottom: 2mm; }
+.reader-guide-page .reader-tracks { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; }
+.reader-guide-page h2 { margin-top: 2mm; }.reader-guide-page li { margin-bottom: 1mm; }
+.source-links { margin: 2.5mm 0; font: 650 7.4pt/1.35 Inter,Arial,sans-serif; }
+.source-links a { display: inline-block; margin-right: 2mm; }
+.title-page { display: flex; flex-direction: column; justify-content: center; }
+.title-page h1 { font-size: 62pt; margin-bottom: 2mm; }
+.title-rule { width: 45mm; height: 3mm; margin: 12mm 0; background: var(--guaria); border-radius: 2mm; }
+.concept-grid, .family-map { display: grid; grid-template-columns: repeat(2,1fr); gap: 4mm; }
+.concept-grid article, .family-map article { padding: 4mm; border-top: 4px solid var(--jade); background: #edf4ef; border-radius: 0 0 3mm 3mm; }
+.concept-grid h2, .family-map h2 { margin-top: 0; }
+.family-map { grid-template-columns: repeat(3,1fr); }
+.family-map article { min-height: 43mm; }
+.family-map b { color: var(--rana); font-family: Inter,Arial,sans-serif; }
+.route-grid { display: grid; gap: 5mm; }
+.route-grid article { padding: 5mm 6mm; border-left: 6px solid var(--rio); background: #eef4f7; }
+.big-steps { counter-reset: route; list-style: none; padding: 0; }
+.big-steps li { padding: 4mm 4mm 4mm 16mm; margin: 3mm 0; position: relative; background: #f7f3e7; border-radius: 3mm; }
+.big-steps li::before { counter-increment: route; content: counter(route); position: absolute; left: 4mm; top: 3mm; width: 8mm; height: 8mm; color: white; background: var(--bosque); border-radius: 50%; display: grid; place-items: center; font: 700 8pt Inter,Arial,sans-serif; }
+.flow { display: flex; align-items: stretch; gap: 2mm; margin: 6mm 0; }
+.flow div { position: relative; flex: 1; min-height: 26mm; padding: 4mm 2mm; text-align: center; color: var(--bosque); background: #eaf2ed; border-radius: 3mm; font-family: Inter,Arial,sans-serif; }
+.flow div:not(:last-child)::after { content: "→"; position: absolute; right: -3.5mm; top: 8mm; color: var(--rana); font-size: 14pt; z-index: 2; }
+.flow b { display: block; margin-bottom: 2mm; color: var(--rana); }
+.flow span { font-size: 8.5pt; font-weight: 700; }
+.flow.compact { margin: 3mm 0 4mm; }
+.flow.compact div { min-height: 20mm; padding: 2.5mm 2mm; }
+.learning-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; }
+.learning-grid section { min-height: 47mm; padding: 4mm; border-top: 4px solid var(--jade); border-radius: 0 0 3mm 3mm; background: #edf4ef; }
+.learning-grid section.avoid { border-color: var(--rana); background: #faece8; }
+.learning-grid h2 { margin-top: 0; }
+.learning-page pre { margin: 2mm 0; font-size: 8.2pt; }
+.learning-page .connections { margin-top: 2mm; padding: 3mm; font-size: 8.8pt; line-height: 1.32; }
+.learning-page footer { margin-top: 0; padding-top: 2mm; }
+.family-opening { display: flex; flex-direction: column; }
+.family-opening h1 { font-size: 40pt; margin-bottom: 3mm; }
+.family-flow { display: flex; align-items: center; gap: 3mm; margin: 8mm 0; }
+.family-flow div { position: relative; flex: 1; min-height: 31mm; display: grid; align-content: center; justify-items: center; padding: 3mm; color: var(--bosque); border: 2px solid var(--jade); border-radius: 50% 50% 45% 45%; background: #edf4ef; text-align: center; }
+.family-flow div:not(:last-child)::after { content: "→"; position: absolute; right: -5mm; top: 9mm; color: var(--rana); font-size: 16pt; }
+.family-flow b { color: var(--rana); }
+.family-flow span { font: 750 8pt/1.2 Inter,Arial,sans-serif; }
+.family-summary { display: grid; grid-template-columns: 2fr 3fr; gap: 5mm; }
+.family-summary section { padding: 4mm 5mm; border-left: 5px solid var(--guaria); background: #fbf8ed; }
+.family-summary h2 { margin-top: 0; }
+.family-illustration { display: grid; grid-template-columns: 2fr 3fr; min-height: 67mm; margin: 7mm 0 0; overflow: hidden; border: 1px solid #bac9bd; border-radius: 4mm; background: #e4ece6; }
+.family-illustration img { width: 100%; height: 67mm; object-fit: contain; }
+.family-illustration figcaption { display: flex; align-items: center; margin: 0; padding: 6mm; color: var(--bosque); background: #edf3ef; font: 650 10pt/1.45 Inter,Arial,sans-serif; }
+.toc-page nav { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5mm 5mm; margin: 5mm 0; }
+.toc-page nav a { display: block; padding: 2mm 4mm; border-left: 4px solid var(--jade); border-radius: 0 2mm 2mm 0; background: #edf4ef; font-weight: 700; text-decoration: none; }
+.compact-routes { grid-template-columns: 1fr 1fr; gap: 3mm; }
+.compact-routes article { padding: 3.5mm 4mm; }
+.steps { padding-left: 7mm; }
+.steps li { margin: 2mm 0; padding-left: 2mm; }
+.decision-grid, .reference-grid, .question-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; }
+.decision-grid section { padding: 4mm 5mm; border-top: 5px solid var(--jade); background: #edf4ef; border-radius: 0 0 3mm 3mm; }
+.decision-grid .avoid { border-color: var(--rana); background: #faece8; }
+.connections { margin-top: 5mm; padding: 4mm; color: var(--bosque); background: #fbf3d8; border-radius: 3mm; }
+.reference-grid section { padding: 4mm; background: #f6f2e6; border-radius: 3mm; }
+.checklist { list-style: none; padding: 0; }
+.checklist li { margin: 2mm 0; }
+.checklist li::before { content: "□"; margin-right: 2mm; color: var(--jade); font-weight: 700; }
+.question-grid p { margin: 0; min-height: 24mm; padding: 4mm; border-left: 4px solid var(--guaria); background: #fbf8ed; }
+.case-cover { display: flex; flex-direction: column; justify-content: center; background: linear-gradient(145deg,#edf3e9,#fbf3d8); padding: 15mm; border-radius: 4mm; }
+.case-cover h1 { font-size: 40pt; }
+.term { margin: 7mm 0; padding: 5mm; border-left: 5px solid var(--jade); background: #edf4ef; }
+.term h2 { margin: 0 0 2mm; font-size: 20pt; }
+.term small { color: #65746c; font-family: Inter,Arial,sans-serif; }
+.rubric { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm; }
+.rubric div { display: flex; justify-content: space-between; padding: 4mm; background: #eef4ef; border-bottom: 2px solid var(--jade); }
+.rubric b { color: var(--rana); font-family: Inter,Arial,sans-serif; }
+.module-opening { display: block; min-height: 0; break-inside: avoid-page; }
+.module-opening h1 { font-size: 39pt; margin-bottom: 5mm; }
+/* Las lecturas EP7 comparten la apertura sin crear páginas vacías por el
+   último borde del repaso. Se ajusta espacio, no el tamaño del texto. */
+.module-opening .module-sources { margin-top: 2mm; margin-bottom: 2mm; }
+.module-opening .module-review { margin-top: 2mm; }
+.consultation-index { columns: 2; column-gap: 8mm; padding-left: 6mm; }
+.consultation-index li { margin-block: 2mm; break-inside: avoid; }
+.module-promise { margin: 3mm 0; padding: 3mm 5mm; border-top: 5px solid var(--jade); border-radius: 0 0 4mm 4mm; background: #edf4ef; }
+.module-promise h2 { margin-top: 0; }
+.module-promise ul { columns: 2; padding-left: 5mm; }
+.beginner-lesson h1 { font-size: 27pt; margin-bottom: 3mm; }
+.compact-lead { font-size: 12.5pt; }
+.lesson-situation { margin: 3mm 0; padding: 3mm 5mm; border-left: 5px solid var(--guaria); border-radius: 0 3mm 3mm 0; background: #fbf3d8; font-size: 11pt; line-height: 1.5; }
+.lesson-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; margin: 3mm 0; }
+.lesson-columns section { padding: 3mm 5mm; border: 1px solid #bdc9c0; border-radius: 3mm; background: #fffefa; }
+.lesson-columns h2 { margin-top: 0; }
+.lesson-columns ol { padding-left: 5mm; }
+.lesson-columns li { margin-bottom: 1.4mm; }
+.lesson-proof { display: grid; grid-template-columns: 48mm 1fr; gap: 4mm; margin-top: 4mm; padding: 4mm 5mm; border-left: 5px solid var(--jade); border-radius: 0 3mm 3mm 0; background: #edf4ef; }
+.lesson-proof strong { color: var(--bosque); }
+.beginner-lesson .lesson-proof { margin-top: 3mm; padding-block: 3mm; }
+.practice-page h1 { font-size: 25pt; line-height: 1.18; }
+.practice-page ol { padding-left: 6mm; }
+.practice-page li { margin-bottom: 2mm; }
+.practice-page pre { font-size: 9pt; line-height: 1.45; white-space: pre-wrap; overflow-wrap: anywhere; }
+.practice-reference { margin-top: 4mm; font-size: 8.5pt; overflow-wrap: anywhere; }
+.lesson-practice-page { font-size: 10pt; line-height: 1.4; }
+.lesson-practice-page h1 { font-size: 24pt; margin-bottom: 3mm; }
+.lesson-practice-page h2 { font-size: 12pt; margin: 3mm 0 1.5mm; }
+.lesson-practice-page p, .lesson-practice-page ul { margin-top: 1.5mm; margin-bottom: 2mm; }
+.lesson-practice-page li { margin-bottom: 1mm; }
+pre, code, .contract { font-family: 'COBRIA Mono', monospace !important; font-variant-ligatures: none; }
+@media screen and (max-width: 760px) {
+  .pattern-grid, .learning-grid, .family-summary, .family-illustration, .toc-page nav, .compact-routes, .code-grid, .lesson-columns, .lesson-proof { grid-template-columns: 1fr; }
+  .family-flow { flex-wrap: wrap; }
+  .family-flow div { min-width: 28%; }
+  .family-flow div::after { display: none; }
+}
+@media print { html { background: white; } body { max-width: none; } .pattern { break-after: page; } a { color: inherit; } }
+</style></head><body>
+<section class="cover"><img src="assets/ecosistema-cobria-panoramico-v4.png" alt="Ecosistema COBRIA ilustrado"><div class="cover-title"><div class="kicker">Edición ecosistema 1.0.0-rc2</div><h1>COBRIA</h1><h2>Diecisiete áreas para construir la misma reserva digital</h2></div><div class="cover-author">Billy Jak Cordero Porras<br>Coto Brus, Costa Rica · 2026</div><div class="edition-chip">Propuesta independiente · 1.0.0-rc2</div></section>
+<main id="contenido-principal"><section class="book-page ep3-page" id="area-desarrollada-inicio"><div class="eyebrow">Caso desarrollado · inicio</div><h1>Preparar una entrega pequeña que puedas explicar</h1><p>Una brigada quiere registrar tres colibríes y contar una sola visita aunque alguien pulse dos veces. Si el primer objetivo es instalar nube, autenticación e IA, será difícil saber qué parte está fallando. La primera entrega debe ser más pequeña que el sistema deseado, pero conservar una regla de cantidad y un límite de reserva.</p><h2>Antes de empezar</h2><p>Completa las diez unidades de De una idea a tu primera prueba. Usa la copia de ecosistema-app, no una base de datos personal.</p><h2>Palabras que necesitarás</h2><p><strong>Entrega:</strong> Resultado observable que otra persona puede repetir.</p><p><strong>Memoria:</strong> Datos que desaparecen al terminar el proceso.</p><p><strong>Requisito:</strong> Conducta pedida y su condición de aceptación.</p><h2>Resolver el problema</h2><p>Escribe primero una frase comprobable: al enviar la misma visita dos veces, queda una observación con cantidad tres. Una segunda frase cubre el rechazo: cero no se guarda. Una tercera separa las reservas. Esas frases son requisitos, no nombres de carpetas ni promesas de una tecnología.</p><p>Guarda una copia intacta y trabaja en otra carpeta. Abre package.json para distinguir las tareas disponibles y ejecuta start desde la aplicación. Mira el archivo que produce la salida antes de buscar una pantalla. Este inicio termina en la terminal; no tiene un servidor HTTP oculto ni conserva sesiones entre procesos.</p></section><section class="book-page ep3-page" id="area-desarrollada-inicio-ejemplo"><div class="eyebrow">Ejemplo trabajado · inicio</div><h1>Seguir el resultado</h1><ol><li>Ejecuta las diez unidades del taller inicial en orden y conserva un cambio propio.</li><li>Ejecuta npm --prefix replication/examples/ecosistema-app start desde la raíz de COBRIA.</li><li>Comprueba la cantidad, la repetición y los dos rechazos en la misma ejecución.</li></ol><p>Artefacto trabajado, no programa para ejecutar.</p><pre>{
+  &quot;requisito&quot;: &quot;La misma visita no se cuenta dos veces&quot;,
+  &quot;entrada&quot;: {
+    &quot;id&quot;: &quot;obs-001&quot;,
+    &quot;ambito&quot;: &quot;reserva-sur&quot;,
+    &quot;cantidad&quot;: 3,
+    &quot;revision&quot;: 1
+  },
+  &quot;esperado&quot;: {
+    &quot;observaciones&quot;: 1,
+    &quot;colibries&quot;: 3
+  },
+  &quot;rechazos&quot;: [
+    &quot;cantidad cero&quot;,
+    &quot;reserva no autorizada&quot;
+  ]
+}</pre></section><section class="book-page ep3-page" id="area-desarrollada-inicio-ejercicio"><div class="eyebrow">Decidir y practicar · inicio</div><h1>Elegir y comprobar</h1><h2>Alternativa y costo</h2><p>Una hoja de cálculo puede bastar para un recuento personal sin colaboración ni controles de acceso. No construyas todas las capas solo para justificar el uso del manual.</p><p>La copia de aprendizaje evita riesgo, pero no conserva información al cerrar. Anota esa limitación como una decisión de esta entrega, no como un defecto que se corrige escondiendo archivos.</p><h2>Fallo y recuperación</h2><p>El proceso termina y al abrirlo de nuevo no aparecen visitas anteriores. Es el comportamiento de un almacén en memoria; cambiar el texto de éxito no añade persistencia.</p><p>Vuelve al ejemplo original y distingue repetir una intención dentro del proceso de repetir el proceso completo. La persistencia documental pertenece al recorrido de aplicación completa.</p><h2>Tu ejercicio</h2><p>Escribe tres criterios para una visita de cinco colibríes. Cambia el programa de tu copia y entrega entrada, comando y salida. No cambies la prohibición de cantidad cero.</p><h2>Solución explicada</h2><p>La entrada usa cantidad cinco; la repetición mantiene una observación; la cantidad cero sigue rechazándose. El criterio de éxito no es que aparezca una ventana: es que coincidan datos, efectos y rechazos. Adjunta la versión de Node y explica que los registros se perderán al cerrar.</p><h2>Revisar la entrega</h2><ul><li>La cantidad cinco se observa en una ejecución real.</li><li>La repetición conserva un solo efecto.</li><li>La entrega declara memoria y no promete autenticación.</li></ul><p><strong>Continúa:</strong> Ahora convierte la entrada en un objeto que no pueda existir con una cantidad inválida.</p><p class="ep3-source">Fuentes: manuales/35-programar-desde-cero.md · replication/examples/ecosistema-app/src/primer-recorrido.mjs</p></section><section class="book-page ep3-page" id="area-desarrollada-fundamentos"><div class="eyebrow">Caso desarrollado · fundamentos</div><h1>Proteger un dato antes de organizar el sistema</h1><p>Una persona escribe cero y otra envía un número decimal. Ambas entradas caben en un objeto de JavaScript, pero ninguna representa el conteo admitido. Si cada formulario decide por separado, una importación o una llamada directa podrá crear hechos inválidos.</p><h2>Antes de empezar</h2><p>Distingue texto, número, función y objeto. Ya sabes leer una propiedad y ejecutar un archivo con Node.</p><h2>Palabras que necesitarás</h2><p><strong>Invariante:</strong> Regla que todo objeto válido debe conservar.</p><p><strong>Constructor:</strong> Operación que crea una entidad y comprueba sus reglas.</p><p><strong>Contrato:</strong> Condiciones de entrada y resultado que una operación promete.</p><h2>Resolver el problema</h2><p>Observacion reúne identidad, reserva, especie, cantidad, revisión y fecha. Su constructor rechaza una cantidad no entera o menor que uno. No se trata de una regla de presentación: también se aplica cuando el objeto nace desde un archivo. La validación de una pantalla sirve para orientar; no reemplaza esta frontera.</p><p>Object.freeze impide reasignar las propiedades de esta entidad plana. Eso no transforma cualquier objeto anidado en una estructura profundamente inmutable ni resuelve conflictos de dos usuarios. La revisión conserva otra responsabilidad: identificar la versión del hecho cuando un repositorio decide si acepta una escritura.</p></section><section class="book-page ep3-page" id="area-desarrollada-fundamentos-ejemplo"><div class="eyebrow">Ejemplo trabajado · fundamentos</div><h1>Seguir el resultado</h1><ol><li>Construye la entidad válida y comprueba su cantidad.</li><li>Construye otra con cero: el constructor debe rechazarla.</li><li>Intenta reasignar la cantidad: este objeto congelado no admite el cambio.</li></ol><p>Raíz de COBRIA; Node.js 22.13 o superior, sin paquetes nuevos.</p><pre>node replication/examples/ecosistema-app/taller-areas/ejecutar.mjs fundamentos</pre><p>Puedes añadir 4 al final del comando para cambiar la cantidad, o 0 para provocar el rechazo. Calidad no utiliza ese argumento: comprueba cargas y permisos con un reloj controlado.</p><p>Función real de replication/examples/ecosistema-app/taller-areas/casos.mjs. Utiliza imports y datos compartidos del archivo completo; no es un programa autónomo.</p><pre>export async function fundamentos(cantidad = 3) {
+  const observacion = new Observacion(entrada(cantidad));
+  assert.equal(observacion.cantidad, cantidad);
+  assert.throws(() =&gt; new Observacion(entrada(0)), { codigo: 'OBS_QUANTITY_INVALID' });
+  assert.throws(() =&gt; {
+    observacion.cantidad = 99;
+  }, TypeError);
+  return {
+    cantidad: observacion.cantidad,
+    revision: observacion.revision,
+    congelada: Object.isFrozen(observacion),
+  };
+}</pre><h2>Campos esperados</h2><pre>{
+  &quot;cantidad&quot;: 3,
+  &quot;revision&quot;: 1,
+  &quot;congelada&quot;: true
+}</pre></section><section class="book-page ep3-page" id="area-desarrollada-fundamentos-ejercicio"><div class="eyebrow">Decidir y practicar · fundamentos</div><h1>Elegir y comprobar</h1><h2>Alternativa y costo</h2><p>Para un cálculo temporal sin identidad puede bastar una función pura que reciba números. Una entidad se justifica cuando hay reglas e identidad que deben acompañar al dato.</p><p>Crear una entidad añade validación y errores que el llamador debe manejar. Evita estados inválidos de este contrato, no prueba que el avistamiento ocurrió en la naturaleza.</p><h2>Fallo y recuperación</h2><p>Sustituir la entidad por un literal puede hacer pasar una cantidad cero a otra capa. Una pantalla que la rechaza no protege una importación que nunca pasa por esa pantalla.</p><p>Mantén la construcción del dominio en la frontera de entrada y agrega una prueba para cero. No conviertas el rechazo en un valor silencioso ni sustituyas cero por uno.</p><h2>Tu ejercicio</h2><p>Ejecuta el caso con cantidad cuatro y luego con cero. Escribe una prueba que espere OBS_QUANTITY_INVALID para cero y conserva el caso válido.</p><h2>Solución explicada</h2><p>Con cuatro se conserva cantidad cuatro y revisión uno. Con cero falla antes de producir un resultado válido. La prueba usa assert.throws al construir Observacion; no comprueba solamente un mensaje de consola. La revisión no debe aumentar por crear otra variable local con la misma entrada.</p><h2>Revisar la entrega</h2><ul><li>El caso positivo conserva su cantidad.</li><li>Cero produce el código del dominio.</li><li>Se distinguen congelación local y control de concurrencia.</li></ul><p><strong>Continúa:</strong> La regla ya tiene un lugar; ahora decide quién coordina guardarla sin conocer el motor.</p><p class="ep3-source">Fuentes: replication/examples/ecosistema-app/src/domain/observacion.mjs · replication/examples/ecosistema-app/taller-inicial/10-prueba.test.mjs</p></section><section class="book-page ep3-page" id="area-desarrollada-arquitectura"><div class="eyebrow">Caso desarrollado · arquitectura</div><h1>Elegir fronteras antes de repartir servidores</h1><p>Hoy la reserva usa memoria y mañana necesitará un motor documental. Si RegistrarObservacion crea su propio cliente de base de datos, cambiar el motor obliga a tocar también el caso de uso. El problema no se resuelve creando cinco carpetas vacías o cinco servicios remotos.</p><h2>Antes de empezar</h2><p>Comprende una entidad válida, una función y un objeto recibido como parámetro.</p><h2>Palabras que necesitarás</h2><p><strong>Arquitectura:</strong> Decisiones de responsabilidad y dependencia que condicionan el cambio.</p><p><strong>Puerto:</strong> Capacidad que una pieza necesita de otra.</p><p><strong>Inyección:</strong> Entregar una implementación a quien la utiliza.</p><h2>Resolver el problema</h2><p>crearAplicacion recibe un repositorio y lo entrega al caso de uso. RegistrarObservacion conoce operaciones como guardar y buscarOperacion, no direcciones de red. La composición concentra la elección concreta. El ejemplo inyecta el mismo RepositorioMemoria y verifica que el objeto entregado es el que realmente recibe las escrituras.</p><p>La comprobación de métodos solo valida la forma del puerto. Un objeto puede tener guardar y aun así perder datos o mezclar reservas. Por eso una implementación nueva necesita pruebas de contrato y de fallos, no solo satisfacer una lista de nombres. Un monolito modular conserva estas fronteras dentro de un proceso.</p></section><section class="book-page ep3-page" id="area-desarrollada-arquitectura-ejemplo"><div class="eyebrow">Ejemplo trabajado · arquitectura</div><h1>Seguir el resultado</h1><ol><li>Crea el repositorio fuera del caso de uso.</li><li>Inyéctalo mediante crearAplicacion y registra una observación.</li><li>Consulta ese mismo objeto y prueba el rechazo de un puerto incompleto.</li></ol><p>Raíz de COBRIA; Node.js 22.13 o superior, sin paquetes nuevos.</p><pre>node replication/examples/ecosistema-app/taller-areas/ejecutar.mjs arquitectura</pre><p>Puedes añadir 4 al final del comando para cambiar la cantidad, o 0 para provocar el rechazo. Calidad no utiliza ese argumento: comprueba cargas y permisos con un reloj controlado.</p><p>Función real de replication/examples/ecosistema-app/taller-areas/casos.mjs. Utiliza imports y datos compartidos del archivo completo; no es un programa autónomo.</p><pre>export async function arquitectura(cantidad = 3) {
+  const repositorio = new RepositorioMemoria();
+  const app = crearAplicacion({ repositorio });
+  await app.registrar.ejecutar(entrada(cantidad), contexto());
+  const documentos = await repositorio.listar('reserva-sur');
+  assert.equal(app.repositorio, repositorio);
+  assert.equal(documentos.length, 1);
+  assert.throws(() =&gt; crearAplicacion({ repositorio: {} }), /Repositorio sin método/);
+  return {
+    documentos: documentos.length,
+    cantidad: documentos[0].cantidad,
+    puertoIncompleto: 'rechazado',
+  };
+}</pre><h2>Campos esperados</h2><pre>{
+  &quot;documentos&quot;: 1,
+  &quot;cantidad&quot;: 3,
+  &quot;puertoIncompleto&quot;: &quot;rechazado&quot;
+}</pre></section><section class="book-page ep3-page" id="area-desarrollada-arquitectura-ejercicio"><div class="eyebrow">Decidir y practicar · arquitectura</div><h1>Elegir y comprobar</h1><h2>Alternativa y costo</h2><p>Un programa pequeño y sin reglas puede usar una función directa. Introduce el puerto cuando exista una dependencia que aislar o una sustitución concreta que probar, no por una cuota de clases.</p><p>La separación exige conectar piezas y mantener contratos. No elimina la latencia ni las diferencias de consistencia entre motores; hace visible dónde resolverlas.</p><h2>Fallo y recuperación</h2><p>Un repositorio con guardar pero sin listar falla al componer. Otro con todos los métodos pero semántica incorrecta podría pasar esa comprobación inicial.</p><p>Completa el puerto y ejecuta casos positivos y negativos sobre la misma implementación. No añadas métodos vacíos para satisfacer la comprobación.</p><h2>Tu ejercicio</h2><p>Dibuja dos opciones: acceso directo y repositorio inyectado. Justifica cuál usarías para una reserva que importará documentos de dos fuentes y escribe qué cambio esperas aislar.</p><h2>Solución explicada</h2><p>La opción inyectada permite sustituir la persistencia en la composición y conservar el caso de uso. El dibujo debe mostrar dominio independiente, aplicación que depende del puerto e infraestructura que lo implementa. No dibujes una llamada de red por cada carpeta: las responsabilidades no obligan a distribuir el despliegue.</p><h2>Revisar la entrega</h2><ul><li>La elección responde a un cambio concreto.</li><li>El dominio no importa el motor.</li><li>La decisión reconoce el costo del contrato.</li></ul><p><strong>Continúa:</strong> Sigue una solicitud por archivos reales para distinguir dependencia y secuencia de ejecución.</p><p class="ep3-source">Fuentes: replication/examples/ecosistema-app/src/composition.mjs · replication/examples/ecosistema-app/src/application/ports/repositorio-observaciones.mjs</p></section><section class="book-page ep3-page" id="area-desarrollada-capas"><div class="eyebrow">Caso desarrollado · capas</div><h1>Seguir una solicitud y cambiar una sola responsabilidad</h1><p>La pantalla muestra un error genérico al enviar una cantidad cero. La regla sí está funcionando, pero la respuesta no explica el problema. Reescribir la vista, el caso de uso y el repositorio a la vez haría difícil saber qué corrección era necesaria.</p><h2>Antes de empezar</h2><p>Reconoce composición, caso de uso y repositorio. Puedes abrir varios archivos sin confundir su ubicación con su responsabilidad.</p><h2>Palabras que necesitarás</h2><p><strong>Presentación:</strong> Traduce un protocolo a entradas y salidas de la aplicación.</p><p><strong>Caso de uso:</strong> Coordina una intención y sus dependencias.</p><p><strong>Dater:</strong> Traduce la representación lógica y física de datos.</p><h2>Resolver el problema</h2><p>El controlador convierte el resultado del registro en estado 201. Cuando recibe un error conocido del dominio, lo convierte en un problema de entrada o permiso. El caso de uso autoriza y coordina; la entidad valida; el repositorio guarda. La traducción de un código a castellano pertenece a presentación, no al Dater.</p><p>El árbol real está en data/arquitectura.json. Consulta su propietario por archivo y sus pruebas relacionadas antes de editar. Una cadena de ejecución puede ir del controlador al caso de uso y de allí al repositorio; eso no autoriza que el dominio importe el controlador de vuelta. Las dependencias deben poder leerse sin recorrer ciclos.</p></section><section class="book-page ep3-page" id="area-desarrollada-capas-ejemplo"><div class="eyebrow">Ejemplo trabajado · capas</div><h1>Seguir el resultado</h1><ol><li>Invoca el controlador con una solicitud autorizada.</li><li>Cambia solo la cantidad: observa el problema 400.</li><li>Conserva una entrada válida pero retira la capacidad: observa 403, no 201.</li></ol><p>Raíz de COBRIA; Node.js 22.13 o superior, sin paquetes nuevos.</p><pre>node replication/examples/ecosistema-app/taller-areas/ejecutar.mjs capas</pre><p>Puedes añadir 4 al final del comando para cambiar la cantidad, o 0 para provocar el rechazo. Calidad no utiliza ese argumento: comprueba cargas y permisos con un reloj controlado.</p><p>Función real de replication/examples/ecosistema-app/taller-areas/casos.mjs. Utiliza imports y datos compartidos del archivo completo; no es un programa autónomo.</p><pre>export async function capas(cantidad = 3) {
+  const app = crearAplicacion();
+  const solicitud = { cuerpo: entrada(cantidad), contexto: contexto() };
+  const correcta = await app.registrarController.ejecutar(solicitud);
+  const invalida = await app.registrarController.ejecutar({
+    cuerpo: entrada(0),
+    contexto: { ...contexto(), claveIdempotencia: 'visita-cero' },
+  });
+  const prohibida = await app.registrarController.ejecutar({
+    ...solicitud,
+    contexto: { ...contexto(), permisos: [] },
+  });
+  assert.equal(correcta.estado, 201);
+  assert.equal(invalida.estado, 400);
+  assert.equal(prohibida.estado, 403);
+  return {
+    aceptada: correcta.estado,
+    invalida: invalida.estado,
+    denegada: prohibida.estado,
+    mensaje: prohibida.cuerpo.mensaje,
+  };
+}</pre><h2>Campos esperados</h2><pre>{
+  &quot;aceptada&quot;: 201,
+  &quot;invalida&quot;: 400,
+  &quot;denegada&quot;: 403
+}</pre></section><section class="book-page ep3-page" id="area-desarrollada-capas-ejercicio"><div class="eyebrow">Decidir y practicar · capas</div><h1>Elegir y comprobar</h1><h2>Alternativa y costo</h2><p>Un controlador mínimo puede bastar para una operación pequeña. No separes una clase adicional si solo cambia el nombre de una llamada y no protege una responsabilidad.</p><p>Cada frontera añade traducción y pruebas. Compensa cuando permite cambiar mensajes sin alterar reglas o adaptar datos sin contaminar el dominio.</p><h2>Fallo y recuperación</h2><p>Cambiar la regla del dominio para que el controlador devuelva éxito con cero elimina una protección válida. Un 403 tampoco es necesariamente un defecto de la pantalla.</p><p>Reproduce entrada, contexto y respuesta por separado. Corrige el traductor si el código es correcto y el mensaje es malo; corrige la autorización solo si el requisito realmente concede esa capacidad.</p><h2>Tu ejercicio</h2><p>Asigna estos cambios a archivos: traducir OBS_QUANTITY_INVALID, añadir un índice, cambiar una regla de cantidad y conectar otro repositorio. Dibuja sus imports permitidos.</p><h2>Solución explicada</h2><p>El mensaje va en presentation/i18n/mensajes-es.mjs; el índice corresponde al adaptador del motor; la cantidad se protege en domain/observacion.mjs; el repositorio concreto se elige en composition.mjs. Aplicación depende del puerto; dominio no depende de ninguna de esas implementaciones.</p><h2>Revisar la entrega</h2><ul><li>Cada cambio tiene un responsable distinto.</li><li>El caso negativo conserva 400 y 403.</li><li>El dibujo no introduce un ciclo.</li></ul><p><strong>Continúa:</strong> Usa nombres y comentarios que permitan entender esas decisiones sin memorizar el diagrama.</p><p class="ep3-source">Fuentes: replication/examples/ecosistema-app/data/arquitectura.json · replication/examples/ecosistema-app/src/presentation/registrar-observacion-controller.mjs</p></section><section class="book-page ep3-page" id="area-desarrollada-codigo"><div class="eyebrow">Caso desarrollado · codigo</div><h1>Nombrar valores y conservar su significado</h1><p>El número de una fecha viaja entre dos funciones y alguien lo divide por mil. El programa no se cae: muestra una fecha de 1970. Un comentario que diga convertir fecha no evita el fallo porque nunca explicó la unidad que debía conservarse.</p><h2>Antes de empezar</h2><p>Sabes leer una función y distinguir texto y número. La entidad ya valida la fecha antes de llegar al ejemplo.</p><h2>Palabras que necesitarás</h2><p><strong>Unidad:</strong> Escala que da significado a una magnitud, como milisegundos.</p><p><strong>Código de error:</strong> Identificador estable que una interfaz puede traducir.</p><p><strong>Comentario de intención:</strong> Explicación del motivo de una decisión, no repetición de la instrucción.</p><h2>Resolver el problema</h2><p>Compara const x = Date.parse(fecha) con const instanteMs = Date.parse(observacion.observadaEn). La segunda forma hace visible la unidad. Date recibe milisegundos; volver a crear la fecha con instanteMs conserva el instante. El comentario explica por qué dividir por mil sería incorrecto en esta frontera.</p><p>Mantén códigos como OBS_QUANTITY_INVALID separados del texto que lee la persona. Puedes mejorar la redacción sin romper una prueba que compara el código. En este proyecto los nombres del dominio están en español; las palabras reservadas de JavaScript y nombres de bibliotecas conservan su forma. No traduzcas contratos externos improvisando otro protocolo.</p></section><section class="book-page ep3-page" id="area-desarrollada-codigo-ejemplo"><div class="eyebrow">Ejemplo trabajado · codigo</div><h1>Seguir el resultado</h1><ol><li>Construye una observación válida y convierte su fecha a milisegundos.</li><li>Reconstruye el mismo instante UTC y compáralo con el original.</li><li>Provoca el cambio de unidad y verifica que ya no representa la misma fecha.</li></ol><p>Raíz de COBRIA; Node.js 22.13 o superior, sin paquetes nuevos.</p><pre>node replication/examples/ecosistema-app/taller-areas/ejecutar.mjs codigo</pre><p>Puedes añadir 4 al final del comando para cambiar la cantidad, o 0 para provocar el rechazo. Calidad no utiliza ese argumento: comprueba cargas y permisos con un reloj controlado.</p><p>Función real de replication/examples/ecosistema-app/taller-areas/casos.mjs. Utiliza imports y datos compartidos del archivo completo; no es un programa autónomo.</p><pre>export async function codigo(cantidad = 3) {
+  const observacion = new Observacion(entrada(cantidad));
+  const instanteMs = Date.parse(observacion.observadaEn);
+  // Date recibe milisegundos. Dividir por 1000 aquí cambiaría la unidad.
+  const fechaUtc = new Date(instanteMs).toISOString();
+  const descripcion = `${observacion.especie}: ${observacion.cantidad} (${fechaUtc})`;
+  assert.equal(fechaUtc, observacion.observadaEn);
+  assert.notEqual(new Date(instanteMs / 1000).toISOString(), fechaUtc);
+  return { descripcion, errorCantidad: traducirErrorEs('OBS_QUANTITY_INVALID') };
+}</pre><h2>Campos esperados</h2><pre>{
+  &quot;errorCantidad&quot;: &quot;La cantidad debe ser positiva.&quot;
+}</pre></section><section class="book-page ep3-page" id="area-desarrollada-codigo-ejercicio"><div class="eyebrow">Decidir y practicar · codigo</div><h1>Elegir y comprobar</h1><h2>Alternativa y costo</h2><p>Un valor fecha ISO puede circular sin conversión numérica cuando no hay cálculo temporal. Evita transformar y volver a transformar solo para añadir una utilidad.</p><p>Nombres más explícitos ocupan espacio, pero reducen supuestos. Un comentario desactualizado puede ser peor que ninguno; la prueba debe conservar la relación temporal.</p><h2>Fallo y recuperación</h2><p>instanteMs / 1000 es válido como aritmética, pero incorrecto como entrada de este constructor de Date. No basta con comprobar que el resultado sea una cadena.</p><p>Devuelve milisegundos a la frontera y compara el instante esperado. Anota la unidad donde entra y sale; no ajustes la expectativa a una fecha equivocada.</p><h2>Tu ejercicio</h2><p>Refactoriza en una copia un nombre ambiguo como x a instanteMs. Escribe el comentario de intención y una prueba que falle si se introduce la división por mil.</p><h2>Solución explicada</h2><p>El antes oculta la unidad; el después la conserva en el nombre y en la llamada new Date(instanteMs). La prueba compara ISO con el instante validado y añade una desigualdad para la división incorrecta. No hace falta un comentario por cada asignación ni una clase de fechas para esta única conversión.</p><h2>Revisar la entrega</h2><ul><li>El cambio no altera la salida correcta.</li><li>La prueba detecta el error de unidad.</li><li>El comentario explica el porqué y conserva el código del error.</li></ul><p><strong>Continúa:</strong> Conserva también el significado cuando el documento se traduzca a atributos físicos.</p><p class="ep3-source">Fuentes: specification/phase-6/COMENTARIOS-Y-DOCSTRINGS.md · replication/examples/ecosistema-app/src/presentation/i18n/mensajes-es.mjs</p></section><section class="book-page ep3-page" id="area-desarrollada-datos"><div class="eyebrow">Caso desarrollado · datos</div><h1>Diseñar el diccionario y evolucionar un documento</h1><p>La reserva añade una edición del catálogo y los documentos antiguos siguen existiendo. Si se reemplaza la etiqueta sin conservar la edición, una consulta histórica podría interpretar la observación con un significado posterior. Añadir una letra física no debería cambiar silenciosamente la cantidad observada.</p><h2>Antes de empezar</h2><p>Comprende identidad, ámbito, revisión y objeto. Las letras físicas no deben convertirse en nombres del dominio.</p><h2>Palabras que necesitarás</h2><p><strong>Diccionario:</strong> Definición de campos, tipos, reglas, propietario y versiones.</p><p><strong>Catálogo:</strong> Conjunto versionado de códigos y significados permitidos.</p><p><strong>Migración:</strong> Transformación explícita entre formatos compatibles con un propósito.</p><h2>Resolver el problema</h2><p>Empieza por el significado: identifica la observación, su reserva, revisión, instante, especie y cantidad. Después declara tipos, nulabilidad, límites y quién puede escribirlos. El diccionario local asigna a a identidad, b a ámbito, c a revisión, d a formato, e a instante, f a especie y g a cantidad. Es una convención de esta aplicación, no un alfabeto universal.</p><p>El Dater traduce; el dominio sigue leyendo cantidad. El formato dos añade h para la edición del catálogo en la frontera de datos. La migración requiere que se declare esa edición: no la adivina. Repetir la migración conserva el resultado, mientras revisión uno sigue siendo la versión del hecho y no la del formato.</p><p>Separa nodos por propiedad y patrón de acceso. Un catálogo compartido y versionado no debe duplicarse editable en cada observación; una proyección puede incluir su etiqueta con procedencia. La consulta del taller filtra y ordena en memoria: recorre N documentos y puede ordenar M candidatos. No crea un índice real ni prueba el rendimiento de un motor.</p></section><section class="book-page ep3-page" id="area-desarrollada-datos-ejemplo"><div class="eyebrow">Ejemplo trabajado · datos</div><h1>Seguir el resultado</h1><ol><li>Traduce la entidad con el Dater, sin cambiar nombres del dominio.</li><li>Migra declarando 2026.1 y lee el documento con su edición.</li><li>Repite la migración y prueba el rechazo cuando falta la edición.</li></ol><p>Raíz de COBRIA; Node.js 22.13 o superior, sin paquetes nuevos.</p><pre>node replication/examples/ecosistema-app/taller-areas/ejecutar.mjs datos</pre><p>Puedes añadir 4 al final del comando para cambiar la cantidad, o 0 para provocar el rechazo. Calidad no utiliza ese argumento: comprueba cargas y permisos con un reloj controlado.</p><p>Función real de replication/examples/ecosistema-app/taller-areas/casos.mjs. Utiliza imports y datos compartidos del archivo completo; no es un programa autónomo.</p><pre>export async function datos(cantidad = 3) {
+  const dater = new ObservacionDater();
+  const documento = dater.haciaFisico(new Observacion(entrada(cantidad)));
+  const migrado = migrarObservacion(documento, '2026.1');
+  const leido = leerObservacionVersionada(migrado);
+  assert.equal(leido.observacion.cantidad, cantidad);
+  assert.equal(leido.observacion.revision, 1);
+  assert.throws(() =&gt; migrarObservacion(documento), { codigo: 'CAT_VERSION_REQUIRED' });
+  assert.deepEqual(migrarObservacion(migrado, '2026.1'), migrado);
+  return {
+    cantidad: leido.observacion.cantidad,
+    revision: leido.observacion.revision,
+    catalogo: leido.catalogoVersion,
+    etiqueta: leido.clasificacion.etiqueta,
+  };
+}</pre><h2>Campos esperados</h2><pre>{
+  &quot;cantidad&quot;: 3,
+  &quot;revision&quot;: 1,
+  &quot;catalogo&quot;: &quot;2026.1&quot;,
+  &quot;etiqueta&quot;: &quot;Colibrí&quot;
+}</pre></section><section class="book-page ep3-page" id="area-desarrollada-datos-ejercicio"><div class="eyebrow">Decidir y practicar · datos</div><h1>Elegir y comprobar</h1><h2>Alternativa y costo</h2><p>Usa nombres físicos largos si facilitan operar el almacén y el ahorro no se ha medido. Un código compacto no es automáticamente más rápido ni más fácil de mantener.</p><p>Conservar ediciones exige almacenamiento y políticas de retención. Un índice por ámbito y fecha añade mantenimiento; solo se justifica por la consulta y su costo medido.</p><h2>Fallo y recuperación</h2><p>Omitir la edición produce CAT_VERSION_REQUIRED. Usar el formato como si fuera revisión confundiría una transformación técnica con un cambio del hecho.</p><p>Obtén la edición histórica de una fuente autorizada antes de migrar. Si no se conoce, conserva el documento para revisión; no le asignes la edición más reciente para lograr éxito.</p><h2>Tu ejercicio</h2><p>Diseña un campo opcional observadorAnonimo sin datos personales. Entrega diccionario, dueño, nulabilidad, nodo, consulta afectada y propuesta de compatibilidad; no añadas una letra arbitraria al dominio.</p><h2>Solución explicada</h2><p>El diccionario debe explicar un identificador sintético, finalidad y retención. Propón un formato nuevo si cambia el sobre físico y conserva lectura de formatos anteriores. El campo no sustituye actorId ni concede permisos. Antes de escribir código, identifica dónde se traduce y qué pasa con documentos que no lo tienen.</p><h2>Revisar la entrega</h2><ul><li>Revisión y formato tienen significados separados.</li><li>Se declara catálogo histórico y responsable.</li><li>La propuesta no confunde consulta local con índice del motor.</li></ul><p><strong>Continúa:</strong> Define qué documento manda y cómo comprobar la copia que resume esos hechos.</p><p class="ep3-source">Fuentes: replication/examples/ecosistema-app/data/diccionario-observaciones.json · replication/examples/ecosistema-app/src/infrastructure/data/taller-datos.mjs</p></section><section class="book-page ep3-page" id="area-desarrollada-core"><div class="eyebrow">Caso desarrollado · core</div><h1>Reconstruir un resumen sin cambiar los hechos</h1><p>El resumen muestra noventa y nueve colibríes, pero la observación original registra tres. Corregir el documento original para que coincida con el resumen convertiría una copia averiada en autoridad. La reparación debe partir del hecho y conservar su reserva.</p><h2>Antes de empezar</h2><p>Distingue documento lógico, representación física, revisión y ámbito. Lee el Core para las obligaciones normativas, no la analogía del libro.</p><h2>Palabras que necesitarás</h2><p><strong>Canónico:</strong> Representación con autoridad para el hecho.</p><p><strong>Proyección:</strong> Representación derivada para una pregunta concreta.</p><p><strong>Equivalencia:</strong> Criterio declarado para comparar dos resultados.</p><h2>Resolver el problema</h2><p>La aplicación registra mediante su caso de uso y construye un resumen por especie desde los documentos canónicos. El ensayo altera deliberadamente solo la copia derivada y vuelve a reconstruir. La comparación comprueba igualdad del resultado anterior y posterior para este conjunto pequeño. No demuestra equivalencia universal ni todos los requisitos de conformidad.</p><p>En un despliegue real se necesita además declarar fuentes, transformación, corte, revisión y regla de publicación. Un resumen igual en memoria no demuestra que lectores distribuidos vean una versión indivisible. Core 1.0 conserva su autoridad: este ejemplo ilustra una responsabilidad, no amplía la norma con cada recomendación del manual.</p></section><section class="book-page ep3-page" id="area-desarrollada-core-ejemplo"><div class="eyebrow">Ejemplo trabajado · core</div><h1>Seguir el resultado</h1><ol><li>Guarda el hecho autorizado y construye el resumen.</li><li>Altera la copia derivada en el ensayo aislado, no el documento.</li><li>Reconstruye y compara; intenta otra reserva y espera rechazo.</li></ol><p>Raíz de COBRIA; Node.js 22.13 o superior, sin paquetes nuevos.</p><pre>node replication/examples/ecosistema-app/taller-areas/ejecutar.mjs core</pre><p>Puedes añadir 4 al final del comando para cambiar la cantidad, o 0 para provocar el rechazo. Calidad no utiliza ese argumento: comprueba cargas y permisos con un reloj controlado.</p><p>Función real de replication/examples/ecosistema-app/taller-areas/casos.mjs. Utiliza imports y datos compartidos del archivo completo; no es un programa autónomo.</p><pre>export async function core(cantidad = 3) {
+  const app = crearAplicacion(),
+    actor = contexto();
+  await app.registrar.ejecutar(entrada(cantidad), actor);
+  const antes = await app.reconstruir.ejecutar('reserva-sur', actor);
+  // Corrupción deliberada de la copia derivada, solo dentro de este ensayo.
+  await app.proyecciones.publicar('reserva-sur', { conteos: { colibri: 99 } });
+  const reparada = await app.reconstruir.ejecutar('reserva-sur', actor);
+  assert.deepEqual(reparada, antes);
+  assert.equal(
+    (await app.listar.ejecutar({ ambito: 'reserva-sur' }, actor)).items[0].cantidad,
+    cantidad,
+  );
+  await assert.rejects(() =&gt; app.reconstruir.ejecutar('reserva-norte', actor), {
+    codigo: 'ACCESS_DENIED',
+  });
+  return {
+    canonico: cantidad,
+    reconstruida: reparada.conteos.colibri,
+    equivalenciaDelCaso: true,
+  };
+}</pre><h2>Campos esperados</h2><pre>{
+  &quot;canonico&quot;: 3,
+  &quot;reconstruida&quot;: 3,
+  &quot;equivalenciaDelCaso&quot;: true
+}</pre></section><section class="book-page ep3-page" id="area-desarrollada-core-ejercicio"><div class="eyebrow">Decidir y practicar · core</div><h1>Elegir y comprobar</h1><h2>Alternativa y costo</h2><p>Lee el documento directamente si la consulta es sencilla y su costo cumple el requisito. Una proyección introduce otra pieza que verificar y retirar.</p><p>Reconstruir todo lee las fuentes y consume tiempo. Con varias especies, el ejemplo vuelve a filtrar por cada especie: no debe venderse como implementación óptima universal.</p><h2>Fallo y recuperación</h2><p>Publicar una copia con conteo correcto en una reserva equivocada sigue siendo incorrecto. La igualdad de un número no reemplaza ámbito, procedencia y autorización.</p><p>Conserva la evidencia de la copia incorrecta, vuelve a las fuentes autorizadas y publica solo tras comprobar el contrato. No edites la fuente para ocultar la divergencia.</p><h2>Tu ejercicio</h2><p>Escribe un criterio de equivalencia para un resumen con colibríes y ranas. Distingue campos que deben coincidir de metadatos que pueden cambiar al reconstruir.</p><h2>Solución explicada</h2><p>Deben coincidir ámbito, especies y totales para el mismo corte de fuentes. Un instante de construcción puede variar si el contrato lo permite; la transformación y su versión deben quedar identificadas. El criterio debe rechazar una especie omitida aunque coincida el total general. Para conformidad completa usa la especificación y sus pruebas, no solo este caso.</p><h2>Revisar la entrega</h2><ul><li>Se conserva autoridad canónica.</li><li>La equivalencia incluye ámbito y contenido.</li><li>No se declara conformidad completa por una igualdad local.</li></ul><p><strong>Continúa:</strong> Elige un mecanismo por su problema y garantías, no por el prestigio de su nombre.</p><p class="ep3-source">Fuentes: specification/COBRIA-CORE-1.0.md · replication/examples/ecosistema-app/src/application/reconstruir-resumen.mjs</p></section><section class="book-page ep3-page" id="area-desarrollada-patrones"><div class="eyebrow">Caso desarrollado · patrones</div><h1>Elegir y reconocer una solución recurrente</h1><p>La conexión se interrumpe después de guardar una visita. La interfaz reintenta y no sabe si hubo efecto. Contar dos visitas daría un resumen incorrecto; rechazar todos los reintentos impediría recuperarse de un fallo de red.</p><h2>Antes de empezar</h2><p>Comprende el registro autorizado, la misma intención repetida y la diferencia entre un hecho y una copia.</p><h2>Palabras que necesitarás</h2><p><strong>Patrón:</strong> Solución recurrente con contexto, tensiones y consecuencias.</p><p><strong>Adaptación:</strong> Aplicación de una idea conocida con condiciones del proyecto.</p><p><strong>Convención:</strong> Acuerdo local de nombres u organización, no garantía técnica.</p><h2>Resolver el problema</h2><p>El caso de uso consulta la clave de idempotencia dentro del ámbito. Si ya existe con el mismo contenido, devuelve el resultado anterior; si cambia el contenido, rechaza el conflicto. En la demostración secuencial queda un documento. Concurrencia y caída entre guardar y registrarOperacion requieren garantías adicionales del adaptador: dos llamadas separadas no son una transacción.</p><p>Empieza también por patrones de entrada: un repositorio concentra acceso; un mapeador separa formatos; la composición inyecta dependencias. Son ideas reconocidas, no novedades COBRIA. El Dater adapta un papel de mapeo al contrato documental. Las treinta fichas incluyen además controles, contratos, heurísticas y propuestas experimentales; la revisión de clasificación explica cada distinción.</p></section><section class="book-page ep3-page" id="area-desarrollada-patrones-ejemplo"><div class="eyebrow">Ejemplo trabajado · patrones</div><h1>Seguir el resultado</h1><ol><li>Registra y repite la misma entrada bajo la misma clave.</li><li>Comprueba un solo documento y el mismo resultado.</li><li>Cambia la cantidad manteniendo la clave: debe aparecer IDEMPOTENCY_CONFLICT.</li></ol><p>Raíz de COBRIA; Node.js 22.13 o superior, sin paquetes nuevos.</p><pre>node replication/examples/ecosistema-app/taller-areas/ejecutar.mjs patrones</pre><p>Puedes añadir 4 al final del comando para cambiar la cantidad, o 0 para provocar el rechazo. Calidad no utiliza ese argumento: comprueba cargas y permisos con un reloj controlado.</p><p>Función real de replication/examples/ecosistema-app/taller-areas/casos.mjs. Utiliza imports y datos compartidos del archivo completo; no es un programa autónomo.</p><pre>export async function patrones(cantidad = 3) {
+  const app = crearAplicacion(),
+    actor = contexto();
+  const primera = await app.registrar.ejecutar(entrada(cantidad), actor);
+  const repetida = await app.registrar.ejecutar(entrada(cantidad), actor);
+  assert.deepEqual(repetida, primera);
+  await assert.rejects(() =&gt; app.registrar.ejecutar(entrada(cantidad + 1), actor), {
+    codigo: 'IDEMPOTENCY_CONFLICT',
+  });
+  const lista = await app.listar.ejecutar({ ambito: 'reserva-sur' }, actor);
+  assert.equal(lista.items.length, 1);
+  return {
+    documentos: lista.items.length,
+    conflicto: 'IDEMPOTENCY_CONFLICT',
+    garantiaConcurrente: false,
+  };
+}</pre><h2>Campos esperados</h2><pre>{
+  &quot;documentos&quot;: 1,
+  &quot;conflicto&quot;: &quot;IDEMPOTENCY_CONFLICT&quot;,
+  &quot;garantiaConcurrente&quot;: false
+}</pre></section><section class="book-page ep3-page" id="area-desarrollada-patrones-ejercicio"><div class="eyebrow">Decidir y practicar · patrones</div><h1>Elegir y comprobar</h1><h2>Alternativa y costo</h2><p>Una restricción o transacción nativa puede dar la garantía requerida con menos código. No introduzcas una bandeja de salida si no hay un evento que deba confirmarse junto al hecho.</p><p>El registro de intenciones ocupa almacenamiento y necesita retención. Si se elimina demasiado pronto puede perderse la protección para reintentos tardíos.</p><h2>Fallo y recuperación</h2><p>Generar una clave nueva en cada reintento impide reconocer la misma intención. Reusar una clave para contenido nuevo no es recuperación: es un conflicto.</p><p>Conserva la clave durante los reintentos de una intención. Genera otra solo para una intención nueva y usa la garantía atómica del motor cuando el riesgo concurrente lo exija.</p><h2>Tu ejercicio</h2><p>Completa una ficha propia para la visita repetida: contexto, fuerzas, alternativa, garantía, prueba adversa y condición de retiro. Clasifícala sin afirmar que inventaste la idempotencia.</p><h2>Solución explicada</h2><p>Clasifica el mecanismo como adaptación de procesamiento idempotente. Sus fuerzas son evitar duplicados y permitir reintentos sin esconder contenido distinto. La prueba adversa cambia cantidad con la misma clave. Declara que el ejemplo local no garantiza exactamente un efecto concurrente; esa obligación exige otra implementación y pruebas del adaptador.</p><h2>Revisar la entrega</h2><ul><li>La ficha declara antecedentes y límites.</li><li>El conflicto no se interpreta como éxito.</li><li>Se compara una alternativa más simple.</li></ul><p><strong>Continúa:</strong> Expresa esos resultados en una interfaz que muestre éxito, rechazo y reintento sin duplicar efectos.</p><p class="ep3-source">Fuentes: manuales/03-pattern-design.md · editorial/pc1/AUDITORIA-PC1.md</p></section><section class="book-page ep3-page" id="area-desarrollada-apiux"><div class="eyebrow">Caso desarrollado · apiux</div><h1>Conectar una respuesta verificable con el formulario</h1><p>El formulario borra los datos cuando el servidor devuelve cantidad inválida. La persona debe escribir todo de nuevo y no sabe qué campo corregir. Si se muestra éxito ante cualquier respuesta recibida, un rechazo de permisos parece un registro válido.</p><h2>Antes de empezar</h2><p>Entiende el controlador y los estados 201, 400 y 403. Una API es una interfaz entre programas; HTTP es uno de sus protocolos.</p><h2>Palabras que necesitarás</h2><p><strong>Estado de interfaz:</strong> Situación visible como carga, éxito, vacío o error.</p><p><strong>Problema de API:</strong> Respuesta estructurada con código y explicación.</p><p><strong>Internacionalización:</strong> Separación del significado y su presentación según idioma.</p><h2>Resolver el problema</h2><p>Recibir una respuesta de red no equivale a éxito del negocio. El controlador distingue registro creado, entrada inválida y acceso denegado. La interfaz del taller C5 conserva formulario, estado y mensajes. Lee public/app.js junto al servidor: una validación local ayuda a corregir, pero el backend sigue siendo autoritativo.</p><p>Especifica qué pasa durante carga, envío repetido, error recuperable y nueva intención. Los errores se anuncian mediante texto y no solo color; el foco debe permitir volver al campo o al mensaje. Mantén los códigos estables y traduce la explicación. El ejemplo de controlador es comprobable sin red; el formulario HTTP completo se ejecuta desde el taller existente, no aparece mágicamente al llamar esta función.</p></section><section class="book-page ep3-page" id="area-desarrollada-apiux-ejemplo"><div class="eyebrow">Ejemplo trabajado · apiux</div><h1>Seguir el resultado</h1><ol><li>Observa el caso positivo y dos rechazos del controlador.</li><li>Abre el taller api-ux-c5 y sigue el envío hasta el mismo caso de uso.</li><li>Prueba teclado, error de cantidad y rol sin permiso sin borrar protecciones.</li></ol><p>Raíz de COBRIA; Node.js 22.13 o superior, sin paquetes nuevos.</p><pre>node replication/examples/ecosistema-app/taller-areas/ejecutar.mjs capas</pre><p>Puedes añadir 4 al final del comando para cambiar la cantidad, o 0 para provocar el rechazo. Calidad no utiliza ese argumento: comprueba cargas y permisos con un reloj controlado.</p><p>Función real de replication/examples/ecosistema-app/taller-areas/casos.mjs. Utiliza imports y datos compartidos del archivo completo; no es un programa autónomo.</p><pre>export async function capas(cantidad = 3) {
+  const app = crearAplicacion();
+  const solicitud = { cuerpo: entrada(cantidad), contexto: contexto() };
+  const correcta = await app.registrarController.ejecutar(solicitud);
+  const invalida = await app.registrarController.ejecutar({
+    cuerpo: entrada(0),
+    contexto: { ...contexto(), claveIdempotencia: 'visita-cero' },
+  });
+  const prohibida = await app.registrarController.ejecutar({
+    ...solicitud,
+    contexto: { ...contexto(), permisos: [] },
+  });
+  assert.equal(correcta.estado, 201);
+  assert.equal(invalida.estado, 400);
+  assert.equal(prohibida.estado, 403);
+  return {
+    aceptada: correcta.estado,
+    invalida: invalida.estado,
+    denegada: prohibida.estado,
+    mensaje: prohibida.cuerpo.mensaje,
+  };
+}</pre><h2>Campos esperados</h2><pre>{
+  &quot;aceptada&quot;: 201,
+  &quot;invalida&quot;: 400,
+  &quot;denegada&quot;: 403
+}</pre></section><section class="book-page ep3-page" id="area-desarrollada-apiux-ejercicio"><div class="eyebrow">Decidir y practicar · apiux</div><h1>Elegir y comprobar</h1><h2>Alternativa y costo</h2><p>Una página de lectura puede bastar si la persona no necesita escribir datos. Añadir un formulario implica estado, accesibilidad, autorización y recuperación.</p><p>Conservar estado y foco exige pruebas de interacción. Ocultar un botón reduce confusión, pero no autoriza ni protege por sí mismo una operación.</p><h2>Fallo y recuperación</h2><p>Un 403 presentado como completado induce al usuario a confiar en un registro inexistente. Dos clics no deberían convertirse sin explicación en dos intenciones distintas.</p><p>Conserva entrada y error específico; no repitas automáticamente un rechazo de permiso. Permite reintentar fallos recuperables con la clave de la misma intención.</p><h2>Tu ejercicio</h2><p>Dibuja los estados del formulario y redacta mensajes para cantidad cero, sesión no autorizada y error temporal. Define qué dato conserva y dónde queda el foco.</p><h2>Solución explicada</h2><p>Desde edición se pasa a carga y luego a éxito o error. En cantidad cero se conserva el formulario, se explica el límite y se dirige la atención al campo. En 403 se informa la falta de permiso sin sugerir que cambie la reserva a ciegas. En error temporal se ofrece reintento controlado. El mensaje y el foco tienen una comprobación, no solo un color.</p><h2>Revisar la entrega</h2><ul><li>El flujo distingue rechazo y fallo temporal.</li><li>La validación del servidor permanece.</li><li>Los mensajes y el foco son utilizables sin color ni ratón.</li></ul><p><strong>Continúa:</strong> Documenta el recorrido que una persona necesita, sin confundirlo con la referencia de cada parámetro.</p><p class="ep3-source">Fuentes: replication/examples/api-ux-c5/public/app.js · manuales/30-api-ux-seguridad-y-privacidad.md</p></section><section class="book-page ep3-page" id="area-desarrollada-documentacion"><div class="eyebrow">Caso desarrollado · documentacion</div><h1>Escribir documentos que responden preguntas distintas</h1><p>El equipo tiene un README enorme, pero una persona nueva no sabe ejecutar el programa y quien atiende un incidente no encuentra cómo restaurarlo. Mezclar una historia de diseño con comandos de emergencia obliga a leer demasiado cuando el tiempo importa.</p><h2>Antes de empezar</h2><p>Ya puedes ejecutar un caso y explicar su entrada, resultado y rechazo. No necesitas inventar una plantilla para todo el proyecto.</p><h2>Palabras que necesitarás</h2><p><strong>Tutorial:</strong> Recorrido para aprender haciendo una tarea.</p><p><strong>Referencia:</strong> Descripción precisa de contratos y parámetros.</p><p><strong>ADR:</strong> Registro de una decisión, sus opciones y consecuencias.</p><h2>Resolver el problema</h2><p>Separa tutorial, referencia, explicación y guía operativa. El tutorial lleva de una copia nueva a una observación; la referencia define entradas y códigos; la explicación justifica el agregado; la guía operativa recupera un repositorio nuevo. Son necesidades distintas y pueden enlazarse sin repetir el mismo párrafo en cuatro lugares.</p><p>El ADR del agregado local conserva la opción elegida y lo descartado. El comentario de código debe aclarar una intención cercana; no puede sustituir esa historia. Una docstring de registrar debe explicar contexto, resultado, errores, efectos y límite de idempotencia. No prometas atomicidad si el repositorio usa dos operaciones separadas.</p></section><section class="book-page ep3-page" id="area-desarrollada-documentacion-ejemplo"><div class="eyebrow">Ejemplo trabajado · documentacion</div><h1>Seguir el resultado</h1><ol><li>Consulta el tutorial y ejecuta una tarea de principio a fin.</li><li>Busca el mismo contrato en la referencia sin repetir los pasos de instalación.</li><li>Relaciona la decisión del agregado con su guía de recuperación.</li></ol><p>Artefacto trabajado, no programa para ejecutar.</p><pre>{
+  &quot;tutorial&quot;: &quot;Registrar una visita desde una copia nueva&quot;,
+  &quot;referencia&quot;: {
+    &quot;entrada&quot;: [
+      &quot;documento&quot;,
+      &quot;contexto&quot;
+    ],
+    &quot;errores&quot;: [
+      &quot;ACCESS_DENIED&quot;,
+      &quot;IDEMPOTENCY_CONFLICT&quot;
+    ],
+    &quot;efecto&quot;: &quot;registro en el repositorio&quot;
+  },
+  &quot;explicacion&quot;: &quot;Por qué existe un límite de agregado&quot;,
+  &quot;guiaOperativa&quot;: &quot;Restaurar en un repositorio nuevo y comprobar equivalencia&quot;
+}</pre></section><section class="book-page ep3-page" id="area-desarrollada-documentacion-ejercicio"><div class="eyebrow">Decidir y practicar · documentacion</div><h1>Elegir y comprobar</h1><h2>Alternativa y costo</h2><p>Un solo README puede contener cuatro secciones claras en un proyecto pequeño. Dividirlo en docenas de archivos sin enlaces no lo vuelve más útil.</p><p>La documentación cambia con el contrato. Cada comando copiado y cada cifra histórica sin fuente aumenta el mantenimiento y la posibilidad de contradicción.</p><h2>Fallo y recuperación</h2><p>Una guía de restauración que presupone claves, rutas o permisos no declarados no permite transferencia aunque su prosa sea correcta.</p><p>Ensaya la guía desde una carpeta nueva y registra cada supuesto faltante. Corrige la fuente compartida; no solo la captura o el PDF que la reproduce.</p><h2>Tu ejercicio</h2><p>Redacta una docstring para registrar y una nota ADR que compare memoria con motor documental. Entrega además un enlace desde el tutorial hasta la recuperación.</p><h2>Solución explicada</h2><p>La docstring declara actor, capacidad, ámbito, finalidad y clave; devuelve la observación y enumera rechazos. El ADR elige memoria solo para aprender y reconoce pérdida al cerrar. La alternativa documental exige persistencia y recuperación comprobadas. La guía indica un repositorio nuevo, no sobrescribir el activo. Cada documento responde una pregunta concreta.</p><h2>Revisar la entrega</h2><ul><li>Se distinguen aprender, consultar, entender y operar.</li><li>La docstring no inventa garantías.</li><li>Los enlaces permiten ejecutar y recuperar sin conocimiento oculto.</li></ul><p><strong>Continúa:</strong> Usa esa precisión para describir amenazas y controles que puedan rechazarse en pruebas.</p><p class="ep3-source">Fuentes: manuales/34-documentacion-y-herramientas-practicas.md · manuales/decisiones/ADR-C8-AGREGADO-LOCAL.md · manuales/operacion/RECUPERACION-C8.md</p></section><section class="book-page ep3-page" id="area-desarrollada-seguridad"><div class="eyebrow">Caso desarrollado · seguridad</div><h1>Probar permisos antes y después del caso permitido</h1><p>Un guardaparques de la reserva sur cambia la reserva del formulario e intenta escribir en la norte. Si el sistema solo ocultó la opción visual, una petición directa podría cruzar el límite. La privacidad depende del flujo completo, no del diseño del botón.</p><h2>Antes de empezar</h2><p>Distingue actor, capacidad, ámbito y contexto. Reconoce que un objeto de permisos editable no autentica a una persona.</p><h2>Palabras que necesitarás</h2><p><strong>Amenaza:</strong> Acción o condición que puede dañar un activo.</p><p><strong>Autorización:</strong> Comprobación de una capacidad sobre un recurso y ámbito.</p><p><strong>Mínimo privilegio:</strong> Conceder solo lo necesario para una finalidad.</p><h2>Resolver el problema</h2><p>El caso de uso comprueba la capacidad de escritura y pertenencia al ámbito antes de guardar. El ejemplo intenta primero una capacidad ausente y luego una reserva ajena. Consulta después los documentos autorizados para comprobar que ninguno de los rechazos dejó una escritura parcial. Finalmente ejecuta un registro permitido: seguridad también significa no bloquear a quien sí debe actuar.</p><p>En la demostración el contexto es sintético y confiado por el ensayo. En un servidor se obtiene de una sesión verificada, con revocación y caducidad. Las reglas del motor y las Functions deben conservar la misma política. Nunca aceptes una lista de permisos del formulario como si la hubiera emitido el servidor.</p></section><section class="book-page ep3-page" id="area-desarrollada-seguridad-ejemplo"><div class="eyebrow">Ejemplo trabajado · seguridad</div><h1>Seguir el resultado</h1><ol><li>Intenta escribir sin capacidad y espera ACCESS_DENIED.</li><li>Intenta otra reserva con la misma identidad de demostración.</li><li>Comprueba cero efectos tras los rechazos y un efecto tras la solicitud válida.</li></ol><p>Raíz de COBRIA; Node.js 22.13 o superior, sin paquetes nuevos.</p><pre>node replication/examples/ecosistema-app/taller-areas/ejecutar.mjs seguridad</pre><p>Puedes añadir 4 al final del comando para cambiar la cantidad, o 0 para provocar el rechazo. Calidad no utiliza ese argumento: comprueba cargas y permisos con un reloj controlado.</p><p>Función real de replication/examples/ecosistema-app/taller-areas/casos.mjs. Utiliza imports y datos compartidos del archivo completo; no es un programa autónomo.</p><pre>export async function seguridad(cantidad = 3) {
+  const app = crearAplicacion();
+  await assert.rejects(
+    () =&gt; app.registrar.ejecutar(entrada(cantidad), { ...contexto(), permisos: [] }),
+    { codigo: 'ACCESS_DENIED' },
+  );
+  await assert.rejects(
+    () =&gt;
+      app.registrar.ejecutar(
+        { ...entrada(cantidad), ambito: 'reserva-norte' },
+        contexto(),
+      ),
+    { codigo: 'ACCESS_DENIED' },
+  );
+  assert.equal(
+    (await app.listar.ejecutar({ ambito: 'reserva-sur' }, contexto())).items.length,
+    0,
+  );
+  await app.registrar.ejecutar(entrada(cantidad), contexto());
+  return {
+    rechazos: 2,
+    escriturasTrasRechazos: 0,
+    documentosAutorizados: 1,
+    autenticacionReal: false,
+  };
+}</pre><h2>Campos esperados</h2><pre>{
+  &quot;rechazos&quot;: 2,
+  &quot;escriturasTrasRechazos&quot;: 0,
+  &quot;documentosAutorizados&quot;: 1,
+  &quot;autenticacionReal&quot;: false
+}</pre></section><section class="book-page ep3-page" id="area-desarrollada-seguridad-ejercicio"><div class="eyebrow">Decidir y practicar · seguridad</div><h1>Elegir y comprobar</h1><h2>Alternativa y costo</h2><p>Un flujo solo de lectura elimina algunas capacidades de escritura, pero sigue necesitando aislamiento y protección de campos privados.</p><p>Una política por rol, recurso y ámbito requiere una matriz y pruebas negativas. Registrar tokens completos como ayuda de diagnóstico crearía otro riesgo.</p><h2>Fallo y recuperación</h2><p>Una llamada que devuelve 403 después de haber guardado ya filtró autoridad. Comprobar únicamente el estado HTTP no detecta ese efecto.</p><p>Autoriza antes del efecto, revisa datos y auditoría saneada, y añade el caso sin efectos a la regresión. No amplíes permisos globalmente para corregir un único rol.</p><h2>Tu ejercicio</h2><p>Construye una matriz para guardaparques, persona lectora y administradora de una reserva. Incluye lectura, escritura y reserva ajena; define dos rechazos obligatorios.</p><h2>Solución explicada</h2><p>La persona lectora consulta su reserva pero no registra; guardaparques registra solo en su ámbito; administración no obtiene automáticamente todas las reservas sin una política explícita. Los dos rechazos son capacidad ausente y ámbito ajeno, ambos sin escritura. La matriz debe ligarse al servidor y al motor, no quedar como lista de botones.</p><h2>Revisar la entrega</h2><ul><li>Los rechazos ocurren antes del efecto.</li><li>Existe caso positivo y negativo por frontera.</li><li>Se reconoce el límite de la identidad sintética.</li></ul><p><strong>Continúa:</strong> Reproduce un defecto real y compara su corrección sin quitar las protecciones para ganar velocidad.</p><p class="ep3-source">Fuentes: replication/examples/ecosistema-app/src/application/security/autorizar-capacidad.mjs · specification/phase-7/security.json</p></section><section class="book-page ep3-page" id="area-desarrollada-calidad"><div class="eyebrow">Caso desarrollado · calidad</div><h1>Reproducir el defecto antes de optimizar</h1><p>Dos reservas tienen una observación con el mismo identificador. Una caché que usa solo ese identificador devuelve el dato de la primera reserva a la segunda. El resultado es rápido y equivocado: medir su latencia no convierte el sistema en una mejora.</p><h2>Antes de empezar</h2><p>Sabes ejecutar una prueba y comprobar ausencia de efectos. Una caché guarda temporalmente una lectura para reutilizarla.</p><h2>Palabras que necesitarás</h2><p><strong>Regresión:</strong> Fallo que reaparece al cambiar algo.</p><p><strong>Línea base:</strong> Comportamiento contra el que se compara una alternativa.</p><p><strong>Presupuesto:</strong> Límite explícito de tiempo, memoria o costo.</p><h2>Resolver el problema</h2><p>El fixture defectuoso reproduce el cruce de ámbito de forma aislada. La lectura segura usa una clave con ámbito y política y autoriza incluso cuando la caché ya tiene el resultado. Dos lecturas autorizadas del mismo recurso cargan una vez; una lectura sin permiso se rechaza. El contador muestra trabajo evitado, no una cifra universal de rendimiento.</p><p>Para hablar de tiempo usa el protocolo de medir.mjs: calentamiento, orden de pares, repeticiones y resultados crudos. Compara resultados equivalentes, misma carga y misma frescura. Un índice añade construcción y almacenamiento; una proyección añade también mantenimiento y recuperación. La notación O describe crecimiento, no milisegundos ni facturación.</p></section><section class="book-page ep3-page" id="area-desarrollada-calidad-ejemplo"><div class="eyebrow">Ejemplo trabajado · calidad</div><h1>Seguir el resultado</h1><ol><li>Observa esperado y obtenido en el fixture de caché defectuosa.</li><li>Ejecuta dos lecturas permitidas y cuenta cargas reales.</li><li>Retira permiso después del acierto: la caché no debe saltarse autorización.</li></ol><p>Raíz de COBRIA; Node.js 22.13 o superior, sin paquetes nuevos.</p><pre>node replication/examples/ecosistema-app/taller-areas/ejecutar.mjs calidad</pre><p>Puedes añadir 4 al final del comando para cambiar la cantidad, o 0 para provocar el rechazo. Calidad no utiliza ese argumento: comprueba cargas y permisos con un reloj controlado.</p><p>Función real de replication/examples/ecosistema-app/taller-areas/casos.mjs. Utiliza imports y datos compartidos del archivo completo; no es un programa autónomo.</p><pre>export async function calidad() {
+  const defecto = await reproducirDefectoCache();
+  assert.notEqual(defecto.esperado, defecto.obtenido);
+  let cargas = 0;
+  const lectura = crearLecturaSegura({
+    reloj: () =&gt; 0, // Reloj controlado: aquí contamos cargas, no medimos latencia.
+    cargar: async (ambito) =&gt; {
+      cargas++;
+      return [{ ambito }];
+    },
+  });
+  await lectura.leer('reserva-sur', contexto());
+  await lectura.leer('reserva-sur', contexto());
+  await assert.rejects(
+    () =&gt; lectura.leer('reserva-sur', { ...contexto(), permisos: [] }),
+    { codigo: 'ACCESS_DENIED' },
+  );
+  assert.equal(cargas, 1);
+  return {
+    defectoReproducido: defecto.causa,
+    cargasParaDosLecturas: cargas,
+    autorizacionEnCache: true,
+  };
+}</pre><h2>Campos esperados</h2><pre>{
+  &quot;defectoReproducido&quot;: &quot;clave-sin-ambito&quot;,
+  &quot;cargasParaDosLecturas&quot;: 1,
+  &quot;autorizacionEnCache&quot;: true
+}</pre></section><section class="book-page ep3-page" id="area-desarrollada-calidad-ejercicio"><div class="eyebrow">Decidir y practicar · calidad</div><h1>Elegir y comprobar</h1><h2>Alternativa y costo</h2><p>Una lectura directa acotada es preferible si ya cumple el presupuesto y la frescura. La caché no es una obligación del método.</p><p>Además de bytes y tiempo, considera invalidación, límites de entradas, antigüedad y operación. El costo de mantener una copia puede superar el ahorro de lectura.</p><h2>Fallo y recuperación</h2><p>Comparar una consulta fresca con una caché vieja y afirmar que la segunda es superior mezcla resultados distintos. El número rápido no responde la misma pregunta.</p><p>Primero comprueba equivalencia y aislamiento. Después repite el ensayo con límites declarados y conserva los desaciertos, sin eliminar corridas desfavorables.</p><h2>Tu ejercicio</h2><p>Redacta un presupuesto de lectura por reserva con frescura y memoria máximas. Compara consulta directa, índice y caché indicando qué medición falta para elegir.</p><h2>Solución explicada</h2><p>El presupuesto debe expresar una carga y un percentil, por ejemplo un objetivo contextual de p95, no un resultado ya observado. Añade atraso permitido, bytes, escrituras de mantenimiento y tiempo de recuperación. Primero descarta resultados incorrectos; luego compara alternativas bajo ese presupuesto. Si falta medición, la elección queda provisional.</p><h2>Revisar la entrega</h2><ul><li>La corrección conserva autorización en aciertos.</li><li>Se distingue contador de cargas de medición de latencia.</li><li>La comparación incluye frescura y costo de mantenimiento.</li></ul><p><strong>Continúa:</strong> Prepara recuperación y promoción sin confundir un ensayo local con desplegar en la nube.</p><p class="ep3-source">Fuentes: replication/examples/operacion-c6/operacion.mjs · replication/examples/operacion-c6/protocolo.json · manuales/31-calidad-rendimiento-y-operacion.md</p></section><section class="book-page ep3-page" id="area-desarrollada-operaciones"><div class="eyebrow">Caso desarrollado · operaciones</div><h1>Recuperar datos y promover el mismo artefacto</h1><p>Un despliegue funciona en staging pero producción recibe una compilación distinta. A la vez existe un respaldo que nunca se restauró. Cuando llega un incidente, ni el binario anterior ni la copia de datos tienen una comprobación que permita confiar en ellos.</p><h2>Antes de empezar</h2><p>Comprende archivo, ámbito y huella. No uses una base activa ni credenciales reales para este caso.</p><h2>Palabras que necesitarás</h2><p><strong>Staging:</strong> Ambiente de ensayo separado de producción.</p><p><strong>Artefacto:</strong> Bytes construidos que se prueban y promueven.</p><p><strong>Reversión:</strong> Procedimiento para volver a una versión conocida y verificable.</p><h2>Resolver el problema</h2><p>El ejemplo crea bytes de documentos autorizados, calcula su huella y restaura en un repositorio nuevo. La copia alterada se rechaza antes de restaurar. Es un ensayo de documentos: no incluye sesiones, auditoría, índices ni registro de idempotencia. Recuperar solo esos bytes no significa haber recuperado todo el servicio.</p><p>En nube distingue ambiente, identidad de ejecución y configuración. Una Function autoritativa valida actor y ámbito y usa permisos mínimos del motor; define tiempo máximo, memoria, reintentos y clave de intención. Versiona Rules e índices junto a la función. La promoción debe identificar el mismo artefacto probado, con aprobación y plan de humo; una bandera approval en una demostración no constituye autorización humana real.</p></section><section class="book-page ep3-page" id="area-desarrollada-operaciones-ejemplo"><div class="eyebrow">Ejemplo trabajado · operaciones</div><h1>Seguir el resultado</h1><ol><li>Crea el respaldo desde documentos del ámbito autorizado.</li><li>Restaura en memoria nueva y compara su contenido.</li><li>Altera un byte y verifica el rechazo por huella incompatible.</li></ol><p>Raíz de COBRIA; Node.js 22.13 o superior, sin paquetes nuevos.</p><pre>node replication/examples/ecosistema-app/taller-areas/ejecutar.mjs operaciones</pre><p>Puedes añadir 4 al final del comando para cambiar la cantidad, o 0 para provocar el rechazo. Calidad no utiliza ese argumento: comprueba cargas y permisos con un reloj controlado.</p><p>Función real de replication/examples/ecosistema-app/taller-areas/casos.mjs. Utiliza imports y datos compartidos del archivo completo; no es un programa autónomo.</p><pre>export async function operaciones(cantidad = 3) {
+  const documentos = [new Observacion(entrada(cantidad))];
+  const respaldo = crearRespaldo(documentos, 'reserva-sur', contexto());
+  const restaurado = await restaurarRespaldo(
+    respaldo.bytes,
+    respaldo.sha256,
+    'reserva-sur',
+    contexto(),
+  );
+  assert.equal((await restaurado.listar('reserva-sur'))[0].cantidad, cantidad);
+  const alterado = Buffer.from(respaldo.bytes);
+  alterado[0] ^= 1;
+  await assert.rejects(
+    () =&gt; restaurarRespaldo(alterado, respaldo.sha256, 'reserva-sur', contexto()),
+    /HUELLA_INCOMPATIBLE/,
+  );
+  return {
+    documentosRestaurados: 1,
+    huella: respaldo.sha256,
+    copiaAlterada: 'rechazada',
+    despliegueReal: false,
+  };
+}</pre><h2>Campos esperados</h2><pre>{
+  &quot;documentosRestaurados&quot;: 1,
+  &quot;copiaAlterada&quot;: &quot;rechazada&quot;,
+  &quot;despliegueReal&quot;: false
+}</pre></section><section class="book-page ep3-page" id="area-desarrollada-operaciones-ejercicio"><div class="eyebrow">Decidir y practicar · operaciones</div><h1>Elegir y comprobar</h1><h2>Alternativa y costo</h2><p>Un proceso local puede ser suficiente mientras no haya disponibilidad remota que mantener. Usar Functions no elimina operación, observabilidad ni seguridad.</p><p>Ambientes separados y respaldos consumen recursos. Definir límites reduce exposición a errores o gasto, pero no garantiza ausencia de fallos.</p><h2>Fallo y recuperación</h2><p>Un respaldo correcto de documentos no contiene las claves idempotentes. Después de restaurar, un reintento antiguo puede necesitar otra estrategia antes de habilitar escritura.</p><p>Comprueba el inventario completo de recuperación. Conserva el sistema activo, restaura en otro destino, valida permisos y equivalencia y solo entonces decide el cambio con autoridad apropiada.</p><h2>Tu ejercicio</h2><p>Escribe un procedimiento de promoción con SHA, huella, configuración, Rules, índices, pruebas, humo y reversión. Añade qué información no cubre este respaldo.</p><h2>Solución explicada</h2><p>Staging prueba un artefacto identificado; la aprobación referencia esa huella y producción recibe los mismos bytes. El humo comprueba URL, ambiente, permisos y versión. La reversión apunta a un artefacto anterior conservado. Para recuperación enumera documentos, sesiones, auditoría, operaciones e índices y decide cuáles se restauran o reconstruyen. Este ejercicio no autoriza desplegar.</p><h2>Revisar la entrega</h2><ul><li>La promoción no recompila silenciosamente.</li><li>La recuperación usa un destino nuevo.</li><li>Se declaran límites del respaldo y de la Function.</li></ul><p><strong>Continúa:</strong> Usa fuentes recuperables también cuando una respuesta se construya mediante analítica o IA.</p><p class="ep3-source">Fuentes: specification/phase-8/environments.json · replication/examples/operacion-c6/operacion.mjs · manuales/operacion/RECUPERACION-C8.md</p></section><section class="book-page ep3-page" id="area-desarrollada-ia"><div class="eyebrow">Caso desarrollado · ia</div><h1>Responder con evidencia y abstenerse cuando falta</h1><p>Una consulta pregunta por tucanes cuando solo hay colibríes. Inventar un resultado sería más vistoso que reconocer la ausencia de datos, pero no ayudaría a la brigada. Una respuesta también puede ser peligrosa si usa evidencia de otra reserva o de un momento posterior al corte evaluado.</p><h2>Antes de empezar</h2><p>Comprende consulta autorizada, revisión, huella y diferencia entre fuente y representación derivada.</p><h2>Palabras que necesitarás</h2><p><strong>Procedencia:</strong> Hilo que relaciona un resultado con sus fuentes y transformación.</p><p><strong>Fuga:</strong> Información indebida que llega a entrenamiento, evaluación o recuperación.</p><p><strong>Abstención:</strong> Decisión de no responder sin evidencia suficiente.</p><h2>Resolver el problema</h2><p>El asistente del taller primero autoriza el ámbito, valida el corpus y recupera coincidencias léxicas. Devuelve citas con identidad, revisión y huella. Si no hay coincidencias suficientes, se abstiene. No llama a un modelo generativo, no aprende de los ejemplos y no convierte una coincidencia de palabras en una afirmación biológica validada.</p><p>Para minería de datos declara entidad, tiempo observado y tiempo conocido. El taller C7 crea conjuntos con cortes y rechaza entidades compartidas entre entrenamiento y evaluación. Versiona características y conserva exclusiones. Una división aleatoria de filas puede filtrar la misma entidad a ambos lados; más filas no corrigen esa dependencia.</p><p>Una herramienta de agente necesita una capacidad permitida y argumentos validados por el servidor. El texto recuperado sigue siendo evidencia, no instrucciones para ampliar permisos. La salida analítica y la respuesta del asistente no ganan autoridad de escritura sobre el hecho original.</p></section><section class="book-page ep3-page" id="area-desarrollada-ia-ejemplo"><div class="eyebrow">Ejemplo trabajado · ia</div><h1>Seguir el resultado</h1><ol><li>Registra una observación y consulta colibri dentro del ámbito.</li><li>Comprueba identidad y revisión de la cita.</li><li>Consulta tucan y observa abstención sin conceder escritura.</li></ol><p>Raíz de COBRIA; Node.js 22.13 o superior, sin paquetes nuevos.</p><pre>node replication/examples/ecosistema-app/taller-areas/ejecutar.mjs ia</pre><p>Puedes añadir 4 al final del comando para cambiar la cantidad, o 0 para provocar el rechazo. Calidad no utiliza ese argumento: comprueba cargas y permisos con un reloj controlado.</p><p>Función real de replication/examples/ecosistema-app/taller-areas/casos.mjs. Utiliza imports y datos compartidos del archivo completo; no es un programa autónomo.</p><pre>export async function ia(cantidad = 3) {
+  const app = crearAplicacion();
+  await app.registrar.ejecutar(entrada(cantidad), contexto());
+  const consultar = crearAsistente({ repositorio: app.repositorio });
+  const evidencia = await consultar(
+    { consulta: 'colibri', ambito: 'reserva-sur' },
+    contexto(),
+  );
+  const ausente = await consultar(
+    { consulta: 'tucan', ambito: 'reserva-sur' },
+    contexto(),
+  );
+  assert.equal(evidencia.citas[0].id, 'obs-area-001');
+  assert.equal(ausente.estado, 'abstencion');
+  assert.equal(evidencia.autoridadEscritura, false);
+  return {
+    citas: evidencia.citas.length,
+    revision: evidencia.citas[0].revision,
+    sinEvidencia: ausente.estado,
+    tipo: evidencia.tipo,
+  };
+}</pre><h2>Campos esperados</h2><pre>{
+  &quot;citas&quot;: 1,
+  &quot;revision&quot;: 1,
+  &quot;sinEvidencia&quot;: &quot;abstencion&quot;,
+  &quot;tipo&quot;: &quot;recuperacion-lexica-sin-generacion&quot;
+}</pre></section><section class="book-page ep3-page" id="area-desarrollada-ia-ejercicio"><div class="eyebrow">Decidir y practicar · ia</div><h1>Elegir y comprobar</h1><h2>Alternativa y costo</h2><p>Una lista autorizada de documentos puede ser más útil que un resumen generado cuando la evidencia es escasa. No necesitas un LLM para mostrar fuentes.</p><p>Vectores, modelos y características añaden versiones, almacenamiento y evaluación. Un umbral léxico no equivale a confianza calibrada de una predicción.</p><h2>Fallo y recuperación</h2><p>La coincidencia colibri enfermo puede citar colibri aunque la fuente no sostenga enfermo. El taller conserva ese desacierto: una cita existente no prueba que respalde toda la frase.</p><p>Abstente o muestra la evidencia sin añadir el atributo no sustentado. Revisa por separado recuperación, soporte de citas y generación; no ocultes el fallo cambiando solamente el texto de presentación.</p><h2>Tu ejercicio</h2><p>Diseña dos filas de entrenamiento y dos de evaluación sin compartir entidad. Añade un dato conocido después del corte y explica su exclusión; plantea una consulta que deba abstenerse.</p><h2>Solución explicada</h2><p>Cada partición usa entidades distintas y tiempos válidos explícitos. El dato tardío no entra retrospectivamente al entrenamiento aunque su observación sea anterior. La consulta de una especie ausente debe abstenerse y devolver cero citas, no una predicción improvisada. Conserva versión de característica, cortes y fuentes para reproducir el conjunto.</p><h2>Revisar la entrega</h2><ul><li>Se distingue recuperación de generación.</li><li>Las citas conservan ámbito, identidad y revisión.</li><li>La partición y el dato tardío no introducen fuga.</li></ul><p><strong>Continúa:</strong> Integra lo aprendido en entregas incrementales del mismo proyecto, no en prototipos inconexos.</p><p class="ep3-source">Fuentes: replication/examples/analitica-c7/taller.mjs · replication/examples/analitica-c7/fixtures.json · manuales/32-analitica-e-ia-con-procedencia.md</p></section><section class="book-page ep3-page" id="area-desarrollada-construir"><div class="eyebrow">Caso desarrollado · construir</div><h1>Integrar una aplicación sin ocultar pasos</h1><p>Un libro presenta capítulos correctos por separado, pero cada uno usa una entidad distinta y al unirlos no coinciden contratos, permisos ni formatos. La persona debe inventar la conexión que el material prometía enseñar.</p><h2>Antes de empezar</h2><p>Recorre los casos de registro, datos, API y seguridad. La persistencia documental local necesita las dependencias fijadas del ejemplo integral.</p><h2>Palabras que necesitarás</h2><p><strong>Hito:</strong> Estado ejecutable con una conducta demostrada.</p><p><strong>Agregado:</strong> Límite de datos y reglas que cambia como unidad.</p><p><strong>Prueba integral:</strong> Comprobación de varias piezas conectadas en un flujo.</p><h2>Resolver el problema</h2><p>Conserva el proyecto conductor: observaciones, catálogo, resumen y recuperación. Primero funciona memoria; luego se aprende el diccionario; después se conecta HTTP y un motor documental local. El ejemplo integral C8 ya tiene formulario, catálogo y persistencia PouchDB. Su guía declara instalación, ambiente y sesiones DEMO. No lo describas como autenticación institucional ni como despliegue administrado.</p><p>Cada incremento debe mantener el anterior. Una prueba de registro no reemplaza la de migración y la interfaz no reemplaza la prueba de permiso. El ADR del agregado explica por qué el registro durable integra operación y resultado en una unidad. Esa decisión difiere de las dos escrituras del taller en memoria y no debe atribuirse retroactivamente a aquel.</p></section><section class="book-page ep3-page" id="area-desarrollada-construir-ejemplo"><div class="eyebrow">Ejemplo trabajado · construir</div><h1>Seguir el resultado</h1><ol><li>Consulta el hito en memoria y conserva sus rechazos.</li><li>Sigue manuales/33-aplicacion-integral-neutral.md para instalar el ejemplo C8 con su bloqueo de dependencias.</li><li>Ejecuta el flujo permitido, cierra, reabre y comprueba persistencia y recuperación según su guía.</li></ol><p>Artefacto trabajado, no programa para ejecutar.</p><pre>{
+  &quot;hitos&quot;: [
+    {
+      &quot;nombre&quot;: &quot;memoria&quot;,
+      &quot;demuestra&quot;: &quot;reglas y repetición secuencial&quot;
+    },
+    {
+      &quot;nombre&quot;: &quot;datos&quot;,
+      &quot;demuestra&quot;: &quot;traducción y catálogo&quot;
+    },
+    {
+      &quot;nombre&quot;: &quot;HTTP&quot;,
+      &quot;demuestra&quot;: &quot;contrato y estados&quot;
+    },
+    {
+      &quot;nombre&quot;: &quot;documental local&quot;,
+      &quot;demuestra&quot;: &quot;persistencia y recuperación del ejemplo&quot;
+    }
+  ],
+  &quot;noDemuestra&quot;: [
+    &quot;autenticación productiva&quot;,
+    &quot;servicio administrado&quot;,
+    &quot;distribución multinodo&quot;
+  ]
+}</pre></section><section class="book-page ep3-page" id="area-desarrollada-construir-ejercicio"><div class="eyebrow">Decidir y practicar · construir</div><h1>Elegir y comprobar</h1><h2>Alternativa y costo</h2><p>Mantén memoria para enseñar reglas si aún no necesitas persistencia. Conectar un motor antes de entender el contrato agrega fallos que dificultan aprender.</p><p>Una aplicación integral tiene más configuración y dependencias. El bloqueo, la guía de arranque y la recuperación forman parte de su mantenibilidad.</p><h2>Fallo y recuperación</h2><p>Cambiar la entidad de cada capítulo impide reproducir una entrega completa. Un motor persistente tampoco vuelve confiable un contexto de usuario que sigue siendo DEMO.</p><p>Fija un hito funcional, compara contratos y conecta una frontera por vez. Ejecuta sus pruebas antes de añadir otra tecnología; conserva una ruta de regreso al hito anterior.</p><h2>Tu ejercicio</h2><p>Redacta una lista de aceptación para pasar del hito de memoria al documental. Incluye reinicio, repetición, catálogo, permiso cruzado y recuperación en otro destino.</p><h2>Solución explicada</h2><p>Después del reinicio debe existir el registro, el reintento no duplica la intención bajo el contrato durable y la edición del catálogo sigue interpretable. El ámbito ajeno se rechaza. La recuperación prueba un destino nuevo con fuentes y huellas. La lista señala la guía exacta y las dependencias, y mantiene pendientes autenticación productiva y operación remota.</p><h2>Revisar la entrega</h2><ul><li>Los hitos usan el mismo vocabulario y contratos.</li><li>Se comprueba reinicio y recuperación, no solo primer arranque.</li><li>Se separa DEMO de identidad confiable.</li></ul><p><strong>Continúa:</strong> Automatiza trabajo repetitivo sin confundir un esqueleto generado con una solución terminada.</p><p class="ep3-source">Fuentes: manuales/33-aplicacion-integral-neutral.md · replication/examples/integral-c8/README.md · manuales/decisiones/ADR-C8-AGREGADO-LOCAL.md</p></section><section class="book-page ep3-page" id="area-desarrollada-toolkit"><div class="eyebrow">Caso desarrollado · toolkit</div><h1>Generar sin sobrescribir y auditar sin certificar</h1><p>Una IA propone generar un proyecto sobre una carpeta que ya contiene cambios. Un generador que sobrescribe archivos puede destruir una decisión que no conoce. Un informe verde de estructura tampoco demuestra que el nuevo programa esté autorizado o sea correcto.</p><h2>Antes de empezar</h2><p>Sabes usar una terminal y reconocer la carpeta raíz. El Toolkit tiene dependencias propias; el taller inicial sin paquetes no las instala.</p><h2>Palabras que necesitarás</h2><p><strong>Simulación:</strong> Plan de cambios sin crear ni modificar archivos.</p><p><strong>Generador:</strong> Herramienta que produce una estructura repetible.</p><p><strong>Auditor estático:</strong> Análisis del texto o estructura del programa, no de todos sus comportamientos.</p><h2>Resolver el problema</h2><p>Instala las dependencias de réplica con npm ci --prefix replication antes del Toolkit. Usa --ayuda para consultar opciones reales y --simular para examinar el plan. El recorrido documentacion-c9 ya comprueba instalación local, generación y conflictos. Las rutas de salida deben ser propias y no contener secretos ni escritores concurrentes.</p><p>El plan simulado declara cero mutaciones y rutas previstas. Una generación real produce código, prueba, documento y manifiesto; todavía debes completar dominio, permisos y datos. El auditor estático encuentra reglas que sabe expresar, con falsos positivos y límites documentados. No convierte una carpeta en una certificación de seguridad ni en una conformidad Core completa.</p></section><section class="book-page ep3-page" id="area-desarrollada-toolkit-ejemplo"><div class="eyebrow">Ejemplo trabajado · toolkit</div><h1>Seguir el resultado</h1><ol><li>Instala con el bloqueo declarado y consulta la ayuda del CLI.</li><li>Usa el ejemplo de simulación del tutorial C9 y revisa todas las rutas.</li><li>Solo en una copia propia, genera, ejecuta la prueba y repite para observar la idempotencia o el conflicto.</li></ol><p>Artefacto trabajado, no programa para ejecutar.</p><pre>{
+  &quot;comando&quot;: &quot;generar --tipo entidad --nombre Observacion --directorio ejemplo-propio --simular --json&quot;,
+  &quot;aceptacion&quot;: {
+    &quot;status&quot;: &quot;simulated&quot;,
+    &quot;mutations&quot;: 0,
+    &quot;created&quot;: []
+  },
+  &quot;decision&quot;: &quot;Revisar rutas y completar reglas antes de generar realmente&quot;
+}</pre></section><section class="book-page ep3-page" id="area-desarrollada-toolkit-ejercicio"><div class="eyebrow">Decidir y practicar · toolkit</div><h1>Elegir y comprobar</h1><h2>Alternativa y costo</h2><p>Escribir una entidad pequeña a mano puede ser más comprensible que adoptar quince plantillas. Usa el generador cuando la repetición real compense mantenerlo.</p><p>Las plantillas crean dependencias sobre sus convenciones y necesitan evolución. Una prueba generada puede aprobar un esqueleto que todavía desconoce el negocio.</p><h2>Fallo y recuperación</h2><p>Eliminar --simular cambia la autoridad del comando: ya puede escribir. Cambiar el destino a una carpeta ajena no está autorizado por haber revisado otro plan.</p><p>Detente ante un conflicto y compara el contenido. No borres la carpeta para conseguir un estado verde; elige un destino nuevo o integra manualmente con revisión.</p><h2>Tu ejercicio</h2><p>Entrega un plan de generación con rutas esperadas, responsable, regla pendiente y prueba negativa que el esqueleto aún no cubre. Explica cómo comprobarás que la simulación no escribió nada.</p><h2>Solución explicada</h2><p>El plan conserva mutations cero y created vacío; se contrasta el inventario anterior y posterior. La regla pendiente puede ser autorización por ámbito y su prueba negativa debe rechazar otra reserva. Antes de generar de verdad se revisa de nuevo el destino. La salida estructural del auditor no se presenta como validación funcional ni como permiso de publicación.</p><h2>Revisar la entrega</h2><ul><li>Simulación y escritura tienen autoridad distinta.</li><li>El destino no sobrescribe contenido divergente.</li><li>Se identifica una regla que debe añadirse después de generar.</li></ul><p><strong>Continúa:</strong> Conserva la evidencia de qué se ejecutó y qué sigue pendiente antes de publicar.</p><p class="ep3-source">Fuentes: manuales/34-documentacion-y-herramientas-practicas.md · replication/src/cli.mjs · replication/examples/documentacion-c9/recorrido.mjs</p></section><section class="book-page ep3-page" id="area-desarrollada-evidencia"><div class="eyebrow">Caso desarrollado · evidencia</div><h1>Conservar resultados sin exagerar su alcance</h1><p>Una captura muestra todas las pruebas aprobadas, pero no dice con qué código ni configuración se obtuvieron. Otra persona cambia la cantidad y conserva la misma imagen. El resultado ya no representa los bytes que se distribuyen.</p><h2>Antes de empezar</h2><p>Distingue documento, revisión, resultado de prueba y huella. El libro enseña; el artículo debe sostener afirmaciones con evidencia.</p><h2>Palabras que necesitarás</h2><p><strong>Trazabilidad:</strong> Relación verificable entre afirmación, fuente, prueba y resultado.</p><p><strong>Reproducibilidad:</strong> Capacidad de repetir un procedimiento bajo condiciones declaradas.</p><p><strong>Amenaza a la validez:</strong> Razón por la que una conclusión puede no sostenerse en otro contexto.</p><h2>Resolver el problema</h2><p>Una huella vincula un contenido con una identificación calculada. El caso conserva identidad y revisión de una entidad válida y muestra que un cambio de contenido altera su huella. Eso detecta diferencias si la referencia es confiable; no demuestra autoría, consentimiento, corrección del contenido ni independencia de quien revisó.</p><p>Separa estados: documentado, implementado, ejecutado localmente, repetido externamente y validado con personas. El artículo no puede convertir un microensayo en superioridad distribuida ni el libro convertir una rúbrica preparada en aprendizaje observado. Conserva resultados negativos, configuración, versión y límites. Si cambia un artefacto aprobado, identifica otra candidata y repite los controles afectados.</p></section><section class="book-page ep3-page" id="area-desarrollada-evidencia-ejemplo"><div class="eyebrow">Ejemplo trabajado · evidencia</div><h1>Seguir el resultado</h1><ol><li>Calcula la huella del documento válido.</li><li>Comprueba que una copia equivalente conserva esa huella.</li><li>Cambia la cantidad y comprueba que ya no coincide con la referencia.</li></ol><p>Raíz de COBRIA; Node.js 22.13 o superior, sin paquetes nuevos.</p><pre>node replication/examples/ecosistema-app/taller-areas/ejecutar.mjs evidencia</pre><p>Puedes añadir 4 al final del comando para cambiar la cantidad, o 0 para provocar el rechazo. Calidad no utiliza ese argumento: comprueba cargas y permisos con un reloj controlado.</p><p>Función real de replication/examples/ecosistema-app/taller-areas/casos.mjs. Utiliza imports y datos compartidos del archivo completo; no es un programa autónomo.</p><pre>export async function evidencia(cantidad = 3) {
+  const fuente = new Observacion(entrada(cantidad));
+  const huella = calcularHuellaSha256(fuente);
+  assert.equal(calcularHuellaSha256({ ...fuente }), huella);
+  assert.notEqual(calcularHuellaSha256({ ...fuente, cantidad: cantidad + 1 }), huella);
+  return {
+    id: fuente.id,
+    revision: fuente.revision,
+    huella,
+    integridadNoEsAutoria: true,
+  };
+}</pre><h2>Campos esperados</h2><pre>{
+  &quot;id&quot;: &quot;obs-area-001&quot;,
+  &quot;revision&quot;: 1,
+  &quot;integridadNoEsAutoria&quot;: true
+}</pre></section><section class="book-page ep3-page" id="area-desarrollada-evidencia-ejercicio"><div class="eyebrow">Decidir y practicar · evidencia</div><h1>Elegir y comprobar</h1><h2>Alternativa y costo</h2><p>Para una nota personal puede bastar una versión y un archivo; para una afirmación pública necesitas poder relacionarla con las fuentes y resultados que la sostienen.</p><p>Guardar procedencia requiere espacio y disciplina. Un inventario enorme sin relación con las afirmaciones dificulta revisar tanto como una ausencia de evidencia.</p><h2>Fallo y recuperación</h2><p>Un archivo modificado puede tener una huella correctamente calculada y seguir conteniendo un resultado inventado. La integridad no vuelve verdadera la afirmación.</p><p>Revisa de dónde proviene la referencia, repite el procedimiento y conserva su salida. Si no existe evidencia humana, marca pendiente en lugar de completar un registro ficticio.</p><h2>Tu ejercicio</h2><p>Escribe una afirmación acotada de este taller y su fila de trazabilidad: fuente, prueba, salida, configuración, amenaza y documento que la publica.</p><h2>Solución explicada</h2><p>Una afirmación defendible es que el caso secuencial de memoria conserva una observación al repetir la misma intención bajo la configuración declarada. La fila enlaza código, prueba y recibo, y advierte que no demuestra concurrencia ni motor remoto. Una revisión humana o eficacia pedagógica permanece pendiente hasta observarla realmente.</p><h2>Revisar la entrega</h2><ul><li>La afirmación no supera la evidencia.</li><li>Se distinguen integridad, autoría y verdad.</li><li>Los cambios posteriores invalidan la aprobación afectada.</li></ul><p><strong>Continúa:</strong> Vuelve al requisito inicial y conserva solo las decisiones cuyo beneficio puedes explicar y comprobar.</p><p class="ep3-source">Fuentes: MATRIZ-TRAZABILIDAD-RELEASE.md · editorial/ep2/LECTURA-PILOTO.md</p></section><section class="book-page ep3-page" id="clasificar-patrones"><h1>Qué llamamos patrón y qué no</h1><p>Revisión editorial de las treinta fichas y cuatro mecanismos de entrada. No es revisión independiente ni declaración de novedad. Las categorías distinguen antecedentes reconocidos, adaptaciones, contratos, mecanismos, convenciones, heurísticas y propuestas experimentales. Se conserva el tipo anterior para no cambiar su significado silenciosamente.</p><h2>Repositorio · patrón reconocido</h2><p>Concentra acceso mediante una interfaz de colección; el ámbito es una adaptación del proyecto.</p><p><a href="https://martinfowler.com/eaaCatalog/repository.html">Antecedente primario</a></p><h2>Mapeador y Dater · adaptación</h2><p>Dater es el nombre local de una frontera de traducción. No es un patrón universal nuevo ni obliga a letras compactas.</p><p><a href="https://martinfowler.com/eaaCatalog/dataMapper.html">Antecedente primario</a></p><h2>Inyección en la composición · mecanismo</h2><p>Entregar un repositorio desacopla su elección. Una función crearAplicacion no basta para llamarse Factory Method.</p><h2>Atributos físicos a–h · convención</h2><p>Acuerdo del diccionario local. La letra g puede tener otro significado en otro contrato; el dominio no depende de esas letras.</p><p>No se promete desarrollar todo el catálogo general de patrones de objetos. Las fichas especializadas conservan implementación, alternativa y límite del ejemplo.</p></section><section class="book-page ep3-page" id="revision-patrones-1"><h1>Revisar las fichas 1 a 5</h1><h2>01 Objeto canónico · contrato</h2><p>Combina identidad, ámbito y autoridad; congelar un objeto no implementa todas esas garantías.</p><p><strong>Alternativa:</strong> Una entidad sencilla sin derivados</p><h2>02 Dato fechado · adaptación</h2><p>Organiza tiempos del hecho y de conocimiento para el contrato documental; no inventa el modelado temporal.</p><p><strong>Alternativa:</strong> Una fecha de registro sin reconstrucción histórica</p><h2>03 Repositorio con ámbito · adaptación</h2><p>Añade ámbito explícito al papel de repositorio; el repositorio es un antecedente reconocido.</p><p><strong>Alternativa:</strong> Colecciones separadas con autorización explícita</p><p><a href="https://martinfowler.com/eaaCatalog/repository.html">Antecedente primario</a></p><h2>04 Catálogo versionado · contrato</h2><p>Exige interpretar un código con una edición; un catálogo no es por sí mismo un patrón de objetos.</p><p><strong>Alternativa:</strong> Enumeración fija sin cambios de significado</p><h2>05 Proyección de lectura · adaptación</h2><p>Usa representaciones de lectura derivadas, con antecedentes en vistas materializadas.</p><p><strong>Alternativa:</strong> Consulta directa con índice nativo</p><p><a href="https://learn.microsoft.com/en-us/azure/architecture/patterns/materialized-view">Antecedente primario</a></p></section><section class="book-page ep3-page" id="revision-patrones-2"><h1>Revisar las fichas 6 a 10</h1><h2>06 Proyección de cobertura · mecanismo</h2><p>Selecciona información para una lectura; cubrir campos no concede acceso a ellos.</p><p><strong>Alternativa:</strong> Selección de campos en el motor</p><h2>07 Reconstrucción total · contrato</h2><p>Declara reconstrucción desde fuentes; el ejemplo calcula una candidata, no verifica equivalencia general.</p><p><strong>Alternativa:</strong> Actualización incremental</p><h2>08 Reconstrucción incremental · mecanismo</h2><p>Aplica cambios desde una posición; requiere demostrar integridad del historial, no solo guardar un cursor.</p><p><strong>Alternativa:</strong> Reconstrucción total</p><h2>09 Publicación por versión · mecanismo</h2><p>Propone una versión activa y reversión; el fragmento no cambia un alias persistente.</p><p><strong>Alternativa:</strong> Lectura directa de la fuente</p><h2>10 Procesamiento idempotente · patrón reconocido</h2><p>Procesamiento idempotente tiene antecedentes explícitos; la variante local no prueba exclusión concurrente.</p><p><strong>Alternativa:</strong> Restricción única o registro de operaciones</p><p><a href="https://microservices.io/post/microservices/patterns/2020/10/16/idempotent-consumer.html">Antecedente primario</a></p></section><section class="book-page ep3-page" id="revision-patrones-3"><h1>Revisar las fichas 11 a 15</h1><h2>11 Revisión obsoleta rechazada · mecanismo</h2><p>Controla revisiones obsoletas; la comparación debe ser indivisible en el motor para cubrir concurrencia.</p><p><strong>Alternativa:</strong> Transacción o escritura condicional nativa</p><h2>12 Cola de salida transaccional · patrón reconocido</h2><p>La bandeja de salida transaccional es un patrón previo; el ejemplo devuelve un plan, no una transacción real.</p><p><strong>Alternativa:</strong> Transacción nativa con bandeja de salida</p><p><a href="https://microservices.io/patterns/data/transactional-outbox.html">Antecedente primario</a></p><h2>13 Reparación verificable · mecanismo</h2><p>Detecta y propone reparar una divergencia; igualdad de identificadores no demuestra igualdad de contenido.</p><p><strong>Alternativa:</strong> Reconstrucción total de la copia</p><h2>14 Conjunto de datos reproducible · contrato</h2><p>Declara fuentes y repetibilidad de un conjunto; no es un algoritmo nuevo de aprendizaje.</p><p><strong>Alternativa:</strong> Exportación puntual documentada</p><h2>15 Característica versionada · contrato</h2><p>Versiona una transformación de características, no valida por sí sola una predicción.</p><p><strong>Alternativa:</strong> Variable cruda sin transformación</p></section><section class="book-page ep3-page" id="revision-patrones-4"><h1>Revisar las fichas 16 a 20</h1><h2>16 Recuperación limitada por ámbito · mecanismo</h2><p>Limita recuperación al ámbito autorizado; el corpus recibido también debe ser confiable.</p><p><strong>Alternativa:</strong> Búsqueda documental sin generación</p><h2>17 Herramienta de agente gobernada · mecanismo</h2><p>Gobierna una herramienta; una aprobación booleana no autentica a una persona.</p><p><strong>Alternativa:</strong> Flujo manual autorizado</p><h2>18 Frontera lectura—escritura · heurística</h2><p>Guía la separación de autoridad de lectura y escritura; no equivale a implementar todo CQRS.</p><p><strong>Alternativa:</strong> Caso de uso único con comandos explícitos</p><p><a href="https://martinfowler.com/bliki/CQRS.html">Antecedente primario</a></p><h2>19 Índice antes que proyección · heurística</h2><p>Recomienda comparar un índice antes de mantener una copia; su utilidad depende de la carga.</p><p><strong>Alternativa:</strong> Medición del índice nativo</p><h2>20 Retiro de proyección · mecanismo</h2><p>Organiza el retiro con consumidores y reversión; el ejemplo no elimina datos remotos.</p><p><strong>Alternativa:</strong> Mantener temporalmente la proyección</p></section><section class="book-page ep3-page" id="revision-patrones-5"><h1>Revisar las fichas 21 a 25</h1><h2>21 Identidad documental estable · adaptación</h2><p>Mantiene identidad al cambiar ubicación; la independencia de ubicación no nace con COBRIA.</p><p><strong>Alternativa:</strong> Identificador asignado por el motor</p><h2>22 Validación en frontera · mecanismo</h2><p>Validar entradas es una práctica establecida; no se presenta como un patrón GoF específico.</p><p><strong>Alternativa:</strong> Validador de esquema en frontera</p><h2>23 Contrato documental versionado · adaptación</h2><p>Aplica evolución explícita de formato; una migración local no demuestra migración de toda la colección.</p><p><strong>Alternativa:</strong> Cambio aditivo compatible</p><h2>24 Lectura coherente por revisión · contrato</h2><p>Requiere un corte coherente de revisión; etiquetas iguales no prueban instantánea compartida.</p><p><strong>Alternativa:</strong> Instantánea o sesión consistente del motor</p><h2>25 Ventana de frescura declarada · contrato</h2><p>Declara antigüedad admitida y conducta al excederla; necesita tiempos confiables.</p><p><strong>Alternativa:</strong> Lectura canónica actual</p></section><section class="book-page ep3-page" id="revision-patrones-6"><h1>Revisar las fichas 26 a 30</h1><h2>26 Manifiesto de proyección · contrato</h2><p>Relaciona transformación, fuentes y versión; una cadena con forma de huella no comprueba sus bytes.</p><p><strong>Alternativa:</strong> Registro de exportación simple</p><h2>27 Partición analítica sin fuga · contrato</h2><p>Prohíbe fuga según el protocolo; el caso local no detecta todas las dependencias ocultas.</p><p><strong>Alternativa:</strong> Separación por entidad y tiempo</p><h2>28 Abstención con evidencia · mecanismo</h2><p>Se abstiene con evidencia insuficiente; un umbral no acredita calibración del modelo.</p><p><strong>Alternativa:</strong> Respuesta manual o lista de evidencia</p><h2>29 Presupuesto de derivados · heurística</h2><p>Explicita costo total y presupuesto; no demuestra que toda proyección sea rentable.</p><p><strong>Alternativa:</strong> No crear el derivado</p><h2>30 Auditoría narrativa reconstruible · experimental</h2><p>Propone reconstruir un relato de auditoría; no sustituye evidencia legal ni revisión independiente.</p><p><strong>Alternativa:</strong> Registro técnico estructurado</p></section></main>
+</body></html>

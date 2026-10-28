@@ -24,7 +24,7 @@ test('la afirmación de 630 observaciones coincide con evidencia ejecutada', asy
 
 test('cada producto declara fuente, autoridad y salida', async () => {
   const registry = await readJson('editorial/products.json');
-  assert.deepEqual(registry.products.map((item) => item.id), ['specification', 'article', 'master', 'book', 'workbook', 'technical-annex', 'site', 'toolkit', 'evidence']);
+  assert.deepEqual(registry.products.map((item) => item.id), ['specification', 'article', 'master', 'curriculum', 'book', 'workbook', 'technical-annex', 'site', 'toolkit', 'evidence']);
   for (const product of registry.products) {
     assert.ok(product.authority);
     assert.ok(product.source);

@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.0.0",
+  "phase": "EP0",
+  "date": "2026-10-19",
+  "deliveryTarget": "candidata-educativa-y-preprint",
+  "decisionStatus": "confirmada-por-usuario-en-chat",
+  "decisionEvidence": "Respuesta directa del usuario: Candidata educativa y preprint (recomendado)",
+  "proposalIndependent": true,
+  "stablePromotionAuthorized": false,
+  "deploymentAuthorized": false,
+  "coreChangesAuthorized": false,
+  "historicalResultsMayBeRewritten": false,
+  "newExperiments": "Condicionados a mantener afirmaciones que necesiten evidencia posterior a R7; no se declaran ejecutados ni se cierra PC3.",
+  "allowedClaims": [
+    "Método pedagógico propuesto y ejemplos con su cobertura real de pruebas",
+    "Contratos y mecanismos documentados o ejecutados bajo el alcance identificado",
+    "R7 como evidencia histórica del arnés original y sus configuraciones"
+  ],
+  "disallowedClaims": [
+    "Versión estable, certificación o estándar oficial",
+    "Eficacia pedagógica o productividad humana comprobadas sin estudio",
+    "Validación retrospectiva de PC2 por R7",
+    "Superioridad universal, seguridad integral o calidad generativa demostrada por A1"
+  ],
+  "acceptance": [
+    "Libro y web con recorridos desarrollados y ejemplos identificados por madurez",
+    "Artículo y maestro coherentes desde el resumen hasta las conclusiones",
+    "Edición, licencias, privacidad y acceso público revisados para el alcance elegido",
+    "Entrega y descargas vinculadas al SHA y paquete aprobado",
+    "Pendientes humanos y científicos visibles; autorización de publicación aparte"
+  ]
+}

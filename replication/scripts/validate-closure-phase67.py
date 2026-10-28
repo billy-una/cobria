@@ -32,7 +32,8 @@ def run(label: str, command: list[str], cwd: Path = ROOT) -> None:
 require_tokens(ROOT / "manuales/15-api-ux.md", ("RFC 9457", "Idempotencia", "cursor opaco", "WCAG 2.2 AA", "pruebas manuales"))
 require_tokens(ROOT / "manuales/16-security.md", ("Modelo de amenazas", "capacidad", "Functions", "Cadena de suministro", "Incidentes"))
 require_tokens(APP / "src/presentation/problema-http.mjs", ("application/problem+json", "traceId", "status", "categorias"))
-require_tokens(ROOT / "sitio/app/manual.tsx", ('apiux:', 'seguridad:', 'apiux: "/api-ux"', 'seguridad: "/seguridad"'))
+from pedagogy_checks import require_modules
+require_modules(ROOT, {"apiux": "/api-ux", "seguridad": "/seguridad"}, errors)
 for route in ("api-ux", "seguridad"):
     require_tokens(ROOT / f"sitio/app/{route}/page.tsx", ("ManualPage",))
 

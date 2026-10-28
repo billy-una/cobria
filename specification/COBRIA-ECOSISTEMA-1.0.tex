@@ -1,92 +1,514 @@
 \documentclass[11pt,letterpaper]{article}
-\usepackage[spanish]{babel}
+\usepackage[spanish,es-nodecimaldot]{babel}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
-\usepackage[margin=2.3cm]{geometry}
-\usepackage{xcolor,booktabs,longtable,enumitem,hyperref}
+\usepackage{lmodern}
+\usepackage[margin=2.25cm,headheight=15pt]{geometry}
+\usepackage{xcolor,booktabs,longtable,tabularx,array,enumitem,hyperref,microtype,amssymb}
+\usepackage{fancyhdr,lastpage,titlesec,tcolorbox,tikz}
+\usepackage{xurl}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric}
+\tcbuselibrary{breakable,skins}
+
 \definecolor{bosque}{HTML}{174A3A}
-\definecolor{coral}{HTML}{D96B4B}
-\hypersetup{colorlinks=true,linkcolor=bosque,urlcolor=coral,pdftitle={COBRIA Ecosistema 1.0: especificación de alcance},pdfauthor={Billy Jak Cordero Porras},pdfsubject={Especificación normativa del ecosistema COBRIA},pdfkeywords={COBRIA, arquitectura de software, patrones, NoSQL, trazabilidad}}
-\setlist{nosep,leftmargin=*}
-\title{\textcolor{bosque}{COBRIA Ecosistema 1.0}\\\large Especificación de alcance, autoridad y conformidad}
-\author{Billy Jak Cordero Porras}
-\date{Coto Brus, Costa Rica · 2026}
+\definecolor{bosqueoscuro}{HTML}{0B3027}
+\definecolor{jade}{HTML}{2F7D62}
+\definecolor{coral}{HTML}{A84330}
+\definecolor{oro}{HTML}{E4B43C}
+\definecolor{papel}{HTML}{FAF7EF}
+\definecolor{niebla}{HTML}{EAF1ED}
+\definecolor{tinta}{HTML}{25332E}
+
+\hypersetup{colorlinks=true,linkcolor=bosque,urlcolor=coral,citecolor=jade,
+pdftitle={COBRIA Ecosistema 1.0: especificación normativa},
+pdfauthor={Billy Jak Cordero Porras},
+pdfsubject={Requisitos, niveles y conformidad de COBRIA},
+pdfkeywords={COBRIA, especificación, conformidad, NoSQL, datos canónicos, proyecciones reconstruibles}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\textcolor{bosque}{\small COBRIA Ecosistema 1.0}}
+\fancyhead[R]{\textcolor{bosque}{\small Especificación normativa candidata}}
+\fancyfoot[L]{\small Propuesta independiente · 1.0.0-rc2}
+\fancyfoot[R]{\small \thepage\ de \pageref{LastPage}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\titleformat{\section}{\Large\bfseries\color{bosque}}{\thesection}{.7em}{}
+\titleformat{\subsection}{\large\bfseries\color{jade}}{\thesubsection}{.7em}{}
+\setlist{leftmargin=*,itemsep=3pt,topsep=5pt}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+\renewcommand{\arraystretch}{1.22}
+\setcounter{tocdepth}{1}
+
+\newtcolorbox{aviso}[1]{breakable,enhanced,colback=niebla,colframe=jade,boxrule=.8pt,
+arc=2mm,left=3mm,right=3mm,top=2.5mm,bottom=2.5mm,title={#1},fonttitle=\bfseries,
+colbacktitle=jade,coltitle=white}
+\newtcolorbox{requisito}[1]{breakable,enhanced,colback=papel,colframe=bosque,boxrule=.9pt,
+borderline west={3pt}{0pt}{oro},arc=1.5mm,left=4mm,right=4mm,top=3mm,bottom=3mm,
+title={#1},fonttitle=\bfseries,coltitle=white,colbacktitle=bosque}
+\newcommand{\term}[1]{\textbf{\textcolor{bosque}{#1}}}
+
 \begin{document}
-\maketitle
-\begin{abstract}
-Este documento identifica las partes normativas del Ecosistema COBRIA 1.0 y sus
-relaciones con los productos pedagógicos y científicos. COBRIA es una propuesta
-independiente que compone prácticas conocidas mediante contratos verificables; no se
-presenta como estándar oficial ni como invención aislada de cada mecanismo.
-\end{abstract}
+\pagenumbering{roman}
+\begin{titlepage}
+\pagecolor{papel}\color{tinta}\vspace*{1.2cm}
+{\color{coral}\bfseries\large ESPECIFICACIÓN NORMATIVA CANDIDATA\par}\vspace{1cm}
+{\color{bosqueoscuro}\bfseries\fontsize{34}{39}\selectfont COBRIA\par}\vspace{.3cm}
+{\color{bosque}\fontsize{21}{26}\selectfont Ecosistema 1.0\par}\vspace{.7cm}
+{\Large Requisitos, contratos y conformidad para datos canónicos y representaciones reconstruibles\par}
+\vspace{1cm}
+\begin{tcolorbox}[colback=white,colframe=jade,arc=2mm,boxrule=.8pt]
+\textbf{Estado:} candidata pública \texttt{1.0.0-rc2}; no estable y no certificada.\\
+\textbf{Núcleo protegido:} COBRIA Core 1.0, congelado.\\
+\textbf{Ámbito normativo:} sistemas documentales NoSQL con autoridad canónica y derivados reconstruibles.\\
+\textbf{Naturaleza:} propuesta independiente; no es un estándar oficial.
+\end{tcolorbox}
+\vfill
+{\large Billy Jak Cordero Porras\par}
+{Coto Brus, Costa Rica · 2026\par}\vspace{.6cm}
+{\small Repositorio canónico: \url{https://github.com/billy-una/cobria}\par}
+\end{titlepage}
+\nopagecolor
+\pagenumbering{arabic}
+
+\section*{Resumen}
+\addcontentsline{toc}{section}{Resumen}
+Esta especificación establece vocabulario, modelo conceptual, invariantes, requisitos,
+estados, operaciones, perfiles de conformidad y métodos de verificación para COBRIA. La
+propuesta gobierna la relación entre una autoridad documental NoSQL y sus índices,
+cachés, proyecciones, conjuntos analíticos y contextos de inteligencia artificial. Su
+objetivo no es imponer una tecnología: busca que autoridad, ámbito, revisión,
+procedencia, equivalencia, reconstrucción, publicación y retiro sean decisiones
+explícitas y comprobables.
+
+COBRIA integra prácticas conocidas. La contribución defendible es su composición en un
+contrato verificable y una ruta de conformidad por niveles. Una implementación puede
+declarar C1, C2 o C3 únicamente cuando satisface todos los requisitos heredados y conserva
+evidencia resoluble. Compilar, documentar o utilizar un patrón no equivale a validación
+externa ni certificación oficial.
+
+\begin{aviso}{Cómo leer esta especificación}
+Las secciones 1--5 fijan alcance y vocabulario. Las secciones 6--8 contienen el modelo y
+las obligaciones. Las secciones 9--12 explican pruebas, evolución y ejemplos. Los anexos
+ofrecen una declaración de conformidad y una lista de inspección. El registro estructurado
+canónico de requisitos es \path{specification/requirements-1.0.json}.
+\end{aviso}
 \tableofcontents
-\section{Autoridad documental}
-El orden de autoridad es: especificación, implementación, evidencia y productos
-editoriales. Una explicación del libro o del sitio no puede ampliar un requisito del
-núcleo normativo. Una cifra experimental solo puede publicarse si conserva fuente,
-configuración, estado y limitaciones.
-\begin{longtable}{p{.19\linewidth}p{.27\linewidth}p{.46\linewidth}}
-\toprule Producto & Autoridad & Responsabilidad \\ \midrule
-Especificación & Normativa & Define requisitos, invariantes, niveles y vocabulario.\\
-Implementación & Ejecutable & Materializa contratos sin redefinirlos.\\
-Evidencia & Empírica & Registra pruebas, mediciones, fallos y amenazas.\\
-Artículo & Científica & Resume contribución, método, resultados y límites.\\
-Documento maestro & Metodológica & Desarrolla fundamentos, protocolo y trazabilidad.\\
-Libro y sitio & Pedagógica & Enseñan mediante patrones, ejemplos y laboratorios.\\
-\bottomrule
+\clearpage
+
+\section{Control del documento}
+\begin{longtable}{p{.28\linewidth}p{.64\linewidth}}
+\toprule Campo & Valor \\ \midrule
+Título & COBRIA Ecosistema 1.0: especificación normativa \\
+Versión editorial & \texttt{1.0.0-rc2} \\
+Estado & candidata pública, no estable, no certificada \\
+Autor responsable & Billy Jak Cordero Porras \\
+Fuente & \path{specification/COBRIA-ECOSISTEMA-1.0.tex} \\
+Registro normativo & \path{specification/requirements-1.0.json} \\
+Núcleo congelado & \path{specification/COBRIA-CORE-1.0.md} \\
+Huella del núcleo & {\footnotesize\ttfamily 9db3b0fffdee83ddf6c7ec8ede7e8f5d675d1e152e0614cadecba884eae1c179} \\
+Licencias & Apache-2.0 para código; CC-BY-4.0 para contenido propio \\
+Repositorio & \url{https://github.com/billy-una/cobria} \\ \bottomrule
 \end{longtable}
-\section{Invariantes transversales}
+
+\subsection{Orden de autoridad}
+Cuando dos productos difieren, se aplica este orden:
 \begin{enumerate}
-\item El dominio y la aplicación no dependen de interfaz, SDK o almacenamiento.
-\item Las claves físicas compactas se traducen exclusivamente en Daters o adaptadores.
-\item Toda operación sensible conserva actor, capacidad, ámbito y finalidad.
-\item Ningún estado ejecutado se afirma sin un artefacto verificable.
-\item Índices, cachés, vectores y proyecciones no adquieren autoridad silenciosamente.
-\item Todo derivado declara fuente, contrato, versión, frescura y retiro.
-\item La optimización se justifica con mediciones y una alternativa más simple.
-\item Las actividades humanas o externas permanecen pendientes hasta recibir evidencia válida.
+\item \textbf{especificación}: define obligaciones, términos y perfiles;
+\item \textbf{implementación}: materializa el contrato sin redefinirlo;
+\item \textbf{evidencia}: informa qué se ejecutó y bajo cuáles límites;
+\item \textbf{artículo y documento maestro}: interpretan contribución y método;
+\item \textbf{libro y sitio}: enseñan sin crear obligaciones nuevas.
 \end{enumerate}
-\section{Módulos del ecosistema}
-El ecosistema organiza diecisiete módulos: Manifiesto, Fundamentos, Layers, Pattern
-Design, Data, Core, API \& UX, Security, Quality, Performance, Cloud \& Operations,
-Analytics \& AI, Engineering, Build, Toolkit, Evidence y Knowledge. No todos son
-obligatorios para todos los proyectos; el nivel mínimo debe corresponder al riesgo.
-\section{COBRIA Core 1.0}
-Core 1.0 permanece congelado. Su ámbito son sistemas NoSQL documentales con datos
-canónicos y representaciones reconstruibles. La conformidad se declara por nivel:
+Una cifra experimental no cambia una obligación. Una explicación pedagógica no amplía
+Core. Una prueba exitosa demuestra solamente el alcance que declara su protocolo.
+
+\subsection{Política de cambios}
+Core 1.0 permanece congelado. Esta edición organiza y hace publicables obligaciones ya
+declaradas sin modificar su semántica. Una incompatibilidad normativa requiere una nueva
+versión mayor y una decisión arquitectónica. Una aclaración compatible puede publicarse
+como errata, siempre que no reescriba evidencia histórica.
+
+\section{Alcance, audiencia y exclusiones}
+\subsection{Alcance}
+Esta especificación se aplica cuando un sistema documental NoSQL mantiene una
+representación autorizada y una o más representaciones derivadas. Incluye proyecciones
+de lectura, índices de búsqueda, cachés materializadas, exportaciones, conjuntos
+analíticos, fragmentos para recuperación aumentada y características para modelos.
+
+La unidad normativa es una relación declarada entre fuente, transformación, ámbito,
+versión, criterio de equivalencia, operación y retiro. COBRIA no exige crear una
+proyección; exige gobernarla cuando existe.
+
+\subsection{Audiencia}
+\begin{itemize}
+\item equipos que diseñan dominio, aplicación, datos e infraestructura;
+\item personas responsables de seguridad, calidad, operación y analítica;
+\item autores de adaptadores, repositorios, índices y procesos de reconstrucción;
+\item investigadores que evalúan costo, transferencia y reproducibilidad;
+\item agentes de IA que proponen cambios bajo una política de autoridad explícita.
+\end{itemize}
+
+\subsection{Fuera de alcance}
+COBRIA no define un motor de base de datos, ORM, algoritmo de consenso, topología de
+clúster, identidad corporativa, legislación aplicable ni modelo de aprendizaje. No
+garantiza rendimiento, seguridad exhaustiva, disponibilidad, exactitud predictiva,
+ausencia de sesgo o cumplimiento legal. Tampoco convierte resultados locales en prueba
+de comportamiento distribuido.
+
+Los motores relacionales pueden emplearse como controles históricos o alternativas,
+pero no forman parte del conjunto confirmatorio NoSQL de Core 1.0.
+
+\section{Lenguaje normativo y declaraciones}
+\subsection{Palabras clave}
+\begin{longtable}{p{.22\linewidth}p{.7\linewidth}}
+\toprule Palabra & Interpretación \\ \midrule
+DEBE / NO DEBE & obligación necesaria para el perfil que la contiene \\
+DEBERÍA / NO DEBERÍA & recomendación fuerte; una desviación exige razón y riesgo documentados \\
+PUEDE & opción permitida que no crea una obligación implícita \\
+PROPONE & estado de diseño sin evidencia suficiente para afirmar implementación \\
+OBSERVA & hallazgo contextual que no se generaliza automáticamente \\ \bottomrule
+\end{longtable}
+El uso sigue el espíritu de RFC 2119 y RFC 8174, adaptado al español. Solo los requisitos
+con identificador estable y perfil declarado participan en una afirmación de conformidad.
+
+\subsection{Estados de evidencia}
 \begin{description}
-\item[C1 --- Fundamental.] Autoridad, identidad, ámbito, revisión y frontera de escritura.
-\item[C2 --- Reconstruible.] C1 más contrato de transformación, equivalencia,
-idempotencia, reconstrucción y publicación segura.
-\item[C3 --- Gobernado.] C2 más procedencia, frescura, observabilidad, responsable y retiro.
+\item[Propuesto.] Existe intención y alcance, pero no implementación comprobada.
+\item[Documentado.] El contrato posee fuente revisable.
+\item[Implementado.] Existe código o configuración resoluble.
+\item[Ejecutado.] Una prueba conserva ambiente, entrada, salida y huella.
+\item[Reproducido externamente.] Otra persona y computadora repiten el procedimiento.
+\item[Revisado por terceros.] Una evaluación independiente conserva identidad, método y hallazgos.
 \end{description}
-Una implementación solo declara un nivel cuando supera todas sus pruebas obligatorias.
-\section{Patrones, capas y datos}
-Una ficha de patrón DEBE separar contexto, problema, fuerzas, solución, participantes,
-consecuencias, implementación, casos negativos, métricas y relaciones. Las capas DEBEN
-respetar dependencias hacia el dominio. El modelado documental DEBE partir de identidad,
-ciclo de vida, consultas, invariantes, ámbito y evolución; una estructura de carpetas no
-constituye por sí sola una arquitectura.
-\section{Seguridad, operación e inteligencia artificial}
-Los controles de seguridad se aplican en la frontera y se prueban con casos negativos.
-Los ambientes promueven artefactos inmutables y conservan rollback. La telemetría no
-debe exponer secretos ni bloquear el flujo principal. Un sistema de IA conserva
-procedencia, utiliza capacidades mínimas y se abstiene cuando la evidencia es insuficiente.
-\section{Evidencia y estados}
-Los estados permitidos son: propuesto, documentado, implementado, ejecutado, reproducido
-externamente y revisado por terceros. Ningún estado implica automáticamente el siguiente.
-Los resultados locales no demuestran comportamiento distribuido ni superioridad universal.
-\section{Productos y versiones}
-El libro principal contiene enseñanza duradera; el cuaderno reúne ejercicios; el anexo
-técnico conserva trazabilidad de fases. El artículo y el documento maestro consumen las
-mismas afirmaciones canónicas. La descarga pública no debe ofrecer versiones finales
-competidoras.
-\section{Licencia y cita}
-Cada tipo de material se rige por la licencia declarada en el repositorio. La atribución
-recomendada es: Cordero Porras, B. J. (2026). \emph{COBRIA Ecosistema 1.0: especificación
-de alcance, autoridad y conformidad}. Publicación independiente.
-\section{Límites}
-COBRIA no garantiza rendimiento, seguridad, disponibilidad, cumplimiento legal ni éxito
-de un proyecto. No reemplaza análisis de dominio, pruebas en infraestructura real,
-consentimiento, evaluación ética o revisión profesional independiente.
+Ningún estado implica automáticamente el siguiente. Una simulación o perfil sintético no
+se presenta como trabajo humano.
+
+\section{Vocabulario canónico}
+\begin{longtable}{p{.22\linewidth}p{.42\linewidth}p{.28\linewidth}}
+\toprule Término & Significado & No debe confundirse con \\ \midrule
+Autoridad canónica & representación autorizada para cambiar hechos y reglas & la copia más consultada \\
+Ámbito & límite obligatorio de identidad, autorización y partición & filtro opcional al final \\
+Documento canónico & agregado con identidad, ámbito, revisión y esquema & forma física de un proveedor \\
+Derivado & representación obtenida de fuentes declaradas & fuente paralela editable \\
+Proyección & derivado orientado a lectura, búsqueda o análisis & respaldo de emergencia \\
+Transformación & función y entradas que producen un derivado & tarea sin versión \\
+Revisión & orden lógico monotónico de una entidad & fecha de actualización \\
+Versión & identidad de contrato, esquema, catálogo o transformación & revisión de una entidad \\
+Procedencia & registro de fuentes y transformaciones relevantes & comentario informal \\
+Equivalencia & relación congelada sobre significado observable & igualdad física de bytes \\
+Candidata & versión construida y todavía no activa & publicación parcial \\
+Reconstrucción & regeneración desde fuentes autorizadas & reparación desde la copia dañada \\
+Publicación & cambio verificable de versión activa & sobrescritura en el mismo lugar \\
+Retiro & cierre gobernado de escrituras y consumidores & borrado inmediato sin evidencia \\ \bottomrule
+\end{longtable}
+
+\section{Modelo conceptual}
+\subsection{Documento canónico}
+Un documento canónico se representa como:
+\[d = (id,\; ambito,\; revision,\; versionEsquema,\; contenido)\]
+La identidad lógica no depende del motor. El ámbito acompaña a la operación. La revisión
+ordena cambios de una misma identidad dentro de su ámbito. La versión de esquema explica
+cómo interpretar el contenido.
+
+\subsection{Contrato de proyección}
+Una proyección se define por la tupla:
+\[K = \langle C, T, \Theta, S, V, \Phi, E, R, O \rangle\]
+\begin{longtable}{p{.1\linewidth}p{.82\linewidth}}
+\toprule Símbolo & Responsabilidad \\ \midrule
+$C$ & conjunto de fuentes canónicas y cortes externos autorizados \\
+$T$ & transformación determinista o con toda entrada no determinista declarada \\
+$\Theta$ & catálogos, parámetros, políticas, semillas y modelos versionados \\
+$S$ & ámbito de autorización y partición \\
+$V$ & versión del contrato, esquema y representación \\
+$\Phi$ & presupuesto de frescura y costo \\
+$E$ & relación de equivalencia lógica \\
+$R$ & procedimiento repetible de reconstrucción y reparación \\
+$O$ & propiedad operacional, observabilidad, retención y retiro \\ \bottomrule
+\end{longtable}
+Si falta un componente requerido por el nivel declarado, la implementación no puede
+subir de nivel mediante documentación compensatoria.
+
+\subsection{Participantes}
+\begin{itemize}
+\item \term{Objeto}: identidad e invariantes del dominio sin claves físicas.
+\item \term{Caso de uso}: coordina autorización, validación y efecto.
+\item \term{Repositorio}: frontera semántica de persistencia.
+\item \term{Dater}: traduce campos físicos, versiones y proveedor.
+\item \term{Catálogo}: fija versiones, estados, catálogos y punteros activos.
+\item \term{Constructor}: produce una candidata separada.
+\item \term{Verificador}: aplica equivalencia y casos testigo.
+\item \term{Publicador}: cambia la versión activa y conserva rollback.
+\item \term{Observador}: emite métricas y evidencia sanitizada.
+\item \term{Responsable}: decide operación, evolución y retiro.
+\end{itemize}
+
+\section{Invariantes y operaciones}
+\subsection{Invariantes transversales}
+\begin{enumerate}
+\item solo la autoridad canónica acepta cambios autoritativos;
+\item toda operación aporta identidad, capacidad, ámbito y finalidad suficientes;
+\item una revisión aceptada nunca retrocede el estado visible;
+\item un derivado conserva fuente, revisión y versión de transformación;
+\item reconstruir no depende del derivado activo;
+\item una candidata se verifica antes de publicarse;
+\item repetir una entrega lógica no duplica el efecto;
+\item un fallo previo a publicación conserva la versión activa anterior;
+\item la evidencia no expone secretos ni cargas sensibles;
+\item una afirmación automatizada sin evidencia suficiente se abstiene.
+\end{enumerate}
+
+\subsection{Precondiciones y poscondiciones}
+\begin{longtable}{p{.18\linewidth}p{.35\linewidth}p{.39\linewidth}}
+\toprule Operación & Precondiciones & Poscondiciones \\ \midrule
+Guardar canónico & identidad, ámbito, capacidad y revisión esperada válidos & cambio visible solo en el ámbito; revisión monotónica; evento o evidencia correlacionable \\
+Construir candidata & fuentes, corte, transformación, versión y catálogos congelados & candidata separada; versión activa intacta; manifiesto completo \\
+Verificar candidata & construcción completa y criterio $E$ congelado & resultado aprobado o rechazo con diferencias; ningún cambio activo \\
+Publicar & candidata verificada y fuentes todavía vigentes & una única versión activa; huella, versión previa y rollback registrados \\
+Reparar & diferencia localizada y fuente autorizada & equivalencia repetida; reparación idempotente \\
+Retirar & consumidores, retención y reconstruibilidad conocidas & sin nuevas escrituras; migración o rechazo explícito; evidencia de cierre \\ \bottomrule
+\end{longtable}
+
+\section{Ciclo de vida de una proyección}
+\begin{center}
+\begin{tikzpicture}[node distance=8mm and 6mm,
+state/.style={draw=bosque,rounded corners,fill=niebla,minimum width=24mm,minimum height=9mm,font=\small\bfseries},
+terminal/.style={state,fill=papel,draw=coral},flow/.style={-{Latex[length=2mm]},thick,draw=jade}]
+\node[state] (ausente) {AUSENTE};
+\node[state,right=of ausente] (construyendo) {CONSTRUYENDO};
+\node[state,right=of construyendo] (candidata) {CANDIDATA};
+\node[state,right=of candidata] (verificada) {VERIFICADA};
+\node[state,below=of verificada] (publicada) {PUBLICADA};
+\node[terminal,below=of publicada] (retirada) {RETIRADA};
+\node[terminal,below=of candidata] (rechazada) {RECHAZADA};
+\node[terminal,below=of construyendo] (fallida) {FALLIDA};
+\draw[flow] (ausente) -- (construyendo);
+\draw[flow] (construyendo) -- (candidata);
+\draw[flow] (candidata) -- (verificada);
+\draw[flow] (verificada) -- (publicada);
+\draw[flow] (publicada) -- (retirada);
+\draw[flow] (candidata) -- (rechazada);
+\draw[flow] (construyendo) -- (fallida);
+\draw[flow,bend left=35] (fallida.west) to (construyendo.west);
+\draw[flow,bend right=30] (rechazada.east) to (construyendo.south);
+\end{tikzpicture}
+\end{center}
+\begin{longtable}{p{.20\linewidth}p{.34\linewidth}p{.38\linewidth}}
+\toprule Transición & Condición mínima & Prohibición \\ \midrule
+AUSENTE $\rightarrow$ CONSTRUYENDO & contrato y fuentes declaradas & no escribir sobre versión activa \\
+CONSTRUYENDO $\rightarrow$ CANDIDATA & recorrido completo y manifiesto cerrado & no ocultar errores o faltantes \\
+CANDIDATA $\rightarrow$ VERIFICADA & equivalencia y pruebas obligatorias aprobadas & no aceptar un oráculo improvisado \\
+VERIFICADA $\rightarrow$ PUBLICADA & fuentes vigentes y operación autorizada & ningún otro estado publica \\
+PUBLICADA $\rightarrow$ RETIRADA & consumidores, retención y reconstrucción resueltos & no recibir escrituras nuevas \\
+CONSTRUYENDO $\rightarrow$ FALLIDA & interrupción o transformación inválida & no alterar puntero activo \\
+CANDIDATA $\rightarrow$ RECHAZADA & divergencia, fuente obsoleta o ámbito contradictorio & no transicionar directamente a PUBLICADA \\ \bottomrule
+\end{longtable}
+
+\section{Requisitos normativos por nivel}
+Los requisitos siguientes se generan desde un registro JSON único. C2 hereda C1 y C3
+hereda C1 y C2. El conteo exacto aparece en el derivado generado.
+\input{specification/generated/requirements-1.0.tex}
+
+\section{Conformidad}
+\subsection{Perfiles}
+\begin{longtable}{p{.13\linewidth}p{.28\linewidth}p{.51\linewidth}}
+\toprule Nivel & Nombre & Resultado mínimo \\ \midrule
+C1 & Fundamental & autoridad, identidad, ámbito, revisión y frontera única de escritura \\
+C2 & Reconstruible & C1 más transformación, idempotencia, equivalencia, reconstrucción y publicación segura \\
+C3 & Gobernado & C2 más procedencia, presupuestos, observabilidad, responsable, retiro, analítica e IA gobernada \\ \bottomrule
+\end{longtable}
+
+\subsection{Reglas para declarar conformidad}
+Una declaración de conformidad:
+\begin{enumerate}
+\item identifica producto, versión, commit, ambiente y nivel;
+\item enumera todos los requisitos del nivel y sus heredados;
+\item conserva comando, resultado, fecha, configuración y huella de evidencia;
+\item marca cada requisito como conforme, no conforme o no evaluado;
+\item trata \emph{no evaluado} como impedimento, no como aprobación;
+\item registra desviaciones de recomendaciones DEBERÍA;
+\item separa pruebas locales, distribuidas, humanas y externas;
+\item evita vocabulario de certificación cuando no existe una entidad certificadora.
+\end{enumerate}
+El uso de un patrón, una carpeta o un nombre COBRIA no constituye conformidad. Una
+implementación puede cumplir un nivel sin adoptar todos los módulos pedagógicos.
+
+\begin{aviso}{Forma mínima del informe}
+El informe incluye alcance, exclusiones, versión de la especificación, nivel solicitado,
+tabla requisito--resultado, evidencia resoluble, hallazgos, amenazas y responsable. Si
+una prueba depende de servicios no ejecutados, el resultado correcto es \emph{no evaluado}.
+\end{aviso}
+
+\section{Protocolos obligatorios y evidencia}
+Los protocolos P1, P2, R1, S1 y A1 comprueban propiedades distintas. No deben combinarse
+en una puntuación que oculte fallos.
+\begin{longtable}{p{.09\linewidth}p{.29\linewidth}p{.25\linewidth}p{.23\linewidth}}
+\toprule Prueba & Pregunta & Métricas mínimas & Límite \\ \midrule
+P1 & ¿La lectura derivada conserva significado y aporta un beneficio medible? & latencia, lecturas, bytes, p50/p95/p99 & una microprueba no demuestra arquitectura distribuida \\
+P2 & ¿Qué costo introduce mantener el derivado? & escrituras, bytes, eventos, CPU, memoria, convergencia & omitir recuperación subestima costo total \\
+R1 & ¿Puede reconstruirse y publicarse sin vaciar lectores? & duración, cobertura, equivalencia, almacenamiento pico & la garantía local no prueba consenso \\
+S1 & ¿El ámbito falla cerrado antes del almacén? & rechazos, accesos cruzados, documentos filtrados & no sustituye controles del proveedor \\
+A1 & ¿Analítica e IA conservan procedencia y abstención? & fuentes, partición, huellas, fugas y abstenciones & no mide por sí sola exactitud, sesgo o daño \\ \bottomrule
+\end{longtable}
+
+\subsection{Reproducibilidad mínima}
+Cada corrida conserva código, dependencias, configuración, semilla, reloj relevante,
+orden de escenarios, calentamiento, aislamiento, observaciones crudas, análisis y huellas.
+Las tablas y gráficos se regeneran; no se corrigen a mano. Un resultado negativo se
+publica con la misma precisión metodológica que uno favorable.
+
+\section{Compatibilidad, migración y extensiones}
+\subsection{Tipos de cambio}
+\begin{longtable}{p{.22\linewidth}p{.33\linewidth}p{.37\linewidth}}
+\toprule Cambio & Compatibilidad & Acción \\ \midrule
+Aclaración editorial & no cambia obligaciones & errata y reconstrucción del PDF \\
+Nuevo método de prueba equivalente & compatible si no reduce aceptación & versión menor, trazabilidad y comparación \\
+Nuevo requisito obligatorio & incompatible para perfiles existentes & versión mayor y ADR \\
+Relajar una obligación & incompatible y riesgoso & versión mayor, justificación y reevaluación \\
+Extensión de proveedor & compatible si respeta el contrato & perfil de extensión con pruebas propias \\
+Cambio de esquema documental & depende de lectura/escritura compatibles & catálogo, Dater, migración y rollback \\ \bottomrule
+\end{longtable}
+
+\subsection{Migración}
+Una migración conforme declara origen, destino, transformaciones, versiones leídas y
+escritas, estrategia gradual, observabilidad, criterio de término y rollback. Los Daters
+pueden leer varias versiones físicas mientras el dominio conserva un contrato único. Una
+migración no debe usar una proyección editable como sustituto de la autoridad.
+
+\subsection{Extensiones}
+Una extensión usa un espacio de identificadores propio, declara qué nivel requiere, no
+redefine términos canónicos y aporta casos negativos. Los requisitos de interfaz,
+documentación, nube o gestión general permanecen en módulos ECO cuando no pertenecen a
+Core. La extensión indica si es normativa, experimental o pedagógica.
+
+\section{Ejemplos de aplicación}
+\subsection{Caso conforme: observaciones ambientales}
+Una organización registra observaciones de ríos. El documento canónico conserva
+identidad del punto, ámbito comunitario, revisión y medición. Una proyección geográfica
+se construye con catálogo de unidades y versión de transformación. El constructor escribe
+una candidata; el verificador compara conteos, identidades, valores normalizados y
+consultas testigo. Solo después cambia el alias activo. El conjunto analítico conserva
+corte temporal, consentimiento, partición y huella. Sin observaciones autorizadas, el
+asistente se abstiene.
+
+Este diseño puede declarar C3 si la evidencia confirma todos los requisitos heredados.
+El caso no demuestra rendimiento en otro motor o topología.
+
+\subsection{Caso conforme mínimo: C1 sin proyección}
+Una aplicación pequeña conserva un solo documento canónico. El repositorio exige ámbito,
+identidad y revisión; la presentación no accede al SDK; no existe materialización
+adicional. Puede declarar C1 sin crear ceremoniosamente una proyección. COBRIA favorece
+esta solución si un índice canónico satisface el objetivo.
+
+\subsection{Contraejemplos}
+\begin{longtable}{p{.24\linewidth}p{.31\linewidth}p{.37\linewidth}}
+\toprule Fallo & Consecuencia & Requisito afectado \\ \midrule
+Editar el índice desde la interfaz & aparece una segunda autoridad imposible de reconciliar & AUT-001, WRT-001 \\
+Recuperar globalmente y filtrar al final & existencia, conteos o cachés pueden cruzar ámbitos & SCP-001, SEC-001 \\
+Aceptar revisión 2 después de revisión 3 & regresión silenciosa & REV-001 \\
+Reconstruir desde la copia dañada & se propaga corrupción & REC-001, EQV-001 \\
+Borrar la versión activa antes de construir & ventana vacía o mezcla parcial & PUB-001 \\
+Cambiar incrustaciones sin registrar modelo & resultados no reproducibles & TRN-001, PRV-001 \\
+Barajar antes de separar el futuro & fuga temporal y evaluación optimista & ANA-001 \\
+Forzar una respuesta sin evidencia & afirmación plausible sin respaldo & AI-001 \\ \bottomrule
+\end{longtable}
+
+\section{Matriz integral de trazabilidad}
+La tabla enlaza cada obligación con responsable, método y evidencia principal. ``Cubierta''
+significa que existe una comprobación en el alcance declarado; no equivale a certificación,
+revisión independiente o validez universal.
+\input{specification/generated/traceability-1.0.tex}
+
+\section{Seguridad, privacidad y amenazas}
+La conformidad COBRIA no reemplaza un modelo de amenazas. Cada adopción considera al
+menos: confusión de autoridad, fuga entre ámbitos, revisión obsoleta, dependencia
+comprometida, transformación no reproducible, oráculo incompleto, publicación parcial,
+telemetría sensible, retención excesiva, recuperación aumentada sin autorización y agente
+con capacidades amplias.
+
+Los datos personales exigen finalidad, minimización, consentimiento o base aplicable,
+retención y borrado verificable según contexto. La procedencia nunca autoriza por sí sola
+la divulgación. Secretos, cargas completas y atributos de alta cardinalidad no deben
+incorporarse a registros generales.
+
+\section{Limitaciones de la especificación}
+Esta especificación define contratos comprobables, no una prueba matemática completa de
+un sistema distribuido. Las pruebas locales disponibles no demuestran serialización entre
+regiones, disponibilidad bajo partición, confidencialidad frente a canales laterales,
+corrección de un proveedor administrado ni capacidad humana de transferencia.
+
+La candidata RC2 permanece bloqueada para promoción estable hasta completar revisión
+independiente, doble cribado bibliográfico, estudio de transferencia, repetición en otra
+computadora y autorización de publicación.
+
+\section{Licencia, atribución y cita}
+El código propio se publica bajo Apache-2.0. Los textos, diagramas, ilustraciones y datos
+sintéticos propios se publican bajo CC-BY-4.0, salvo indicación expresa. Los materiales de
+terceros conservan su licencia. La procedencia se documenta en \path{PROVENANCE.md} y
+\path{editorial/provenance.json}.
+
+Forma sugerida de cita:
+\begin{quote}
+Cordero Porras, B. J. (2026). \emph{COBRIA Ecosistema 1.0: especificación normativa}
+(versión 1.0.0-rc2). Propuesta independiente. \url{https://github.com/billy-una/cobria}
+\end{quote}
+
+\section{Referencias normativas e informativas}
+\begin{thebibliography}{9}
+\bibitem{rfc2119} S. Bradner. \emph{Key words for use in RFCs to Indicate Requirement Levels}. RFC 2119, 1997. \url{https://www.rfc-editor.org/rfc/rfc2119}
+\bibitem{rfc8174} B. Leiba. \emph{Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words}. RFC 8174, 2017. \url{https://www.rfc-editor.org/rfc/rfc8174}
+\bibitem{jsonschema} JSON Schema. \emph{A Media Type for Describing JSON Documents}. Draft 2020-12. \url{https://json-schema.org/draft/2020-12}
+\bibitem{wcag} W3C. \emph{Web Content Accessibility Guidelines (WCAG) 2.2}. 2023. \url{https://www.w3.org/TR/WCAG22/}
+\bibitem{cobriacore} B. J. Cordero Porras. \emph{COBRIA Core 1.0}. Especificación congelada, 2026.
+\end{thebibliography}
+
+\appendix
+\section{Plantilla de declaración de conformidad}
+\begin{aviso}{Declaración propuesta; no certificación}
+Producto: \rule{9cm}{.3pt}\\
+Versión y commit: \rule{7.6cm}{.3pt}\\
+Perfil solicitado: C1 / C2 / C3\\
+Ambiente y fecha: \rule{7.7cm}{.3pt}\\
+Responsable: \rule{9cm}{.3pt}\\
+Resultado: conforme / no conforme / no evaluado\\
+Ubicación del informe y huellas: \rule{5.1cm}{.3pt}
+\end{aviso}
+La declaración anexa una fila por requisito. Una excepción a DEBERÍA registra razón,
+riesgo, responsable y fecha de revisión. Ninguna firma transforma esta propuesta en
+certificación oficial.
+
+\section{Lista de inspección}
+\begin{itemize}[label=$\square$]
+\item la autoridad canónica y sus escritores están identificados;
+\item ámbito, identidad y revisión llegan antes del almacén;
+\item cada derivado posee transformación, versión y fuentes;
+\item el criterio de equivalencia incluye casos negativos;
+\item la reconstrucción no usa la copia activa como fuente;
+\item la publicación conserva versión previa y rollback;
+\item frescura, costo, responsable, alertas y retiro son visibles;
+\item analítica conserva corte, partición, semilla y consentimiento aplicable;
+\item IA recupera dentro del ámbito, cita y puede abstenerse;
+\item cada afirmación apunta a evidencia con configuración y huella;
+\item las limitaciones locales, distribuidas y humanas permanecen separadas;
+\item el nivel declarado incluye todos los requisitos heredados.
+\end{itemize}
+
+\section{Índice de artefactos normativos}
+\begin{longtable}{p{.39\linewidth}p{.53\linewidth}}
+\toprule Artefacto & Responsabilidad \\ \midrule
+\path{specification/COBRIA-CORE-1.0.md} & núcleo congelado y contrato original \\
+\path{specification/requirements-1.0.json} & registro estructurado de requisitos y pruebas \\
+\path{specification/CONFORMANCE-1.0.json} & perfiles acumulativos y experimentos requeridos \\
+\path{specification/COBRIA-FORMAL-1.2.md} & complemento formal experimental \\
+\path{specification/COUNTEREXAMPLES-1.2.md} & fallos concretos y correcciones \\
+\path{replication/RELEASE-MANIFEST.json} & integridad del paquete de reproducción \\
+\path{editorial/canonical.json} & identidad y estado editorial compartidos \\ \bottomrule
+\end{longtable}
+
+\begin{center}\vfill
+\textcolor{bosque}{\rule{.7\linewidth}{.6pt}}\\[5pt]
+\small Fin de la especificación candidata COBRIA Ecosistema 1.0\\
+Fuente y derivados verificables desde el repositorio canónico.
+\end{center}
 \end{document}

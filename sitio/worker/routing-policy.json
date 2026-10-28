@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "1.0.0",
+  "redirects": {
+    "/core-1-1": "/core", "/core-1-2": "/core", "/caso": "/construir",
+    "/rutas": "/mapa", "/errores": "/calidad", "/decidir": "/laboratorio",
+    "/engineering": "/construir",
+    "/downloads/COBRIA-tesis.pdf": "/downloads/COBRIA-documento-maestro.pdf"
+  },
+  "assetPrefixes": ["/downloads/", "/lecturas/", "/fonts/", "/images/", "/_next/", "/assets/", "/archivo/"],
+  "assetPaths": ["/robots.txt", "/sitemap.xml", "/llms.txt", "/og.png", "/favicon.svg", "/catalogo.json", "/pattern-catalog.json", "/cobria-canonical.json", "/evidence-r7.json", "/trazabilidad.json", "/practical-examples.json", "/patterns.css", "/pattern-page.js"],
+  "mutableCacheControl": "public, max-age=0, must-revalidate",
+  "htmlCacheControl": "no-cache"
+}

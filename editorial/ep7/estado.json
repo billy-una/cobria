@@ -1,0 +1,35 @@
+{
+  "phase": "EP7",
+  "date": "2026-10-23",
+  "status": "completada-local-revision-exploratoria-acotada",
+  "published": false,
+  "coreChanged": false,
+  "systematicReviewComplete": false,
+  "independentScreeners": 0,
+  "references": 46,
+  "thematicAreas": 17,
+  "mechanismComparisons": 6,
+  "visualAndHistoricalAssetsChecked": 32,
+  "fontFilesChecked": 20,
+  "links": {"successfulResponses": 35, "accessRestricted403": 11, "doiMetadataSuccessful": 17},
+  "checks": {"ep7Tests": 8, "ep8Tests": 4, "fullVerification": "passed", "renderedHtmlTests": 33},
+  "pdfPages": {"article": 17, "master": 205, "blindArticle": 17, "book": 468},
+  "evidence": [
+    "output/review/ep7/pruebas.log",
+    "output/review/ep7/verificacion-completa.log",
+    "output/review/ep7/verificacion-cierre.log",
+    "output/review/ep7/sitio-final.log",
+    "output/review/site-check/cobria-site-check-cGw019/VERIFICATION.json",
+    "output/review/ep7/PDF.json",
+    "output/review/ep7/regresion-libro-ep3.log",
+    "output/review/ep7/DESCARGAS-VERIFICADAS.json"
+  ],
+  "limits": [
+    "Búsqueda dirigida, no exportación exhaustiva de índices ni revisión sistemática concluida.",
+    "Metadatos y estados HTTP no acreditan lectura íntegra de todas las obras ni validación de sus conclusiones.",
+    "Faltan doble cribado y extracción independientes reales.",
+    "La procedencia generativa declarada no sustituye recibos originales ni acredita exclusividad.",
+    "Revisión visual de secciones afectadas; EP9 conserva la inspección integral y accesibilidad.",
+    "Árbol local con cambios previos, no commit final, CI remota ni publicación."
+  ]
+}

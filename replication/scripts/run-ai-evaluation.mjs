@@ -2,7 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { rng } from "../src/generator.mjs";
-import { sha256 } from "../src/cobria.mjs";
+import { sha256 } from "../historical/memory-model/cobria.mjs";
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),".."),cfg=JSON.parse(fs.readFileSync(path.join(root,"protocol","preregistered-phase2.json"),"utf8")),dir=path.join(root,"results","phase2","raw");
 fs.mkdirSync(dir,{recursive:true});const out=path.join(dir,"ai-evaluation.jsonl");fs.writeFileSync(out,"");const runId="ai-"+new Date().toISOString().replace(/[:.]/g,"-");let rows=0;const emit=x=>{fs.appendFileSync(out,JSON.stringify({runId,...x})+"\n");rows++;};
 const topics=["training","injury","match","player","season","inventory","finance","video","consent","report"];

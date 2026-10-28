@@ -1,0 +1,20 @@
+[
+  ["Autoridad", "Lugar autorizado para aceptar un cambio legítimo."],
+  ["Ámbito", "Límite organizacional o de seguridad que acompaña toda operación."],
+  ["Canónico", "Documento desde el cual los derivados pueden volver a producirse."],
+  ["Catálogo", "Vocabulario versionado que estabiliza significado."],
+  ["Contrato", "Condición observable de entrada, resultado y fallo."],
+  ["Corte", "Punto temporal o de revisión usado para reproducir un conjunto."],
+  ["Derivado", "Representación orientada a una lectura, analítica o IA."],
+  ["Frescura", "Edad observable de una proyección frente a su fuente."],
+  ["Idempotencia", "Propiedad por la cual repetir no añade efectos distintos."],
+  ["Linaje", "Enlaces entre fuente, transformación, versión y resultado."],
+  ["Manifiesto", "Registro sellado de materiales y parámetros de construcción."],
+  ["Procedencia", "Origen y transformación documentados de un dato."],
+  ["Proyección", "Derivado diseñado para una necesidad concreta."],
+  ["Reconstrucción", "Producción repetible de un derivado desde fuentes autorizadas."],
+  ["Revisión", "Número o marca monotónica que evita regresiones silenciosas."],
+  ["Tiempo conocido", "Momento en que el sistema aprendió un hecho."],
+  ["Tiempo válido", "Momento del mundo al que el hecho se refiere."],
+  ["Ventana", "Atraso máximo aceptado por una lectura."]
+]

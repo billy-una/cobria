@@ -1,0 +1,634 @@
+{
+  "version": "1.0.0",
+  "labs": [
+    {
+      "id": "LAB-01",
+      "module": "inicio",
+      "title": "Convertir una idea en una prueba",
+      "objective": "Redactar una conducta observable y un rechazo.",
+      "steps": [
+        "Escriba actor, acción y resultado.",
+        "Añada una entrada inválida.",
+        "Convierta ambos ejemplos en pruebas."
+      ],
+      "expected": "Dos ejemplos concretos sin mencionar tecnología.",
+      "solution": "Dado un guardaparques autorizado, cuando registra una observación válida, entonces obtiene identidad y revisión; sin ámbito, la solicitud se rechaza.",
+      "command": "node --test --test-reporter=tap --test-name-pattern='^registra un documento canónico válido$' replication/examples/ecosistema-app/test/app.test.mjs",
+      "testPattern": "registra un documento canónico válido",
+      "testFile": "replication/examples/ecosistema-app/test/app.test.mjs",
+      "cwd": ".",
+      "prerequisites": [
+        "Terminal en la raíz de COBRIA.",
+        "Node.js 22.13 o superior; el ejemplo no requiere paquetes externos."
+      ],
+      "verificationScope": "Comprobación técnica relacionada; no demuestra por sí sola que la persona completó la tarea conceptual."
+    },
+    {
+      "id": "LAB-02",
+      "module": "inicio",
+      "title": "Repetir el inicio en limpio",
+      "objective": "Comprobar que el ejemplo no depende de la computadora del autor.",
+      "steps": [
+        "Use una copia limpia.",
+        "Ejecute instalación y pruebas.",
+        "Registre versiones y salida."
+      ],
+      "expected": "La copia ejecuta todas las pruebas y la demostración; registre los conteos reales, sin asumir una cifra fija.",
+      "solution": "Conserve node --version, npm --version y la salida de npm test junto al commit.",
+      "command": "npm --prefix replication/examples/ecosistema-app test",
+      "cwd": ".",
+      "prerequisites": [
+        "Terminal en la raíz de COBRIA.",
+        "Node.js 22.13 o superior; el ejemplo no requiere paquetes externos."
+      ],
+      "verificationScope": "Comprobación técnica relacionada; no demuestra por sí sola que la persona completó la tarea conceptual."
+    },
+    {
+      "id": "LAB-03",
+      "module": "fundamentos",
+      "title": "Separar identidad y valor",
+      "objective": "Modelar una corrección sin sustituir la identidad.",
+      "steps": [
+        "Cree obs-001 revisión 1.",
+        "Cambie cantidad.",
+        "Produzca revisión 2."
+      ],
+      "expected": "La identidad permanece y la revisión aumenta.",
+      "solution": "Identidad pertenece al objeto; cantidad es estado versionado.",
+      "command": "node --test --test-reporter=tap --test-name-pattern='^rechaza revisiones obsoletas$' replication/examples/ecosistema-app/test/app.test.mjs",
+      "testPattern": "rechaza revisiones obsoletas",
+      "testFile": "replication/examples/ecosistema-app/test/app.test.mjs",
+      "cwd": ".",
+      "prerequisites": [
+        "Terminal en la raíz de COBRIA.",
+        "Node.js 22.13 o superior; el ejemplo no requiere paquetes externos."
+      ],
+      "verificationScope": "Comprobación técnica relacionada; no demuestra por sí sola que la persona completó la tarea conceptual."
+    },
+    {
+      "id": "LAB-04",
+      "module": "fundamentos",
+      "title": "Mover una invariante al dominio",
+      "objective": "Evitar reglas duplicadas en interfaces.",
+      "steps": [
+        "Introduzca cantidad negativa.",
+        "Observe el rechazo.",
+        "Compruebe el mismo rechazo desde otra entrada."
+      ],
+      "expected": "Un único código de dominio protege ambas rutas.",
+      "solution": "La validación vive en new Observacion(entrada) y las fronteras solo traducen el error.",
+      "command": "node --test --test-reporter=tap --test-name-pattern='^el problema HTTP conserva traceId sin exponer detalles internos$' replication/examples/ecosistema-app/test/app.test.mjs",
+      "testPattern": "el problema HTTP conserva traceId sin exponer detalles internos",
+      "testFile": "replication/examples/ecosistema-app/test/app.test.mjs",
+      "cwd": ".",
+      "prerequisites": [
+        "Terminal en la raíz de COBRIA.",
+        "Node.js 22.13 o superior; el ejemplo no requiere paquetes externos."
+      ],
+      "verificationScope": "Comprobación técnica relacionada; no demuestra por sí sola que la persona completó la tarea conceptual."
+    },
+    {
+      "id": "LAB-05",
+      "module": "arquitectura",
+      "title": "Escribir un ADR mínimo",
+      "objective": "Comparar dependencia fija, selección global e inyección explícita.",
+      "steps": [
+        "Describa el cambio de repositorio que necesita demostrar.",
+        "Compare las tres alternativas del manual C3.",
+        "Registre costo, decisión local y condición de revisión.",
+        "Distinga la prueba funcional de una revisión del razonamiento."
+      ],
+      "expected": "Decisión local justificable sin cifras de rendimiento inventadas.",
+      "solution": "La guía C3 conserva memoria por defecto e inyecta el repositorio; revisar al necesitar durabilidad o concurrencia.",
+      "command": "node --test --test-reporter=tap --test-name-pattern='^la composición permite sustituir el puerto y detecta una forma incompleta$' replication/examples/ecosistema-app/test/capas-c3.test.mjs",
+      "cwd": ".",
+      "prerequisites": [
+        "Terminal en la raíz de COBRIA.",
+        "Node.js 22.13 o superior; manuales/28-arquitectura-y-capas-paso-a-paso.md."
+      ],
+      "verificationScope": "Comprueba la sustitución elegida, no la calidad del ADR escrito por el lector; su razonamiento requiere revisión."
+    },
+    {
+      "id": "LAB-06",
+      "module": "arquitectura",
+      "title": "Romper una frontera a propósito",
+      "objective": "Comprobar una función de aptitud.",
+      "steps": [
+        "Abra las fuentes virtuales de c3-architecture.test.mjs.",
+        "Compare un import prohibido y un comentario con apariencia de import.",
+        "Ejecute el analizador sin modificar la aplicación válida.",
+        "Explique qué detecta y qué no puede demostrar."
+      ],
+      "expected": "Se detectan imports prohibidos, ciclos y dependencias calculadas; los comentarios no causan falsos positivos.",
+      "solution": "El analizador usa la política de fase 5. Las fuentes virtuales inválidas no se ejecutan.",
+      "command": "node --test replication/tests/c3-architecture.test.mjs",
+      "cwd": ".",
+      "prerequisites": [
+        "Terminal en la raíz de COBRIA.",
+        "Node.js 22.13 o superior y dependencias de réplica instaladas con npm ci --prefix replication."
+      ],
+      "verificationScope": "Análisis estático y pruebas del control, no verificación semántica de negocio ni seguridad completa."
+    },
+    {
+      "id": "LAB-07",
+      "module": "capas",
+      "title": "Seguir una solicitud por las capas",
+      "objective": "Reconocer responsabilidad de cada archivo.",
+      "steps": [
+        "Comience en registrar-observacion-controller.mjs.",
+        "Siga autorización, idempotencia y entidad.",
+        "Observe el guardado mediante el repositorio y el Dater.",
+        "Distinga ese recorrido del sentido de los imports."
+      ],
+      "expected": "Estado 201 y un documento; cantidad cero devuelve 400 sin otra escritura.",
+      "solution": "La composición inyecta el repositorio. El puerto describe una capacidad y no es otro salto de red.",
+      "command": "node replication/examples/ecosistema-app/src/demo-capas.mjs",
+      "cwd": ".",
+      "prerequisites": [
+        "Terminal en la raíz de COBRIA.",
+        "Node.js 22.13 o superior; el ejemplo no requiere paquetes externos."
+      ],
+      "verificationScope": "Comprobación técnica relacionada; no demuestra por sí sola que la persona completó la tarea conceptual."
+    },
+    {
+      "id": "LAB-08",
+      "module": "capas",
+      "title": "Cambiar memoria por otro adaptador",
+      "objective": "Validar inversión de dependencias.",
+      "steps": [
+        "Revise las cuatro capacidades del puerto.",
+        "Inyecte cada variante local con crearAplicacion({repositorio}).",
+        "Ejecute la misma entrada y repetición.",
+        "Compare entidades lógicas y explique los límites de los Map."
+      ],
+      "expected": "Ambas variantes producen la misma entidad y una observación tras la repetición secuencial.",
+      "solution": "La sustitución es local y explícita; no prueba dos motores ni atomicidad ante concurrencia.",
+      "command": "node --test --test-reporter=tap --test-name-pattern='^dos repositorios locales cumplen el mismo recorrido de registro$' replication/examples/ecosistema-app/test/capas-c3.test.mjs",
+      "cwd": ".",
+      "prerequisites": [
+        "Terminal en la raíz de COBRIA.",
+        "Node.js 22.13 o superior; el ejemplo no requiere paquetes externos."
+      ],
+      "verificationScope": "Comprobación técnica relacionada; no demuestra por sí sola que la persona completó la tarea conceptual."
+    },
+    {
+      "id": "LAB-09",
+      "module": "codigo",
+      "title": "Diseñar un error accionable",
+      "objective": "Traducir un rechazo de dominio a problema HTTP.",
+      "steps": [
+        "Provoque revisión obsoleta.",
+        "Conserve código estable.",
+        "Traduzca a 409."
+      ],
+      "expected": "El cliente recibe código, estado y detalle seguro.",
+      "solution": "No compare texto libre; use ErrorCobria y problema-http.",
+      "command": "node --test --test-reporter=tap --test-name-pattern='^rechaza revisiones obsoletas$' replication/examples/ecosistema-app/test/app.test.mjs",
+      "testPattern": "rechaza revisiones obsoletas",
+      "testFile": "replication/examples/ecosistema-app/test/app.test.mjs",
+      "cwd": ".",
+      "prerequisites": [
+        "Terminal en la raíz de COBRIA.",
+        "Node.js 22.13 o superior; el ejemplo no requiere paquetes externos."
+      ],
+      "verificationScope": "Comprobación técnica relacionada; no demuestra por sí sola que la persona completó la tarea conceptual."
+    },
+    {
+      "id": "LAB-10",
+      "module": "codigo",
+      "title": "Eliminar un comentario obvio",
+      "objective": "Conservar la razón, no narrar la sintaxis.",
+      "steps": [
+        "Busque comentario descriptivo.",
+        "Reemplace con nombre claro.",
+        "Añada referencia solo si existe una decisión."
+      ],
+      "expected": "Menos comentario y más intención verificable.",
+      "solution": "Comente la restricción de revisión, no el incremento de una variable.",
+      "command": "npm --prefix sitio run lint",
+      "cwd": ".",
+      "prerequisites": [
+        "Terminal en la raíz de COBRIA.",
+        "Dependencias del sitio instaladas con npm ci --prefix sitio; la auditoría consulta el registro npm."
+      ],
+      "verificationScope": "Comprobación técnica relacionada; no demuestra por sí sola que la persona completó la tarea conceptual."
+    },
+    {
+      "id": "LAB-11",
+      "module": "datos",
+      "title": "Crear un diccionario desde cero",
+      "objective": "Documentar identidad, ámbito, revisión y negocio.",
+      "steps": [
+        "Liste campos.",
+        "Añada tipo y regla.",
+        "Añada sensibilidad, origen y versión."
+      ],
+      "expected": "Los siete campos v1 de la tabla coinciden con los valores del Dater; la octava clave h pertenece solo al formato 2 del taller.",
+      "solution": "Use nombres de negocio; las claves físicas pertenecen al Dater.",
+      "command": "node --test --test-reporter=tap replication/examples/ecosistema-app/test/datos-c2.test.mjs",
+      "cwd": ".",
+      "prerequisites": [
+        "Terminal en la raíz de COBRIA.",
+        "Node.js 22.13 o superior; siga manuales/27-datos-desde-cero.md. Este taller no requiere paquetes externos ni motor remoto."
+      ],
+      "verificationScope": "Comprobación técnica relacionada; no demuestra por sí sola que la persona completó la tarea conceptual."
+    },
+    {
+      "id": "LAB-12",
+      "module": "datos",
+      "title": "Probar ida y vuelta del Dater",
+      "objective": "Aislar claves físicas compactas.",
+      "steps": [
+        "Convierta dominio a físico.",
+        "Recupere dominio.",
+        "Compare identidad y revisión."
+      ],
+      "expected": "Round-trip sin pérdida semántica.",
+      "solution": "a-h nunca aparecen fuera del adaptador de datos.",
+      "command": "node --test --test-reporter=tap --test-name-pattern='^el Dater aísla claves físicas del dominio$' replication/examples/ecosistema-app/test/app.test.mjs",
+      "testPattern": "el Dater aísla claves físicas del dominio",
+      "testFile": "replication/examples/ecosistema-app/test/app.test.mjs",
+      "cwd": ".",
+      "prerequisites": [
+        "Terminal en la raíz de COBRIA.",
+        "Node.js 22.13 o superior; el ejemplo no requiere paquetes externos."
+      ],
+      "verificationScope": "Comprobación técnica relacionada; no demuestra por sí sola que la persona completó la tarea conceptual."
+    },
+    {
+      "id": "LAB-13",
+      "module": "core",
+      "title": "Declarar conformidad mínima",
+      "objective": "Distinguir C1, C2 y C3.",
+      "steps": [
+        "Ejecute conformidad.",
+        "Liste requisitos superados.",
+        "Declare el nivel menor completo."
+      ],
+      "expected": "Informe sin requisitos omitidos.",
+      "solution": "No promedie: un requisito obligatorio ausente impide ese nivel.",
+      "command": "node replication/src/cli.mjs verificar --adaptador lokijs --salida output/review/lab-13",
+      "cwd": ".",
+      "prerequisites": [
+        "Terminal en la raíz de COBRIA.",
+        "Consulte make ayuda: algunas verificaciones requieren dependencias de réplica, Java, Go, Python, LaTeX o repositorios de referencia. No pertenecen al inicio mínimo."
+      ],
+      "verificationScope": "Comprobación técnica relacionada; no demuestra por sí sola que la persona completó la tarea conceptual."
+    },
+    {
+      "id": "LAB-14",
+      "module": "core",
+      "title": "Eliminar y reconstruir un derivado",
+      "objective": "Demostrar reconstructibilidad.",
+      "steps": [
+        "Registre canónicos.",
+        "Elimine resumen.",
+        "Reconstruya y compare."
+      ],
+      "expected": "La candidata equivale a la lectura esperada.",
+      "solution": "La fuente permanece autoritativa; el alias cambia después de verificar.",
+      "command": "node --test --test-reporter=tap --test-name-pattern='^reconstruye una proyección equivalente después de retirarla$' replication/examples/ecosistema-app/test/app.test.mjs",
+      "testPattern": "reconstruye una proyección equivalente después de retirarla",
+      "testFile": "replication/examples/ecosistema-app/test/app.test.mjs",
+      "cwd": ".",
+      "prerequisites": [
+        "Terminal en la raíz de COBRIA.",
+        "Node.js 22.13 o superior; el ejemplo no requiere paquetes externos."
+      ],
+      "verificationScope": "Comprobación técnica relacionada; no demuestra por sí sola que la persona completó la tarea conceptual."
+    },
+    {
+      "id": "LAB-15",
+      "module": "patrones",
+      "title": "Elegir patrón por tensión",
+      "objective": "Evitar selección por moda.",
+      "steps": [
+        "Nombre problema.",
+        "Liste fuerzas.",
+        "Compare alternativa simple.",
+        "Elija o rechace patrón."
+      ],
+      "expected": "Ficha problema-contexto-costo-prueba.",
+      "solution": "Repositorio con ámbito solo aplica si existe un límite real de acceso.",
+      "command": "make verificar-r4",
+      "cwd": ".",
+      "prerequisites": [
+        "Terminal en la raíz de COBRIA.",
+        "Consulte make ayuda: algunas verificaciones requieren dependencias de réplica, Java, Go, Python, LaTeX o repositorios de referencia. No pertenecen al inicio mínimo."
+      ],
+      "verificationScope": "Comprobación técnica relacionada; no demuestra por sí sola que la persona completó la tarea conceptual."
+    },
+    {
+      "id": "LAB-16",
+      "module": "patrones",
+      "title": "Combinar tres patrones",
+      "objective": "Conectar responsabilidades sin megaservicio.",
+      "steps": [
+        "Elija patrón principal.",
+        "Añada colaboradores.",
+        "Pruebe cada frontera."
+      ],
+      "expected": "Caso de uso con contratos pequeños.",
+      "solution": "Objeto canónico, cola de salida y proyección conservan responsabilidades independientes.",
+      "command": "make verificar-r4",
+      "cwd": ".",
+      "prerequisites": [
+        "Terminal en la raíz de COBRIA.",
+        "Consulte make ayuda: algunas verificaciones requieren dependencias de réplica, Java, Go, Python, LaTeX o repositorios de referencia. No pertenecen al inicio mínimo."
+      ],
+      "verificationScope": "Comprobación técnica relacionada; no demuestra por sí sola que la persona completó la tarea conceptual."
+    },
+    {
+      "id": "LAB-17",
+      "module": "apiux",
+      "title": "Diseñar una respuesta de error",
+      "objective": "Aplicar estructura RFC 9457 y código estable.",
+      "steps": [
+        "Provoque entrada inválida.",
+        "Asigne estado.",
+        "Añada detalle seguro y código."
+      ],
+      "expected": "Respuesta traducible y comprobable.",
+      "solution": "La frontera HTTP traduce ErrorCobria sin exponer la traza.",
+      "command": "node --test --test-reporter=tap --test-name-pattern='^el controlador publica código estable y mensaje localizado$' replication/examples/ecosistema-app/test/app.test.mjs",
+      "testPattern": "el controlador publica código estable y mensaje localizado",
+      "testFile": "replication/examples/ecosistema-app/test/app.test.mjs",
+      "cwd": ".",
+      "prerequisites": [
+        "Terminal en la raíz de COBRIA.",
+        "Node.js 22.13 o superior; el ejemplo no requiere paquetes externos."
+      ],
+      "verificationScope": "Comprobación técnica relacionada; no demuestra por sí sola que la persona completó la tarea conceptual."
+    },
+    {
+      "id": "LAB-18",
+      "module": "apiux",
+      "title": "Completar seis estados de interfaz",
+      "objective": "Diseñar reposo, carga, éxito, vacío, error y reintento.",
+      "steps": [
+        "Dibuje cada estado.",
+        "Defina foco.",
+        "Escriba mensaje y acción."
+      ],
+      "expected": "Ningún estado depende solo del color.",
+      "solution": "Vacío y error son estados diferentes con acciones diferentes.",
+      "command": "npm --prefix sitio run lint",
+      "cwd": ".",
+      "prerequisites": [
+        "Terminal en la raíz de COBRIA.",
+        "Dependencias del sitio instaladas con npm ci --prefix sitio; la auditoría consulta el registro npm."
+      ],
+      "verificationScope": "Comprobación técnica relacionada; no demuestra por sí sola que la persona completó la tarea conceptual."
+    },
+    {
+      "id": "LAB-19",
+      "module": "documentacion",
+      "title": "Separar cuatro tipos de documento",
+      "objective": "Crear tutorial, guía, referencia y explicación.",
+      "steps": [
+        "Elija una necesidad por documento.",
+        "Mueva contenido repetido.",
+        "Enlace autoridad."
+      ],
+      "expected": "Cada documento tiene audiencia y propósito.",
+      "solution": "README inicia; tutorial enseña; referencia define; ADR explica.",
+      "command": "make verificar-fase-6",
+      "cwd": ".",
+      "prerequisites": [
+        "Terminal en la raíz de COBRIA.",
+        "Consulte make ayuda: algunas verificaciones requieren dependencias de réplica, Java, Go, Python, LaTeX o repositorios de referencia. No pertenecen al inicio mínimo."
+      ],
+      "verificationScope": "Comprobación técnica relacionada; no demuestra por sí sola que la persona completó la tarea conceptual."
+    },
+    {
+      "id": "LAB-20",
+      "module": "documentacion",
+      "title": "Romper un enlace de trazabilidad",
+      "objective": "Comprobar que la documentación falla con el código.",
+      "steps": [
+        "Cambie una ruta en una copia.",
+        "Ejecute el validador.",
+        "Restaure la fuente."
+      ],
+      "expected": "Fallo con identificador y ruta.",
+      "solution": "La documentación crítica debe participar en el gate.",
+      "command": "make verificar-fase-17",
+      "cwd": ".",
+      "prerequisites": [
+        "Terminal en la raíz de COBRIA.",
+        "Consulte make ayuda: algunas verificaciones requieren dependencias de réplica, Java, Go, Python, LaTeX o repositorios de referencia. No pertenecen al inicio mínimo."
+      ],
+      "verificationScope": "Comprobación técnica relacionada; no demuestra por sí sola que la persona completó la tarea conceptual."
+    },
+    {
+      "id": "LAB-21",
+      "module": "seguridad",
+      "title": "Atacar el ámbito",
+      "objective": "Rechazar ausencia, manipulación y acceso cruzado.",
+      "steps": [
+        "Omita ámbito.",
+        "Envíe otro ámbito.",
+        "Use identidad ajena."
+      ],
+      "expected": "Cero accesos al repositorio para casos rechazados.",
+      "solution": "La autorización ocurre antes de recuperar candidatos.",
+      "command": "node --test --test-reporter=tap --test-name-pattern='^rechaza el acceso a otro ámbito antes de tocar el repositorio$' replication/examples/ecosistema-app/test/app.test.mjs",
+      "testPattern": "rechaza el acceso a otro ámbito antes de tocar el repositorio",
+      "testFile": "replication/examples/ecosistema-app/test/app.test.mjs",
+      "cwd": ".",
+      "prerequisites": [
+        "Terminal en la raíz de COBRIA.",
+        "Node.js 22.13 o superior; el ejemplo no requiere paquetes externos."
+      ],
+      "verificationScope": "Comprobación técnica relacionada; no demuestra por sí sola que la persona completó la tarea conceptual."
+    },
+    {
+      "id": "LAB-22",
+      "module": "seguridad",
+      "title": "Inventariar secretos y dependencias",
+      "objective": "Reducir exposición y riesgo de suministro.",
+      "steps": [
+        "Liste secretos.",
+        "Revise permisos.",
+        "Ejecute auditoría de dependencias."
+      ],
+      "expected": "Ningún secreto en Git y hallazgos con tratamiento.",
+      "solution": "Separe identidades por ambiente y mantenga lockfile.",
+      "command": "npm audit --prefix sitio",
+      "cwd": ".",
+      "prerequisites": [
+        "Terminal en la raíz de COBRIA.",
+        "Dependencias del sitio instaladas con npm ci --prefix sitio; la auditoría consulta el registro npm."
+      ],
+      "verificationScope": "Comprobación técnica relacionada; no demuestra por sí sola que la persona completó la tarea conceptual."
+    },
+    {
+      "id": "LAB-23",
+      "module": "calidad",
+      "title": "Construir una suite de contrato",
+      "objective": "Probar varios adaptadores con la misma expectativa.",
+      "steps": [
+        "Defina fábrica.",
+        "Ejecute casos positivos.",
+        "Añada cruces y revisiones."
+      ],
+      "expected": "Resultados equivalentes por adaptador.",
+      "solution": "La suite depende del puerto, no del SDK.",
+      "command": "npm --prefix replication test",
+      "cwd": ".",
+      "prerequisites": [
+        "Terminal en la raíz de COBRIA.",
+        "Consulte make ayuda: algunas verificaciones requieren dependencias de réplica, Java, Go, Python, LaTeX o repositorios de referencia. No pertenecen al inicio mínimo."
+      ],
+      "verificationScope": "Comprobación técnica relacionada; no demuestra por sí sola que la persona completó la tarea conceptual."
+    },
+    {
+      "id": "LAB-24",
+      "module": "calidad",
+      "title": "Comparar índice y proyección",
+      "objective": "Medir antes de duplicar.",
+      "steps": [
+        "Congele consulta.",
+        "Caliente.",
+        "Aleatorice.",
+        "Informe distribución y costo."
+      ],
+      "expected": "Decisión con p50, p95, p99 y costo total.",
+      "solution": "Una celda no concluyente permanece publicada.",
+      "command": "npm --prefix replication run statistics:r7",
+      "cwd": ".",
+      "prerequisites": [
+        "Terminal en la raíz de COBRIA.",
+        "Consulte make ayuda: algunas verificaciones requieren dependencias de réplica, Java, Go, Python, LaTeX o repositorios de referencia. No pertenecen al inicio mínimo."
+      ],
+      "verificationScope": "Comprobación técnica relacionada; no demuestra por sí sola que la persona completó la tarea conceptual."
+    },
+    {
+      "id": "LAB-25",
+      "module": "operaciones",
+      "title": "Promover el mismo artefacto",
+      "objective": "Evitar recompilación entre staging y producción.",
+      "steps": [
+        "Construya digest.",
+        "Pruebe en staging.",
+        "Promueva sin reconstruir.",
+        "Ejecute humo."
+      ],
+      "expected": "Mismo commit y digest.",
+      "solution": "Configuración cambia por entorno; el artefacto no.",
+      "command": "make verificar-fase-20",
+      "cwd": ".",
+      "prerequisites": [
+        "Terminal en la raíz de COBRIA.",
+        "Consulte make ayuda: algunas verificaciones requieren dependencias de réplica, Java, Go, Python, LaTeX o repositorios de referencia. No pertenecen al inicio mínimo."
+      ],
+      "verificationScope": "Comprobación técnica relacionada; no demuestra por sí sola que la persona completó la tarea conceptual."
+    },
+    {
+      "id": "LAB-26",
+      "module": "operaciones",
+      "title": "Ensayar duplicado y dead-letter",
+      "objective": "Operar una tarea idempotente.",
+      "steps": [
+        "Entregue dos veces.",
+        "Provoque mensaje inválido.",
+        "Recupere desde dead-letter."
+      ],
+      "expected": "Un efecto y fallo observable.",
+      "solution": "Identidad de mensaje, reintentos acotados y reparación explícita.",
+      "command": "make verificar-fase-20",
+      "cwd": ".",
+      "prerequisites": [
+        "Terminal en la raíz de COBRIA.",
+        "Consulte make ayuda: algunas verificaciones requieren dependencias de réplica, Java, Go, Python, LaTeX o repositorios de referencia. No pertenecen al inicio mínimo."
+      ],
+      "verificationScope": "Comprobación técnica relacionada; no demuestra por sí sola que la persona completó la tarea conceptual."
+    },
+    {
+      "id": "LAB-27",
+      "module": "ia",
+      "title": "Detectar fuga en un conjunto",
+      "objective": "Separar entidad y tiempo antes de entrenar.",
+      "steps": [
+        "Construya particiones.",
+        "Introduzca entidad repetida.",
+        "Ejecute verificador."
+      ],
+      "expected": "La intersección provoca fallo.",
+      "solution": "La partición ocurre antes de calcular características.",
+      "command": "node --test --test-reporter=tap --test-name-pattern='^la partición analítica rechaza fuga de una misma entidad$' replication/examples/ecosistema-app/test/app.test.mjs",
+      "testPattern": "la partición analítica rechaza fuga de una misma entidad",
+      "testFile": "replication/examples/ecosistema-app/test/app.test.mjs",
+      "cwd": ".",
+      "prerequisites": [
+        "Terminal en la raíz de COBRIA.",
+        "Node.js 22.13 o superior; el ejemplo no requiere paquetes externos."
+      ],
+      "verificationScope": "Comprobación técnica relacionada; no demuestra por sí sola que la persona completó la tarea conceptual."
+    },
+    {
+      "id": "LAB-28",
+      "module": "ia",
+      "title": "Forzar una abstención",
+      "objective": "Comprobar que la IA no inventa evidencia.",
+      "steps": [
+        "Consulte sin documentos suficientes.",
+        "Revise causa.",
+        "Confirme ausencia de escritura."
+      ],
+      "expected": "Abstención segura y auditable.",
+      "solution": "Cobertura mínima y citas válidas preceden a la respuesta.",
+      "command": "node --test --test-reporter=tap --test-name-pattern='^la IA se abstiene sin evidencia y nunca adquiere escritura$' replication/examples/ecosistema-app/test/app.test.mjs",
+      "testPattern": "la IA se abstiene sin evidencia y nunca adquiere escritura",
+      "testFile": "replication/examples/ecosistema-app/test/app.test.mjs",
+      "cwd": ".",
+      "prerequisites": [
+        "Terminal en la raíz de COBRIA.",
+        "Node.js 22.13 o superior; el ejemplo no requiere paquetes externos."
+      ],
+      "verificationScope": "Comprobación técnica relacionada; no demuestra por sí sola que la persona completó la tarea conceptual."
+    },
+    {
+      "id": "LAB-29",
+      "module": "construir",
+      "title": "Completar el recorrido B01-B14",
+      "objective": "Integrar código, datos, seguridad, operación y evidencia.",
+      "steps": [
+        "Revise HITOS.json.",
+        "Ejecute pruebas.",
+        "Documente vacíos.",
+        "Solicite réplica."
+      ],
+      "expected": "Catorce hitos con evidencia o estado pendiente.",
+      "solution": "No convierta un pendiente humano en resultado automático.",
+      "command": "make verificar",
+      "cwd": ".",
+      "prerequisites": [
+        "Terminal en la raíz de COBRIA.",
+        "Consulte make ayuda: algunas verificaciones requieren dependencias de réplica, Java, Go, Python, LaTeX o repositorios de referencia. No pertenecen al inicio mínimo."
+      ],
+      "verificationScope": "Comprobación técnica relacionada; no demuestra por sí sola que la persona completó la tarea conceptual."
+    },
+    {
+      "id": "LAB-30",
+      "module": "evidencia",
+      "title": "Construir un candidato reproducible",
+      "objective": "Sincronizar Git, PDF, sitio y metadatos.",
+      "steps": [
+        "Parta de checkout limpio.",
+        "Genere artefactos.",
+        "Compruebe huellas.",
+        "Revise estado candidato."
+      ],
+      "expected": "Un commit reproduce documentos y sitio sin diferencias.",
+      "solution": "Actualice manifest, sitemap y llms.txt desde canonical.json.",
+      "command": "make verificar && git status --short",
+      "cwd": ".",
+      "prerequisites": [
+        "Terminal en la raíz de COBRIA.",
+        "Consulte make ayuda: algunas verificaciones requieren dependencias de réplica, Java, Go, Python, LaTeX o repositorios de referencia. No pertenecen al inicio mínimo."
+      ],
+      "verificationScope": "Comprobación técnica relacionada; no demuestra por sí sola que la persona completó la tarea conceptual."
+    }
+  ]
+}

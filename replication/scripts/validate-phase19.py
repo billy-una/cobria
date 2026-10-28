@@ -47,17 +47,20 @@ roadmap = (ROOT / 'manuales/11-estado-y-roadmap-integral.md').read_text(encoding
 prompts = (ROOT / 'manuales/12-prompts-roadmap-integral.md').read_text(encoding='utf-8')
 manual = (ROOT / 'manuales/13-engineering.md').read_text(encoding='utf-8')
 site_manual = (ROOT / 'sitio/app/manual.tsx').read_text(encoding='utf-8')
+site_engineering = (ROOT / 'sitio/app/construir/page.tsx').read_text(encoding='utf-8')
 home = (ROOT / 'sitio/app/page.tsx').read_text(encoding='utf-8')
 book = (ROOT / 'libro-cobria/build-book.mjs').read_text(encoding='utf-8')
 canonical = json.loads((ROOT / 'editorial/canonical.json').read_text(encoding='utf-8'))
+pedagogy = json.loads((ROOT / 'editorial/curriculum.json').read_text(encoding='utf-8'))
+operations = next((item for item in pedagogy.get('modules', []) if item.get('key') == 'operaciones'), {})
 
 checks = {
     'roadmap': 'Fase 19 — COBRIA Engineering' in roadmap,
     'prompt': 'Fase 19 — COBRIA Engineering' in prompts,
     'manual': all(token in manual for token in expected),
-    'sitio': 'engineering' in site_manual and '/engineering' in home,
-    'libro': 'COBRIA Engineering' in book and 'Promoción ligada al artefacto' in book,
-    'canónico': 'Engineering' in canonical.get('ecosystem', {}).get('modules', []),
+    'sitio': 'curriculum.json' in site_manual and 'kind="construir"' in site_engineering and bool(operations),
+    'libro': 'buildCurriculum' in book and 'technicalAnnexHtml' in book,
+    'canónico': 'Engineering' in canonical.get('ecosystem', {}).get('legacyProductNames', []) and 'Nube, ambientes y operaciones' in canonical.get('ecosystem', {}).get('modules', []),
 }
 for name, ok in checks.items():
     if not ok:

@@ -1,6 +1,6 @@
 {
   "catalogId": "cobria-errors-reference",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "languageIndependent": true,
   "errors": [
     {"code": "OBS_ID_REQUIRED", "category": "validation", "http": 400, "retryable": false, "safeParameters": []},
@@ -23,6 +23,14 @@
     {"code": "DRIFT_CONFIG_INVALID", "category": "validation", "http": 400, "retryable": false, "safeParameters": []},
     {"code": "ANALYTICS_CONFIG_INVALID", "category": "validation", "http": 400, "retryable": false, "safeParameters": []},
     {"code": "ANALYTICS_CUTOFF_INVALID", "category": "validation", "http": 400, "retryable": false, "safeParameters": []},
-    {"code": "ANALYTICS_ENTITY_LEAKAGE", "category": "integrity", "http": 422, "retryable": false, "safeParameters": []}
+    {"code": "ANALYTICS_ENTITY_LEAKAGE", "category": "integrity", "http": 422, "retryable": false, "safeParameters": []},
+    {"code": "DATA_FIELDS_INVALID", "category": "validation", "http": 422, "retryable": false, "safeParameters": []},
+    {"code": "DATA_SCOPE_REQUIRED", "category": "validation", "http": 400, "retryable": false, "safeParameters": []},
+    {"code": "DATA_SPECIES_REQUIRED", "category": "validation", "http": 400, "retryable": false, "safeParameters": []},
+    {"code": "DATA_LIMIT_INVALID", "category": "validation", "http": 400, "retryable": false, "safeParameters": []},
+    {"code": "CAT_VERSION_UNKNOWN", "category": "validation", "http": 422, "retryable": false, "safeParameters": []},
+    {"code": "CAT_CODE_UNKNOWN", "category": "validation", "http": 422, "retryable": false, "safeParameters": []},
+    {"code": "CAT_VERSION_REQUIRED", "category": "validation", "http": 400, "retryable": false, "safeParameters": []},
+    {"code": "CAT_VERSION_CONFLICT", "category": "conflict", "http": 409, "retryable": false, "safeParameters": []}
   ]
 }

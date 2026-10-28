@@ -1,6 +1,6 @@
 # Manifiesto COBRIA 1.0
 
-**Estado:** estable para el ecosistema editorial y pedagógico  
+**Estado:** candidata pública `1.0.0-rc2`; propuesta independiente, no estable y no certificada
 **Autor:** Billy Jak Cordero Porras  
 **Repositorio canónico:** <https://github.com/billy-una/cobria>  
 **Relación normativa:** este manifiesto no sustituye ni amplía COBRIA Core 1.0
@@ -157,4 +157,3 @@ repositorio. Quien lo adopta debe comprobar su contexto, tecnologías, obligacio
 legales y amenazas. La conformidad con COBRIA Core se declara únicamente al superar el
 conjunto de requisitos y pruebas correspondiente; utilizar una recomendación del libro
 no constituye certificación.
-

@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "1.0.0",
+  "date": "2026-10-23",
+  "kind": "revision-exploratoria-dirigida-asistida",
+  "protocol": "replication/SYSTEMATIC-REVIEW-PROTOCOL-1.2.md",
+  "independentScreeners": 0,
+  "systematicReviewComplete": false,
+  "scope": "Corrección del corpus existente y ampliación temática dirigida; no exportación exhaustiva de índices bibliográficos.",
+  "coverageLimits": ["Búsqueda web pública con restricciones por dominio, no búsquedas nativas completas de ACM, IEEE o Springer.", "El buscador no entrega un universo exhaustivo ni conteos estables; no se construye un diagrama PRISMA ficticio.", "Una ficha o un resumen verifica identidad o pertinencia, no lectura completa ni evaluación de calidad del trabajo.", "La extracción temática es asistida por IA, no doble cribado ni adjudicación humana independiente."],
+  "queries": [
+    {"id":"Q01","query":"(\"materialized view\" OR CQRS OR \"event sourcing\" OR provenance OR lineage OR \"data contract\") (rebuild OR reproducibility OR version OR \"multi-tenant\" OR isolation)","domains":["dl.acm.org","ieeexplore.ieee.org","link.springer.com","usenix.org"],"outcome":"sin-resultados-devueltos-en-la-consulta-agrupada","retained":[]},
+    {"id":"Q02","query":"materialized view provenance rebuild version site:dl.acm.org","retained":[],"outcome":"sin-registro-nuevo-retenido"},
+    {"id":"Q03","query":"multi tenant schema adaptive database Ni site:ieeexplore.ieee.org","retained":[],"outcome":"resultados-no-usados-para-la-sintesis"},
+    {"id":"Q04","query":"provenance why where Buneman site:link.springer.com","retained":[],"outcome":"resultado-ajeno-excluido"},
+    {"id":"Q05","query":"CQRS event sourcing recovery site:usenix.org","retained":[],"outcome":"sin-registro-nuevo-retenido"},
+    {"id":"Q06","query":"RAG provenance site:arxiv.org","retained":[],"outcome":"sin-registro-nuevo-retenido"},
+    {"id":"Q07","query":"machine learning data leakage Kapoor Narayanan site:cell.com","retained":["kapoor2023leakage"],"outcome":"seguimiento-dirigido-de-titulo-y-editor"},
+    {"id":"Q08","query":"NoSQL multi tenant site:dl.acm.org","retained":[],"outcome":"sin-registro-nuevo-retenido"},
+    {"id":"Q09","query":"change data capture recovery turning database inside out site:cidrdb.org","retained":["helland2015immutability"],"outcome":"seguimiento-del-programa-CIDR-y-PDF; no atribuir este PDF a Kleppmann"},
+    {"id":"Q10","query":"\"A Comparison of Flexible Schemas for Software as a Service\" DOI","retained":["aulbach2009flexibleschemas"],"outcome":"corregidos-autores-y-DOI"},
+    {"id":"Q11","query":"\"Adaptive Database Schema Design for Multi-Tenant Data Management\" \"Ni\"","retained":["ni2014adaptiveschema"],"outcome":"corregidos-autores-y-DOI"},
+    {"id":"Q12","query":"\"Leakage and the reproducibility crisis\" 2023 patterns","retained":["kapoor2023leakage"],"outcome":"articulo-editorial-preferido-a-prepublicacion"}
+  ],
+  "excluded": [
+    {"id":"X01","url":"https://doi.org/10.1145/1559845.1559937","reason":"DOI de Advances in flash memory SSD technology, no corresponde al título citado; se corrige la asociación, no se elimina el trabajo pertinente de Aulbach."},
+    {"id":"X02","url":"https://doi.org/10.1109/TKDE.2013.42","reason":"DOI de Spatially Aware Term Selection for Geotagging; no corresponde al título multinquilino ni a sus autores."},
+    {"id":"X03","url":"https://arxiv.org/abs/2207.07048","reason":"Versión previa del trabajo de Kapoor y Narayanan; para la síntesis se utiliza el artículo de Patterns de 2023. No se suman como dos estudios."},
+    {"id":"X04","url":"https://link.springer.com/article/10.1007/s10502-024-09459-5","reason":"Provenance de archivos y arqueología; fuera de la pregunta técnica de contratos documentales."},
+    {"id":"X05","url":"https://arxivlens.com/paperview/details/managed-geo-distributed-feature-store-architecture-and-system-design-2859-1505158","reason":"Agregador secundario; se usa arXiv original para autoría, versión e identidad."},
+    {"id":"X06","url":"https://www.researchgate.net/publication/287562348_A_Hybrid_Multi-Tenant_Database_Schema_for_Multi-Level_Quality_of_Service","reason":"Título diferente; no se usa para justificar la autoría errónea del artículo de Ni."}
+  ],
+  "corrections": [
+    {"id":"aulbach2009flexibleschemas","fields":["author","doi"],"source":"https://doi.org/10.1145/1559845.1559941"},
+    {"id":"ni2014adaptiveschema","previousKey":"yaish2014adaptiveschema","fields":["author","doi","url"],"source":"https://dbgroup.cs.tsinghua.edu.cn/ligl/papers/tkde14-multitenant.pdf"},
+    {"id":"li2023featurestore","fields":["author","primaryclass","version"],"source":"https://arxiv.org/abs/2305.20077v1"},
+    {"id":"hevner2004designscience","fields":["pages"],"source":"https://api.crossref.org/works/10.2307%2F25148625","note":"Metadatos editoriales: 75–106; se conserva la trazabilidad de la corrección."},
+    {"id":"roa2015iso25000","fields":["url","note"],"source":"https://revistas.udistrital.edu.co/index.php/tia/article/download/8373/11349/47605","note":"Discrepancia conservada entre el PDF (Roa Molina; 26–32) y ficha OJS (Paola Andrea Roa; 27–33); no se homogeneiza silenciosamente."}
+  ],
+  "comparisons": [
+    {"id":"lectura","sources":["fowler2011cqrs","microsoft2025materialized"],"mechanism":"Separar modelos de consulta y mantener una representación precomputada.","cost":"Coordinación, almacenamiento y obsolescencia.","relation":"COBRIA pide declarar autoridad, ámbito y reconstrucción del derivado.","limit":"Es una comparación conceptual; no demuestra que CQRS o una vista carezcan de esos controles en una implementación concreta."},
+    {"id":"historia","sources":["fowler2005eventsourcing","helland2015immutability"],"mechanism":"Historia de cambios e información inmutable para derivar estado.","cost":"Retención, reproducción y evolución de transformaciones.","relation":"COBRIA puede reconstruir desde un corte canónico y no exige conservar todos los eventos.","limit":"No reemplaza registro de eventos, consenso o recuperación física del motor."},
+    {"id":"procedencia","sources":["buneman2001provenance","w3c2013prov"],"mechanism":"Explicar origen, derivación, actividad y responsabilidad.","cost":"Capturar y mantener relaciones de procedencia.","relation":"La ficha de proyección vincula fuentes, transformación, versión y reparación.","limit":"No se declara equivalencia formal ni conformidad W3C de COBRIA."},
+    {"id":"esquema","sources":["aulbach2009flexibleschemas","ni2014adaptiveschema","scherzinger2013schema"],"mechanism":"Evolución y mapeo del esquema con costos de lectura y almacenamiento.","cost":"Migraciones, índices y adaptación a cargas.","relation":"Se separa modelo lógico, Dater físico y derivado versionado.","limit":"Aulbach y Ni son antecedentes de esquemas SaaS, no ensayos de COBRIA en motores documentales. Scherzinger se identifica por su versión arXiv."},
+    {"id":"analitica","sources":["li2023featurestore","kapoor2023leakage"],"mechanism":"Definir características reutilizables y evitar información indebida entre particiones.","cost":"Materialización, desfase y validación temporal.","relation":"Los productos analíticos declaran corte, origen y separación de entidades.","limit":"El consumidor determinista A1 no mide predicción ni calidad generativa."},
+    {"id":"motores","sources":["mongodbAtomicity","apacheCouchDocumentApi","opensearch32Alias"],"mechanism":"Actualización condicional, revisiones documentales y alias.","cost":"Semánticas y condiciones diferentes por motor.","relation":"Cada adaptador debe probar las capacidades realmente requeridas.","limit":"Un alias atómico no demuestra por sí solo CAS de revisión, equivalencia ni publicación segura COBRIA; una guía viva no acredita una versión experimental."}
+  ],
+  "moduleSources": {
+    "inicio":["sadalage2012nosql"],"fundamentos":["evans2003ddd","sadalage2012nosql"],"arquitectura":["fowler2002poeaa","kleppmann2017data"],"capas":["fowler2002poeaa","evans2003ddd"],"codigo":["gamma1994patterns","cormen2022algorithms"],"datos":["scherzinger2013schema","sadalage2012nosql"],"core":["fowler2011cqrs","w3c2013prov"],"patrones":["gamma1994patterns","microsoft2025materialized"],"apiux":["fowler2002poeaa"],"documentacion":["gebru2021datasheets","apa2020manual"],"seguridad":["nist2023airmf","mongodbTenancy"],"calidad":["iso25010_2023","iso25040_2024","jain1991performance"],"operaciones":["helland2015immutability","mongodbAtomicity"],"ia":["lewis2020rag","kapoor2023leakage","li2023featurestore"],"construir":["sadalage2012nosql","kleppmann2017data"],"toolkit":["fowler2002poeaa"],"evidencia":["hevner2004designscience","cooper2010ycsb"]
+  },
+  "sourceOverrides": {
+    "gupta1995materialized":{"url":"https://sigmod.org/publications/dblp/db/journals/debu/GuptaM95.html","access":"ficha bibliográfica; texto íntegro no recuperado"},
+    "aulbach2009flexibleschemas":{"url":"https://db.in.tum.de/research/publications/conferences/sigmod2009-mtd.pdf","access":"texto-primario-abierto"},
+    "ni2014adaptiveschema":{"access":"manuscrito-de-autores"},
+    "roa2015iso25000":{"access":"PDF-y-ficha-discrepantes"},
+    "iso25010_2023":{"kind":"norma-ficha","access":"ficha-oficial; no texto íntegro"},
+    "iso25040_2024":{"kind":"norma-ficha","access":"ficha-oficial; no texto íntegro"},
+    "w3c2013prov":{"kind":"recomendacion-tecnica","access":"texto-oficial-abierto"},
+    "orr2021featurestores":{"access":"version-arxiv-v1"},
+    "li2023featurestore":{"access":"prepublicacion-arxiv-v1"},
+    "scherzinger2013schema":{"access":"version-arxiv-v1"},
+    "rico2016multitarget":{"access":"ficha-y-resumen-editoriales; no extracción detallada","note":"Edición de volumen 2016; publicación electrónica 2014."}
+  }
+}

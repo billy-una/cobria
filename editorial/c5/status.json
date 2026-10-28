@@ -1,0 +1,33 @@
+{
+  "phase": "C5",
+  "date": "2026-10-18",
+  "status": "verificada_localmente_revision_humana_pendiente",
+  "guide": "manuales/30-api-ux-seguridad-y-privacidad.md",
+  "sharedSource": "editorial/c5/workshop.json",
+  "verification": "make verificar-c5",
+  "httpTestsPassed": 12,
+  "editorialTestsPassed": 1,
+  "browserChecksPassed": 9,
+  "browserViewport": {"width": 390, "height": 844},
+  "fullVerification": "make verificar-publicacion COBRIA_SITE_ISOLATED=1",
+  "fullVerificationExitCode": 0,
+  "fullVerificationLog": "output/review/c5/full-verification.log",
+  "browserReport": "output/review/c5/browser.json",
+  "isolatedSiteReport": "output/review/c5/site-verification.json",
+  "replicationTestsPassed": 130,
+  "renderedSiteTestsPassed": 16,
+  "bookPages": 278,
+  "visualReview": {"bookPages": [86], "mobileWidth": 390, "result": "sin cortes observados en la página nueva y en el formulario móvil; no es revisión humana con tecnología asistiva"},
+  "published": false,
+  "coreChanged": false,
+  "rc2Changed": false,
+  "externalIdentityProviderValidated": false,
+  "assistiveTechnologyHumanReview": false,
+  "limits": [
+    "HTTP loopback, documentos y sesiones DEMO en memoria; sin despliegue ni datos reales.",
+    "No se garantiza atomicidad entre escritura y registro de operación.",
+    "Las comprobaciones de navegador no certifican accesibilidad ni comprensión.",
+    "OIDC, MFA, TLS, revocación, control de frecuencia y presupuesto de memoria no están implementados."
+  ],
+  "remaining": ["C6 y C8: persistencia, atomicidad y operación con infraestructura real.", "C13: revisión humana de accesibilidad, comprensión y transferencia."]
+}

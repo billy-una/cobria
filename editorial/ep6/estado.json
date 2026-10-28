@@ -1,0 +1,28 @@
+{
+  "phase": "EP6",
+  "date": "2026-10-23",
+  "status": "completada-local-preprint-acotado",
+  "published": false,
+  "coreChanged": false,
+  "newExperiments": false,
+  "independentReview": false,
+  "specificTests": 6,
+  "fullVerification": "passed",
+  "traceability": "editorial/ep6/traceability.json",
+  "pdfPages": {"article": 16, "master": 204, "blindArticle": 16},
+  "evidence": [
+    "output/review/ep6/pruebas-finales.log",
+    "output/review/ep6/verificacion-completa.log",
+    "output/review/ep6/congelamiento-pc2.log",
+    "output/review/ep6/PDF.json",
+    "output/review/ep6/descargas.log"
+  ],
+  "limits": [
+    "R7 histórico no valida retrospectivamente PC2.",
+    "PC3 permanece sin observaciones nuevas.",
+    "A1 no demuestra calidad generativa de un LLM.",
+    "La microcomparación no demuestra superioridad arquitectónica distribuida.",
+    "Pendientes EP7, réplica externa, transferencia y revisión humana independiente.",
+    "Árbol local con cambios previos: no release Git limpia ni publicación."
+  ]
+}

@@ -5,7 +5,7 @@ Se solicita una revisión independiente y crítica de la especificación, implem
 ## Material mínimo
 
 1. `specification/COBRIA-CORE-1.0.md`
-2. `output/pdf/COBRIA-articulo-nosql-ampliado.pdf`
+2. `archivo/artefactos/revision-core10/COBRIA-articulo-nosql-ampliado.pdf`
 3. `replication/src/` y `replication/tests/`
 4. `replication/results/nosql-core-1.0/raw.jsonl`
 5. `replication/results/nosql-core-1.0/summary.json`

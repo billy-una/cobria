@@ -1,0 +1,11 @@
+{
+  "version": "1.0.0",
+  "scope": "QA local representativa; no certificación ni auditoría exhaustiva",
+  "routes": ["/", "/comenzar", "/explorar", "/laboratorio", "/recursos", "/historia"],
+  "widths": [390, 1440],
+  "axeTags": ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"],
+  "maximumAxeViolations": 0,
+  "lighthouse": {"route": "/", "minimum": {"accessibility": 0.95, "seo": 0.9, "best-practices": 0.9}, "performance": "informativa; una ejecución móvil local no establece un SLO"},
+  "tools": {"axePlaywright": "4.14.0", "lighthouse": "13.5.0", "playwright": "1.62.1"},
+  "publicationAuthorized": false
+}

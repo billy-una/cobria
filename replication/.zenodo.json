@@ -5,7 +5,7 @@
   "creators": [{"name": "Cordero Porras, Billy Jak"}],
   "license": "Apache-2.0",
   "keywords": ["NoSQL", "datos canónicos", "proyecciones reconstruibles", "multiinquilinato", "inteligencia artificial"],
-  "version": "1.0.0-rc1",
+  "version": "1.0.0-rc2",
   "access_right": "open",
   "notes": "El código usa Apache-2.0; textos y datos propios usan CC BY 4.0. Consulte LICENSES.md. El DOI, la firma y la réplica externa permanecen pendientes."
 }

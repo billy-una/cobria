@@ -1,0 +1,362 @@
+// Casos desarrollados del mismo proyecto; no redefinen requisitos de Core.
+export const chapters=[
+  {
+    key:'inicio',title:'Preparar una entrega pequeña que puedas explicar',caseKey:null,
+    prerequisites:'Completa las diez unidades de De una idea a tu primera prueba. Usa la copia de ecosistema-app, no una base de datos personal.',
+    vocabulary:[['Entrega','Resultado observable que otra persona puede repetir.'],['Memoria','Datos que desaparecen al terminar el proceso.'],['Requisito','Conducta pedida y su condición de aceptación.']],
+    problem:'Una brigada quiere registrar tres colibríes y contar una sola visita aunque alguien pulse dos veces. Si el primer objetivo es instalar nube, autenticación e IA, será difícil saber qué parte está fallando. La primera entrega debe ser más pequeña que el sistema deseado, pero conservar una regla de cantidad y un límite de reserva.',
+    reasoning:[
+      'Escribe primero una frase comprobable: al enviar la misma visita dos veces, queda una observación con cantidad tres. Una segunda frase cubre el rechazo: cero no se guarda. Una tercera separa las reservas. Esas frases son requisitos, no nombres de carpetas ni promesas de una tecnología.',
+      'Guarda una copia intacta y trabaja en otra carpeta. Abre package.json para distinguir las tareas disponibles y ejecuta start desde la aplicación. Mira el archivo que produce la salida antes de buscar una pantalla. Este inicio termina en la terminal; no tiene un servidor HTTP oculto ni conserva sesiones entre procesos.'
+    ],
+    trace:['Ejecuta las diez unidades del taller inicial en orden y conserva un cambio propio.','Ejecuta npm --prefix replication/examples/ecosistema-app start desde la raíz de COBRIA.','Comprueba la cantidad, la repetición y los dos rechazos en la misma ejecución.'],
+    artifact:{requisito:'La misma visita no se cuenta dos veces',entrada:{id:'obs-001',ambito:'reserva-sur',cantidad:3,revision:1},esperado:{observaciones:1,colibries:3},rechazos:['cantidad cero','reserva no autorizada']},
+    alternative:'Una hoja de cálculo puede bastar para un recuento personal sin colaboración ni controles de acceso. No construyas todas las capas solo para justificar el uso del manual.',
+    cost:'La copia de aprendizaje evita riesgo, pero no conserva información al cerrar. Anota esa limitación como una decisión de esta entrega, no como un defecto que se corrige escondiendo archivos.',
+    adverse:'El proceso termina y al abrirlo de nuevo no aparecen visitas anteriores. Es el comportamiento de un almacén en memoria; cambiar el texto de éxito no añade persistencia.',
+    recovery:'Vuelve al ejemplo original y distingue repetir una intención dentro del proceso de repetir el proceso completo. La persistencia documental pertenece al recorrido de aplicación completa.',
+    exercise:'Escribe tres criterios para una visita de cinco colibríes. Cambia el programa de tu copia y entrega entrada, comando y salida. No cambies la prohibición de cantidad cero.',
+    solution:'La entrada usa cantidad cinco; la repetición mantiene una observación; la cantidad cero sigue rechazándose. El criterio de éxito no es que aparezca una ventana: es que coincidan datos, efectos y rechazos. Adjunta la versión de Node y explica que los registros se perderán al cerrar.',
+    rubric:['La cantidad cinco se observa en una ejecución real.','La repetición conserva un solo efecto.','La entrega declara memoria y no promete autenticación.'],
+    sources:['manuales/35-programar-desde-cero.md','replication/examples/ecosistema-app/src/primer-recorrido.mjs'],
+    next:'Ahora convierte la entrada en un objeto que no pueda existir con una cantidad inválida.'
+  },
+  {
+    key:'fundamentos',title:'Proteger un dato antes de organizar el sistema',caseKey:'fundamentos',
+    prerequisites:'Distingue texto, número, función y objeto. Ya sabes leer una propiedad y ejecutar un archivo con Node.',
+    vocabulary:[['Invariante','Regla que todo objeto válido debe conservar.'],['Constructor','Operación que crea una entidad y comprueba sus reglas.'],['Contrato','Condiciones de entrada y resultado que una operación promete.']],
+    problem:'Una persona escribe cero y otra envía un número decimal. Ambas entradas caben en un objeto de JavaScript, pero ninguna representa el conteo admitido. Si cada formulario decide por separado, una importación o una llamada directa podrá crear hechos inválidos.',
+    reasoning:[
+      'Observacion reúne identidad, reserva, especie, cantidad, revisión y fecha. Su constructor rechaza una cantidad no entera o menor que uno. No se trata de una regla de presentación: también se aplica cuando el objeto nace desde un archivo. La validación de una pantalla sirve para orientar; no reemplaza esta frontera.',
+      'Object.freeze impide reasignar las propiedades de esta entidad plana. Eso no transforma cualquier objeto anidado en una estructura profundamente inmutable ni resuelve conflictos de dos usuarios. La revisión conserva otra responsabilidad: identificar la versión del hecho cuando un repositorio decide si acepta una escritura.'
+    ],
+    trace:['Construye la entidad válida y comprueba su cantidad.','Construye otra con cero: el constructor debe rechazarla.','Intenta reasignar la cantidad: este objeto congelado no admite el cambio.'],
+    expected:{cantidad:3,revision:1,congelada:true},
+    alternative:'Para un cálculo temporal sin identidad puede bastar una función pura que reciba números. Una entidad se justifica cuando hay reglas e identidad que deben acompañar al dato.',
+    cost:'Crear una entidad añade validación y errores que el llamador debe manejar. Evita estados inválidos de este contrato, no prueba que el avistamiento ocurrió en la naturaleza.',
+    adverse:'Sustituir la entidad por un literal puede hacer pasar una cantidad cero a otra capa. Una pantalla que la rechaza no protege una importación que nunca pasa por esa pantalla.',
+    recovery:'Mantén la construcción del dominio en la frontera de entrada y agrega una prueba para cero. No conviertas el rechazo en un valor silencioso ni sustituyas cero por uno.',
+    exercise:'Ejecuta el caso con cantidad cuatro y luego con cero. Escribe una prueba que espere OBS_QUANTITY_INVALID para cero y conserva el caso válido.',
+    solution:'Con cuatro se conserva cantidad cuatro y revisión uno. Con cero falla antes de producir un resultado válido. La prueba usa assert.throws al construir Observacion; no comprueba solamente un mensaje de consola. La revisión no debe aumentar por crear otra variable local con la misma entrada.',
+    rubric:['El caso positivo conserva su cantidad.','Cero produce el código del dominio.','Se distinguen congelación local y control de concurrencia.'],
+    sources:['replication/examples/ecosistema-app/src/domain/observacion.mjs','replication/examples/ecosistema-app/taller-inicial/10-prueba.test.mjs'],
+    next:'La regla ya tiene un lugar; ahora decide quién coordina guardarla sin conocer el motor.'
+  },
+  {
+    key:'arquitectura',title:'Elegir fronteras antes de repartir servidores',caseKey:'arquitectura',
+    prerequisites:'Comprende una entidad válida, una función y un objeto recibido como parámetro.',
+    vocabulary:[['Arquitectura','Decisiones de responsabilidad y dependencia que condicionan el cambio.'],['Puerto','Capacidad que una pieza necesita de otra.'],['Inyección','Entregar una implementación a quien la utiliza.']],
+    problem:'Hoy la reserva usa memoria y mañana necesitará un motor documental. Si RegistrarObservacion crea su propio cliente de base de datos, cambiar el motor obliga a tocar también el caso de uso. El problema no se resuelve creando cinco carpetas vacías o cinco servicios remotos.',
+    reasoning:[
+      'crearAplicacion recibe un repositorio y lo entrega al caso de uso. RegistrarObservacion conoce operaciones como guardar y buscarOperacion, no direcciones de red. La composición concentra la elección concreta. El ejemplo inyecta el mismo RepositorioMemoria y verifica que el objeto entregado es el que realmente recibe las escrituras.',
+      'La comprobación de métodos solo valida la forma del puerto. Un objeto puede tener guardar y aun así perder datos o mezclar reservas. Por eso una implementación nueva necesita pruebas de contrato y de fallos, no solo satisfacer una lista de nombres. Un monolito modular conserva estas fronteras dentro de un proceso.'
+    ],
+    trace:['Crea el repositorio fuera del caso de uso.','Inyéctalo mediante crearAplicacion y registra una observación.','Consulta ese mismo objeto y prueba el rechazo de un puerto incompleto.'],
+    expected:{documentos:1,cantidad:3,puertoIncompleto:'rechazado'},
+    alternative:'Un programa pequeño y sin reglas puede usar una función directa. Introduce el puerto cuando exista una dependencia que aislar o una sustitución concreta que probar, no por una cuota de clases.',
+    cost:'La separación exige conectar piezas y mantener contratos. No elimina la latencia ni las diferencias de consistencia entre motores; hace visible dónde resolverlas.',
+    adverse:'Un repositorio con guardar pero sin listar falla al componer. Otro con todos los métodos pero semántica incorrecta podría pasar esa comprobación inicial.',
+    recovery:'Completa el puerto y ejecuta casos positivos y negativos sobre la misma implementación. No añadas métodos vacíos para satisfacer la comprobación.',
+    exercise:'Dibuja dos opciones: acceso directo y repositorio inyectado. Justifica cuál usarías para una reserva que importará documentos de dos fuentes y escribe qué cambio esperas aislar.',
+    solution:'La opción inyectada permite sustituir la persistencia en la composición y conservar el caso de uso. El dibujo debe mostrar dominio independiente, aplicación que depende del puerto e infraestructura que lo implementa. No dibujes una llamada de red por cada carpeta: las responsabilidades no obligan a distribuir el despliegue.',
+    rubric:['La elección responde a un cambio concreto.','El dominio no importa el motor.','La decisión reconoce el costo del contrato.'],
+    sources:['replication/examples/ecosistema-app/src/composition.mjs','replication/examples/ecosistema-app/src/application/ports/repositorio-observaciones.mjs'],
+    next:'Sigue una solicitud por archivos reales para distinguir dependencia y secuencia de ejecución.'
+  },
+  {
+    key:'capas',title:'Seguir una solicitud y cambiar una sola responsabilidad',caseKey:'capas',
+    prerequisites:'Reconoce composición, caso de uso y repositorio. Puedes abrir varios archivos sin confundir su ubicación con su responsabilidad.',
+    vocabulary:[['Presentación','Traduce un protocolo a entradas y salidas de la aplicación.'],['Caso de uso','Coordina una intención y sus dependencias.'],['Dater','Traduce la representación lógica y física de datos.']],
+    problem:'La pantalla muestra un error genérico al enviar una cantidad cero. La regla sí está funcionando, pero la respuesta no explica el problema. Reescribir la vista, el caso de uso y el repositorio a la vez haría difícil saber qué corrección era necesaria.',
+    reasoning:[
+      'El controlador convierte el resultado del registro en estado 201. Cuando recibe un error conocido del dominio, lo convierte en un problema de entrada o permiso. El caso de uso autoriza y coordina; la entidad valida; el repositorio guarda. La traducción de un código a castellano pertenece a presentación, no al Dater.',
+      'El árbol real está en data/arquitectura.json. Consulta su propietario por archivo y sus pruebas relacionadas antes de editar. Una cadena de ejecución puede ir del controlador al caso de uso y de allí al repositorio; eso no autoriza que el dominio importe el controlador de vuelta. Las dependencias deben poder leerse sin recorrer ciclos.'
+    ],
+    trace:['Invoca el controlador con una solicitud autorizada.','Cambia solo la cantidad: observa el problema 400.','Conserva una entrada válida pero retira la capacidad: observa 403, no 201.'],
+    expected:{aceptada:201,invalida:400,denegada:403},
+    alternative:'Un controlador mínimo puede bastar para una operación pequeña. No separes una clase adicional si solo cambia el nombre de una llamada y no protege una responsabilidad.',
+    cost:'Cada frontera añade traducción y pruebas. Compensa cuando permite cambiar mensajes sin alterar reglas o adaptar datos sin contaminar el dominio.',
+    adverse:'Cambiar la regla del dominio para que el controlador devuelva éxito con cero elimina una protección válida. Un 403 tampoco es necesariamente un defecto de la pantalla.',
+    recovery:'Reproduce entrada, contexto y respuesta por separado. Corrige el traductor si el código es correcto y el mensaje es malo; corrige la autorización solo si el requisito realmente concede esa capacidad.',
+    exercise:'Asigna estos cambios a archivos: traducir OBS_QUANTITY_INVALID, añadir un índice, cambiar una regla de cantidad y conectar otro repositorio. Dibuja sus imports permitidos.',
+    solution:'El mensaje va en presentation/i18n/mensajes-es.mjs; el índice corresponde al adaptador del motor; la cantidad se protege en domain/observacion.mjs; el repositorio concreto se elige en composition.mjs. Aplicación depende del puerto; dominio no depende de ninguna de esas implementaciones.',
+    rubric:['Cada cambio tiene un responsable distinto.','El caso negativo conserva 400 y 403.','El dibujo no introduce un ciclo.'],
+    sources:['replication/examples/ecosistema-app/data/arquitectura.json','replication/examples/ecosistema-app/src/presentation/registrar-observacion-controller.mjs'],
+    next:'Usa nombres y comentarios que permitan entender esas decisiones sin memorizar el diagrama.'
+  },
+  {
+    key:'codigo',title:'Nombrar valores y conservar su significado',caseKey:'codigo',
+    prerequisites:'Sabes leer una función y distinguir texto y número. La entidad ya valida la fecha antes de llegar al ejemplo.',
+    vocabulary:[['Unidad','Escala que da significado a una magnitud, como milisegundos.'],['Código de error','Identificador estable que una interfaz puede traducir.'],['Comentario de intención','Explicación del motivo de una decisión, no repetición de la instrucción.']],
+    problem:'El número de una fecha viaja entre dos funciones y alguien lo divide por mil. El programa no se cae: muestra una fecha de 1970. Un comentario que diga convertir fecha no evita el fallo porque nunca explicó la unidad que debía conservarse.',
+    reasoning:[
+      'Compara const x = Date.parse(fecha) con const instanteMs = Date.parse(observacion.observadaEn). La segunda forma hace visible la unidad. Date recibe milisegundos; volver a crear la fecha con instanteMs conserva el instante. El comentario explica por qué dividir por mil sería incorrecto en esta frontera.',
+      'Mantén códigos como OBS_QUANTITY_INVALID separados del texto que lee la persona. Puedes mejorar la redacción sin romper una prueba que compara el código. En este proyecto los nombres del dominio están en español; las palabras reservadas de JavaScript y nombres de bibliotecas conservan su forma. No traduzcas contratos externos improvisando otro protocolo.'
+    ],
+    trace:['Construye una observación válida y convierte su fecha a milisegundos.','Reconstruye el mismo instante UTC y compáralo con el original.','Provoca el cambio de unidad y verifica que ya no representa la misma fecha.'],
+    expected:{errorCantidad:'La cantidad debe ser positiva.'},
+    alternative:'Un valor fecha ISO puede circular sin conversión numérica cuando no hay cálculo temporal. Evita transformar y volver a transformar solo para añadir una utilidad.',
+    cost:'Nombres más explícitos ocupan espacio, pero reducen supuestos. Un comentario desactualizado puede ser peor que ninguno; la prueba debe conservar la relación temporal.',
+    adverse:'instanteMs / 1000 es válido como aritmética, pero incorrecto como entrada de este constructor de Date. No basta con comprobar que el resultado sea una cadena.',
+    recovery:'Devuelve milisegundos a la frontera y compara el instante esperado. Anota la unidad donde entra y sale; no ajustes la expectativa a una fecha equivocada.',
+    exercise:'Refactoriza en una copia un nombre ambiguo como x a instanteMs. Escribe el comentario de intención y una prueba que falle si se introduce la división por mil.',
+    solution:'El antes oculta la unidad; el después la conserva en el nombre y en la llamada new Date(instanteMs). La prueba compara ISO con el instante validado y añade una desigualdad para la división incorrecta. No hace falta un comentario por cada asignación ni una clase de fechas para esta única conversión.',
+    rubric:['El cambio no altera la salida correcta.','La prueba detecta el error de unidad.','El comentario explica el porqué y conserva el código del error.'],
+    sources:['specification/phase-6/COMENTARIOS-Y-DOCSTRINGS.md','replication/examples/ecosistema-app/src/presentation/i18n/mensajes-es.mjs'],
+    next:'Conserva también el significado cuando el documento se traduzca a atributos físicos.'
+  },
+  {
+    key:'datos',title:'Diseñar el diccionario y evolucionar un documento',caseKey:'datos',
+    prerequisites:'Comprende identidad, ámbito, revisión y objeto. Las letras físicas no deben convertirse en nombres del dominio.',
+    vocabulary:[['Diccionario','Definición de campos, tipos, reglas, propietario y versiones.'],['Catálogo','Conjunto versionado de códigos y significados permitidos.'],['Migración','Transformación explícita entre formatos compatibles con un propósito.']],
+    problem:'La reserva añade una edición del catálogo y los documentos antiguos siguen existiendo. Si se reemplaza la etiqueta sin conservar la edición, una consulta histórica podría interpretar la observación con un significado posterior. Añadir una letra física no debería cambiar silenciosamente la cantidad observada.',
+    reasoning:[
+      'Empieza por el significado: identifica la observación, su reserva, revisión, instante, especie y cantidad. Después declara tipos, nulabilidad, límites y quién puede escribirlos. El diccionario local asigna a a identidad, b a ámbito, c a revisión, d a formato, e a instante, f a especie y g a cantidad. Es una convención de esta aplicación, no un alfabeto universal.',
+      'El Dater traduce; el dominio sigue leyendo cantidad. El formato dos añade h para la edición del catálogo en la frontera de datos. La migración requiere que se declare esa edición: no la adivina. Repetir la migración conserva el resultado, mientras revisión uno sigue siendo la versión del hecho y no la del formato.',
+      'Separa nodos por propiedad y patrón de acceso. Un catálogo compartido y versionado no debe duplicarse editable en cada observación; una proyección puede incluir su etiqueta con procedencia. La consulta del taller filtra y ordena en memoria: recorre N documentos y puede ordenar M candidatos. No crea un índice real ni prueba el rendimiento de un motor.'
+    ],
+    trace:['Traduce la entidad con el Dater, sin cambiar nombres del dominio.','Migra declarando 2026.1 y lee el documento con su edición.','Repite la migración y prueba el rechazo cuando falta la edición.'],
+    expected:{cantidad:3,revision:1,catalogo:'2026.1',etiqueta:'Colibrí'},
+    alternative:'Usa nombres físicos largos si facilitan operar el almacén y el ahorro no se ha medido. Un código compacto no es automáticamente más rápido ni más fácil de mantener.',
+    cost:'Conservar ediciones exige almacenamiento y políticas de retención. Un índice por ámbito y fecha añade mantenimiento; solo se justifica por la consulta y su costo medido.',
+    adverse:'Omitir la edición produce CAT_VERSION_REQUIRED. Usar el formato como si fuera revisión confundiría una transformación técnica con un cambio del hecho.',
+    recovery:'Obtén la edición histórica de una fuente autorizada antes de migrar. Si no se conoce, conserva el documento para revisión; no le asignes la edición más reciente para lograr éxito.',
+    exercise:'Diseña un campo opcional observadorAnonimo sin datos personales. Entrega diccionario, dueño, nulabilidad, nodo, consulta afectada y propuesta de compatibilidad; no añadas una letra arbitraria al dominio.',
+    solution:'El diccionario debe explicar un identificador sintético, finalidad y retención. Propón un formato nuevo si cambia el sobre físico y conserva lectura de formatos anteriores. El campo no sustituye actorId ni concede permisos. Antes de escribir código, identifica dónde se traduce y qué pasa con documentos que no lo tienen.',
+    rubric:['Revisión y formato tienen significados separados.','Se declara catálogo histórico y responsable.','La propuesta no confunde consulta local con índice del motor.'],
+    sources:['replication/examples/ecosistema-app/data/diccionario-observaciones.json','replication/examples/ecosistema-app/src/infrastructure/data/taller-datos.mjs'],
+    next:'Define qué documento manda y cómo comprobar la copia que resume esos hechos.'
+  },
+  {
+    key:'core',title:'Reconstruir un resumen sin cambiar los hechos',caseKey:'core',
+    prerequisites:'Distingue documento lógico, representación física, revisión y ámbito. Lee el Core para las obligaciones normativas, no la analogía del libro.',
+    vocabulary:[['Canónico','Representación con autoridad para el hecho.'],['Proyección','Representación derivada para una pregunta concreta.'],['Equivalencia','Criterio declarado para comparar dos resultados.']],
+    problem:'El resumen muestra noventa y nueve colibríes, pero la observación original registra tres. Corregir el documento original para que coincida con el resumen convertiría una copia averiada en autoridad. La reparación debe partir del hecho y conservar su reserva.',
+    reasoning:[
+      'La aplicación registra mediante su caso de uso y construye un resumen por especie desde los documentos canónicos. El ensayo altera deliberadamente solo la copia derivada y vuelve a reconstruir. La comparación comprueba igualdad del resultado anterior y posterior para este conjunto pequeño. No demuestra equivalencia universal ni todos los requisitos de conformidad.',
+      'En un despliegue real se necesita además declarar fuentes, transformación, corte, revisión y regla de publicación. Un resumen igual en memoria no demuestra que lectores distribuidos vean una versión indivisible. Core 1.0 conserva su autoridad: este ejemplo ilustra una responsabilidad, no amplía la norma con cada recomendación del manual.'
+    ],
+    trace:['Guarda el hecho autorizado y construye el resumen.','Altera la copia derivada en el ensayo aislado, no el documento.','Reconstruye y compara; intenta otra reserva y espera rechazo.'],
+    expected:{canonico:3,reconstruida:3,equivalenciaDelCaso:true},
+    alternative:'Lee el documento directamente si la consulta es sencilla y su costo cumple el requisito. Una proyección introduce otra pieza que verificar y retirar.',
+    cost:'Reconstruir todo lee las fuentes y consume tiempo. Con varias especies, el ejemplo vuelve a filtrar por cada especie: no debe venderse como implementación óptima universal.',
+    adverse:'Publicar una copia con conteo correcto en una reserva equivocada sigue siendo incorrecto. La igualdad de un número no reemplaza ámbito, procedencia y autorización.',
+    recovery:'Conserva la evidencia de la copia incorrecta, vuelve a las fuentes autorizadas y publica solo tras comprobar el contrato. No edites la fuente para ocultar la divergencia.',
+    exercise:'Escribe un criterio de equivalencia para un resumen con colibríes y ranas. Distingue campos que deben coincidir de metadatos que pueden cambiar al reconstruir.',
+    solution:'Deben coincidir ámbito, especies y totales para el mismo corte de fuentes. Un instante de construcción puede variar si el contrato lo permite; la transformación y su versión deben quedar identificadas. El criterio debe rechazar una especie omitida aunque coincida el total general. Para conformidad completa usa la especificación y sus pruebas, no solo este caso.',
+    rubric:['Se conserva autoridad canónica.','La equivalencia incluye ámbito y contenido.','No se declara conformidad completa por una igualdad local.'],
+    sources:['specification/COBRIA-CORE-1.0.md','replication/examples/ecosistema-app/src/application/reconstruir-resumen.mjs'],
+    next:'Elige un mecanismo por su problema y garantías, no por el prestigio de su nombre.'
+  },
+  {
+    key:'patrones',title:'Elegir y reconocer una solución recurrente',caseKey:'patrones',
+    prerequisites:'Comprende el registro autorizado, la misma intención repetida y la diferencia entre un hecho y una copia.',
+    vocabulary:[['Patrón','Solución recurrente con contexto, tensiones y consecuencias.'],['Adaptación','Aplicación de una idea conocida con condiciones del proyecto.'],['Convención','Acuerdo local de nombres u organización, no garantía técnica.']],
+    problem:'La conexión se interrumpe después de guardar una visita. La interfaz reintenta y no sabe si hubo efecto. Contar dos visitas daría un resumen incorrecto; rechazar todos los reintentos impediría recuperarse de un fallo de red.',
+    reasoning:[
+      'El caso de uso consulta la clave de idempotencia dentro del ámbito. Si ya existe con el mismo contenido, devuelve el resultado anterior; si cambia el contenido, rechaza el conflicto. En la demostración secuencial queda un documento. Concurrencia y caída entre guardar y registrarOperacion requieren garantías adicionales del adaptador: dos llamadas separadas no son una transacción.',
+      'Empieza también por patrones de entrada: un repositorio concentra acceso; un mapeador separa formatos; la composición inyecta dependencias. Son ideas reconocidas, no novedades COBRIA. El Dater adapta un papel de mapeo al contrato documental. Las treinta fichas incluyen además controles, contratos, heurísticas y propuestas experimentales; la revisión de clasificación explica cada distinción.'
+    ],
+    trace:['Registra y repite la misma entrada bajo la misma clave.','Comprueba un solo documento y el mismo resultado.','Cambia la cantidad manteniendo la clave: debe aparecer IDEMPOTENCY_CONFLICT.'],
+    expected:{documentos:1,conflicto:'IDEMPOTENCY_CONFLICT',garantiaConcurrente:false},
+    alternative:'Una restricción o transacción nativa puede dar la garantía requerida con menos código. No introduzcas una bandeja de salida si no hay un evento que deba confirmarse junto al hecho.',
+    cost:'El registro de intenciones ocupa almacenamiento y necesita retención. Si se elimina demasiado pronto puede perderse la protección para reintentos tardíos.',
+    adverse:'Generar una clave nueva en cada reintento impide reconocer la misma intención. Reusar una clave para contenido nuevo no es recuperación: es un conflicto.',
+    recovery:'Conserva la clave durante los reintentos de una intención. Genera otra solo para una intención nueva y usa la garantía atómica del motor cuando el riesgo concurrente lo exija.',
+    exercise:'Completa una ficha propia para la visita repetida: contexto, fuerzas, alternativa, garantía, prueba adversa y condición de retiro. Clasifícala sin afirmar que inventaste la idempotencia.',
+    solution:'Clasifica el mecanismo como adaptación de procesamiento idempotente. Sus fuerzas son evitar duplicados y permitir reintentos sin esconder contenido distinto. La prueba adversa cambia cantidad con la misma clave. Declara que el ejemplo local no garantiza exactamente un efecto concurrente; esa obligación exige otra implementación y pruebas del adaptador.',
+    rubric:['La ficha declara antecedentes y límites.','El conflicto no se interpreta como éxito.','Se compara una alternativa más simple.'],
+    sources:['manuales/03-pattern-design.md','editorial/pc1/AUDITORIA-PC1.md'],
+    next:'Expresa esos resultados en una interfaz que muestre éxito, rechazo y reintento sin duplicar efectos.'
+  },
+  {
+    key:'apiux',title:'Conectar una respuesta verificable con el formulario',caseKey:'capas',
+    prerequisites:'Entiende el controlador y los estados 201, 400 y 403. Una API es una interfaz entre programas; HTTP es uno de sus protocolos.',
+    vocabulary:[['Estado de interfaz','Situación visible como carga, éxito, vacío o error.'],['Problema de API','Respuesta estructurada con código y explicación.'],['Internacionalización','Separación del significado y su presentación según idioma.']],
+    problem:'El formulario borra los datos cuando el servidor devuelve cantidad inválida. La persona debe escribir todo de nuevo y no sabe qué campo corregir. Si se muestra éxito ante cualquier respuesta recibida, un rechazo de permisos parece un registro válido.',
+    reasoning:[
+      'Recibir una respuesta de red no equivale a éxito del negocio. El controlador distingue registro creado, entrada inválida y acceso denegado. La interfaz del taller C5 conserva formulario, estado y mensajes. Lee public/app.js junto al servidor: una validación local ayuda a corregir, pero el backend sigue siendo autoritativo.',
+      'Especifica qué pasa durante carga, envío repetido, error recuperable y nueva intención. Los errores se anuncian mediante texto y no solo color; el foco debe permitir volver al campo o al mensaje. Mantén los códigos estables y traduce la explicación. El ejemplo de controlador es comprobable sin red; el formulario HTTP completo se ejecuta desde el taller existente, no aparece mágicamente al llamar esta función.'
+    ],
+    trace:['Observa el caso positivo y dos rechazos del controlador.','Abre el taller api-ux-c5 y sigue el envío hasta el mismo caso de uso.','Prueba teclado, error de cantidad y rol sin permiso sin borrar protecciones.'],
+    expected:{aceptada:201,invalida:400,denegada:403},
+    alternative:'Una página de lectura puede bastar si la persona no necesita escribir datos. Añadir un formulario implica estado, accesibilidad, autorización y recuperación.',
+    cost:'Conservar estado y foco exige pruebas de interacción. Ocultar un botón reduce confusión, pero no autoriza ni protege por sí mismo una operación.',
+    adverse:'Un 403 presentado como completado induce al usuario a confiar en un registro inexistente. Dos clics no deberían convertirse sin explicación en dos intenciones distintas.',
+    recovery:'Conserva entrada y error específico; no repitas automáticamente un rechazo de permiso. Permite reintentar fallos recuperables con la clave de la misma intención.',
+    exercise:'Dibuja los estados del formulario y redacta mensajes para cantidad cero, sesión no autorizada y error temporal. Define qué dato conserva y dónde queda el foco.',
+    solution:'Desde edición se pasa a carga y luego a éxito o error. En cantidad cero se conserva el formulario, se explica el límite y se dirige la atención al campo. En 403 se informa la falta de permiso sin sugerir que cambie la reserva a ciegas. En error temporal se ofrece reintento controlado. El mensaje y el foco tienen una comprobación, no solo un color.',
+    rubric:['El flujo distingue rechazo y fallo temporal.','La validación del servidor permanece.','Los mensajes y el foco son utilizables sin color ni ratón.'],
+    sources:['replication/examples/api-ux-c5/public/app.js','manuales/30-api-ux-seguridad-y-privacidad.md'],
+    next:'Documenta el recorrido que una persona necesita, sin confundirlo con la referencia de cada parámetro.'
+  },
+  {
+    key:'documentacion',title:'Escribir documentos que responden preguntas distintas',caseKey:null,
+    prerequisites:'Ya puedes ejecutar un caso y explicar su entrada, resultado y rechazo. No necesitas inventar una plantilla para todo el proyecto.',
+    vocabulary:[['Tutorial','Recorrido para aprender haciendo una tarea.'],['Referencia','Descripción precisa de contratos y parámetros.'],['ADR','Registro de una decisión, sus opciones y consecuencias.']],
+    problem:'El equipo tiene un README enorme, pero una persona nueva no sabe ejecutar el programa y quien atiende un incidente no encuentra cómo restaurarlo. Mezclar una historia de diseño con comandos de emergencia obliga a leer demasiado cuando el tiempo importa.',
+    reasoning:[
+      'Separa tutorial, referencia, explicación y guía operativa. El tutorial lleva de una copia nueva a una observación; la referencia define entradas y códigos; la explicación justifica el agregado; la guía operativa recupera un repositorio nuevo. Son necesidades distintas y pueden enlazarse sin repetir el mismo párrafo en cuatro lugares.',
+      'El ADR del agregado local conserva la opción elegida y lo descartado. El comentario de código debe aclarar una intención cercana; no puede sustituir esa historia. Una docstring de registrar debe explicar contexto, resultado, errores, efectos y límite de idempotencia. No prometas atomicidad si el repositorio usa dos operaciones separadas.'
+    ],
+    trace:['Consulta el tutorial y ejecuta una tarea de principio a fin.','Busca el mismo contrato en la referencia sin repetir los pasos de instalación.','Relaciona la decisión del agregado con su guía de recuperación.'],
+    artifact:{tutorial:'Registrar una visita desde una copia nueva',referencia:{entrada:['documento','contexto'],errores:['ACCESS_DENIED','IDEMPOTENCY_CONFLICT'],efecto:'registro en el repositorio'},explicacion:'Por qué existe un límite de agregado',guiaOperativa:'Restaurar en un repositorio nuevo y comprobar equivalencia'},
+    alternative:'Un solo README puede contener cuatro secciones claras en un proyecto pequeño. Dividirlo en docenas de archivos sin enlaces no lo vuelve más útil.',
+    cost:'La documentación cambia con el contrato. Cada comando copiado y cada cifra histórica sin fuente aumenta el mantenimiento y la posibilidad de contradicción.',
+    adverse:'Una guía de restauración que presupone claves, rutas o permisos no declarados no permite transferencia aunque su prosa sea correcta.',
+    recovery:'Ensaya la guía desde una carpeta nueva y registra cada supuesto faltante. Corrige la fuente compartida; no solo la captura o el PDF que la reproduce.',
+    exercise:'Redacta una docstring para registrar y una nota ADR que compare memoria con motor documental. Entrega además un enlace desde el tutorial hasta la recuperación.',
+    solution:'La docstring declara actor, capacidad, ámbito, finalidad y clave; devuelve la observación y enumera rechazos. El ADR elige memoria solo para aprender y reconoce pérdida al cerrar. La alternativa documental exige persistencia y recuperación comprobadas. La guía indica un repositorio nuevo, no sobrescribir el activo. Cada documento responde una pregunta concreta.',
+    rubric:['Se distinguen aprender, consultar, entender y operar.','La docstring no inventa garantías.','Los enlaces permiten ejecutar y recuperar sin conocimiento oculto.'],
+    sources:['manuales/34-documentacion-y-herramientas-practicas.md','manuales/decisiones/ADR-C8-AGREGADO-LOCAL.md','manuales/operacion/RECUPERACION-C8.md'],
+    next:'Usa esa precisión para describir amenazas y controles que puedan rechazarse en pruebas.'
+  },
+  {
+    key:'seguridad',title:'Probar permisos antes y después del caso permitido',caseKey:'seguridad',
+    prerequisites:'Distingue actor, capacidad, ámbito y contexto. Reconoce que un objeto de permisos editable no autentica a una persona.',
+    vocabulary:[['Amenaza','Acción o condición que puede dañar un activo.'],['Autorización','Comprobación de una capacidad sobre un recurso y ámbito.'],['Mínimo privilegio','Conceder solo lo necesario para una finalidad.']],
+    problem:'Un guardaparques de la reserva sur cambia la reserva del formulario e intenta escribir en la norte. Si el sistema solo ocultó la opción visual, una petición directa podría cruzar el límite. La privacidad depende del flujo completo, no del diseño del botón.',
+    reasoning:[
+      'El caso de uso comprueba la capacidad de escritura y pertenencia al ámbito antes de guardar. El ejemplo intenta primero una capacidad ausente y luego una reserva ajena. Consulta después los documentos autorizados para comprobar que ninguno de los rechazos dejó una escritura parcial. Finalmente ejecuta un registro permitido: seguridad también significa no bloquear a quien sí debe actuar.',
+      'En la demostración el contexto es sintético y confiado por el ensayo. En un servidor se obtiene de una sesión verificada, con revocación y caducidad. Las reglas del motor y las Functions deben conservar la misma política. Nunca aceptes una lista de permisos del formulario como si la hubiera emitido el servidor.'
+    ],
+    trace:['Intenta escribir sin capacidad y espera ACCESS_DENIED.','Intenta otra reserva con la misma identidad de demostración.','Comprueba cero efectos tras los rechazos y un efecto tras la solicitud válida.'],
+    expected:{rechazos:2,escriturasTrasRechazos:0,documentosAutorizados:1,autenticacionReal:false},
+    alternative:'Un flujo solo de lectura elimina algunas capacidades de escritura, pero sigue necesitando aislamiento y protección de campos privados.',
+    cost:'Una política por rol, recurso y ámbito requiere una matriz y pruebas negativas. Registrar tokens completos como ayuda de diagnóstico crearía otro riesgo.',
+    adverse:'Una llamada que devuelve 403 después de haber guardado ya filtró autoridad. Comprobar únicamente el estado HTTP no detecta ese efecto.',
+    recovery:'Autoriza antes del efecto, revisa datos y auditoría saneada, y añade el caso sin efectos a la regresión. No amplíes permisos globalmente para corregir un único rol.',
+    exercise:'Construye una matriz para guardaparques, persona lectora y administradora de una reserva. Incluye lectura, escritura y reserva ajena; define dos rechazos obligatorios.',
+    solution:'La persona lectora consulta su reserva pero no registra; guardaparques registra solo en su ámbito; administración no obtiene automáticamente todas las reservas sin una política explícita. Los dos rechazos son capacidad ausente y ámbito ajeno, ambos sin escritura. La matriz debe ligarse al servidor y al motor, no quedar como lista de botones.',
+    rubric:['Los rechazos ocurren antes del efecto.','Existe caso positivo y negativo por frontera.','Se reconoce el límite de la identidad sintética.'],
+    sources:['replication/examples/ecosistema-app/src/application/security/autorizar-capacidad.mjs','specification/phase-7/security.json'],
+    next:'Reproduce un defecto real y compara su corrección sin quitar las protecciones para ganar velocidad.'
+  },
+  {
+    key:'calidad',title:'Reproducir el defecto antes de optimizar',caseKey:'calidad',
+    prerequisites:'Sabes ejecutar una prueba y comprobar ausencia de efectos. Una caché guarda temporalmente una lectura para reutilizarla.',
+    vocabulary:[['Regresión','Fallo que reaparece al cambiar algo.'],['Línea base','Comportamiento contra el que se compara una alternativa.'],['Presupuesto','Límite explícito de tiempo, memoria o costo.']],
+    problem:'Dos reservas tienen una observación con el mismo identificador. Una caché que usa solo ese identificador devuelve el dato de la primera reserva a la segunda. El resultado es rápido y equivocado: medir su latencia no convierte el sistema en una mejora.',
+    reasoning:[
+      'El fixture defectuoso reproduce el cruce de ámbito de forma aislada. La lectura segura usa una clave con ámbito y política y autoriza incluso cuando la caché ya tiene el resultado. Dos lecturas autorizadas del mismo recurso cargan una vez; una lectura sin permiso se rechaza. El contador muestra trabajo evitado, no una cifra universal de rendimiento.',
+      'Para hablar de tiempo usa el protocolo de medir.mjs: calentamiento, orden de pares, repeticiones y resultados crudos. Compara resultados equivalentes, misma carga y misma frescura. Un índice añade construcción y almacenamiento; una proyección añade también mantenimiento y recuperación. La notación O describe crecimiento, no milisegundos ni facturación.'
+    ],
+    trace:['Observa esperado y obtenido en el fixture de caché defectuosa.','Ejecuta dos lecturas permitidas y cuenta cargas reales.','Retira permiso después del acierto: la caché no debe saltarse autorización.'],
+    expected:{defectoReproducido:'clave-sin-ambito',cargasParaDosLecturas:1,autorizacionEnCache:true},
+    alternative:'Una lectura directa acotada es preferible si ya cumple el presupuesto y la frescura. La caché no es una obligación del método.',
+    cost:'Además de bytes y tiempo, considera invalidación, límites de entradas, antigüedad y operación. El costo de mantener una copia puede superar el ahorro de lectura.',
+    adverse:'Comparar una consulta fresca con una caché vieja y afirmar que la segunda es superior mezcla resultados distintos. El número rápido no responde la misma pregunta.',
+    recovery:'Primero comprueba equivalencia y aislamiento. Después repite el ensayo con límites declarados y conserva los desaciertos, sin eliminar corridas desfavorables.',
+    exercise:'Redacta un presupuesto de lectura por reserva con frescura y memoria máximas. Compara consulta directa, índice y caché indicando qué medición falta para elegir.',
+    solution:'El presupuesto debe expresar una carga y un percentil, por ejemplo un objetivo contextual de p95, no un resultado ya observado. Añade atraso permitido, bytes, escrituras de mantenimiento y tiempo de recuperación. Primero descarta resultados incorrectos; luego compara alternativas bajo ese presupuesto. Si falta medición, la elección queda provisional.',
+    rubric:['La corrección conserva autorización en aciertos.','Se distingue contador de cargas de medición de latencia.','La comparación incluye frescura y costo de mantenimiento.'],
+    sources:['replication/examples/operacion-c6/operacion.mjs','replication/examples/operacion-c6/protocolo.json','manuales/31-calidad-rendimiento-y-operacion.md'],
+    next:'Prepara recuperación y promoción sin confundir un ensayo local con desplegar en la nube.'
+  },
+  {
+    key:'operaciones',title:'Recuperar datos y promover el mismo artefacto',caseKey:'operaciones',
+    prerequisites:'Comprende archivo, ámbito y huella. No uses una base activa ni credenciales reales para este caso.',
+    vocabulary:[['Staging','Ambiente de ensayo separado de producción.'],['Artefacto','Bytes construidos que se prueban y promueven.'],['Reversión','Procedimiento para volver a una versión conocida y verificable.']],
+    problem:'Un despliegue funciona en staging pero producción recibe una compilación distinta. A la vez existe un respaldo que nunca se restauró. Cuando llega un incidente, ni el binario anterior ni la copia de datos tienen una comprobación que permita confiar en ellos.',
+    reasoning:[
+      'El ejemplo crea bytes de documentos autorizados, calcula su huella y restaura en un repositorio nuevo. La copia alterada se rechaza antes de restaurar. Es un ensayo de documentos: no incluye sesiones, auditoría, índices ni registro de idempotencia. Recuperar solo esos bytes no significa haber recuperado todo el servicio.',
+      'En nube distingue ambiente, identidad de ejecución y configuración. Una Function autoritativa valida actor y ámbito y usa permisos mínimos del motor; define tiempo máximo, memoria, reintentos y clave de intención. Versiona Rules e índices junto a la función. La promoción debe identificar el mismo artefacto probado, con aprobación y plan de humo; una bandera approval en una demostración no constituye autorización humana real.'
+    ],
+    trace:['Crea el respaldo desde documentos del ámbito autorizado.','Restaura en memoria nueva y compara su contenido.','Altera un byte y verifica el rechazo por huella incompatible.'],
+    expected:{documentosRestaurados:1,copiaAlterada:'rechazada',despliegueReal:false},
+    alternative:'Un proceso local puede ser suficiente mientras no haya disponibilidad remota que mantener. Usar Functions no elimina operación, observabilidad ni seguridad.',
+    cost:'Ambientes separados y respaldos consumen recursos. Definir límites reduce exposición a errores o gasto, pero no garantiza ausencia de fallos.',
+    adverse:'Un respaldo correcto de documentos no contiene las claves idempotentes. Después de restaurar, un reintento antiguo puede necesitar otra estrategia antes de habilitar escritura.',
+    recovery:'Comprueba el inventario completo de recuperación. Conserva el sistema activo, restaura en otro destino, valida permisos y equivalencia y solo entonces decide el cambio con autoridad apropiada.',
+    exercise:'Escribe un procedimiento de promoción con SHA, huella, configuración, Rules, índices, pruebas, humo y reversión. Añade qué información no cubre este respaldo.',
+    solution:'Staging prueba un artefacto identificado; la aprobación referencia esa huella y producción recibe los mismos bytes. El humo comprueba URL, ambiente, permisos y versión. La reversión apunta a un artefacto anterior conservado. Para recuperación enumera documentos, sesiones, auditoría, operaciones e índices y decide cuáles se restauran o reconstruyen. Este ejercicio no autoriza desplegar.',
+    rubric:['La promoción no recompila silenciosamente.','La recuperación usa un destino nuevo.','Se declaran límites del respaldo y de la Function.'],
+    sources:['specification/phase-8/environments.json','replication/examples/operacion-c6/operacion.mjs','manuales/operacion/RECUPERACION-C8.md'],
+    next:'Usa fuentes recuperables también cuando una respuesta se construya mediante analítica o IA.'
+  },
+  {
+    key:'ia',title:'Responder con evidencia y abstenerse cuando falta',caseKey:'ia',
+    prerequisites:'Comprende consulta autorizada, revisión, huella y diferencia entre fuente y representación derivada.',
+    vocabulary:[['Procedencia','Hilo que relaciona un resultado con sus fuentes y transformación.'],['Fuga','Información indebida que llega a entrenamiento, evaluación o recuperación.'],['Abstención','Decisión de no responder sin evidencia suficiente.']],
+    problem:'Una consulta pregunta por tucanes cuando solo hay colibríes. Inventar un resultado sería más vistoso que reconocer la ausencia de datos, pero no ayudaría a la brigada. Una respuesta también puede ser peligrosa si usa evidencia de otra reserva o de un momento posterior al corte evaluado.',
+    reasoning:[
+      'El asistente del taller primero autoriza el ámbito, valida el corpus y recupera coincidencias léxicas. Devuelve citas con identidad, revisión y huella. Si no hay coincidencias suficientes, se abstiene. No llama a un modelo generativo, no aprende de los ejemplos y no convierte una coincidencia de palabras en una afirmación biológica validada.',
+      'Para minería de datos declara entidad, tiempo observado y tiempo conocido. El taller C7 crea conjuntos con cortes y rechaza entidades compartidas entre entrenamiento y evaluación. Versiona características y conserva exclusiones. Una división aleatoria de filas puede filtrar la misma entidad a ambos lados; más filas no corrigen esa dependencia.',
+      'Una herramienta de agente necesita una capacidad permitida y argumentos validados por el servidor. El texto recuperado sigue siendo evidencia, no instrucciones para ampliar permisos. La salida analítica y la respuesta del asistente no ganan autoridad de escritura sobre el hecho original.'
+    ],
+    trace:['Registra una observación y consulta colibri dentro del ámbito.','Comprueba identidad y revisión de la cita.','Consulta tucan y observa abstención sin conceder escritura.'],
+    expected:{citas:1,revision:1,sinEvidencia:'abstencion',tipo:'recuperacion-lexica-sin-generacion'},
+    alternative:'Una lista autorizada de documentos puede ser más útil que un resumen generado cuando la evidencia es escasa. No necesitas un LLM para mostrar fuentes.',
+    cost:'Vectores, modelos y características añaden versiones, almacenamiento y evaluación. Un umbral léxico no equivale a confianza calibrada de una predicción.',
+    adverse:'La coincidencia colibri enfermo puede citar colibri aunque la fuente no sostenga enfermo. El taller conserva ese desacierto: una cita existente no prueba que respalde toda la frase.',
+    recovery:'Abstente o muestra la evidencia sin añadir el atributo no sustentado. Revisa por separado recuperación, soporte de citas y generación; no ocultes el fallo cambiando solamente el texto de presentación.',
+    exercise:'Diseña dos filas de entrenamiento y dos de evaluación sin compartir entidad. Añade un dato conocido después del corte y explica su exclusión; plantea una consulta que deba abstenerse.',
+    solution:'Cada partición usa entidades distintas y tiempos válidos explícitos. El dato tardío no entra retrospectivamente al entrenamiento aunque su observación sea anterior. La consulta de una especie ausente debe abstenerse y devolver cero citas, no una predicción improvisada. Conserva versión de característica, cortes y fuentes para reproducir el conjunto.',
+    rubric:['Se distingue recuperación de generación.','Las citas conservan ámbito, identidad y revisión.','La partición y el dato tardío no introducen fuga.'],
+    sources:['replication/examples/analitica-c7/taller.mjs','replication/examples/analitica-c7/fixtures.json','manuales/32-analitica-e-ia-con-procedencia.md'],
+    next:'Integra lo aprendido en entregas incrementales del mismo proyecto, no en prototipos inconexos.'
+  },
+  {
+    key:'construir',title:'Integrar una aplicación sin ocultar pasos',caseKey:null,
+    prerequisites:'Recorre los casos de registro, datos, API y seguridad. La persistencia documental local necesita las dependencias fijadas del ejemplo integral.',
+    vocabulary:[['Hito','Estado ejecutable con una conducta demostrada.'],['Agregado','Límite de datos y reglas que cambia como unidad.'],['Prueba integral','Comprobación de varias piezas conectadas en un flujo.']],
+    problem:'Un libro presenta capítulos correctos por separado, pero cada uno usa una entidad distinta y al unirlos no coinciden contratos, permisos ni formatos. La persona debe inventar la conexión que el material prometía enseñar.',
+    reasoning:[
+      'Conserva el proyecto conductor: observaciones, catálogo, resumen y recuperación. Primero funciona memoria; luego se aprende el diccionario; después se conecta HTTP y un motor documental local. El ejemplo integral C8 ya tiene formulario, catálogo y persistencia PouchDB. Su guía declara instalación, ambiente y sesiones DEMO. No lo describas como autenticación institucional ni como despliegue administrado.',
+      'Cada incremento debe mantener el anterior. Una prueba de registro no reemplaza la de migración y la interfaz no reemplaza la prueba de permiso. El ADR del agregado explica por qué el registro durable integra operación y resultado en una unidad. Esa decisión difiere de las dos escrituras del taller en memoria y no debe atribuirse retroactivamente a aquel.'
+    ],
+    trace:['Consulta el hito en memoria y conserva sus rechazos.','Sigue manuales/33-aplicacion-integral-neutral.md para instalar el ejemplo C8 con su bloqueo de dependencias.','Ejecuta el flujo permitido, cierra, reabre y comprueba persistencia y recuperación según su guía.'],
+    artifact:{hitos:[{nombre:'memoria',demuestra:'reglas y repetición secuencial'},{nombre:'datos',demuestra:'traducción y catálogo'},{nombre:'HTTP',demuestra:'contrato y estados'},{nombre:'documental local',demuestra:'persistencia y recuperación del ejemplo'}],noDemuestra:['autenticación productiva','servicio administrado','distribución multinodo']},
+    alternative:'Mantén memoria para enseñar reglas si aún no necesitas persistencia. Conectar un motor antes de entender el contrato agrega fallos que dificultan aprender.',
+    cost:'Una aplicación integral tiene más configuración y dependencias. El bloqueo, la guía de arranque y la recuperación forman parte de su mantenibilidad.',
+    adverse:'Cambiar la entidad de cada capítulo impide reproducir una entrega completa. Un motor persistente tampoco vuelve confiable un contexto de usuario que sigue siendo DEMO.',
+    recovery:'Fija un hito funcional, compara contratos y conecta una frontera por vez. Ejecuta sus pruebas antes de añadir otra tecnología; conserva una ruta de regreso al hito anterior.',
+    exercise:'Redacta una lista de aceptación para pasar del hito de memoria al documental. Incluye reinicio, repetición, catálogo, permiso cruzado y recuperación en otro destino.',
+    solution:'Después del reinicio debe existir el registro, el reintento no duplica la intención bajo el contrato durable y la edición del catálogo sigue interpretable. El ámbito ajeno se rechaza. La recuperación prueba un destino nuevo con fuentes y huellas. La lista señala la guía exacta y las dependencias, y mantiene pendientes autenticación productiva y operación remota.',
+    rubric:['Los hitos usan el mismo vocabulario y contratos.','Se comprueba reinicio y recuperación, no solo primer arranque.','Se separa DEMO de identidad confiable.'],
+    sources:['manuales/33-aplicacion-integral-neutral.md','replication/examples/integral-c8/README.md','manuales/decisiones/ADR-C8-AGREGADO-LOCAL.md'],
+    next:'Automatiza trabajo repetitivo sin confundir un esqueleto generado con una solución terminada.'
+  },
+  {
+    key:'toolkit',title:'Generar sin sobrescribir y auditar sin certificar',caseKey:null,
+    prerequisites:'Sabes usar una terminal y reconocer la carpeta raíz. El Toolkit tiene dependencias propias; el taller inicial sin paquetes no las instala.',
+    vocabulary:[['Simulación','Plan de cambios sin crear ni modificar archivos.'],['Generador','Herramienta que produce una estructura repetible.'],['Auditor estático','Análisis del texto o estructura del programa, no de todos sus comportamientos.']],
+    problem:'Una IA propone generar un proyecto sobre una carpeta que ya contiene cambios. Un generador que sobrescribe archivos puede destruir una decisión que no conoce. Un informe verde de estructura tampoco demuestra que el nuevo programa esté autorizado o sea correcto.',
+    reasoning:[
+      'Instala las dependencias de réplica con npm ci --prefix replication antes del Toolkit. Usa --ayuda para consultar opciones reales y --simular para examinar el plan. El recorrido documentacion-c9 ya comprueba instalación local, generación y conflictos. Las rutas de salida deben ser propias y no contener secretos ni escritores concurrentes.',
+      'El plan simulado declara cero mutaciones y rutas previstas. Una generación real produce código, prueba, documento y manifiesto; todavía debes completar dominio, permisos y datos. El auditor estático encuentra reglas que sabe expresar, con falsos positivos y límites documentados. No convierte una carpeta en una certificación de seguridad ni en una conformidad Core completa.'
+    ],
+    trace:['Instala con el bloqueo declarado y consulta la ayuda del CLI.','Usa el ejemplo de simulación del tutorial C9 y revisa todas las rutas.','Solo en una copia propia, genera, ejecuta la prueba y repite para observar la idempotencia o el conflicto.'],
+    artifact:{comando:'generar --tipo entidad --nombre Observacion --directorio ejemplo-propio --simular --json',aceptacion:{status:'simulated',mutations:0,created:[]},decision:'Revisar rutas y completar reglas antes de generar realmente'},
+    alternative:'Escribir una entidad pequeña a mano puede ser más comprensible que adoptar quince plantillas. Usa el generador cuando la repetición real compense mantenerlo.',
+    cost:'Las plantillas crean dependencias sobre sus convenciones y necesitan evolución. Una prueba generada puede aprobar un esqueleto que todavía desconoce el negocio.',
+    adverse:'Eliminar --simular cambia la autoridad del comando: ya puede escribir. Cambiar el destino a una carpeta ajena no está autorizado por haber revisado otro plan.',
+    recovery:'Detente ante un conflicto y compara el contenido. No borres la carpeta para conseguir un estado verde; elige un destino nuevo o integra manualmente con revisión.',
+    exercise:'Entrega un plan de generación con rutas esperadas, responsable, regla pendiente y prueba negativa que el esqueleto aún no cubre. Explica cómo comprobarás que la simulación no escribió nada.',
+    solution:'El plan conserva mutations cero y created vacío; se contrasta el inventario anterior y posterior. La regla pendiente puede ser autorización por ámbito y su prueba negativa debe rechazar otra reserva. Antes de generar de verdad se revisa de nuevo el destino. La salida estructural del auditor no se presenta como validación funcional ni como permiso de publicación.',
+    rubric:['Simulación y escritura tienen autoridad distinta.','El destino no sobrescribe contenido divergente.','Se identifica una regla que debe añadirse después de generar.'],
+    sources:['manuales/34-documentacion-y-herramientas-practicas.md','replication/src/cli.mjs','replication/examples/documentacion-c9/recorrido.mjs'],
+    next:'Conserva la evidencia de qué se ejecutó y qué sigue pendiente antes de publicar.'
+  },
+  {
+    key:'evidencia',title:'Conservar resultados sin exagerar su alcance',caseKey:'evidencia',
+    prerequisites:'Distingue documento, revisión, resultado de prueba y huella. El libro enseña; el artículo debe sostener afirmaciones con evidencia.',
+    vocabulary:[['Trazabilidad','Relación verificable entre afirmación, fuente, prueba y resultado.'],['Reproducibilidad','Capacidad de repetir un procedimiento bajo condiciones declaradas.'],['Amenaza a la validez','Razón por la que una conclusión puede no sostenerse en otro contexto.']],
+    problem:'Una captura muestra todas las pruebas aprobadas, pero no dice con qué código ni configuración se obtuvieron. Otra persona cambia la cantidad y conserva la misma imagen. El resultado ya no representa los bytes que se distribuyen.',
+    reasoning:[
+      'Una huella vincula un contenido con una identificación calculada. El caso conserva identidad y revisión de una entidad válida y muestra que un cambio de contenido altera su huella. Eso detecta diferencias si la referencia es confiable; no demuestra autoría, consentimiento, corrección del contenido ni independencia de quien revisó.',
+      'Separa estados: documentado, implementado, ejecutado localmente, repetido externamente y validado con personas. El artículo no puede convertir un microensayo en superioridad distribuida ni el libro convertir una rúbrica preparada en aprendizaje observado. Conserva resultados negativos, configuración, versión y límites. Si cambia un artefacto aprobado, identifica otra candidata y repite los controles afectados.'
+    ],
+    trace:['Calcula la huella del documento válido.','Comprueba que una copia equivalente conserva esa huella.','Cambia la cantidad y comprueba que ya no coincide con la referencia.'],
+    expected:{id:'obs-area-001',revision:1,integridadNoEsAutoria:true},
+    alternative:'Para una nota personal puede bastar una versión y un archivo; para una afirmación pública necesitas poder relacionarla con las fuentes y resultados que la sostienen.',
+    cost:'Guardar procedencia requiere espacio y disciplina. Un inventario enorme sin relación con las afirmaciones dificulta revisar tanto como una ausencia de evidencia.',
+    adverse:'Un archivo modificado puede tener una huella correctamente calculada y seguir conteniendo un resultado inventado. La integridad no vuelve verdadera la afirmación.',
+    recovery:'Revisa de dónde proviene la referencia, repite el procedimiento y conserva su salida. Si no existe evidencia humana, marca pendiente en lugar de completar un registro ficticio.',
+    exercise:'Escribe una afirmación acotada de este taller y su fila de trazabilidad: fuente, prueba, salida, configuración, amenaza y documento que la publica.',
+    solution:'Una afirmación defendible es que el caso secuencial de memoria conserva una observación al repetir la misma intención bajo la configuración declarada. La fila enlaza código, prueba y recibo, y advierte que no demuestra concurrencia ni motor remoto. Una revisión humana o eficacia pedagógica permanece pendiente hasta observarla realmente.',
+    rubric:['La afirmación no supera la evidencia.','Se distinguen integridad, autoría y verdad.','Los cambios posteriores invalidan la aprobación afectada.'],
+    sources:['MATRIZ-TRAZABILIDAD-RELEASE.md','editorial/ep2/LECTURA-PILOTO.md'],
+    next:'Vuelve al requisito inicial y conserva solo las decisiones cuyo beneficio puedes explicar y comprobar.'
+  }
+];

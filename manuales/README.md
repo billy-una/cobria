@@ -1,8 +1,9 @@
 # Manuales del ecosistema COBRIA
 
-El plan vigente para integrar estos manuales, completar el catálogo de patrones y
-cerrar libro, artículo, documento maestro, herramientas y sitio se encuentra en
-[`../ROADMAP-CIERRE-ECOSISTEMA-COBRIA.md`](../ROADMAP-CIERRE-ECOSISTEMA-COBRIA.md).
+El plan de cierre pedagógico vigente es [C0 a C15](../ROADMAP-CIERRE-C0-C15.md).
+La [matriz C0](../editorial/c0/AUDITORIA-C0.md) distingue presencia de contenido,
+ejecución, pruebas y comprensión por lectores. El
+[roadmap anterior](../ROADMAP-CIERRE-ECOSISTEMA-COBRIA.md) se conserva como antecedente.
 
 Para comenzar, use `01-fundamentos.md`, continúe con `02-layers.md` y seleccione una
 ruta en `14-rutas-de-aprendizaje.md` según su experiencia y objetivo.
@@ -18,6 +19,21 @@ El estándar de documentación, comentarios, errores, idioma, fechas, monedas y 
 se encuentra en `specification/phase-6/`.
 
 ## Rutas
+
+[Cómo recorrer el libro y la web](35-como-recorrer-el-libro-y-la-web.md): rutas de
+entrada, búsqueda, lectura de fragmentos y repaso con límites explícitos.
+
+[Documentación y herramientas prácticas](34-documentacion-y-herramientas-practicas.md):
+generación segura, comentarios, tutorial, referencia, ADR y recuperación del mismo caso.
+
+Integración real local: [El cuaderno que permanece](33-aplicacion-integral-neutral.md),
+con formulario, HTTP, PouchDB en disco, proyección y recuperación verificable.
+
+Prácticas iniciales: [Tu primer proyecto](26-primer-proyecto-paso-a-paso.md) y
+[Datos desde cero](27-datos-desde-cero.md), con diccionario, Dater, catálogo,
+consulta y migración comprobables sin infraestructura remota.
+Continúa con [un registro por capas](28-arquitectura-y-capas-paso-a-paso.md):
+responsabilidades, puertos, composición y comprobación de dependencias del mismo caso.
 
 1. [Fundamentos](01-fundamentos.md)
 2. [Layers: arquitectura por capas](02-layers.md)
@@ -41,6 +57,16 @@ se encuentra en `specification/phase-6/`.
 20. [COBRIA Build: aplicación de referencia](20-build-reference.md)
 21. [COBRIA Toolkit](21-toolkit.md)
 22. [COBRIA Evidence y transferencia](22-evidence-transfer.md)
+23. [Metodología aplicada: del reporte al cierre verificable](23-metodologia-de-correccion-verificable.md)
+24. [Organización y operación de un proyecto](24-organizacion-y-operacion-del-proyecto.md)
+25. [Normas y evaluación de calidad: SQuaRE y referencias por área](25-normas-y-evaluacion-de-calidad.md)
+26. [Tu primer proyecto paso a paso](26-primer-proyecto-paso-a-paso.md)
+27. [Datos desde cero](27-datos-desde-cero.md)
+28. [Arquitectura y capas paso a paso](28-arquitectura-y-capas-paso-a-paso.md)
+29. [Core y patrones en la práctica](29-core-y-patrones-en-la-practica.md)
+30. [API, experiencia, seguridad y privacidad](30-api-ux-seguridad-y-privacidad.md)
+31. [Calidad, rendimiento y operación](31-calidad-rendimiento-y-operacion.md)
+32. [Analítica e IA con procedencia](32-analitica-e-ia-con-procedencia.md)
 
 ## Método didáctico
 

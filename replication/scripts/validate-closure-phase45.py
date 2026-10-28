@@ -28,8 +28,18 @@ for item in catalog["items"]:
     missing = required - set(item)
     if missing:
         errors.append(f"{item.get('slug')}: faltan {sorted(missing)}")
-    if set(item.get("codigo", {})) != {"TypeScript", "Python", "Java", "Go"}:
-        errors.append(f"{item.get('slug')}: ejemplos multilenguaje incompletos")
+    code = item.get("codigo", {})
+    verified = item.get("lenguajesVerificados", [])
+    verified_names = {entry.get("language") for entry in verified}
+    if "TypeScript" not in code:
+        errors.append(f"{item.get('slug')}: falta la referencia TypeScript")
+    if set(code) != verified_names:
+        errors.append(f"{item.get('slug')}: código publicado sin evidencia de lenguaje equivalente")
+    for evidence in verified:
+        for field in ("source", "test"):
+            relative = evidence.get(field, "")
+            if not relative or not (ROOT / relative).is_file():
+                errors.append(f"{item.get('slug')}: {field} no resoluble para {evidence.get('language')}")
     for relation in item.get("relaciones", []):
         if relation.get("target") not in names:
             errors.append(f"{item.get('slug')}: relación rota {relation}")
@@ -69,4 +79,4 @@ if errors:
         print(f"- {error}")
     raise SystemExit(1)
 
-print("Fases de cierre 4-5 válidas: 30 patrones completos, 9 familias, Data validado y 2 adaptadores locales conformes.")
+print("Fases de cierre 4-5 válidas: 30 patrones con referencia probada, 9 familias, Data validado y 2 adaptadores locales conformes.")

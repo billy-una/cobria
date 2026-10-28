@@ -1,0 +1,17 @@
+{
+  "title": "Analizar sin mezclar y responder con procedencia",
+  "intro": "Una brigada estudia observaciones de aves. Primero fija qué información estaba disponible en cada corte; después consulta evidencia autorizada y admite no encontrarla. El taller usa datos ficticios y recuperación léxica, no un modelo entrenado.",
+  "command": "npm start --prefix replication/examples/analitica-c7",
+  "testCommand": "npm test --prefix replication/examples/analitica-c7",
+  "evaluateCommand": "npm run evaluar --prefix replication/examples/analitica-c7",
+  "steps": [
+    "Separe observación y conocimiento. El primer corte define entrenamiento; el segundo limita evaluación. Rechace conocer una observación antes de que ocurra.",
+    "Excluya registros tardíos, fuera de corte o sin habilitación didáctica. Rechace entidades compartidas entre particiones; no las reparta al azar para ocultar fuga.",
+    "Conserve fuente, revisión, huella y versión de característica. El manifiesto identifica las entradas usadas, pero su huella no prueba autenticidad.",
+    "Autorice antes de recuperar. Una cita contiene identidad, ámbito, revisión y huella; sin coincidencia suficiente, el sistema se abstiene.",
+    "Evalúe los diez casos fijados, incluidos un falso positivo y un falso negativo. Una herramienta de lectura rechaza escritura y permisos enviados por el solicitante."
+  ],
+  "checks": "Doce pruebas locales comprueban cortes, cronología, fuga, procedencia, ámbito, abstención y herramientas. Diez consultas sintéticas evalúan recuperación; sus dos desaciertos se conservan.",
+  "limits": "Sin entrenamiento, embeddings, LLM ni proveedor externo. La coincidencia léxica no es confianza calibrada ni demuestra que una cita respalde toda la pregunta. La habilitación del fixture no representa consentimiento real. Un texto no se convierte en una acción; esta demostración no prueba resistencia general de un LLM a inyección. No modifica Core 1.0 ni resultados científicos históricos.",
+  "guide": "manuales/32-analitica-e-ia-con-procedencia.md"
+}

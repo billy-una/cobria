@@ -3,60 +3,157 @@ name: COBRIA CI
 on:
   push:
   pull_request:
+  workflow_dispatch:
+    inputs:
+      verify_references:
+        description: "Ejecutar auditoría autorizada de repositorios de referencia"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cobria-ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
-  sitio:
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: sitio
+  public-build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: npm
-          cache-dependency-path: sitio/package-lock.json
-      - run: npm ci
-      - run: npm test
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.22.x"
+      - name: Herramientas públicas
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y latexmk biber texlive-latex-extra texlive-bibtex-extra texlive-lang-spanish texlive-fonts-recommended texlive-fonts-extra poppler-utils ghostscript
+          python -m pip install -r requirements-build.txt
+          npm ci --prefix replication
+          npm ci --prefix sitio
+          npm ci --prefix libro-cobria
+          cd libro-cobria && npx playwright install --with-deps chromium
+      - name: Construcción sin referencias privadas
+        run: make construir-publico
+      - name: Regresión HTTP del servidor construido
+        run: node replication/scripts/review-pc8-server.mjs "$GITHUB_WORKSPACE/sitio"
+      - name: Evidencia pública local al runner
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cobria-public-build
+          path: |
+            output/pdf/
+            output/review/
 
-  replication:
+  publication-candidate:
+    if: github.event_name == 'workflow_dispatch' && inputs.verify_references
     runs-on: ubuntu-latest
+    timeout-minutes: 90
     defaults:
       run:
-        working-directory: replication
+        working-directory: cobria
     steps:
       - uses: actions/checkout@v4
+        with:
+          path: cobria
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Comprobar acceso autorizado a referencias
+        env:
+          REFERENCE_TOKEN: ${{ secrets.COBRIA_REFERENCE_TOKEN }}
+        run: |
+          if [ -z "$REFERENCE_TOKEN" ]; then
+            echo "::error::Falta COBRIA_REFERENCE_TOKEN de solo lectura para los repositorios de referencia; no se omiten las fases 21–25."
+            exit 1
+          fi
+      - name: Referencia POS Guápiles (solo inspección)
+        uses: actions/checkout@v4
+        with:
+          repository: billy-una/posguapiles
+          ref: ae8d63ce535ecff40059b49d8b8c9f050c353d96
+          path: references/POSGUAPILES-1
+          token: ${{ secrets.COBRIA_REFERENCE_TOKEN }}
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Referencia CRM hotel (solo inspección)
+        uses: actions/checkout@v4
+        with:
+          repository: billy-una/CRMHOTEL
+          ref: b7b0f8e83871df1220865931f53424d8dd39772c
+          path: references/CRMHOTEL_NUEVO
+          token: ${{ secrets.COBRIA_REFERENCE_TOKEN }}
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Referencia balonmano (solo inspección)
+        uses: actions/checkout@v4
+        with:
+          repository: billy-una/BSHandball
+          ref: 09c15acd14ab806abe436a8176ef3247c61a2df6
+          path: references/BSHandball
+          token: ${{ secrets.COBRIA_REFERENCE_TOKEN }}
+          fetch-depth: 0
+          persist-credentials: false
       - uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
-          cache-dependency-path: replication/package-lock.json
-      - run: npm ci
-      - run: python3 scripts/validate-phase2.py
-      - run: python3 scripts/validate-phase3.py
-      - run: python3 scripts/validate-phase4.py
-      - run: python3 scripts/validate-phase5.py
-      - run: python3 scripts/validate-phase6.py
-      - run: python3 scripts/validate-phase7.py
-      - run: python3 scripts/validate-phase8.py
-      - run: python3 scripts/validate-phase9.py
-      - run: python3 scripts/validate-phase10.py
-      - run: python3 scripts/validate-phase11.py
-      - run: python3 scripts/validate-phase12.py
-      - run: python3 scripts/validate-phase13.py
-      - run: python3 scripts/validate-phase14.py
-      - run: python3 scripts/validate-phase15.py
-      - run: python3 scripts/validate-phase16.py
-      - run: python3 scripts/validate-phase17.py
-      - run: python3 scripts/validate-phase18.py
-      - run: npm test
-      - run: npm test
-        working-directory: replication/examples/ecosistema-app
-      - run: node src/cli.mjs verificar --adaptador lokijs --tamano 30 --salida "$RUNNER_TEMP/cobria"
-      - run: npm run sbom
-      - run: node -e "const s=require('./SBOM.cdx.json'); if(s.bomFormat!=='CycloneDX'||!s.components.length) process.exit(1)"
-      - run: npm audit --audit-level=high
+          cache-dependency-path: |
+            cobria/replication/package-lock.json
+            cobria/sitio/package-lock.json
+            cobria/libro-cobria/package-lock.json
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.22.x"
+      - name: Dependencias de documentos
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y latexmk biber texlive-latex-extra texlive-bibtex-extra texlive-lang-spanish texlive-fonts-recommended texlive-fonts-extra poppler-utils
+          python -m pip install --disable-pip-version-check -r requirements-build.txt
+      - name: Dependencias Node
+        run: |
+          npm ci --prefix replication
+          npm ci --prefix sitio
+          npm ci --prefix libro-cobria
+          cd libro-cobria && npx playwright install --with-deps chromium
+      - name: Construcción doble de RC2 desde clones limpios
+        run: python3 replication/scripts/build-remediation-r9.py --reference-root "$GITHUB_WORKSPACE/references"
+      - name: Compuerta local de RC2
+        run: make verificar-r9
+      - name: Auditoría de dependencias completa
+        run: |
+          npm audit --prefix replication --audit-level=high
+          npm audit --prefix sitio --audit-level=high
+      - name: Evidencia de construcción
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cobria-candidate-evidence
+          if-no-files-found: warn
+          path: |
+            cobria/output/release/ecosistema-1.0.0-rc2/**
 
   package-integrity:
     runs-on: ubuntu-latest
@@ -65,11 +162,16 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: python3 replication/scripts/build-release-manifest.py
-        working-directory: replication
+      - name: Comprobar el manifiesto conservado sin regenerarlo
+        run: make verificar-pc0
+      - uses: actions/upload-artifact@v4
+        with:
+          name: replication-manifest
+          path: replication/RELEASE-MANIFEST.json
 
   infrastructure-config:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: docker compose -f replication/infrastructure/docker-compose.core12.yml config
+      - name: Validar configuración de infraestructura
+        run: docker compose -f replication/infrastructure/docker-compose.core12.yml config

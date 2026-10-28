@@ -1,0 +1,82 @@
+{
+  "schemaVersion": "1.0.0",
+  "phase": "C0",
+  "date": "2026-10-17",
+  "baselineCommit": "deca1b14ff44805d5d36814654cf35be27d2fa89",
+  "kind": "automatic-local-probes-not-scientific-experiment",
+  "environment": {
+    "node": "v24.2.0",
+    "platform": "darwin",
+    "arch": "arm64"
+  },
+  "scope": {
+    "projectSourceMutated": false,
+    "scientificResultsMutated": false,
+    "temporaryFixtureCreated": true,
+    "published": false
+  },
+  "sourceHashes": [
+    {
+      "path": "replication/src/cli.mjs",
+      "sha256": "cca42a2a31596fc972ff39a018b66172878ed3ab8145b404562d36a3bd7b265f"
+    },
+    {
+      "path": "replication/src/generator.mjs",
+      "sha256": "33bc87aa13585c5e13cacfc2b05e7eff8aab0e7c5bae1a3fef4a95aad21c2755"
+    },
+    {
+      "path": "replication/examples/ecosistema-app/src/domain/observacion.mjs",
+      "sha256": "a2816760f5d360959fdc756d48b56bf068df3869f891278806a0397c6c5d7d54"
+    }
+  ],
+  "probes": [
+    {
+      "id": "opcion-cambio",
+      "command": "node replication/src/cli.mjs impacto --cambio cambio.json --json",
+      "exitCode": 2,
+      "stdout": "",
+      "stderr": "{\"ok\":false,\"code\":\"CLI_OPTION_UNKNOWN\",\"message\":\"Opción desconocida: --cambio\"}"
+    },
+    {
+      "id": "opcion-comprobar",
+      "command": "node replication/src/cli.mjs generar --comprobar --json",
+      "exitCode": 2,
+      "stdout": "",
+      "stderr": "{\"ok\":false,\"code\":\"CLI_OPTION_UNKNOWN\",\"message\":\"Opción desconocida: --comprobar\"}"
+    },
+    {
+      "id": "meta-patrones",
+      "command": "make -n verificar-ejemplos-patrones",
+      "exitCode": 2,
+      "stdout": "",
+      "stderr": "make: *** No rule to make target `verificar-ejemplos-patrones'.  Stop."
+    },
+    {
+      "id": "meta-paquete",
+      "command": "make -n paquete-candidato",
+      "exitCode": 2,
+      "stdout": "",
+      "stderr": "make: *** No rule to make target `paquete-candidato'.  Stop."
+    },
+    {
+      "id": "contrato-entidad",
+      "crearMethod": "undefined",
+      "zeroQuantityCode": "OBS_QUANTITY_INVALID"
+    },
+    {
+      "id": "simular-genera",
+      "command": "node replication/src/cli.mjs generar --simular --tipo entidad --nombre Sonda Cero --directorio <directorio-temporal-sintetico> --json",
+      "exitCode": 0,
+      "stdout": "{\n  \"ok\": true,\n  \"type\": \"entidad\",\n  \"name\": \"Sonda Cero\",\n  \"root\": \"<directorio-temporal-sintetico>\",\n  \"created\": [\n    \"src/generated/entidad-sonda-cero.mjs\",\n    \"test/generated/entidad-sonda-cero.test.mjs\",\n    \"docs/generated/entidad-sonda-cero.md\",\n    \".cobria/generated/entidad-sonda-cero.json\"\n  ],\n  \"unchanged\": [],\n  \"status\": \"generated\"\n}",
+      "stderr": "",
+      "createdFiles": [
+        "src/generated/entidad-sonda-cero.mjs",
+        "test/generated/entidad-sonda-cero.test.mjs",
+        "docs/generated/entidad-sonda-cero.md",
+        ".cobria/generated/entidad-sonda-cero.json"
+      ],
+      "createdCount": 4,
+      "actualFilesPresent": true
+    }
+  ]
+}

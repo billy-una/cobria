@@ -1,7 +1,16 @@
 # COBRIA Layers
 
+Empieza con [el registro por capas](28-arquitectura-y-capas-paso-a-paso.md): el mismo
+caso de C1 y C2, código real, sustitución local y pruebas de responsabilidades.
+
+Para seguir un defecto entre responsabilidades, consulte la
+[metodología de corrección verificable](23-metodologia-de-correccion-verificable.md).
+El recorrido de diagnóstico incluye vista, caso de uso, servicio, datos, autorización,
+funciones e índices, ajustado a las rutas de ejecución reales.
+
 **Versión:** 1.0  
-**Estado:** estable para la ruta del Ecosistema 1.0  
+**Estado:** guía pedagógica de una propuesta independiente en validación
+
 **Propósito:** separar conocimiento y autoridad, no multiplicar carpetas
 
 La especificación verificable está en `specification/phase-5/`. El ejemplo ejecutable
@@ -59,17 +68,16 @@ entidad no sabe cómo se guarda. Aplicación expresa intenciones, autoriza antes
 recursos, coordina puertos y devuelve resultados estables.
 
 ```js
-export class RegistrarObservacion {
-  constructor({ repositorio, autorizar }) {
-    this.repositorio = repositorio;
-    this.autorizar = autorizar;
-  }
-  async ejecutar(entrada, contexto) {
-    this.autorizar(contexto, "crear", entrada.ambito);
-    return this.repositorio.guardar(entrada);
-  }
-}
+const registrar = new RegistrarObservacion({
+  repositorio, autorizar, calcularHuella
+});
+await registrar.ejecutar(entrada, contexto);
 ```
+
+El fragmento muestra la firma real, no un programa completo. El caso de uso exige
+clave de idempotencia, autoriza `observaciones:escribir`, comprueba repetición, construye
+la entidad y guarda. El código completo está en `src/application/registrar-observacion.mjs`
+dentro de la aplicación. No se sustituye ese recorrido por un guardado directo.
 
 Un servicio de aplicación reúne coordinación compartida. Un servicio de dominio expresa
 una política entre objetos. Ninguno es un lugar genérico para código sin dueño.
@@ -90,6 +98,9 @@ ResumenPorEspecieIndexer
   verifica y publica sin adquirir autoridad
 ```
 
+El esquema anterior describe responsabilidades posibles, no clases ya instanciadas.
+La variante local C3 sí conecta `RepositorioDocumentalMemoria` con `ObservacionDater`.
+Los adaptadores MongoDB y CouchDB existentes no usan automáticamente ese formato.
 Separarlos permite cambiar representación, consulta o transporte por razones distintas.
 En un ejemplo pequeño pueden vivir cerca; sus responsabilidades siguen separadas.
 
@@ -100,9 +111,11 @@ Presentación traduce interacción a casos de uso y resultados a carga, vacío, 
 memoria o CouchDB.
 
 ```js
-const repositorio = new RepositorioMongo({ connector, dater });
-const registrar = new RegistrarObservacion({ repositorio, autorizar });
-const controller = new RegistrarObservacionController({ registrar, mensajes });
+const repositorio = new RepositorioDocumentalMemoria();
+const app = crearAplicacion({ repositorio });
+// La composición conecta realmente:
+// new RegistrarObservacion({ repositorio, autorizar, calcularHuella })
+// new RegistrarObservacionController(registrar, traducirErrorEs)
 ```
 
 ## Estructura recomendada

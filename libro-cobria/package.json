@@ -1,0 +1,15 @@
+{
+  "name": "cobria-libro",
+  "version": "1.0.0-rc2",
+  "private": true,
+  "license": "Apache-2.0",
+  "type": "module",
+  "scripts": {
+    "build": "node build-book.mjs",
+    "pdf": "node export-pdf.mjs",
+    "all": "npm run build && npm run pdf"
+  },
+  "devDependencies": {
+    "playwright": "1.62.1"
+  }
+}

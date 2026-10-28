@@ -1,0 +1,25 @@
+{
+  "phase": "EP4",
+  "date": "2026-10-23",
+  "status": "completada-local-candidata-educativa",
+  "coreChanged": false,
+  "published": false,
+  "independentReview": false,
+  "siteRoute": "/comenzar/proyecto-integral",
+  "sharedSource": "editorial/ep4/ENTREGA.md",
+  "executableSource": "replication/examples/integral-c8/recorrido-ep4.mjs",
+  "evidence": [
+    "output/review/ep4/pruebas-finales.log",
+    "output/review/ep4/pruebas.log",
+    "output/review/ep4/COPIA.json",
+    "output/review/ep4/PDF.json",
+    "output/review/ep4/verificacion-final.log",
+    "output/review/ep4/local-1792773403608/RESULTADO.json"
+  ],
+  "limits": [
+    "Pruebas locales; no reproducción por un equipo independiente.",
+    "Sesiones DEMO, sin autenticación real ni despliegue en nube.",
+    "Analítica descriptiva y recuperación léxica, sin modelo generativo.",
+    "Revisión visual del capítulo nuevo, no auditoría integral del manual."
+  ]
+}

@@ -37,6 +37,15 @@ export class MongoDbAdapter {
     return values;
   }
   async clear(kind, scope) { await this.collection.deleteMany({cobriaManaged:true, kind, scope:exigirAmbito(scope)}); }
+  async storage() {
+    const rows=await this.collection.aggregate([{$match:{cobriaManaged:true}},{$group:{_id:null,logicalBytes:{$sum:{$bsonSize:"$$ROOT"}},documentCount:{$sum:1}}}]).toArray();
+    const item=rows[0]??{logicalBytes:0,documentCount:0};
+    // $bsonSize no incluye asignación, compresión, journal ni índices físicos.
+    return {storageBytes:null,physicalBytes:null,logicalBytes:item.logicalBytes,documentCount:item.documentCount,
+      logicalMethod:'Suma BSON de documentos cobriaManaged; incluye envoltura documental',
+      physicalReason:'No se instrumentó almacenamiento físico exclusivo del ensayo'};
+  }
+  async destroy() { await this.collection.drop().catch(error=>{if(error?.codeName!=="NamespaceNotFound")throw error}); }
   snapshot() { return {...this.metrics}; }
   async close() {}
 }

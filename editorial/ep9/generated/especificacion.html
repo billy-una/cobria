@@ -1,0 +1,1935 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc 3.12.1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Billy Jak Cordero Porras" />
+  <title>COBRIA: especificación candidata del ecosistema</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      color: light-dark(#1a1a1a, #fdfdfd);
+      background-color: #fdfdfd;
+      background-color: light-dark(#fdfdfd, #1a1a1a);
+      color-scheme: light dark;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        color-scheme: light only;
+      }
+      html, body, pre, code {
+        background-color: transparent;
+      }
+      body, a, a:visited, blockquote {
+        color: black;
+      }
+      pre, code {
+        padding: 0;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a, a:visited {
+      color: inherit;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid;
+      border-color: #e6e6e6;
+      border-color: light-dark(#e6e6e6, #4c4c4c);
+      color: #606060;
+      color: light-dark(#606060, #b6b6b6);
+    }
+    code {
+      white-space: pre-wrap;
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid currentColor;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid currentColor;
+      border-bottom: 1px solid currentColor;
+    }
+    th {
+      border-top: 1px solid currentColor;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">COBRIA: especificación candidata del ecosistema</h1>
+<p class="author">Billy Jak Cordero Porras</p>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#resumen" id="toc-resumen">Resumen</a>
+<ul>
+<li><a href="#cómo-leer-esta-especificación"
+id="toc-cómo-leer-esta-especificación">Cómo leer esta
+especificación</a></li>
+</ul></li>
+<li><a href="#control-del-documento"
+id="toc-control-del-documento">Control del documento</a>
+<ul>
+<li><a href="#orden-de-autoridad" id="toc-orden-de-autoridad">Orden de
+autoridad</a></li>
+<li><a href="#política-de-cambios" id="toc-política-de-cambios">Política
+de cambios</a></li>
+</ul></li>
+<li><a href="#alcance-audiencia-y-exclusiones"
+id="toc-alcance-audiencia-y-exclusiones">Alcance, audiencia y
+exclusiones</a>
+<ul>
+<li><a href="#alcance" id="toc-alcance">Alcance</a></li>
+<li><a href="#audiencia" id="toc-audiencia">Audiencia</a></li>
+<li><a href="#fuera-de-alcance" id="toc-fuera-de-alcance">Fuera de
+alcance</a></li>
+</ul></li>
+<li><a href="#lenguaje-normativo-y-declaraciones"
+id="toc-lenguaje-normativo-y-declaraciones">Lenguaje normativo y
+declaraciones</a>
+<ul>
+<li><a href="#palabras-clave" id="toc-palabras-clave">Palabras
+clave</a></li>
+<li><a href="#estados-de-evidencia"
+id="toc-estados-de-evidencia">Estados de evidencia</a></li>
+</ul></li>
+<li><a href="#vocabulario-canónico"
+id="toc-vocabulario-canónico">Vocabulario canónico</a></li>
+<li><a href="#modelo-conceptual" id="toc-modelo-conceptual">Modelo
+conceptual</a>
+<ul>
+<li><a href="#documento-canónico" id="toc-documento-canónico">Documento
+canónico</a></li>
+<li><a href="#contrato-de-proyección"
+id="toc-contrato-de-proyección">Contrato de proyección</a></li>
+<li><a href="#participantes"
+id="toc-participantes">Participantes</a></li>
+</ul></li>
+<li><a href="#invariantes-y-operaciones"
+id="toc-invariantes-y-operaciones">Invariantes y operaciones</a>
+<ul>
+<li><a href="#invariantes-transversales"
+id="toc-invariantes-transversales">Invariantes transversales</a></li>
+<li><a href="#precondiciones-y-poscondiciones"
+id="toc-precondiciones-y-poscondiciones">Precondiciones y
+poscondiciones</a></li>
+</ul></li>
+<li><a href="#ciclo-de-vida-de-una-proyección"
+id="toc-ciclo-de-vida-de-una-proyección">Ciclo de vida de una
+proyección</a></li>
+<li><a href="#requisitos-normativos-por-nivel"
+id="toc-requisitos-normativos-por-nivel">Requisitos normativos por
+nivel</a>
+<ul>
+<li><a href="#nivel:c1" id="toc-nivel:c1">Nivel C1: Fundamental</a></li>
+<li><a href="#aut-001-autoridad-canónica-única"
+id="toc-aut-001-autoridad-canónica-única">AUT-001 — Autoridad canónica
+única</a></li>
+<li><a href="#id-001-identidad-documental-estable"
+id="toc-id-001-identidad-documental-estable">ID-001 — Identidad
+documental estable</a></li>
+<li><a href="#scp-001-ámbito-obligatorio"
+id="toc-scp-001-ámbito-obligatorio">SCP-001 — Ámbito
+obligatorio</a></li>
+<li><a href="#rev-001-revisión-monotónica"
+id="toc-rev-001-revisión-monotónica">REV-001 — Revisión
+monotónica</a></li>
+<li><a href="#wrt-001-frontera-única-de-escritura"
+id="toc-wrt-001-frontera-única-de-escritura">WRT-001 — Frontera única de
+escritura</a></li>
+<li><a href="#nivel:c2" id="toc-nivel:c2">Nivel C2:
+Reconstruible</a></li>
+<li><a href="#trn-001-transformación-versionada"
+id="toc-trn-001-transformación-versionada">TRN-001 — Transformación
+versionada</a></li>
+<li><a href="#idm-001-procesamiento-idempotente"
+id="toc-idm-001-procesamiento-idempotente">IDM-001 — Procesamiento
+idempotente</a></li>
+<li><a href="#eqv-001-equivalencia-congelada"
+id="toc-eqv-001-equivalencia-congelada">EQV-001 — Equivalencia
+congelada</a></li>
+<li><a href="#rec-001-reconstrucción-independiente"
+id="toc-rec-001-reconstrucción-independiente">REC-001 — Reconstrucción
+independiente</a></li>
+<li><a href="#pub-001-publicación-segura-por-versión"
+id="toc-pub-001-publicación-segura-por-versión">PUB-001 — Publicación
+segura por versión</a></li>
+<li><a href="#nivel:c3" id="toc-nivel:c3">Nivel C3: Gobernado</a></li>
+<li><a href="#prv-001-procedencia-completa"
+id="toc-prv-001-procedencia-completa">PRV-001 — Procedencia
+completa</a></li>
+<li><a href="#frs-001-presupuesto-de-frescura-y-costo"
+id="toc-frs-001-presupuesto-de-frescura-y-costo">FRS-001 — Presupuesto
+de frescura y costo</a></li>
+<li><a href="#obs-001-observabilidad-verificable"
+id="toc-obs-001-observabilidad-verificable">OBS-001 — Observabilidad
+verificable</a></li>
+<li><a href="#own-001-propiedad-operacional"
+id="toc-own-001-propiedad-operacional">OWN-001 — Propiedad
+operacional</a></li>
+<li><a href="#ret-001-retiro-gobernado"
+id="toc-ret-001-retiro-gobernado">RET-001 — Retiro gobernado</a></li>
+<li><a href="#ana-001-conjunto-analítico-reproducible"
+id="toc-ana-001-conjunto-analítico-reproducible">ANA-001 — Conjunto
+analítico reproducible</a></li>
+<li><a href="#ai-001-ia-con-evidencia-y-abstención"
+id="toc-ai-001-ia-con-evidencia-y-abstención">AI-001 — IA con evidencia
+y abstención</a></li>
+<li><a href="#sec-001-fallo-cerrado-y-capacidad-mínima"
+id="toc-sec-001-fallo-cerrado-y-capacidad-mínima">SEC-001 — Fallo
+cerrado y capacidad mínima</a></li>
+</ul></li>
+<li><a href="#conformidad" id="toc-conformidad">Conformidad</a>
+<ul>
+<li><a href="#perfiles" id="toc-perfiles">Perfiles</a></li>
+<li><a href="#reglas-para-declarar-conformidad"
+id="toc-reglas-para-declarar-conformidad">Reglas para declarar
+conformidad</a></li>
+<li><a href="#forma-mínima-del-informe"
+id="toc-forma-mínima-del-informe">Forma mínima del informe</a></li>
+</ul></li>
+<li><a href="#protocolos-obligatorios-y-evidencia"
+id="toc-protocolos-obligatorios-y-evidencia">Protocolos obligatorios y
+evidencia</a>
+<ul>
+<li><a href="#reproducibilidad-mínima"
+id="toc-reproducibilidad-mínima">Reproducibilidad mínima</a></li>
+</ul></li>
+<li><a href="#compatibilidad-migración-y-extensiones"
+id="toc-compatibilidad-migración-y-extensiones">Compatibilidad,
+migración y extensiones</a>
+<ul>
+<li><a href="#tipos-de-cambio" id="toc-tipos-de-cambio">Tipos de
+cambio</a></li>
+<li><a href="#migración" id="toc-migración">Migración</a></li>
+<li><a href="#extensiones" id="toc-extensiones">Extensiones</a></li>
+</ul></li>
+<li><a href="#ejemplos-de-aplicación"
+id="toc-ejemplos-de-aplicación">Ejemplos de aplicación</a>
+<ul>
+<li><a href="#caso-conforme-observaciones-ambientales"
+id="toc-caso-conforme-observaciones-ambientales">Caso conforme:
+observaciones ambientales</a></li>
+<li><a href="#caso-conforme-mínimo-c1-sin-proyección"
+id="toc-caso-conforme-mínimo-c1-sin-proyección">Caso conforme mínimo: C1
+sin proyección</a></li>
+<li><a href="#contraejemplos"
+id="toc-contraejemplos">Contraejemplos</a></li>
+</ul></li>
+<li><a href="#matriz-integral-de-trazabilidad"
+id="toc-matriz-integral-de-trazabilidad">Matriz integral de
+trazabilidad</a></li>
+<li><a href="#seguridad-privacidad-y-amenazas"
+id="toc-seguridad-privacidad-y-amenazas">Seguridad, privacidad y
+amenazas</a></li>
+<li><a href="#limitaciones-de-la-especificación"
+id="toc-limitaciones-de-la-especificación">Limitaciones de la
+especificación</a></li>
+<li><a href="#licencia-atribución-y-cita"
+id="toc-licencia-atribución-y-cita">Licencia, atribución y cita</a></li>
+<li><a href="#referencias-normativas-e-informativas"
+id="toc-referencias-normativas-e-informativas">Referencias normativas e
+informativas</a></li>
+<li><a href="#plantilla-de-declaración-de-conformidad"
+id="toc-plantilla-de-declaración-de-conformidad">Plantilla de
+declaración de conformidad</a>
+<ul>
+<li><a href="#declaración-propuesta-no-certificación"
+id="toc-declaración-propuesta-no-certificación">Declaración propuesta;
+no certificación</a></li>
+</ul></li>
+<li><a href="#lista-de-inspección" id="toc-lista-de-inspección">Lista de
+inspección</a></li>
+<li><a href="#índice-de-artefactos-normativos"
+id="toc-índice-de-artefactos-normativos">Índice de artefactos
+normativos</a></li>
+</ul>
+</nav>
+<div class="titlepage">
+<p><strong>ESPECIFICACIÓN NORMATIVA CANDIDATA</strong></p>
+<p><strong>COBRIA</strong></p>
+<p>Ecosistema 1.0</p>
+<p>Requisitos, contratos y conformidad para datos canónicos y
+representaciones reconstruibles</p>
+<div class="tcolorbox">
+<p><strong>Estado:</strong> candidata pública <code>1.0.0-rc2</code>; no
+estable y no certificada.<br />
+<strong>Núcleo protegido:</strong> COBRIA Core 1.0, congelado.<br />
+<strong>Ámbito normativo:</strong> sistemas documentales NoSQL con
+autoridad canónica y derivados reconstruibles.<br />
+<strong>Naturaleza:</strong> propuesta independiente; no es un estándar
+oficial.</p>
+</div>
+<p>Billy Jak Cordero Porras</p>
+<p>Coto Brus, Costa Rica · 2026</p>
+<p>Repositorio canónico: <a href="https://github.com/billy-una/cobria"
+class="uri">https://github.com/billy-una/cobria</a></p>
+</div>
+<h2 class="unnumbered" id="resumen">Resumen</h2>
+<p>Esta especificación establece vocabulario, modelo conceptual,
+invariantes, requisitos, estados, operaciones, perfiles de conformidad y
+métodos de verificación para COBRIA. La propuesta gobierna la relación
+entre una autoridad documental NoSQL y sus índices, cachés,
+proyecciones, conjuntos analíticos y contextos de inteligencia
+artificial. Su objetivo no es imponer una tecnología: busca que
+autoridad, ámbito, revisión, procedencia, equivalencia, reconstrucción,
+publicación y retiro sean decisiones explícitas y comprobables.</p>
+<p>COBRIA integra prácticas conocidas. La contribución defendible es su
+composición en un contrato verificable y una ruta de conformidad por
+niveles. Una implementación puede declarar C1, C2 o C3 únicamente cuando
+satisface todos los requisitos heredados y conserva evidencia resoluble.
+Compilar, documentar o utilizar un patrón no equivale a validación
+externa ni certificación oficial.</p>
+<h3 class="unnumbered" id="cómo-leer-esta-especificación">Cómo leer esta
+especificación</h3>
+<p>Las secciones 1–5 fijan alcance y vocabulario. Las secciones 6–8
+contienen el modelo y las obligaciones. Las secciones 9–12 explican
+pruebas, evolución y ejemplos. Los anexos ofrecen una declaración de
+conformidad y una lista de inspección. El registro estructurado canónico
+de requisitos es .</p>
+<h2 id="control-del-documento">Control del documento</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Campo</th>
+<th style="text-align: left;">Valor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Título</td>
+<td style="text-align: left;">COBRIA Ecosistema 1.0: especificación
+normativa</td>
+</tr>
+<tr>
+<td style="text-align: left;">Versión editorial</td>
+<td style="text-align: left;"><code>1.0.0-rc2</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">Estado</td>
+<td style="text-align: left;">candidata pública, no estable, no
+certificada</td>
+</tr>
+<tr>
+<td style="text-align: left;">Autor responsable</td>
+<td style="text-align: left;">Billy Jak Cordero Porras</td>
+</tr>
+<tr>
+<td style="text-align: left;">Fuente</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">Registro normativo</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">Núcleo congelado</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">Huella del núcleo</td>
+<td
+style="text-align: left;"><span><code>9db3b0fffdee83ddf6c7ec8ede7e8f5d675d1e152e0614cadecba884eae1c179</code></span></td>
+</tr>
+<tr>
+<td style="text-align: left;">Licencias</td>
+<td style="text-align: left;">Apache-2.0 para código; CC-BY-4.0 para
+contenido propio</td>
+</tr>
+<tr>
+<td style="text-align: left;">Repositorio</td>
+<td style="text-align: left;"><a
+href="https://github.com/billy-una/cobria"
+class="uri">https://github.com/billy-una/cobria</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="orden-de-autoridad">Orden de autoridad</h3>
+<p>Cuando dos productos difieren, se aplica este orden:</p>
+<ol>
+<li><p><strong>especificación</strong>: define obligaciones, términos y
+perfiles;</p></li>
+<li><p><strong>implementación</strong>: materializa el contrato sin
+redefinirlo;</p></li>
+<li><p><strong>evidencia</strong>: informa qué se ejecutó y bajo cuáles
+límites;</p></li>
+<li><p><strong>artículo y documento maestro</strong>: interpretan
+contribución y método;</p></li>
+<li><p><strong>libro y sitio</strong>: enseñan sin crear obligaciones
+nuevas.</p></li>
+</ol>
+<p>Una cifra experimental no cambia una obligación. Una explicación
+pedagógica no amplía Core. Una prueba exitosa demuestra solamente el
+alcance que declara su protocolo.</p>
+<h3 id="política-de-cambios">Política de cambios</h3>
+<p>Core 1.0 permanece congelado. Esta edición organiza y hace
+publicables obligaciones ya declaradas sin modificar su semántica. Una
+incompatibilidad normativa requiere una nueva versión mayor y una
+decisión arquitectónica. Una aclaración compatible puede publicarse como
+errata, siempre que no reescriba evidencia histórica.</p>
+<h2 id="alcance-audiencia-y-exclusiones">Alcance, audiencia y
+exclusiones</h2>
+<h3 id="alcance">Alcance</h3>
+<p>Esta especificación se aplica cuando un sistema documental NoSQL
+mantiene una representación autorizada y una o más representaciones
+derivadas. Incluye proyecciones de lectura, índices de búsqueda, cachés
+materializadas, exportaciones, conjuntos analíticos, fragmentos para
+recuperación aumentada y características para modelos.</p>
+<p>La unidad normativa es una relación declarada entre fuente,
+transformación, ámbito, versión, criterio de equivalencia, operación y
+retiro. COBRIA no exige crear una proyección; exige gobernarla cuando
+existe.</p>
+<h3 id="audiencia">Audiencia</h3>
+<ul>
+<li><p>equipos que diseñan dominio, aplicación, datos e
+infraestructura;</p></li>
+<li><p>personas responsables de seguridad, calidad, operación y
+analítica;</p></li>
+<li><p>autores de adaptadores, repositorios, índices y procesos de
+reconstrucción;</p></li>
+<li><p>investigadores que evalúan costo, transferencia y
+reproducibilidad;</p></li>
+<li><p>agentes de IA que proponen cambios bajo una política de autoridad
+explícita.</p></li>
+</ul>
+<h3 id="fuera-de-alcance">Fuera de alcance</h3>
+<p>COBRIA no define un motor de base de datos, ORM, algoritmo de
+consenso, topología de clúster, identidad corporativa, legislación
+aplicable ni modelo de aprendizaje. No garantiza rendimiento, seguridad
+exhaustiva, disponibilidad, exactitud predictiva, ausencia de sesgo o
+cumplimiento legal. Tampoco convierte resultados locales en prueba de
+comportamiento distribuido.</p>
+<p>Los motores relacionales pueden emplearse como controles históricos o
+alternativas, pero no forman parte del conjunto confirmatorio NoSQL de
+Core 1.0.</p>
+<h2 id="lenguaje-normativo-y-declaraciones">Lenguaje normativo y
+declaraciones</h2>
+<h3 id="palabras-clave">Palabras clave</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Palabra</th>
+<th style="text-align: left;">Interpretación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">DEBE / NO DEBE</td>
+<td style="text-align: left;">obligación necesaria para el perfil que la
+contiene</td>
+</tr>
+<tr>
+<td style="text-align: left;">DEBERÍA / NO DEBERÍA</td>
+<td style="text-align: left;">recomendación fuerte; una desviación exige
+razón y riesgo documentados</td>
+</tr>
+<tr>
+<td style="text-align: left;">PUEDE</td>
+<td style="text-align: left;">opción permitida que no crea una
+obligación implícita</td>
+</tr>
+<tr>
+<td style="text-align: left;">PROPONE</td>
+<td style="text-align: left;">estado de diseño sin evidencia suficiente
+para afirmar implementación</td>
+</tr>
+<tr>
+<td style="text-align: left;">OBSERVA</td>
+<td style="text-align: left;">hallazgo contextual que no se generaliza
+automáticamente</td>
+</tr>
+</tbody>
+</table>
+<p>El uso sigue el espíritu de RFC 2119 y RFC 8174, adaptado al español.
+Solo los requisitos con identificador estable y perfil declarado
+participan en una afirmación de conformidad.</p>
+<h3 id="estados-de-evidencia">Estados de evidencia</h3>
+<dl>
+<dt>Propuesto.</dt>
+<dd>
+<p>Existe intención y alcance, pero no implementación comprobada.</p>
+</dd>
+<dt>Documentado.</dt>
+<dd>
+<p>El contrato posee fuente revisable.</p>
+</dd>
+<dt>Implementado.</dt>
+<dd>
+<p>Existe código o configuración resoluble.</p>
+</dd>
+<dt>Ejecutado.</dt>
+<dd>
+<p>Una prueba conserva ambiente, entrada, salida y huella.</p>
+</dd>
+<dt>Reproducido externamente.</dt>
+<dd>
+<p>Otra persona y computadora repiten el procedimiento.</p>
+</dd>
+<dt>Revisado por terceros.</dt>
+<dd>
+<p>Una evaluación independiente conserva identidad, método y
+hallazgos.</p>
+</dd>
+</dl>
+<p>Ningún estado implica automáticamente el siguiente. Una simulación o
+perfil sintético no se presenta como trabajo humano.</p>
+<h2 id="vocabulario-canónico">Vocabulario canónico</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Término</th>
+<th style="text-align: left;">Significado</th>
+<th style="text-align: left;">No debe confundirse con</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Autoridad canónica</td>
+<td style="text-align: left;">representación autorizada para cambiar
+hechos y reglas</td>
+<td style="text-align: left;">la copia más consultada</td>
+</tr>
+<tr>
+<td style="text-align: left;">Ámbito</td>
+<td style="text-align: left;">límite obligatorio de identidad,
+autorización y partición</td>
+<td style="text-align: left;">filtro opcional al final</td>
+</tr>
+<tr>
+<td style="text-align: left;">Documento canónico</td>
+<td style="text-align: left;">agregado con identidad, ámbito, revisión y
+esquema</td>
+<td style="text-align: left;">forma física de un proveedor</td>
+</tr>
+<tr>
+<td style="text-align: left;">Derivado</td>
+<td style="text-align: left;">representación obtenida de fuentes
+declaradas</td>
+<td style="text-align: left;">fuente paralela editable</td>
+</tr>
+<tr>
+<td style="text-align: left;">Proyección</td>
+<td style="text-align: left;">derivado orientado a lectura, búsqueda o
+análisis</td>
+<td style="text-align: left;">respaldo de emergencia</td>
+</tr>
+<tr>
+<td style="text-align: left;">Transformación</td>
+<td style="text-align: left;">función y entradas que producen un
+derivado</td>
+<td style="text-align: left;">tarea sin versión</td>
+</tr>
+<tr>
+<td style="text-align: left;">Revisión</td>
+<td style="text-align: left;">orden lógico monotónico de una
+entidad</td>
+<td style="text-align: left;">fecha de actualización</td>
+</tr>
+<tr>
+<td style="text-align: left;">Versión</td>
+<td style="text-align: left;">identidad de contrato, esquema, catálogo o
+transformación</td>
+<td style="text-align: left;">revisión de una entidad</td>
+</tr>
+<tr>
+<td style="text-align: left;">Procedencia</td>
+<td style="text-align: left;">registro de fuentes y transformaciones
+relevantes</td>
+<td style="text-align: left;">comentario informal</td>
+</tr>
+<tr>
+<td style="text-align: left;">Equivalencia</td>
+<td style="text-align: left;">relación congelada sobre significado
+observable</td>
+<td style="text-align: left;">igualdad física de bytes</td>
+</tr>
+<tr>
+<td style="text-align: left;">Candidata</td>
+<td style="text-align: left;">versión construida y todavía no
+activa</td>
+<td style="text-align: left;">publicación parcial</td>
+</tr>
+<tr>
+<td style="text-align: left;">Reconstrucción</td>
+<td style="text-align: left;">regeneración desde fuentes
+autorizadas</td>
+<td style="text-align: left;">reparación desde la copia dañada</td>
+</tr>
+<tr>
+<td style="text-align: left;">Publicación</td>
+<td style="text-align: left;">cambio verificable de versión activa</td>
+<td style="text-align: left;">sobrescritura en el mismo lugar</td>
+</tr>
+<tr>
+<td style="text-align: left;">Retiro</td>
+<td style="text-align: left;">cierre gobernado de escrituras y
+consumidores</td>
+<td style="text-align: left;">borrado inmediato sin evidencia</td>
+</tr>
+</tbody>
+</table>
+<h2 id="modelo-conceptual">Modelo conceptual</h2>
+<h3 id="documento-canónico">Documento canónico</h3>
+<p>Un documento canónico se representa como:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mo>=</mo><mo stretchy="false" form="prefix">(</mo><mi>i</mi><mi>d</mi><mo>,</mo><mspace width="0.278em"></mspace><mi>a</mi><mi>m</mi><mi>b</mi><mi>i</mi><mi>t</mi><mi>o</mi><mo>,</mo><mspace width="0.278em"></mspace><mi>r</mi><mi>e</mi><mi>v</mi><mi>i</mi><mi>s</mi><mi>i</mi><mi>o</mi><mi>n</mi><mo>,</mo><mspace width="0.278em"></mspace><mi>v</mi><mi>e</mi><mi>r</mi><mi>s</mi><mi>i</mi><mi>o</mi><mi>n</mi><mi>E</mi><mi>s</mi><mi>q</mi><mi>u</mi><mi>e</mi><mi>m</mi><mi>a</mi><mo>,</mo><mspace width="0.278em"></mspace><mi>c</mi><mi>o</mi><mi>n</mi><mi>t</mi><mi>e</mi><mi>n</mi><mi>i</mi><mi>d</mi><mi>o</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">d = (id,\; ambito,\; revision,\; versionEsquema,\; contenido)</annotation></semantics></math>
+La identidad lógica no depende del motor. El ámbito acompaña a la
+operación. La revisión ordena cambios de una misma identidad dentro de
+su ámbito. La versión de esquema explica cómo interpretar el
+contenido.</p>
+<h3 id="contrato-de-proyección">Contrato de proyección</h3>
+<p>Una proyección se define por la tupla:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>K</mi><mo>=</mo><mo stretchy="false" form="prefix">⟨</mo><mi>C</mi><mo>,</mo><mi>T</mi><mo>,</mo><mi mathvariant="normal">Θ</mi><mo>,</mo><mi>S</mi><mo>,</mo><mi>V</mi><mo>,</mo><mi mathvariant="normal">Φ</mi><mo>,</mo><mi>E</mi><mo>,</mo><mi>R</mi><mo>,</mo><mi>O</mi><mo stretchy="false" form="postfix">⟩</mo></mrow><annotation encoding="application/x-tex">K = \langle C, T, \Theta, S, V, \Phi, E, R, O \rangle</annotation></semantics></math></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Símbolo</th>
+<th style="text-align: left;">Responsabilidad</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td
+style="text-align: left;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>C</mi><annotation encoding="application/x-tex">C</annotation></semantics></math></td>
+<td style="text-align: left;">conjunto de fuentes canónicas y cortes
+externos autorizados</td>
+</tr>
+<tr>
+<td
+style="text-align: left;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>T</mi><annotation encoding="application/x-tex">T</annotation></semantics></math></td>
+<td style="text-align: left;">transformación determinista o con toda
+entrada no determinista declarada</td>
+</tr>
+<tr>
+<td
+style="text-align: left;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi mathvariant="normal">Θ</mi><annotation encoding="application/x-tex">\Theta</annotation></semantics></math></td>
+<td style="text-align: left;">catálogos, parámetros, políticas, semillas
+y modelos versionados</td>
+</tr>
+<tr>
+<td
+style="text-align: left;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math></td>
+<td style="text-align: left;">ámbito de autorización y partición</td>
+</tr>
+<tr>
+<td
+style="text-align: left;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>V</mi><annotation encoding="application/x-tex">V</annotation></semantics></math></td>
+<td style="text-align: left;">versión del contrato, esquema y
+representación</td>
+</tr>
+<tr>
+<td
+style="text-align: left;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi mathvariant="normal">Φ</mi><annotation encoding="application/x-tex">\Phi</annotation></semantics></math></td>
+<td style="text-align: left;">presupuesto de frescura y costo</td>
+</tr>
+<tr>
+<td
+style="text-align: left;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>E</mi><annotation encoding="application/x-tex">E</annotation></semantics></math></td>
+<td style="text-align: left;">relación de equivalencia lógica</td>
+</tr>
+<tr>
+<td
+style="text-align: left;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math></td>
+<td style="text-align: left;">procedimiento repetible de reconstrucción
+y reparación</td>
+</tr>
+<tr>
+<td
+style="text-align: left;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>O</mi><annotation encoding="application/x-tex">O</annotation></semantics></math></td>
+<td style="text-align: left;">propiedad operacional, observabilidad,
+retención y retiro</td>
+</tr>
+</tbody>
+</table>
+<p>Si falta un componente requerido por el nivel declarado, la
+implementación no puede subir de nivel mediante documentación
+compensatoria.</p>
+<h3 id="participantes">Participantes</h3>
+<ul>
+<li><p><strong><span style="color: bosque">Objeto</span></strong>:
+identidad e invariantes del dominio sin claves físicas.</p></li>
+<li><p><strong><span style="color: bosque">Caso de uso</span></strong>:
+coordina autorización, validación y efecto.</p></li>
+<li><p><strong><span style="color: bosque">Repositorio</span></strong>:
+frontera semántica de persistencia.</p></li>
+<li><p><strong><span style="color: bosque">Dater</span></strong>:
+traduce campos físicos, versiones y proveedor.</p></li>
+<li><p><strong><span style="color: bosque">Catálogo</span></strong>:
+fija versiones, estados, catálogos y punteros activos.</p></li>
+<li><p><strong><span style="color: bosque">Constructor</span></strong>:
+produce una candidata separada.</p></li>
+<li><p><strong><span style="color: bosque">Verificador</span></strong>:
+aplica equivalencia y casos testigo.</p></li>
+<li><p><strong><span style="color: bosque">Publicador</span></strong>:
+cambia la versión activa y conserva rollback.</p></li>
+<li><p><strong><span style="color: bosque">Observador</span></strong>:
+emite métricas y evidencia sanitizada.</p></li>
+<li><p><strong><span style="color: bosque">Responsable</span></strong>:
+decide operación, evolución y retiro.</p></li>
+</ul>
+<h2 id="invariantes-y-operaciones">Invariantes y operaciones</h2>
+<h3 id="invariantes-transversales">Invariantes transversales</h3>
+<ol>
+<li><p>solo la autoridad canónica acepta cambios autoritativos;</p></li>
+<li><p>toda operación aporta identidad, capacidad, ámbito y finalidad
+suficientes;</p></li>
+<li><p>una revisión aceptada nunca retrocede el estado visible;</p></li>
+<li><p>un derivado conserva fuente, revisión y versión de
+transformación;</p></li>
+<li><p>reconstruir no depende del derivado activo;</p></li>
+<li><p>una candidata se verifica antes de publicarse;</p></li>
+<li><p>repetir una entrega lógica no duplica el efecto;</p></li>
+<li><p>un fallo previo a publicación conserva la versión activa
+anterior;</p></li>
+<li><p>la evidencia no expone secretos ni cargas sensibles;</p></li>
+<li><p>una afirmación automatizada sin evidencia suficiente se
+abstiene.</p></li>
+</ol>
+<h3 id="precondiciones-y-poscondiciones">Precondiciones y
+poscondiciones</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Operación</th>
+<th style="text-align: left;">Precondiciones</th>
+<th style="text-align: left;">Poscondiciones</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Guardar canónico</td>
+<td style="text-align: left;">identidad, ámbito, capacidad y revisión
+esperada válidos</td>
+<td style="text-align: left;">cambio visible solo en el ámbito; revisión
+monotónica; evento o evidencia correlacionable</td>
+</tr>
+<tr>
+<td style="text-align: left;">Construir candidata</td>
+<td style="text-align: left;">fuentes, corte, transformación, versión y
+catálogos congelados</td>
+<td style="text-align: left;">candidata separada; versión activa
+intacta; manifiesto completo</td>
+</tr>
+<tr>
+<td style="text-align: left;">Verificar candidata</td>
+<td style="text-align: left;">construcción completa y criterio
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>E</mi><annotation encoding="application/x-tex">E</annotation></semantics></math>
+congelado</td>
+<td style="text-align: left;">resultado aprobado o rechazo con
+diferencias; ningún cambio activo</td>
+</tr>
+<tr>
+<td style="text-align: left;">Publicar</td>
+<td style="text-align: left;">candidata verificada y fuentes todavía
+vigentes</td>
+<td style="text-align: left;">una única versión activa; huella, versión
+previa y rollback registrados</td>
+</tr>
+<tr>
+<td style="text-align: left;">Reparar</td>
+<td style="text-align: left;">diferencia localizada y fuente
+autorizada</td>
+<td style="text-align: left;">equivalencia repetida; reparación
+idempotente</td>
+</tr>
+<tr>
+<td style="text-align: left;">Retirar</td>
+<td style="text-align: left;">consumidores, retención y
+reconstruibilidad conocidas</td>
+<td style="text-align: left;">sin nuevas escrituras; migración o rechazo
+explícito; evidencia de cierre</td>
+</tr>
+</tbody>
+</table>
+<h2 id="ciclo-de-vida-de-una-proyección">Ciclo de vida de una
+proyección</h2>
+<div class="center">
+<p><img src="figuras/especificacion-01.svg" alt="Diagrama: AUSENTE, CONSTRUYENDO, CANDIDATA, VERIFICADA, PUBLICADA, RETIRADA, RECHAZADA, FALLIDA. Consulte la descripción textual siguiente." /></p>
+<blockquote>
+<p><strong>Descripción textual del diagrama.</strong></p>
+<ul>
+<li><p>Nodo: AUSENTE.</p></li>
+<li><p>Nodo: CONSTRUYENDO.</p></li>
+<li><p>Nodo: CANDIDATA.</p></li>
+<li><p>Nodo: VERIFICADA.</p></li>
+<li><p>Nodo: PUBLICADA.</p></li>
+<li><p>Nodo: RETIRADA.</p></li>
+<li><p>Nodo: RECHAZADA.</p></li>
+<li><p>Nodo: FALLIDA.</p></li>
+<li><p>AUSENTE
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>→</mo><annotation encoding="application/x-tex">\rightarrow</annotation></semantics></math>
+CONSTRUYENDO.</p></li>
+<li><p>CONSTRUYENDO
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>→</mo><annotation encoding="application/x-tex">\rightarrow</annotation></semantics></math>
+CANDIDATA.</p></li>
+<li><p>CANDIDATA
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>→</mo><annotation encoding="application/x-tex">\rightarrow</annotation></semantics></math>
+VERIFICADA.</p></li>
+<li><p>VERIFICADA
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>→</mo><annotation encoding="application/x-tex">\rightarrow</annotation></semantics></math>
+PUBLICADA.</p></li>
+<li><p>PUBLICADA
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>→</mo><annotation encoding="application/x-tex">\rightarrow</annotation></semantics></math>
+RETIRADA.</p></li>
+<li><p>CANDIDATA
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>→</mo><annotation encoding="application/x-tex">\rightarrow</annotation></semantics></math>
+RECHAZADA.</p></li>
+<li><p>CONSTRUYENDO
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>→</mo><annotation encoding="application/x-tex">\rightarrow</annotation></semantics></math>
+FALLIDA.</p></li>
+<li><p>FALLIDA
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>→</mo><annotation encoding="application/x-tex">\rightarrow</annotation></semantics></math>
+CONSTRUYENDO.</p></li>
+<li><p>RECHAZADA
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>→</mo><annotation encoding="application/x-tex">\rightarrow</annotation></semantics></math>
+CONSTRUYENDO.</p></li>
+</ul>
+</blockquote>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Transición</th>
+<th style="text-align: left;">Condición mínima</th>
+<th style="text-align: left;">Prohibición</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">AUSENTE
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>→</mo><annotation encoding="application/x-tex">\rightarrow</annotation></semantics></math>
+CONSTRUYENDO</td>
+<td style="text-align: left;">contrato y fuentes declaradas</td>
+<td style="text-align: left;">no escribir sobre versión activa</td>
+</tr>
+<tr>
+<td style="text-align: left;">CONSTRUYENDO
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>→</mo><annotation encoding="application/x-tex">\rightarrow</annotation></semantics></math>
+CANDIDATA</td>
+<td style="text-align: left;">recorrido completo y manifiesto
+cerrado</td>
+<td style="text-align: left;">no ocultar errores o faltantes</td>
+</tr>
+<tr>
+<td style="text-align: left;">CANDIDATA
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>→</mo><annotation encoding="application/x-tex">\rightarrow</annotation></semantics></math>
+VERIFICADA</td>
+<td style="text-align: left;">equivalencia y pruebas obligatorias
+aprobadas</td>
+<td style="text-align: left;">no aceptar un oráculo improvisado</td>
+</tr>
+<tr>
+<td style="text-align: left;">VERIFICADA
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>→</mo><annotation encoding="application/x-tex">\rightarrow</annotation></semantics></math>
+PUBLICADA</td>
+<td style="text-align: left;">fuentes vigentes y operación
+autorizada</td>
+<td style="text-align: left;">ningún otro estado publica</td>
+</tr>
+<tr>
+<td style="text-align: left;">PUBLICADA
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>→</mo><annotation encoding="application/x-tex">\rightarrow</annotation></semantics></math>
+RETIRADA</td>
+<td style="text-align: left;">consumidores, retención y reconstrucción
+resueltos</td>
+<td style="text-align: left;">no recibir escrituras nuevas</td>
+</tr>
+<tr>
+<td style="text-align: left;">CONSTRUYENDO
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>→</mo><annotation encoding="application/x-tex">\rightarrow</annotation></semantics></math>
+FALLIDA</td>
+<td style="text-align: left;">interrupción o transformación
+inválida</td>
+<td style="text-align: left;">no alterar puntero activo</td>
+</tr>
+<tr>
+<td style="text-align: left;">CANDIDATA
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>→</mo><annotation encoding="application/x-tex">\rightarrow</annotation></semantics></math>
+RECHAZADA</td>
+<td style="text-align: left;">divergencia, fuente obsoleta o ámbito
+contradictorio</td>
+<td style="text-align: left;">no transicionar directamente a
+PUBLICADA</td>
+</tr>
+</tbody>
+</table>
+<h2 id="requisitos-normativos-por-nivel">Requisitos normativos por
+nivel</h2>
+<p>Los requisitos siguientes se generan desde un registro JSON único. C2
+hereda C1 y C3 hereda C1 y C2. El conteo exacto aparece en el derivado
+generado.</p>
+<h3 id="nivel:c1">Nivel C1: Fundamental</h3>
+<h3 class="unnumbered" id="aut-001-autoridad-canónica-única">AUT-001 —
+Autoridad canónica única</h3>
+<p><strong>Obligación normativa (DEBE).</strong> Cada hecho mutable de
+dominio debe tener una representación canónica declarada; índices,
+cachés, proyecciones, exportaciones y respuestas de IA no deben aceptar
+cambios autoritativos.</p>
+<p><strong>Criterios de aceptación.</strong></p>
+<ul>
+<li><p>La matriz de lectura y escritura identifica un único escritor
+autoritativo.</p></li>
+<li><p>Una escritura dirigida a un derivado es rechazada o traducida a
+un caso de uso canónico.</p></li>
+</ul>
+<p><strong>Responsable.</strong> responsable de dominio.</p>
+<p><strong>Verificación.</strong> pruebas de frontera del repositorio y
+revisión arquitectónica.</p>
+<p><strong>Comando reproducible.</strong></p>
+<p><strong>Evidencia resoluble.</strong> ; .</p>
+<p><strong>Amenaza residual.</strong> Una ruta administrativa o
+integración puede crear una autoridad paralela.</p>
+<p><strong>Origen normativo.</strong> COBRIA-CORE-1.0.md §3.1.</p>
+<h3 class="unnumbered" id="id-001-identidad-documental-estable">ID-001 —
+Identidad documental estable</h3>
+<p><strong>Obligación normativa (DEBE).</strong> La identidad lógica
+debe permanecer estable frente a cambios de motor, colección, partición,
+versión de esquema o proyección.</p>
+<p><strong>Criterios de aceptación.</strong></p>
+<ul>
+<li><p>La clave lógica se define fuera del SDK y de la ubicación
+física.</p></li>
+<li><p>Reconstruir o migrar conserva la misma identidad
+observable.</p></li>
+</ul>
+<p><strong>Responsable.</strong> responsable de datos.</p>
+<p><strong>Verificación.</strong> casos positivos y negativos de
+identidad requerida.</p>
+<p><strong>Comando reproducible.</strong></p>
+<p><strong>Evidencia resoluble.</strong> ; .</p>
+<p><strong>Amenaza residual.</strong> Una clave generada por
+infraestructura puede filtrarse al dominio.</p>
+<p><strong>Origen normativo.</strong> COBRIA-CORE-1.0.md §5 C1.</p>
+<h3 class="unnumbered" id="scp-001-ámbito-obligatorio">SCP-001 — Ámbito
+obligatorio</h3>
+<p><strong>Obligación normativa (DEBE).</strong> Toda lectura,
+escritura, clave, consulta, caché, evento, trabajo de fondo y
+recuperación debe incorporar un ámbito autorizado antes de acceder al
+almacén.</p>
+<p><strong>Criterios de aceptación.</strong></p>
+<ul>
+<li><p>Una operación sin ámbito falla cerrada.</p></li>
+<li><p>Una identidad válida no observa documentos de otro
+ámbito.</p></li>
+<li><p>El ámbito participa en claves e índices cuando evita
+colisiones.</p></li>
+</ul>
+<p><strong>Responsable.</strong> responsable de seguridad y datos.</p>
+<p><strong>Verificación.</strong> S1 y mutante deliberado de fuga.</p>
+<p><strong>Comando reproducible.</strong></p>
+<p><strong>Evidencia resoluble.</strong> ; .</p>
+<p><strong>Amenaza residual.</strong> Filtrar después de recuperar puede
+exponer existencia, conteos o trazas.</p>
+<p><strong>Origen normativo.</strong> COBRIA-CORE-1.0.md §3.2.</p>
+<h3 class="unnumbered" id="rev-001-revisión-monotónica">REV-001 —
+Revisión monotónica</h3>
+<p><strong>Obligación normativa (NO DEBE).</strong> Una escritura con
+revisión obsoleta no debe reducir la revisión visible ni reemplazar
+silenciosamente un estado más reciente.</p>
+<p><strong>Criterios de aceptación.</strong></p>
+<ul>
+<li><p>La revisión esperada forma parte de la precondición de
+escritura.</p></li>
+<li><p>El rechazo utiliza un código estable y deja evidencia
+mínima.</p></li>
+</ul>
+<p><strong>Responsable.</strong> responsable de persistencia.</p>
+<p><strong>Verificación.</strong> entrega fuera de orden y carrera
+local.</p>
+<p><strong>Comando reproducible.</strong></p>
+<p><strong>Evidencia resoluble.</strong> ; .</p>
+<p><strong>Amenaza residual.</strong> Relojes, reintentos o consumidores
+concurrentes pueden reintroducir versiones antiguas.</p>
+<p><strong>Origen normativo.</strong> COBRIA-CORE-1.0.md §3.7.</p>
+<h3 class="unnumbered" id="wrt-001-frontera-única-de-escritura">WRT-001
+— Frontera única de escritura</h3>
+<p><strong>Obligación normativa (DEBE).</strong> Los cambios
+autoritativos deben atravesar un caso de uso o repositorio que aplique
+validación, capacidad, ámbito, revisión e idempotencia antes de
+persistir.</p>
+<p><strong>Criterios de aceptación.</strong></p>
+<ul>
+<li><p>No existe acceso de escritura de presentación a
+infraestructura.</p></li>
+<li><p>Las rutas administrativas obedecen la misma frontera que las
+rutas ordinarias.</p></li>
+</ul>
+<p><strong>Responsable.</strong> responsable de aplicación.</p>
+<p><strong>Verificación.</strong> auditoría de dependencias y prueba
+negativa de acceso directo.</p>
+<p><strong>Comando reproducible.</strong></p>
+<p><strong>Evidencia resoluble.</strong> ; .</p>
+<p><strong>Amenaza residual.</strong> Una excepción operacional puede
+convertirse en ruta permanente sin controles.</p>
+<p><strong>Origen normativo.</strong> COBRIA-CORE-1.0.md §5 C1.</p>
+<h3 id="nivel:c2">Nivel C2: Reconstruible</h3>
+<p>Este nivel hereda todos los requisitos de C1.</p>
+<h3 class="unnumbered" id="trn-001-transformación-versionada">TRN-001 —
+Transformación versionada</h3>
+<p><strong>Obligación normativa (DEBE).</strong> Cada derivado debe
+declarar transformación, versión, parámetros, catálogos, fuentes y
+reglas de normalización necesarias para repetirlo.</p>
+<p><strong>Criterios de aceptación.</strong></p>
+<ul>
+<li><p>El manifiesto identifica entradas y versión de
+transformación.</p></li>
+<li><p>Cambiar semántica produce una versión nueva y no una mutación
+silenciosa.</p></li>
+</ul>
+<p><strong>Responsable.</strong> responsable de proyección.</p>
+<p><strong>Verificación.</strong> reconstrucción con catálogo y cambio
+de esquema.</p>
+<p><strong>Comando reproducible.</strong></p>
+<p><strong>Evidencia resoluble.</strong> ; .</p>
+<p><strong>Amenaza residual.</strong> Dependencias ambientales no
+registradas pueden volver no determinista el resultado.</p>
+<p><strong>Origen normativo.</strong> COBRIA-CORE-1.0.md §2.</p>
+<h3 class="unnumbered" id="idm-001-procesamiento-idempotente">IDM-001 —
+Procesamiento idempotente</h3>
+<p><strong>Obligación normativa (NO DEBE).</strong> Repetir la misma
+entrega lógica no debe crear efectos observables adicionales ni ocultar
+una entrada diferente bajo la misma clave.</p>
+<p><strong>Criterios de aceptación.</strong></p>
+<ul>
+<li><p>La clave incluye ámbito y operación.</p></li>
+<li><p>Una repetición equivalente devuelve el resultado previo.</p></li>
+<li><p>Una repetición divergente se rechaza.</p></li>
+</ul>
+<p><strong>Responsable.</strong> responsable de aplicación.</p>
+<p><strong>Verificación.</strong> entrega duplicada y colisión
+semántica.</p>
+<p><strong>Comando reproducible.</strong></p>
+<p><strong>Evidencia resoluble.</strong> .</p>
+<p><strong>Amenaza residual.</strong> La deduplicación con caducidad
+corta puede aceptar duplicados tardíos.</p>
+<p><strong>Origen normativo.</strong> COBRIA-CORE-1.0.md §3.6.</p>
+<h3 class="unnumbered" id="eqv-001-equivalencia-congelada">EQV-001 —
+Equivalencia congelada</h3>
+<p><strong>Obligación normativa (DEBE).</strong> Antes de construir, el
+proyecto debe declarar una relación de equivalencia que compare el
+significado relevante entre la candidata y la autoridad.</p>
+<p><strong>Criterios de aceptación.</strong></p>
+<ul>
+<li><p>La normalización excluye solo campos no semánticos
+declarados.</p></li>
+<li><p>Una candidata corrupta o incompleta falla la
+verificación.</p></li>
+<li><p>Las tolerancias numéricas están versionadas.</p></li>
+</ul>
+<p><strong>Responsable.</strong> responsable de calidad de datos.</p>
+<p><strong>Verificación.</strong> R1 y mutante de candidata
+corrupta.</p>
+<p><strong>Comando reproducible.</strong></p>
+<p><strong>Evidencia resoluble.</strong> ; .</p>
+<p><strong>Amenaza residual.</strong> Un oráculo incompleto puede
+aprobar pérdidas semánticas.</p>
+<p><strong>Origen normativo.</strong> COBRIA-CORE-1.0.md §3.5.</p>
+<h3 class="unnumbered" id="rec-001-reconstrucción-independiente">REC-001
+— Reconstrucción independiente</h3>
+<p><strong>Obligación normativa (DEBE).</strong> Una proyección debe
+poder regenerarse desde fuentes autorizadas y entradas declaradas sin
+depender de la proyección activa o dañada.</p>
+<p><strong>Criterios de aceptación.</strong></p>
+<ul>
+<li><p>La construcción ocurre en una candidata separada.</p></li>
+<li><p>Eliminar el derivado no elimina la capacidad de
+reconstrucción.</p></li>
+<li><p>La ejecución repetida produce un resultado equivalente.</p></li>
+</ul>
+<p><strong>Responsable.</strong> responsable de proyección.</p>
+<p><strong>Verificación.</strong> R1 total e incremental.</p>
+<p><strong>Comando reproducible.</strong></p>
+<p><strong>Evidencia resoluble.</strong> ; .</p>
+<p><strong>Amenaza residual.</strong> Una fuente mutable externa puede
+impedir reproducir un corte histórico.</p>
+<p><strong>Origen normativo.</strong> COBRIA-CORE-1.0.md §3.4.</p>
+<h3 class="unnumbered"
+id="pub-001-publicación-segura-por-versión">PUB-001 — Publicación segura
+por versión</h3>
+<p><strong>Obligación normativa (DEBE).</strong> Solo una candidata
+completa y verificada debe sustituir la versión activa; cualquier fallo
+previo debe conservar la versión anterior legible.</p>
+<p><strong>Criterios de aceptación.</strong></p>
+<ul>
+<li><p>Solo VERIFICADA transiciona a PUBLICADA.</p></li>
+<li><p>El cambio activo registra versión, huella y versión
+previa.</p></li>
+<li><p>Existe rollback comprobable.</p></li>
+</ul>
+<p><strong>Responsable.</strong> responsable de publicación.</p>
+<p><strong>Verificación.</strong> fallo durante publicación, huella
+incorrecta y rollback.</p>
+<p><strong>Comando reproducible.</strong></p>
+<p><strong>Evidencia resoluble.</strong> ; .</p>
+<p><strong>Amenaza residual.</strong> La garantía local no demuestra
+intercambio atómico distribuido.</p>
+<p><strong>Origen normativo.</strong> COBRIA-CORE-1.0.md §3.8.</p>
+<h3 id="nivel:c3">Nivel C3: Gobernado</h3>
+<p>Este nivel hereda todos los requisitos de C1 y C2.</p>
+<h3 class="unnumbered" id="prv-001-procedencia-completa">PRV-001 —
+Procedencia completa</h3>
+<p><strong>Obligación normativa (DEBE).</strong> Cada derivado debe
+enlazar fuente, identidad, revisión, versión de transformación,
+catálogos, tiempo de corte y huellas necesarias para explicarlo.</p>
+<p><strong>Criterios de aceptación.</strong></p>
+<ul>
+<li><p>El manifiesto permite resolver todas las referencias.</p></li>
+<li><p>Una fuente o versión ausente impide declarar
+reproducibilidad.</p></li>
+</ul>
+<p><strong>Responsable.</strong> custodio de datos.</p>
+<p><strong>Verificación.</strong> integridad del manifiesto A1.</p>
+<p><strong>Comando reproducible.</strong></p>
+<p><strong>Evidencia resoluble.</strong> ; .</p>
+<p><strong>Amenaza residual.</strong> Una fuente puede cambiar
+conservando la misma ubicación.</p>
+<p><strong>Origen normativo.</strong> COBRIA-CORE-1.0.md §3.3.</p>
+<h3 class="unnumbered"
+id="frs-001-presupuesto-de-frescura-y-costo">FRS-001 — Presupuesto de
+frescura y costo</h3>
+<p><strong>Obligación normativa (DEBE).</strong> Toda representación
+derivada debe declarar frescura permitida, costo esperado, condición de
+degradación y respuesta cuando incumple el presupuesto.</p>
+<p><strong>Criterios de aceptación.</strong></p>
+<ul>
+<li><p>Las métricas comparan edad observable con el
+presupuesto.</p></li>
+<li><p>El incumplimiento alerta, degrada o impide publicar según
+política.</p></li>
+</ul>
+<p><strong>Responsable.</strong> responsable de operación.</p>
+<p><strong>Verificación.</strong> evaluación de presupuesto con caso
+conforme y excedido.</p>
+<p><strong>Comando reproducible.</strong></p>
+<p><strong>Evidencia resoluble.</strong> ; .</p>
+<p><strong>Amenaza residual.</strong> Un presupuesto sin medición se
+convierte en documentación decorativa.</p>
+<p><strong>Origen normativo.</strong> COBRIA-CORE-1.0.md §2 y §3.9.</p>
+<h3 class="unnumbered" id="obs-001-observabilidad-verificable">OBS-001 —
+Observabilidad verificable</h3>
+<p><strong>Obligación normativa (DEBE).</strong> Construcción,
+verificación, publicación, rechazo, reparación y retiro deben emitir
+evidencia suficiente sin exponer secretos ni datos sensibles.</p>
+<p><strong>Criterios de aceptación.</strong></p>
+<ul>
+<li><p>Existen métricas de duración, cobertura, frescura y
+fallos.</p></li>
+<li><p>Los registros usan lista positiva y correlación estable.</p></li>
+<li><p>La caída de telemetría no bloquea el negocio.</p></li>
+</ul>
+<p><strong>Responsable.</strong> responsable de operación.</p>
+<p><strong>Verificación.</strong> escenarios de telemetría sanitizada y
+no bloqueante.</p>
+<p><strong>Comando reproducible.</strong></p>
+<p><strong>Evidencia resoluble.</strong> ; .</p>
+<p><strong>Amenaza residual.</strong> Etiquetas de alta cardinalidad o
+cargas completas pueden causar costo y fuga.</p>
+<p><strong>Origen normativo.</strong> COBRIA-CORE-1.0.md §3.9.</p>
+<h3 class="unnumbered" id="own-001-propiedad-operacional">OWN-001 —
+Propiedad operacional</h3>
+<p><strong>Obligación normativa (DEBE).</strong> Cada proyección debe
+declarar una persona o rol responsable de su contrato, operación,
+incidentes, evolución y retiro.</p>
+<p><strong>Criterios de aceptación.</strong></p>
+<ul>
+<li><p>El responsable es resoluble desde el manifiesto.</p></li>
+<li><p>Existe una ruta de escalamiento y un runbook mínimo.</p></li>
+</ul>
+<p><strong>Responsable.</strong> responsable de arquitectura.</p>
+<p><strong>Verificación.</strong> inspección de manifiesto y
+runbook.</p>
+<p><strong>Comando reproducible.</strong></p>
+<p><strong>Evidencia resoluble.</strong> ; .</p>
+<p><strong>Amenaza residual.</strong> Un nombre desactualizado puede
+simular propiedad sin capacidad real de respuesta.</p>
+<p><strong>Origen normativo.</strong> COBRIA-CORE-1.0.md §2 y §3.9.</p>
+<h3 class="unnumbered" id="ret-001-retiro-gobernado">RET-001 — Retiro
+gobernado</h3>
+<p><strong>Obligación normativa (DEBE).</strong> Toda proyección debe
+declarar condiciones de retiro, consumidores, retención, eliminación
+verificable y comportamiento posterior al retiro.</p>
+<p><strong>Criterios de aceptación.</strong></p>
+<ul>
+<li><p>Una versión retirada no recibe escrituras.</p></li>
+<li><p>Los consumidores tienen una ruta de migración.</p></li>
+<li><p>Retirar no elimina las fuentes requeridas por la política
+vigente.</p></li>
+</ul>
+<p><strong>Responsable.</strong> responsable de proyección.</p>
+<p><strong>Verificación.</strong> retiro y reconstrucción posterior.</p>
+<p><strong>Comando reproducible.</strong></p>
+<p><strong>Evidencia resoluble.</strong> ; .</p>
+<p><strong>Amenaza residual.</strong> Retención legal, copias y cachés
+pueden sobrevivir al retiro lógico.</p>
+<p><strong>Origen normativo.</strong> COBRIA-CORE-1.0.md §4.</p>
+<h3 class="unnumbered"
+id="ana-001-conjunto-analítico-reproducible">ANA-001 — Conjunto
+analítico reproducible</h3>
+<p><strong>Obligación normativa (DEBE).</strong> Un conjunto analítico
+debe conservar fuentes autorizadas, consulta, transformación, tiempo de
+corte, partición, semilla, esquema, consentimiento aplicable y
+huella.</p>
+<p><strong>Criterios de aceptación.</strong></p>
+<ul>
+<li><p>El mismo manifiesto reconstruye selección y partición
+equivalentes.</p></li>
+<li><p>Una entidad no cruza particiones cuando produciría fuga.</p></li>
+<li><p>El contenido restringido se separa de los metadatos
+reproducibles.</p></li>
+</ul>
+<p><strong>Responsable.</strong> responsable de analítica.</p>
+<p><strong>Verificación.</strong> A1, reconstrucción y fuga
+temporal.</p>
+<p><strong>Comando reproducible.</strong></p>
+<p><strong>Evidencia resoluble.</strong> ; .</p>
+<p><strong>Amenaza residual.</strong> La reproducibilidad no autoriza
+divulgar datos personales.</p>
+<p><strong>Origen normativo.</strong> COBRIA-CORE-1.0.md §6 A1.</p>
+<h3 class="unnumbered" id="ai-001-ia-con-evidencia-y-abstención">AI-001
+— IA con evidencia y abstención</h3>
+<p><strong>Obligación normativa (DEBE).</strong> Una salida de IA debe
+limitar recuperación por ámbito, citar procedencia suficiente y
+abstenerse cuando la evidencia autorizada no permita sostener la
+respuesta.</p>
+<p><strong>Criterios de aceptación.</strong></p>
+<ul>
+<li><p>El ámbito restringe candidatos antes de similitud.</p></li>
+<li><p>La salida enlaza revisiones de fuente.</p></li>
+<li><p>Sin evidencia suficiente se produce una abstención observable y
+útil.</p></li>
+</ul>
+<p><strong>Responsable.</strong> responsable de IA y seguridad.</p>
+<p><strong>Verificación.</strong> recuperación cruzada, ausencia de
+evidencia y escritura prohibida.</p>
+<p><strong>Comando reproducible.</strong></p>
+<p><strong>Evidencia resoluble.</strong> ; .</p>
+<p><strong>Amenaza residual.</strong> Una cita presente no demuestra
+exactitud, ausencia de sesgo ni seguridad del modelo.</p>
+<p><strong>Origen normativo.</strong> COBRIA-CORE-1.0.md §6 A1.</p>
+<h3 class="unnumbered"
+id="sec-001-fallo-cerrado-y-capacidad-mínima">SEC-001 — Fallo cerrado y
+capacidad mínima</h3>
+<p><strong>Obligación normativa (DEBE).</strong> La ausencia o
+contradicción de identidad, capacidad, ámbito, finalidad, revisión o
+procedencia requerida debe rechazarse antes del acceso; una herramienta
+automatizada recibe solo capacidades mínimas.</p>
+<p><strong>Criterios de aceptación.</strong></p>
+<ul>
+<li><p>Los casos negativos demuestran que el almacén no fue
+consultado.</p></li>
+<li><p>Lectura y escritura utilizan capacidades separadas.</p></li>
+<li><p>La auditoría no copia cargas sensibles.</p></li>
+</ul>
+<p><strong>Responsable.</strong> responsable de seguridad.</p>
+<p><strong>Verificación.</strong> S1, capacidades y contexto
+manipulado.</p>
+<p><strong>Comando reproducible.</strong></p>
+<p><strong>Evidencia resoluble.</strong> ; .</p>
+<p><strong>Amenaza residual.</strong> La conformidad lógica no prueba
+ACL, red o aislamiento del proveedor.</p>
+<p><strong>Origen normativo.</strong> COBRIA-CORE-1.0.md §3.10.</p>
+<h2 id="conformidad">Conformidad</h2>
+<h3 id="perfiles">Perfiles</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Nivel</th>
+<th style="text-align: left;">Nombre</th>
+<th style="text-align: left;">Resultado mínimo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">C1</td>
+<td style="text-align: left;">Fundamental</td>
+<td style="text-align: left;">autoridad, identidad, ámbito, revisión y
+frontera única de escritura</td>
+</tr>
+<tr>
+<td style="text-align: left;">C2</td>
+<td style="text-align: left;">Reconstruible</td>
+<td style="text-align: left;">C1 más transformación, idempotencia,
+equivalencia, reconstrucción y publicación segura</td>
+</tr>
+<tr>
+<td style="text-align: left;">C3</td>
+<td style="text-align: left;">Gobernado</td>
+<td style="text-align: left;">C2 más procedencia, presupuestos,
+observabilidad, responsable, retiro, analítica e IA gobernada</td>
+</tr>
+</tbody>
+</table>
+<h3 id="reglas-para-declarar-conformidad">Reglas para declarar
+conformidad</h3>
+<p>Una declaración de conformidad:</p>
+<ol>
+<li><p>identifica producto, versión, commit, ambiente y nivel;</p></li>
+<li><p>enumera todos los requisitos del nivel y sus heredados;</p></li>
+<li><p>conserva comando, resultado, fecha, configuración y huella de
+evidencia;</p></li>
+<li><p>marca cada requisito como conforme, no conforme o no
+evaluado;</p></li>
+<li><p>trata <em>no evaluado</em> como impedimento, no como
+aprobación;</p></li>
+<li><p>registra desviaciones de recomendaciones DEBERÍA;</p></li>
+<li><p>separa pruebas locales, distribuidas, humanas y
+externas;</p></li>
+<li><p>evita vocabulario de certificación cuando no existe una entidad
+certificadora.</p></li>
+</ol>
+<p>El uso de un patrón, una carpeta o un nombre COBRIA no constituye
+conformidad. Una implementación puede cumplir un nivel sin adoptar todos
+los módulos pedagógicos.</p>
+<h3 class="unnumbered" id="forma-mínima-del-informe">Forma mínima del
+informe</h3>
+<p>El informe incluye alcance, exclusiones, versión de la
+especificación, nivel solicitado, tabla requisito–resultado, evidencia
+resoluble, hallazgos, amenazas y responsable. Si una prueba depende de
+servicios no ejecutados, el resultado correcto es <em>no
+evaluado</em>.</p>
+<h2 id="protocolos-obligatorios-y-evidencia">Protocolos obligatorios y
+evidencia</h2>
+<p>Los protocolos P1, P2, R1, S1 y A1 comprueban propiedades distintas.
+No deben combinarse en una puntuación que oculte fallos.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Prueba</th>
+<th style="text-align: left;">Pregunta</th>
+<th style="text-align: left;">Métricas mínimas</th>
+<th style="text-align: left;">Límite</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">P1</td>
+<td style="text-align: left;">¿La lectura derivada conserva significado
+y aporta un beneficio medible?</td>
+<td style="text-align: left;">latencia, lecturas, bytes,
+p50/p95/p99</td>
+<td style="text-align: left;">una microprueba no demuestra arquitectura
+distribuida</td>
+</tr>
+<tr>
+<td style="text-align: left;">P2</td>
+<td style="text-align: left;">¿Qué costo introduce mantener el
+derivado?</td>
+<td style="text-align: left;">escrituras, bytes, eventos, CPU, memoria,
+convergencia</td>
+<td style="text-align: left;">omitir recuperación subestima costo
+total</td>
+</tr>
+<tr>
+<td style="text-align: left;">R1</td>
+<td style="text-align: left;">¿Puede reconstruirse y publicarse sin
+vaciar lectores?</td>
+<td style="text-align: left;">duración, cobertura, equivalencia,
+almacenamiento pico</td>
+<td style="text-align: left;">la garantía local no prueba consenso</td>
+</tr>
+<tr>
+<td style="text-align: left;">S1</td>
+<td style="text-align: left;">¿El ámbito falla cerrado antes del
+almacén?</td>
+<td style="text-align: left;">rechazos, accesos cruzados, documentos
+filtrados</td>
+<td style="text-align: left;">no sustituye controles del proveedor</td>
+</tr>
+<tr>
+<td style="text-align: left;">A1</td>
+<td style="text-align: left;">¿Analítica e IA conservan procedencia y
+abstención?</td>
+<td style="text-align: left;">fuentes, partición, huellas, fugas y
+abstenciones</td>
+<td style="text-align: left;">no mide por sí sola exactitud, sesgo o
+daño</td>
+</tr>
+</tbody>
+</table>
+<h3 id="reproducibilidad-mínima">Reproducibilidad mínima</h3>
+<p>Cada corrida conserva código, dependencias, configuración, semilla,
+reloj relevante, orden de escenarios, calentamiento, aislamiento,
+observaciones crudas, análisis y huellas. Las tablas y gráficos se
+regeneran; no se corrigen a mano. Un resultado negativo se publica con
+la misma precisión metodológica que uno favorable.</p>
+<h2 id="compatibilidad-migración-y-extensiones">Compatibilidad,
+migración y extensiones</h2>
+<h3 id="tipos-de-cambio">Tipos de cambio</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Cambio</th>
+<th style="text-align: left;">Compatibilidad</th>
+<th style="text-align: left;">Acción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Aclaración editorial</td>
+<td style="text-align: left;">no cambia obligaciones</td>
+<td style="text-align: left;">errata y reconstrucción del PDF</td>
+</tr>
+<tr>
+<td style="text-align: left;">Nuevo método de prueba equivalente</td>
+<td style="text-align: left;">compatible si no reduce aceptación</td>
+<td style="text-align: left;">versión menor, trazabilidad y
+comparación</td>
+</tr>
+<tr>
+<td style="text-align: left;">Nuevo requisito obligatorio</td>
+<td style="text-align: left;">incompatible para perfiles existentes</td>
+<td style="text-align: left;">versión mayor y ADR</td>
+</tr>
+<tr>
+<td style="text-align: left;">Relajar una obligación</td>
+<td style="text-align: left;">incompatible y riesgoso</td>
+<td style="text-align: left;">versión mayor, justificación y
+reevaluación</td>
+</tr>
+<tr>
+<td style="text-align: left;">Extensión de proveedor</td>
+<td style="text-align: left;">compatible si respeta el contrato</td>
+<td style="text-align: left;">perfil de extensión con pruebas
+propias</td>
+</tr>
+<tr>
+<td style="text-align: left;">Cambio de esquema documental</td>
+<td style="text-align: left;">depende de lectura/escritura
+compatibles</td>
+<td style="text-align: left;">catálogo, Dater, migración y rollback</td>
+</tr>
+</tbody>
+</table>
+<h3 id="migración">Migración</h3>
+<p>Una migración conforme declara origen, destino, transformaciones,
+versiones leídas y escritas, estrategia gradual, observabilidad,
+criterio de término y rollback. Los Daters pueden leer varias versiones
+físicas mientras el dominio conserva un contrato único. Una migración no
+debe usar una proyección editable como sustituto de la autoridad.</p>
+<h3 id="extensiones">Extensiones</h3>
+<p>Una extensión usa un espacio de identificadores propio, declara qué
+nivel requiere, no redefine términos canónicos y aporta casos negativos.
+Los requisitos de interfaz, documentación, nube o gestión general
+permanecen en módulos ECO cuando no pertenecen a Core. La extensión
+indica si es normativa, experimental o pedagógica.</p>
+<h2 id="ejemplos-de-aplicación">Ejemplos de aplicación</h2>
+<h3 id="caso-conforme-observaciones-ambientales">Caso conforme:
+observaciones ambientales</h3>
+<p>Una organización registra observaciones de ríos. El documento
+canónico conserva identidad del punto, ámbito comunitario, revisión y
+medición. Una proyección geográfica se construye con catálogo de
+unidades y versión de transformación. El constructor escribe una
+candidata; el verificador compara conteos, identidades, valores
+normalizados y consultas testigo. Solo después cambia el alias activo.
+El conjunto analítico conserva corte temporal, consentimiento, partición
+y huella. Sin observaciones autorizadas, el asistente se abstiene.</p>
+<p>Este diseño puede declarar C3 si la evidencia confirma todos los
+requisitos heredados. El caso no demuestra rendimiento en otro motor o
+topología.</p>
+<h3 id="caso-conforme-mínimo-c1-sin-proyección">Caso conforme mínimo: C1
+sin proyección</h3>
+<p>Una aplicación pequeña conserva un solo documento canónico. El
+repositorio exige ámbito, identidad y revisión; la presentación no
+accede al SDK; no existe materialización adicional. Puede declarar C1
+sin crear ceremoniosamente una proyección. COBRIA favorece esta solución
+si un índice canónico satisface el objetivo.</p>
+<h3 id="contraejemplos">Contraejemplos</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Fallo</th>
+<th style="text-align: left;">Consecuencia</th>
+<th style="text-align: left;">Requisito afectado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Editar el índice desde la interfaz</td>
+<td style="text-align: left;">aparece una segunda autoridad imposible de
+reconciliar</td>
+<td style="text-align: left;">AUT-001, WRT-001</td>
+</tr>
+<tr>
+<td style="text-align: left;">Recuperar globalmente y filtrar al
+final</td>
+<td style="text-align: left;">existencia, conteos o cachés pueden cruzar
+ámbitos</td>
+<td style="text-align: left;">SCP-001, SEC-001</td>
+</tr>
+<tr>
+<td style="text-align: left;">Aceptar revisión 2 después de revisión
+3</td>
+<td style="text-align: left;">regresión silenciosa</td>
+<td style="text-align: left;">REV-001</td>
+</tr>
+<tr>
+<td style="text-align: left;">Reconstruir desde la copia dañada</td>
+<td style="text-align: left;">se propaga corrupción</td>
+<td style="text-align: left;">REC-001, EQV-001</td>
+</tr>
+<tr>
+<td style="text-align: left;">Borrar la versión activa antes de
+construir</td>
+<td style="text-align: left;">ventana vacía o mezcla parcial</td>
+<td style="text-align: left;">PUB-001</td>
+</tr>
+<tr>
+<td style="text-align: left;">Cambiar incrustaciones sin registrar
+modelo</td>
+<td style="text-align: left;">resultados no reproducibles</td>
+<td style="text-align: left;">TRN-001, PRV-001</td>
+</tr>
+<tr>
+<td style="text-align: left;">Barajar antes de separar el futuro</td>
+<td style="text-align: left;">fuga temporal y evaluación optimista</td>
+<td style="text-align: left;">ANA-001</td>
+</tr>
+<tr>
+<td style="text-align: left;">Forzar una respuesta sin evidencia</td>
+<td style="text-align: left;">afirmación plausible sin respaldo</td>
+<td style="text-align: left;">AI-001</td>
+</tr>
+</tbody>
+</table>
+<h2 id="matriz-integral-de-trazabilidad">Matriz integral de
+trazabilidad</h2>
+<p>La tabla enlaza cada obligación con responsable, método y evidencia
+principal. “Cubierta” significa que existe una comprobación en el
+alcance declarado; no equivale a certificación, revisión independiente o
+validez universal.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;"><strong>ID</strong></th>
+<th style="text-align: left;">Nivel</th>
+<th style="text-align: left;">Responsable</th>
+<th style="text-align: left;">Método</th>
+<th style="text-align: left;">Evidencia principal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>ID</strong></td>
+<td style="text-align: left;">Nivel</td>
+<td style="text-align: left;">Responsable</td>
+<td style="text-align: left;">Método</td>
+<td style="text-align: left;">Evidencia principal</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>AUT-001</strong></td>
+<td style="text-align: left;">C1</td>
+<td style="text-align: left;">responsable de dominio</td>
+<td style="text-align: left;">pruebas de frontera del repositorio y
+revisión arquitectónica</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>ID-001</strong></td>
+<td style="text-align: left;">C1</td>
+<td style="text-align: left;">responsable de datos</td>
+<td style="text-align: left;">casos positivos y negativos de identidad
+requerida</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>SCP-001</strong></td>
+<td style="text-align: left;">C1</td>
+<td style="text-align: left;">responsable de seguridad y datos</td>
+<td style="text-align: left;">S1 y mutante deliberado de fuga</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>REV-001</strong></td>
+<td style="text-align: left;">C1</td>
+<td style="text-align: left;">responsable de persistencia</td>
+<td style="text-align: left;">entrega fuera de orden y carrera
+local</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>WRT-001</strong></td>
+<td style="text-align: left;">C1</td>
+<td style="text-align: left;">responsable de aplicación</td>
+<td style="text-align: left;">auditoría de dependencias y prueba
+negativa de acceso directo</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>TRN-001</strong></td>
+<td style="text-align: left;">C2</td>
+<td style="text-align: left;">responsable de proyección</td>
+<td style="text-align: left;">reconstrucción con catálogo y cambio de
+esquema</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>IDM-001</strong></td>
+<td style="text-align: left;">C2</td>
+<td style="text-align: left;">responsable de aplicación</td>
+<td style="text-align: left;">entrega duplicada y colisión
+semántica</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>EQV-001</strong></td>
+<td style="text-align: left;">C2</td>
+<td style="text-align: left;">responsable de calidad de datos</td>
+<td style="text-align: left;">R1 y mutante de candidata corrupta</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>REC-001</strong></td>
+<td style="text-align: left;">C2</td>
+<td style="text-align: left;">responsable de proyección</td>
+<td style="text-align: left;">R1 total e incremental</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>PUB-001</strong></td>
+<td style="text-align: left;">C2</td>
+<td style="text-align: left;">responsable de publicación</td>
+<td style="text-align: left;">fallo durante publicación, huella
+incorrecta y rollback</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>PRV-001</strong></td>
+<td style="text-align: left;">C3</td>
+<td style="text-align: left;">custodio de datos</td>
+<td style="text-align: left;">integridad del manifiesto A1</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>FRS-001</strong></td>
+<td style="text-align: left;">C3</td>
+<td style="text-align: left;">responsable de operación</td>
+<td style="text-align: left;">evaluación de presupuesto con caso
+conforme y excedido</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>OBS-001</strong></td>
+<td style="text-align: left;">C3</td>
+<td style="text-align: left;">responsable de operación</td>
+<td style="text-align: left;">escenarios de telemetría sanitizada y no
+bloqueante</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>OWN-001</strong></td>
+<td style="text-align: left;">C3</td>
+<td style="text-align: left;">responsable de arquitectura</td>
+<td style="text-align: left;">inspección de manifiesto y runbook</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>RET-001</strong></td>
+<td style="text-align: left;">C3</td>
+<td style="text-align: left;">responsable de proyección</td>
+<td style="text-align: left;">retiro y reconstrucción posterior</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>ANA-001</strong></td>
+<td style="text-align: left;">C3</td>
+<td style="text-align: left;">responsable de analítica</td>
+<td style="text-align: left;">A1, reconstrucción y fuga temporal</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>AI-001</strong></td>
+<td style="text-align: left;">C3</td>
+<td style="text-align: left;">responsable de IA y seguridad</td>
+<td style="text-align: left;">recuperación cruzada, ausencia de
+evidencia y escritura prohibida</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>SEC-001</strong></td>
+<td style="text-align: left;">C3</td>
+<td style="text-align: left;">responsable de seguridad</td>
+<td style="text-align: left;">S1, capacidades y contexto manipulado</td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+<h2 id="seguridad-privacidad-y-amenazas">Seguridad, privacidad y
+amenazas</h2>
+<p>La conformidad COBRIA no reemplaza un modelo de amenazas. Cada
+adopción considera al menos: confusión de autoridad, fuga entre ámbitos,
+revisión obsoleta, dependencia comprometida, transformación no
+reproducible, oráculo incompleto, publicación parcial, telemetría
+sensible, retención excesiva, recuperación aumentada sin autorización y
+agente con capacidades amplias.</p>
+<p>Los datos personales exigen finalidad, minimización, consentimiento o
+base aplicable, retención y borrado verificable según contexto. La
+procedencia nunca autoriza por sí sola la divulgación. Secretos, cargas
+completas y atributos de alta cardinalidad no deben incorporarse a
+registros generales.</p>
+<h2 id="limitaciones-de-la-especificación">Limitaciones de la
+especificación</h2>
+<p>Esta especificación define contratos comprobables, no una prueba
+matemática completa de un sistema distribuido. Las pruebas locales
+disponibles no demuestran serialización entre regiones, disponibilidad
+bajo partición, confidencialidad frente a canales laterales, corrección
+de un proveedor administrado ni capacidad humana de transferencia.</p>
+<p>La candidata RC2 permanece bloqueada para promoción estable hasta
+completar revisión independiente, doble cribado bibliográfico, estudio
+de transferencia, repetición en otra computadora y autorización de
+publicación.</p>
+<h2 id="licencia-atribución-y-cita">Licencia, atribución y cita</h2>
+<p>El código propio se publica bajo Apache-2.0. Los textos, diagramas,
+ilustraciones y datos sintéticos propios se publican bajo CC-BY-4.0,
+salvo indicación expresa. Los materiales de terceros conservan su
+licencia. La procedencia se documenta en y .</p>
+<p>Forma sugerida de cita:</p>
+<blockquote>
+<p>Cordero Porras, B. J. (2026). <em>COBRIA Ecosistema 1.0:
+especificación normativa</em> (versión 1.0.0-rc2). Propuesta
+independiente. <a href="https://github.com/billy-una/cobria"
+class="uri">https://github.com/billy-una/cobria</a></p>
+</blockquote>
+<h2 id="referencias-normativas-e-informativas">Referencias normativas e
+informativas</h2>
+<div class="thebibliography">
+<p><span>9</span> S. Bradner. <em>Key words for use in RFCs to Indicate
+Requirement Levels</em>. RFC 2119, 1997. <a
+href="https://www.rfc-editor.org/rfc/rfc2119"
+class="uri">https://www.rfc-editor.org/rfc/rfc2119</a> B. Leiba.
+<em>Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words</em>. RFC
+8174, 2017. <a href="https://www.rfc-editor.org/rfc/rfc8174"
+class="uri">https://www.rfc-editor.org/rfc/rfc8174</a> JSON Schema.
+<em>A Media Type for Describing JSON Documents</em>. Draft 2020-12. <a
+href="https://json-schema.org/draft/2020-12"
+class="uri">https://json-schema.org/draft/2020-12</a> W3C. <em>Web
+Content Accessibility Guidelines (WCAG) 2.2</em>. 2023. <a
+href="https://www.w3.org/TR/WCAG22/"
+class="uri">https://www.w3.org/TR/WCAG22/</a> B. J. Cordero Porras.
+<em>COBRIA Core 1.0</em>. Especificación congelada, 2026.</p>
+</div>
+<h2 id="plantilla-de-declaración-de-conformidad">Plantilla de
+declaración de conformidad</h2>
+<h3 class="unnumbered"
+id="declaración-propuesta-no-certificación">Declaración propuesta; no
+certificación</h3>
+<p>Producto:</p>
+<hr />
+<p><br />
+Versión y commit:</p>
+<hr />
+<p><br />
+Perfil solicitado: C1 / C2 / C3<br />
+Ambiente y fecha:</p>
+<hr />
+<p><br />
+Responsable:</p>
+<hr />
+<p><br />
+Resultado: conforme / no conforme / no evaluado<br />
+Ubicación del informe y huellas:</p>
+<hr />
+<p>La declaración anexa una fila por requisito. Una excepción a DEBERÍA
+registra razón, riesgo, responsable y fecha de revisión. Ninguna firma
+transforma esta propuesta en certificación oficial.</p>
+<h2 id="lista-de-inspección">Lista de inspección</h2>
+<ul>
+<li><p>la autoridad canónica y sus escritores están
+identificados;</p></li>
+<li><p>ámbito, identidad y revisión llegan antes del almacén;</p></li>
+<li><p>cada derivado posee transformación, versión y fuentes;</p></li>
+<li><p>el criterio de equivalencia incluye casos negativos;</p></li>
+<li><p>la reconstrucción no usa la copia activa como fuente;</p></li>
+<li><p>la publicación conserva versión previa y rollback;</p></li>
+<li><p>frescura, costo, responsable, alertas y retiro son
+visibles;</p></li>
+<li><p>analítica conserva corte, partición, semilla y consentimiento
+aplicable;</p></li>
+<li><p>IA recupera dentro del ámbito, cita y puede abstenerse;</p></li>
+<li><p>cada afirmación apunta a evidencia con configuración y
+huella;</p></li>
+<li><p>las limitaciones locales, distribuidas y humanas permanecen
+separadas;</p></li>
+<li><p>el nivel declarado incluye todos los requisitos
+heredados.</p></li>
+</ul>
+<h2 id="índice-de-artefactos-normativos">Índice de artefactos
+normativos</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Artefacto</th>
+<th style="text-align: left;">Responsabilidad</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">núcleo congelado y contrato original</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">registro estructurado de requisitos y
+pruebas</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">perfiles acumulativos y experimentos
+requeridos</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">complemento formal experimental</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">fallos concretos y correcciones</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">integridad del paquete de
+reproducción</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">identidad y estado editorial
+compartidos</td>
+</tr>
+</tbody>
+</table>
+<div class="center">
+<div style="color: bosque">
+<hr />
+</div>
+<p><br />
+Fin de la especificación candidata COBRIA Ecosistema 1.0<br />
+Fuente y derivados verificables desde el repositorio canónico.</p>
+</div>
+</body>
+</html>

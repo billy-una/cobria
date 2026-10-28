@@ -6,6 +6,11 @@
 **Autor y responsable editorial:** Billy Jak Cordero Porras  
 **Repositorio canónico:** <https://github.com/billy-una/cobria>
 
+> **Plan operativo vigente al 19 de octubre de 2026:** los hallazgos de la auditoría de
+> productos y alojamiento se gestionan en [`ROADMAP-ENTREGA-PUBLICA-COBRIA.md`](ROADMAP-ENTREGA-PUBLICA-COBRIA.md), EP0–EP12.
+> Este documento conserva la arquitectura objetivo del ecosistema; el plan operativo
+> determina qué debe cerrarse antes de publicar una candidata nueva o una versión estable.
+
 ## 1. Resultado final buscado
 
 COBRIA debe terminar como un **ecosistema abierto de patrones, manuales, contratos,
@@ -279,6 +284,11 @@ rastrearse hasta entradas, versión, transformación y política.
 
 ### Fase 11. COBRIA Build y aplicación de referencia
 
+**Avance local:** [recorrido integrado y ejercicios](editorial/ecosistema-11-12/ENTREGA.md).
+`make verificar-ecosistema-11-12` prueba el proyecto; la prueba de instalación copia
+la aplicación a un directorio nuevo y conserva los intentos. La transferencia con
+personas sin asistencia y el staging remoto no se declaran realizados.
+
 **Objetivo:** demostrar el ecosistema completo en un proyecto neutral y amigable.
 
 **Proyecto:** sistema comunitario de observaciones ambientales inspirado en Coto Brus,
@@ -294,6 +304,10 @@ ejercicios, soluciones y pruebas.
 documentación publicada y obtiene los resultados esperados.
 
 ### Fase 12. COBRIA Toolkit para humanos e IA
+
+**Avance local:** recursos documentales incluidos en el paquete, generación específica
+de diccionario y sintaxis posicional de tipos. `make probar-instalacion-toolkit`
+comprueba el paquete instalado fuera del checkout, sin publicarlo en npm.
 
 **Objetivo:** volver ejecutables las reglas repetibles del ecosistema.
 
@@ -320,6 +334,10 @@ propuesta, implementación, ejecución y validación externa.
 
 ### Fase 13. Evidencia científica y transferencia
 
+**Avance local:** [matriz generada, selección bibliográfica exploratoria y réplica
+funcional](editorial/ecosistema-13-14/ENTREGA.md). R7 conserva su identidad histórica;
+las corridas PC3 y las puertas humanas permanecen pendientes.
+
 **Objetivo:** alinear la contribución científica con lo realmente observado.
 
 **Trabajo:** repetir P1, P2, R1, S1 y A1; comparar alternativas; ejecutar infraestructura
@@ -334,6 +352,11 @@ semilla. **Puerta humana:** revisión, cribado y estudio solo cambian a “ejecu
 personas reales entregan evidencia válida.
 
 ### Fase 14. Cierre editorial del libro y documentos
+
+**Avance local:** seis PDF reconstruidos, etiquetas y marcadores en los derivados
+Chromium, conservación de estructura al normalizar/comprimir y pruebas de regresión.
+Las comprobaciones automáticas y muestras visuales no cierran la revisión integral
+legible ni acreditan PDF/UA.
 
 **Objetivo:** convertir el material acumulado en productos de lectura, no registros de
 proceso.
@@ -358,6 +381,10 @@ metadatos correctos y ausencia de versiones “finales” competidoras en la des
 
 ### Fase 15. Reconstrucción del sitio público
 
+**Avance local:** [entradas por necesidad y QA de navegador](editorial/ecosistema-15-16/ENTREGA.md).
+Se conserva la aplicación única y se comprueban dos anchuras; la verificación local
+no acredita acceso anónimo del alojamiento público ni certificación de accesibilidad.
+
 **Objetivo:** ofrecer una experiencia pedagógica navegable, pública y coherente.
 
 **Trabajo:**
@@ -379,18 +406,28 @@ de umbrales acordados, descargas correctas y verificación desde navegadores rea
 
 ### Fase 16. Release candidata reproducible
 
+**Avance local:** dos construcciones de instantánea y empaquetado interno con
+inventarios, comparación semántica PDF y SBOM. La instantánea de herramienta no
+reemplaza un commit final confirmado del repositorio principal ni su CI remota.
+
 **Objetivo:** demostrar que la entrega coincide con el repositorio.
 
 **Trabajo:** compilación limpia, pruebas completas, inventario, SBOM, huellas, licencia
 por tipo de obra, notas de versión, matriz de trazabilidad y paquete de archivo.
 
-**Entregables:** `COBRIA Ecosistema 1.0-rc1`, artefactos firmados o con huellas verificables
+**Entregables:** candidata identificada según `editorial/canonical.json`, sin reemplazar
+los archivos históricos RC1/RC2; artefactos firmados o con huellas verificables
 y guía de reproducción.
 
 **Puerta:** dos ejecuciones limpias generan contenido equivalente y no existen cambios
 sin confirmar que afecten la publicación.
 
 ### Fase 17. Revisión de la candidata
+
+**Avance local del 19 de octubre de 2026:** [revisión ligada al ZIP y registro de
+incidencias](editorial/ecosistema-17-18/ENTREGA.md). No hereda la auditoría histórica
+RC1 ni acredita revisión independiente. Las correcciones de este ciclo son posteriores
+a la instantánea de fase 16 y deben incluirse en otra candidata antes de publicar.
 
 **Objetivo:** detectar problemas antes de llamar estable a la propuesta.
 
@@ -409,9 +446,9 @@ y no se sustituye por revisores inventados.
 
 **Objetivo:** publicar una propuesta independiente honesta, utilizable y sostenible.
 
-**Estado al 21 de septiembre de 2026:** infraestructura de mantenimiento y publicación
-preparada; candidata pública reproducible; etiqueta estable retenida correctamente por
-las puertas humanas y externas pendientes.
+**Estado al 19 de octubre de 2026:** infraestructura de mantenimiento y decisión de
+publicación preparada; candidata interna de fase 16 revisada automáticamente;
+etiqueta estable retenida por las puertas humanas, externas y del SHA final pendientes.
 
 **Entregables:**
 

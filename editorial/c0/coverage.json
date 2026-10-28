@@ -1,0 +1,2907 @@
+{
+  "schemaVersion": "1.0.0",
+  "phase": "C0",
+  "baselineCommit": "deca1b14ff44805d5d36814654cf35be27d2fa89",
+  "date": "2026-10-17",
+  "reviewer": {
+    "type": "ai",
+    "independent": false,
+    "humanReaderStudy": false
+  },
+  "scope": {
+    "normativeCoreChanged": false,
+    "candidateArchiveChanged": false,
+    "publicationAuthorized": false,
+    "scopeFrozenFor": "C1–C15",
+    "claim": "Se congela el alcance pedagógico, no se declara completo el ecosistema ni se añaden obligaciones Core."
+  },
+  "method": {
+    "structural": "Inventario de las 85 lecciones, 30 laboratorios, fuentes declaradas y anclajes del libro y sitio.",
+    "qualitative": "Lectura completa de la primera lección de cada módulo; revisión transversal de títulos, fragmentos y evidencias de las 85; lectura dirigida de manuales, CLI, composición y pruebas.",
+    "limits": [
+      "No se leyó visualmente cada página PDF ni se auditó el despliegue público.",
+      "Presencia de una fuente o prueba no prueba profundidad, eficacia educativa ni cobertura de cada lección.",
+      "Los comandos se clasifican estáticamente; los ensayos acotados registrados no ejecutan todos los laboratorios."
+    ]
+  },
+  "decision": "alcance_congelado_con_brechas_abiertas",
+  "totals": {
+    "areas": 17,
+    "lessons": 85,
+    "labs": 30,
+    "practices": 12,
+    "findings": 10,
+    "critical": 1,
+    "bareNpmLabCommands": 11,
+    "areasClosed": 0,
+    "humanReaderValidationsEstablished": 0
+  },
+  "areas": [
+    {
+      "key": "inicio",
+      "nextPhase": "C1",
+      "implementation": [
+        "replication/examples/ecosistema-app/src/demo.mjs"
+      ],
+      "tests": [
+        "replication/examples/ecosistema-app/test/app.test.mjs"
+      ],
+      "sampledLesson": 1,
+      "finding": "Hay un recorrido mínimo en memoria, pero la lección de instalación no explica Node, terminal, ubicación ni salida paso a paso.",
+      "acceptance": "Entorno desde cero con directorio, versiones, resultado y solución de fallos.",
+      "readerValidation": "no_verificada_para_esta_area_en_C0",
+      "closure": "parcial",
+      "number": "01",
+      "title": "Primeros pasos",
+      "declaredSources": [
+        "MANIFESTO.md",
+        "replication/examples/ecosistema-app/README.md"
+      ],
+      "sourceInventory": [
+        {
+          "path": "MANIFESTO.md",
+          "existsAtBaseline": true
+        },
+        {
+          "path": "replication/examples/ecosistema-app/README.md",
+          "existsAtBaseline": true
+        },
+        {
+          "path": "replication/examples/ecosistema-app/src/demo.mjs",
+          "existsAtBaseline": true
+        },
+        {
+          "path": "replication/examples/ecosistema-app/test/app.test.mjs",
+          "existsAtBaseline": true
+        }
+      ],
+      "lessons": [
+        {
+          "number": 1,
+          "title": "De una idea a una conducta observable",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-01-1",
+          "bookPresent": true,
+          "route": "/aprender/inicio/1",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        },
+        {
+          "number": 2,
+          "title": "El recorrido vertical más pequeño",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-01-2",
+          "bookPresent": true,
+          "route": "/aprender/inicio/2",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        },
+        {
+          "number": 3,
+          "title": "Elegir una primera entrega pequeña",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-01-3",
+          "bookPresent": true,
+          "route": "/aprender/inicio/3",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        },
+        {
+          "number": 4,
+          "title": "Preparar un entorno que otra persona pueda repetir",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-01-4",
+          "bookPresent": true,
+          "route": "/aprender/inicio/4",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        },
+        {
+          "number": 5,
+          "title": "Leer un fallo sin adivinar",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-01-5",
+          "bookPresent": true,
+          "route": "/aprender/inicio/5",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        }
+      ],
+      "coverage": {
+        "explicado": "presente_revision_muestral",
+        "ejemplificado": "ejemplos_en_lecciones",
+        "ejecutable": "parcial_por_modulo_no_por_leccion",
+        "probado": "pruebas_relacionadas_no_cobertura_total",
+        "libro": "anclajes_locales_presentes",
+        "web": "fuente_y_rutas_locales_presentes",
+        "lectores": "no_verificada_para_esta_area_en_C0"
+      }
+    },
+    {
+      "key": "fundamentos",
+      "nextPhase": "C1",
+      "implementation": [
+        "replication/examples/ecosistema-app/src/domain/observacion.mjs"
+      ],
+      "tests": [
+        "replication/examples/ecosistema-app/test/app.test.mjs"
+      ],
+      "sampledLesson": 1,
+      "finding": "La entidad usa constructor y exige cantidad positiva; las lecciones enseñan Observacion.crear y cantidad no negativa.",
+      "acceptance": "Contrato único entre explicación, API real, cantidad cero y pruebas de aceptación.",
+      "readerValidation": "no_verificada_para_esta_area_en_C0",
+      "closure": "parcial",
+      "number": "02",
+      "title": "Fundamentos de software",
+      "declaredSources": [
+        "manuales/01-fundamentos.md",
+        "replication/examples/ecosistema-app/src/domain/observacion.mjs"
+      ],
+      "sourceInventory": [
+        {
+          "path": "manuales/01-fundamentos.md",
+          "existsAtBaseline": true
+        },
+        {
+          "path": "replication/examples/ecosistema-app/src/domain/observacion.mjs",
+          "existsAtBaseline": true
+        },
+        {
+          "path": "replication/examples/ecosistema-app/test/app.test.mjs",
+          "existsAtBaseline": true
+        }
+      ],
+      "lessons": [
+        {
+          "number": 1,
+          "title": "Dato, objeto y regla",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-02-1",
+          "bookPresent": true,
+          "route": "/aprender/fundamentos/1",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        },
+        {
+          "number": 2,
+          "title": "Contrato y evidencia",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-02-2",
+          "bookPresent": true,
+          "route": "/aprender/fundamentos/2",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        },
+        {
+          "number": 3,
+          "title": "Identidad, valor y referencia",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-02-3",
+          "bookPresent": true,
+          "route": "/aprender/fundamentos/3",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        },
+        {
+          "number": 4,
+          "title": "Invariantes antes que formularios",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-02-4",
+          "bookPresent": true,
+          "route": "/aprender/fundamentos/4",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        },
+        {
+          "number": 5,
+          "title": "Comandos, consultas y eventos",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-02-5",
+          "bookPresent": true,
+          "route": "/aprender/fundamentos/5",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        }
+      ],
+      "coverage": {
+        "explicado": "presente_revision_muestral",
+        "ejemplificado": "ejemplos_en_lecciones",
+        "ejecutable": "parcial_por_modulo_no_por_leccion",
+        "probado": "pruebas_relacionadas_no_cobertura_total",
+        "libro": "anclajes_locales_presentes",
+        "web": "fuente_y_rutas_locales_presentes",
+        "lectores": "no_verificada_para_esta_area_en_C0"
+      }
+    },
+    {
+      "key": "arquitectura",
+      "nextPhase": "C3",
+      "implementation": [
+        "replication/src/auditor.mjs"
+      ],
+      "tests": [
+        "replication/tests/phase14-auditor.test.mjs"
+      ],
+      "sampledLesson": 1,
+      "finding": "Existen fronteras y ADR, pero los fragmentos de aptitud no son un tutorial ejecutable de evolución.",
+      "acceptance": "Un caso pequeño antes y después, decisiones, dependencias y prueba que falla al romperlas.",
+      "readerValidation": "no_verificada_para_esta_area_en_C0",
+      "closure": "parcial",
+      "number": "03",
+      "title": "Arquitectura de software",
+      "declaredSources": [
+        "specification/MAPA-ECOSISTEMA.md",
+        "manuales/11-estado-y-roadmap-integral.md",
+        "manuales/24-organizacion-y-operacion-del-proyecto.md"
+      ],
+      "sourceInventory": [
+        {
+          "path": "specification/MAPA-ECOSISTEMA.md",
+          "existsAtBaseline": true
+        },
+        {
+          "path": "manuales/11-estado-y-roadmap-integral.md",
+          "existsAtBaseline": true
+        },
+        {
+          "path": "manuales/24-organizacion-y-operacion-del-proyecto.md",
+          "existsAtBaseline": true
+        },
+        {
+          "path": "replication/src/auditor.mjs",
+          "existsAtBaseline": true
+        },
+        {
+          "path": "replication/tests/phase14-auditor.test.mjs",
+          "existsAtBaseline": true
+        }
+      ],
+      "lessons": [
+        {
+          "number": 1,
+          "title": "Fronteras que protegen cambios",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-03-1",
+          "bookPresent": true,
+          "route": "/aprender/arquitectura/1",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        },
+        {
+          "number": 2,
+          "title": "Decidir con alternativas y costo",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-03-2",
+          "bookPresent": true,
+          "route": "/aprender/arquitectura/2",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        },
+        {
+          "number": 3,
+          "title": "Delimitar contextos y vocabularios",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-03-3",
+          "bookPresent": true,
+          "route": "/aprender/arquitectura/3",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        },
+        {
+          "number": 4,
+          "title": "Registrar una decisión arquitectónica",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-03-4",
+          "bookPresent": true,
+          "route": "/aprender/arquitectura/4",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        },
+        {
+          "number": 5,
+          "title": "Comprobar arquitectura con funciones de aptitud",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-03-5",
+          "bookPresent": true,
+          "route": "/aprender/arquitectura/5",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        }
+      ],
+      "coverage": {
+        "explicado": "presente_revision_muestral",
+        "ejemplificado": "ejemplos_en_lecciones",
+        "ejecutable": "parcial_por_modulo_no_por_leccion",
+        "probado": "pruebas_relacionadas_no_cobertura_total",
+        "libro": "anclajes_locales_presentes",
+        "web": "fuente_y_rutas_locales_presentes",
+        "lectores": "no_verificada_para_esta_area_en_C0"
+      }
+    },
+    {
+      "key": "capas",
+      "nextPhase": "C3",
+      "implementation": [
+        "replication/examples/ecosistema-app/src/composition.mjs"
+      ],
+      "tests": [
+        "replication/examples/ecosistema-app/test/app.test.mjs"
+      ],
+      "sampledLesson": 1,
+      "finding": "Object, Dater, Repository, Catalog e Indexer están descritos; no se demuestra cada rol en un recorrido incremental único.",
+      "acceptance": "Mapa archivo a responsabilidad y cambio real de adaptador, sin mezclar significado con almacenamiento.",
+      "readerValidation": "no_verificada_para_esta_area_en_C0",
+      "closure": "parcial",
+      "number": "04",
+      "title": "Capas, carpetas y responsabilidades",
+      "declaredSources": [
+        "manuales/02-layers.md",
+        "replication/examples/ecosistema-app/src/composition.mjs",
+        "manuales/24-organizacion-y-operacion-del-proyecto.md"
+      ],
+      "sourceInventory": [
+        {
+          "path": "manuales/02-layers.md",
+          "existsAtBaseline": true
+        },
+        {
+          "path": "replication/examples/ecosistema-app/src/composition.mjs",
+          "existsAtBaseline": true
+        },
+        {
+          "path": "manuales/24-organizacion-y-operacion-del-proyecto.md",
+          "existsAtBaseline": true
+        },
+        {
+          "path": "replication/examples/ecosistema-app/test/app.test.mjs",
+          "existsAtBaseline": true
+        }
+      ],
+      "lessons": [
+        {
+          "number": 1,
+          "title": "Una carpeta responde una pregunta",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-04-1",
+          "bookPresent": true,
+          "route": "/aprender/capas/1",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        },
+        {
+          "number": 2,
+          "title": "Quién puede importar a quién",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-04-2",
+          "bookPresent": true,
+          "route": "/aprender/capas/2",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        },
+        {
+          "number": 3,
+          "title": "Puertos y adaptadores: Catalog, Indexer y Connector",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-04-3",
+          "bookPresent": true,
+          "route": "/aprender/capas/3",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        },
+        {
+          "number": 4,
+          "title": "Composición en una única frontera",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-04-4",
+          "bookPresent": true,
+          "route": "/aprender/capas/4",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        },
+        {
+          "number": 5,
+          "title": "Evitar el cajón de utilidades",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-04-5",
+          "bookPresent": true,
+          "route": "/aprender/capas/5",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        }
+      ],
+      "coverage": {
+        "explicado": "presente_revision_muestral",
+        "ejemplificado": "ejemplos_en_lecciones",
+        "ejecutable": "parcial_por_modulo_no_por_leccion",
+        "probado": "pruebas_relacionadas_no_cobertura_total",
+        "libro": "anclajes_locales_presentes",
+        "web": "fuente_y_rutas_locales_presentes",
+        "lectores": "no_verificada_para_esta_area_en_C0"
+      }
+    },
+    {
+      "key": "codigo",
+      "nextPhase": "C9",
+      "implementation": [
+        "replication/examples/ecosistema-app/src/domain/error-cobria.mjs"
+      ],
+      "tests": [
+        "replication/examples/ecosistema-app/test/app.test.mjs"
+      ],
+      "sampledLesson": 1,
+      "finding": "Hay ejemplos de nombres y comentarios, pero las firmas y comandos ilustrativos no siempre corresponden al proyecto.",
+      "acceptance": "Contratos reales, errores con firma correcta, formato y ejercicios de refactorización comprobados.",
+      "readerValidation": "no_verificada_para_esta_area_en_C0",
+      "closure": "parcial",
+      "number": "05",
+      "title": "Código, nombres y comentarios",
+      "declaredSources": [
+        "specification/phase-6/code-conventions.json",
+        "replication/examples/ecosistema-app/src/domain/error-cobria.mjs"
+      ],
+      "sourceInventory": [
+        {
+          "path": "specification/phase-6/code-conventions.json",
+          "existsAtBaseline": false
+        },
+        {
+          "path": "replication/examples/ecosistema-app/src/domain/error-cobria.mjs",
+          "existsAtBaseline": true
+        },
+        {
+          "path": "replication/examples/ecosistema-app/test/app.test.mjs",
+          "existsAtBaseline": true
+        }
+      ],
+      "lessons": [
+        {
+          "number": 1,
+          "title": "Nombres que cuentan una historia",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-05-1",
+          "bookPresent": true,
+          "route": "/aprender/codigo/1",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        },
+        {
+          "number": 2,
+          "title": "Comentarios que explican por qué",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-05-2",
+          "bookPresent": true,
+          "route": "/aprender/codigo/2",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        },
+        {
+          "number": 3,
+          "title": "Errores de dominio que permiten actuar",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-05-3",
+          "bookPresent": true,
+          "route": "/aprender/codigo/3",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        },
+        {
+          "number": 4,
+          "title": "Funciones pequeñas alrededor de efectos visibles",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-05-4",
+          "bookPresent": true,
+          "route": "/aprender/codigo/4",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        },
+        {
+          "number": 5,
+          "title": "Formato automático y revisión humana",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-05-5",
+          "bookPresent": true,
+          "route": "/aprender/codigo/5",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        }
+      ],
+      "coverage": {
+        "explicado": "presente_revision_muestral",
+        "ejemplificado": "ejemplos_en_lecciones",
+        "ejecutable": "parcial_por_modulo_no_por_leccion",
+        "probado": "pruebas_relacionadas_no_cobertura_total",
+        "libro": "anclajes_locales_presentes",
+        "web": "fuente_y_rutas_locales_presentes",
+        "lectores": "no_verificada_para_esta_area_en_C0"
+      }
+    },
+    {
+      "key": "datos",
+      "nextPhase": "C2",
+      "implementation": [
+        "replication/examples/ecosistema-app/src/infrastructure/data/observacion-dater.mjs"
+      ],
+      "tests": [
+        "replication/examples/ecosistema-app/test/app.test.mjs"
+      ],
+      "sampledLesson": 1,
+      "finding": "Existe diccionario YAML y Dater; el currículo enlaza un data-dictionary.json inexistente y simplifica la cantidad a >=0.",
+      "acceptance": "Diccionario gradual consistente, nodos, catálogos, claves físicas, consultas y migración con ejemplos válidos e inválidos.",
+      "readerValidation": "no_verificada_para_esta_area_en_C0",
+      "closure": "parcial",
+      "number": "06",
+      "title": "Bases de datos y diccionario de datos",
+      "declaredSources": [
+        "manuales/04-bases-de-datos.md",
+        "specification/phase-3/data-dictionary.json",
+        "manuales/24-organizacion-y-operacion-del-proyecto.md"
+      ],
+      "sourceInventory": [
+        {
+          "path": "manuales/04-bases-de-datos.md",
+          "existsAtBaseline": true
+        },
+        {
+          "path": "specification/phase-3/data-dictionary.json",
+          "existsAtBaseline": false
+        },
+        {
+          "path": "manuales/24-organizacion-y-operacion-del-proyecto.md",
+          "existsAtBaseline": true
+        },
+        {
+          "path": "replication/examples/ecosistema-app/src/infrastructure/data/observacion-dater.mjs",
+          "existsAtBaseline": true
+        },
+        {
+          "path": "replication/examples/ecosistema-app/test/app.test.mjs",
+          "existsAtBaseline": true
+        }
+      ],
+      "lessons": [
+        {
+          "number": 1,
+          "title": "Diccionario de datos desde cero",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-06-1",
+          "bookPresent": true,
+          "route": "/aprender/datos/1",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        },
+        {
+          "number": 2,
+          "title": "Incrustar, referenciar e indexar",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-06-2",
+          "bookPresent": true,
+          "route": "/aprender/datos/2",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        },
+        {
+          "number": 3,
+          "title": "Diseñar agregados y separar nodos",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-06-3",
+          "bookPresent": true,
+          "route": "/aprender/datos/3",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        },
+        {
+          "number": 4,
+          "title": "Traducir claves físicas en el Dater",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-06-4",
+          "bookPresent": true,
+          "route": "/aprender/datos/4",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        },
+        {
+          "number": 5,
+          "title": "Migrar documentos sin detener el mundo",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-06-5",
+          "bookPresent": true,
+          "route": "/aprender/datos/5",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        }
+      ],
+      "coverage": {
+        "explicado": "presente_revision_muestral",
+        "ejemplificado": "ejemplos_en_lecciones",
+        "ejecutable": "parcial_por_modulo_no_por_leccion",
+        "probado": "pruebas_relacionadas_no_cobertura_total",
+        "libro": "anclajes_locales_presentes",
+        "web": "fuente_y_rutas_locales_presentes",
+        "lectores": "no_verificada_para_esta_area_en_C0"
+      }
+    },
+    {
+      "key": "core",
+      "nextPhase": "C4",
+      "implementation": [
+        "replication/src/core/cobria.mjs",
+        "replication/src/conformance.mjs"
+      ],
+      "tests": [
+        "replication/tests/core11.test.mjs"
+      ],
+      "sampledLesson": 1,
+      "finding": "El núcleo y el arnés tienen evidencia técnica; los ejemplos del alumno todavía necesitan comandos completos y separación de perfiles.",
+      "acceptance": "Adaptador mínimo explicado, informe interpretado y fallo por cada obligación relevante sin modificar Core 1.0.",
+      "readerValidation": "no_verificada_para_esta_area_en_C0",
+      "closure": "parcial",
+      "number": "07",
+      "title": "COBRIA Core",
+      "declaredSources": [
+        "specification/COBRIA-CORE-1.0.md",
+        "replication/src/conformance.mjs"
+      ],
+      "sourceInventory": [
+        {
+          "path": "specification/COBRIA-CORE-1.0.md",
+          "existsAtBaseline": true
+        },
+        {
+          "path": "replication/src/conformance.mjs",
+          "existsAtBaseline": true
+        },
+        {
+          "path": "replication/src/core/cobria.mjs",
+          "existsAtBaseline": true
+        },
+        {
+          "path": "replication/tests/core11.test.mjs",
+          "existsAtBaseline": true
+        }
+      ],
+      "lessons": [
+        {
+          "number": 1,
+          "title": "Autoridad y ámbito",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-07-1",
+          "bookPresent": true,
+          "route": "/aprender/core/1",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        },
+        {
+          "number": 2,
+          "title": "Reconstrucción y publicación segura",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-07-2",
+          "bookPresent": true,
+          "route": "/aprender/core/2",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        },
+        {
+          "number": 3,
+          "title": "Elegir nivel C1, C2 o C3",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-07-3",
+          "bookPresent": true,
+          "route": "/aprender/core/3",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        },
+        {
+          "number": 4,
+          "title": "Definir equivalencia útil",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-07-4",
+          "bookPresent": true,
+          "route": "/aprender/core/4",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        },
+        {
+          "number": 5,
+          "title": "Presupuestar y retirar derivados",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-07-5",
+          "bookPresent": true,
+          "route": "/aprender/core/5",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        }
+      ],
+      "coverage": {
+        "explicado": "presente_revision_muestral",
+        "ejemplificado": "ejemplos_en_lecciones",
+        "ejecutable": "parcial_por_modulo_no_por_leccion",
+        "probado": "pruebas_relacionadas_no_cobertura_total",
+        "libro": "anclajes_locales_presentes",
+        "web": "fuente_y_rutas_locales_presentes",
+        "lectores": "no_verificada_para_esta_area_en_C0"
+      }
+    },
+    {
+      "key": "patrones",
+      "nextPhase": "C4",
+      "implementation": [
+        "replication/examples/patterns-r4/src/patrones.ts"
+      ],
+      "tests": [
+        "replication/examples/patterns-r4/test/patrones.test.ts"
+      ],
+      "sampledLesson": 1,
+      "finding": "Las treinta fichas tienen referencia verificada; LAB-15 y LAB-16 invocan una meta Make inexistente.",
+      "acceptance": "Problema ingenuo, solución, ejecución, prueba, costo y alternativa por patrón.",
+      "readerValidation": "no_verificada_para_esta_area_en_C0",
+      "closure": "parcial",
+      "number": "08",
+      "title": "Patrones de diseño",
+      "declaredSources": [
+        "manuales/03-pattern-design.md",
+        "libro-cobria/practical-examples.json"
+      ],
+      "sourceInventory": [
+        {
+          "path": "manuales/03-pattern-design.md",
+          "existsAtBaseline": true
+        },
+        {
+          "path": "libro-cobria/practical-examples.json",
+          "existsAtBaseline": true
+        },
+        {
+          "path": "replication/examples/patterns-r4/src/patrones.ts",
+          "existsAtBaseline": true
+        },
+        {
+          "path": "replication/examples/patterns-r4/test/patrones.test.ts",
+          "existsAtBaseline": true
+        }
+      ],
+      "lessons": [
+        {
+          "number": 1,
+          "title": "Cómo leer una ficha",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-08-1",
+          "bookPresent": true,
+          "route": "/aprender/patrones/1",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        },
+        {
+          "number": 2,
+          "title": "Combinar patrones sin crear una megasolución",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-08-2",
+          "bookPresent": true,
+          "route": "/aprender/patrones/2",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        },
+        {
+          "number": 3,
+          "title": "Fuerzas y consecuencias antes que recetas",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-08-3",
+          "bookPresent": true,
+          "route": "/aprender/patrones/3",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        },
+        {
+          "number": 4,
+          "title": "Reconocer antipatrones por su fallo",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-08-4",
+          "bookPresent": true,
+          "route": "/aprender/patrones/4",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        },
+        {
+          "number": 5,
+          "title": "Construir un lenguaje de patrones",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-08-5",
+          "bookPresent": true,
+          "route": "/aprender/patrones/5",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        }
+      ],
+      "coverage": {
+        "explicado": "presente_revision_muestral",
+        "ejemplificado": "ejemplos_en_lecciones",
+        "ejecutable": "parcial_por_modulo_no_por_leccion",
+        "probado": "pruebas_relacionadas_no_cobertura_total",
+        "libro": "anclajes_locales_presentes",
+        "web": "fuente_y_rutas_locales_presentes",
+        "lectores": "no_verificada_para_esta_area_en_C0"
+      }
+    },
+    {
+      "key": "apiux",
+      "nextPhase": "C5",
+      "implementation": [
+        "replication/examples/ecosistema-app/src/presentation/registrar-observacion-controller.mjs"
+      ],
+      "tests": [
+        "replication/examples/ecosistema-app/test/app.test.mjs",
+        "sitio/tests/rendered-html.test.mjs"
+      ],
+      "sampledLesson": 1,
+      "finding": "Hay controladores y contratos; no son por sí solos servidor HTTP, interfaz de la aplicación ni prueba con tecnología de apoyo.",
+      "acceptance": "Formulario y API conectados, estados, errores, cursores, idiomas y revisión accesible de la aplicación conductora.",
+      "readerValidation": "no_verificada_para_esta_area_en_C0",
+      "closure": "parcial",
+      "number": "09",
+      "title": "API, experiencia e internacionalización",
+      "declaredSources": [
+        "manuales/15-api-ux.md",
+        "replication/examples/ecosistema-app/src/presentation/problema-http.mjs"
+      ],
+      "sourceInventory": [
+        {
+          "path": "manuales/15-api-ux.md",
+          "existsAtBaseline": true
+        },
+        {
+          "path": "replication/examples/ecosistema-app/src/presentation/problema-http.mjs",
+          "existsAtBaseline": true
+        },
+        {
+          "path": "replication/examples/ecosistema-app/src/presentation/registrar-observacion-controller.mjs",
+          "existsAtBaseline": true
+        },
+        {
+          "path": "replication/examples/ecosistema-app/test/app.test.mjs",
+          "existsAtBaseline": true
+        },
+        {
+          "path": "sitio/tests/rendered-html.test.mjs",
+          "existsAtBaseline": true
+        }
+      ],
+      "lessons": [
+        {
+          "number": 1,
+          "title": "Una API expresa intención",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-09-1",
+          "bookPresent": true,
+          "route": "/aprender/apiux/1",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        },
+        {
+          "number": 2,
+          "title": "Estados visibles, idioma y accesibilidad",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-09-2",
+          "bookPresent": true,
+          "route": "/aprender/apiux/2",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        },
+        {
+          "number": 3,
+          "title": "Paginar con cursores opacos",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-09-3",
+          "bookPresent": true,
+          "route": "/aprender/apiux/3",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        },
+        {
+          "number": 4,
+          "title": "Diseñar acciones idempotentes",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-09-4",
+          "bookPresent": true,
+          "route": "/aprender/apiux/4",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        },
+        {
+          "number": 5,
+          "title": "Probar experiencia adaptable y accesible",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-09-5",
+          "bookPresent": true,
+          "route": "/aprender/apiux/5",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        }
+      ],
+      "coverage": {
+        "explicado": "presente_revision_muestral",
+        "ejemplificado": "ejemplos_en_lecciones",
+        "ejecutable": "parcial_por_modulo_no_por_leccion",
+        "probado": "pruebas_relacionadas_no_cobertura_total",
+        "libro": "anclajes_locales_presentes",
+        "web": "fuente_y_rutas_locales_presentes",
+        "lectores": "no_verificada_para_esta_area_en_C0"
+      }
+    },
+    {
+      "key": "documentacion",
+      "nextPhase": "C9",
+      "implementation": [
+        "editorial/build-curriculum.mjs"
+      ],
+      "tests": [
+        "replication/tests/phase17-editorial.test.mjs"
+      ],
+      "sampledLesson": 1,
+      "finding": "La generación editorial existe, pero las lecciones de README repiten npm install/test/start sin situar carpeta ni prerrequisitos.",
+      "acceptance": "Tutorial, referencia, ADR y runbook completos y mantenidos desde ejemplos reales.",
+      "readerValidation": "no_verificada_para_esta_area_en_C0",
+      "closure": "parcial",
+      "number": "10",
+      "title": "Documentación y comunicación",
+      "declaredSources": [
+        "manuales/README.md",
+        "editorial/DICCIONARIO-TERMINOLOGICO.md",
+        "manuales/24-organizacion-y-operacion-del-proyecto.md"
+      ],
+      "sourceInventory": [
+        {
+          "path": "manuales/README.md",
+          "existsAtBaseline": true
+        },
+        {
+          "path": "editorial/DICCIONARIO-TERMINOLOGICO.md",
+          "existsAtBaseline": true
+        },
+        {
+          "path": "manuales/24-organizacion-y-operacion-del-proyecto.md",
+          "existsAtBaseline": true
+        },
+        {
+          "path": "editorial/build-curriculum.mjs",
+          "existsAtBaseline": true
+        },
+        {
+          "path": "replication/tests/phase17-editorial.test.mjs",
+          "existsAtBaseline": true
+        }
+      ],
+      "lessons": [
+        {
+          "number": 1,
+          "title": "Cuatro documentos, cuatro necesidades",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-10-1",
+          "bookPresent": true,
+          "route": "/aprender/documentacion/1",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        },
+        {
+          "number": 2,
+          "title": "Documentación que no se desactualiza en silencio",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-10-2",
+          "bookPresent": true,
+          "route": "/aprender/documentacion/2",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        },
+        {
+          "number": 3,
+          "title": "Escribir un README que permita comenzar",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-10-3",
+          "bookPresent": true,
+          "route": "/aprender/documentacion/3",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        },
+        {
+          "number": 4,
+          "title": "Separar ADR, referencia y runbook",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-10-4",
+          "bookPresent": true,
+          "route": "/aprender/documentacion/4",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        },
+        {
+          "number": 5,
+          "title": "Mantener trazabilidad entre texto y ejecución",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-10-5",
+          "bookPresent": true,
+          "route": "/aprender/documentacion/5",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        }
+      ],
+      "coverage": {
+        "explicado": "presente_revision_muestral",
+        "ejemplificado": "ejemplos_en_lecciones",
+        "ejecutable": "parcial_por_modulo_no_por_leccion",
+        "probado": "pruebas_relacionadas_no_cobertura_total",
+        "libro": "anclajes_locales_presentes",
+        "web": "fuente_y_rutas_locales_presentes",
+        "lectores": "no_verificada_para_esta_area_en_C0"
+      }
+    },
+    {
+      "key": "seguridad",
+      "nextPhase": "C5",
+      "implementation": [
+        "replication/examples/ecosistema-app/src/application/security/autorizar-capacidad.mjs"
+      ],
+      "tests": [
+        "replication/examples/ecosistema-app/test/app.test.mjs"
+      ],
+      "sampledLesson": 1,
+      "finding": "Autorización local probada; identidad verificada, Rules de la aplicación y rotación operativa requieren un recorrido separado.",
+      "acceptance": "Modelo de amenazas y pruebas negativas que atraviesen identidad, autorización, proveedor, exportación y recuperación.",
+      "readerValidation": "no_verificada_para_esta_area_en_C0",
+      "closure": "parcial",
+      "number": "11",
+      "title": "Seguridad y privacidad",
+      "declaredSources": [
+        "manuales/16-security.md",
+        "specification/phase-7/security.json",
+        "manuales/24-organizacion-y-operacion-del-proyecto.md"
+      ],
+      "sourceInventory": [
+        {
+          "path": "manuales/16-security.md",
+          "existsAtBaseline": true
+        },
+        {
+          "path": "specification/phase-7/security.json",
+          "existsAtBaseline": true
+        },
+        {
+          "path": "manuales/24-organizacion-y-operacion-del-proyecto.md",
+          "existsAtBaseline": true
+        },
+        {
+          "path": "replication/examples/ecosistema-app/src/application/security/autorizar-capacidad.mjs",
+          "existsAtBaseline": true
+        },
+        {
+          "path": "replication/examples/ecosistema-app/test/app.test.mjs",
+          "existsAtBaseline": true
+        }
+      ],
+      "lessons": [
+        {
+          "number": 1,
+          "title": "Amenazas desde el flujo",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-11-1",
+          "bookPresent": true,
+          "route": "/aprender/seguridad/1",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        },
+        {
+          "number": 2,
+          "title": "Secretos, suministro y respuesta",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-11-2",
+          "bookPresent": true,
+          "route": "/aprender/seguridad/2",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        },
+        {
+          "number": 3,
+          "title": "Modelar amenazas desde el flujo",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-11-3",
+          "bookPresent": true,
+          "route": "/aprender/seguridad/3",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        },
+        {
+          "number": 4,
+          "title": "Autenticar actor y autorizar capacidad",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-11-4",
+          "bookPresent": true,
+          "route": "/aprender/seguridad/4",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        },
+        {
+          "number": 5,
+          "title": "Proteger secretos y cadena de suministro",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-11-5",
+          "bookPresent": true,
+          "route": "/aprender/seguridad/5",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        }
+      ],
+      "coverage": {
+        "explicado": "presente_revision_muestral",
+        "ejemplificado": "ejemplos_en_lecciones",
+        "ejecutable": "parcial_por_modulo_no_por_leccion",
+        "probado": "pruebas_relacionadas_no_cobertura_total",
+        "libro": "anclajes_locales_presentes",
+        "web": "fuente_y_rutas_locales_presentes",
+        "lectores": "no_verificada_para_esta_area_en_C0"
+      }
+    },
+    {
+      "key": "calidad",
+      "nextPhase": "C6",
+      "implementation": [
+        "replication/scripts/run-r7-confirmatory.mjs"
+      ],
+      "tests": [
+        "replication/examples/operacion-documental/test/operacion.test.mjs"
+      ],
+      "sampledLesson": 1,
+      "finding": "Existe metodología de defectos y evidencia experimental; un comando de estadísticas no demuestra que el alumno ejecutó el experimento.",
+      "acceptance": "Reproducir un defecto, corregirlo, demostrar regresión y medir una optimización con carga y límites.",
+      "readerValidation": "no_verificada_para_esta_area_en_C0",
+      "closure": "parcial",
+      "number": "12",
+      "title": "Calidad, pruebas y rendimiento",
+      "declaredSources": [
+        "manuales/17-quality-performance.md",
+        "specification/phase-9/quality.json",
+        "manuales/23-metodologia-de-correccion-verificable.md",
+        "manuales/24-organizacion-y-operacion-del-proyecto.md"
+      ],
+      "sourceInventory": [
+        {
+          "path": "manuales/17-quality-performance.md",
+          "existsAtBaseline": true
+        },
+        {
+          "path": "specification/phase-9/quality.json",
+          "existsAtBaseline": true
+        },
+        {
+          "path": "manuales/23-metodologia-de-correccion-verificable.md",
+          "existsAtBaseline": true
+        },
+        {
+          "path": "manuales/24-organizacion-y-operacion-del-proyecto.md",
+          "existsAtBaseline": true
+        },
+        {
+          "path": "replication/scripts/run-r7-confirmatory.mjs",
+          "existsAtBaseline": true
+        },
+        {
+          "path": "replication/examples/operacion-documental/test/operacion.test.mjs",
+          "existsAtBaseline": true
+        }
+      ],
+      "lessons": [
+        {
+          "number": 1,
+          "title": "Pruebas que cubren decisiones",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-12-1",
+          "bookPresent": true,
+          "route": "/aprender/calidad/1",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        },
+        {
+          "number": 2,
+          "title": "Optimizar sin engañarse",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-12-2",
+          "bookPresent": true,
+          "route": "/aprender/calidad/2",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        },
+        {
+          "number": 3,
+          "title": "Del reporte al cierre verificable",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-12-3",
+          "bookPresent": true,
+          "route": "/aprender/calidad/3",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        },
+        {
+          "number": 4,
+          "title": "Probar propiedades y casos adversos",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-12-4",
+          "bookPresent": true,
+          "route": "/aprender/calidad/4",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        },
+        {
+          "number": 5,
+          "title": "Evaluar calidad con SQuaRE y medir sin engañarse",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-12-5",
+          "bookPresent": true,
+          "route": "/aprender/calidad/5",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        }
+      ],
+      "coverage": {
+        "explicado": "presente_revision_muestral",
+        "ejemplificado": "ejemplos_en_lecciones",
+        "ejecutable": "parcial_por_modulo_no_por_leccion",
+        "probado": "pruebas_relacionadas_no_cobertura_total",
+        "libro": "anclajes_locales_presentes",
+        "web": "fuente_y_rutas_locales_presentes",
+        "lectores": "no_verificada_para_esta_area_en_C0"
+      }
+    },
+    {
+      "key": "operaciones",
+      "nextPhase": "C6",
+      "implementation": [
+        "replication/examples/operacion-documental/src/application/verificar-entrega.mjs"
+      ],
+      "tests": [
+        "replication/examples/operacion-documental/test/operacion.test.mjs"
+      ],
+      "sampledLesson": 1,
+      "finding": "Los mecanismos locales no sustituyen Functions y staging de una aplicación real; publicar del Toolkit solo simula.",
+      "acceptance": "Proveedor opcional aislado, Function, Rules, promoción por huella, humo, respaldo y rollback con evidencia propia.",
+      "readerValidation": "no_verificada_para_esta_area_en_C0",
+      "closure": "parcial",
+      "number": "13",
+      "title": "Nube, ambientes y operaciones",
+      "declaredSources": [
+        "manuales/18-cloud-operations.md",
+        "specification/phase-8/environments.json",
+        "manuales/24-organizacion-y-operacion-del-proyecto.md"
+      ],
+      "sourceInventory": [
+        {
+          "path": "manuales/18-cloud-operations.md",
+          "existsAtBaseline": true
+        },
+        {
+          "path": "specification/phase-8/environments.json",
+          "existsAtBaseline": true
+        },
+        {
+          "path": "manuales/24-organizacion-y-operacion-del-proyecto.md",
+          "existsAtBaseline": true
+        },
+        {
+          "path": "replication/examples/operacion-documental/src/application/verificar-entrega.mjs",
+          "existsAtBaseline": true
+        },
+        {
+          "path": "replication/examples/operacion-documental/test/operacion.test.mjs",
+          "existsAtBaseline": true
+        }
+      ],
+      "lessons": [
+        {
+          "number": 1,
+          "title": "Del desarrollo a producción",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-13-1",
+          "bookPresent": true,
+          "route": "/aprender/operaciones/1",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        },
+        {
+          "number": 2,
+          "title": "Funciones, colas y tareas idempotentes",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-13-2",
+          "bookPresent": true,
+          "route": "/aprender/operaciones/2",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        },
+        {
+          "number": 3,
+          "title": "Separar desarrollo, preview, staging y producción",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-13-3",
+          "bookPresent": true,
+          "route": "/aprender/operaciones/3",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        },
+        {
+          "number": 4,
+          "title": "Offline con fronteras explícitas",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-13-4",
+          "bookPresent": true,
+          "route": "/aprender/operaciones/4",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        },
+        {
+          "number": 5,
+          "title": "Desplegar, observar y revertir",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-13-5",
+          "bookPresent": true,
+          "route": "/aprender/operaciones/5",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        }
+      ],
+      "coverage": {
+        "explicado": "presente_revision_muestral",
+        "ejemplificado": "ejemplos_en_lecciones",
+        "ejecutable": "parcial_por_modulo_no_por_leccion",
+        "probado": "pruebas_relacionadas_no_cobertura_total",
+        "libro": "anclajes_locales_presentes",
+        "web": "fuente_y_rutas_locales_presentes",
+        "lectores": "no_verificada_para_esta_area_en_C0"
+      }
+    },
+    {
+      "key": "ia",
+      "nextPhase": "C7",
+      "implementation": [
+        "replication/examples/ecosistema-app/src/application/ai/recuperar-evidencia.mjs",
+        "replication/examples/ecosistema-app/src/application/analytics/construir-conjunto.mjs"
+      ],
+      "tests": [
+        "replication/examples/ecosistema-app/test/app.test.mjs"
+      ],
+      "sampledLesson": 1,
+      "finding": "La recuperación es determinista y léxica; no demuestra evaluación de un modelo generativo ni comprensión humana.",
+      "acceptance": "Conjunto reconstruible, ausencia de fuga, citas, abstención y extensión a modelos con evaluación explícita.",
+      "readerValidation": "no_verificada_para_esta_area_en_C0",
+      "closure": "parcial",
+      "number": "14",
+      "title": "Analítica e inteligencia artificial",
+      "declaredSources": [
+        "manuales/19-analytics-ai.md",
+        "replication/examples/ecosistema-app/src/application/ai/recuperar-evidencia.mjs"
+      ],
+      "sourceInventory": [
+        {
+          "path": "manuales/19-analytics-ai.md",
+          "existsAtBaseline": true
+        },
+        {
+          "path": "replication/examples/ecosistema-app/src/application/ai/recuperar-evidencia.mjs",
+          "existsAtBaseline": true
+        },
+        {
+          "path": "replication/examples/ecosistema-app/src/application/analytics/construir-conjunto.mjs",
+          "existsAtBaseline": true
+        },
+        {
+          "path": "replication/examples/ecosistema-app/test/app.test.mjs",
+          "existsAtBaseline": true
+        }
+      ],
+      "lessons": [
+        {
+          "number": 1,
+          "title": "Conjuntos reproducibles y sin fuga",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-14-1",
+          "bookPresent": true,
+          "route": "/aprender/ia/1",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        },
+        {
+          "number": 2,
+          "title": "IA con procedencia y capacidad mínima",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-14-2",
+          "bookPresent": true,
+          "route": "/aprender/ia/2",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        },
+        {
+          "number": 3,
+          "title": "Evitar fuga temporal y por entidad",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-14-3",
+          "bookPresent": true,
+          "route": "/aprender/ia/3",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        },
+        {
+          "number": 4,
+          "title": "Construir RAG con recuperación autorizada",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-14-4",
+          "bookPresent": true,
+          "route": "/aprender/ia/4",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        },
+        {
+          "number": 5,
+          "title": "Gobernar herramientas y abstención",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-14-5",
+          "bookPresent": true,
+          "route": "/aprender/ia/5",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        }
+      ],
+      "coverage": {
+        "explicado": "presente_revision_muestral",
+        "ejemplificado": "ejemplos_en_lecciones",
+        "ejecutable": "parcial_por_modulo_no_por_leccion",
+        "probado": "pruebas_relacionadas_no_cobertura_total",
+        "libro": "anclajes_locales_presentes",
+        "web": "fuente_y_rutas_locales_presentes",
+        "lectores": "no_verificada_para_esta_area_en_C0"
+      }
+    },
+    {
+      "key": "construir",
+      "nextPhase": "C8",
+      "implementation": [
+        "replication/examples/ecosistema-app/src/composition.mjs"
+      ],
+      "tests": [
+        "replication/examples/ecosistema-app/test/app.test.mjs"
+      ],
+      "sampledLesson": 1,
+      "finding": "La composición fija memoria e ignora COBRIA_ADAPTER; los otros adaptadores se prueban con dobles, no como aplicación integral.",
+      "acceptance": "Instalación hasta interfaz, API, motor real, seguridad, operación y retirada en un mismo proyecto.",
+      "readerValidation": "no_verificada_para_esta_area_en_C0",
+      "closure": "parcial",
+      "number": "15",
+      "title": "Aplicación completa",
+      "declaredSources": [
+        "manuales/20-build-reference.md",
+        "replication/examples/ecosistema-app/GUIA-PASO-A-PASO.md",
+        "manuales/24-organizacion-y-operacion-del-proyecto.md"
+      ],
+      "sourceInventory": [
+        {
+          "path": "manuales/20-build-reference.md",
+          "existsAtBaseline": true
+        },
+        {
+          "path": "replication/examples/ecosistema-app/GUIA-PASO-A-PASO.md",
+          "existsAtBaseline": true
+        },
+        {
+          "path": "manuales/24-organizacion-y-operacion-del-proyecto.md",
+          "existsAtBaseline": true
+        },
+        {
+          "path": "replication/examples/ecosistema-app/src/composition.mjs",
+          "existsAtBaseline": true
+        },
+        {
+          "path": "replication/examples/ecosistema-app/test/app.test.mjs",
+          "existsAtBaseline": true
+        }
+      ],
+      "lessons": [
+        {
+          "number": 1,
+          "title": "Del caso de uso al adaptador",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-15-1",
+          "bookPresent": true,
+          "route": "/aprender/construir/1",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        },
+        {
+          "number": 2,
+          "title": "Extender sin romper contratos",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-15-2",
+          "bookPresent": true,
+          "route": "/aprender/construir/2",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        },
+        {
+          "number": 3,
+          "title": "Ejecutar el proyecto conductor",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-15-3",
+          "bookPresent": true,
+          "route": "/aprender/construir/3",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        },
+        {
+          "number": 4,
+          "title": "Cambiar el adaptador sin cambiar el núcleo",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-15-4",
+          "bookPresent": true,
+          "route": "/aprender/construir/4",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        },
+        {
+          "number": 5,
+          "title": "Cerrar una entrega demostrable",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-15-5",
+          "bookPresent": true,
+          "route": "/aprender/construir/5",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        }
+      ],
+      "coverage": {
+        "explicado": "presente_revision_muestral",
+        "ejemplificado": "ejemplos_en_lecciones",
+        "ejecutable": "parcial_por_modulo_no_por_leccion",
+        "probado": "pruebas_relacionadas_no_cobertura_total",
+        "libro": "anclajes_locales_presentes",
+        "web": "fuente_y_rutas_locales_presentes",
+        "lectores": "no_verificada_para_esta_area_en_C0"
+      }
+    },
+    {
+      "key": "toolkit",
+      "nextPhase": "C9",
+      "implementation": [
+        "replication/src/cli.mjs",
+        "replication/src/generator.mjs"
+      ],
+      "tests": [
+        "replication/tests/phase13-generator.test.mjs"
+      ],
+      "sampledLesson": 1,
+      "finding": "Algunos flags pedagógicos no existen; generar acepta --simular pero no lo aplica y escribe archivos.",
+      "acceptance": "Alinear ayuda y lecciones con comandos reales; una simulación debe producir cero escrituras.",
+      "readerValidation": "no_verificada_para_esta_area_en_C0",
+      "closure": "parcial",
+      "number": "16",
+      "title": "Herramientas para personas e IA",
+      "declaredSources": [
+        "manuales/21-toolkit.md",
+        "replication/src/cli.mjs"
+      ],
+      "sourceInventory": [
+        {
+          "path": "manuales/21-toolkit.md",
+          "existsAtBaseline": true
+        },
+        {
+          "path": "replication/src/cli.mjs",
+          "existsAtBaseline": true
+        },
+        {
+          "path": "replication/src/generator.mjs",
+          "existsAtBaseline": true
+        },
+        {
+          "path": "replication/tests/phase13-generator.test.mjs",
+          "existsAtBaseline": true
+        }
+      ],
+      "lessons": [
+        {
+          "number": 1,
+          "title": "Automatización conservadora",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-16-1",
+          "bookPresent": true,
+          "route": "/aprender/toolkit/1",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        },
+        {
+          "number": 2,
+          "title": "Contexto seguro para agentes",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-16-2",
+          "bookPresent": true,
+          "route": "/aprender/toolkit/2",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        },
+        {
+          "number": 3,
+          "title": "Declarar el proyecto mediante un manifiesto",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-16-3",
+          "bookPresent": true,
+          "route": "/aprender/toolkit/3",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        },
+        {
+          "number": 4,
+          "title": "Generar sin sobrescribir decisiones humanas",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-16-4",
+          "bookPresent": true,
+          "route": "/aprender/toolkit/4",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        },
+        {
+          "number": 5,
+          "title": "Preparar contexto seguro para una IA",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-16-5",
+          "bookPresent": true,
+          "route": "/aprender/toolkit/5",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        }
+      ],
+      "coverage": {
+        "explicado": "presente_revision_muestral",
+        "ejemplificado": "ejemplos_en_lecciones",
+        "ejecutable": "parcial_por_modulo_no_por_leccion",
+        "probado": "pruebas_relacionadas_no_cobertura_total",
+        "libro": "anclajes_locales_presentes",
+        "web": "fuente_y_rutas_locales_presentes",
+        "lectores": "no_verificada_para_esta_area_en_C0"
+      }
+    },
+    {
+      "key": "evidencia",
+      "nextPhase": "C11",
+      "implementation": [
+        "replication/scripts/build-remediation-r9.py"
+      ],
+      "tests": [
+        "replication/tests/release-handoff.test.mjs"
+      ],
+      "sampledLesson": 1,
+      "finding": "Hay réplica local y límites, pero manuales/22 mantiene resultados confirmatorios incompletos y aparece una meta de paquete inexistente.",
+      "acceptance": "Inventario vigente en todos los productos y revisión, transferencia, cribado y réplica externos auténticos.",
+      "readerValidation": "no_verificada_para_esta_area_en_C0",
+      "closure": "parcial",
+      "number": "17",
+      "title": "Evidencia, evolución y publicación",
+      "declaredSources": [
+        "manuales/22-evidence-transfer.md",
+        "MATRIZ-TRAZABILIDAD-RELEASE.md"
+      ],
+      "sourceInventory": [
+        {
+          "path": "manuales/22-evidence-transfer.md",
+          "existsAtBaseline": true
+        },
+        {
+          "path": "MATRIZ-TRAZABILIDAD-RELEASE.md",
+          "existsAtBaseline": true
+        },
+        {
+          "path": "replication/scripts/build-remediation-r9.py",
+          "existsAtBaseline": true
+        },
+        {
+          "path": "replication/tests/release-handoff.test.mjs",
+          "existsAtBaseline": true
+        }
+      ],
+      "lessons": [
+        {
+          "number": 1,
+          "title": "De una afirmación a su evidencia",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-17-1",
+          "bookPresent": true,
+          "route": "/aprender/evidencia/1",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        },
+        {
+          "number": 2,
+          "title": "Versionar, retirar y comunicar",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-17-2",
+          "bookPresent": true,
+          "route": "/aprender/evidencia/2",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        },
+        {
+          "number": 3,
+          "title": "Construir una matriz de trazabilidad integral",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-17-3",
+          "bookPresent": true,
+          "route": "/aprender/evidencia/3",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        },
+        {
+          "number": 4,
+          "title": "Reproducir desde un checkout limpio",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-17-4",
+          "bookPresent": true,
+          "route": "/aprender/evidencia/4",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        },
+        {
+          "number": 5,
+          "title": "Publicar con versión, límites y retiro",
+          "fieldsPresent": true,
+          "bookAnchor": "leccion-17-5",
+          "bookPresent": true,
+          "route": "/aprender/evidencia/5",
+          "webSourcePresent": true,
+          "executionContractPerLesson": false,
+          "testBindingPerLesson": false
+        }
+      ],
+      "coverage": {
+        "explicado": "presente_revision_muestral",
+        "ejemplificado": "ejemplos_en_lecciones",
+        "ejecutable": "parcial_por_modulo_no_por_leccion",
+        "probado": "pruebas_relacionadas_no_cobertura_total",
+        "libro": "anclajes_locales_presentes",
+        "web": "fuente_y_rutas_locales_presentes",
+        "lectores": "no_verificada_para_esta_area_en_C0"
+      }
+    }
+  ],
+  "labs": [
+    {
+      "id": "LAB-01",
+      "module": "inicio",
+      "command": "npm test -- --test-name-pattern='documento canónico'",
+      "declaresDirectory": false,
+      "bareNpmWithoutDirectory": true,
+      "pedagogicalTaskVerifiedByCommand": "no_verificado_en_C0"
+    },
+    {
+      "id": "LAB-02",
+      "module": "inicio",
+      "command": "cd replication/examples/ecosistema-app && npm test",
+      "declaresDirectory": true,
+      "bareNpmWithoutDirectory": false,
+      "pedagogicalTaskVerifiedByCommand": "no_verificado_en_C0"
+    },
+    {
+      "id": "LAB-03",
+      "module": "fundamentos",
+      "command": "npm test -- --test-name-pattern='revisión'",
+      "declaresDirectory": false,
+      "bareNpmWithoutDirectory": true,
+      "pedagogicalTaskVerifiedByCommand": "no_verificado_en_C0"
+    },
+    {
+      "id": "LAB-04",
+      "module": "fundamentos",
+      "command": "npm test -- --test-name-pattern='válido'",
+      "declaresDirectory": false,
+      "bareNpmWithoutDirectory": true,
+      "pedagogicalTaskVerifiedByCommand": "no_verificado_en_C0"
+    },
+    {
+      "id": "LAB-05",
+      "module": "arquitectura",
+      "command": "make verificar-cierre-14-15",
+      "declaresDirectory": false,
+      "bareNpmWithoutDirectory": false,
+      "pedagogicalTaskVerifiedByCommand": "no_verificado_en_C0"
+    },
+    {
+      "id": "LAB-06",
+      "module": "arquitectura",
+      "command": "make verificar-fase-14",
+      "declaresDirectory": false,
+      "bareNpmWithoutDirectory": false,
+      "pedagogicalTaskVerifiedByCommand": "no_verificado_en_C0"
+    },
+    {
+      "id": "LAB-07",
+      "module": "capas",
+      "command": "node replication/examples/ecosistema-app/src/demo.mjs",
+      "declaresDirectory": false,
+      "bareNpmWithoutDirectory": false,
+      "pedagogicalTaskVerifiedByCommand": "no_verificado_en_C0"
+    },
+    {
+      "id": "LAB-08",
+      "module": "capas",
+      "command": "cd replication/examples/ecosistema-app && npm test",
+      "declaresDirectory": true,
+      "bareNpmWithoutDirectory": false,
+      "pedagogicalTaskVerifiedByCommand": "no_verificado_en_C0"
+    },
+    {
+      "id": "LAB-09",
+      "module": "codigo",
+      "command": "npm test -- --test-name-pattern='obsoleta'",
+      "declaresDirectory": false,
+      "bareNpmWithoutDirectory": true,
+      "pedagogicalTaskVerifiedByCommand": "no_verificado_en_C0"
+    },
+    {
+      "id": "LAB-10",
+      "module": "codigo",
+      "command": "npm run lint",
+      "declaresDirectory": false,
+      "bareNpmWithoutDirectory": true,
+      "pedagogicalTaskVerifiedByCommand": "no_verificado_en_C0"
+    },
+    {
+      "id": "LAB-11",
+      "module": "datos",
+      "command": "make verificar-fase-3",
+      "declaresDirectory": false,
+      "bareNpmWithoutDirectory": false,
+      "pedagogicalTaskVerifiedByCommand": "no_verificado_en_C0"
+    },
+    {
+      "id": "LAB-12",
+      "module": "datos",
+      "command": "npm test -- --test-name-pattern='Dater'",
+      "declaresDirectory": false,
+      "bareNpmWithoutDirectory": true,
+      "pedagogicalTaskVerifiedByCommand": "no_verificado_en_C0"
+    },
+    {
+      "id": "LAB-13",
+      "module": "core",
+      "command": "cd replication && node src/cli.mjs verificar --adaptador memory",
+      "declaresDirectory": true,
+      "bareNpmWithoutDirectory": false,
+      "pedagogicalTaskVerifiedByCommand": "no_verificado_en_C0"
+    },
+    {
+      "id": "LAB-14",
+      "module": "core",
+      "command": "npm test -- --test-name-pattern='reconstruye'",
+      "declaresDirectory": false,
+      "bareNpmWithoutDirectory": true,
+      "pedagogicalTaskVerifiedByCommand": "no_verificado_en_C0"
+    },
+    {
+      "id": "LAB-15",
+      "module": "patrones",
+      "command": "make verificar-ejemplos-patrones",
+      "declaresDirectory": false,
+      "bareNpmWithoutDirectory": false,
+      "pedagogicalTaskVerifiedByCommand": "no_verificado_en_C0"
+    },
+    {
+      "id": "LAB-16",
+      "module": "patrones",
+      "command": "make verificar-ejemplos-patrones",
+      "declaresDirectory": false,
+      "bareNpmWithoutDirectory": false,
+      "pedagogicalTaskVerifiedByCommand": "no_verificado_en_C0"
+    },
+    {
+      "id": "LAB-17",
+      "module": "apiux",
+      "command": "npm test -- --test-name-pattern='RFC'",
+      "declaresDirectory": false,
+      "bareNpmWithoutDirectory": true,
+      "pedagogicalTaskVerifiedByCommand": "no_verificado_en_C0"
+    },
+    {
+      "id": "LAB-18",
+      "module": "apiux",
+      "command": "cd sitio && npm run lint",
+      "declaresDirectory": true,
+      "bareNpmWithoutDirectory": false,
+      "pedagogicalTaskVerifiedByCommand": "no_verificado_en_C0"
+    },
+    {
+      "id": "LAB-19",
+      "module": "documentacion",
+      "command": "make verificar-fase-6",
+      "declaresDirectory": false,
+      "bareNpmWithoutDirectory": false,
+      "pedagogicalTaskVerifiedByCommand": "no_verificado_en_C0"
+    },
+    {
+      "id": "LAB-20",
+      "module": "documentacion",
+      "command": "make verificar-fase-17",
+      "declaresDirectory": false,
+      "bareNpmWithoutDirectory": false,
+      "pedagogicalTaskVerifiedByCommand": "no_verificado_en_C0"
+    },
+    {
+      "id": "LAB-21",
+      "module": "seguridad",
+      "command": "npm test -- --test-name-pattern='ámbito'",
+      "declaresDirectory": false,
+      "bareNpmWithoutDirectory": true,
+      "pedagogicalTaskVerifiedByCommand": "no_verificado_en_C0"
+    },
+    {
+      "id": "LAB-22",
+      "module": "seguridad",
+      "command": "cd sitio && npm audit",
+      "declaresDirectory": true,
+      "bareNpmWithoutDirectory": false,
+      "pedagogicalTaskVerifiedByCommand": "no_verificado_en_C0"
+    },
+    {
+      "id": "LAB-23",
+      "module": "calidad",
+      "command": "cd replication && npm test",
+      "declaresDirectory": true,
+      "bareNpmWithoutDirectory": false,
+      "pedagogicalTaskVerifiedByCommand": "no_verificado_en_C0"
+    },
+    {
+      "id": "LAB-24",
+      "module": "calidad",
+      "command": "cd replication && npm run statistics:r7",
+      "declaresDirectory": true,
+      "bareNpmWithoutDirectory": false,
+      "pedagogicalTaskVerifiedByCommand": "no_verificado_en_C0"
+    },
+    {
+      "id": "LAB-25",
+      "module": "operaciones",
+      "command": "make verificar-fase-20",
+      "declaresDirectory": false,
+      "bareNpmWithoutDirectory": false,
+      "pedagogicalTaskVerifiedByCommand": "no_verificado_en_C0"
+    },
+    {
+      "id": "LAB-26",
+      "module": "operaciones",
+      "command": "make verificar-fase-20",
+      "declaresDirectory": false,
+      "bareNpmWithoutDirectory": false,
+      "pedagogicalTaskVerifiedByCommand": "no_verificado_en_C0"
+    },
+    {
+      "id": "LAB-27",
+      "module": "ia",
+      "command": "npm test -- --test-name-pattern='fuga'",
+      "declaresDirectory": false,
+      "bareNpmWithoutDirectory": true,
+      "pedagogicalTaskVerifiedByCommand": "no_verificado_en_C0"
+    },
+    {
+      "id": "LAB-28",
+      "module": "ia",
+      "command": "npm test -- --test-name-pattern='abstiene'",
+      "declaresDirectory": false,
+      "bareNpmWithoutDirectory": true,
+      "pedagogicalTaskVerifiedByCommand": "no_verificado_en_C0"
+    },
+    {
+      "id": "LAB-29",
+      "module": "construir",
+      "command": "make verificar",
+      "declaresDirectory": false,
+      "bareNpmWithoutDirectory": false,
+      "pedagogicalTaskVerifiedByCommand": "no_verificado_en_C0"
+    },
+    {
+      "id": "LAB-30",
+      "module": "evidencia",
+      "command": "make verificar && git status --short",
+      "declaresDirectory": false,
+      "bareNpmWithoutDirectory": false,
+      "pedagogicalTaskVerifiedByCommand": "no_verificado_en_C0"
+    }
+  ],
+  "findings": [
+    {
+      "id": "C0-01",
+      "severity": "critica",
+      "areas": [
+        "toolkit"
+      ],
+      "phase": "C9",
+      "title": "La simulación de generación puede escribir",
+      "evidence": [
+        {
+          "path": "replication/src/cli.mjs",
+          "needle": "await generate({type:options.type",
+          "line": 48,
+          "sha256": "cca42a2a31596fc972ff39a018b66172878ed3ab8145b404562d36a3bd7b265f"
+        },
+        {
+          "path": "editorial/curriculum.json",
+          "needle": "cobria generar --simular",
+          "line": 1591,
+          "sha256": "0ad30c61d3d9a24a2e0c8f5e7ba6ee177a492679a19a16152e4898db696a79ff"
+        }
+      ],
+      "action": "No recomendar generar --simular hasta que rechace la opción o implemente un plan sin escrituras."
+    },
+    {
+      "id": "C0-02",
+      "severity": "alta",
+      "areas": [
+        "fundamentos",
+        "datos"
+      ],
+      "phase": "C1",
+      "title": "La regla de cantidad y la API de la entidad se contradicen",
+      "evidence": [
+        {
+          "path": "replication/examples/ecosistema-app/src/domain/observacion.mjs",
+          "needle": "cantidad < 1",
+          "line": 8,
+          "sha256": "a2816760f5d360959fdc756d48b56bf068df3869f891278806a0397c6c5d7d54"
+        },
+        {
+          "path": "editorial/curriculum.json",
+          "needle": "Observacion.crear",
+          "line": 145,
+          "sha256": "0ad30c61d3d9a24a2e0c8f5e7ba6ee177a492679a19a16152e4898db696a79ff"
+        },
+        {
+          "path": "editorial/curriculum.json",
+          "needle": "cantidad < 0",
+          "line": 190,
+          "sha256": "0ad30c61d3d9a24a2e0c8f5e7ba6ee177a492679a19a16152e4898db696a79ff"
+        }
+      ],
+      "action": "Unificar el contrato, la forma de construcción y las pruebas antes de ampliar el tutorial."
+    },
+    {
+      "id": "C0-03",
+      "severity": "alta",
+      "areas": [
+        "patrones",
+        "evidencia"
+      ],
+      "phase": "C1",
+      "title": "Hay metas Make enseñadas que no existen",
+      "evidence": [
+        {
+          "path": "editorial/labs.json",
+          "needle": "make verificar-ejemplos-patrones",
+          "line": 18,
+          "sha256": "90197858d1e0d0fbdea4770c8da04003c407b5beb521c9bbbc3ffea5ddea9ee5"
+        },
+        {
+          "path": "editorial/curriculum.json",
+          "needle": "make paquete-candidato",
+          "line": 1706,
+          "sha256": "0ad30c61d3d9a24a2e0c8f5e7ba6ee177a492679a19a16152e4898db696a79ff"
+        },
+        {
+          "path": "Makefile",
+          "needle": "verificar-r4:",
+          "line": 124,
+          "sha256": "e591054a54299de9310de106854a7d2b684d6ebd588f9fa28b3b6c965997b57a"
+        }
+      ],
+      "action": "Sustituir por comandos existentes y probarlos desde un directorio declarado."
+    },
+    {
+      "id": "C0-04",
+      "severity": "alta",
+      "areas": [
+        "inicio",
+        "codigo",
+        "documentacion"
+      ],
+      "phase": "C1",
+      "title": "Los laboratorios no declaran siempre el directorio de ejecución",
+      "evidence": [
+        {
+          "path": "editorial/labs.json",
+          "needle": "npm test -- --test-name-pattern",
+          "line": 4,
+          "sha256": "90197858d1e0d0fbdea4770c8da04003c407b5beb521c9bbbc3ffea5ddea9ee5"
+        },
+        {
+          "path": "replication/examples/ecosistema-app/package.json",
+          "needle": "\"test\": \"node --test\"",
+          "line": 8,
+          "sha256": "611d68e5cf34ed6baff0186ba9727d98b4946da45154cf6d3ed70901ffc4565e"
+        }
+      ],
+      "action": "Añadir cwd, prerrequisitos, salida esperada y una comprobación de que se ejecutó al menos una prueba pertinente."
+    },
+    {
+      "id": "C0-05",
+      "severity": "alta",
+      "areas": [
+        "construir"
+      ],
+      "phase": "C8",
+      "title": "Seleccionar MongoDB por variable no cambia la aplicación",
+      "evidence": [
+        {
+          "path": "editorial/curriculum.json",
+          "needle": "COBRIA_ADAPTER=mongodb npm test",
+          "line": 1490,
+          "sha256": "0ad30c61d3d9a24a2e0c8f5e7ba6ee177a492679a19a16152e4898db696a79ff"
+        },
+        {
+          "path": "replication/examples/ecosistema-app/src/composition.mjs",
+          "needle": "new RepositorioMemoria()",
+          "line": 14,
+          "sha256": "f1c57632baadf8664086444ac2fd9b118ab0ea76be2343e476a07747f6fc72fb"
+        },
+        {
+          "path": "replication/examples/ecosistema-app/test/app.test.mjs",
+          "needle": "falsoFetch",
+          "line": 158,
+          "sha256": "0ab835d8ccaabfd47ed888416454a5712a27c901ffcfb784f0029490173a6267"
+        }
+      ],
+      "action": "Implementar composición configurable y una integración explícita con motor real sin confundirla con dobles."
+    },
+    {
+      "id": "C0-06",
+      "severity": "alta",
+      "areas": [
+        "toolkit"
+      ],
+      "phase": "C9",
+      "title": "La documentación usa opciones CLI no implementadas",
+      "evidence": [
+        {
+          "path": "editorial/curriculum.json",
+          "needle": "--comprobar",
+          "line": 1591,
+          "sha256": "0ad30c61d3d9a24a2e0c8f5e7ba6ee177a492679a19a16152e4898db696a79ff"
+        },
+        {
+          "path": "editorial/curriculum.json",
+          "needle": "--cambio cambio.json",
+          "line": 1545,
+          "sha256": "0ad30c61d3d9a24a2e0c8f5e7ba6ee177a492679a19a16152e4898db696a79ff"
+        },
+        {
+          "path": "replication/src/cli.mjs",
+          "needle": "CLI_OPTION_UNKNOWN",
+          "line": 37,
+          "sha256": "cca42a2a31596fc972ff39a018b66172878ed3ab8145b404562d36a3bd7b265f"
+        }
+      ],
+      "action": "Verificar cada ejemplo contra la ayuda y el comportamiento de la CLI; no agregar flags ficticios."
+    },
+    {
+      "id": "C0-07",
+      "severity": "alta",
+      "areas": [
+        "datos"
+      ],
+      "phase": "C2",
+      "title": "Dos fuentes JSON declaradas no existen",
+      "evidence": [
+        {
+          "path": "editorial/curriculum.json",
+          "needle": "specification/phase-3/data-dictionary.json",
+          "line": 607,
+          "sha256": "0ad30c61d3d9a24a2e0c8f5e7ba6ee177a492679a19a16152e4898db696a79ff"
+        },
+        {
+          "path": "specification/phase-3/data-dictionary.yaml",
+          "needle": "",
+          "line": 1,
+          "sha256": "ff878f74b5d7d82ce9c3cb8feeb892387bd0f13638e03cffaed1478f5abe7ac9"
+        },
+        {
+          "path": "editorial/curriculum.json",
+          "needle": "specification/phase-6/code-conventions.json",
+          "line": 506,
+          "sha256": "0ad30c61d3d9a24a2e0c8f5e7ba6ee177a492679a19a16152e4898db696a79ff"
+        },
+        {
+          "path": "specification/phase-6/documentation.yaml",
+          "needle": "",
+          "line": 1,
+          "sha256": "9ded2add8d5362db9c834e7cd6cd8f0f7c2054e603e464843c56333058044548"
+        }
+      ],
+      "action": "Enlazar el diccionario YAML y la fuente real de convenciones de código; validar existencia de todas las fuentes."
+    },
+    {
+      "id": "C0-08",
+      "severity": "alta",
+      "areas": [
+        "evidencia"
+      ],
+      "phase": "C11",
+      "title": "Un manual conserva un estado confirmatorio anterior",
+      "evidence": [
+        {
+          "path": "manuales/22-evidence-transfer.md",
+          "needle": "faltan corridas de MongoDB",
+          "line": 46,
+          "sha256": "7f3bab39aa2f0de573c4b8a23b2e921e83660049da4ecad6add9a773f3fed6a9"
+        },
+        {
+          "path": "ROADMAP-REMEDIACION-PUBLICA-1.0.md",
+          "needle": "90 observaciones válidas cada uno",
+          "line": 254,
+          "sha256": "7fd921042002623605f3ea0551b925fe1f9d77cfeacfa79f5929e8b153bbc48f"
+        }
+      ],
+      "action": "Sincronizar estados con R7 sin convertir su evidencia interna en réplica externa."
+    },
+    {
+      "id": "C0-09",
+      "severity": "media",
+      "areas": [
+        "inicio",
+        "fundamentos",
+        "apiux",
+        "seguridad",
+        "calidad",
+        "operaciones"
+      ],
+      "phase": "C10",
+      "title": "La palabra estable en manuales puede confundirse con una edición cerrada",
+      "evidence": [
+        {
+          "path": "manuales/01-fundamentos.md",
+          "needle": "Estado:** estable",
+          "line": 4,
+          "sha256": "4be364f8ef7cd67958748ea6627c948610eb77a3013ac6cad904b6d1d8032a0e"
+        },
+        {
+          "path": "editorial/canonical.json",
+          "needle": "candidate-non-stable",
+          "line": 17,
+          "sha256": "52bd8e54e1774f187a5103f5e909c3df79f0222c673193df73c166a0bdf6c5e1"
+        }
+      ],
+      "action": "Distinguir madurez del texto, candidata editorial y estado publicado."
+    },
+    {
+      "id": "C0-10",
+      "severity": "alta",
+      "areas": [
+        "inicio",
+        "fundamentos",
+        "arquitectura",
+        "capas",
+        "codigo",
+        "datos",
+        "core",
+        "patrones",
+        "apiux",
+        "documentacion",
+        "seguridad",
+        "calidad",
+        "operaciones",
+        "ia",
+        "construir",
+        "toolkit",
+        "evidencia"
+      ],
+      "phase": "C13",
+      "title": "La estructura uniforme no acredita aprendizaje ni ejecución por lección",
+      "evidence": [
+        {
+          "path": "editorial/ARQUITECTURA-PEDAGOGICA.md",
+          "needle": "Criterio de completitud",
+          "line": 54,
+          "sha256": "50cfcc67c09a547970e0c7d977cae1b1993763596a96afee168c5a045938205d"
+        },
+        {
+          "path": "sitio/app/aprender/[modulo]/[leccion]/page.tsx",
+          "needle": "Fuentes del módulo",
+          "line": 36,
+          "sha256": "11fd642f1e3cfc0f3457adb3e82fa3475a5fcc2c02bc8eae72838c149391ce49"
+        }
+      ],
+      "action": "Añadir trazabilidad por lección y validación de tareas con lectores; no utilizar conteos como porcentaje de calidad."
+    }
+  ],
+  "sourceInventory": [
+    {
+      "path": "articulo-cobria.tex",
+      "existsAtBaseline": true,
+      "sha256": "2e0aad51e46f36500e4e2b15f03b11a2a27362a22e572accb3c5593c4b17a1cd"
+    },
+    {
+      "path": "editorial/ARQUITECTURA-PEDAGOGICA.md",
+      "existsAtBaseline": true,
+      "sha256": "50cfcc67c09a547970e0c7d977cae1b1993763596a96afee168c5a045938205d"
+    },
+    {
+      "path": "editorial/build-curriculum.mjs",
+      "existsAtBaseline": true,
+      "sha256": "57d657109aa73ff446f17cb3720e7bd831b555d102ccca87edc829b8c9f7aa42"
+    },
+    {
+      "path": "editorial/canonical.json",
+      "existsAtBaseline": true,
+      "sha256": "52bd8e54e1774f187a5103f5e909c3df79f0222c673193df73c166a0bdf6c5e1"
+    },
+    {
+      "path": "editorial/content-map.json",
+      "existsAtBaseline": true,
+      "sha256": "6af902dea14c7366a0340b83296460fa4cf41a333b2efc95d9caf56dcba5f5c1"
+    },
+    {
+      "path": "editorial/curriculum.json",
+      "existsAtBaseline": true,
+      "sha256": "0ad30c61d3d9a24a2e0c8f5e7ba6ee177a492679a19a16152e4898db696a79ff"
+    },
+    {
+      "path": "editorial/DICCIONARIO-TERMINOLOGICO.md",
+      "existsAtBaseline": true,
+      "sha256": "54be63b296976adc30bc561e7c1677c5c1cfe5dba40b6f2b60f6f223823b548a"
+    },
+    {
+      "path": "editorial/labs.json",
+      "existsAtBaseline": true,
+      "sha256": "90197858d1e0d0fbdea4770c8da04003c407b5beb521c9bbbc3ffea5ddea9ee5"
+    },
+    {
+      "path": "editorial/products.json",
+      "existsAtBaseline": true,
+      "sha256": "14c3be98f1e02162b7f8a75a50c0f7f4b74b632e7642996ffdccffbff88cb3bd"
+    },
+    {
+      "path": "libro-cobria/index.html",
+      "existsAtBaseline": true,
+      "sha256": "927dba6d8322599f622d4729f2bf911b48a739cbbddec7423d2b89cc627cee1c"
+    },
+    {
+      "path": "libro-cobria/practical-examples.json",
+      "existsAtBaseline": true,
+      "sha256": "5d06750c1745f381bb63e4b46c9d76accf906e8414876328f112859e268a9ef8"
+    },
+    {
+      "path": "main.tex",
+      "existsAtBaseline": true,
+      "sha256": "feb3aee84a999eec490a47c29e258807bd6f010b14a687b233d41de10b0d4064"
+    },
+    {
+      "path": "Makefile",
+      "existsAtBaseline": true,
+      "sha256": "e591054a54299de9310de106854a7d2b684d6ebd588f9fa28b3b6c965997b57a"
+    },
+    {
+      "path": "MANIFESTO.md",
+      "existsAtBaseline": true,
+      "sha256": "bf611df09af50836a943e83e7ba498525414192657371962a14bbdd651441f2d"
+    },
+    {
+      "path": "manuales/01-fundamentos.md",
+      "existsAtBaseline": true,
+      "sha256": "4be364f8ef7cd67958748ea6627c948610eb77a3013ac6cad904b6d1d8032a0e"
+    },
+    {
+      "path": "manuales/02-layers.md",
+      "existsAtBaseline": true,
+      "sha256": "8e30acf02b09d2a5e136139e9abf754e4a53e923dc695c935ff26124c6310689"
+    },
+    {
+      "path": "manuales/03-pattern-design.md",
+      "existsAtBaseline": true,
+      "sha256": "3c54b286df92c2b7cf370b33562cf308662dea48abb38bd6d22064cc0d7e6bc4"
+    },
+    {
+      "path": "manuales/04-bases-de-datos.md",
+      "existsAtBaseline": true,
+      "sha256": "d23fe85cd5f776acc805fcc919b3a255ea7ae8f88a63b6697dfb604530a47e46"
+    },
+    {
+      "path": "manuales/11-estado-y-roadmap-integral.md",
+      "existsAtBaseline": true,
+      "sha256": "7d187923de8a6a8c818a9b9c3a9831b7d7a8b2b100fe7f35a8157b865ba403e4"
+    },
+    {
+      "path": "manuales/15-api-ux.md",
+      "existsAtBaseline": true,
+      "sha256": "01ae0b46156f12496c917e32750f3c2ac00f138bf7d8dc21dc8522720e4f4227"
+    },
+    {
+      "path": "manuales/16-security.md",
+      "existsAtBaseline": true,
+      "sha256": "e699fc42bb6e99f6e754309043e7fe8beb8c256a5b9ebdcaffe4bc04d5e784ac"
+    },
+    {
+      "path": "manuales/17-quality-performance.md",
+      "existsAtBaseline": true,
+      "sha256": "9012e59080603e43d223b572e985dd327429227b459c5f7de2cc6599bfac73e8"
+    },
+    {
+      "path": "manuales/18-cloud-operations.md",
+      "existsAtBaseline": true,
+      "sha256": "a154cfa76c2134e3042809c0a79571387db8c5c2b34991e4a9f0c5a64fa43bbf"
+    },
+    {
+      "path": "manuales/19-analytics-ai.md",
+      "existsAtBaseline": true,
+      "sha256": "99ffc8e4f1360b8ff752d0d14a8edc3d792e2d216a11102a447aa85667139558"
+    },
+    {
+      "path": "manuales/20-build-reference.md",
+      "existsAtBaseline": true,
+      "sha256": "60a325ede1675687ae6cf4388bd832c9d8af402e7990ca58d4a21c7ad1af412e"
+    },
+    {
+      "path": "manuales/21-toolkit.md",
+      "existsAtBaseline": true,
+      "sha256": "e9d10fe99a96826a9ebd5f0f944df920ee3cbe109aafc27f9296a8f139d635a3"
+    },
+    {
+      "path": "manuales/22-evidence-transfer.md",
+      "existsAtBaseline": true,
+      "sha256": "7f3bab39aa2f0de573c4b8a23b2e921e83660049da4ecad6add9a773f3fed6a9"
+    },
+    {
+      "path": "manuales/23-metodologia-de-correccion-verificable.md",
+      "existsAtBaseline": true,
+      "sha256": "b134dbf9cc90c9377069179a2ffa897aa25fef7966b652892ce54e8025384dd7"
+    },
+    {
+      "path": "manuales/24-organizacion-y-operacion-del-proyecto.md",
+      "existsAtBaseline": true,
+      "sha256": "a94071b2628f286850b641eb91310916851849e51b5a1355a761aec89e638ed0"
+    },
+    {
+      "path": "manuales/README.md",
+      "existsAtBaseline": true,
+      "sha256": "7625ed7c58f7560405bfb873de6ae89a0cb4aeba1bc55e020e3f3dff7b1a1273"
+    },
+    {
+      "path": "MATRIZ-TRAZABILIDAD-RELEASE.md",
+      "existsAtBaseline": true,
+      "sha256": "1eafddfcefad8be9861244d77e293da6a0a4e9f5506b1c28340426c9bb6e3a26"
+    },
+    {
+      "path": "partes/parte-i-fundamentos.tex",
+      "existsAtBaseline": true,
+      "sha256": "f8ef86a8616236cd285e4c5c5fb72854d9c65b5d7700aa1738b88833f21f1f7c"
+    },
+    {
+      "path": "partes/parte-ii-diseno-formalizacion.tex",
+      "existsAtBaseline": true,
+      "sha256": "d7c4e6a1031b9f205865612aa615d55ec16f8e4a192bf2f48736f9aad8cc2451"
+    },
+    {
+      "path": "partes/parte-iii-rendimiento-optimizacion.tex",
+      "existsAtBaseline": true,
+      "sha256": "d420fba5c17ef642fd2d421f6d73a1cb86f9b5130aba7e89d1411d3263b5558b"
+    },
+    {
+      "path": "partes/parte-iv-analitica-ia.tex",
+      "existsAtBaseline": true,
+      "sha256": "621aa4ec669997904ed481099e3e66c31aa6c8af8c4683687a7ca0b7a4a5d3bf"
+    },
+    {
+      "path": "partes/parte-v-implementacion-casos.tex",
+      "existsAtBaseline": true,
+      "sha256": "d5f901bf0d8c5007a4221050c0e89362c2d0be4d6645b088f190b1051f8d2815"
+    },
+    {
+      "path": "partes/parte-vi-evaluacion-nosql.tex",
+      "existsAtBaseline": true,
+      "sha256": "584ea51dd41220800ee3f66ca7d6a99e0aea362fc83567bda5ed4020c60751ee"
+    },
+    {
+      "path": "partes/parte-vii-sintesis-nosql.tex",
+      "existsAtBaseline": true,
+      "sha256": "4de55a05ae9748276feec0cb5804ad1793d33bf3dc0a8e84d1ae38b894894de2"
+    },
+    {
+      "path": "partes/parte-viii-manual-replica-nosql.tex",
+      "existsAtBaseline": true,
+      "sha256": "ca7897dc79e22a319d3ea611e26338a8c49df42055b7dd4c3087b4f461c3cd33"
+    },
+    {
+      "path": "replication/examples/ecosistema-app/GUIA-PASO-A-PASO.md",
+      "existsAtBaseline": true,
+      "sha256": "5f66029494d254877e2745b5703cefe7ccec7b3c9cdf08e45266e71f5c3be536"
+    },
+    {
+      "path": "replication/examples/ecosistema-app/package.json",
+      "existsAtBaseline": true,
+      "sha256": "611d68e5cf34ed6baff0186ba9727d98b4946da45154cf6d3ed70901ffc4565e"
+    },
+    {
+      "path": "replication/examples/ecosistema-app/README.md",
+      "existsAtBaseline": true,
+      "sha256": "c5c1b8e7c2854cfa5038ed9c63d39daf77ed7194b81915bf1669d9ad05b48f1d"
+    },
+    {
+      "path": "replication/examples/ecosistema-app/src/application/ai/recuperar-evidencia.mjs",
+      "existsAtBaseline": true,
+      "sha256": "ce421d15d2acecd323a1d75fea4954ef45c6c7874275ef1e3c7fb7a78ee5f0ff"
+    },
+    {
+      "path": "replication/examples/ecosistema-app/src/application/analytics/construir-conjunto.mjs",
+      "existsAtBaseline": true,
+      "sha256": "ca174a58613669404be7edde430dfbc02575365e9fc69ece6e895e0618dcd37b"
+    },
+    {
+      "path": "replication/examples/ecosistema-app/src/application/security/autorizar-capacidad.mjs",
+      "existsAtBaseline": true,
+      "sha256": "32e86f0baa506968576e4c3b846b9136b30a56ba9dfb166966bf69420c7d3b96"
+    },
+    {
+      "path": "replication/examples/ecosistema-app/src/composition.mjs",
+      "existsAtBaseline": true,
+      "sha256": "f1c57632baadf8664086444ac2fd9b118ab0ea76be2343e476a07747f6fc72fb"
+    },
+    {
+      "path": "replication/examples/ecosistema-app/src/demo.mjs",
+      "existsAtBaseline": true,
+      "sha256": "8c1608df879bfbeef13a9aedff1b1d37b3ad8551f2d001e3a6d2a94a5ee32667"
+    },
+    {
+      "path": "replication/examples/ecosistema-app/src/domain/error-cobria.mjs",
+      "existsAtBaseline": true,
+      "sha256": "09ac725bdb7003d3636430c8f83e860213eb92fb1913d466151ef93ca018d7cc"
+    },
+    {
+      "path": "replication/examples/ecosistema-app/src/domain/observacion.mjs",
+      "existsAtBaseline": true,
+      "sha256": "a2816760f5d360959fdc756d48b56bf068df3869f891278806a0397c6c5d7d54"
+    },
+    {
+      "path": "replication/examples/ecosistema-app/src/infrastructure/data/observacion-dater.mjs",
+      "existsAtBaseline": true,
+      "sha256": "7c4a6d1585bc14c278e7091d14baa0189258307de27a408298b3d3dfe4f225bf"
+    },
+    {
+      "path": "replication/examples/ecosistema-app/src/presentation/problema-http.mjs",
+      "existsAtBaseline": true,
+      "sha256": "aebe90abc3e4cb22eb23eb17f67b7b0e22b80c13e1689fae1b2ddc723928e6f5"
+    },
+    {
+      "path": "replication/examples/ecosistema-app/src/presentation/registrar-observacion-controller.mjs",
+      "existsAtBaseline": true,
+      "sha256": "ac8661952fd5ff5fa16044fcb7faa508b5ec22d81bb667413c0dd119ca5ae48c"
+    },
+    {
+      "path": "replication/examples/ecosistema-app/test/app.test.mjs",
+      "existsAtBaseline": true,
+      "sha256": "0ab835d8ccaabfd47ed888416454a5712a27c901ffcfb784f0029490173a6267"
+    },
+    {
+      "path": "replication/examples/operacion-documental/src/application/verificar-entrega.mjs",
+      "existsAtBaseline": true,
+      "sha256": "98760c237244af5e817fabb1f51f29f88e39321ebb0e79331ebac123881322b4"
+    },
+    {
+      "path": "replication/examples/operacion-documental/test/operacion.test.mjs",
+      "existsAtBaseline": true,
+      "sha256": "079d79a36d9c1fc8b02e3e2d94a4cf171331ee9030d700bb6fa1c4f45c88f4d9"
+    },
+    {
+      "path": "replication/examples/patterns-r4/src/patrones.ts",
+      "existsAtBaseline": true,
+      "sha256": "58e133bd4838d0a6ba0f889462203f863d14e6d2f8a9682888ebe1a6fb5accf5"
+    },
+    {
+      "path": "replication/examples/patterns-r4/test/patrones.test.ts",
+      "existsAtBaseline": true,
+      "sha256": "fc8972324455c02f7fd24271ff0cb55d2a720990eeca353d7d62280dac658fd8"
+    },
+    {
+      "path": "replication/scripts/build-remediation-r9.py",
+      "existsAtBaseline": true,
+      "sha256": "10861b052c785c96805422731aecb4e3773bb3da0bfe5651424d5e06b7d9f3e2"
+    },
+    {
+      "path": "replication/scripts/run-r7-confirmatory.mjs",
+      "existsAtBaseline": true,
+      "sha256": "65fb4aa9b5e330c99556836f6e64b6f9941e51ace9d121b703f16aebf8db9b9c"
+    },
+    {
+      "path": "replication/src/auditor.mjs",
+      "existsAtBaseline": true,
+      "sha256": "af8b3f0b030e6afde7928250a511f8aed21bfe177d659e6cb124be09151cf773"
+    },
+    {
+      "path": "replication/src/cli.mjs",
+      "existsAtBaseline": true,
+      "sha256": "cca42a2a31596fc972ff39a018b66172878ed3ab8145b404562d36a3bd7b265f"
+    },
+    {
+      "path": "replication/src/conformance.mjs",
+      "existsAtBaseline": true,
+      "sha256": "895f7b76ef0b824deec23063df4212fe9bb247751e71025bf450ac09d91b6154"
+    },
+    {
+      "path": "replication/src/core/cobria.mjs",
+      "existsAtBaseline": true,
+      "sha256": "825291a456ed22b6e11e8b0351acc64ca3eddb0b81817897f587edf4c9e4e00a"
+    },
+    {
+      "path": "replication/src/generator.mjs",
+      "existsAtBaseline": true,
+      "sha256": "33bc87aa13585c5e13cacfc2b05e7eff8aab0e7c5bae1a3fef4a95aad21c2755"
+    },
+    {
+      "path": "replication/tests/core11.test.mjs",
+      "existsAtBaseline": true,
+      "sha256": "0e866fea99d8868825227f44309813013e9e58823579a4587899c963693270ba"
+    },
+    {
+      "path": "replication/tests/phase13-generator.test.mjs",
+      "existsAtBaseline": true,
+      "sha256": "c7a44761509149d08da40655c50f9b62c076457761d23d0209b15fb1c09c71ba"
+    },
+    {
+      "path": "replication/tests/phase14-auditor.test.mjs",
+      "existsAtBaseline": true,
+      "sha256": "f381d4fc4bab77194f6e50d55798641207ef0a235d492fc7290c643a7fa734e0"
+    },
+    {
+      "path": "replication/tests/phase17-editorial.test.mjs",
+      "existsAtBaseline": true,
+      "sha256": "551debe18d76ac46b4ca33a5ca316ab2fe3f266ac1300c68961bdea1cd2112f0"
+    },
+    {
+      "path": "replication/tests/release-handoff.test.mjs",
+      "existsAtBaseline": true,
+      "sha256": "9b4cd0e0ee6af12a1050773a04b28e699525717025538c339474a12a8bc80e95"
+    },
+    {
+      "path": "ROADMAP-REMEDIACION-PUBLICA-1.0.md",
+      "existsAtBaseline": true,
+      "sha256": "7fd921042002623605f3ea0551b925fe1f9d77cfeacfa79f5929e8b153bbc48f"
+    },
+    {
+      "path": "sitio/app/aprender/[modulo]/[leccion]/page.tsx",
+      "existsAtBaseline": true,
+      "sha256": "11fd642f1e3cfc0f3457adb3e82fa3475a5fcc2c02bc8eae72838c149391ce49"
+    },
+    {
+      "path": "sitio/public/sitemap.xml",
+      "existsAtBaseline": true,
+      "sha256": "7f480def1e585e439b7953012b67afe64410de6072cb5024ee6d4712656ed6ca"
+    },
+    {
+      "path": "sitio/tests/rendered-html.test.mjs",
+      "existsAtBaseline": true,
+      "sha256": "9a4fe8b02d2720ee322fad71e710d4ece2b3860fc3e5501461fff55b17f3eb2c"
+    },
+    {
+      "path": "specification/COBRIA-CORE-1.0.md",
+      "existsAtBaseline": true,
+      "sha256": "9db3b0fffdee83ddf6c7ec8ede7e8f5d675d1e152e0614cadecba884eae1c179"
+    },
+    {
+      "path": "specification/MAPA-ECOSISTEMA.md",
+      "existsAtBaseline": true,
+      "sha256": "21dc487c9128fe4a140c54d2c05b0d619954b35b007d0ce38cefa43ee6512db1"
+    },
+    {
+      "path": "specification/phase-3/data-dictionary.json",
+      "existsAtBaseline": false,
+      "sha256": null
+    },
+    {
+      "path": "specification/phase-3/data-dictionary.yaml",
+      "existsAtBaseline": true,
+      "sha256": "ff878f74b5d7d82ce9c3cb8feeb892387bd0f13638e03cffaed1478f5abe7ac9"
+    },
+    {
+      "path": "specification/phase-6/code-conventions.json",
+      "existsAtBaseline": false,
+      "sha256": null
+    },
+    {
+      "path": "specification/phase-6/documentation.yaml",
+      "existsAtBaseline": true,
+      "sha256": "9ded2add8d5362db9c834e7cd6cd8f0f7c2054e603e464843c56333058044548"
+    },
+    {
+      "path": "specification/phase-7/security.json",
+      "existsAtBaseline": true,
+      "sha256": "4e2ae4d8a2b27a7288fc8831fb6c22b9681c1b73ff117653cebb314b28d51bf8"
+    },
+    {
+      "path": "specification/phase-8/environments.json",
+      "existsAtBaseline": true,
+      "sha256": "3680a49901d1d77e2773ef7b2c0d9523aeecc15aa1889b9c59abaa294c5f175d"
+    },
+    {
+      "path": "specification/phase-9/quality.json",
+      "existsAtBaseline": true,
+      "sha256": "bd04b826e845ee7ae3d650220d46f02ee2e84fb9c4faf3b800d1f01f90c69ab8"
+    }
+  ],
+  "probeEvidence": {
+    "schemaVersion": "1.0.0",
+    "phase": "C0",
+    "date": "2026-10-17",
+    "baselineCommit": "deca1b14ff44805d5d36814654cf35be27d2fa89",
+    "kind": "automatic-local-probes-not-scientific-experiment",
+    "environment": {
+      "node": "v24.2.0",
+      "platform": "darwin",
+      "arch": "arm64"
+    },
+    "scope": {
+      "projectSourceMutated": false,
+      "scientificResultsMutated": false,
+      "temporaryFixtureCreated": true,
+      "published": false
+    },
+    "sourceHashes": [
+      {
+        "path": "replication/src/cli.mjs",
+        "sha256": "cca42a2a31596fc972ff39a018b66172878ed3ab8145b404562d36a3bd7b265f"
+      },
+      {
+        "path": "replication/src/generator.mjs",
+        "sha256": "33bc87aa13585c5e13cacfc2b05e7eff8aab0e7c5bae1a3fef4a95aad21c2755"
+      },
+      {
+        "path": "replication/examples/ecosistema-app/src/domain/observacion.mjs",
+        "sha256": "a2816760f5d360959fdc756d48b56bf068df3869f891278806a0397c6c5d7d54"
+      }
+    ],
+    "probes": [
+      {
+        "id": "opcion-cambio",
+        "command": "node replication/src/cli.mjs impacto --cambio cambio.json --json",
+        "exitCode": 2,
+        "stdout": "",
+        "stderr": "{\"ok\":false,\"code\":\"CLI_OPTION_UNKNOWN\",\"message\":\"Opción desconocida: --cambio\"}"
+      },
+      {
+        "id": "opcion-comprobar",
+        "command": "node replication/src/cli.mjs generar --comprobar --json",
+        "exitCode": 2,
+        "stdout": "",
+        "stderr": "{\"ok\":false,\"code\":\"CLI_OPTION_UNKNOWN\",\"message\":\"Opción desconocida: --comprobar\"}"
+      },
+      {
+        "id": "meta-patrones",
+        "command": "make -n verificar-ejemplos-patrones",
+        "exitCode": 2,
+        "stdout": "",
+        "stderr": "make: *** No rule to make target `verificar-ejemplos-patrones'.  Stop."
+      },
+      {
+        "id": "meta-paquete",
+        "command": "make -n paquete-candidato",
+        "exitCode": 2,
+        "stdout": "",
+        "stderr": "make: *** No rule to make target `paquete-candidato'.  Stop."
+      },
+      {
+        "id": "contrato-entidad",
+        "crearMethod": "undefined",
+        "zeroQuantityCode": "OBS_QUANTITY_INVALID"
+      },
+      {
+        "id": "simular-genera",
+        "command": "node replication/src/cli.mjs generar --simular --tipo entidad --nombre Sonda Cero --directorio <directorio-temporal-sintetico> --json",
+        "exitCode": 0,
+        "stdout": "{\n  \"ok\": true,\n  \"type\": \"entidad\",\n  \"name\": \"Sonda Cero\",\n  \"root\": \"<directorio-temporal-sintetico>\",\n  \"created\": [\n    \"src/generated/entidad-sonda-cero.mjs\",\n    \"test/generated/entidad-sonda-cero.test.mjs\",\n    \"docs/generated/entidad-sonda-cero.md\",\n    \".cobria/generated/entidad-sonda-cero.json\"\n  ],\n  \"unchanged\": [],\n  \"status\": \"generated\"\n}",
+        "stderr": "",
+        "createdFiles": [
+          "src/generated/entidad-sonda-cero.mjs",
+          "test/generated/entidad-sonda-cero.test.mjs",
+          "docs/generated/entidad-sonda-cero.md",
+          ".cobria/generated/entidad-sonda-cero.json"
+        ],
+        "createdCount": 4,
+        "actualFilesPresent": true
+      }
+    ]
+  },
+  "scientificBoundary": "El maestro y el artículo explican la contribución investigativa; no se exige que reproduzcan los 17 tutoriales. La difusión pedagógica no demuestra eficacia educativa."
+}

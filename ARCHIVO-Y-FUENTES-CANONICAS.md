@@ -40,6 +40,10 @@ autoridad sobre su fuente. La corrección se realiza en la fuente y después se 
 6. Los resultados experimentales nunca se reclasifican ni se corrigen manualmente.
 7. Antes de mover o retirar un archivo se comprobarán referencias entrantes.
 
+Los artefactos reemplazados auditados durante R2 se conservan en `archivo/artefactos/`.
+Su inventario de tamaños y huellas está en `editorial/provenance.json`; esa ubicación no
+forma parte de las descargas canónicas ni de la construcción vigente.
+
 ## Regla de publicación
 
 Una publicación debe indicar nombre, versión, fecha, estado, licencia, fuente y
@@ -50,6 +54,9 @@ evidencia correspondiente y no es sinónimo de “compilado”.
 
 El árbol de trabajo contiene una integración extensa posterior al commit registrado.
 Por seguridad, la fase 0 no confirma, descarta ni traslada esos cambios. El inventario
-regenerable queda en `editorial/generated/release-baseline.json`. La selección de commits
+regenerable queda en `output/review/ecosistema-1.0.0-rc1/release-baseline.json` y se
+publica como evidencia de CI, no como fuente versionada. La selección de commits
 y la creación de la rama o etiqueta candidata deberán realizarse cuando este inventario
-sea revisado y el árbol represente deliberadamente el Ecosistema 1.0.
+sea revisado y el árbol represente deliberadamente el Ecosistema 1.0. R2 añadió una
+declaración multilicencia, procedencia verificable y archivo histórico, sin promover la
+candidata a versión estable.

@@ -1,6 +1,16 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
+// Describe lo que el ejemplo ejecuta, no la garantía del patrón completo.
+const resultadosLocales = {
+  7: 'Calcula una candidata; todavía no comprueba equivalencia ni un corte consistente.',
+  9: 'Propone la versión siguiente y la reversión; no cambia la versión persistida.',
+  12: 'Prepara documento y evento en memoria; no ejecuta una transacción del motor.',
+  17: 'Valida una propuesta con aprobación declarada; no autentica a una persona ni ejecuta la acción.',
+  20: 'Propone retirar la copia según entradas declaradas; no borra datos ni descubre consumidores reales.',
+  22: 'Valida coordenadas y normaliza texto; la existencia de la especie en catálogo se comprueba aparte.'
+};
+
 const scenarios = [
 ['Objeto canónico','Expediente de un árbol patrimonial','Varias brigadas guardan altura, especie y estado en archivos distintos.','ArbolPatrimonial','registrar','arbolId: "roble-42", especie: "Quercus costaricensis"','Un único expediente conserva identidad y reglas; los mapas son derivados.'],
 ['Dato fechado','Medición de un río después de una tormenta','Una lectura sin tiempo válido confunde cuándo ocurrió con cuándo se transmitió.','MedicionRio','registrar','rioId: "terraba", nivelCm: 184, observadoEn: "2026-08-24T06:15:00Z"','La observación conserva tiempo observado, recibido y procedencia del sensor.'],
@@ -34,18 +44,70 @@ const scenarios = [
 ['Auditoría narrativa reconstruible','Explicar por qué se cerró una reserva','Registros aislados no cuentan qué lluvia, regla y aprobación produjeron la decisión.','HistoriaCierreReserva','reconstruir','reservaId: "la-amistad", desde: "2026-08-23T18:00:00Z"','Una línea temporal enlaza eventos, revisiones, política, responsable y resultado.']
 ];
 
-const safe = value => value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ0-9]/g,'');
-const outputs = scenarios.map((s,index)=>{
-  const [nombre,escena,problema,clase,metodo,input,resultado]=s;
+const root = path.resolve(import.meta.dirname, '..');
+const catalog = JSON.parse(fs.readFileSync(path.join(root, 'sitio/public/catalogo.json'), 'utf8'));
+const cases = JSON.parse(fs.readFileSync(path.join(root, 'replication/examples/patterns-r4/cases.json'), 'utf8'));
+const typeScriptPath = 'replication/examples/patterns-r4/src/patrones.ts';
+const typeScriptSource = fs.readFileSync(path.join(root, typeScriptPath), 'utf8');
+const catalogById = new Map(catalog.items.map(item => [item.id, item]));
+const caseById = new Map(cases.map(item => [item.id, item]));
+
+const selectedLanguages = new Map([
+  [3, {language: 'Python', source: 'replication/examples/patterns-r4/multilang/python/repositorio_ambito.py', test: 'replication/examples/patterns-r4/multilang/python/test_repositorio_ambito.py'}],
+  [9, {language: 'Go', source: 'replication/examples/patterns-r4/multilang/go/publicacion.go', test: 'replication/examples/patterns-r4/multilang/go/publicacion_test.go'}],
+  [10, {language: 'Java', source: 'replication/examples/patterns-r4/multilang/java/ProcesamientoIdempotente.java', test: 'replication/examples/patterns-r4/multilang/java/ProcesamientoIdempotente.java', bookMarkers: ['// @book-start', '// @book-end']}]
+]);
+
+function typeScriptExample(id) {
+  const match = typeScriptSource.match(new RegExp(`// @example-start ${id}\\n([\\s\\S]*?)\\n// @example-end ${id}`));
+  if (!match) throw new Error(`No existe el fragmento TypeScript del patrón ${id}`);
+  return match[1].trim();
+}
+
+function contraindication(text, patternName) {
+  const match = text.match(/(?:Evítelo|Evítela|No lo use|No la use)[^.?!]*(?:[.?!]|$)/i);
+  return match?.[0] ?? `No adopte ${patternName} si el problema no fue observado o una alternativa más simple satisface el contrato.`;
+}
+
+const outputs = scenarios.map((scenario,index)=>{
+  const [nombre,escena,problemaConcreto,clase,,,resultado]=scenario;
   const id=index+1;
-  const ts=`// ${escena}\ntype Solicitud = Record<string, unknown>;\n\nclass ${safe(clase)} {\n  ${metodo}(solicitud: Solicitud) {\n    if (!solicitud) throw new Error("Solicitud requerida");\n    return { patron: ${id}, evidencia: true, solicitud };\n  }\n}\n\nconst resultado = new ${safe(clase)}().${metodo}({ ${input} });`;
-  const py=`# ${escena}\nclass ${safe(clase)}:\n    def ${metodo}(self, solicitud):\n        if not solicitud:\n            raise ValueError("Solicitud requerida")\n        return {"patron": ${id}, "evidencia": True, **solicitud}\n\nresultado = ${safe(clase)}().${metodo}({"detalle": ${JSON.stringify(input)}})`;
-  const java=`// ${escena}\nrecord Solicitud(String detalle) {}\n\nfinal class ${safe(clase)} {\n  Resultado ${metodo}(Solicitud solicitud) {\n    if (solicitud == null) throw new IllegalArgumentException();\n    return new Resultado(${id}, true, solicitud);\n  }\n}\n\nvar resultado = new ${safe(clase)}().${metodo}(new Solicitud("${input.replace(/"/g,'\\"')}"));`;
-  const go=`// ${escena}\ntype Solicitud struct { Detalle string }\n\nfunc ${safe(metodo[0].toUpperCase()+metodo.slice(1))}(s Solicitud) (Resultado, error) {\n  if s.Detalle == "" { return Resultado{}, errors.New("solicitud requerida") }\n  return Resultado{Patron: ${id}, Evidencia: true}, nil\n}\n\nresultado, err := ${safe(metodo[0].toUpperCase()+metodo.slice(1))}(Solicitud{Detalle: "${input.replace(/"/g,'\\"')}"})`;
-  return {id,nombre,escena,problema,participantes:[clase,'Contrato de entrada','Repositorio documental','Evidencia'],resultado,code:{TypeScript:ts,Python:py,Java:java,Go:go}};
+  const item = catalogById.get(id);
+  const testCase = caseById.get(id);
+  if (!item || !testCase) throw new Error(`Faltan metadatos o pruebas para el patrón ${id}`);
+  const code = {TypeScript: typeScriptExample(id)};
+  const languagesVerified = [{language: 'TypeScript', source: typeScriptPath, test: 'replication/examples/patterns-r4/test/patrones.test.ts'}];
+  const selected = selectedLanguages.get(id);
+  if (selected) {
+    let selectedSource = fs.readFileSync(path.join(root, selected.source), 'utf8').trim();
+    if (selected.bookMarkers) {
+      const [start, end] = selected.bookMarkers;
+      selectedSource = selectedSource.split(start)[1]?.split(end)[0]?.trim();
+      if (!selectedSource) throw new Error(`No se pudieron extraer las marcas editoriales de ${selected.source}`);
+    }
+    code[selected.language] = selectedSource;
+    languagesVerified.push(selected);
+  }
+  return {
+    id,
+    nombre,
+    escena,
+    problema: problemaConcreto,
+    problemaIngenuo: item.problema,
+    solucion: item.solucion,
+    contrato: item.contrato,
+    participantes:[clase,'Contrato de entrada','Repositorio documental','Evidencia'],
+    resultado: resultadosLocales[id] ?? resultado,
+    costo: item.metricas,
+    cuandoNoUsar: contraindication(item.aplicacion, nombre),
+    pruebaPositiva: {entrada: testCase.valid, esperado: testCase.expected},
+    pruebaNegativa: {entrada: testCase.invalid, codigoError: testCase.errorCode, esperado: testCase.negativeExpected},
+    code,
+    languagesVerified
+  };
 });
 
 const json=JSON.stringify(outputs,null,2)+'\n';
 fs.writeFileSync(path.join(import.meta.dirname,'practical-examples.json'),json);
-fs.writeFileSync(path.resolve(import.meta.dirname,'../../COBRIA-atlas/public/practical-examples.json'),json);
+fs.writeFileSync(path.join(root,'sitio/public/practical-examples.json'),json);
 console.log(`Ejemplos prácticos generados: ${outputs.length}`);

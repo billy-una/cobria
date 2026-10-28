@@ -1,0 +1,40 @@
+{
+  "generatedAt": "2026-10-23T20:35:25.576Z",
+  "architecture": "arm64",
+  "platform": "darwin",
+  "kind": "preflight-no-es-corrida",
+  "ready": false,
+  "checks": [
+    {
+      "check": "freeze-pc2.mjs",
+      "ok": true
+    },
+    {
+      "check": "check-pc2-analysis.mjs",
+      "ok": true
+    },
+    {
+      "check": "espacio",
+      "ok": false,
+      "freeGiB": 5.115867614746094,
+      "minimumGiB": 10
+    },
+    {
+      "check": "mongodb",
+      "ok": false,
+      "reason": "Motor local inaccesible; no se midió ni se modificó almacenamiento"
+    },
+    {
+      "check": "couchdb",
+      "ok": false,
+      "reason": "Motor local inaccesible; no se midió ni se modificó almacenamiento"
+    },
+    {
+      "check": "opensearch",
+      "ok": false,
+      "reason": "Motor local inaccesible; no se midió ni se modificó almacenamiento"
+    }
+  ],
+  "confirmatoryObservations": 0,
+  "limitation": "Este diagnóstico no implementa el ejecutor remoto PC3 ni acredita ejecución confirmatoria."
+}

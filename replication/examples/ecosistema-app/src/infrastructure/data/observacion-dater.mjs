@@ -16,6 +16,12 @@ export class ObservacionDater {
 
   desdeFisico(documento) {
     if (documento?.d !== 1) throw new ErrorCobria('PHYSICAL_VERSION_UNSUPPORTED', 'Versión física no compatible', { version: documento?.d });
+    const claves = ['a','b','c','d','e','f','g'];
+    const faltanCampos = claves.some(clave => !Object.hasOwn(documento, clave) || documento[clave] === undefined || documento[clave] === null);
+    const tiposInvalidos = ['a','b','e','f'].some(clave => typeof documento[clave] !== 'string');
+    if (Object.keys(documento).length !== claves.length || faltanCampos || tiposInvalidos) {
+      throw new ErrorCobria('DATA_FIELDS_INVALID', 'El formato 1 requiere sus siete campos y no admite campos desconocidos');
+    }
     return new Observacion({
       id: documento.a,
       ambito: documento.b,

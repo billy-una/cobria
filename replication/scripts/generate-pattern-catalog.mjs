@@ -1,6 +1,7 @@
 import { readFile, writeFile, mkdir } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { decisiones } from "../../editorial/pattern-decisions.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
 const source = JSON.parse(await readFile(path.join(root, "sitio/public/catalogo.json"), "utf8"));
@@ -27,6 +28,8 @@ function firstSentence(text) {
 const names = new Set(source.items.map((item) => item.nombre));
 const items = source.items.map((item) => {
   const example = byId.get(item.id);
+  const decision = decisiones.find(entry => entry.id === item.id);
+  if (!decision || !example?.pruebaPositiva || !example?.pruebaNegativa) throw new Error(`Patrón ${item.id} incompleto`);
   const relations = item.relaciones.filter((name) => names.has(name)).map((name) => ({ type: "complementa", target: name }));
   return {
     id: item.id,
@@ -35,18 +38,31 @@ const items = source.items.map((item) => {
     familia: item.familia,
     tipo: item.tipo,
     estado: "documentado",
+    decision,
+    autoridad: `Ejemplo pedagógico; no es una declaración de conformidad con Core 1.0. ${example.resultado}`,
     resumen: item.proposito,
     problema: item.problema,
     contexto: item.aplicacion,
     fuerzas: ["simplicidad frente a control", "rendimiento frente a costo total", "autonomía frente a autoridad y trazabilidad"],
     cuandoUsar: firstSentence(item.aplicacion),
-    cuandoEvitar: `Evítelo cuando el problema descrito no existe o una alternativa más simple satisface el contrato de ${item.nombre}.`,
+    cuandoEvitar: example?.cuandoNoUsar ?? `Evítelo cuando el problema descrito no existe o una alternativa más simple satisface el contrato de ${item.nombre}.`,
     estructura: example?.participantes?.join(" → ") ?? item.contrato,
     participantes: example?.participantes ?? [],
     secuencia: item.contrato,
-    ejemplo: { escena: example?.escena ?? item.analogia, problema: example?.problema ?? item.problema, resultado: example?.resultado ?? item.solucion },
+    ejemplo: {
+      escena: example?.escena ?? item.analogia,
+      problema: example?.problema ?? item.problema,
+      problemaIngenuo: example?.problemaIngenuo ?? item.problema,
+      solucion: example?.solucion ?? item.solucion,
+      contrato: example?.contrato ?? item.contrato,
+      resultado: example?.resultado ?? item.solucion,
+      costo: example?.costo ?? item.metricas,
+      pruebaPositiva: example?.pruebaPositiva ?? null,
+      pruebaNegativa: example?.pruebaNegativa ?? null
+    },
     codigo: example?.code ?? {},
-    casoNegativo: `La solución se introduce sin contrato ni prueba y termina ocultando el problema que ${item.nombre} debía controlar.`,
+    lenguajesVerificados: example?.languagesVerified ?? [],
+    casoNegativo: example?.pruebaNegativa ?? `La solución se introduce sin contrato ni prueba y termina ocultando el problema que ${item.nombre} debía controlar.`,
     antipatrones: [`${item.nombre} ceremonial`, "aplicación sin medición ni caso negativo"],
     consecuencias: item.metricas,
     pruebas: [`comprobar: ${item.contrato}`, `resolver y verificar: ${item.ejercicio}`],

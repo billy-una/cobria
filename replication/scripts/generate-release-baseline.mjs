@@ -1,6 +1,6 @@
 import { createHash } from "node:crypto";
 import { execFileSync } from "node:child_process";
-import { readFile, writeFile } from "node:fs/promises";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -54,6 +54,9 @@ const canonicalFiles = [
   "MANIFESTO.md",
   "IDENTIDAD-ECOSISTEMA-COBRIA.md",
   "ROADMAP-CIERRE-ECOSISTEMA-COBRIA.md",
+  "ROADMAP-REMEDIACION-PUBLICA-1.0.md",
+  "LICENSES.md",
+  "CITATION.cff",
   "editorial/canonical.json",
   "editorial/products.json",
   scope.protectedCore
@@ -72,6 +75,7 @@ const report = {
   schemaVersion: "1.0.0",
   baselineDate: scope.baselineDate,
   targetRelease: scope.targetRelease,
+  candidateRelease: scope.candidateTag,
   repository: {
     head: git("rev-parse", "HEAD"),
     branch: git("branch", "--show-current"),
@@ -91,5 +95,6 @@ const report = {
   ]
 };
 
+await mkdir(path.dirname(outputPath), { recursive: true });
 await writeFile(outputPath, `${JSON.stringify(report, null, 2)}\n`, "utf8");
 console.log(`Inventario reproducible escrito en ${path.relative(root, outputPath)}`);

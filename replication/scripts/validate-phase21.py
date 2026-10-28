@@ -5,6 +5,7 @@ from pathlib import Path
 import subprocess
 import tempfile
 import sys
+from frozen_project import frozen_project
 
 ROOT=Path(__file__).resolve().parents[2]
 BASE=ROOT/'specification/phase-21'
@@ -25,11 +26,12 @@ for item in report.get('checks',[]):
     for evidence in item.get('files',[]):
         if not evidence.get('exists') or len(evidence.get('sha256') or '')!=64: errors.append(f"{item.get('id')}: evidencia sin huella")
 
-if not POS.is_dir(): errors.append('checkout POSGUAPILES-1 no disponible para repetir el piloto')
-else:
+try:
+  source_context=frozen_project(POS, report['project']['remote'], status['expectedCommit'])
+  with source_context as source:
     with tempfile.TemporaryDirectory() as directory:
         checkout=Path(directory)/'pos-frozen'
-        clone=subprocess.run(['git','clone','--quiet','--no-hardlinks',str(POS),str(checkout)],capture_output=True,text=True)
+        clone=subprocess.run(['git','clone','--quiet','--no-hardlinks',str(source),str(checkout)],capture_output=True,text=True)
         if clone.returncode: errors.append(clone.stderr or clone.stdout)
         else:
             frozen=status['expectedCommit']
@@ -46,12 +48,14 @@ else:
                         if regenerated.get(key)!=report.get(key): errors.append(f'informe no reproducible: {key}')
                     if regenerated.get('project',{}).get('commit')!=frozen or regenerated.get('project',{}).get('dirty') is not False:
                         errors.append('el checkout temporal no reproduce el commit limpio')
+except RuntimeError as error:
+  errors.append(str(error))
 
 for name in ('README.md','RUBRICA-DE-ADOPCION.md','BRECHAS-Y-SIGUIENTE-PASO.md','pilot-posguapiles.json','status.json'):
     if not (BASE/name).is_file(): errors.append(f'falta {name}')
 roadmap=(ROOT/'manuales/11-estado-y-roadmap-integral.md').read_text(encoding='utf-8')
 if 'Fase 21 — Piloto de adopción COBRIA Engineering' not in roadmap: errors.append('roadmap sin fase 21')
-site=(ROOT/'sitio/app/manual.tsx').read_text(encoding='utf-8')
+site=(ROOT/'editorial/pedagogy.json').read_text(encoding='utf-8')
 book=(ROOT/'libro-cobria/build-book.mjs').read_text(encoding='utf-8')
 if '8/8 estructurales · 0 operacionales' not in site: errors.append('sitio sin resultado limitado del piloto')
 if '0 presentados como validados operacionalmente' not in book: errors.append('libro sin límite operacional del piloto')

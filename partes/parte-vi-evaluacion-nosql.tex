@@ -1,4 +1,4 @@
-\chapter{Diseño de evaluación exclusivamente NoSQL}
+\chapter{Diseño de evaluación NoSQL}
 
 \section{Delimitación tecnológica}
 
@@ -16,7 +16,9 @@ Una afirmación no asciende de nivel sin la evidencia correspondiente.
 
 \section{Casos documentales anonimizados}
 
-Se estudian tres aplicaciones con dominios distintos: eventos deportivos y multimedia,
+\COBRIAPerfilesCientificos
+
+Los perfiles corresponden a tres aplicaciones con dominios distintos: eventos y multimedia,
 operación hotelera y operación comercial. Sus nombres se omiten. Las tres emplean
 documentos, colecciones, autenticación, funciones y almacenamiento administrado. Se
 buscan contratos repetidos sin revelar organizaciones, personas ni credenciales.
@@ -55,6 +57,12 @@ N3 & inventario, ventas y cierres & agregados operacionales y trazabilidad\\
 HN1--HN4 admiten verificación funcional. HN5 necesita mediciones específicas por motor,
 región, índice, escala y mezcla de operaciones. Esta edición no publica un umbral
 universal de lecturas por escritura.
+
+Son objetivos de evaluación, no conclusiones ya establecidas. Los rótulos H1--H9 de
+la fundamentación conservan preguntas exploratorias del programa inicial; no son
+una familia de nueve contrastes confirmatorios ejecutados. HN1--HN5 organizan los
+criterios documentales actuales. R7 solo cubre indicadores acotados del arnés histórico;
+las pruebas posteriores PC2 no sustituyen las mediciones PC3 pendientes.
 
 \section{Variables y unidades}
 
@@ -121,22 +129,12 @@ rutas concretas, pero no productividad humana ni superioridad general.
 
 \section{Resultados COBRIA Core 1.0}
 
-La primera réplica congelada se ejecutó sobre dos motores documentales embebidos,
-PouchDB y LokiJS, con escalas de 100, 1,000 y 5,000 documentos y treinta corridas por
-celda. En total se conservaron 180 corridas. Todas las celdas superaron conjuntamente
-P1, P2, R1, S1 y A1: equivalencia lógica completa, reconstrucción repetible,
-amplificación de dos escrituras por cambio proyectado, rechazo de ámbito ausente y cero
-documentos cruzados.
-
-En PouchDB las medianas de lectura canónica fueron 1,186; 13,589 y 69,291 ms, frente a
-0,440; 4,719 y 23,131 ms para la proyección. Las reconstrucciones medianas requirieron
-8,376; 89,301 y 500,070 ms. En LokiJS las lecturas canónicas fueron 0,145; 1,263 y
-7,026 ms, frente a 0,052; 0,409 y 2,220 ms; R1 requirió 0,663; 6,452 y 46,011 ms.
-
-Estos resultados apoyan conformidad funcional y muestran una reducción de lectura en
-este arnés embebido. No representan redes, regiones, concurrencia administrada, cuotas
-ni facturación. HN1--HN4 quedan apoyadas para esta implementación de referencia; HN5
-recibe apoyo local condicionado y permanece abierta para servicios administrados.
+El núcleo normativo no es un conjunto de mediciones. Las 180 corridas embebidas iniciales
+se conservan en los antecedentes segregados, después del manual de réplica. R7 se
+describe a continuación con los límites de su arnés; PC2 añade pruebas funcionales
+locales posteriores y PC3 permanece sin observaciones confirmatorias nuevas. No se
+declara un nivel completo de conformidad solo porque cinco indicadores tengan el
+mismo nombre que cinco familias normativas.
 
 \chapter{Amenazas a la validez y síntesis}
 
@@ -146,7 +144,7 @@ sintéticos pueden subrepresentar deriva y errores históricos. La inspección n
 ejecución; las pruebas automáticas no sustituyen revisión humana; y una implementación
 correcta no demuestra comprensión por todos los equipos.
 
-La evidencia permite afirmar que COBRIA Core 1.0 es formalizable, ejecutable y conforme
-en dos motores NoSQL documentales embebidos. No permite afirmar una mejora universal de
-rendimiento ni un umbral económico transferible. El siguiente nivel de evidencia debe
-provenir de servicios documentales administrados y una réplica externa.
+La evidencia permite examinar la formalización, rutas ejecutables y costos acotados.
+No establece conformidad integral de todos los motores, mejora universal o un umbral
+económico transferible. Las pruebas de los contratos posteriores y su repetición
+experimental conservan sus propios requisitos de aceptación.

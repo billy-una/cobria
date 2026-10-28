@@ -1,0 +1,30 @@
+import assert from 'node:assert/strict';
+import {mkdtemp,readdir,readFile} from 'node:fs/promises';
+import {tmpdir} from 'node:os';
+import path from 'node:path';
+import {spawnSync} from 'node:child_process';
+import {fileURLToPath} from 'node:url';
+
+const root=fileURLToPath(new URL('../../../',import.meta.url));
+const cli=path.join(root,'replication/src/cli.mjs');
+const directory=await mkdtemp(path.join(tmpdir(),'cobria-c9-recorrido-'));
+const target=path.join(directory,'proyecto');
+let checks=0;
+const run=(args,expected=0)=>{
+  const r=spawnSync(process.execPath,[cli,...args,'--json'],{cwd:root,encoding:'utf8',timeout:20000});
+  assert.equal(r.status,expected,r.stderr);checks++;return JSON.parse(expected===0?r.stdout:r.stderr);
+};
+const plan=run(['generar','--tipo','entidad','--nombre','Reserva','--directorio',target,'--simular']);
+assert.equal(plan.mutations,0);assert.deepEqual(await readdir(directory),[]);checks++;
+run(['iniciar','--directorio',target]);
+run(['validar','--ruta',path.join(target,'.cobria'),'--raiz',target]);
+run(['explicar','--ruta',path.join(target,'.cobria'),'--id','PROJECT-LOCAL','--raiz',target]);
+const generated=run(['generar','--tipo','entidad','--nombre','Reserva','--directorio',target]);
+assert.equal(generated.created.length,4);checks++;
+const r=spawnSync(process.execPath,['--test',path.join(target,'test/generated/entidad-reserva.test.mjs')],{encoding:'utf8',timeout:20000});assert.equal(r.status,0,r.stderr);checks++;
+const repeat=run(['generar','--tipo','entidad','--nombre','Reserva','--directorio',target]);assert.equal(repeat.status,'unchanged');checks++;
+run(['iniciar','--directorio',target],4);
+run(['informar','--ruta',path.join(target,'.cobria'),'--raiz',target,'--salida',path.join(directory,'informe')]);
+const report=JSON.parse(await readFile(path.join(directory,'informe/informe.json'),'utf8'));assert.equal(report.ok,true);checks++;
+run(['publicar','--simular','--ambiente','staging','--artefacto',`sha256:${'a'.repeat(64)}`]);
+console.log(JSON.stringify({kind:'recorrido-documental-local',checksPassed:checks,directory,planMutations:0,generatedArtifacts:4,generatedCodeTested:true,semanticContractCompleted:false,published:false,limits:['Esqueleto genérico: la prueba no implementa reglas de dominio.','El SHA repetido de la simulación es ficticio y no identifica una candidata.','No prueba comprensión por lectores.']},null,2));

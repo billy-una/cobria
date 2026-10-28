@@ -1,0 +1,13 @@
+{
+  "version": "1.0.0",
+  "consultedOn": "2026-10-19",
+  "kind": "busqueda-exploratoria-asistida-no-revision-sistematica-completa",
+  "queries": ["site.microsoft.com research materialized views incremental maintenance database paper", "site.martinfowler.com bliki CQRS EventSourcing", "site.dsrp.org Hevner March Park Ram 2004 design science information systems research"],
+  "criteria": {"include": "Fuentes primarias y documentación oficial que aclaren separación de lecturas, reconstrucción y control documental NoSQL", "exclude": "Copias sin procedencia, opiniones secundarias y resultados de rendimiento de otros motores usados como si fueran evidencia COBRIA"},
+  "records": [
+    {"id": "F-CQRS", "url": "https://martinfowler.com/bliki/CQRS.html", "year": 2011, "type": "ensayo técnico del autor", "decision": "seleccion-exploratoria", "extraction": "Separar modelos de lectura y escritura no garantiza beneficio; la complejidad depende del dominio.", "relation": "COBRIA no inventa esta separación; sus contratos deben medirse frente a opciones más simples.", "reviewer1": null, "reviewer2": null, "adjudication": null},
+    {"id": "F-EVENTS", "url": "https://martinfowler.com/eaaDev/EventSourcing.html", "year": 2005, "type": "borrador técnico del autor", "decision": "seleccion-exploratoria", "extraction": "El historial de eventos permite reconstruir estados; requiere conservar y procesar eventos.", "relation": "Reconstruir desde documentos canónicos no exige registrar todos los cambios como eventos.", "reviewer1": null, "reviewer2": null, "adjudication": null},
+    {"id": "F-COUCH", "url": "https://docs.couchdb.org/en/stable/api/document/common.html", "type": "documentación oficial viva", "decision": "seleccion-exploratoria", "extraction": "La API documental trata revisiones y conflictos de actualización.", "relation": "Control de revisión documental no demuestra una transacción de múltiples documentos.", "reviewer1": null, "reviewer2": null, "adjudication": null}
+  ],
+  "limitations": ["No hay búsqueda exhaustiva en bases bibliográficas ni diagrama PRISMA completo.", "La selección asistida no cuenta como doble cribado humano.", "La documentación stable es viva; no sustituye la de una versión experimental fijada.", "Las fuentes no demuestran novedad absoluta ni superioridad de COBRIA."]
+}

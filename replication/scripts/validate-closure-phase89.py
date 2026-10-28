@@ -30,7 +30,8 @@ def run(label: str, command: list[str], cwd: Path = ROOT) -> None:
 
 require(ROOT / "manuales/17-quality-performance.md", ("p50", "p95", "p99", "630 observaciones", "Costo total", "microbenchmark"))
 require(ROOT / "manuales/18-cloud-operations.md", ("staging", "Function", "dead-letter", "RPO", "RTO", "simulación"))
-require(ROOT / "sitio/app/manual.tsx", ("Calidad y rendimiento", "630 observaciones", "Nube y operaciones", "promover huella"))
+from pedagogy_checks import require_modules
+require_modules(ROOT, {"calidad": "/calidad", "operaciones": "/operaciones"}, errors)
 
 plan = json.loads((ROOT / "specification/phase-15/benchmark-plan.json").read_text(encoding="utf-8"))
 raw = json.loads((ROOT / "replication/results/core-1.3-alternatives/raw.json").read_text(encoding="utf-8"))

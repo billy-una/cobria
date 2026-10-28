@@ -1,0 +1,33 @@
+{
+  "id": "observaciones-taller-c2",
+  "version": "1.0.0",
+  "authority": "contrato pedagógico local; no amplía Core",
+  "node": "observaciones",
+  "scope": "identidad compuesta por ambito e id",
+  "schemaVersions": [1, 2],
+  "fields": [
+    {"logical": "id", "physical": "a", "meaning": "Identidad estable de una observación dentro del ámbito", "type": "string", "required": true, "since": 1, "rule": "texto no vacío", "unit": null, "origin": "registro de campo", "sensitivity": "interna", "example": "obs-001"},
+    {"logical": "ambito", "physical": "b", "meaning": "Reserva autorizada que posee el documento", "type": "string", "required": true, "since": 1, "rule": "texto no vacío; comprobar autorización antes del acceso", "unit": null, "origin": "contexto autorizado", "sensitivity": "restringida", "example": "reserva-sur"},
+    {"logical": "revision", "physical": "c", "meaning": "Revisión del hecho, no versión del formato", "type": "integer", "required": true, "since": 1, "rule": "entero >= 1", "unit": "revisión", "origin": "control de cambios", "sensitivity": "interna", "example": 1},
+    {"logical": "versionEsquema", "physical": "d", "meaning": "Formato físico que debe interpretar el lector", "type": "integer", "required": true, "since": 1, "rule": "1 o 2 en este taller", "unit": "versión", "origin": "Dater", "sensitivity": "metadato público", "example": 2},
+    {"logical": "observadaEn", "physical": "e", "meaning": "Instante en que se observaron los animales", "type": "string", "required": true, "since": 1, "rule": "fecha reconocida por Observacion; salida ISO UTC", "unit": "instante", "origin": "persona observadora", "sensitivity": "restringida", "example": "2026-10-17T12:00:00.000Z"},
+    {"logical": "especie", "physical": "f", "meaning": "Código de clasificación, no etiqueta visible", "type": "string", "required": true, "since": 1, "rule": "texto no vacío en v1; código del catálogo declarado en v2", "unit": null, "origin": "clasificación de campo", "sensitivity": "restringida", "example": "colibri"},
+    {"logical": "cantidad", "physical": "g", "meaning": "Número de individuos de la observación", "type": "integer", "required": true, "since": 1, "rule": "entero >= 1; cero no es una observación válida", "unit": "individuos", "origin": "conteo de campo", "sensitivity": "interna", "example": 3},
+    {"logical": "catalogoVersion", "physical": "h", "meaning": "Edición necesaria para interpretar el código de especie", "type": "string", "required": true, "since": 2, "rule": "edición existente; no inferir la edición de un documento antiguo", "unit": null, "origin": "decisión explícita de migración o registro", "sensitivity": "metadato público", "example": "2026.1"}
+  ],
+  "governance": {
+    "owner": "Responsable de datos de la reserva",
+    "retention": "Definir según finalidad; el taller no fija un plazo universal",
+    "provenance": "La aplicación registra actor y finalidad en auditoría; el documento v1 no contiene una procedencia científica completa",
+    "consumers": ["registro", "consulta por reserva", "resumen por especie"],
+    "deletion": "Evaluar canónicos, derivados y auditoría antes de borrar; este taller no ejecuta borrados"
+  },
+  "nodes": [
+    {"name": "observaciones", "authority": "canónica", "identity": ["ambito", "id"], "lifecycle": "un documento por observación; no una lista ilimitada dentro de la reserva", "implemented": "datos en memoria del taller"},
+    {"name": "catalogos/especies/{version}", "authority": "referencia versionada", "identity": ["version", "codigo"], "lifecycle": "la edición permanece disponible para interpretar datos históricos", "implemented": "archivo JSON local"},
+    {"name": "resumenPorEspecie/{ambito}", "authority": "derivada", "identity": ["ambito"], "lifecycle": "se puede reconstruir; no modifica el conteo canónico", "implemented": "aplicación inicial en memoria"}
+  ],
+  "queries": [
+    {"id": "Q-RESERVA-ESPECIE", "filter": ["ambito", "especie"], "order": ["observadaEn desc", "id asc"], "limit": 10, "logicalIndexCandidate": ["ambito", "especie", "observadaEn desc", "id asc"], "physicalIndexCandidate": ["b", "f", "e desc", "a asc"], "status": "candidato documental, no índice creado ni rendimiento medido", "test": "consulta acotada excluye otra reserva y ordena resultados"}
+  ]
+}

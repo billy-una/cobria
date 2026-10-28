@@ -1,6 +1,6 @@
 # Política de mantenimiento de COBRIA
 
-**Estado:** vigente para la candidata pública 1.0.0-rc1  
+**Estado:** vigente para la candidata pública 1.0.0-rc2
 **Naturaleza:** propuesta independiente; no constituye estándar ni certificación.
 
 ## Versiones mantenidas
@@ -8,7 +8,7 @@
 | Línea | Estado | Alcance |
 |---|---|---|
 | Core 1.0 | congelada | correcciones editoriales que no cambien requisitos |
-| Ecosistema 1.0.0-rc1 | candidata pública | correcciones, reproducción y revisión externa |
+| Ecosistema 1.0.0-rc2 | candidata pública | correcciones, reproducción y revisión externa |
 | Ecosistema 1.0.0 | bloqueada | requiere las puertas humanas y externas declaradas |
 | Core 1.1/1.2 | experimental | no sustituye Core 1.0 |
 
@@ -40,4 +40,3 @@ mantienen.
 COBRIA 1.x se guiará por incidencias reproducibles, experiencias de adopción y revisión
 externa. No se añadirán módulos, patrones o páginas únicamente para aumentar volumen. Un
 cambio incompatible se reservará para Core o Ecosistema 2.0.
-

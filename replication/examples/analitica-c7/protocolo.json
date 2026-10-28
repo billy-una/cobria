@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "kind": "evaluacion-local-de-recuperacion-lexica-no-modelo-entrenado",
+  "threshold": 0.5,
+  "trainingCutoff": "2026-01-15T23:59:59.000Z",
+  "evaluationCutoff": "2026-01-31T23:59:59.000Z",
+  "featureVersion": "cantidad-v1",
+  "limits": "Casos ficticios fijados antes de ejecutar. La puntuación es coincidencia léxica, no confianza calibrada. No hay entrenamiento, embeddings, proveedor de IA ni evaluación de un LLM. Los resultados no son evidencia de generalización."
+}

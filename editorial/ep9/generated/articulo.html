@@ -1,0 +1,1406 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc 3.12.1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Billy Jak Cordero Porras" />
+  <meta name="dcterms.date" content="2026-01-01" />
+  <title>Contratos reconstruibles con ámbito explícito para sistemas NoSQL documentales</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      color: light-dark(#1a1a1a, #fdfdfd);
+      background-color: #fdfdfd;
+      background-color: light-dark(#fdfdfd, #1a1a1a);
+      color-scheme: light dark;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        color-scheme: light only;
+      }
+      html, body, pre, code {
+        background-color: transparent;
+      }
+      body, a, a:visited, blockquote {
+        color: black;
+      }
+      pre, code {
+        padding: 0;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a, a:visited {
+      color: inherit;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid;
+      border-color: #e6e6e6;
+      border-color: light-dark(#e6e6e6, #4c4c4c);
+      color: #606060;
+      color: light-dark(#606060, #b6b6b6);
+    }
+    div.abstract {
+      margin: 2em 2em 2em 2em;
+      text-align: left;
+      font-size: 85%;
+    }
+    div.abstract-title {
+      font-weight: bold;
+      text-align: center;
+      padding: 0;
+      margin-bottom: 0.5em;
+    }
+    code {
+      white-space: pre-wrap;
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid currentColor;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid currentColor;
+      border-bottom: 1px solid currentColor;
+    }
+    th {
+      border-top: 1px solid currentColor;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Contratos reconstruibles con ámbito explícito para
+sistemas NoSQL documentales</h1>
+<p class="author">Billy Jak Cordero Porras</p>
+<p class="date">2026</p>
+<div class="abstract">
+<div class="abstract-title">Resumen</div>
+<p>Los sistemas NoSQL documentales pueden mantener representaciones
+derivadas cuya autoridad, ámbito y reparación resultan difíciles de
+comprobar. COBRIA propone un contrato reconstruible que reúne fuente
+canónica, transformación y políticas versionadas, ámbito, frescura,
+equivalencia y responsabilidad operacional. La contribución es
+composicional: no atribuye novedad a repositorios, vistas o procedencia
+por separado. Mediante ciencia del diseño se formaliza el contrato y se
+distinguen observación estructural, pruebas funcionales y medición
+histórica. R7 conserva 270 corridas internas en tres motores y nueve
+celdas; ocho favorecen la lectura de la colección proyectada tras ajuste
+de Holm y OpenSearch con
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><mn>100</mn></mrow><annotation encoding="application/x-tex">n=100</annotation></semantics></math>
+es no concluyente. Ese resultado pertenece al arnés histórico: no valida
+retrospectivamente los contratos PC2 ni demuestra superioridad
+arquitectónica. Una microcomparación de 630 observaciones en un proceso
+tiene alcance algorítmico. PC2 aporta pruebas locales posteriores; PC3
+carece de observaciones confirmatorias nuevas. La recuperación y los
+consumidores evaluados no acreditan calidad generativa de un modelo de
+IA. Permanecen pendientes réplica externa, estudio humano de
+transferencia y doble cribado bibliográfico.</p>
+</div>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#introducción" id="toc-introducción">Introducción</a></li>
+<li><a href="#contexto-y-vacío-de-investigación"
+id="toc-contexto-y-vacío-de-investigación">Contexto y vacío de
+investigación</a></li>
+<li><a href="#contrato-cobria" id="toc-contrato-cobria">Contrato
+COBRIA</a></li>
+<li><a href="#arquitectura-documental"
+id="toc-arquitectura-documental">Arquitectura documental</a></li>
+<li><a href="#minería-de-datos-e-inteligencia-artificial"
+id="toc-minería-de-datos-e-inteligencia-artificial">Minería de datos e
+inteligencia artificial</a></li>
+<li><a href="#método" id="toc-método">Método</a></li>
+<li><a href="#protocolo-experimental-nosql"
+id="toc-protocolo-experimental-nosql">Protocolo experimental
+NoSQL</a></li>
+<li><a href="#resultados-disponibles-y-estado-de-la-evidencia"
+id="toc-resultados-disponibles-y-estado-de-la-evidencia">Resultados
+disponibles y estado de la evidencia</a></li>
+<li><a href="#proposiciones-verificables"
+id="toc-proposiciones-verificables">Proposiciones verificables</a>
+<ul>
+<li><a href="#autoridad-única" id="toc-autoridad-única">Autoridad
+única</a></li>
+<li><a href="#aislamiento-previo-a-recuperación"
+id="toc-aislamiento-previo-a-recuperación">Aislamiento previo a
+recuperación</a></li>
+<li><a href="#reconstrucción-equivalente"
+id="toc-reconstrucción-equivalente">Reconstrucción equivalente</a></li>
+<li><a href="#monotonicidad-de-revisión"
+id="toc-monotonicidad-de-revisión">Monotonicidad de revisión</a></li>
+</ul></li>
+<li><a href="#modelo-de-decisión-multidimensional"
+id="toc-modelo-de-decisión-multidimensional">Modelo de decisión
+multidimensional</a></li>
+<li><a href="#ejemplo-de-aplicación-neutral"
+id="toc-ejemplo-de-aplicación-neutral">Ejemplo de aplicación
+neutral</a></li>
+<li><a href="#trazabilidad-entre-hipótesis-y-artefactos"
+id="toc-trazabilidad-entre-hipótesis-y-artefactos">Trazabilidad entre
+hipótesis y artefactos</a></li>
+<li><a href="#plan-de-análisis-y-ciencia-abierta"
+id="toc-plan-de-análisis-y-ciencia-abierta">Plan de análisis y ciencia
+abierta</a></li>
+<li><a href="#discusión" id="toc-discusión">Discusión</a></li>
+<li><a href="#transferencia-del-resultado-científico"
+id="toc-transferencia-del-resultado-científico">Transferencia del
+resultado científico</a></li>
+<li><a href="#amenazas-a-la-validez"
+id="toc-amenazas-a-la-validez">Amenazas a la validez</a></li>
+<li><a href="#conclusión" id="toc-conclusión">Conclusión</a></li>
+</ul>
+</nav>
+<p><strong>Palabras clave:</strong> NoSQL documental; datos canónicos;
+proyecciones reconstruibles; multiinquilinato; procedencia; minería de
+datos; inteligencia artificial.</p>
+<h2 id="introducción">Introducción</h2>
+<p>Una aplicación documental rara vez conserva una sola forma de cada
+hecho. Las reglas de negocio necesitan documentos completos; las
+interfaces requieren respuestas breves; la analítica necesita cortes
+estables; y la inteligencia artificial necesita fragmentos con evidencia
+y autorización. Duplicar puede ser correcto, pero la copia se vuelve
+peligrosa cuando nadie puede responder de dónde provino, qué versión
+representa, a qué ámbito pertenece o cómo se repara.</p>
+<p>La literatura describe separación de lectura y escritura,
+procesamiento de eventos, procedencia, almacenes de características y
+gobierno de productos de datos <span class="citation"
+data-cites="microsoft2025cqrs fowler2005eventsourcing buneman2001provenance orr2021featurestores li2023featurestore">(Microsoft
+2025a; Fowler 2005; Buneman et al. 2001; Orr et al. 2021; Li et al.
+2023)</span>. COBRIA no reclama esos mecanismos como nuevos. Su
+contribución es composicional: convertir reconstrucción, ámbito y
+equivalencia en un contrato verificable que acompaña a cada
+representación derivada.</p>
+<p>La pregunta principal es: <em>¿qué contrato permite optimizar
+lecturas documentales sin crear una autoridad paralela ni debilitar
+aislamiento, trazabilidad y capacidad de reparación?</em> Se derivan
+cuatro preguntas: cómo formalizar la proyección; qué invariantes
+comprobar; cómo extender el contrato hacia analítica e inteligencia
+artificial; y qué evidencia hace falta para justificar su costo.</p>
+<p>La contribución principal es el contrato reconstruible con ámbito. Se
+concreta en:</p>
+<ol>
+<li><p>una definición formal que articula mecanismos conocidos y permite
+formular obligaciones refutables;</p></li>
+<li><p>su operacionalización en contratos y pruebas con alcance
+declarado;</p></li>
+<li><p>una evaluación interna acotada, separando mediciones históricas
+de controles posteriores y de resultados todavía pendientes.</p></li>
+</ol>
+<h2 id="contexto-y-vacío-de-investigación">Contexto y vacío de
+investigación</h2>
+<p>Bigtable y Dynamo mostraron que partición, replicación,
+disponibilidad y patrones de acceso deben considerarse desde el diseño
+<span class="citation"
+data-cites="chang2006bigtable decandia2007dynamo">(Chang et al. 2006;
+DeCandia et al. 2007)</span>. La flexibilidad documental no elimina el
+esquema: lo distribuye entre código, índices, reglas de acceso, eventos,
+cachés y consumidores.</p>
+<p>La investigación sobre vistas materializadas estudia mantenimiento
+incremental, selección de vistas y costo de actualización <span
+class="citation"
+data-cites="gupta1993incremental gupta1995materialized">(Gupta et al.
+1993; Gupta y Mumick 1995)</span>. En bases con esquemas flexibles se
+han propuesto técnicas para identificar, adaptar y migrar estructuras
+heterogéneas <span class="citation"
+data-cites="aulbach2009flexibleschemas ni2014adaptiveschema rico2016multitarget scherzinger2013schema">(Aulbach
+et al. 2009; Ni et al. 2014; Rico et al. 2016; Scherzinger et al.
+2013)</span>. Estos trabajos explican cómo conservar o transformar
+representaciones; COBRIA añade a la decisión los límites de autoridad,
+ámbito, equivalencia y reparación.</p>
+<p>La separación de modelos ofrece vocabulario para lectura y escritura;
+los eventos pueden rehidratar estado; los almacenes de características
+preservan definiciones entre entrenamiento e inferencia; y la
+procedencia explica cómo se obtuvo un resultado. Una implementación
+todavía debe decidir quién posee autoridad, qué ámbito restringe la
+copia, qué equivalencia se acepta y qué reparación es ejecutable.</p>
+<p>CQRS y las vistas materializadas separan caminos de lectura <span
+class="citation"
+data-cites="microsoft2025cqrs microsoft2025materialized">(Microsoft
+2025a, 2025b)</span>; el procesamiento por eventos permite reconstruir
+estado <span class="citation"
+data-cites="fowler2005eventsourcing">(Fowler 2005)</span>; y la
+procedencia, datasheets y model cards hacen explícito el origen y los
+límites de productos de datos <span class="citation"
+data-cites="buneman2001provenance gebru2021datasheets mitchell2019modelcards">(Buneman
+et al. 2001; Gebru et al. 2021; Mitchell et al. 2019)</span>. Los
+almacenes de características y las arquitecturas lakehouse abordan
+consistencia y reutilización analítica <span class="citation"
+data-cites="orr2021featurestores li2023featurestore armbrust2021lakehouse">(Orr
+et al. 2021; Li et al. 2023; Armbrust et al. 2021)</span>. COBRIA no
+reemplaza esas familias: ofrece una ficha común para decidir cuándo
+combinarlas en un sistema documental.</p>
+<p>Metodológicamente, la propuesta sigue ciencia del diseño <span
+class="citation"
+data-cites="hevner2004designscience peffers2007dsrm">(Hevner et al.
+2004; Peffers et al. 2007)</span>. La evaluación de rendimiento se apoya
+en cargas repetibles y unidades inferenciales explícitas, coherentes con
+YCSB y con principios clásicos de medición <span class="citation"
+data-cites="cooper2010ycsb jain1991performance">(Cooper et al. 2010;
+Jain 1991)</span>. Para inteligencia artificial, la gestión de riesgos y
+la deuda técnica exigen distinguir artefactos verificables de promesas
+generales <span class="citation"
+data-cites="sculley2015debt nist2023airmf nist2024genai">(Sculley et al.
+2015; National Institute of Standards and Technology 2023,
+2024)</span>.</p>
+<p>El problema abordado es cómo expresar conjuntamente optimización
+operacional, aislamiento, evolución y reparación en una ficha
+contractual de sistemas documentales. La revisión exploratoria motiva
+esa composición, pero no establece que no exista otra equivalente. La
+aportación propuesta es una integración especificada y refutable; la
+novedad absoluta y la exhaustividad de la búsqueda no se dan por
+demostradas.</p>
+<p>Se realizó una revisión exploratoria dirigida del corpus existente y
+una ampliación temática con búsqueda web pública, consultas por dominio
+y seguimiento de títulos, DOI y fuentes primarias. El registro conserva
+doce registros de búsqueda, seis decisiones de exclusión o sustitución y
+las correcciones de identidad. No es una exportación exhaustiva de ACM,
+IEEE o Springer; no se estiman conteos totales del buscador. Se
+distinguen publicaciones académicas, prepublicaciones, documentación
+técnica y fichas de normas. El corpus compartido contiene 46
+referencias; su comprobación de enlaces y metadatos no implica lectura
+íntegra de todas ellas. La extracción temática es asistida y no acredita
+doble cribado independiente.</p>
+<p>Para esta entrega se excluye justificadamente la investigación nueva
+de EP8: el preprint conserva el alcance acotado elegido, sin afirmar
+validación confirmatoria de los contratos posteriores. PC3 y la réplica
+externa continúan pendientes. La exclusión no declara ejecutadas
+corridas P1–A1 ni satisface las puertas de una versión estable.</p>
+<p>PROV-DM ofrece un vocabulario de entidades, actividades, agentes y
+derivaciones <span class="citation" data-cites="w3c2013prov">(World Wide
+Web Consortium 2013)</span>; conservar inmutabilidad también ayuda a
+razonar sobre estado y copias <span class="citation"
+data-cites="helland2015immutability">(Helland 2015)</span>. Son
+antecedentes, no mecanismos inventados por COBRIA ni una declaración de
+conformidad con W3C. La fuga de datos puede invalidar conclusiones de
+aprendizaje automático <span class="citation"
+data-cites="kapoor2023leakage">(Kapoor y Narayanan 2023)</span>; por eso
+registrar origen y corte temporal no equivale a demostrar calidad
+predictiva.</p>
+<p>La documentación de MongoDB, CouchDB y OpenSearch distingue
+actualización condicional, revisión documental y cambio de alias <span
+class="citation"
+data-cites="mongodbAtomicity apacheCouchDocumentApi opensearch32Alias">(MongoDB,
+s. f.; Apache Software Foundation, s. f.; OpenSearch Project,
+s. f.)</span>. Un cambio de alias atómico no prueba por sí solo
+equivalencia de la candidata o CAS de revisión. Las guías consultadas
+delimitan capacidades; no sustituyen ensayos de los adaptadores.</p>
+<table id="tab:comparacion-literatura-ep7">
+<caption>Comparación conceptual por mecanismos, no clasificación de
+superioridad.</caption>
+<thead>
+<tr>
+<th style="text-align: left;">Mecanismo</th>
+<th style="text-align: left;">Aporte del antecedente</th>
+<th style="text-align: left;">Decisión que debe comprobarse en
+COBRIA</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Lectura y escritura</td>
+<td style="text-align: left;">Modelos separados y copias
+precomputadas</td>
+<td style="text-align: left;">Autoridad, ámbito y costo de mantener el
+derivado.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Historia e inmutabilidad</td>
+<td style="text-align: left;">Cambios conservados y estado
+derivable</td>
+<td style="text-align: left;">Reconstrucción desde el corte declarado;
+no exigir historia completa de eventos.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Procedencia</td>
+<td style="text-align: left;">Fuentes, actividad, derivación y
+responsabilidad</td>
+<td style="text-align: left;">Relacionar fuente, transformación, versión
+y reparación.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Evolución de esquema</td>
+<td style="text-align: left;">Mapeo flexible y compensación entre
+costos</td>
+<td style="text-align: left;">Separar modelo lógico, mapeo físico y
+proyección versionada.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Analítica</td>
+<td style="text-align: left;">Características reutilizables y riesgos de
+fuga</td>
+<td style="text-align: left;">Comprobar corte temporal y separación de
+entidades; no inferir calidad predictiva.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Capacidades del motor</td>
+<td style="text-align: left;">Revisiones, actualización condicional y
+alias</td>
+<td style="text-align: left;">Probar precondiciones por adaptador;
+atomicidad no implica equivalencia ni CAS.</td>
+</tr>
+</tbody>
+</table>
+<p>La evaluación de calidad requiere distinguir el atributo del
+producto, su medida y la decisión contextual. SQuaRE ofrece referencias
+para organizar esa evaluación <span class="citation"
+data-cites="iso25010_2023 iso25040_2024">(ISO/IEC 2023, 2024)</span>; el
+artículo introductorio de <span class="citation"
+data-cites="roa2015iso25000">Roa Molina et al. (2015)</span> se conserva
+como antecedente, no como edición vigente de la norma. La
+correspondencia temática incorporada al ecosistema no constituye
+evaluación de cláusulas ni certificación ISO, y no modifica los niveles
+de Core.</p>
+<h2 id="contrato-cobria">Contrato COBRIA</h2>
+<p>Sea
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>C</mi><annotation encoding="application/x-tex">C</annotation></semantics></math>
+una colección de documentos canónicos. Una proyección
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>P</mi><mi>i</mi></msub><annotation encoding="application/x-tex">P_i</annotation></semantics></math>
+se describe por:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>K</mi><mi>i</mi></msub><mo>=</mo><mo stretchy="false" form="prefix">⟨</mo><mi>C</mi><mo>,</mo><msub><mi>f</mi><mi>i</mi></msub><mo>,</mo><msub><mi>θ</mi><mi>i</mi></msub><mo>,</mo><mi>s</mi><mo>,</mo><mi>v</mi><mo>,</mo><msub><mi>ϕ</mi><mi>i</mi></msub><mo>,</mo><msub><mi>e</mi><mi>i</mi></msub><mo>,</mo><msub><mi>r</mi><mi>i</mi></msub><mo>,</mo><msub><mi>o</mi><mi>i</mi></msub><mo stretchy="false" form="postfix">⟩</mo><mo>,</mo></mrow><annotation encoding="application/x-tex">K_i=\langle C,f_i,\theta_i,s,v,\phi_i,e_i,r_i,o_i\rangle,</annotation></semantics></math>
+donde
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>f</mi><mi>i</mi></msub><annotation encoding="application/x-tex">f_i</annotation></semantics></math>
+es la transformación,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>θ</mi><mi>i</mi></msub><annotation encoding="application/x-tex">\theta_i</annotation></semantics></math>
+sus catálogos y políticas,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>s</mi><annotation encoding="application/x-tex">s</annotation></semantics></math>
+el ámbito,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math>
+la versión,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>ϕ</mi><mi>i</mi></msub><annotation encoding="application/x-tex">\phi_i</annotation></semantics></math>
+el límite de frescura,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>e</mi><mi>i</mi></msub><annotation encoding="application/x-tex">e_i</annotation></semantics></math>
+el verificador de equivalencia,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>r</mi><mi>i</mi></msub><annotation encoding="application/x-tex">r_i</annotation></semantics></math>
+la reconstrucción y
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>o</mi><mi>i</mi></msub><annotation encoding="application/x-tex">o_i</annotation></semantics></math>
+la propiedad operacional del componente.</p>
+<p>Core 1.0 declara diez invariantes; el artículo los resume sin
+sustituir la norma:</p>
+<ol>
+<li><p><strong>autoridad</strong>: solo
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>C</mi><annotation encoding="application/x-tex">C</annotation></semantics></math>
+acepta cambios de dominio autoritativos;</p></li>
+<li><p><strong>ámbito</strong>: identidad, consulta, caché, evento y
+recuperación incluyen
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>s</mi><annotation encoding="application/x-tex">s</annotation></semantics></math>;</p></li>
+<li><p><strong>procedencia</strong>: cada elemento derivado enlaza
+origen y versión;</p></li>
+<li><p><strong>reconstrucción</strong>:
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>r</mi><mi>i</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>C</mi><mo>,</mo><msub><mi>θ</mi><mi>i</mi></msub><mo>,</mo><mi>v</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">r_i(C,\theta_i,v)</annotation></semantics></math>
+produce una candidata completa;</p></li>
+<li><p><strong>equivalencia</strong>:
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>e</mi><mi>i</mi></msub><annotation encoding="application/x-tex">e_i</annotation></semantics></math>
+compara resultado lógico, no representación física;</p></li>
+<li><p><strong>idempotencia</strong>: repetir una entrega lógica no
+duplica efectos;</p></li>
+<li><p><strong>monotonicidad</strong>: una revisión obsoleta no reduce
+la revisión visible;</p></li>
+<li><p><strong>publicación segura</strong>: la candidata se verifica
+antes de sustituir la activa;</p></li>
+<li><p><strong>operabilidad</strong>: existen responsable, métricas,
+alerta y criterio de retiro.</p></li>
+<li><p><strong>fallo cerrado</strong>: se rechaza ausencia de ámbito,
+versión o autorización antes del acceso sensible.</p></li>
+</ol>
+<p>La publicación segura construye
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msubsup><mi>P</mi><mi>i</mi><mrow><mi>v</mi><mo>+</mo><mn>1</mn></mrow></msubsup><annotation encoding="application/x-tex">P_i^{v+1}</annotation></semantics></math>,
+verifica equivalencia y cambia un alias de forma indivisible. La versión
+activa no se vacía durante el proceso. La actualización incremental es
+válida si puede repetirse y si una reconstrucción total periódica
+detecta omisiones o deriva.</p>
+<h2 id="arquitectura-documental">Arquitectura documental</h2>
+<figure data-latex-placement="H">
+<img src="figuras/articulo-01.svg" />
+<blockquote>
+<p><strong>Descripción textual del diagrama.</strong></p>
+<ul>
+<li><p>Nodo: Caso de uso.</p></li>
+<li><p>Nodo: Documento canónico.</p></li>
+<li><p>Nodo: Proyección reconstruible.</p></li>
+<li><p>Nodo: Producto de datos.</p></li>
+<li><p>Nodo: Metadatos, ámbito y versión.</p></li>
+<li><p>Caso de uso
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>→</mo><annotation encoding="application/x-tex">\rightarrow</annotation></semantics></math>
+Documento canónico.</p></li>
+<li><p>Documento canónico
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>→</mo><annotation encoding="application/x-tex">\rightarrow</annotation></semantics></math>
+Proyección reconstruible.</p></li>
+<li><p>Proyección reconstruible
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>→</mo><annotation encoding="application/x-tex">\rightarrow</annotation></semantics></math>
+Caso de uso.</p></li>
+<li><p>Proyección reconstruible
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>→</mo><annotation encoding="application/x-tex">\rightarrow</annotation></semantics></math>
+Producto de datos.</p></li>
+<li><p>Metadatos, ámbito y versión
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>→</mo><annotation encoding="application/x-tex">\rightarrow</annotation></semantics></math>
+Documento canónico.</p></li>
+<li><p>Metadatos, ámbito y versión
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>→</mo><annotation encoding="application/x-tex">\rightarrow</annotation></semantics></math>
+Proyección reconstruible.</p></li>
+<li><p>Metadatos, ámbito y versión
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>→</mo><annotation encoding="application/x-tex">\rightarrow</annotation></semantics></math>
+Producto de datos.</p></li>
+</ul>
+</blockquote>
+<figcaption>Relaciones principales del contrato COBRIA en NoSQL
+documental.</figcaption>
+</figure>
+<p>El objeto canónico expresa identidad, revisión, tiempo y ciclo de
+vida. El Dater traduce entre esa semántica y documentos físicos, índices
+y consultas. El servicio ejecuta reglas y autorización. El catálogo
+conserva vocabulario versionado. Esta separación es una guía de
+responsabilidades; no obliga a multiplicar clases cuando un módulo
+pequeño puede cumplir el mismo contrato.</p>
+<h2 id="minería-de-datos-e-inteligencia-artificial">Minería de datos e
+inteligencia artificial</h2>
+<p>Un conjunto de datos reconstruible es una proyección fechada. Declara
+población, ventana temporal, transformación, versión de catálogos,
+exclusiones, semilla y política de división. Una característica
+versionada añade definición, tipo, tiempo de evento, tiempo de
+conocimiento y prevención de fuga temporal.</p>
+<p>La recuperación aumentada restringe candidatos por ámbito antes de
+calcular similitud. Cada fragmento conserva documento fuente, revisión,
+versión, autorización y fecha. La respuesta enlaza evidencia o se
+abstiene. Una herramienta de agente añade capacidad mínima, validación,
+idempotencia, confirmación para efectos de alto riesgo y registro.</p>
+<p>Estas propiedades no garantizan exactitud de un modelo. Sí hacen
+reproducible el insumo, limitan cruces de ámbito y permiten retirar
+productos afectados por cambios o borrado.</p>
+<h2 id="método">Método</h2>
+<p>La investigación sigue ciencia del diseño: problema, objetivos,
+construcción, demostración, evaluación y comunicación. Se consideran
+tres perfiles documentales anonimizados. Los perfiles A/N1 y B/N2
+proceden del inventario original de dos implementaciones; N3 amplía la
+observación estructural con un corte posterior. La profundidad de
+observación es desigual y no constituye una muestra de equipos
+independientes. Los dominios son eventos y multimedia, operación
+hotelera y operación comercial. Se inspeccionan canónicos, Daters,
+servicios, catálogos, reglas, índices, funciones y derivados. La
+recurrencia motiva el problema; no estima su frecuencia poblacional.</p>
+<p>La evaluación activa se restringe a NoSQL documental. Se distinguen
+evidencia estructural, ejecutable y empírica. El protocolo registra
+motor, región, escala, ámbitos, forma documental, índices, semillas,
+calentamiento, orden, versión y descartes. La corrida completa es la
+unidad inferencial.</p>
+<p>Las hipótesis son: HN1, reconstrucción equivalente; HN2, cero cruces
+de ámbito; HN3, idempotencia y revisión; HN4, reproducción de productos
+analíticos; y HN5, beneficio de lectura suficiente para pagar
+mantenimiento. Son objetivos de evaluación, no hipótesis íntegramente
+confirmadas por R7. Ese arnés anterior examina controles más acotados;
+PC2 implementa obligaciones adicionales y PC3 debe aportar las nuevas
+mediciones. La transferencia a otros equipos, topologías y servicios
+administrados permanece abierta.</p>
+<h2 id="protocolo-experimental-nosql">Protocolo experimental NoSQL</h2>
+<table>
+<caption>Familias de evaluación y criterios de diseño; no cobertura
+íntegra del arnés R7.</caption>
+<thead>
+<tr>
+<th style="text-align: left;">Código</th>
+<th style="text-align: left;">Experimento</th>
+<th style="text-align: left;">Aceptación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">P1</td>
+<td style="text-align: left;">consulta canónica frente a proyección</td>
+<td style="text-align: left;">mismo resultado y mejora del objetivo
+declarado</td>
+</tr>
+<tr>
+<td style="text-align: left;">P2</td>
+<td style="text-align: left;">amplificación de escritura</td>
+<td style="text-align: left;">operaciones, bytes, eventos y convergencia
+dentro de presupuesto</td>
+</tr>
+<tr>
+<td style="text-align: left;">R1</td>
+<td style="text-align: left;">reconstrucción total e incremental</td>
+<td style="text-align: left;">equivalencia, idempotencia y publicación
+segura</td>
+</tr>
+<tr>
+<td style="text-align: left;">S1</td>
+<td style="text-align: left;">aislamiento adversarial</td>
+<td style="text-align: left;">cero documentos cruzados y rechazo sin
+ámbito</td>
+</tr>
+<tr>
+<td style="text-align: left;">A1</td>
+<td style="text-align: left;">conjunto, recuperación y herramientas</td>
+<td style="text-align: left;">procedencia completa, abstención y cero
+fugas</td>
+</tr>
+</tbody>
+</table>
+<p>P1 y P2 deben ejecutarse en al menos dos motores NoSQL, con treinta
+corridas válidas por celda, orden rotado, escalas múltiples y resultados
+negativos publicados. R1 interrumpe la construcción antes de publicar;
+S1 manipula identidad, caché y búsqueda; A1 introduce eventos tardíos,
+duplicados, catálogos desconocidos y documentos incompletos.</p>
+<h2 id="resultados-disponibles-y-estado-de-la-evidencia">Resultados
+disponibles y estado de la evidencia</h2>
+<table>
+<caption>Estratos de evidencia y límites de interpretación.</caption>
+<thead>
+<tr>
+<th style="text-align: left;">Estrato</th>
+<th style="text-align: left;">Aporte disponible</th>
+<th style="text-align: left;">Inferencia no establecida</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Norma</td>
+<td style="text-align: left;">Contrato e invariantes de Core 1.0</td>
+<td style="text-align: left;">Eficacia o conformidad por el solo uso del
+nombre</td>
+</tr>
+<tr>
+<td style="text-align: left;">Observación</td>
+<td style="text-align: left;">Dos inventarios originales y un perfil
+complementario</td>
+<td style="text-align: left;">Prevalencia, causalidad o muestra
+independiente</td>
+</tr>
+<tr>
+<td style="text-align: left;">R7 histórico</td>
+<td style="text-align: left;">270 corridas; ocho celdas favorables y una
+no concluyente</td>
+<td style="text-align: left;">Validación retrospectiva de PC2 o
+superioridad del contrato</td>
+</tr>
+<tr>
+<td style="text-align: left;">Microensayo</td>
+<td style="text-align: left;">630 observaciones en un proceso</td>
+<td style="text-align: left;">Rendimiento distribuido de arquitecturas
+completas</td>
+</tr>
+<tr>
+<td style="text-align: left;">PC2 local</td>
+<td style="text-align: left;">Pruebas de persistencia, publicación,
+autorización y consumidor</td>
+<td style="text-align: left;">Nuevas cifras en tres motores o calidad de
+un LLM</td>
+</tr>
+<tr>
+<td style="text-align: left;">PC3 pendiente</td>
+<td style="text-align: left;">Diseño y análisis preparado sin
+observaciones nuevas</td>
+<td style="text-align: left;">Resultado confirmatorio, celdas imputadas
+o mejora estimada</td>
+</tr>
+<tr>
+<td style="text-align: left;">Evaluación externa</td>
+<td style="text-align: left;">Protocolos y material de
+transferencia</td>
+<td style="text-align: left;">Revisión independiente, aprendizaje o
+productividad demostrados</td>
+</tr>
+</tbody>
+</table>
+<p>Los tres perfiles contienen fuentes documentales, capas de acceso,
+servicios, catálogos y derivados. La recurrencia documenta el problema
+en los perfiles observados, sin estimar su prevalencia ni el beneficio
+de adoptar la propuesta en otros equipos. Las pruebas disponibles
+verifican reglas de acceso, roles, aislamiento, ciclos de vida,
+idempotencia y reconstrucción en rutas concretas. Una observación
+longitudinal también muestra reducción de accesos directos desde
+presentación hacia la capa documental.</p>
+<p>El conjunto histórico R7 contiene 270 corridas internas: tres
+motores, tres escalas y 30 repeticiones por celda. MongoDB 8.0.29 y
+CouchDB 3.4.3 se ejecutaron en contenedores amd64; OpenSearch 3.2.0 se
+ejecutó de forma nativa en arm64. Las 90 corridas de cada motor
+aprobaron los indicadores denominados P1, P2, R1, S1 y A1 por el arnés
+de esa versión, no todos los controles posteriores. Las huellas SHA-256
+de los eventos crudos y los manifiestos de entorno acompañan al
+análisis. Los antecedentes embebidos y el conjunto distribuido
+preliminar permanecen segregados; no se suman a R7 ni completan el
+conjunto PC3.</p>
+<p>En R7, P1 filtra en el cliente la lista de documentos canónicos y la
+compara con una colección derivada; no prueba que una consulta canónica
+nativa óptima sea inferior. P2 comprueba dos escrituras y convergencia,
+no su atomicidad. R1 verifica reconstrucción y rechazo de una candidata,
+pero no demuestra un alias persistido mediante CAS ni publicación
+linealizable. S1 ensaya ámbito en el adaptador, no un proveedor de
+identidad. A1 reconstruye un producto sintético y observa ausencia de
+evidencia tras retirarlo, no la respuesta de un LLM. Los nombres P1–A1
+identifican familias; compartir sus etiquetas con PC2 no hace
+equivalentes sus controles.</p>
+<table>
+<caption>Comparación pareada de lectura en R7. Una razón menor que uno
+favorece la proyección; la diferencia es proyección menos lectura
+canónica.</caption>
+<thead>
+<tr>
+<th style="text-align: left;">Motor</th>
+<th
+style="text-align: right;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math></th>
+<th style="text-align: right;">razón mediana</th>
+<th style="text-align: right;">diferencia media (ms)</th>
+<th
+style="text-align: right;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>d</mi><mi>z</mi></msub><annotation encoding="application/x-tex">d_z</annotation></semantics></math></th>
+<th
+style="text-align: right;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>p</mi><annotation encoding="application/x-tex">p</annotation></semantics></math>
+de Holm</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">MongoDB</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">0,930</td>
+<td style="text-align: right;">-2,446</td>
+<td style="text-align: right;">-0,305</td>
+<td style="text-align: right;">0,0004</td>
+</tr>
+<tr>
+<td style="text-align: left;">MongoDB</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">0,869</td>
+<td style="text-align: right;">-15,484</td>
+<td style="text-align: right;">-0,376</td>
+<td style="text-align: right;">0,0004</td>
+</tr>
+<tr>
+<td style="text-align: left;">MongoDB</td>
+<td style="text-align: right;">5000</td>
+<td style="text-align: right;">0,843</td>
+<td style="text-align: right;">-48,206</td>
+<td style="text-align: right;">-0,573</td>
+<td style="text-align: right;">0,0011</td>
+</tr>
+<tr>
+<td style="text-align: left;">CouchDB</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">0,512</td>
+<td style="text-align: right;">-58,535</td>
+<td style="text-align: right;">-1,817</td>
+<td style="text-align: right;">0,0004</td>
+</tr>
+<tr>
+<td style="text-align: left;">CouchDB</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">0,372</td>
+<td style="text-align: right;">-581,855</td>
+<td style="text-align: right;">-2,592</td>
+<td style="text-align: right;">0,0004</td>
+</tr>
+<tr>
+<td style="text-align: left;">CouchDB</td>
+<td style="text-align: right;">5000</td>
+<td style="text-align: right;">0,358</td>
+<td style="text-align: right;">-2 923,388</td>
+<td style="text-align: right;">-2,648</td>
+<td style="text-align: right;">0,0004</td>
+</tr>
+<tr>
+<td style="text-align: left;">OpenSearch</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">0,940</td>
+<td style="text-align: right;">0,020</td>
+<td style="text-align: right;">0,002</td>
+<td style="text-align: right;">0,9930</td>
+</tr>
+<tr>
+<td style="text-align: left;">OpenSearch</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">0,714</td>
+<td style="text-align: right;">-9,238</td>
+<td style="text-align: right;">-0,774</td>
+<td style="text-align: right;">0,0004</td>
+</tr>
+<tr>
+<td style="text-align: left;">OpenSearch</td>
+<td style="text-align: right;">5000</td>
+<td style="text-align: right;">0,452</td>
+<td style="text-align: right;">-42,439</td>
+<td style="text-align: right;">-1,645</td>
+<td style="text-align: right;">0,0004</td>
+</tr>
+</tbody>
+</table>
+<p>En ocho celdas la lectura proyectada favoreció la comparación pareada
+con ajuste de Holm. Cada par pertenece a una corrida; no se tratan las
+consultas internas como réplicas independientes. OpenSearch con
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><mn>100</mn></mrow><annotation encoding="application/x-tex">n=100</annotation></semantics></math>
+produjo una diferencia media de 0,020 ms,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>d</mi><mi>z</mi></msub><mo>=</mo><mn>0</mn><mo>,</mo><mn>002</mn></mrow><annotation encoding="application/x-tex">d_z=0,002</annotation></semantics></math>
+y
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>p</mi><mrow><mi>H</mi><mi>o</mi><mi>l</mi><mi>m</mi></mrow></msub><mo>=</mo><mn>0</mn><mo>,</mo><mn>993</mn></mrow><annotation encoding="application/x-tex">p_{Holm}=0,993</annotation></semantics></math>:
+el resultado es no concluyente y se conserva como resultado negativo, no
+como excepción editorial.</p>
+<p>Como comparación complementaria, un experimento algorítmico
+controlado contrasta siete estrategias: consulta del documento, índice
+nativo, vista materializada, CQRS, reconstrucción por eventos,
+proyección sin contrato y proyección COBRIA. El conjunto contiene 630
+observaciones (siete estrategias, tres escalas y treinta repeticiones) y
+registra estadísticas de tiempos y medidas de recursos del arnés. Las
+etiquetas de estrategia representan modelos algorítmicos de esas
+opciones, no despliegues completos de CQRS, vistas o procesamiento por
+eventos. Al ejecutarse en un único proceso, no se interpreta como
+comparación entre motores ni demuestra un efecto causal del
+contrato.</p>
+<p>Esta evidencia apoya viabilidad estructural y ejecutable. No
+demuestra beneficio universal de rendimiento, productividad humana ni
+seguridad exhaustiva. Las cifras de controles SQL históricos permanecen
+segregadas y no alimentan el resumen ni las conclusiones.</p>
+<h2 id="proposiciones-verificables">Proposiciones verificables</h2>
+<p>El contrato permite derivar propiedades que un arnés puede intentar
+refutar. No se presentan como teoremas universales del almacenamiento
+distribuido, sino como obligaciones de una implementación COBRIA.</p>
+<h3 id="autoridad-única">Autoridad única</h3>
+<p>Sea
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>w</mi><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">w(x)</annotation></semantics></math>
+una operación que cambia el estado de dominio de
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>x</mi><annotation encoding="application/x-tex">x</annotation></semantics></math>.
+Para cualquier proyección
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>P</mi><mi>i</mi></msub><annotation encoding="application/x-tex">P_i</annotation></semantics></math>,
+una operación válida satisface:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>w</mi><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo><mo>⇒</mo><mi>w</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>C</mi><mi>x</mi></msub><mo stretchy="false" form="postfix">)</mo><mo>∧</mo><mo>¬</mo><msub><mi>w</mi><mrow><mi>a</mi><mi>u</mi><mi>t</mi><mi>o</mi><mi>r</mi><mi>i</mi><mi>d</mi><mi>a</mi><mi>d</mi></mrow></msub><mo stretchy="false" form="prefix">(</mo><msub><mi>P</mi><mi>i</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">w(x)\Rightarrow w(C_x)\land \neg w_{autoridad}(P_i(x)).</annotation></semantics></math>
+Una interfaz administrativa que modifica directamente el derivado viola
+la propiedad, aunque luego intente sincronizar la fuente. La prueba
+combina análisis estático de dependencias con una escritura adversarial
+contra el adaptador.</p>
+<h3 id="aislamiento-previo-a-recuperación">Aislamiento previo a
+recuperación</h3>
+<p>Para una identidad
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>a</mi><annotation encoding="application/x-tex">a</annotation></semantics></math>
+y ámbito autorizado
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>s</mi><mi>a</mi></msub><annotation encoding="application/x-tex">s_a</annotation></semantics></math>,
+el conjunto candidato cumple:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi><mi>a</mi><mi>n</mi><mi>d</mi><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo>,</mo><mi>q</mi><mo stretchy="false" form="postfix">)</mo><mo>⊆</mo><mo stretchy="false" form="prefix">{</mo><mi>x</mi><mo>∣</mo><mi>s</mi><mi>c</mi><mi>o</mi><mi>p</mi><mi>e</mi><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msub><mi>s</mi><mi>a</mi></msub><mo>∧</mo><mi>p</mi><mi>e</mi><mi>r</mi><mi>m</mi><mi>i</mi><mi>t</mi><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo>,</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">}</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">Cand(a,q)\subseteq \{x\mid scope(x)=s_a\land permit(a,x)\}.</annotation></semantics></math>
+La condición se aplica antes de similitud, orden, caché o ensamblado de
+contexto. Las pruebas pueden comprobar la exclusión de candidatos y
+contenidos ajenos en esas rutas. No demuestran ausencia de canales
+laterales temporales: esa propiedad requiere un modelo de amenaza y
+mediciones específicos, fuera de la evaluación actual.</p>
+<h3 id="reconstrucción-equivalente">Reconstrucción equivalente</h3>
+<p>Para una versión congelada
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math>,
+política
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>θ</mi><annotation encoding="application/x-tex">\theta</annotation></semantics></math>
+y corte
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>t</mi><annotation encoding="application/x-tex">t</annotation></semantics></math>,
+la reconstrucción se acepta cuando:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>e</mi><mi>i</mi></msub><mo minsize="120%" maxsize="120%" stretchy="true" form="prefix">(</mo><msubsup><mi>P</mi><mi>i</mi><mrow><mi>a</mi><mi>c</mi><mi>t</mi><mi>i</mi><mi>v</mi><mi>o</mi></mrow></msubsup><mo>,</mo><msub><mi>r</mi><mi>i</mi></msub><mo stretchy="false" form="prefix">(</mo><msub><mi>C</mi><mrow><mo>≤</mo><mi>t</mi></mrow></msub><mo>,</mo><mi>θ</mi><mo>,</mo><mi>v</mi><mo stretchy="false" form="postfix">)</mo><mo minsize="120%" maxsize="120%" stretchy="true" form="postfix">)</mo><mo>=</mo><mn>1</mn><mi>.</mi></mrow><annotation encoding="application/x-tex">e_i\bigl(P_i^{activo},r_i(C_{\leq t},\theta,v)\bigr)=1.</annotation></semantics></math>
+El verificador puede comparar igualdad exacta, conjunto ordenado,
+tolerancia numérica o invariantes de dominio. La tolerancia debe
+declararse antes de observar divergencias.</p>
+<h3 id="monotonicidad-de-revisión">Monotonicidad de revisión</h3>
+<p>Si
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>r</mi><mi>e</mi><mi>v</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>x</mi><mo>′</mo></msup><mo stretchy="false" form="postfix">)</mo><mo>&lt;</mo><mi>r</mi><mi>e</mi><mi>v</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>C</mi><mi>x</mi></msub><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">rev(x&#39;)&lt;rev(C_x)</annotation></semantics></math>,
+el procesamiento de
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>x</mi><mo>′</mo></msup><annotation encoding="application/x-tex">x&#39;</annotation></semantics></math>
+no puede reducir la revisión visible ni reaplicar un efecto no
+conmutativo. La propiedad cubre entregas fuera de orden, reintentos y
+restauraciones parciales.</p>
+<h2 id="modelo-de-decisión-multidimensional">Modelo de decisión
+multidimensional</h2>
+<p>Una proyección no se justifica únicamente por latencia. Se define el
+vector:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>D</mi><mi>i</mi></msub><mo>=</mo><mo stretchy="false" form="prefix">⟨</mo><mi mathvariant="normal">Δ</mi><mi>L</mi><mo>,</mo><mi mathvariant="normal">Δ</mi><mi>O</mi><mo>,</mo><mi mathvariant="normal">Δ</mi><mi>B</mi><mo>,</mo><mi mathvariant="normal">Δ</mi><mi>S</mi><mo>,</mo><mi mathvariant="normal">Δ</mi><mi>F</mi><mo>,</mo><mi mathvariant="normal">Δ</mi><mi>R</mi><mo>,</mo><mi mathvariant="normal">Δ</mi><mi>H</mi><mo stretchy="false" form="postfix">⟩</mo><mo>,</mo></mrow><annotation encoding="application/x-tex">D_i=\langle \Delta L,\Delta O,\Delta B,\Delta S,\Delta F,\Delta R,\Delta H\rangle,</annotation></semantics></math>
+donde
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>L</mi><annotation encoding="application/x-tex">L</annotation></semantics></math>
+es latencia,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>O</mi><annotation encoding="application/x-tex">O</annotation></semantics></math>
+operaciones facturables,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>
+bytes,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>
+almacenamiento,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>F</mi><annotation encoding="application/x-tex">F</annotation></semantics></math>
+frescura,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>
+riesgo operacional y
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>H</mi><annotation encoding="application/x-tex">H</annotation></semantics></math>
+esfuerzo humano. Los tres primeros pueden medirse automáticamente; los
+últimos requieren objetivos, incidentes y estudios humanos.</p>
+<p>La frontera temporal simplificada usa consultas
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Q</mi><annotation encoding="application/x-tex">Q</annotation></semantics></math>,
+escrituras
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>W</mi><annotation encoding="application/x-tex">W</annotation></semantics></math>,
+ahorro de lectura
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">Δ</mi><mi>q</mi></mrow><annotation encoding="application/x-tex">\Delta q</annotation></semantics></math>
+y costo adicional
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">Δ</mi><mi>w</mi></mrow><annotation encoding="application/x-tex">\Delta w</annotation></semantics></math>:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Q</mi><mi mathvariant="normal">Δ</mi><mi>q</mi><mo>&gt;</mo><mi>W</mi><mi mathvariant="normal">Δ</mi><mi>w</mi><mi>.</mi></mrow><annotation encoding="application/x-tex">Q\Delta q&gt;W\Delta w.</annotation></semantics></math>
+Esta desigualdad no decide por sí sola. Si una proyección duplica
+información sensible, incumple frescura o carece de reparación, se
+rechaza aunque el tiempo agregado resulte favorable. El valor del modelo
+es obligar a declarar dimensiones y evitar que una mediana aislada se
+convierta en recomendación arquitectónica.</p>
+<table>
+<caption>Preguntas de decisión antes de adoptar una
+proyección.</caption>
+<thead>
+<tr>
+<th style="text-align: left;">Dimensión</th>
+<th style="text-align: left;">Evidencia mínima</th>
+<th style="text-align: left;">Señal para simplificar</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Lectura</td>
+<td style="text-align: left;">percentiles pareados y costo</td>
+<td style="text-align: left;">índice canónico cumple el objetivo</td>
+</tr>
+<tr>
+<td style="text-align: left;">Escritura</td>
+<td style="text-align: left;">operaciones, eventos y convergencia</td>
+<td style="text-align: left;">amplificación supera presupuesto</td>
+</tr>
+<tr>
+<td style="text-align: left;">Frescura</td>
+<td style="text-align: left;">atraso y distribución temporal</td>
+<td style="text-align: left;">consumidor exige lectura inmediata</td>
+</tr>
+<tr>
+<td style="text-align: left;">Reparación</td>
+<td style="text-align: left;">ensayo total e incremental</td>
+<td style="text-align: left;">reconstrucción no es repetible</td>
+</tr>
+<tr>
+<td style="text-align: left;">Privacidad</td>
+<td style="text-align: left;">pruebas negativas por ámbito</td>
+<td style="text-align: left;">derivado duplica campos innecesarios</td>
+</tr>
+<tr>
+<td style="text-align: left;">Operación</td>
+<td style="text-align: left;">responsable, alertas e incidentes</td>
+<td style="text-align: left;">nadie posee o utiliza la proyección</td>
+</tr>
+</tbody>
+</table>
+<h2 id="ejemplo-de-aplicación-neutral">Ejemplo de aplicación
+neutral</h2>
+<p>Como escenario de diseño, no resultado experimental, considérese una
+colección de actividades con documentos heterogéneos, diez ámbitos y una
+pantalla que muestra únicamente identidad, fecha, estado y resumen. La
+fuente canónica conserva además reglas, multimedia, revisión y
+procedencia. El equipo debe comprobar si la consulta indexada cumple el
+objetivo antes de atribuir a una proyección un beneficio. Ninguna cifra
+de este escenario se presenta como observación de R7.</p>
+<p>La ficha COBRIA no ordena crear una copia. Primero define la consulta
+y congela el índice canónico. Después propone una proyección estrecha
+con los cuatro campos visibles, revisión, fuente y versión. P1 compara
+ambas rutas; P2 mide la actualización; R1 elimina y reconstruye la
+candidata; S1 intenta cruzar ámbitos; A1 verifica que un conjunto
+analítico pueda enlazar cada registro con el documento de origen.</p>
+<p>Tres resultados son posibles. Si la consulta canónica satisface costo
+y latencia, se descarta la proyección. Si la proyección mejora lectura
+pero rompe frescura o reparación, se corrige antes de publicarla. Solo
+si cumple el vector de decisión se adopta, con fecha de revisión y
+criterio de retiro. El ejemplo muestra que COBRIA es un proceso de
+decisión, no una instrucción de duplicar.</p>
+<p>El paquete de réplica incorpora además una aplicación mínima de
+observaciones de biodiversidad. Se organiza en dominio, aplicación,
+puertos e infraestructura; exige ámbito antes del acceso, rechaza
+revisiones obsoletas, aplica idempotencia ligada a la huella de entrada
+y reconstruye un resumen por especie. Las pruebas funcionales cubren
+registro válido, autorización previa, repetición sin duplicado,
+conflicto de clave, monotonicidad y equivalencia tras retirar y
+regenerar la proyección. Su función es pedagógica y de transferencia: no
+sustituye los experimentos P1–A1.</p>
+<h2 id="trazabilidad-entre-hipótesis-y-artefactos">Trazabilidad entre
+hipótesis y artefactos</h2>
+<table>
+<caption>Matriz de trazabilidad del artículo.</caption>
+<thead>
+<tr>
+<th style="text-align: left;">Hipótesis</th>
+<th style="text-align: left;">Riesgo</th>
+<th style="text-align: left;">Prueba</th>
+<th style="text-align: left;">Evidencia requerida</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">HN1</td>
+<td style="text-align: left;">autoridad paralela</td>
+<td style="text-align: left;">R1 y escritura adversarial</td>
+<td style="text-align: left;">equivalencia y rechazo directo</td>
+</tr>
+<tr>
+<td style="text-align: left;">HN2</td>
+<td style="text-align: left;">fuga entre ámbitos</td>
+<td style="text-align: left;">S1</td>
+<td style="text-align: left;">cero candidatos cruzados</td>
+</tr>
+<tr>
+<td style="text-align: left;">HN3</td>
+<td style="text-align: left;">duplicados o regresión</td>
+<td style="text-align: left;">repetición y revisión vieja</td>
+<td style="text-align: left;">un efecto y revisión monotónica</td>
+</tr>
+<tr>
+<td style="text-align: left;">HN4</td>
+<td style="text-align: left;">producto irreproducible</td>
+<td style="text-align: left;">A1</td>
+<td style="text-align: left;">manifiesto, huella y procedencia</td>
+</tr>
+<tr>
+<td style="text-align: left;">HN5</td>
+<td style="text-align: left;">costo sin beneficio</td>
+<td style="text-align: left;">P1 y P2</td>
+<td style="text-align: left;">vector pareado por región de carga</td>
+</tr>
+</tbody>
+</table>
+<p>La matriz evita que una métrica secundaria sustituya la hipótesis.
+Por ejemplo, una reconstrucción rápida no apoya HN1 si produce
+documentos distintos; una precisión alta no apoya HN2 si el conjunto
+candidato contenía material prohibido.</p>
+<h2 id="plan-de-análisis-y-ciencia-abierta">Plan de análisis y ciencia
+abierta</h2>
+<p>R7 conserva su análisis histórico: treinta corridas por celda,
+intervalos puntuales de mediana mediante 5000 remuestras, diferencias
+pareadas, permutación de signos con 20000 remuestras y ajuste de Holm
+para nueve celdas. Su interpretación depende de comparabilidad de las
+parejas y de los supuestos de independencia e intercambiabilidad; no es
+una inferencia poblacional sobre todos los motores. El diseño posterior
+PC2, destinado a PC3, fija cinco parejas de calentamiento y diez
+consultas por ruta dentro de cada corrida; su adenda establece como
+primaria la prueba exacta bilateral de signos, no la prueba histórica de
+R7. La permutación queda como sensibilidad bajo sus supuestos. Es una
+planificación congelada localmente, no prerregistro independiente ni
+resultado nuevo. Las consultas internas no son unidades inferenciales
+independientes y las tablas R7 no se recalculan con el protocolo
+posterior.</p>
+<p>El paquete de réplica debe incluir protocolo, enmiendas, generador,
+adaptadores, manifiestos, eventos crudos, análisis, tablas y entorno.
+Las huellas enlazan cada figura con sus entradas. Una corrida se
+descarta únicamente por reglas congeladas: manifiesto incompleto,
+pérdida de equivalencia previa a la medición, interferencia externa
+registrada o fallo del arnés. Los datos descartados se conservan fuera
+del conjunto inferencial.</p>
+<p>La revisión independiente examinará equivalencia de configuraciones,
+unidad inferencial, exclusiones y correspondencia entre evidencia y
+afirmaciones. R7 ya reproduce sus tablas desde eventos crudos mediante
+un análisis congelado. Continúan pendientes una réplica externa
+independiente, un estudio de transferencia y el doble cribado
+bibliográfico.</p>
+<h2 id="discusión">Discusión</h2>
+<p>La reconstruibilidad cambia la naturaleza de una copia: deja de ser
+un activo que debe protegerse manualmente y se convierte en un producto
+regenerable con contrato. El ámbito explícito evita que optimización y
+recuperación debiliten la autorización. La procedencia continua conecta
+operación, analítica e inteligencia artificial.</p>
+<p>El costo es real: más metadatos, observabilidad, almacenamiento,
+eventos y disciplina. Por ello COBRIA incorpora un criterio de retiro.
+Una proyección sin objetivo, responsable, verificador o uso suficiente
+debe eliminarse. En sistemas pequeños, la mejor decisión puede ser
+conservar solo documentos canónicos bien indexados.</p>
+<h2 id="transferencia-del-resultado-científico">Transferencia del
+resultado científico</h2>
+<p>La especificación, el artículo y los materiales educativos cumplen
+funciones distintas. La especificación define obligaciones de
+conformidad; este artículo delimita la contribución y su evidencia; el
+documento maestro conserva el desarrollo metodológico; y el libro junto
+con el sitio enseñan a aplicar las decisiones. Esta separación evita que
+una analogía pedagógica se interprete como norma o que una guía de
+programación se presente como resultado experimental.</p>
+<p>Para reducir divergencia editorial, el libro y el sitio se derivan de
+un currículo estructurado común con diecisiete partes, 85 lecciones y 30
+laboratorios: primeros pasos, fundamentos, arquitectura, capas y
+carpetas, código, bases de datos, Core, patrones, interfaces,
+documentación, seguridad, calidad, nube, analítica e inteligencia
+artificial, aplicación completa, herramientas y evidencia. Cada lección
+usa una estructura repetible: situación, explicación sencilla, pasos,
+ejemplo, error frecuente y evidencia observable. El caso conductor de
+biodiversidad es neutral y enlaza reglas, documentos NoSQL, pruebas
+adversariales, operación y recuperación con procedencia.</p>
+<p>Esta estrategia constituye un artefacto de transferencia, no
+evidencia de facilidad de aprendizaje. La afirmación de que personas
+principiantes pueden comprender o implementar COBRIA requiere un estudio
+con participantes, tareas, medición de errores, tiempo, consultas al
+autor y análisis ético apropiado. Mientras ese estudio no exista, el
+material solo demuestra cobertura, consistencia entre formatos, rutas
+navegables y disponibilidad de una ruta práctica; no demuestra eficacia
+educativa ni productividad humana.</p>
+<h2 id="amenazas-a-la-validez">Amenazas a la validez</h2>
+<p>La propuesta combina mecanismos existentes, no los sustituye por una
+afirmación de novedad absoluta. Separar lectura y escritura puede añadir
+complejidad sin beneficio cuando el dominio no lo justifica <span
+class="citation" data-cites="fowler2011cqrs">(Fowler 2011)</span>.
+Reconstruir una proyección desde documentos canónicos tampoco exige
+conservar todos los cambios como eventos <span class="citation"
+data-cites="fowler2005eventsourcing">(Fowler 2005)</span>. El control de
+revisión de un documento debe distinguirse de una transacción entre
+documentos <span class="citation"
+data-cites="apacheCouchDocumentApi">(Apache Software Foundation,
+s. f.)</span>. Estas referencias orientan alternativas y amenazas; no
+demuestran superioridad de COBRIA. La selección bibliográfica
+exploratoria asistida no equivale al doble cribado humano ni a una
+revisión sistemática completa.</p>
+<p>Los perfiles comparten autoría y ecosistema. Los emuladores no
+reproducen todas las cuotas, particiones, regiones o costos
+administrados. La inspección no sustituye ejecución; los datos
+sintéticos pueden omitir errores históricos; y las pruebas automáticas
+no prueban comprensión humana. Se requieren réplica externa, revisión
+independiente y estudio con desarrolladores ajenos a los casos.</p>
+<h2 id="conclusión">Conclusión</h2>
+<p>La contribución defendible es un contrato explícito y refutable para
+gobernar autoridad, ámbito, derivación y reconstrucción en sistemas
+NoSQL documentales, acompañado de implementación y pruebas de alcance
+declarado. R7 describe diferencias de lectura en configuraciones
+internas, no el efecto causal aislado del contrato ni su superioridad
+universal. Los controles PC2 posteriores no revalidan R7; PC3 sigue sin
+observaciones confirmatorias nuevas. La evidencia disponible no
+demuestra productividad humana, seguridad exhaustiva, eficacia
+pedagógica ni calidad generativa. La propuesta permanece independiente y
+no certificada.</p>
+<div id="refs" class="references csl-bib-body hanging-indent"
+role="list">
+<div id="ref-apacheCouchDocumentApi" class="csl-entry" role="listitem">
+Apache Software Foundation. s. f. <span>«Apache CouchDB Document
+API»</span>. Accedido 19 de octubre de 2026. <a
+href="https://docs.couchdb.org/en/stable/api/document/common.html">https://docs.couchdb.org/en/stable/api/document/common.html</a>.
+</div>
+<div id="ref-armbrust2021lakehouse" class="csl-entry" role="listitem">
+Armbrust, Michael, Ali Ghodsi, Reynold Xin, y Matei Zaharia. 2021.
+<span>«Lakehouse: A New Generation of Open Platforms that Unify Data
+Warehousing and Advanced Analytics»</span>. <em>11th Conference on
+Innovative Data Systems Research</em>. <a
+href="https://www.cidrdb.org/cidr2021/papers/cidr2021_paper17.pdf">https://www.cidrdb.org/cidr2021/papers/cidr2021_paper17.pdf</a>.
+</div>
+<div id="ref-aulbach2009flexibleschemas" class="csl-entry"
+role="listitem">
+Aulbach, Stefan, Dean Jacobs, Alfons Kemper, y Michael Seibold. 2009.
+<span>«A Comparison of Flexible Schemas for Software as a
+Service»</span>. <em>Proceedings of the 2009 ACM SIGMOD International
+Conference on Management of Data</em>, 881-88. <a
+href="https://doi.org/10.1145/1559845.1559941">https://doi.org/10.1145/1559845.1559941</a>.
+</div>
+<div id="ref-buneman2001provenance" class="csl-entry" role="listitem">
+Buneman, Peter, Sanjeev Khanna, y Wang-Chiew Tan. 2001. <span>«Why and
+Where: A Characterization of Data Provenance»</span>. <em>Database
+Theory—ICDT 2001</em>, 316-30. <a
+href="https://doi.org/10.1007/3-540-44503-X_20">https://doi.org/10.1007/3-540-44503-X_20</a>.
+</div>
+<div id="ref-chang2006bigtable" class="csl-entry" role="listitem">
+Chang, Fay, Jeffrey Dean, Sanjay Ghemawat, et al. 2006. <span>«Bigtable:
+A Distributed Storage System for Structured Data»</span>. <em>7th USENIX
+Symposium on Operating Systems Design and Implementation</em>, 205-18.
+<a
+href="https://www.usenix.org/conference/osdi-06/bigtable-distributed-storage-system-structured-data">https://www.usenix.org/conference/osdi-06/bigtable-distributed-storage-system-structured-data</a>.
+</div>
+<div id="ref-cooper2010ycsb" class="csl-entry" role="listitem">
+Cooper, Brian F., Adam Silberstein, Erwin Tam, Raghu Ramakrishnan, y
+Russell Sears. 2010. <span>«Benchmarking Cloud Serving Systems with
+YCSB»</span>. <em>Proceedings of the 1st ACM Symposium on Cloud
+Computing</em>, 143-54. <a
+href="https://doi.org/10.1145/1807128.1807152">https://doi.org/10.1145/1807128.1807152</a>.
+</div>
+<div id="ref-decandia2007dynamo" class="csl-entry" role="listitem">
+DeCandia, Giuseppe, Deniz Hastorun, Madan Jampani, et al. 2007.
+<span>«Dynamo: Amazon’s Highly Available Key-value Store»</span>.
+<em>Proceedings of Twenty-First ACM SIGOPS Symposium on Operating
+Systems Principles</em>, 205-20. <a
+href="https://doi.org/10.1145/1294261.1294281">https://doi.org/10.1145/1294261.1294281</a>.
+</div>
+<div id="ref-fowler2005eventsourcing" class="csl-entry" role="listitem">
+Fowler, Martin. 2005. <span>«Event Sourcing»</span>. diciembre 12. <a
+href="https://martinfowler.com/eaaDev/EventSourcing.html">https://martinfowler.com/eaaDev/EventSourcing.html</a>.
+</div>
+<div id="ref-fowler2011cqrs" class="csl-entry" role="listitem">
+Fowler, Martin. 2011. <span>«CQRS»</span>. julio 14. <a
+href="https://martinfowler.com/bliki/CQRS.html">https://martinfowler.com/bliki/CQRS.html</a>.
+</div>
+<div id="ref-gebru2021datasheets" class="csl-entry" role="listitem">
+Gebru, Timnit, Jamie Morgenstern, Briana Vecchione, et al. 2021.
+<span>«Datasheets for Datasets»</span>. <em>Communications of the
+ACM</em> 64 (12): 86-92. <a
+href="https://doi.org/10.1145/3458723">https://doi.org/10.1145/3458723</a>.
+</div>
+<div id="ref-gupta1995materialized" class="csl-entry" role="listitem">
+Gupta, Ashish, y Inderpal Singh Mumick. 1995. <span>«Maintenance of
+Materialized Views: Problems, Techniques, and Applications»</span>.
+<em>IEEE Data Engineering Bulletin</em> 18 (2): 3-18. <a
+href="https://sigmod.org/publications/dblp/db/journals/debu/GuptaM95.html">https://sigmod.org/publications/dblp/db/journals/debu/GuptaM95.html</a>.
+</div>
+<div id="ref-gupta1993incremental" class="csl-entry" role="listitem">
+Gupta, Ashish, Inderpal Singh Mumick, y V. S. Subrahmanian. 1993.
+<span>«Maintaining Views Incrementally»</span>. <em>Proceedings of the
+1993 ACM SIGMOD International Conference on Management of Data</em>,
+157-66. <a
+href="https://doi.org/10.1145/170035.170066">https://doi.org/10.1145/170035.170066</a>.
+</div>
+<div id="ref-helland2015immutability" class="csl-entry" role="listitem">
+Helland, Pat. 2015. <span>«Immutability Changes Everything»</span>.
+<em>7th Biennial Conference on Innovative Data Systems Research</em>. <a
+href="https://www.cidrdb.org/cidr2015/Papers/CIDR15_Paper16.pdf">https://www.cidrdb.org/cidr2015/Papers/CIDR15_Paper16.pdf</a>.
+</div>
+<div id="ref-hevner2004designscience" class="csl-entry" role="listitem">
+Hevner, Alan R., Salvatore T. March, Jinsoo Park, y Sudha Ram. 2004.
+<span>«Design Science in Information Systems Research»</span>. <em>MIS
+Quarterly</em> 28 (1): 75-106. <a
+href="https://doi.org/10.2307/25148625">https://doi.org/10.2307/25148625</a>.
+</div>
+<div id="ref-iso25010_2023" class="csl-entry" role="listitem">
+ISO/IEC. 2023. <span>«ISO/IEC 25010:2023: modelo de calidad del
+producto»</span>. <a
+href="https://www.iso.org/standard/78176.html">https://www.iso.org/standard/78176.html</a>.
+</div>
+<div id="ref-iso25040_2024" class="csl-entry" role="listitem">
+ISO/IEC. 2024. <span>«ISO/IEC 25040:2024: marco de evaluación de
+calidad»</span>. <a
+href="https://www.iso.org/standard/83467.html">https://www.iso.org/standard/83467.html</a>.
+</div>
+<div id="ref-jain1991performance" class="csl-entry" role="listitem">
+Jain, Raj. 1991. <em>The Art of Computer Systems Performance
+Analysis</em>. Wiley. <a
+href="https://www.cse.wustl.edu/~jain/books/perfbook.htm">https://www.cse.wustl.edu/~jain/books/perfbook.htm</a>.
+</div>
+<div id="ref-kapoor2023leakage" class="csl-entry" role="listitem">
+Kapoor, Sayash, y Arvind Narayanan. 2023. <span>«Leakage and the
+Reproducibility Crisis in Machine-Learning-Based Science»</span>.
+<em>Patterns</em> 4 (9). <a
+href="https://doi.org/10.1016/j.patter.2023.100804">https://doi.org/10.1016/j.patter.2023.100804</a>.
+</div>
+<div id="ref-li2023featurestore" class="csl-entry" role="listitem">
+Li, Anya, Bhala Ranganathan, Feng Pan, et al. 2023. <em>Managed
+Geo-Distributed Feature Store: Architecture and System Design</em>. <a
+href="https://doi.org/10.48550/arXiv.2305.20077">https://doi.org/10.48550/arXiv.2305.20077</a>.
+</div>
+<div id="ref-microsoft2025cqrs" class="csl-entry" role="listitem">
+Microsoft. 2025a. <span>«Command and Query Responsibility Segregation
+(CQRS) Pattern»</span>. <a
+href="https://learn.microsoft.com/en-us/azure/architecture/patterns/cqrs">https://learn.microsoft.com/en-us/azure/architecture/patterns/cqrs</a>.
+</div>
+<div id="ref-microsoft2025materialized" class="csl-entry"
+role="listitem">
+Microsoft. 2025b. <span>«Materialized View Pattern»</span>. <a
+href="https://learn.microsoft.com/en-us/azure/architecture/patterns/materialized-view">https://learn.microsoft.com/en-us/azure/architecture/patterns/materialized-view</a>.
+</div>
+<div id="ref-mitchell2019modelcards" class="csl-entry" role="listitem">
+Mitchell, Margaret, Simone Wu, Andrew Zaldivar, et al. 2019.
+<span>«Model Cards for Model Reporting»</span>. <em>Proceedings of the
+Conference on Fairness, Accountability, and Transparency</em>, 220-29.
+<a
+href="https://doi.org/10.1145/3287560.3287596">https://doi.org/10.1145/3287560.3287596</a>.
+</div>
+<div id="ref-mongodbAtomicity" class="csl-entry" role="listitem">
+MongoDB. s. f. <span>«Atomicity and Transactions»</span>. Accedido 23 de
+octubre de 2026. <a
+href="https://www.mongodb.com/docs/manual/core/write-operations-atomicity/">https://www.mongodb.com/docs/manual/core/write-operations-atomicity/</a>.
+</div>
+<div id="ref-nist2023airmf" class="csl-entry" role="listitem">
+National Institute of Standards and Technology. 2023. <em>Artificial
+Intelligence Risk Management Framework (AI RMF 1.0)</em>. NIST AI 100-1.
+U.S. Department of Commerce. <a
+href="https://doi.org/10.6028/NIST.AI.100-1">https://doi.org/10.6028/NIST.AI.100-1</a>.
+</div>
+<div id="ref-nist2024genai" class="csl-entry" role="listitem">
+National Institute of Standards and Technology. 2024. <em>Artificial
+Intelligence Risk Management Framework: Generative Artificial
+Intelligence Profile</em>. NIST AI 600-1. U.S. Department of Commerce.
+<a
+href="https://doi.org/10.6028/NIST.AI.600-1">https://doi.org/10.6028/NIST.AI.600-1</a>.
+</div>
+<div id="ref-ni2014adaptiveschema" class="csl-entry" role="listitem">
+Ni, Jiacai, Guoliang Li, Lijun Wang, Jianhua Feng, Jun Zhang, y Lei Li.
+2014. <span>«Adaptive Database Schema Design for Multi-Tenant Data
+Management»</span>. <em>IEEE Transactions on Knowledge and Data
+Engineering</em> 26 (9): 2079-93. <a
+href="https://doi.org/10.1109/TKDE.2013.94">https://doi.org/10.1109/TKDE.2013.94</a>.
+</div>
+<div id="ref-opensearch32Alias" class="csl-entry" role="listitem">
+OpenSearch Project. s. f. <span>«Alias API»</span>. Accedido 23 de
+octubre de 2026. <a
+href="https://docs.opensearch.org/3.2/api-reference/index-apis/alias/">https://docs.opensearch.org/3.2/api-reference/index-apis/alias/</a>.
+</div>
+<div id="ref-orr2021featurestores" class="csl-entry" role="listitem">
+Orr, Laurel, Atindriyo Sanyal, Xiao Ling, Karan Goel, y Megan
+Leszczynski. 2021. <em>Managing ML Pipelines: Feature Stores and the
+Coming Wave of Embedding Ecosystems</em>. <a
+href="https://doi.org/10.48550/arXiv.2108.05053">https://doi.org/10.48550/arXiv.2108.05053</a>.
+</div>
+<div id="ref-peffers2007dsrm" class="csl-entry" role="listitem">
+Peffers, Ken, Tuure Tuunanen, Marcus A. Rothenberger, y Samir
+Chatterjee. 2007. <span>«A Design Science Research Methodology for
+Information Systems Research»</span>. <em>Journal of Management
+Information Systems</em> 24 (3): 45-77. <a
+href="https://doi.org/10.2753/MIS0742-1222240302">https://doi.org/10.2753/MIS0742-1222240302</a>.
+</div>
+<div id="ref-rico2016multitarget" class="csl-entry" role="listitem">
+Rico, Antonio, Manuel Noguera, José Luis Garrido, Kawtar Benghazi, y
+Joseph Barjis. 2016. <span>«Extending Multi-Tenant Architectures: A
+Database Model for a Multi-Target Support in SaaS Applications»</span>.
+<em>Enterprise Information Systems</em> 10 (4): 400-421. <a
+href="https://doi.org/10.1080/17517575.2014.947636">https://doi.org/10.1080/17517575.2014.947636</a>.
+</div>
+<div id="ref-roa2015iso25000" class="csl-entry" role="listitem">
+Roa Molina, Paola, Claribel Morales, y Patricia Gutiérrez. 2015.
+<span>«Norma ISO/IEC 25000»</span>. <em>Tecnología, Investigación y
+Academia</em> 3 (2): 26-32. <a
+href="https://revistas.udistrital.edu.co/index.php/tia/article/view/8373">https://revistas.udistrital.edu.co/index.php/tia/article/view/8373</a>.
+</div>
+<div id="ref-scherzinger2013schema" class="csl-entry" role="listitem">
+Scherzinger, Stefanie, Meike Klettke, y Uta Störl. 2013. <em>Managing
+Schema Evolution in NoSQL Data Stores</em>. <a
+href="https://doi.org/10.48550/arXiv.1308.0514">https://doi.org/10.48550/arXiv.1308.0514</a>.
+</div>
+<div id="ref-sculley2015debt" class="csl-entry" role="listitem">
+Sculley, D., Gary Holt, Daniel Golovin, et al. 2015. <span>«Hidden
+Technical Debt in Machine Learning Systems»</span>. <em>Advances in
+Neural Information Processing Systems</em> 28: 2503-11. <a
+href="https://papers.nips.cc/paper/5656-hidden-technical-debt-in-machine-learning-systems">https://papers.nips.cc/paper/5656-hidden-technical-debt-in-machine-learning-systems</a>.
+</div>
+<div id="ref-w3c2013prov" class="csl-entry" role="listitem">
+World Wide Web Consortium. 2013. <span>«PROV-DM: The PROV Data
+Model»</span>. Editado por Luc Moreau y Paolo Missier. abril 30. <a
+href="https://www.w3.org/TR/2013/REC-prov-dm-20130430/">https://www.w3.org/TR/2013/REC-prov-dm-20130430/</a>.
+</div>
+</div>
+</body>
+</html>

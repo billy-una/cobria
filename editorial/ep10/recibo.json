@@ -1,0 +1,260 @@
+{
+  "phase": "EP10",
+  "kind": "instantanea-local-sin-historia-no-release",
+  "date": "2026-10-28",
+  "sourceHead": "0c89c1ee27923dfdf612d5d9bec0ed3bd8698c1d",
+  "sourceWorkingTreeClean": false,
+  "published": false,
+  "approvedMainCommit": false,
+  "remoteCiObserved": false,
+  "builds": [
+    {
+      "index": 1,
+      "commit": "82783828700b212a2c6778a7a880b46aa1c544ad",
+      "cleanBeforeInstall": true,
+      "referenceRepositoriesAvailable": false,
+      "status": "aprobado"
+    },
+    {
+      "index": 2,
+      "commit": "82783828700b212a2c6778a7a880b46aa1c544ad",
+      "cleanBeforeInstall": true,
+      "referenceRepositoriesAvailable": false,
+      "status": "aprobado"
+    }
+  ],
+  "status": "verificada-localmente-pendiente-aprobacion-y-CI",
+  "output": "output/review/ep10/20261028T211258785478Z",
+  "toolchain": {
+    "python": "3.9.6",
+    "node": "v24.2.0",
+    "npm": "11.3.0",
+    "browserOverride": true,
+    "platform": "darwin"
+  },
+  "snapshotCommit": "82783828700b212a2c6778a7a880b46aa1c544ad",
+  "sourceFiles": 1412,
+  "sourceInventorySha256": "2eb8423f22785c128ae96f50f55cb9a6dcb3f702dcb4912c882398cb7a069b71",
+  "privacyFindings": 11,
+  "pdfComparisons": [
+    {
+      "id": "articulo",
+      "semanticEquivalentBetweenBuilds": true,
+      "semanticEquivalentToEp9": true,
+      "pages": 17,
+      "binaryIdentity": false,
+      "sha256": [
+        "39d6659497c7ca01040f7e091938d1416c5591a67bbd8be6f03d110a9a770d92",
+        "9c14d03a4cca1c981530f2e09e6f27ee0c5c00158032fca82aeda059eb2b98a5"
+      ],
+      "criterion": "texto normalizado por página, cajas, título, autor, idioma y presencia de etiquetas; no certifica PDF/UA",
+      "rasterEquivalentBetweenBuilds": true,
+      "rasterEquivalentToEp9": true,
+      "rasterScale": 650,
+      "rasterDifferentPages": []
+    },
+    {
+      "id": "maestro",
+      "semanticEquivalentBetweenBuilds": true,
+      "semanticEquivalentToEp9": true,
+      "pages": 205,
+      "binaryIdentity": false,
+      "sha256": [
+        "f3de3b6f2d4e67fa3d07253658dc59628eedd603ee422aa3c34e4aeeec05cb10",
+        "9e7c2b2d7ac60d521caa2ef5791fd31b7e942c427e23a552589cbe2a70710201"
+      ],
+      "criterion": "texto normalizado por página, cajas, título, autor, idioma y presencia de etiquetas; no certifica PDF/UA",
+      "rasterEquivalentBetweenBuilds": true,
+      "rasterEquivalentToEp9": true,
+      "rasterScale": 650,
+      "rasterDifferentPages": []
+    },
+    {
+      "id": "ciega",
+      "semanticEquivalentBetweenBuilds": true,
+      "semanticEquivalentToEp9": true,
+      "pages": 17,
+      "binaryIdentity": false,
+      "sha256": [
+        "3de03c6b8c88182cb9bfc9b68ce319a0670de2f9b1a00dbe5315fc49f6797cab",
+        "926e998aaeadfeb0218c952aca268d98205e286d7fc19b2565d400ee26ef644f"
+      ],
+      "criterion": "texto normalizado por página, cajas, título, autor, idioma y presencia de etiquetas; no certifica PDF/UA",
+      "rasterEquivalentBetweenBuilds": true,
+      "rasterEquivalentToEp9": true,
+      "rasterScale": 650,
+      "rasterDifferentPages": []
+    },
+    {
+      "id": "especificacion",
+      "semanticEquivalentBetweenBuilds": true,
+      "semanticEquivalentToEp9": true,
+      "pages": 23,
+      "binaryIdentity": false,
+      "sha256": [
+        "0a3fe60640ed97831133c8dd90de7a1888ce29a3dc957bb9e555421c6fba29e4",
+        "b49181abbea13f7b742989336a9327f200d42c50844531c4b7f263e21aa32e4a"
+      ],
+      "criterion": "texto normalizado por página, cajas, título, autor, idioma y presencia de etiquetas; no certifica PDF/UA",
+      "rasterEquivalentBetweenBuilds": true,
+      "rasterEquivalentToEp9": true,
+      "rasterScale": 650,
+      "rasterDifferentPages": []
+    },
+    {
+      "id": "libro",
+      "semanticEquivalentBetweenBuilds": true,
+      "semanticEquivalentToEp9": true,
+      "pages": 469,
+      "binaryIdentity": false,
+      "sha256": [
+        "9af4130396bf8c1ddaa268fe84579d68b32f6947c24a9750029e0699096a50ff",
+        "efba6e2e4314dbd9513d9e3bb1bf2a7b539a462479ad332794ea07d97704c59f"
+      ],
+      "criterion": "texto normalizado por página, cajas, título, autor, idioma y presencia de etiquetas; no certifica PDF/UA",
+      "rasterEquivalentBetweenBuilds": true,
+      "rasterEquivalentToEp9": true,
+      "rasterScale": 650,
+      "rasterDifferentPages": []
+    },
+    {
+      "id": "cuaderno",
+      "semanticEquivalentBetweenBuilds": true,
+      "semanticEquivalentToEp9": true,
+      "pages": 35,
+      "binaryIdentity": false,
+      "sha256": [
+        "bc43b630911329013af0e94bae5bed3e546f93dedca5f05bf01b42a155d3af74",
+        "32de45d2e9967debb4d6c62556732933fd8ed14692341e9d272c39973e1050f4"
+      ],
+      "criterion": "texto normalizado por página, cajas, título, autor, idioma y presencia de etiquetas; no certifica PDF/UA",
+      "rasterEquivalentBetweenBuilds": true,
+      "rasterEquivalentToEp9": true,
+      "rasterScale": 650,
+      "rasterDifferentPages": []
+    },
+    {
+      "id": "anexo",
+      "semanticEquivalentBetweenBuilds": true,
+      "semanticEquivalentToEp9": true,
+      "pages": 16,
+      "binaryIdentity": false,
+      "sha256": [
+        "9c03ebed41c434685a4660f45b09e513fc501b5fa7de75b33836348ce62cf377",
+        "5fd79d77a26d73ef2c81844c872c4bf4563533e421f19f0188d3fc260132b769"
+      ],
+      "criterion": "texto normalizado por página, cajas, título, autor, idioma y presencia de etiquetas; no certifica PDF/UA",
+      "rasterEquivalentBetweenBuilds": true,
+      "rasterEquivalentToEp9": true,
+      "rasterScale": 650,
+      "rasterDifferentPages": []
+    }
+  ],
+  "editorialComparisons": [
+    {
+      "path": "editorial/curriculum.json",
+      "equivalent": true,
+      "sha256": "9414aaff5af4d097965e4effdbd2170ba9a30bfad94dbbe1babe4d09cff9f477"
+    },
+    {
+      "path": "editorial/content-map.json",
+      "equivalent": true,
+      "sha256": "586a9e9ad4712dbe767388b733e2acf2a9eb0f010da1a78b376eac8ed1280ff4"
+    },
+    {
+      "path": "libro-cobria/index.html",
+      "equivalent": true,
+      "sha256": "260d4102dc594372cbb0d2469f607f21253387238d311025e06ce286452491bd"
+    },
+    {
+      "path": "libro-cobria/cuaderno.html",
+      "equivalent": true,
+      "sha256": "d0c72b8a1c5308e71cc6a6026169298ff8705760692e28969c385ef7d96cd4b5"
+    },
+    {
+      "path": "libro-cobria/anexo-tecnico.html",
+      "equivalent": true,
+      "sha256": "6dcb042da46d05e58494b4e17fa51e23d7fb6b33baaf45c79216fa33a271962c"
+    },
+    {
+      "path": "sitio/public/catalogo.json",
+      "equivalent": true,
+      "sha256": "bd0d436181aa4a0b01832402960ba5bbb7947a852f8b5de61dcdbb64c059d537"
+    },
+    {
+      "path": "sitio/public/pattern-catalog.json",
+      "equivalent": true,
+      "sha256": "d5b37bf69864b6c641de8bac9f7cf0166f9d501dfe21e36cd174563a4b922c5d"
+    }
+  ],
+  "audits": [
+    {
+      "project": "replication",
+      "exitCode": 0,
+      "vulnerabilities": {
+        "info": 0,
+        "low": 0,
+        "moderate": 0,
+        "high": 0,
+        "critical": 0,
+        "total": 0
+      },
+      "error": null
+    },
+    {
+      "project": "sitio",
+      "exitCode": 0,
+      "vulnerabilities": {
+        "info": 0,
+        "low": 0,
+        "moderate": 0,
+        "high": 0,
+        "critical": 0,
+        "total": 0
+      },
+      "error": null
+    },
+    {
+      "project": "libro-cobria",
+      "exitCode": 0,
+      "vulnerabilities": {
+        "info": 0,
+        "low": 0,
+        "moderate": 0,
+        "high": 0,
+        "critical": 0,
+        "total": 0
+      },
+      "error": null
+    },
+    {
+      "project": "replication/qa",
+      "exitCode": 0,
+      "vulnerabilities": {
+        "info": 0,
+        "low": 0,
+        "moderate": 0,
+        "high": 0,
+        "critical": 0,
+        "total": 0
+      },
+      "error": null
+    }
+  ],
+  "documentPackage": {
+    "path": "output/review/ep10/20261028T211258785478Z/COBRIA-documentos-candidata-local.zip",
+    "sha256": "0fbe6532650a5e338ab33c078868d0cbd61091e3617c2842ee511e0bb2c7ac69",
+    "bytes": 86240822,
+    "files": 55,
+    "published": false,
+    "completeSourceReplica": false
+  },
+  "sourceRedistributionApproved": false,
+  "limitations": [
+    "Instantánea local aislada; no es un commit aprobado de main.",
+    "Un equipo macOS ARM; no es réplica externa.",
+    "Comparación visual a 650 px; no sustituye evaluación con tecnología de apoyo.",
+    "Revisar datos históricos, rutas personales, dependencias y derechos antes de redistribuir las fuentes.",
+    "No se publica ni se inventa una ejecución de CI remota."
+  ]
+}

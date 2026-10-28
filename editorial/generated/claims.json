@@ -28,6 +28,45 @@
       ]
     },
     {
+      "id": "CLAIM-R7-270",
+      "value": 270,
+      "unit": "observaciones confirmatorias internas",
+      "status": "confirmatorio-completo-interno",
+      "source": "replication/results/core-r7-statistics/summary.json#/correctness",
+      "allowedProducts": [
+        "article",
+        "master",
+        "book",
+        "site"
+      ]
+    },
+    {
+      "id": "CLAIM-R7-3-ENGINES",
+      "value": 3,
+      "unit": "motores NoSQL documentales",
+      "status": "confirmatorio-completo-interno",
+      "source": "replication/results/core-r7-statistics/summary.json#/correctness",
+      "allowedProducts": [
+        "article",
+        "master",
+        "book",
+        "site"
+      ]
+    },
+    {
+      "id": "CLAIM-R7-ONE-NONCONCLUSIVE",
+      "value": 1,
+      "unit": "celdas no concluyentes",
+      "status": "resultado-negativo-publicado",
+      "source": "replication/results/core-r7-statistics/summary.json#/negativeResults",
+      "allowedProducts": [
+        "article",
+        "master",
+        "book",
+        "site"
+      ]
+    },
+    {
       "id": "CLAIM-HISTORICAL-270",
       "value": 270,
       "unit": "corridas históricas",

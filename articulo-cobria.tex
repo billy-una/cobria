@@ -9,6 +9,10 @@
 \usepackage{amsmath,booktabs,tabularx,array,float,enumitem}
 \usepackage{tikz}\usetikzlibrary{arrows.meta,positioning,shapes.geometric}
 \input{editorial/generated/identity.tex}
+\input{editorial/generated/evidence-r7.tex}
+\input{editorial/ep6/synthesis.tex}
+\input{editorial/ep7/method.tex}
+\input{editorial/ep8/scope.tex}
 \usepackage{hyperref}\hypersetup{hidelinks,pdftitle={Contratos reconstruibles con ámbito explícito para sistemas NoSQL documentales},pdfauthor={\ifnum\blindreview=1 Autor anonimizado\else\COBRIAAutor\fi},pdfsubject={Artículo científico de la propuesta independiente COBRIA},pdfkeywords={COBRIA, NoSQL documental, ámbito, reconstrucción, procedencia}}
 \usepackage[backend=biber,style=apa,sorting=nyt,maxcitenames=2]{biblatex}
 \addbibresource{referencias.bib}
@@ -21,21 +25,7 @@
 \maketitle
 
 \begin{abstract}
-Los sistemas NoSQL documentales permiten adaptar la forma física de los datos a sus
-patrones de acceso, pero esa flexibilidad puede producir copias derivadas sin autoridad,
-aislamiento o reparación verificable. Este artículo formaliza el contrato de proyección
-reconstruible con ámbito explícito de COBRIA. El contrato reúne fuente canónica,
-transformación versionada, ámbito obligatorio, criterio de equivalencia, política de
-frescura y procedimiento de reconstrucción. La propuesta se examina mediante ciencia
-del diseño en tres perfiles documentales anonimizados y un protocolo de pruebas para
-reconstrucción, idempotencia, evolución, recuperación autorizada y productos de datos.
-La evidencia incluye una réplica histórica de 270 corridas sobre MongoDB 8.0,
-CouchDB 3.4 y OpenSearch 2.19.3, además de una repetición preliminar del arnés corregido
-sobre MongoDB y CouchDB. Las 270 corridas se conservan como evidencia histórica porque
-emplearon un oráculo posteriormente fortalecido; no se presentan como certificación
-vigente. El resultado principal es una especificación neutral, un conjunto instalable
-de conformidad y una agenda empírica reproducible para decidir cuándo una proyección
-aporta valor sin convertirse en una segunda fuente de verdad.
+\COBRIAResumenCientifico
 \end{abstract}
 
 \noindent\textbf{Palabras clave:} NoSQL documental; datos canónicos; proyecciones
@@ -63,13 +53,13 @@ reparación?} Se derivan cuatro preguntas: cómo formalizar la proyección; qué
 comprobar; cómo extender el contrato hacia analítica e inteligencia artificial; y qué
 evidencia hace falta para justificar su costo.
 
-Las contribuciones son:
+La contribución principal es el contrato reconstruible con ámbito. Se concreta en:
 \begin{enumerate}[leftmargin=*]
-\item una definición formal del contrato reconstruible con ámbito;
-\item una taxonomía neutral de canónicos, proyecciones, productos y mecanismos;
-\item un protocolo NoSQL para lectura, escritura, reconstrucción, aislamiento y linaje;
-\item un arnés de conformidad reutilizable y una aplicación neutral ejecutable;
-\item una separación explícita entre evidencia histórica, vigente y pendiente.
+\item una definición formal que articula mecanismos conocidos y permite formular
+obligaciones refutables;
+\item su operacionalización en contratos y pruebas con alcance declarado;
+\item una evaluación interna acotada, separando mediciones históricas de controles
+posteriores y de resultados todavía pendientes.
 \end{enumerate}
 
 \section{Contexto y vacío de investigación}
@@ -79,15 +69,70 @@ acceso deben considerarse desde el diseño \parencite{chang2006bigtable,
 decandia2007dynamo}. La flexibilidad documental no elimina el esquema: lo distribuye
 entre código, índices, reglas de acceso, eventos, cachés y consumidores.
 
+La investigación sobre vistas materializadas estudia mantenimiento incremental,
+selección de vistas y costo de actualización \parencite{gupta1993incremental,
+gupta1995materialized}. En bases con esquemas flexibles se han propuesto técnicas para
+identificar, adaptar y migrar estructuras heterogéneas
+\parencite{aulbach2009flexibleschemas,ni2014adaptiveschema,
+rico2016multitarget,scherzinger2013schema}. Estos trabajos explican cómo conservar o
+transformar representaciones; COBRIA añade a la decisión los límites de autoridad,
+ámbito, equivalencia y reparación.
+
 La separación de modelos ofrece vocabulario para lectura y escritura; los eventos pueden
 rehidratar estado; los almacenes de características preservan definiciones entre
 entrenamiento e inferencia; y la procedencia explica cómo se obtuvo un resultado. Una
 implementación todavía debe decidir quién posee autoridad, qué ámbito restringe la
 copia, qué equivalencia se acepta y qué reparación es ejecutable.
 
-El vacío abordado es la falta de una ficha contractual común que conecte optimización
-operacional, aislamiento y productos para analítica e inteligencia artificial dentro de
-sistemas documentales.
+CQRS y las vistas materializadas separan caminos de lectura
+\parencite{microsoft2025cqrs,microsoft2025materialized}; el procesamiento por eventos
+permite reconstruir estado \parencite{fowler2005eventsourcing}; y la procedencia,
+datasheets y model cards hacen explícito el origen y los límites de productos de datos
+\parencite{buneman2001provenance,gebru2021datasheets,mitchell2019modelcards}. Los
+almacenes de características y las arquitecturas lakehouse abordan consistencia y
+reutilización analítica \parencite{orr2021featurestores,li2023featurestore,
+armbrust2021lakehouse}. COBRIA no reemplaza esas familias: ofrece una ficha común para
+decidir cuándo combinarlas en un sistema documental.
+
+Metodológicamente, la propuesta sigue ciencia del diseño
+\parencite{hevner2004designscience,peffers2007dsrm}. La evaluación de rendimiento se
+apoya en cargas repetibles y unidades inferenciales explícitas, coherentes con YCSB y
+con principios clásicos de medición \parencite{cooper2010ycsb,jain1991performance}.
+Para inteligencia artificial, la gestión de riesgos y la deuda técnica exigen distinguir
+artefactos verificables de promesas generales \parencite{sculley2015debt,
+nist2023airmf,nist2024genai}.
+
+El problema abordado es cómo expresar conjuntamente optimización operacional,
+aislamiento, evolución y reparación en una ficha contractual de sistemas documentales.
+La revisión exploratoria motiva esa composición, pero no establece que no exista otra
+equivalente. La aportación propuesta es una integración especificada y refutable;
+la novedad absoluta y la exhaustividad de la búsqueda no se dan por demostradas.
+
+\COBRIAMetodoLiteratura
+
+\COBRIAAlcanceEPocho
+
+PROV-DM ofrece un vocabulario de entidades, actividades, agentes y derivaciones
+\parencite{w3c2013prov}; conservar inmutabilidad también ayuda a razonar sobre
+estado y copias \parencite{helland2015immutability}. Son antecedentes, no mecanismos
+inventados por COBRIA ni una declaración de conformidad con W3C. La fuga de datos
+puede invalidar conclusiones de aprendizaje automático \parencite{kapoor2023leakage};
+por eso registrar origen y corte temporal no equivale a demostrar calidad predictiva.
+
+La documentación de MongoDB, CouchDB y OpenSearch distingue actualización
+condicional, revisión documental y cambio de alias
+\parencite{mongodbAtomicity,apacheCouchDocumentApi,opensearch32Alias}. Un cambio de
+alias atómico no prueba por sí solo equivalencia de la candidata o CAS de revisión.
+Las guías consultadas delimitan capacidades; no sustituyen ensayos de los adaptadores.
+
+\input{editorial/ep7/comparison.tex}
+
+La evaluación de calidad requiere distinguir el atributo del producto, su medida y
+la decisión contextual. SQuaRE ofrece referencias para organizar esa evaluación
+\parencite{iso25010_2023,iso25040_2024}; el artículo introductorio de
+\textcite{roa2015iso25000} se conserva como antecedente, no como edición vigente
+de la norma. La correspondencia temática incorporada al ecosistema no constituye
+evaluación de cláusulas ni certificación ISO, y no modifica los niveles de Core.
 
 \section{Contrato COBRIA}
 
@@ -99,14 +144,19 @@ donde $f_i$ es la transformación, $\theta_i$ sus catálogos y políticas, $s$ e
 $v$ la versión, $\phi_i$ el límite de frescura, $e_i$ el verificador de equivalencia,
 $r_i$ la reconstrucción y $o_i$ la propiedad operacional del componente.
 
-El contrato satisface seis invariantes:
+Core 1.0 declara diez invariantes; el artículo los resume sin sustituir la norma:
 \begin{enumerate}[leftmargin=*]
 \item \textbf{autoridad}: solo $C$ acepta cambios de dominio autoritativos;
 \item \textbf{ámbito}: identidad, consulta, caché, evento y recuperación incluyen $s$;
 \item \textbf{procedencia}: cada elemento derivado enlaza origen y versión;
 \item \textbf{reconstrucción}: $r_i(C,\theta_i,v)$ produce una candidata completa;
 \item \textbf{equivalencia}: $e_i$ compara resultado lógico, no representación física;
+\item \textbf{idempotencia}: repetir una entrega lógica no duplica efectos;
+\item \textbf{monotonicidad}: una revisión obsoleta no reduce la revisión visible;
+\item \textbf{publicación segura}: la candidata se verifica antes de sustituir la activa;
 \item \textbf{operabilidad}: existen responsable, métricas, alerta y criterio de retiro.
+\item \textbf{fallo cerrado}: se rechaza ausencia de ámbito, versión o autorización
+antes del acceso sensible.
 \end{enumerate}
 
 La publicación segura construye $P_i^{v+1}$, verifica equivalencia y cambia un alias de
@@ -153,9 +203,10 @@ limitan cruces de ámbito y permiten retirar productos afectados por cambios o b
 \section{Método}
 
 La investigación sigue ciencia del diseño: problema, objetivos, construcción,
-demostración, evaluación y comunicación. Tres perfiles anonimizados representan eventos
-y multimedia, operación hotelera y operación comercial. Se inspeccionan canónicos,
-Daters, servicios, catálogos, reglas, índices, funciones y derivados.
+demostración, evaluación y comunicación. \COBRIAPerfilesCientificos
+Los dominios son eventos y multimedia, operación hotelera y operación comercial.
+Se inspeccionan canónicos, Daters, servicios, catálogos, reglas, índices, funciones y
+derivados. La recurrencia motiva el problema; no estima su frecuencia poblacional.
 
 La evaluación activa se restringe a NoSQL documental. Se distinguen evidencia
 estructural, ejecutable y empírica. El protocolo registra motor, región, escala, ámbitos,
@@ -164,13 +215,15 @@ corrida completa es la unidad inferencial.
 
 Las hipótesis son: HN1, reconstrucción equivalente; HN2, cero cruces de ámbito; HN3,
 idempotencia y revisión; HN4, reproducción de productos analíticos; y HN5, beneficio de
-lectura suficiente para pagar mantenimiento. HN5 permanece abierta hasta ejecutar una
-réplica multiescala en motores documentales.
+lectura suficiente para pagar mantenimiento. Son objetivos de evaluación, no hipótesis
+íntegramente confirmadas por R7. Ese arnés anterior examina controles más acotados;
+PC2 implementa obligaciones adicionales y PC3 debe aportar las nuevas mediciones.
+La transferencia a otros equipos, topologías y servicios administrados permanece abierta.
 
 \section{Protocolo experimental NoSQL}
 
 \begin{table}[H]\centering
-\caption{Experimentos y criterios de aceptación.}
+\caption{Familias de evaluación y criterios de diseño; no cobertura íntegra del arnés R7.}
 \begin{tabularx}{\textwidth}{p{1.4cm}p{3.5cm}X}\toprule
 Código & Experimento & Aceptación\\\midrule
 P1 & consulta canónica frente a proyección & mismo resultado y mejora del objetivo declarado\\
@@ -187,29 +240,50 @@ eventos tardíos, duplicados, catálogos desconocidos y documentos incompletos.
 
 \section{Resultados disponibles y estado de la evidencia}
 
+\input{editorial/ep6/evidence-table.tex}
+
 Los tres perfiles contienen fuentes documentales, capas de acceso, servicios, catálogos
-y derivados. La recurrencia confirma que el problema existe en dominios heterogéneos.
+y derivados. La recurrencia documenta el problema en los perfiles observados, sin
+estimar su prevalencia ni el beneficio de adoptar la propuesta en otros equipos.
 Las pruebas disponibles verifican reglas de acceso, roles, aislamiento, ciclos de vida,
 idempotencia y reconstrucción en rutas concretas. Una observación longitudinal también
 muestra reducción de accesos directos desde presentación hacia la capa documental.
 
-La réplica distribuida histórica conservó 270 corridas: tres motores, tres escalas y
-treinta repeticiones por celda. Incluyó MongoDB 8.0, CouchDB 3.4 y OpenSearch 2.19.3.
-Todas las celdas superaron P1, P2, R1, S1 y A1 bajo el oráculo utilizado entonces, sin
-recuperación cruzada de documentos entre ámbitos. Una auditoría posterior fortaleció
-el oráculo; por ello, esas corridas describen comportamiento histórico y no conformidad
-vigente. Una repetición preliminar con el arnés corregido completó casos pequeños en
-MongoDB y CouchDB. OpenSearch 3.2.0 alcanzó estado saludable, pero falló durante la carga
-bajo emulación; el incidente se conserva como incompatibilidad de plataforma y no como
-resultado de COBRIA.
+El conjunto histórico R7 contiene \COBRIARSevenObservations{} corridas internas: tres
+motores, tres escalas y \COBRIARSevenRunsPerCell{} repeticiones por celda. MongoDB
+\COBRIARSevenMongoVersion{} y CouchDB \COBRIARSevenCouchVersion{} se ejecutaron en
+contenedores amd64; OpenSearch \COBRIARSevenOpenSearchVersion{} se ejecutó de forma
+nativa en arm64. Las 90 corridas de cada motor aprobaron los indicadores denominados
+P1, P2, R1, S1 y A1 por el arnés de esa versión, no todos los controles posteriores.
+Las huellas SHA-256 de los eventos crudos y los manifiestos de entorno acompañan al
+análisis. Los antecedentes embebidos y el conjunto distribuido preliminar permanecen
+segregados; no se suman a R7 ni completan el conjunto PC3.
+
+\COBRIALimiteHistoricoRSeven
+
+\begin{table}[H]\centering\small
+\caption{Comparación pareada de lectura en R7. Una razón menor que uno favorece la
+proyección; la diferencia es proyección menos lectura canónica.}
+\begin{tabular}{lrrrrr}\toprule
+Motor & $n$ & razón mediana & diferencia media (ms) & $d_z$ & $p$ de Holm\\\midrule
+\COBRIARSevenTableRows
+\bottomrule\end{tabular}
+\end{table}
+
+En ocho celdas la lectura proyectada favoreció la comparación pareada con ajuste de
+Holm. Cada par pertenece a una corrida; no se tratan las consultas internas como
+réplicas independientes. OpenSearch con $n=100$
+produjo una diferencia media de 0,020 ms, $d_z=0,002$ y $p_{Holm}=0,993$: el resultado
+es no concluyente y se conserva como resultado negativo, no como excepción editorial.
 
 Como comparación complementaria, un experimento algorítmico controlado contrasta siete
 estrategias: consulta del documento, índice nativo, vista materializada, CQRS,
 reconstrucción por eventos, proyección sin contrato y proyección COBRIA. El conjunto
 contiene 630 observaciones (siete estrategias, tres escalas y treinta repeticiones) y
-registra p50, p95, p99, CPU, memoria, almacenamiento, recuperación y amplificación de
-escritura. Su propósito es hacer visibles los costos relativos del contrato; al ejecutarse
-en un único proceso, no se interpreta como comparación de rendimiento entre motores.
+registra estadísticas de tiempos y medidas de recursos del arnés. Las etiquetas de
+estrategia representan modelos algorítmicos de esas opciones, no despliegues completos
+de CQRS, vistas o procesamiento por eventos. Al ejecutarse en un único proceso, no se
+interpreta como comparación entre motores ni demuestra un efecto causal del contrato.
 
 Esta evidencia apoya viabilidad estructural y ejecutable. No demuestra beneficio
 universal de rendimiento, productividad humana ni seguridad exhaustiva. Las cifras de
@@ -239,8 +313,10 @@ Para una identidad $a$ y ámbito autorizado $s_a$, el conjunto candidato cumple:
 \[
 Cand(a,q)\subseteq \{x\mid scope(x)=s_a\land permit(a,x)\}.
 \]
-La condición se aplica antes de similitud, orden, caché o ensamblado de contexto. Así,
-un documento prohibido no influye en puntuaciones, tiempos, conteos ni explicaciones.
+La condición se aplica antes de similitud, orden, caché o ensamblado de contexto.
+Las pruebas pueden comprobar la exclusión de candidatos y contenidos ajenos en esas
+rutas. No demuestran ausencia de canales laterales temporales: esa propiedad requiere
+un modelo de amenaza y mediciones específicos, fuera de la evaluación actual.
 
 \subsection{Reconstrucción equivalente}
 
@@ -292,11 +368,12 @@ Operación & responsable, alertas e incidentes & nadie posee o utiliza la proyec
 
 \section{Ejemplo de aplicación neutral}
 
-Considérese una colección de actividades con documentos heterogéneos, diez ámbitos y una
+Como escenario de diseño, no resultado experimental, considérese una colección de
+actividades con documentos heterogéneos, diez ámbitos y una
 pantalla que muestra únicamente identidad, fecha, estado y resumen. La fuente canónica
-conserva además reglas, multimedia, revisión y procedencia. El equipo observa que la
-consulta indexada cumple el objetivo en escalas pequeñas, pero aumenta operaciones y
-bytes en la escala superior.
+conserva además reglas, multimedia, revisión y procedencia. El equipo debe comprobar
+si la consulta indexada cumple el objetivo antes de atribuir a una proyección un
+beneficio. Ninguna cifra de este escenario se presenta como observación de R7.
 
 La ficha COBRIA no ordena crear una copia. Primero define la consulta y congela el índice
 canónico. Después propone una proyección estrecha con los cuatro campos visibles,
@@ -313,7 +390,7 @@ decisión, no una instrucción de duplicar.
 El paquete de réplica incorpora además una aplicación mínima de observaciones de
 biodiversidad. Se organiza en dominio, aplicación, puertos e infraestructura; exige
 ámbito antes del acceso, rechaza revisiones obsoletas, aplica idempotencia ligada a la
-huella de entrada y reconstruye un resumen por especie. Seis pruebas automáticas cubren
+huella de entrada y reconstruye un resumen por especie. Las pruebas funcionales cubren
 registro válido, autorización previa, repetición sin duplicado, conflicto de clave,
 monotonicidad y equivalencia tras retirar y regenerar la proyección. Su función es
 pedagógica y de transferencia: no sustituye los experimentos P1--A1.
@@ -337,10 +414,7 @@ no apoya HN2 si el conjunto candidato contenía material prohibido.
 
 \section{Plan de análisis y ciencia abierta}
 
-Cada celda contiene treinta corridas válidas. Se publican medianas, intervalos del 95\%
-obtenidos mediante remuestreo de corridas, diferencias y razones pareadas. La dirección
-de cada par se conserva. Las familias confirmatorias se ajustan por comparaciones
-múltiples y las exploraciones se rotulan por separado.
+\COBRIAAnalisisSeparado
 
 El paquete de réplica debe incluir protocolo, enmiendas, generador, adaptadores,
 manifiestos, eventos crudos, análisis, tablas y entorno. Las huellas enlazan cada figura
@@ -349,9 +423,9 @@ incompleto, pérdida de equivalencia previa a la medición, interferencia extern
 o fallo del arnés. Los datos descartados se conservan fuera del conjunto inferencial.
 
 La revisión independiente examinará equivalencia de configuraciones, unidad inferencial,
-exclusiones y correspondencia entre evidencia y afirmaciones. Las cifras confirmatorias
-futuras se incorporarán solo después de repetir las celdas distribuidas con el arnés
-corregido y reproducir las salidas desde el depósito.
+exclusiones y correspondencia entre evidencia y afirmaciones. R7 ya reproduce sus tablas
+desde eventos crudos mediante un análisis congelado. Continúan pendientes una réplica
+externa independiente, un estudio de transferencia y el doble cribado bibliográfico.
 
 \section{Discusión}
 
@@ -365,7 +439,36 @@ Por ello COBRIA incorpora un criterio de retiro. Una proyección sin objetivo,
 responsable, verificador o uso suficiente debe eliminarse. En sistemas pequeños, la
 mejor decisión puede ser conservar solo documentos canónicos bien indexados.
 
+\section{Transferencia del resultado científico}
+
+La especificación, el artículo y los materiales educativos cumplen funciones distintas.
+La especificación define obligaciones de conformidad; este artículo delimita la
+contribución y su evidencia; el documento maestro conserva el desarrollo metodológico;
+y el libro junto con el sitio enseñan a aplicar las decisiones. Esta separación evita
+que una analogía pedagógica se interprete como norma o que una guía de programación se
+presente como resultado experimental.
+
+Para reducir divergencia editorial, el libro y el sitio se derivan de un currículo
+estructurado común con diecisiete partes, 85 lecciones y 30 laboratorios: primeros pasos,
+fundamentos, arquitectura, capas y carpetas, código,
+bases de datos, Core, patrones, interfaces, documentación, seguridad, calidad, nube,
+analítica e inteligencia artificial, aplicación completa, herramientas y evidencia.
+Cada lección usa una estructura repetible: situación, explicación sencilla, pasos,
+ejemplo, error frecuente y evidencia observable. El caso conductor de biodiversidad es
+neutral y enlaza reglas, documentos NoSQL, pruebas adversariales, operación y
+recuperación con procedencia.
+
+Esta estrategia constituye un artefacto de transferencia, no evidencia de facilidad de
+aprendizaje. La afirmación de que personas principiantes pueden comprender o implementar
+COBRIA requiere un estudio con participantes, tareas, medición de errores, tiempo,
+consultas al autor y análisis ético apropiado. Mientras ese estudio no exista, el
+material solo demuestra cobertura, consistencia entre formatos, rutas navegables y
+disponibilidad de una ruta práctica; no demuestra eficacia educativa ni productividad
+humana.
+
 \section{Amenazas a la validez}
+
+\input{editorial/generated/ecosistema-13-14/interpretacion.tex}
 
 Los perfiles comparten autoría y ecosistema. Los emuladores no reproducen todas las
 cuotas, particiones, regiones o costos administrados. La inspección no sustituye
@@ -375,17 +478,7 @@ independiente y estudio con desarrolladores ajenos a los casos.
 
 \section{Conclusión}
 
-COBRIA formaliza una arquitectura NoSQL documental en la que cada derivado conserva
-autoridad rastreable, ámbito, versión, equivalencia y reconstrucción. Su aporte no es
-inventar repositorios, eventos o proyecciones, sino integrarlos en una especificación
-verificable que alcanza productos analíticos y de inteligencia artificial.
-
-La evidencia actual permite afirmar aplicabilidad y comprobación de contratos en rutas
-concretas, junto con una réplica histórica distribuida claramente delimitada. La
-afirmación cuantitativa fuerte permanece abierta hasta repetir P1--A1 con el oráculo
-corregido, ejecutar OpenSearch 3.2.0 en una plataforma compatible y obtener réplica
-independiente. Esta delimitación transforma una intuición arquitectónica en un programa
-científico refutable.
+\COBRIAConclusionCientifica
 
 \printbibliography
 \end{document}

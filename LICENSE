@@ -1,0 +1,15 @@
+COBRIA usa licencias diferenciadas por clase de artefacto.
+
+Copyright 2026 Billy Jak Cordero Porras.
+
+- Código fuente propio: Apache License 2.0 (Apache-2.0).
+- Textos, documentación, diagramas e ilustraciones propias: Creative Commons
+  Atribución 4.0 Internacional (CC-BY-4.0).
+- Datos sintéticos y resultados propios: CC-BY-4.0, salvo indicación expresa.
+- Dependencias y materiales de terceros: conservan su licencia original y no
+  quedan relicenciados por este archivo.
+
+Los términos, las exclusiones y la atribución requerida están en `LICENSES.md`,
+`LICENSE-CODE.txt` y `LICENSE-CONTENT.md`.
+
+SPDX-License-Identifier: Apache-2.0 AND CC-BY-4.0

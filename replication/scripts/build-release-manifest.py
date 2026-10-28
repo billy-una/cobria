@@ -1,12 +1,12 @@
-import hashlib,json,platform,sys
+import json
 from pathlib import Path
+from release_manifest import build
 root=Path(__file__).resolve().parents[1]
-exclude={'node_modules','tmp','.DS_Store'}
-files=[]
-for p in sorted(root.rglob('*')):
-    if not p.is_file() or any(x in exclude for x in p.parts): continue
-    if p.name=='RELEASE-MANIFEST.json': continue
-    data=p.read_bytes();files.append({'path':str(p.relative_to(root)),'bytes':len(data),'sha256':hashlib.sha256(data).hexdigest()})
-manifest={'package':'Paquete de reproducción COBRIA','version':'3.0.0','python':sys.version,'platform':platform.platform(),'files':files}
-(root/'RELEASE-MANIFEST.json').write_text(json.dumps(manifest,indent=2))
-print(json.dumps({'files':len(files),'manifest':str(root/'RELEASE-MANIFEST.json')},indent=2))
+repository=root.parent
+canonical=json.loads((repository/'editorial/canonical.json').read_text(encoding='utf-8'))
+manifest=build(root,canonical)
+target=root/'RELEASE-MANIFEST.json'
+if target.is_symlink():
+    raise SystemExit('No se sobrescribe un manifiesto enlazado')
+target.write_text(json.dumps(manifest,indent=2)+'\n',encoding='utf-8')
+print(json.dumps({'files':len(manifest['files']),'manifest':str(target)},indent=2))

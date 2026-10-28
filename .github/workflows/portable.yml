@@ -1,0 +1,39 @@
+name: COBRIA comprobaciones públicas
+
+on: [push, pull_request, workflow_dispatch]
+
+permissions:
+  contents: read
+
+jobs:
+  neutral:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        node: [22, 24]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+          cache-dependency-path: replication/package-lock.json
+      - name: Instalación fijada y pruebas neutrales
+        run: |
+          npm ci --prefix replication --no-audit --no-fund
+          npm test --prefix replication
+          node replication/examples/integral-c8/verificar.mjs
+      - name: Identificar la ejecución
+        if: always()
+        env:
+          SOURCE_SHA: ${{ github.sha }}
+          RUN_ID: ${{ github.run_id }}
+        run: node -e 'console.log(JSON.stringify({sha:process.env.SOURCE_SHA,run:process.env.RUN_ID,node:process.version,scope:"pruebas-neutrales-no-publicacion"}))'
+
+# No sustituye ci.yml: documentos, motores remotos, referencias privadas y
+# publicación tienen requisitos adicionales. No usa secretos de referencias.

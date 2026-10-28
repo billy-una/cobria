@@ -1,0 +1,496 @@
+{
+  "schemaVersion": "1.0.0",
+  "authorityFlow": [
+    "especificación",
+    "evidencia",
+    "maestro y artículo",
+    "currículo",
+    "libro y sitio"
+  ],
+  "rule": "El libro y el sitio consumen el mismo currículo; las fases internas no forman la ruta pedagógica.",
+  "modules": [
+    {
+      "number": 1,
+      "key": "inicio",
+      "title": "Primeros pasos",
+      "route": "/comenzar",
+      "lessonRoutes": [
+        "/aprender/inicio/1",
+        "/aprender/inicio/2",
+        "/aprender/inicio/3",
+        "/aprender/inicio/4",
+        "/aprender/inicio/5"
+      ],
+      "checkpoint": "B01",
+      "sources": [
+        "manuales/26-primer-proyecto-paso-a-paso.md",
+        "replication/examples/ecosistema-app/src/primer-recorrido.mjs"
+      ],
+      "bookSection": "Parte 1: Primeros pasos",
+      "lessonCount": 5,
+      "labIds": [
+        "LAB-01",
+        "LAB-02"
+      ],
+      "practiceIds": []
+    },
+    {
+      "number": 2,
+      "key": "fundamentos",
+      "title": "Fundamentos de software",
+      "route": "/fundamentos",
+      "lessonRoutes": [
+        "/aprender/fundamentos/1",
+        "/aprender/fundamentos/2",
+        "/aprender/fundamentos/3",
+        "/aprender/fundamentos/4",
+        "/aprender/fundamentos/5"
+      ],
+      "checkpoint": "B02",
+      "sources": [
+        "manuales/01-fundamentos.md",
+        "replication/examples/ecosistema-app/src/domain/observacion.mjs"
+      ],
+      "bookSection": "Parte 2: Fundamentos de software",
+      "lessonCount": 5,
+      "labIds": [
+        "LAB-03",
+        "LAB-04"
+      ],
+      "practiceIds": []
+    },
+    {
+      "number": 3,
+      "key": "arquitectura",
+      "title": "Arquitectura de software",
+      "route": "/arquitectura",
+      "lessonRoutes": [
+        "/aprender/arquitectura/1",
+        "/aprender/arquitectura/2",
+        "/aprender/arquitectura/3",
+        "/aprender/arquitectura/4",
+        "/aprender/arquitectura/5"
+      ],
+      "checkpoint": "B03",
+      "sources": [
+        "manuales/28-arquitectura-y-capas-paso-a-paso.md",
+        "replication/examples/ecosistema-app/data/arquitectura.json",
+        "specification/MAPA-ECOSISTEMA.md",
+        "manuales/11-estado-y-roadmap-integral.md",
+        "manuales/24-organizacion-y-operacion-del-proyecto.md"
+      ],
+      "bookSection": "Parte 3: Arquitectura de software",
+      "lessonCount": 5,
+      "labIds": [
+        "LAB-05",
+        "LAB-06"
+      ],
+      "practiceIds": [
+        "OP01",
+        "OP09"
+      ]
+    },
+    {
+      "number": 4,
+      "key": "capas",
+      "title": "Capas, carpetas y responsabilidades",
+      "route": "/capas",
+      "lessonRoutes": [
+        "/aprender/capas/1",
+        "/aprender/capas/2",
+        "/aprender/capas/3",
+        "/aprender/capas/4",
+        "/aprender/capas/5"
+      ],
+      "checkpoint": "B03",
+      "sources": [
+        "manuales/28-arquitectura-y-capas-paso-a-paso.md",
+        "replication/examples/ecosistema-app/data/arquitectura.json",
+        "manuales/02-layers.md",
+        "replication/examples/ecosistema-app/src/composition.mjs",
+        "manuales/24-organizacion-y-operacion-del-proyecto.md"
+      ],
+      "bookSection": "Parte 4: Capas, carpetas y responsabilidades",
+      "lessonCount": 5,
+      "labIds": [
+        "LAB-07",
+        "LAB-08"
+      ],
+      "practiceIds": [
+        "OP02",
+        "OP06",
+        "OP09"
+      ]
+    },
+    {
+      "number": 5,
+      "key": "codigo",
+      "title": "Código, nombres y comentarios",
+      "route": "/codigo",
+      "lessonRoutes": [
+        "/aprender/codigo/1",
+        "/aprender/codigo/2",
+        "/aprender/codigo/3",
+        "/aprender/codigo/4",
+        "/aprender/codigo/5"
+      ],
+      "checkpoint": "B02",
+      "sources": [
+        "specification/phase-6/COMENTARIOS-Y-DOCSTRINGS.md",
+        "replication/examples/ecosistema-app/src/domain/error-cobria.mjs"
+      ],
+      "bookSection": "Parte 5: Código, nombres y comentarios",
+      "lessonCount": 5,
+      "labIds": [
+        "LAB-09",
+        "LAB-10"
+      ],
+      "practiceIds": [
+        "OP02"
+      ]
+    },
+    {
+      "number": 6,
+      "key": "datos",
+      "title": "Bases de datos y diccionario de datos",
+      "route": "/datos",
+      "lessonRoutes": [
+        "/aprender/datos/1",
+        "/aprender/datos/2",
+        "/aprender/datos/3",
+        "/aprender/datos/4",
+        "/aprender/datos/5"
+      ],
+      "checkpoint": "B04-B05",
+      "sources": [
+        "manuales/27-datos-desde-cero.md",
+        "replication/examples/ecosistema-app/data/diccionario-observaciones.json",
+        "manuales/04-bases-de-datos.md",
+        "specification/phase-3/data-dictionary.yaml",
+        "manuales/24-organizacion-y-operacion-del-proyecto.md"
+      ],
+      "bookSection": "Parte 6: Bases de datos y diccionario de datos",
+      "lessonCount": 5,
+      "labIds": [
+        "LAB-11",
+        "LAB-12"
+      ],
+      "practiceIds": [
+        "OP02",
+        "OP03",
+        "OP04",
+        "OP05",
+        "OP07",
+        "OP10"
+      ]
+    },
+    {
+      "number": 7,
+      "key": "core",
+      "title": "COBRIA Core",
+      "route": "/core",
+      "lessonRoutes": [
+        "/aprender/core/1",
+        "/aprender/core/2",
+        "/aprender/core/3",
+        "/aprender/core/4",
+        "/aprender/core/5"
+      ],
+      "checkpoint": "B07-B09",
+      "sources": [
+        "specification/COBRIA-CORE-1.0.md",
+        "replication/src/conformance.mjs"
+      ],
+      "bookSection": "Parte 7: COBRIA Core",
+      "lessonCount": 5,
+      "labIds": [
+        "LAB-13",
+        "LAB-14"
+      ],
+      "practiceIds": [
+        "OP04",
+        "OP10"
+      ]
+    },
+    {
+      "number": 8,
+      "key": "patrones",
+      "title": "Patrones de diseño",
+      "route": "/patrones-diseno",
+      "lessonRoutes": [
+        "/aprender/patrones/1",
+        "/aprender/patrones/2",
+        "/aprender/patrones/3",
+        "/aprender/patrones/4",
+        "/aprender/patrones/5"
+      ],
+      "checkpoint": "B07-B09",
+      "sources": [
+        "manuales/03-pattern-design.md",
+        "libro-cobria/practical-examples.json"
+      ],
+      "bookSection": "Parte 8: Patrones de diseño",
+      "lessonCount": 5,
+      "labIds": [
+        "LAB-15",
+        "LAB-16"
+      ],
+      "practiceIds": []
+    },
+    {
+      "number": 9,
+      "key": "apiux",
+      "title": "API, experiencia e internacionalización",
+      "route": "/api-ux",
+      "lessonRoutes": [
+        "/aprender/apiux/1",
+        "/aprender/apiux/2",
+        "/aprender/apiux/3",
+        "/aprender/apiux/4",
+        "/aprender/apiux/5"
+      ],
+      "checkpoint": "B08",
+      "sources": [
+        "manuales/15-api-ux.md",
+        "replication/examples/ecosistema-app/src/presentation/problema-http.mjs"
+      ],
+      "bookSection": "Parte 9: API, experiencia e internacionalización",
+      "lessonCount": 5,
+      "labIds": [
+        "LAB-17",
+        "LAB-18"
+      ],
+      "practiceIds": [
+        "OP03",
+        "OP06",
+        "OP08"
+      ]
+    },
+    {
+      "number": 10,
+      "key": "documentacion",
+      "title": "Documentación y comunicación",
+      "route": "/documentacion",
+      "lessonRoutes": [
+        "/aprender/documentacion/1",
+        "/aprender/documentacion/2",
+        "/aprender/documentacion/3",
+        "/aprender/documentacion/4",
+        "/aprender/documentacion/5"
+      ],
+      "checkpoint": "B01-B14",
+      "sources": [
+        "manuales/README.md",
+        "editorial/DICCIONARIO-TERMINOLOGICO.md",
+        "manuales/24-organizacion-y-operacion-del-proyecto.md"
+      ],
+      "bookSection": "Parte 10: Documentación y comunicación",
+      "lessonCount": 5,
+      "labIds": [
+        "LAB-19",
+        "LAB-20"
+      ],
+      "practiceIds": [
+        "OP01",
+        "OP03",
+        "OP12"
+      ]
+    },
+    {
+      "number": 11,
+      "key": "seguridad",
+      "title": "Seguridad y privacidad",
+      "route": "/seguridad",
+      "lessonRoutes": [
+        "/aprender/seguridad/1",
+        "/aprender/seguridad/2",
+        "/aprender/seguridad/3",
+        "/aprender/seguridad/4",
+        "/aprender/seguridad/5"
+      ],
+      "checkpoint": "B06",
+      "sources": [
+        "manuales/16-security.md",
+        "specification/phase-7/security.json",
+        "manuales/24-organizacion-y-operacion-del-proyecto.md"
+      ],
+      "bookSection": "Parte 11: Seguridad y privacidad",
+      "lessonCount": 5,
+      "labIds": [
+        "LAB-21",
+        "LAB-22"
+      ],
+      "practiceIds": [
+        "OP05",
+        "OP07",
+        "OP11"
+      ]
+    },
+    {
+      "number": 12,
+      "key": "calidad",
+      "title": "Calidad, pruebas y rendimiento",
+      "route": "/calidad",
+      "lessonRoutes": [
+        "/aprender/calidad/1",
+        "/aprender/calidad/2",
+        "/aprender/calidad/3",
+        "/aprender/calidad/4",
+        "/aprender/calidad/5"
+      ],
+      "checkpoint": "B12",
+      "sources": [
+        "manuales/17-quality-performance.md",
+        "specification/phase-9/quality.json",
+        "manuales/23-metodologia-de-correccion-verificable.md",
+        "manuales/24-organizacion-y-operacion-del-proyecto.md"
+      ],
+      "bookSection": "Parte 12: Calidad, pruebas y rendimiento",
+      "lessonCount": 5,
+      "labIds": [
+        "LAB-23",
+        "LAB-24"
+      ],
+      "practiceIds": [
+        "OP04",
+        "OP06",
+        "OP08",
+        "OP11"
+      ]
+    },
+    {
+      "number": 13,
+      "key": "operaciones",
+      "title": "Nube, ambientes y operaciones",
+      "route": "/operaciones",
+      "lessonRoutes": [
+        "/aprender/operaciones/1",
+        "/aprender/operaciones/2",
+        "/aprender/operaciones/3",
+        "/aprender/operaciones/4",
+        "/aprender/operaciones/5"
+      ],
+      "checkpoint": "B13",
+      "sources": [
+        "manuales/18-cloud-operations.md",
+        "specification/phase-8/environments.json",
+        "manuales/24-organizacion-y-operacion-del-proyecto.md"
+      ],
+      "bookSection": "Parte 13: Nube, ambientes y operaciones",
+      "lessonCount": 5,
+      "labIds": [
+        "LAB-25",
+        "LAB-26"
+      ],
+      "practiceIds": [
+        "OP07",
+        "OP09",
+        "OP11",
+        "OP12"
+      ]
+    },
+    {
+      "number": 14,
+      "key": "ia",
+      "title": "Analítica e inteligencia artificial",
+      "route": "/ia",
+      "lessonRoutes": [
+        "/aprender/ia/1",
+        "/aprender/ia/2",
+        "/aprender/ia/3",
+        "/aprender/ia/4",
+        "/aprender/ia/5"
+      ],
+      "checkpoint": "B10-B11",
+      "sources": [
+        "manuales/19-analytics-ai.md",
+        "replication/examples/ecosistema-app/src/application/ai/recuperar-evidencia.mjs"
+      ],
+      "bookSection": "Parte 14: Analítica e inteligencia artificial",
+      "lessonCount": 5,
+      "labIds": [
+        "LAB-27",
+        "LAB-28"
+      ],
+      "practiceIds": []
+    },
+    {
+      "number": 15,
+      "key": "construir",
+      "title": "Aplicación completa",
+      "route": "/construir",
+      "lessonRoutes": [
+        "/aprender/construir/1",
+        "/aprender/construir/2",
+        "/aprender/construir/3",
+        "/aprender/construir/4",
+        "/aprender/construir/5"
+      ],
+      "checkpoint": "B01-B14",
+      "sources": [
+        "manuales/20-build-reference.md",
+        "replication/examples/ecosistema-app/GUIA-PASO-A-PASO.md",
+        "manuales/24-organizacion-y-operacion-del-proyecto.md"
+      ],
+      "bookSection": "Parte 15: Aplicación completa",
+      "lessonCount": 5,
+      "labIds": [
+        "LAB-29"
+      ],
+      "practiceIds": [
+        "OP01",
+        "OP05",
+        "OP08"
+      ]
+    },
+    {
+      "number": 16,
+      "key": "toolkit",
+      "title": "Herramientas para personas e IA",
+      "route": "/herramientas",
+      "lessonRoutes": [
+        "/aprender/toolkit/1",
+        "/aprender/toolkit/2",
+        "/aprender/toolkit/3",
+        "/aprender/toolkit/4",
+        "/aprender/toolkit/5"
+      ],
+      "checkpoint": "B14",
+      "sources": [
+        "manuales/21-toolkit.md",
+        "replication/src/cli.mjs"
+      ],
+      "bookSection": "Parte 16: Herramientas para personas e IA",
+      "lessonCount": 5,
+      "labIds": [],
+      "practiceIds": []
+    },
+    {
+      "number": 17,
+      "key": "evidencia",
+      "title": "Evidencia, evolución y publicación",
+      "route": "/evidencia",
+      "lessonRoutes": [
+        "/aprender/evidencia/1",
+        "/aprender/evidencia/2",
+        "/aprender/evidencia/3",
+        "/aprender/evidencia/4",
+        "/aprender/evidencia/5"
+      ],
+      "checkpoint": "B14",
+      "sources": [
+        "manuales/22-evidence-transfer.md",
+        "MATRIZ-TRAZABILIDAD-RELEASE.md"
+      ],
+      "bookSection": "Parte 17: Evidencia, evolución y publicación",
+      "lessonCount": 5,
+      "labIds": [
+        "LAB-30"
+      ],
+      "practiceIds": [
+        "OP10",
+        "OP12"
+      ]
+    }
+  ]
+}

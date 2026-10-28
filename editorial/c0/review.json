@@ -1,0 +1,539 @@
+{
+  "schemaVersion": "1.0.0",
+  "phase": "C0",
+  "date": "2026-10-17",
+  "baselineCommit": "deca1b14ff44805d5d36814654cf35be27d2fa89",
+  "reviewer": {
+    "type": "ai",
+    "independent": false,
+    "humanReaderStudy": false
+  },
+  "scope": {
+    "normativeCoreChanged": false,
+    "candidateArchiveChanged": false,
+    "publicationAuthorized": false,
+    "scopeFrozenFor": "C1–C15",
+    "claim": "Se congela el alcance pedagógico, no se declara completo el ecosistema ni se añaden obligaciones Core."
+  },
+  "method": {
+    "structural": "Inventario de las 85 lecciones, 30 laboratorios, fuentes declaradas y anclajes del libro y sitio.",
+    "qualitative": "Lectura completa de la primera lección de cada módulo; revisión transversal de títulos, fragmentos y evidencias de las 85; lectura dirigida de manuales, CLI, composición y pruebas.",
+    "limits": [
+      "No se leyó visualmente cada página PDF ni se auditó el despliegue público.",
+      "Presencia de una fuente o prueba no prueba profundidad, eficacia educativa ni cobertura de cada lección.",
+      "Los comandos se clasifican estáticamente; los ensayos acotados registrados no ejecutan todos los laboratorios."
+    ]
+  },
+  "areas": [
+    {
+      "key": "inicio",
+      "nextPhase": "C1",
+      "implementation": [
+        "replication/examples/ecosistema-app/src/demo.mjs"
+      ],
+      "tests": [
+        "replication/examples/ecosistema-app/test/app.test.mjs"
+      ],
+      "sampledLesson": 1,
+      "finding": "Hay un recorrido mínimo en memoria, pero la lección de instalación no explica Node, terminal, ubicación ni salida paso a paso.",
+      "acceptance": "Entorno desde cero con directorio, versiones, resultado y solución de fallos.",
+      "readerValidation": "no_verificada_para_esta_area_en_C0",
+      "closure": "parcial"
+    },
+    {
+      "key": "fundamentos",
+      "nextPhase": "C1",
+      "implementation": [
+        "replication/examples/ecosistema-app/src/domain/observacion.mjs"
+      ],
+      "tests": [
+        "replication/examples/ecosistema-app/test/app.test.mjs"
+      ],
+      "sampledLesson": 1,
+      "finding": "La entidad usa constructor y exige cantidad positiva; las lecciones enseñan Observacion.crear y cantidad no negativa.",
+      "acceptance": "Contrato único entre explicación, API real, cantidad cero y pruebas de aceptación.",
+      "readerValidation": "no_verificada_para_esta_area_en_C0",
+      "closure": "parcial"
+    },
+    {
+      "key": "arquitectura",
+      "nextPhase": "C3",
+      "implementation": [
+        "replication/src/auditor.mjs"
+      ],
+      "tests": [
+        "replication/tests/phase14-auditor.test.mjs"
+      ],
+      "sampledLesson": 1,
+      "finding": "Existen fronteras y ADR, pero los fragmentos de aptitud no son un tutorial ejecutable de evolución.",
+      "acceptance": "Un caso pequeño antes y después, decisiones, dependencias y prueba que falla al romperlas.",
+      "readerValidation": "no_verificada_para_esta_area_en_C0",
+      "closure": "parcial"
+    },
+    {
+      "key": "capas",
+      "nextPhase": "C3",
+      "implementation": [
+        "replication/examples/ecosistema-app/src/composition.mjs"
+      ],
+      "tests": [
+        "replication/examples/ecosistema-app/test/app.test.mjs"
+      ],
+      "sampledLesson": 1,
+      "finding": "Object, Dater, Repository, Catalog e Indexer están descritos; no se demuestra cada rol en un recorrido incremental único.",
+      "acceptance": "Mapa archivo a responsabilidad y cambio real de adaptador, sin mezclar significado con almacenamiento.",
+      "readerValidation": "no_verificada_para_esta_area_en_C0",
+      "closure": "parcial"
+    },
+    {
+      "key": "codigo",
+      "nextPhase": "C9",
+      "implementation": [
+        "replication/examples/ecosistema-app/src/domain/error-cobria.mjs"
+      ],
+      "tests": [
+        "replication/examples/ecosistema-app/test/app.test.mjs"
+      ],
+      "sampledLesson": 1,
+      "finding": "Hay ejemplos de nombres y comentarios, pero las firmas y comandos ilustrativos no siempre corresponden al proyecto.",
+      "acceptance": "Contratos reales, errores con firma correcta, formato y ejercicios de refactorización comprobados.",
+      "readerValidation": "no_verificada_para_esta_area_en_C0",
+      "closure": "parcial"
+    },
+    {
+      "key": "datos",
+      "nextPhase": "C2",
+      "implementation": [
+        "replication/examples/ecosistema-app/src/infrastructure/data/observacion-dater.mjs"
+      ],
+      "tests": [
+        "replication/examples/ecosistema-app/test/app.test.mjs"
+      ],
+      "sampledLesson": 1,
+      "finding": "Existe diccionario YAML y Dater; el currículo enlaza un data-dictionary.json inexistente y simplifica la cantidad a >=0.",
+      "acceptance": "Diccionario gradual consistente, nodos, catálogos, claves físicas, consultas y migración con ejemplos válidos e inválidos.",
+      "readerValidation": "no_verificada_para_esta_area_en_C0",
+      "closure": "parcial"
+    },
+    {
+      "key": "core",
+      "nextPhase": "C4",
+      "implementation": [
+        "replication/src/core/cobria.mjs",
+        "replication/src/conformance.mjs"
+      ],
+      "tests": [
+        "replication/tests/core11.test.mjs"
+      ],
+      "sampledLesson": 1,
+      "finding": "El núcleo y el arnés tienen evidencia técnica; los ejemplos del alumno todavía necesitan comandos completos y separación de perfiles.",
+      "acceptance": "Adaptador mínimo explicado, informe interpretado y fallo por cada obligación relevante sin modificar Core 1.0.",
+      "readerValidation": "no_verificada_para_esta_area_en_C0",
+      "closure": "parcial"
+    },
+    {
+      "key": "patrones",
+      "nextPhase": "C4",
+      "implementation": [
+        "replication/examples/patterns-r4/src/patrones.ts"
+      ],
+      "tests": [
+        "replication/examples/patterns-r4/test/patrones.test.ts"
+      ],
+      "sampledLesson": 1,
+      "finding": "Las treinta fichas tienen referencia verificada; LAB-15 y LAB-16 invocan una meta Make inexistente.",
+      "acceptance": "Problema ingenuo, solución, ejecución, prueba, costo y alternativa por patrón.",
+      "readerValidation": "no_verificada_para_esta_area_en_C0",
+      "closure": "parcial"
+    },
+    {
+      "key": "apiux",
+      "nextPhase": "C5",
+      "implementation": [
+        "replication/examples/ecosistema-app/src/presentation/registrar-observacion-controller.mjs"
+      ],
+      "tests": [
+        "replication/examples/ecosistema-app/test/app.test.mjs",
+        "sitio/tests/rendered-html.test.mjs"
+      ],
+      "sampledLesson": 1,
+      "finding": "Hay controladores y contratos; no son por sí solos servidor HTTP, interfaz de la aplicación ni prueba con tecnología de apoyo.",
+      "acceptance": "Formulario y API conectados, estados, errores, cursores, idiomas y revisión accesible de la aplicación conductora.",
+      "readerValidation": "no_verificada_para_esta_area_en_C0",
+      "closure": "parcial"
+    },
+    {
+      "key": "documentacion",
+      "nextPhase": "C9",
+      "implementation": [
+        "editorial/build-curriculum.mjs"
+      ],
+      "tests": [
+        "replication/tests/phase17-editorial.test.mjs"
+      ],
+      "sampledLesson": 1,
+      "finding": "La generación editorial existe, pero las lecciones de README repiten npm install/test/start sin situar carpeta ni prerrequisitos.",
+      "acceptance": "Tutorial, referencia, ADR y runbook completos y mantenidos desde ejemplos reales.",
+      "readerValidation": "no_verificada_para_esta_area_en_C0",
+      "closure": "parcial"
+    },
+    {
+      "key": "seguridad",
+      "nextPhase": "C5",
+      "implementation": [
+        "replication/examples/ecosistema-app/src/application/security/autorizar-capacidad.mjs"
+      ],
+      "tests": [
+        "replication/examples/ecosistema-app/test/app.test.mjs"
+      ],
+      "sampledLesson": 1,
+      "finding": "Autorización local probada; identidad verificada, Rules de la aplicación y rotación operativa requieren un recorrido separado.",
+      "acceptance": "Modelo de amenazas y pruebas negativas que atraviesen identidad, autorización, proveedor, exportación y recuperación.",
+      "readerValidation": "no_verificada_para_esta_area_en_C0",
+      "closure": "parcial"
+    },
+    {
+      "key": "calidad",
+      "nextPhase": "C6",
+      "implementation": [
+        "replication/scripts/run-r7-confirmatory.mjs"
+      ],
+      "tests": [
+        "replication/examples/operacion-documental/test/operacion.test.mjs"
+      ],
+      "sampledLesson": 1,
+      "finding": "Existe metodología de defectos y evidencia experimental; un comando de estadísticas no demuestra que el alumno ejecutó el experimento.",
+      "acceptance": "Reproducir un defecto, corregirlo, demostrar regresión y medir una optimización con carga y límites.",
+      "readerValidation": "no_verificada_para_esta_area_en_C0",
+      "closure": "parcial"
+    },
+    {
+      "key": "operaciones",
+      "nextPhase": "C6",
+      "implementation": [
+        "replication/examples/operacion-documental/src/application/verificar-entrega.mjs"
+      ],
+      "tests": [
+        "replication/examples/operacion-documental/test/operacion.test.mjs"
+      ],
+      "sampledLesson": 1,
+      "finding": "Los mecanismos locales no sustituyen Functions y staging de una aplicación real; publicar del Toolkit solo simula.",
+      "acceptance": "Proveedor opcional aislado, Function, Rules, promoción por huella, humo, respaldo y rollback con evidencia propia.",
+      "readerValidation": "no_verificada_para_esta_area_en_C0",
+      "closure": "parcial"
+    },
+    {
+      "key": "ia",
+      "nextPhase": "C7",
+      "implementation": [
+        "replication/examples/ecosistema-app/src/application/ai/recuperar-evidencia.mjs",
+        "replication/examples/ecosistema-app/src/application/analytics/construir-conjunto.mjs"
+      ],
+      "tests": [
+        "replication/examples/ecosistema-app/test/app.test.mjs"
+      ],
+      "sampledLesson": 1,
+      "finding": "La recuperación es determinista y léxica; no demuestra evaluación de un modelo generativo ni comprensión humana.",
+      "acceptance": "Conjunto reconstruible, ausencia de fuga, citas, abstención y extensión a modelos con evaluación explícita.",
+      "readerValidation": "no_verificada_para_esta_area_en_C0",
+      "closure": "parcial"
+    },
+    {
+      "key": "construir",
+      "nextPhase": "C8",
+      "implementation": [
+        "replication/examples/ecosistema-app/src/composition.mjs"
+      ],
+      "tests": [
+        "replication/examples/ecosistema-app/test/app.test.mjs"
+      ],
+      "sampledLesson": 1,
+      "finding": "La composición fija memoria e ignora COBRIA_ADAPTER; los otros adaptadores se prueban con dobles, no como aplicación integral.",
+      "acceptance": "Instalación hasta interfaz, API, motor real, seguridad, operación y retirada en un mismo proyecto.",
+      "readerValidation": "no_verificada_para_esta_area_en_C0",
+      "closure": "parcial"
+    },
+    {
+      "key": "toolkit",
+      "nextPhase": "C9",
+      "implementation": [
+        "replication/src/cli.mjs",
+        "replication/src/generator.mjs"
+      ],
+      "tests": [
+        "replication/tests/phase13-generator.test.mjs"
+      ],
+      "sampledLesson": 1,
+      "finding": "Algunos flags pedagógicos no existen; generar acepta --simular pero no lo aplica y escribe archivos.",
+      "acceptance": "Alinear ayuda y lecciones con comandos reales; una simulación debe producir cero escrituras.",
+      "readerValidation": "no_verificada_para_esta_area_en_C0",
+      "closure": "parcial"
+    },
+    {
+      "key": "evidencia",
+      "nextPhase": "C11",
+      "implementation": [
+        "replication/scripts/build-remediation-r9.py"
+      ],
+      "tests": [
+        "replication/tests/release-handoff.test.mjs"
+      ],
+      "sampledLesson": 1,
+      "finding": "Hay réplica local y límites, pero manuales/22 mantiene resultados confirmatorios incompletos y aparece una meta de paquete inexistente.",
+      "acceptance": "Inventario vigente en todos los productos y revisión, transferencia, cribado y réplica externos auténticos.",
+      "readerValidation": "no_verificada_para_esta_area_en_C0",
+      "closure": "parcial"
+    }
+  ],
+  "findings": [
+    {
+      "id": "C0-01",
+      "severity": "critica",
+      "areas": [
+        "toolkit"
+      ],
+      "phase": "C9",
+      "title": "La simulación de generación puede escribir",
+      "evidence": [
+        {
+          "path": "replication/src/cli.mjs",
+          "needle": "await generate({type:options.type"
+        },
+        {
+          "path": "editorial/curriculum.json",
+          "needle": "cobria generar --simular"
+        }
+      ],
+      "action": "No recomendar generar --simular hasta que rechace la opción o implemente un plan sin escrituras."
+    },
+    {
+      "id": "C0-02",
+      "severity": "alta",
+      "areas": [
+        "fundamentos",
+        "datos"
+      ],
+      "phase": "C1",
+      "title": "La regla de cantidad y la API de la entidad se contradicen",
+      "evidence": [
+        {
+          "path": "replication/examples/ecosistema-app/src/domain/observacion.mjs",
+          "needle": "cantidad < 1"
+        },
+        {
+          "path": "editorial/curriculum.json",
+          "needle": "Observacion.crear"
+        },
+        {
+          "path": "editorial/curriculum.json",
+          "needle": "cantidad < 0"
+        }
+      ],
+      "action": "Unificar el contrato, la forma de construcción y las pruebas antes de ampliar el tutorial."
+    },
+    {
+      "id": "C0-03",
+      "severity": "alta",
+      "areas": [
+        "patrones",
+        "evidencia"
+      ],
+      "phase": "C1",
+      "title": "Hay metas Make enseñadas que no existen",
+      "evidence": [
+        {
+          "path": "editorial/labs.json",
+          "needle": "make verificar-ejemplos-patrones"
+        },
+        {
+          "path": "editorial/curriculum.json",
+          "needle": "make paquete-candidato"
+        },
+        {
+          "path": "Makefile",
+          "needle": "verificar-r4:"
+        }
+      ],
+      "action": "Sustituir por comandos existentes y probarlos desde un directorio declarado."
+    },
+    {
+      "id": "C0-04",
+      "severity": "alta",
+      "areas": [
+        "inicio",
+        "codigo",
+        "documentacion"
+      ],
+      "phase": "C1",
+      "title": "Los laboratorios no declaran siempre el directorio de ejecución",
+      "evidence": [
+        {
+          "path": "editorial/labs.json",
+          "needle": "npm test -- --test-name-pattern"
+        },
+        {
+          "path": "replication/examples/ecosistema-app/package.json",
+          "needle": "\"test\": \"node --test\""
+        }
+      ],
+      "action": "Añadir cwd, prerrequisitos, salida esperada y una comprobación de que se ejecutó al menos una prueba pertinente."
+    },
+    {
+      "id": "C0-05",
+      "severity": "alta",
+      "areas": [
+        "construir"
+      ],
+      "phase": "C8",
+      "title": "Seleccionar MongoDB por variable no cambia la aplicación",
+      "evidence": [
+        {
+          "path": "editorial/curriculum.json",
+          "needle": "COBRIA_ADAPTER=mongodb npm test"
+        },
+        {
+          "path": "replication/examples/ecosistema-app/src/composition.mjs",
+          "needle": "new RepositorioMemoria()"
+        },
+        {
+          "path": "replication/examples/ecosistema-app/test/app.test.mjs",
+          "needle": "falsoFetch"
+        }
+      ],
+      "action": "Implementar composición configurable y una integración explícita con motor real sin confundirla con dobles."
+    },
+    {
+      "id": "C0-06",
+      "severity": "alta",
+      "areas": [
+        "toolkit"
+      ],
+      "phase": "C9",
+      "title": "La documentación usa opciones CLI no implementadas",
+      "evidence": [
+        {
+          "path": "editorial/curriculum.json",
+          "needle": "--comprobar"
+        },
+        {
+          "path": "editorial/curriculum.json",
+          "needle": "--cambio cambio.json"
+        },
+        {
+          "path": "replication/src/cli.mjs",
+          "needle": "CLI_OPTION_UNKNOWN"
+        }
+      ],
+      "action": "Verificar cada ejemplo contra la ayuda y el comportamiento de la CLI; no agregar flags ficticios."
+    },
+    {
+      "id": "C0-07",
+      "severity": "alta",
+      "areas": [
+        "datos"
+      ],
+      "phase": "C2",
+      "title": "Dos fuentes JSON declaradas no existen",
+      "evidence": [
+        {
+          "path": "editorial/curriculum.json",
+          "needle": "specification/phase-3/data-dictionary.json"
+        },
+        {
+          "path": "specification/phase-3/data-dictionary.yaml",
+          "needle": ""
+        },
+        {
+          "path": "editorial/curriculum.json",
+          "needle": "specification/phase-6/code-conventions.json"
+        },
+        {
+          "path": "specification/phase-6/documentation.yaml",
+          "needle": ""
+        }
+      ],
+      "action": "Enlazar el diccionario YAML y la fuente real de convenciones de código; validar existencia de todas las fuentes."
+    },
+    {
+      "id": "C0-08",
+      "severity": "alta",
+      "areas": [
+        "evidencia"
+      ],
+      "phase": "C11",
+      "title": "Un manual conserva un estado confirmatorio anterior",
+      "evidence": [
+        {
+          "path": "manuales/22-evidence-transfer.md",
+          "needle": "faltan corridas de MongoDB"
+        },
+        {
+          "path": "ROADMAP-REMEDIACION-PUBLICA-1.0.md",
+          "needle": "90 observaciones válidas cada uno"
+        }
+      ],
+      "action": "Sincronizar estados con R7 sin convertir su evidencia interna en réplica externa."
+    },
+    {
+      "id": "C0-09",
+      "severity": "media",
+      "areas": [
+        "inicio",
+        "fundamentos",
+        "apiux",
+        "seguridad",
+        "calidad",
+        "operaciones"
+      ],
+      "phase": "C10",
+      "title": "La palabra estable en manuales puede confundirse con una edición cerrada",
+      "evidence": [
+        {
+          "path": "manuales/01-fundamentos.md",
+          "needle": "Estado:** estable"
+        },
+        {
+          "path": "editorial/canonical.json",
+          "needle": "candidate-non-stable"
+        }
+      ],
+      "action": "Distinguir madurez del texto, candidata editorial y estado publicado."
+    },
+    {
+      "id": "C0-10",
+      "severity": "alta",
+      "areas": [
+        "inicio",
+        "fundamentos",
+        "arquitectura",
+        "capas",
+        "codigo",
+        "datos",
+        "core",
+        "patrones",
+        "apiux",
+        "documentacion",
+        "seguridad",
+        "calidad",
+        "operaciones",
+        "ia",
+        "construir",
+        "toolkit",
+        "evidencia"
+      ],
+      "phase": "C13",
+      "title": "La estructura uniforme no acredita aprendizaje ni ejecución por lección",
+      "evidence": [
+        {
+          "path": "editorial/ARQUITECTURA-PEDAGOGICA.md",
+          "needle": "Criterio de completitud"
+        },
+        {
+          "path": "sitio/app/aprender/[modulo]/[leccion]/page.tsx",
+          "needle": "Fuentes del módulo"
+        }
+      ],
+      "action": "Añadir trazabilidad por lección y validación de tareas con lectores; no utilizar conteos como porcentaje de calidad."
+    }
+  ]
+}

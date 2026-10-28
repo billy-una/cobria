@@ -46,9 +46,29 @@ for required_role in ("ROLE-CATALOG", "ROLE-INDEXER", "ROLE-CONNECTOR"):
         errors.append(f"manifiesto sin {required_role}")
 
 site = (ROOT / "sitio/app/manual.tsx").read_text(encoding="utf-8")
-for marker in ("Ejemplo: observaciones comunitarias", "Catalog, Indexer y Connector", "Migración sin reescritura total"):
-    if marker not in site:
-        errors.append(f"sitio no publica {marker}")
+curriculum = json.loads((ROOT / "editorial/curriculum.json").read_text(encoding="utf-8"))
+modules = {module["key"]: module for module in curriculum["modules"]}
+if 'editorial/curriculum.json' not in site or 'page.lessons.map' not in site:
+    errors.append("sitio no renderiza las lecciones de la fuente pedagógica compartida")
+if "observación" not in modules["fundamentos"]["project"].lower():
+    errors.append("Fundamentos perdió el caso conductor de observaciones")
+for key, title in (
+    ("capas", "Puertos y adaptadores: Catalog, Indexer y Connector"),
+    ("datos", "Migrar documentos sin detener el mundo"),
+):
+    lessons = modules[key]["lessons"]
+    matches = [(index, lesson) for index, lesson in enumerate(lessons, 1) if lesson["title"] == title]
+    if len(matches) != 1:
+        errors.append(f"falta la lección única {title}")
+        continue
+    index, lesson = matches[0]
+    if not all(lesson.get(field) for field in ("simple", "steps", "example", "mistake", "evidence", "code")):
+        errors.append(f"lección incompleta: {title}")
+    route = f"/aprender/{key}/{index}"
+    sitemap = (ROOT / "sitio/public/sitemap.xml").read_text(encoding="utf-8")
+    renderer = ROOT / "sitio/app/aprender/[modulo]/[leccion]/page.tsx"
+    if not renderer.is_file() or f"{route}</loc>" not in sitemap:
+        errors.append(f"sitio no tiene ruta publicada para la lección actual: {title}")
 
 phase5 = subprocess.run(
     ["python3", "replication/scripts/validate-phase5.py"], cwd=ROOT,

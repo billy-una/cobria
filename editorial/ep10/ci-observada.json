@@ -1,0 +1,32 @@
+{
+  "queriedOn": "2026-10-28",
+  "repository": "billy-una/cobria",
+  "totalRuns": 37,
+  "runs": [
+    {
+      "id": 35589549294,
+      "sha": "73a43f94f580f4956f824c2a72b5dc3286201fe9",
+      "status": "completed",
+      "conclusion": "failure",
+      "createdAt": "2026-09-21T10:35:25Z",
+      "url": "https://github.com/billy-una/cobria/actions/runs/35589549294"
+    },
+    {
+      "id": 35582511810,
+      "sha": "a80a20ab4bcd011e3e6049fa82500f0a3c9770ab",
+      "status": "completed",
+      "conclusion": "failure",
+      "createdAt": "2026-09-21T09:18:20Z",
+      "url": "https://github.com/billy-una/cobria/actions/runs/35582511810"
+    },
+    {
+      "id": 35582509787,
+      "sha": "a80a20ab4bcd011e3e6049fa82500f0a3c9770ab",
+      "status": "completed",
+      "conclusion": "failure",
+      "createdAt": "2026-09-21T09:18:19Z",
+      "url": "https://github.com/billy-una/cobria/actions/runs/35582509787"
+    }
+  ],
+  "candidateCiObserved": false
+}

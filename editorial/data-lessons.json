@@ -1,0 +1,66 @@
+{
+  "module": "datos",
+  "guide": "manuales/27-datos-desde-cero.md",
+  "lessons": [
+    {
+      "title": "Diccionario de datos desde cero",
+      "situation": "La reserva registra tres colibríes, pero nadie sabe si g significa cantidad o versión de catálogo.",
+      "simple": "El diccionario explica cada dato; la letra física solo tiene significado dentro de un contrato y una versión.",
+      "steps": ["Escriba el hecho en una frase.", "Separe identidad, ámbito, instante, especie y cantidad.", "Defina tipo, unidad, origen y sensibilidad.", "Declare revisión y formato como conceptos distintos.", "Compruebe la tabla contra el Dater, no contra una pantalla."],
+      "example": "En la aplicación: c es revisión, d es formato y g es cantidad. La referencia de fase 3 es otro contrato, no una traducción intercambiable.",
+      "mistake": "Copiar letras de otro diccionario o aceptar cero como cantidad válida.",
+      "evidence": "La prueba recorre los siete campos v1 y compara cada valor con la entidad lógica.",
+      "code": "// Observacion: nombres de negocio\n{id:'obs-001', ambito:'reserva-sur', revision:1,\n especie:'colibri', cantidad:3, observadaEn:'2026-10-17T12:00:00Z'}\n// Dater v1: a=id, b=ambito, c=revision, d=formato,\n// e=observadaEn, f=especie, g=cantidad",
+      "testName": "diccionario C2 coincide con las claves y valores del Dater v1",
+      "expected": "Los siete campos físicos coinciden con el Dater v1. La salida termina con pass 1 y fail 0."
+    },
+    {
+      "title": "Incrustar, referenciar e indexar",
+      "situation": "La reserva necesita sus últimas observaciones de colibríes, no todos los datos de todas las reservas.",
+      "simple": "Diseñe filtros, orden y límite antes del índice. Un límite de resultados no convierte un escaneo en una consulta barata.",
+      "steps": ["Filtre por ámbito y especie.", "Ordene por instante descendente e identidad ascendente.", "Limite la salida.", "Documente un índice candidato y traduzca sus claves.", "Mida el plan real antes de crear una proyección."],
+      "example": "La consulta devuelve obs-001 y obs-002; excluye reserva-norte y conserva un orden determinista en empates.",
+      "mistake": "Afirmar que existe un índice porque su definición aparece en un JSON.",
+      "evidence": "La prueba comprueba filtro, orden, límite, ausencia de mutación y resultado vacío. No mide un motor.",
+      "code": "// Taller local; no adaptador remoto\nconsultarObservaciones(documentos, {\n  ambito:'reserva-sur', especie:'colibri', limite:2\n});\n// Índice candidato: b, f, e descendente, a ascendente\n// Referencia en memoria: O(N + M log M), no O(1)",
+      "testName": "consulta acotada excluye otra reserva y ordena resultados",
+      "expected": "La respuesta contiene solo obs-001 y obs-002 de reserva-sur. La salida termina con pass 1 y fail 0."
+    },
+    {
+      "title": "Diseñar agregados y separar nodos",
+      "situation": "Guardar todas las observaciones dentro de una reserva hace crecer un solo documento sin límite.",
+      "simple": "Separe hechos, referencias y resúmenes cuando tengan ciclos de vida diferentes; un nombre n8 no decide la arquitectura.",
+      "steps": ["Use un documento por observación.", "Identifique cada hecho por ámbito e id.", "Mantenga el catálogo por ediciones.", "Trate el resumen como derivado reconstruible.", "Documente qué nodos existen realmente y cuáles son candidatos."],
+      "example": "observaciones conserva el hecho; catalogos/especies/{version} interpreta códigos; resumenPorEspecie/{ambito} se puede reconstruir.",
+      "mistake": "Confundir una topología documentada con colecciones ya desplegadas o copiar alias sin diccionario.",
+      "evidence": "La prueba verifica identidad compuesta y que el índice candidato empieza por ámbito. El taller usa memoria y JSON.",
+      "code": "// Tres responsabilidades, no tres despliegues\nobservaciones: identidad = [ambito, id]\ncatalogos/especies/{version}: [version, codigo]\nresumenPorEspecie/{ambito}: derivado\n// cantidad se incrusta en la observación;\n// la edición del catálogo se referencia en formato 2",
+      "testName": "nodos e índice candidato conservan identidad y filtro de ámbito",
+      "expected": "La identidad es ambito e id y el índice candidato conserva el ámbito. La salida termina con pass 1 y fail 0."
+    },
+    {
+      "title": "Traducir claves físicas en el Dater",
+      "situation": "El código de negocio empieza a leer g y ya no se entiende qué está contando.",
+      "simple": "El Dater traduce ida y vuelta. El dominio habla de cantidad y observadaEn, no de letras.",
+      "steps": ["Construya una Observacion válida.", "Tradúzcala con haciaFisico.", "Recupérela con desdeFisico.", "Compare todos los valores.", "Compruebe que un offset se normaliza a UTC y no se conserva como campo adicional."],
+      "example": "2026-10-17T06:00:00-06:00 y 2026-10-17T12:00:00Z representan el mismo instante; la salida usa .000Z.",
+      "mistake": "Decir que se conserva la zona original cuando la implementación solo conserva el instante UTC.",
+      "evidence": "La entidad recuperada equivale a la original normalizada, con identidad, ámbito, revisión y cantidad intactos.",
+      "code": "const dater = new ObservacionDater();\nconst original = new Observacion(entrada);\nconst fisico = dater.haciaFisico(original);\nconst recuperada = dater.desdeFisico(fisico);\n// g === original.cantidad; d === 1\n// No use fisico.g dentro de un caso de uso",
+      "testName": "Dater conserva identidad, ámbito, cantidad y tiempo normalizado",
+      "expected": "El recorrido de ida y vuelta conserva la entidad y normaliza a UTC. La salida termina con pass 1 y fail 0."
+    },
+    {
+      "title": "Migrar documentos sin detener el mundo",
+      "situation": "El formato 1 no guardaba la edición del catálogo. Elegir la más reciente alteraría la interpretación histórica.",
+      "simple": "Una migración idempotente necesita una decisión explícita y una copia para reversión. Cambiar formato no es cambiar el hecho.",
+      "steps": ["Conserve el documento v1.", "Declare una edición justificada.", "Valide códigos y campos antes de transformar.", "Añada h y cambie d a 2, sin aumentar c.", "Repita y compare; ensaye restaurar la copia anterior."],
+      "example": "migrarObservacion(v1,'2026.1') produce v2. Una segunda ejecución es idéntica; otra edición produce conflicto.",
+      "mistake": "Inferir la edición por el código o anunciar despliegue sin interrupciones a partir de una función local.",
+      "evidence": "La prueba verifica repetición idéntica, lectura de la copia v1 y rechazo de reclasificación. El despliegue real requiere lotes y lectores compatibles.",
+      "code": "const nuevo = migrarObservacion(antiguo, '2026.1');\nconst repetido = migrarObservacion(nuevo, '2026.1');\n// nuevo.d === 2; nuevo.h === '2026.1'\n// nuevo.c === antiguo.c; la entrada no se modifica\n// El Dater original sigue escribiendo v1;\n// solo el taller adicional interpreta v2",
+      "testName": "migración repetida es idéntica y permite restaurar la copia v1",
+      "expected": "Las dos migraciones son idénticas y la copia v1 sigue legible. La salida termina con pass 1 y fail 0."
+    }
+  ]
+}

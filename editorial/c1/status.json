@@ -1,0 +1,39 @@
+{
+  "phase": "C1",
+  "date": "2026-10-17",
+  "status": "verificada_localmente_validacion_con_lectores_pendiente",
+  "c0BaselineCommit": "deca1b14ff44805d5d36814654cf35be27d2fa89",
+  "guide": "manuales/26-primer-proyecto-paso-a-paso.md",
+  "executionLessons": 10,
+  "labDirectoryDeclarations": 30,
+  "fixes": [
+    {"id": "C0-01", "scope": "generar --simular devuelve plan sin archivos ni directorios; otras simulaciones no soportadas se rechazan"},
+    {"id": "C0-02", "scope": "constructor real y cantidad entera positiva en la ruta inicial"},
+    {"id": "C0-03", "scope": "metas inexistentes sustituidas; esto no acredita todas las tareas conceptuales"},
+    {"id": "C0-04", "scope": "directorios y requisitos de todos los laboratorios; diez instrucciones iniciales ejecutadas en copia nueva"},
+    {"id": "C0-07", "scope": "referencias a los dos archivos existentes; el desarrollo del diccionario sigue en C2"}
+  ],
+  "newFindingResolved": "La demostración carecía de actorId y finalidad y era rechazada por su autorización; ahora usa contexto sintético explícito.",
+  "tests": [
+    "replication/tests/c1-simulation.test.mjs",
+    "replication/tests/c1-learning.test.mjs",
+    "replication/examples/ecosistema-app/test/primer-recorrido.test.mjs"
+  ],
+  "verification": "make verificar-c1",
+  "fullVerification": "make verificar-publicacion COBRIA_SITE_ISOLATED=1",
+  "fullVerificationExitCode": 0,
+  "freshCopyReport": "output/review/c1/cobria-c1-clean-O34JjU.json",
+  "applicationTestsPassed": 25,
+  "bookPages": 260,
+  "readerComprehensionValidated": false,
+  "remoteEnginesValidatedByThisPhase": false,
+  "published": false,
+  "frozenCoreChanged": false,
+  "originalRc2ArchiveChanged": false,
+  "remaining": [
+    "C13 debe observar tareas de principiantes reales sin ayuda del autor.",
+    "La demostración usa memoria y contexto sintético; C5 y C8 deben completar identidad, interfaz, API y persistencia real.",
+    "Las simulaciones de publicación no realizan despliegue.",
+    "C0 se conserva sin reescribir sus hallazgos históricos."
+  ]
+}

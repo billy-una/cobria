@@ -1,0 +1,1544 @@
+{
+  "schemaVersion": "1.0.0",
+  "date": "2026-10-23",
+  "kind": "revision-exploratoria-dirigida-asistida",
+  "systematicReviewComplete": false,
+  "independentScreeners": 0,
+  "scope": "Corrección del corpus existente y ampliación temática dirigida; no exportación exhaustiva de índices bibliográficos.",
+  "coverageLimits": [
+    "Búsqueda web pública con restricciones por dominio, no búsquedas nativas completas de ACM, IEEE o Springer.",
+    "El buscador no entrega un universo exhaustivo ni conteos estables; no se construye un diagrama PRISMA ficticio.",
+    "Una ficha o un resumen verifica identidad o pertinencia, no lectura completa ni evaluación de calidad del trabajo.",
+    "La extracción temática es asistida por IA, no doble cribado ni adjudicación humana independiente."
+  ],
+  "references": [
+    {
+      "id": "apa2020manual",
+      "title": "Publication Manual of the American Psychological Association",
+      "authors": "American Psychological Association",
+      "year": "2020",
+      "venue": "American Psychological Association",
+      "doi": null,
+      "url": "https://apastyle.apa.org/products/publication-manual-7th-edition",
+      "edition": "7",
+      "volume": null,
+      "issue": null,
+      "pages": "",
+      "note": "",
+      "kind": "libro",
+      "access": "ficha-editorial; no lectura íntegra acreditada",
+      "accessUrl": "https://apastyle.apa.org/products/publication-manual-7th-edition",
+      "checkedAt": "2026-10-23T20:32:53.178Z",
+      "linkStatus": 200,
+      "metadataStatus": null,
+      "verificationLimit": "La resolución del enlace o del DOI no acredita por sí sola calidad, lectura completa ni apoyo a toda afirmación."
+    },
+    {
+      "id": "apacheCouchDocumentApi",
+      "title": "Apache CouchDB Document API",
+      "authors": "Apache Software Foundation",
+      "year": "s. f.",
+      "venue": "",
+      "doi": null,
+      "url": "https://docs.couchdb.org/en/stable/api/document/common.html",
+      "edition": null,
+      "volume": null,
+      "issue": null,
+      "pages": "",
+      "note": "Documentación viva consultada para delimitación conceptual, no sustituto de la versión experimental fijada",
+      "kind": "documentacion-tecnica",
+      "access": "identidad editorial; alcance de lectura según extracción temática",
+      "accessUrl": "https://docs.couchdb.org/en/stable/api/document/common.html",
+      "checkedAt": "2026-10-23T20:32:53.178Z",
+      "linkStatus": 200,
+      "metadataStatus": null,
+      "verificationLimit": "La resolución del enlace o del DOI no acredita por sí sola calidad, lectura completa ni apoyo a toda afirmación."
+    },
+    {
+      "id": "armbrust2021lakehouse",
+      "title": "Lakehouse: A New Generation of Open Platforms that Unify Data Warehousing and Advanced Analytics",
+      "authors": "Armbrust, Michael; Ghodsi, Ali; Xin, Reynold; Zaharia, Matei",
+      "year": "2021",
+      "venue": "11th Conference on Innovative Data Systems Research",
+      "doi": null,
+      "url": "https://www.cidrdb.org/cidr2021/papers/cidr2021_paper17.pdf",
+      "edition": null,
+      "volume": null,
+      "issue": null,
+      "pages": "",
+      "note": "",
+      "kind": "publicacion-academica",
+      "access": "identidad editorial; alcance de lectura según extracción temática",
+      "accessUrl": "https://www.cidrdb.org/cidr2021/papers/cidr2021_paper17.pdf",
+      "checkedAt": "2026-10-23T20:32:53.178Z",
+      "linkStatus": 200,
+      "metadataStatus": null,
+      "verificationLimit": "La resolución del enlace o del DOI no acredita por sí sola calidad, lectura completa ni apoyo a toda afirmación."
+    },
+    {
+      "id": "aulbach2009flexibleschemas",
+      "title": "A Comparison of Flexible Schemas for Software as a Service",
+      "authors": "Aulbach, Stefan; Jacobs, Dean; Kemper, Alfons; Seibold, Michael",
+      "year": "2009",
+      "venue": "Proceedings of the 2009 ACM SIGMOD International Conference on Management of Data",
+      "doi": "10.1145/1559845.1559941",
+      "url": "https://doi.org/10.1145/1559845.1559941",
+      "edition": null,
+      "volume": null,
+      "issue": null,
+      "pages": "881–888",
+      "note": "",
+      "kind": "publicacion-academica",
+      "access": "texto-primario-abierto",
+      "accessUrl": "https://db.in.tum.de/research/publications/conferences/sigmod2009-mtd.pdf",
+      "checkedAt": "2026-10-23T20:32:53.178Z",
+      "linkStatus": 200,
+      "metadataStatus": 200,
+      "verificationLimit": "La resolución del enlace o del DOI no acredita por sí sola calidad, lectura completa ni apoyo a toda afirmación."
+    },
+    {
+      "id": "buneman2001provenance",
+      "title": "Why and Where: A Characterization of Data Provenance",
+      "authors": "Buneman, Peter; Khanna, Sanjeev; Tan, Wang-Chiew",
+      "year": "2001",
+      "venue": "Database Theory–-ICDT 2001",
+      "doi": "10.1007/3-540-44503-X_20",
+      "url": "https://doi.org/10.1007/3-540-44503-X_20",
+      "edition": null,
+      "volume": null,
+      "issue": null,
+      "pages": "316–330",
+      "note": "",
+      "kind": "publicacion-academica",
+      "access": "identidad editorial; alcance de lectura según extracción temática",
+      "accessUrl": "https://doi.org/10.1007/3-540-44503-X_20",
+      "checkedAt": "2026-10-23T20:32:53.178Z",
+      "linkStatus": 200,
+      "metadataStatus": 200,
+      "verificationLimit": "La resolución del enlace o del DOI no acredita por sí sola calidad, lectura completa ni apoyo a toda afirmación."
+    },
+    {
+      "id": "chang2006bigtable",
+      "title": "Bigtable: A Distributed Storage System for Structured Data",
+      "authors": "Chang, Fay; Dean, Jeffrey; Ghemawat, Sanjay; Hsieh, Wilson C.; Wallach, Deborah A.; Burrows, Mike; Chandra, Tushar; Fikes, Andrew; Gruber, Robert E.",
+      "year": "2006",
+      "venue": "7th USENIX Symposium on Operating Systems Design and Implementation",
+      "doi": null,
+      "url": "https://www.usenix.org/conference/osdi-06/bigtable-distributed-storage-system-structured-data",
+      "edition": null,
+      "volume": null,
+      "issue": null,
+      "pages": "205–218",
+      "note": "",
+      "kind": "publicacion-academica",
+      "access": "identidad editorial; alcance de lectura según extracción temática",
+      "accessUrl": "https://www.usenix.org/conference/osdi-06/bigtable-distributed-storage-system-structured-data",
+      "checkedAt": "2026-10-23T20:32:53.178Z",
+      "linkStatus": 200,
+      "metadataStatus": null,
+      "verificationLimit": "La resolución del enlace o del DOI no acredita por sí sola calidad, lectura completa ni apoyo a toda afirmación."
+    },
+    {
+      "id": "cooper2010ycsb",
+      "title": "Benchmarking Cloud Serving Systems with YCSB",
+      "authors": "Cooper, Brian F.; Silberstein, Adam; Tam, Erwin; Ramakrishnan, Raghu; Sears, Russell",
+      "year": "2010",
+      "venue": "Proceedings of the 1st ACM Symposium on Cloud Computing",
+      "doi": "10.1145/1807128.1807152",
+      "url": "https://doi.org/10.1145/1807128.1807152",
+      "edition": null,
+      "volume": null,
+      "issue": null,
+      "pages": "143–154",
+      "note": "",
+      "kind": "publicacion-academica",
+      "access": "identidad editorial; alcance de lectura según extracción temática",
+      "accessUrl": "https://doi.org/10.1145/1807128.1807152",
+      "checkedAt": "2026-10-23T20:32:53.178Z",
+      "linkStatus": 403,
+      "metadataStatus": 200,
+      "verificationLimit": "La resolución del enlace o del DOI no acredita por sí sola calidad, lectura completa ni apoyo a toda afirmación."
+    },
+    {
+      "id": "corbett2012spanner",
+      "title": "Spanner: Google's Globally-Distributed Database",
+      "authors": "Corbett, James C.; Dean, Jeffrey; Epstein, Michael; Fikes, Andrew; Frost, Christopher; Furman, J. J.; Ghemawat, Sanjay; Gubarev, Andrey; Heiser, Christopher; Hochschild, Peter; Hsieh, Wilson; Kanthak, Sebastian; Kogan, Eugene; Li, Hongyi; Lloyd, Alexander; Melnik, Sergey; Mwaura, David; Nagle, David; Quinlan, Sean; Rao, Rajesh; Rolig, Lindsay; Saito, Yasushi; Szymaniak, Michal; Taylor, Christopher; Wang, Ruth; Woodford, Dale",
+      "year": "2012",
+      "venue": "10th USENIX Symposium on Operating Systems Design and Implementation",
+      "doi": null,
+      "url": "https://research.google/pubs/spanner-googles-globally-distributed-database-2/",
+      "edition": null,
+      "volume": null,
+      "issue": null,
+      "pages": "251–264",
+      "note": "",
+      "kind": "publicacion-academica",
+      "access": "identidad editorial; alcance de lectura según extracción temática",
+      "accessUrl": "https://research.google/pubs/spanner-googles-globally-distributed-database-2/",
+      "checkedAt": "2026-10-23T20:32:53.178Z",
+      "linkStatus": 200,
+      "metadataStatus": null,
+      "verificationLimit": "La resolución del enlace o del DOI no acredita por sí sola calidad, lectura completa ni apoyo a toda afirmación."
+    },
+    {
+      "id": "cormen2022algorithms",
+      "title": "Introduction to Algorithms",
+      "authors": "Cormen, Thomas H.; Leiserson, Charles E.; Rivest, Ronald L.; Stein, Clifford",
+      "year": "2022",
+      "venue": "MIT Press",
+      "doi": null,
+      "url": "https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/",
+      "edition": "4",
+      "volume": null,
+      "issue": null,
+      "pages": "",
+      "note": "",
+      "kind": "libro",
+      "access": "ficha-editorial; no lectura íntegra acreditada",
+      "accessUrl": "https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/",
+      "checkedAt": "2026-10-23T20:32:53.178Z",
+      "linkStatus": 200,
+      "metadataStatus": null,
+      "verificationLimit": "La resolución del enlace o del DOI no acredita por sí sola calidad, lectura completa ni apoyo a toda afirmación."
+    },
+    {
+      "id": "decandia2007dynamo",
+      "title": "Dynamo: Amazon's Highly Available Key-value Store",
+      "authors": "DeCandia, Giuseppe; Hastorun, Deniz; Jampani, Madan; Kakulapati, Gunavardhan; Lakshman, Avinash; Pilchin, Alex; Sivasubramanian, Swaminathan; Vosshall, Peter; Vogels, Werner",
+      "year": "2007",
+      "venue": "Proceedings of Twenty-First ACM SIGOPS Symposium on Operating Systems Principles",
+      "doi": "10.1145/1294261.1294281",
+      "url": "https://doi.org/10.1145/1294261.1294281",
+      "edition": null,
+      "volume": null,
+      "issue": null,
+      "pages": "205–220",
+      "note": "",
+      "kind": "publicacion-academica",
+      "access": "identidad editorial; alcance de lectura según extracción temática",
+      "accessUrl": "https://doi.org/10.1145/1294261.1294281",
+      "checkedAt": "2026-10-23T20:32:53.178Z",
+      "linkStatus": 403,
+      "metadataStatus": 200,
+      "verificationLimit": "La resolución del enlace o del DOI no acredita por sí sola calidad, lectura completa ni apoyo a toda afirmación."
+    },
+    {
+      "id": "evans2003ddd",
+      "title": "Domain-Driven Design: Tackling Complexity in the Heart of Software",
+      "authors": "Evans, Eric",
+      "year": "2003",
+      "venue": "Addison-Wesley",
+      "doi": null,
+      "url": "https://www.informit.com/store/domain-driven-design-tackling-complexity-in-the-heart-9780321125217",
+      "edition": null,
+      "volume": null,
+      "issue": null,
+      "pages": "",
+      "note": "",
+      "kind": "libro",
+      "access": "ficha-editorial; no lectura íntegra acreditada",
+      "accessUrl": "https://www.informit.com/store/domain-driven-design-tackling-complexity-in-the-heart-9780321125217",
+      "checkedAt": "2026-10-23T20:32:53.178Z",
+      "linkStatus": 200,
+      "metadataStatus": null,
+      "verificationLimit": "La resolución del enlace o del DOI no acredita por sí sola calidad, lectura completa ni apoyo a toda afirmación."
+    },
+    {
+      "id": "fowler2002poeaa",
+      "title": "Patterns of Enterprise Application Architecture",
+      "authors": "Fowler, Martin",
+      "year": "2002",
+      "venue": "Addison-Wesley",
+      "doi": null,
+      "url": "https://martinfowler.com/eaaCatalog/",
+      "edition": null,
+      "volume": null,
+      "issue": null,
+      "pages": "",
+      "note": "",
+      "kind": "libro",
+      "access": "ficha-editorial; no lectura íntegra acreditada",
+      "accessUrl": "https://martinfowler.com/eaaCatalog/",
+      "checkedAt": "2026-10-23T20:32:53.178Z",
+      "linkStatus": 200,
+      "metadataStatus": null,
+      "verificationLimit": "La resolución del enlace o del DOI no acredita por sí sola calidad, lectura completa ni apoyo a toda afirmación."
+    },
+    {
+      "id": "fowler2005eventsourcing",
+      "title": "Event Sourcing",
+      "authors": "Fowler, Martin",
+      "year": "2005",
+      "venue": "",
+      "doi": null,
+      "url": "https://martinfowler.com/eaaDev/EventSourcing.html",
+      "edition": null,
+      "volume": null,
+      "issue": null,
+      "pages": "",
+      "note": "",
+      "kind": "documentacion-tecnica",
+      "access": "identidad editorial; alcance de lectura según extracción temática",
+      "accessUrl": "https://martinfowler.com/eaaDev/EventSourcing.html",
+      "checkedAt": "2026-10-23T20:32:53.178Z",
+      "linkStatus": 200,
+      "metadataStatus": null,
+      "verificationLimit": "La resolución del enlace o del DOI no acredita por sí sola calidad, lectura completa ni apoyo a toda afirmación."
+    },
+    {
+      "id": "fowler2011cqrs",
+      "title": "CQRS",
+      "authors": "Fowler, Martin",
+      "year": "2011",
+      "venue": "",
+      "doi": null,
+      "url": "https://martinfowler.com/bliki/CQRS.html",
+      "edition": null,
+      "volume": null,
+      "issue": null,
+      "pages": "",
+      "note": "",
+      "kind": "documentacion-tecnica",
+      "access": "identidad editorial; alcance de lectura según extracción temática",
+      "accessUrl": "https://martinfowler.com/bliki/CQRS.html",
+      "checkedAt": "2026-10-23T20:32:53.178Z",
+      "linkStatus": 200,
+      "metadataStatus": null,
+      "verificationLimit": "La resolución del enlace o del DOI no acredita por sí sola calidad, lectura completa ni apoyo a toda afirmación."
+    },
+    {
+      "id": "gamma1994patterns",
+      "title": "Design Patterns: Elements of Reusable Object-Oriented Software",
+      "authors": "Gamma, Erich; Helm, Richard; Johnson, Ralph; Vlissides, John",
+      "year": "1994",
+      "venue": "Addison-Wesley",
+      "doi": null,
+      "url": "https://www.pearson.com/en-us/subject-catalog/p/design-patterns-elements-of-reusable-object-oriented-software/P200000009480",
+      "edition": null,
+      "volume": null,
+      "issue": null,
+      "pages": "",
+      "note": "",
+      "kind": "libro",
+      "access": "ficha-editorial; no lectura íntegra acreditada",
+      "accessUrl": "https://www.pearson.com/en-us/subject-catalog/p/design-patterns-elements-of-reusable-object-oriented-software/P200000009480",
+      "checkedAt": "2026-10-23T20:32:53.178Z",
+      "linkStatus": 200,
+      "metadataStatus": null,
+      "verificationLimit": "La resolución del enlace o del DOI no acredita por sí sola calidad, lectura completa ni apoyo a toda afirmación."
+    },
+    {
+      "id": "gebru2021datasheets",
+      "title": "Datasheets for Datasets",
+      "authors": "Gebru, Timnit; Morgenstern, Jamie; Vecchione, Briana; Vaughan, Jennifer Wortman; Wallach, Hanna; Daumé III, Hal; Crawford, Kate",
+      "year": "2021",
+      "venue": "Communications of the ACM",
+      "doi": "10.1145/3458723",
+      "url": "https://doi.org/10.1145/3458723",
+      "edition": null,
+      "volume": "64",
+      "issue": "12",
+      "pages": "86–92",
+      "note": "",
+      "kind": "publicacion-academica",
+      "access": "identidad editorial; alcance de lectura según extracción temática",
+      "accessUrl": "https://doi.org/10.1145/3458723",
+      "checkedAt": "2026-10-23T20:32:53.178Z",
+      "linkStatus": 403,
+      "metadataStatus": 200,
+      "verificationLimit": "La resolución del enlace o del DOI no acredita por sí sola calidad, lectura completa ni apoyo a toda afirmación."
+    },
+    {
+      "id": "gupta1995materialized",
+      "title": "Maintenance of Materialized Views: Problems, Techniques, and Applications",
+      "authors": "Gupta, Ashish; Mumick, Inderpal Singh",
+      "year": "1995",
+      "venue": "IEEE Data Engineering Bulletin",
+      "doi": null,
+      "url": "https://sigmod.org/publications/dblp/db/journals/debu/GuptaM95.html",
+      "edition": null,
+      "volume": "18",
+      "issue": "2",
+      "pages": "3–18",
+      "note": "Identidad comprobada en ficha bibliográfica alojada por ACM SIGMOD; texto íntegro no recuperado en EP7",
+      "kind": "publicacion-academica",
+      "access": "ficha bibliográfica; texto íntegro no recuperado",
+      "accessUrl": "https://sigmod.org/publications/dblp/db/journals/debu/GuptaM95.html",
+      "checkedAt": "2026-10-23T20:35:13.454Z",
+      "linkStatus": 200,
+      "metadataStatus": null,
+      "verificationLimit": "La resolución del enlace o del DOI no acredita por sí sola calidad, lectura completa ni apoyo a toda afirmación."
+    },
+    {
+      "id": "gupta1993incremental",
+      "title": "Maintaining Views Incrementally",
+      "authors": "Gupta, Ashish; Mumick, Inderpal Singh; Subrahmanian, V. S.",
+      "year": "1993",
+      "venue": "Proceedings of the 1993 ACM SIGMOD International Conference on Management of Data",
+      "doi": "10.1145/170035.170066",
+      "url": "https://doi.org/10.1145/170035.170066",
+      "edition": null,
+      "volume": null,
+      "issue": null,
+      "pages": "157–166",
+      "note": "",
+      "kind": "publicacion-academica",
+      "access": "identidad editorial; alcance de lectura según extracción temática",
+      "accessUrl": "https://doi.org/10.1145/170035.170066",
+      "checkedAt": "2026-10-23T20:35:13.454Z",
+      "linkStatus": 403,
+      "metadataStatus": 200,
+      "verificationLimit": "La resolución del enlace o del DOI no acredita por sí sola calidad, lectura completa ni apoyo a toda afirmación."
+    },
+    {
+      "id": "helland2015immutability",
+      "title": "Immutability Changes Everything",
+      "authors": "Helland, Pat",
+      "year": "2015",
+      "venue": "7th Biennial Conference on Innovative Data Systems Research",
+      "doi": null,
+      "url": "https://www.cidrdb.org/cidr2015/Papers/CIDR15_Paper16.pdf",
+      "edition": null,
+      "volume": null,
+      "issue": null,
+      "pages": "",
+      "note": "",
+      "kind": "publicacion-academica",
+      "access": "identidad editorial; alcance de lectura según extracción temática",
+      "accessUrl": "https://www.cidrdb.org/cidr2015/Papers/CIDR15_Paper16.pdf",
+      "checkedAt": "2026-10-23T20:32:53.178Z",
+      "linkStatus": 200,
+      "metadataStatus": null,
+      "verificationLimit": "La resolución del enlace o del DOI no acredita por sí sola calidad, lectura completa ni apoyo a toda afirmación."
+    },
+    {
+      "id": "hevner2004designscience",
+      "title": "Design Science in Information Systems Research",
+      "authors": "Hevner, Alan R.; March, Salvatore T.; Park, Jinsoo; Ram, Sudha",
+      "year": "2004",
+      "venue": "MIS Quarterly",
+      "doi": "10.2307/25148625",
+      "url": "https://doi.org/10.2307/25148625",
+      "edition": null,
+      "volume": "28",
+      "issue": "1",
+      "pages": "75–106",
+      "note": "",
+      "kind": "publicacion-academica",
+      "access": "identidad editorial; alcance de lectura según extracción temática",
+      "accessUrl": "https://doi.org/10.2307/25148625",
+      "checkedAt": "2026-10-23T20:35:13.454Z",
+      "linkStatus": 403,
+      "metadataStatus": 200,
+      "verificationLimit": "La resolución del enlace o del DOI no acredita por sí sola calidad, lectura completa ni apoyo a toda afirmación."
+    },
+    {
+      "id": "iso25010_2023",
+      "title": "ISO/IEC 25010:2023: modelo de calidad del producto",
+      "authors": "ISO/IEC",
+      "year": "2023",
+      "venue": "",
+      "doi": null,
+      "url": "https://www.iso.org/standard/78176.html",
+      "edition": null,
+      "volume": null,
+      "issue": null,
+      "pages": "",
+      "note": "Ficha oficial consultada; título descriptivo en español",
+      "kind": "norma-ficha",
+      "access": "ficha-oficial; no texto íntegro",
+      "accessUrl": "https://www.iso.org/standard/78176.html",
+      "checkedAt": "2026-10-23T20:32:53.178Z",
+      "linkStatus": 403,
+      "metadataStatus": null,
+      "verificationLimit": "La resolución del enlace o del DOI no acredita por sí sola calidad, lectura completa ni apoyo a toda afirmación."
+    },
+    {
+      "id": "iso25040_2024",
+      "title": "ISO/IEC 25040:2024: marco de evaluación de calidad",
+      "authors": "ISO/IEC",
+      "year": "2024",
+      "venue": "",
+      "doi": null,
+      "url": "https://www.iso.org/standard/83467.html",
+      "edition": null,
+      "volume": null,
+      "issue": null,
+      "pages": "",
+      "note": "Ficha oficial consultada; título descriptivo en español",
+      "kind": "norma-ficha",
+      "access": "ficha-oficial; no texto íntegro",
+      "accessUrl": "https://www.iso.org/standard/83467.html",
+      "checkedAt": "2026-10-23T20:32:53.178Z",
+      "linkStatus": 403,
+      "metadataStatus": null,
+      "verificationLimit": "La resolución del enlace o del DOI no acredita por sí sola calidad, lectura completa ni apoyo a toda afirmación."
+    },
+    {
+      "id": "jain1991performance",
+      "title": "The Art of Computer Systems Performance Analysis",
+      "authors": "Jain, Raj",
+      "year": "1991",
+      "venue": "Wiley",
+      "doi": null,
+      "url": "https://www.cse.wustl.edu/~jain/books/perfbook.htm",
+      "edition": null,
+      "volume": null,
+      "issue": null,
+      "pages": "",
+      "note": "",
+      "kind": "libro",
+      "access": "ficha-editorial; no lectura íntegra acreditada",
+      "accessUrl": "https://www.cse.wustl.edu/~jain/books/perfbook.htm",
+      "checkedAt": "2026-10-23T20:32:53.178Z",
+      "linkStatus": 200,
+      "metadataStatus": null,
+      "verificationLimit": "La resolución del enlace o del DOI no acredita por sí sola calidad, lectura completa ni apoyo a toda afirmación."
+    },
+    {
+      "id": "kapoor2023leakage",
+      "title": "Leakage and the Reproducibility Crisis in Machine-Learning-Based Science",
+      "authors": "Kapoor, Sayash; Narayanan, Arvind",
+      "year": "2023",
+      "venue": "Patterns",
+      "doi": "10.1016/j.patter.2023.100804",
+      "url": "https://www.sciencedirect.com/science/article/pii/S2666389923001599",
+      "edition": null,
+      "volume": "4",
+      "issue": "9",
+      "pages": "100804",
+      "note": "",
+      "kind": "publicacion-academica",
+      "access": "identidad editorial; alcance de lectura según extracción temática",
+      "accessUrl": "https://www.sciencedirect.com/science/article/pii/S2666389923001599",
+      "checkedAt": "2026-10-23T20:32:53.178Z",
+      "linkStatus": 403,
+      "metadataStatus": 200,
+      "verificationLimit": "La resolución del enlace o del DOI no acredita por sí sola calidad, lectura completa ni apoyo a toda afirmación."
+    },
+    {
+      "id": "kleppmann2017data",
+      "title": "Designing Data-Intensive Applications: The Big Ideas Behind Reliable, Scalable, and Maintainable Systems",
+      "authors": "Kleppmann, Martin",
+      "year": "2017",
+      "venue": "O'Reilly Media",
+      "doi": null,
+      "url": "https://dataintensive.net/",
+      "edition": "1",
+      "volume": null,
+      "issue": null,
+      "pages": "",
+      "note": "Se cita la primera edición de 2017, no una edición posterior",
+      "kind": "libro",
+      "access": "ficha-editorial; no lectura íntegra acreditada",
+      "accessUrl": "https://dataintensive.net/",
+      "checkedAt": "2026-10-23T20:32:53.178Z",
+      "linkStatus": 200,
+      "metadataStatus": null,
+      "verificationLimit": "La resolución del enlace o del DOI no acredita por sí sola calidad, lectura completa ni apoyo a toda afirmación."
+    },
+    {
+      "id": "lewis2020rag",
+      "title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks",
+      "authors": "Lewis, Patrick; Perez, Ethan; Piktus, Aleksandra; Petroni, Fabio; Karpukhin, Vladimir; Goyal, Naman; Kuttler, Heinrich; Lewis, Mike; Yih, Wen-tau; Rocktäschel, Tim; Riedel, Sebastian; Kiela, Douwe",
+      "year": "2020",
+      "venue": "Advances in Neural Information Processing Systems",
+      "doi": null,
+      "url": "https://proceedings.neurips.cc/paper/2020/hash/6b493230205f780e1bc26945df7481e5-Abstract.html",
+      "edition": null,
+      "volume": "33",
+      "issue": null,
+      "pages": "9459–9474",
+      "note": "",
+      "kind": "publicacion-academica",
+      "access": "identidad editorial; alcance de lectura según extracción temática",
+      "accessUrl": "https://proceedings.neurips.cc/paper/2020/hash/6b493230205f780e1bc26945df7481e5-Abstract.html",
+      "checkedAt": "2026-10-23T20:32:53.178Z",
+      "linkStatus": 200,
+      "metadataStatus": null,
+      "verificationLimit": "La resolución del enlace o del DOI no acredita por sí sola calidad, lectura completa ni apoyo a toda afirmación."
+    },
+    {
+      "id": "li2023featurestore",
+      "title": "Managed Geo-Distributed Feature Store: Architecture and System Design",
+      "authors": "Li, Anya; Ranganathan, Bhala; Pan, Feng; Zhang, Mickey; Xu, Qianjun; Li, Runhan; Raman, Sethu; Shah, Shail Paragbhai; Tang, Vivienne",
+      "year": "2023",
+      "venue": "",
+      "doi": "10.48550/arXiv.2305.20077",
+      "url": "https://arxiv.org/abs/2305.20077v1",
+      "edition": null,
+      "volume": null,
+      "issue": null,
+      "pages": "",
+      "note": "Prepublicación arXiv, versión 1",
+      "kind": "prepublicacion",
+      "access": "prepublicacion-arxiv-v1",
+      "accessUrl": "https://arxiv.org/abs/2305.20077v1",
+      "checkedAt": "2026-10-23T20:32:53.178Z",
+      "linkStatus": 200,
+      "metadataStatus": 200,
+      "verificationLimit": "La resolución del enlace o del DOI no acredita por sí sola calidad, lectura completa ni apoyo a toda afirmación."
+    },
+    {
+      "id": "microsoft2025cqrs",
+      "title": "Command and Query Responsibility Segregation (CQRS) Pattern",
+      "authors": "Microsoft",
+      "year": "2025",
+      "venue": "",
+      "doi": null,
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/cqrs",
+      "edition": null,
+      "volume": null,
+      "issue": null,
+      "pages": "",
+      "note": "",
+      "kind": "documentacion-tecnica",
+      "access": "identidad editorial; alcance de lectura según extracción temática",
+      "accessUrl": "https://learn.microsoft.com/en-us/azure/architecture/patterns/cqrs",
+      "checkedAt": "2026-10-23T20:32:53.178Z",
+      "linkStatus": 200,
+      "metadataStatus": null,
+      "verificationLimit": "La resolución del enlace o del DOI no acredita por sí sola calidad, lectura completa ni apoyo a toda afirmación."
+    },
+    {
+      "id": "microsoft2025materialized",
+      "title": "Materialized View Pattern",
+      "authors": "Microsoft",
+      "year": "2025",
+      "venue": "",
+      "doi": null,
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/materialized-view",
+      "edition": null,
+      "volume": null,
+      "issue": null,
+      "pages": "",
+      "note": "",
+      "kind": "documentacion-tecnica",
+      "access": "identidad editorial; alcance de lectura según extracción temática",
+      "accessUrl": "https://learn.microsoft.com/en-us/azure/architecture/patterns/materialized-view",
+      "checkedAt": "2026-10-23T20:32:53.178Z",
+      "linkStatus": 200,
+      "metadataStatus": null,
+      "verificationLimit": "La resolución del enlace o del DOI no acredita por sí sola calidad, lectura completa ni apoyo a toda afirmación."
+    },
+    {
+      "id": "mitchell2019modelcards",
+      "title": "Model Cards for Model Reporting",
+      "authors": "Mitchell, Margaret; Wu, Simone; Zaldivar, Andrew; Barnes, Parker; Vasserman, Lucy; Hutchinson, Ben; Spitzer, Elena; Raji, Inioluwa Deborah; Gebru, Timnit",
+      "year": "2019",
+      "venue": "Proceedings of the Conference on Fairness, Accountability, and Transparency",
+      "doi": "10.1145/3287560.3287596",
+      "url": "https://doi.org/10.1145/3287560.3287596",
+      "edition": null,
+      "volume": null,
+      "issue": null,
+      "pages": "220–229",
+      "note": "",
+      "kind": "publicacion-academica",
+      "access": "identidad editorial; alcance de lectura según extracción temática",
+      "accessUrl": "https://doi.org/10.1145/3287560.3287596",
+      "checkedAt": "2026-10-23T20:32:53.178Z",
+      "linkStatus": 403,
+      "metadataStatus": 200,
+      "verificationLimit": "La resolución del enlace o del DOI no acredita por sí sola calidad, lectura completa ni apoyo a toda afirmación."
+    },
+    {
+      "id": "mongodbAtomicity",
+      "title": "Atomicity and Transactions",
+      "authors": "MongoDB",
+      "year": "s. f.",
+      "venue": "",
+      "doi": null,
+      "url": "https://www.mongodb.com/docs/manual/core/write-operations-atomicity/",
+      "edition": null,
+      "volume": null,
+      "issue": null,
+      "pages": "",
+      "note": "Documentación viva; no sustituye pruebas de una versión fijada",
+      "kind": "documentacion-tecnica",
+      "access": "identidad editorial; alcance de lectura según extracción temática",
+      "accessUrl": "https://www.mongodb.com/docs/manual/core/write-operations-atomicity/",
+      "checkedAt": "2026-10-23T20:32:53.178Z",
+      "linkStatus": 200,
+      "metadataStatus": null,
+      "verificationLimit": "La resolución del enlace o del DOI no acredita por sí sola calidad, lectura completa ni apoyo a toda afirmación."
+    },
+    {
+      "id": "mongodbTenancy",
+      "title": "Build a Multi-Tenant Architecture",
+      "authors": "MongoDB",
+      "year": "s. f.",
+      "venue": "",
+      "doi": null,
+      "url": "https://www.mongodb.com/docs/atlas/build-multi-tenant-arch/",
+      "edition": null,
+      "volume": null,
+      "issue": null,
+      "pages": "",
+      "note": "Documentación de Atlas; no acredita aislamiento de una aplicación",
+      "kind": "documentacion-tecnica",
+      "access": "identidad editorial; alcance de lectura según extracción temática",
+      "accessUrl": "https://www.mongodb.com/docs/atlas/build-multi-tenant-arch/",
+      "checkedAt": "2026-10-23T20:32:53.178Z",
+      "linkStatus": 200,
+      "metadataStatus": null,
+      "verificationLimit": "La resolución del enlace o del DOI no acredita por sí sola calidad, lectura completa ni apoyo a toda afirmación."
+    },
+    {
+      "id": "nist2023airmf",
+      "title": "Artificial Intelligence Risk Management Framework (AI RMF 1.0)",
+      "authors": "National Institute of Standards; Technology",
+      "year": "2023",
+      "venue": "U.S. Department of Commerce",
+      "doi": "10.6028/NIST.AI.100-1",
+      "url": "https://doi.org/10.6028/NIST.AI.100-1",
+      "edition": null,
+      "volume": null,
+      "issue": "NIST AI 100-1",
+      "pages": "",
+      "note": "",
+      "kind": "informe-tecnico",
+      "access": "identidad editorial; alcance de lectura según extracción temática",
+      "accessUrl": "https://doi.org/10.6028/NIST.AI.100-1",
+      "checkedAt": "2026-10-23T20:32:53.178Z",
+      "linkStatus": 200,
+      "metadataStatus": 200,
+      "verificationLimit": "La resolución del enlace o del DOI no acredita por sí sola calidad, lectura completa ni apoyo a toda afirmación."
+    },
+    {
+      "id": "nist2024genai",
+      "title": "Artificial Intelligence Risk Management Framework: Generative Artificial Intelligence Profile",
+      "authors": "National Institute of Standards; Technology",
+      "year": "2024",
+      "venue": "U.S. Department of Commerce",
+      "doi": "10.6028/NIST.AI.600-1",
+      "url": "https://doi.org/10.6028/NIST.AI.600-1",
+      "edition": null,
+      "volume": null,
+      "issue": "NIST AI 600-1",
+      "pages": "",
+      "note": "",
+      "kind": "informe-tecnico",
+      "access": "identidad editorial; alcance de lectura según extracción temática",
+      "accessUrl": "https://doi.org/10.6028/NIST.AI.600-1",
+      "checkedAt": "2026-10-23T20:32:53.178Z",
+      "linkStatus": 200,
+      "metadataStatus": 200,
+      "verificationLimit": "La resolución del enlace o del DOI no acredita por sí sola calidad, lectura completa ni apoyo a toda afirmación."
+    },
+    {
+      "id": "ni2014adaptiveschema",
+      "title": "Adaptive Database Schema Design for Multi-Tenant Data Management",
+      "authors": "Ni, Jiacai; Li, Guoliang; Wang, Lijun; Feng, Jianhua; Zhang, Jun; Li, Lei",
+      "year": "2014",
+      "venue": "IEEE Transactions on Knowledge and Data Engineering",
+      "doi": "10.1109/TKDE.2013.94",
+      "url": "https://dbgroup.cs.tsinghua.edu.cn/ligl/papers/tkde14-multitenant.pdf",
+      "edition": null,
+      "volume": "26",
+      "issue": "9",
+      "pages": "2079–2093",
+      "note": "",
+      "kind": "publicacion-academica",
+      "access": "manuscrito-de-autores",
+      "accessUrl": "https://dbgroup.cs.tsinghua.edu.cn/ligl/papers/tkde14-multitenant.pdf",
+      "checkedAt": "2026-10-23T20:32:53.178Z",
+      "linkStatus": 200,
+      "metadataStatus": 200,
+      "verificationLimit": "La resolución del enlace o del DOI no acredita por sí sola calidad, lectura completa ni apoyo a toda afirmación."
+    },
+    {
+      "id": "opensearch32Alias",
+      "title": "Alias API",
+      "authors": "OpenSearch Project",
+      "year": "s. f.",
+      "venue": "",
+      "doi": null,
+      "url": "https://docs.opensearch.org/3.2/api-reference/index-apis/alias/",
+      "edition": null,
+      "volume": null,
+      "issue": null,
+      "pages": "",
+      "note": "Documentación 3.2 histórica; operación atómica no implica CAS de revisión ni validación de candidata",
+      "kind": "documentacion-tecnica",
+      "access": "identidad editorial; alcance de lectura según extracción temática",
+      "accessUrl": "https://docs.opensearch.org/3.2/api-reference/index-apis/alias/",
+      "checkedAt": "2026-10-23T20:32:53.178Z",
+      "linkStatus": 200,
+      "metadataStatus": null,
+      "verificationLimit": "La resolución del enlace o del DOI no acredita por sí sola calidad, lectura completa ni apoyo a toda afirmación."
+    },
+    {
+      "id": "orr2021featurestores",
+      "title": "Managing ML Pipelines: Feature Stores and the Coming Wave of Embedding Ecosystems",
+      "authors": "Orr, Laurel; Sanyal, Atindriyo; Ling, Xiao; Goel, Karan; Leszczynski, Megan",
+      "year": "2021",
+      "venue": "",
+      "doi": "10.48550/arXiv.2108.05053",
+      "url": "https://arxiv.org/abs/2108.05053v1",
+      "edition": null,
+      "volume": null,
+      "issue": null,
+      "pages": "",
+      "note": "Versión arXiv consultada; no se infiere arbitraje de su alojamiento",
+      "kind": "prepublicacion",
+      "access": "version-arxiv-v1",
+      "accessUrl": "https://arxiv.org/abs/2108.05053v1",
+      "checkedAt": "2026-10-23T20:32:53.178Z",
+      "linkStatus": 200,
+      "metadataStatus": 200,
+      "verificationLimit": "La resolución del enlace o del DOI no acredita por sí sola calidad, lectura completa ni apoyo a toda afirmación."
+    },
+    {
+      "id": "pavlo2017selfdriving",
+      "title": "Self-Driving Database Management Systems",
+      "authors": "Pavlo, Andrew; Angulo, Gustavo; Arulraj, Joy; Lin, Haibin; Lin, Jiexi; Ma, Lin; Menon, Prashanth; Mowry, Todd C.; Perron, Matthew; Quah, Ian; Santurkar, Siddharth; Tomasic, Anthony; Toor, Skye; Van Aken, Dana; Wang, Ziqi; Wu, Yingjun; Xian, Ran; Zhang, Tieying",
+      "year": "2017",
+      "venue": "8th Conference on Innovative Data Systems Research",
+      "doi": null,
+      "url": "https://www.cidrdb.org/cidr2017/papers/p42-pavlo-cidr17.pdf",
+      "edition": null,
+      "volume": null,
+      "issue": null,
+      "pages": "",
+      "note": "",
+      "kind": "publicacion-academica",
+      "access": "identidad editorial; alcance de lectura según extracción temática",
+      "accessUrl": "https://www.cidrdb.org/cidr2017/papers/p42-pavlo-cidr17.pdf",
+      "checkedAt": "2026-10-23T20:32:53.178Z",
+      "linkStatus": 200,
+      "metadataStatus": null,
+      "verificationLimit": "La resolución del enlace o del DOI no acredita por sí sola calidad, lectura completa ni apoyo a toda afirmación."
+    },
+    {
+      "id": "peffers2007dsrm",
+      "title": "A Design Science Research Methodology for Information Systems Research",
+      "authors": "Peffers, Ken; Tuunanen, Tuure; Rothenberger, Marcus A.; Chatterjee, Samir",
+      "year": "2007",
+      "venue": "Journal of Management Information Systems",
+      "doi": "10.2753/MIS0742-1222240302",
+      "url": "https://doi.org/10.2753/MIS0742-1222240302",
+      "edition": null,
+      "volume": "24",
+      "issue": "3",
+      "pages": "45–77",
+      "note": "",
+      "kind": "publicacion-academica",
+      "access": "identidad editorial; alcance de lectura según extracción temática",
+      "accessUrl": "https://doi.org/10.2753/MIS0742-1222240302",
+      "checkedAt": "2026-10-23T20:32:53.178Z",
+      "linkStatus": 403,
+      "metadataStatus": 200,
+      "verificationLimit": "La resolución del enlace o del DOI no acredita por sí sola calidad, lectura completa ni apoyo a toda afirmación."
+    },
+    {
+      "id": "rico2016multitarget",
+      "title": "Extending Multi-Tenant Architectures: A Database Model for a Multi-Target Support in SaaS Applications",
+      "authors": "Rico, Antonio; Noguera, Manuel; Garrido, José Luis; Benghazi, Kawtar; Barjis, Joseph",
+      "year": "2016",
+      "venue": "Enterprise Information Systems",
+      "doi": "10.1080/17517575.2014.947636",
+      "url": "https://doi.org/10.1080/17517575.2014.947636",
+      "edition": null,
+      "volume": "10",
+      "issue": "4",
+      "pages": "400–421",
+      "note": "",
+      "kind": "publicacion-academica",
+      "access": "ficha-y-resumen-editoriales; no extracción detallada",
+      "accessUrl": "https://doi.org/10.1080/17517575.2014.947636",
+      "checkedAt": "2026-10-23T20:32:53.178Z",
+      "linkStatus": 403,
+      "metadataStatus": 200,
+      "verificationLimit": "Edición de volumen 2016; publicación electrónica 2014."
+    },
+    {
+      "id": "roa2015iso25000",
+      "title": "Norma ISO/IEC 25000",
+      "authors": "Roa Molina, Paola; Morales, Claribel; Gutiérrez, Patricia",
+      "year": "2015",
+      "venue": "Tecnología, Investigación y Academia",
+      "doi": null,
+      "url": "https://revistas.udistrital.edu.co/index.php/tia/article/view/8373",
+      "edition": null,
+      "volume": "3",
+      "issue": "2",
+      "pages": "26–32",
+      "note": "Artículo introductorio, no norma. Se conserva la autoría y paginación del PDF original; la ficha web difiere: Paola Andrea Roa, páginas 27–33",
+      "kind": "publicacion-academica",
+      "access": "PDF-y-ficha-discrepantes",
+      "accessUrl": "https://revistas.udistrital.edu.co/index.php/tia/article/view/8373",
+      "checkedAt": "2026-10-23T20:32:53.178Z",
+      "linkStatus": 200,
+      "metadataStatus": null,
+      "verificationLimit": "La resolución del enlace o del DOI no acredita por sí sola calidad, lectura completa ni apoyo a toda afirmación."
+    },
+    {
+      "id": "sadalage2012nosql",
+      "title": "NoSQL Distilled: A Brief Guide to the Emerging World of Polyglot Persistence",
+      "authors": "Sadalage, Pramod J.; Fowler, Martin",
+      "year": "2012",
+      "venue": "Addison-Wesley",
+      "doi": null,
+      "url": "https://www.informit.com/store/nosql-distilled-a-brief-guide-to-the-emerging-world-9780321826626",
+      "edition": null,
+      "volume": null,
+      "issue": null,
+      "pages": "",
+      "note": "Fecha de publicación 2012; el aviso de copyright editorial es 2013",
+      "kind": "libro",
+      "access": "ficha-editorial; no lectura íntegra acreditada",
+      "accessUrl": "https://www.informit.com/store/nosql-distilled-a-brief-guide-to-the-emerging-world-9780321826626",
+      "checkedAt": "2026-10-23T20:32:53.178Z",
+      "linkStatus": 200,
+      "metadataStatus": null,
+      "verificationLimit": "La resolución del enlace o del DOI no acredita por sí sola calidad, lectura completa ni apoyo a toda afirmación."
+    },
+    {
+      "id": "scherzinger2013schema",
+      "title": "Managing Schema Evolution in NoSQL Data Stores",
+      "authors": "Scherzinger, Stefanie; Klettke, Meike; Störl, Uta",
+      "year": "2013",
+      "venue": "",
+      "doi": "10.48550/arXiv.1308.0514",
+      "url": "https://arxiv.org/abs/1308.0514v1",
+      "edition": null,
+      "volume": null,
+      "issue": null,
+      "pages": "",
+      "note": "Versión arXiv consultada; no se presenta como artículo de revista",
+      "kind": "prepublicacion",
+      "access": "version-arxiv-v1",
+      "accessUrl": "https://arxiv.org/abs/1308.0514v1",
+      "checkedAt": "2026-10-23T20:32:53.178Z",
+      "linkStatus": 200,
+      "metadataStatus": 200,
+      "verificationLimit": "La resolución del enlace o del DOI no acredita por sí sola calidad, lectura completa ni apoyo a toda afirmación."
+    },
+    {
+      "id": "sculley2015debt",
+      "title": "Hidden Technical Debt in Machine Learning Systems",
+      "authors": "Sculley, D.; Holt, Gary; Golovin, Daniel; Davydov, Eugene; Phillips, Todd; Ebner, Dietmar; Chaudhary, Vinay; Young, Michael; Crespo, Jean-François; Dennison, Dan",
+      "year": "2015",
+      "venue": "Advances in Neural Information Processing Systems",
+      "doi": null,
+      "url": "https://papers.nips.cc/paper/5656-hidden-technical-debt-in-machine-learning-systems",
+      "edition": null,
+      "volume": "28",
+      "issue": null,
+      "pages": "2503–2511",
+      "note": "",
+      "kind": "publicacion-academica",
+      "access": "identidad editorial; alcance de lectura según extracción temática",
+      "accessUrl": "https://papers.nips.cc/paper/5656-hidden-technical-debt-in-machine-learning-systems",
+      "checkedAt": "2026-10-23T20:32:53.178Z",
+      "linkStatus": 200,
+      "metadataStatus": null,
+      "verificationLimit": "La resolución del enlace o del DOI no acredita por sí sola calidad, lectura completa ni apoyo a toda afirmación."
+    },
+    {
+      "id": "vaswani2017attention",
+      "title": "Attention Is All You Need",
+      "authors": "Vaswani, Ashish; Shazeer, Noam; Parmar, Niki; Uszkoreit, Jakob; Jones, Llion; Gomez, Aidan N.; Kaiser, Łukasz; Polosukhin, Illia",
+      "year": "2017",
+      "venue": "Advances in Neural Information Processing Systems",
+      "doi": null,
+      "url": "https://papers.nips.cc/paper/7181-attention-is-all-you-need",
+      "edition": null,
+      "volume": "30",
+      "issue": null,
+      "pages": "5998–6008",
+      "note": "",
+      "kind": "publicacion-academica",
+      "access": "identidad editorial; alcance de lectura según extracción temática",
+      "accessUrl": "https://papers.nips.cc/paper/7181-attention-is-all-you-need",
+      "checkedAt": "2026-10-23T20:32:53.178Z",
+      "linkStatus": 200,
+      "metadataStatus": null,
+      "verificationLimit": "La resolución del enlace o del DOI no acredita por sí sola calidad, lectura completa ni apoyo a toda afirmación."
+    },
+    {
+      "id": "w3c2013prov",
+      "title": "PROV-DM: The PROV Data Model",
+      "authors": "World Wide Web Consortium",
+      "year": "2013",
+      "venue": "",
+      "doi": null,
+      "url": "https://www.w3.org/TR/2013/REC-prov-dm-20130430/",
+      "edition": null,
+      "volume": null,
+      "issue": null,
+      "pages": "",
+      "note": "Recomendación W3C; no certifica conformidad de COBRIA",
+      "kind": "recomendacion-tecnica",
+      "access": "texto-oficial-abierto",
+      "accessUrl": "https://www.w3.org/TR/2013/REC-prov-dm-20130430/",
+      "checkedAt": "2026-10-23T20:32:53.178Z",
+      "linkStatus": 200,
+      "metadataStatus": null,
+      "verificationLimit": "La resolución del enlace o del DOI no acredita por sí sola calidad, lectura completa ni apoyo a toda afirmación."
+    }
+  ],
+  "moduleSources": {
+    "inicio": [
+      "sadalage2012nosql"
+    ],
+    "fundamentos": [
+      "evans2003ddd",
+      "sadalage2012nosql"
+    ],
+    "arquitectura": [
+      "fowler2002poeaa",
+      "kleppmann2017data"
+    ],
+    "capas": [
+      "fowler2002poeaa",
+      "evans2003ddd"
+    ],
+    "codigo": [
+      "gamma1994patterns",
+      "cormen2022algorithms"
+    ],
+    "datos": [
+      "scherzinger2013schema",
+      "sadalage2012nosql"
+    ],
+    "core": [
+      "fowler2011cqrs",
+      "w3c2013prov"
+    ],
+    "patrones": [
+      "gamma1994patterns",
+      "microsoft2025materialized"
+    ],
+    "apiux": [
+      "fowler2002poeaa"
+    ],
+    "documentacion": [
+      "gebru2021datasheets",
+      "apa2020manual"
+    ],
+    "seguridad": [
+      "nist2023airmf",
+      "mongodbTenancy"
+    ],
+    "calidad": [
+      "iso25010_2023",
+      "iso25040_2024",
+      "jain1991performance"
+    ],
+    "operaciones": [
+      "helland2015immutability",
+      "mongodbAtomicity"
+    ],
+    "ia": [
+      "lewis2020rag",
+      "kapoor2023leakage",
+      "li2023featurestore"
+    ],
+    "construir": [
+      "sadalage2012nosql",
+      "kleppmann2017data"
+    ],
+    "toolkit": [
+      "fowler2002poeaa"
+    ],
+    "evidencia": [
+      "hevner2004designscience",
+      "cooper2010ycsb"
+    ]
+  },
+  "comparisons": [
+    {
+      "id": "lectura",
+      "sources": [
+        "fowler2011cqrs",
+        "microsoft2025materialized"
+      ],
+      "mechanism": "Separar modelos de consulta y mantener una representación precomputada.",
+      "cost": "Coordinación, almacenamiento y obsolescencia.",
+      "relation": "COBRIA pide declarar autoridad, ámbito y reconstrucción del derivado.",
+      "limit": "Es una comparación conceptual; no demuestra que CQRS o una vista carezcan de esos controles en una implementación concreta."
+    },
+    {
+      "id": "historia",
+      "sources": [
+        "fowler2005eventsourcing",
+        "helland2015immutability"
+      ],
+      "mechanism": "Historia de cambios e información inmutable para derivar estado.",
+      "cost": "Retención, reproducción y evolución de transformaciones.",
+      "relation": "COBRIA puede reconstruir desde un corte canónico y no exige conservar todos los eventos.",
+      "limit": "No reemplaza registro de eventos, consenso o recuperación física del motor."
+    },
+    {
+      "id": "procedencia",
+      "sources": [
+        "buneman2001provenance",
+        "w3c2013prov"
+      ],
+      "mechanism": "Explicar origen, derivación, actividad y responsabilidad.",
+      "cost": "Capturar y mantener relaciones de procedencia.",
+      "relation": "La ficha de proyección vincula fuentes, transformación, versión y reparación.",
+      "limit": "No se declara equivalencia formal ni conformidad W3C de COBRIA."
+    },
+    {
+      "id": "esquema",
+      "sources": [
+        "aulbach2009flexibleschemas",
+        "ni2014adaptiveschema",
+        "scherzinger2013schema"
+      ],
+      "mechanism": "Evolución y mapeo del esquema con costos de lectura y almacenamiento.",
+      "cost": "Migraciones, índices y adaptación a cargas.",
+      "relation": "Se separa modelo lógico, Dater físico y derivado versionado.",
+      "limit": "Aulbach y Ni son antecedentes de esquemas SaaS, no ensayos de COBRIA en motores documentales. Scherzinger se identifica por su versión arXiv."
+    },
+    {
+      "id": "analitica",
+      "sources": [
+        "li2023featurestore",
+        "kapoor2023leakage"
+      ],
+      "mechanism": "Definir características reutilizables y evitar información indebida entre particiones.",
+      "cost": "Materialización, desfase y validación temporal.",
+      "relation": "Los productos analíticos declaran corte, origen y separación de entidades.",
+      "limit": "El consumidor determinista A1 no mide predicción ni calidad generativa."
+    },
+    {
+      "id": "motores",
+      "sources": [
+        "mongodbAtomicity",
+        "apacheCouchDocumentApi",
+        "opensearch32Alias"
+      ],
+      "mechanism": "Actualización condicional, revisiones documentales y alias.",
+      "cost": "Semánticas y condiciones diferentes por motor.",
+      "relation": "Cada adaptador debe probar las capacidades realmente requeridas.",
+      "limit": "Un alias atómico no demuestra por sí solo CAS de revisión, equivalencia ni publicación segura COBRIA; una guía viva no acredita una versión experimental."
+    }
+  ],
+  "citations": [
+    {
+      "file": "articulo-cobria.tex",
+      "id": "microsoft2025cqrs"
+    },
+    {
+      "file": "articulo-cobria.tex",
+      "id": "fowler2005eventsourcing"
+    },
+    {
+      "file": "articulo-cobria.tex",
+      "id": "buneman2001provenance"
+    },
+    {
+      "file": "articulo-cobria.tex",
+      "id": "orr2021featurestores"
+    },
+    {
+      "file": "articulo-cobria.tex",
+      "id": "li2023featurestore"
+    },
+    {
+      "file": "articulo-cobria.tex",
+      "id": "chang2006bigtable"
+    },
+    {
+      "file": "articulo-cobria.tex",
+      "id": "decandia2007dynamo"
+    },
+    {
+      "file": "articulo-cobria.tex",
+      "id": "gupta1993incremental"
+    },
+    {
+      "file": "articulo-cobria.tex",
+      "id": "gupta1995materialized"
+    },
+    {
+      "file": "articulo-cobria.tex",
+      "id": "aulbach2009flexibleschemas"
+    },
+    {
+      "file": "articulo-cobria.tex",
+      "id": "ni2014adaptiveschema"
+    },
+    {
+      "file": "articulo-cobria.tex",
+      "id": "rico2016multitarget"
+    },
+    {
+      "file": "articulo-cobria.tex",
+      "id": "scherzinger2013schema"
+    },
+    {
+      "file": "articulo-cobria.tex",
+      "id": "microsoft2025cqrs"
+    },
+    {
+      "file": "articulo-cobria.tex",
+      "id": "microsoft2025materialized"
+    },
+    {
+      "file": "articulo-cobria.tex",
+      "id": "fowler2005eventsourcing"
+    },
+    {
+      "file": "articulo-cobria.tex",
+      "id": "buneman2001provenance"
+    },
+    {
+      "file": "articulo-cobria.tex",
+      "id": "gebru2021datasheets"
+    },
+    {
+      "file": "articulo-cobria.tex",
+      "id": "mitchell2019modelcards"
+    },
+    {
+      "file": "articulo-cobria.tex",
+      "id": "orr2021featurestores"
+    },
+    {
+      "file": "articulo-cobria.tex",
+      "id": "li2023featurestore"
+    },
+    {
+      "file": "articulo-cobria.tex",
+      "id": "armbrust2021lakehouse"
+    },
+    {
+      "file": "articulo-cobria.tex",
+      "id": "hevner2004designscience"
+    },
+    {
+      "file": "articulo-cobria.tex",
+      "id": "peffers2007dsrm"
+    },
+    {
+      "file": "articulo-cobria.tex",
+      "id": "cooper2010ycsb"
+    },
+    {
+      "file": "articulo-cobria.tex",
+      "id": "jain1991performance"
+    },
+    {
+      "file": "articulo-cobria.tex",
+      "id": "sculley2015debt"
+    },
+    {
+      "file": "articulo-cobria.tex",
+      "id": "nist2023airmf"
+    },
+    {
+      "file": "articulo-cobria.tex",
+      "id": "nist2024genai"
+    },
+    {
+      "file": "articulo-cobria.tex",
+      "id": "w3c2013prov"
+    },
+    {
+      "file": "articulo-cobria.tex",
+      "id": "helland2015immutability"
+    },
+    {
+      "file": "articulo-cobria.tex",
+      "id": "kapoor2023leakage"
+    },
+    {
+      "file": "articulo-cobria.tex",
+      "id": "mongodbAtomicity"
+    },
+    {
+      "file": "articulo-cobria.tex",
+      "id": "apacheCouchDocumentApi"
+    },
+    {
+      "file": "articulo-cobria.tex",
+      "id": "opensearch32Alias"
+    },
+    {
+      "file": "articulo-cobria.tex",
+      "id": "iso25010_2023"
+    },
+    {
+      "file": "articulo-cobria.tex",
+      "id": "iso25040_2024"
+    },
+    {
+      "file": "articulo-cobria.tex",
+      "id": "roa2015iso25000"
+    },
+    {
+      "file": "partes/parte-i-fundamentos.tex",
+      "id": "chang2006bigtable"
+    },
+    {
+      "file": "partes/parte-i-fundamentos.tex",
+      "id": "decandia2007dynamo"
+    },
+    {
+      "file": "partes/parte-i-fundamentos.tex",
+      "id": "aulbach2009flexibleschemas"
+    },
+    {
+      "file": "partes/parte-i-fundamentos.tex",
+      "id": "ni2014adaptiveschema"
+    },
+    {
+      "file": "partes/parte-i-fundamentos.tex",
+      "id": "rico2016multitarget"
+    },
+    {
+      "file": "partes/parte-i-fundamentos.tex",
+      "id": "orr2021featurestores"
+    },
+    {
+      "file": "partes/parte-i-fundamentos.tex",
+      "id": "li2023featurestore"
+    },
+    {
+      "file": "partes/parte-i-fundamentos.tex",
+      "id": "gupta1993incremental"
+    },
+    {
+      "file": "partes/parte-i-fundamentos.tex",
+      "id": "gupta1995materialized"
+    },
+    {
+      "file": "partes/parte-i-fundamentos.tex",
+      "id": "hevner2004designscience"
+    },
+    {
+      "file": "partes/parte-i-fundamentos.tex",
+      "id": "peffers2007dsrm"
+    },
+    {
+      "file": "partes/parte-i-fundamentos.tex",
+      "id": "w3c2013prov"
+    },
+    {
+      "file": "partes/parte-i-fundamentos.tex",
+      "id": "helland2015immutability"
+    },
+    {
+      "file": "partes/parte-i-fundamentos.tex",
+      "id": "aulbach2009flexibleschemas"
+    },
+    {
+      "file": "partes/parte-i-fundamentos.tex",
+      "id": "ni2014adaptiveschema"
+    },
+    {
+      "file": "partes/parte-i-fundamentos.tex",
+      "id": "kapoor2023leakage"
+    },
+    {
+      "file": "partes/parte-i-fundamentos.tex",
+      "id": "mongodbAtomicity"
+    },
+    {
+      "file": "partes/parte-i-fundamentos.tex",
+      "id": "apacheCouchDocumentApi"
+    },
+    {
+      "file": "partes/parte-i-fundamentos.tex",
+      "id": "opensearch32Alias"
+    },
+    {
+      "file": "partes/parte-i-fundamentos.tex",
+      "id": "buneman2001provenance"
+    },
+    {
+      "file": "partes/parte-i-fundamentos.tex",
+      "id": "scherzinger2013schema"
+    },
+    {
+      "file": "partes/parte-i-fundamentos.tex",
+      "id": "armbrust2021lakehouse"
+    },
+    {
+      "file": "partes/parte-i-fundamentos.tex",
+      "id": "pavlo2017selfdriving"
+    },
+    {
+      "file": "partes/parte-i-fundamentos.tex",
+      "id": "nist2023airmf"
+    },
+    {
+      "file": "partes/parte-i-fundamentos.tex",
+      "id": "hevner2004designscience"
+    },
+    {
+      "file": "partes/parte-i-fundamentos.tex",
+      "id": "peffers2007dsrm"
+    },
+    {
+      "file": "partes/parte-i-fundamentos.tex",
+      "id": "microsoft2025cqrs"
+    },
+    {
+      "file": "partes/parte-i-fundamentos.tex",
+      "id": "microsoft2025materialized"
+    },
+    {
+      "file": "partes/parte-i-fundamentos.tex",
+      "id": "fowler2005eventsourcing"
+    },
+    {
+      "file": "partes/parte-i-fundamentos.tex",
+      "id": "orr2021featurestores"
+    },
+    {
+      "file": "partes/parte-i-fundamentos.tex",
+      "id": "li2023featurestore"
+    },
+    {
+      "file": "partes/parte-i-fundamentos.tex",
+      "id": "buneman2001provenance"
+    },
+    {
+      "file": "partes/parte-i-fundamentos.tex",
+      "id": "armbrust2021lakehouse"
+    },
+    {
+      "file": "partes/parte-ii-diseno-formalizacion.tex",
+      "id": "hevner2004designscience"
+    },
+    {
+      "file": "partes/parte-ii-diseno-formalizacion.tex",
+      "id": "peffers2007dsrm"
+    },
+    {
+      "file": "partes/parte-ii-diseno-formalizacion.tex",
+      "id": "fowler2002poeaa"
+    },
+    {
+      "file": "partes/parte-ii-diseno-formalizacion.tex",
+      "id": "microsoft2025cqrs"
+    },
+    {
+      "file": "partes/parte-ii-diseno-formalizacion.tex",
+      "id": "microsoft2025materialized"
+    },
+    {
+      "file": "partes/parte-ii-diseno-formalizacion.tex",
+      "id": "gupta1995materialized"
+    },
+    {
+      "file": "partes/parte-ii-diseno-formalizacion.tex",
+      "id": "fowler2002poeaa"
+    },
+    {
+      "file": "partes/parte-ii-diseno-formalizacion.tex",
+      "id": "decandia2007dynamo"
+    },
+    {
+      "file": "partes/parte-ii-diseno-formalizacion.tex",
+      "id": "corbett2012spanner"
+    },
+    {
+      "file": "partes/parte-ii-diseno-formalizacion.tex",
+      "id": "fowler2002poeaa"
+    },
+    {
+      "file": "partes/parte-iii-rendimiento-optimizacion.tex",
+      "id": "cormen2022algorithms"
+    },
+    {
+      "file": "partes/parte-iii-rendimiento-optimizacion.tex",
+      "id": "cooper2010ycsb"
+    },
+    {
+      "file": "partes/parte-iii-rendimiento-optimizacion.tex",
+      "id": "jain1991performance"
+    },
+    {
+      "file": "partes/parte-iii-rendimiento-optimizacion.tex",
+      "id": "cooper2010ycsb"
+    },
+    {
+      "file": "partes/parte-iii-rendimiento-optimizacion.tex",
+      "id": "orr2021featurestores"
+    },
+    {
+      "file": "partes/parte-iii-rendimiento-optimizacion.tex",
+      "id": "li2023featurestore"
+    },
+    {
+      "file": "partes/parte-iii-rendimiento-optimizacion.tex",
+      "id": "nist2023airmf"
+    },
+    {
+      "file": "partes/parte-iv-analitica-ia.tex",
+      "id": "gebru2021datasheets"
+    },
+    {
+      "file": "partes/parte-iv-analitica-ia.tex",
+      "id": "orr2021featurestores"
+    },
+    {
+      "file": "partes/parte-iv-analitica-ia.tex",
+      "id": "li2023featurestore"
+    },
+    {
+      "file": "partes/parte-iv-analitica-ia.tex",
+      "id": "vaswani2017attention"
+    },
+    {
+      "file": "partes/parte-iv-analitica-ia.tex",
+      "id": "lewis2020rag"
+    },
+    {
+      "file": "partes/parte-iv-analitica-ia.tex",
+      "id": "mitchell2019modelcards"
+    },
+    {
+      "file": "partes/parte-iv-analitica-ia.tex",
+      "id": "nist2024genai"
+    },
+    {
+      "file": "partes/parte-iv-analitica-ia.tex",
+      "id": "nist2023airmf"
+    },
+    {
+      "file": "partes/parte-iv-analitica-ia.tex",
+      "id": "sculley2015debt"
+    },
+    {
+      "file": "partes/parte-v-implementacion-casos.tex",
+      "id": "fowler2002poeaa"
+    },
+    {
+      "file": "partes/parte-vii-sintesis-nosql.tex",
+      "id": "iso25010_2023"
+    },
+    {
+      "file": "partes/parte-vii-sintesis-nosql.tex",
+      "id": "iso25040_2024"
+    },
+    {
+      "file": "partes/parte-vii-sintesis-nosql.tex",
+      "id": "roa2015iso25000"
+    }
+  ],
+  "sourceSha256": {
+    "LICENSE": "c81ddbda0ed033a38e65ddb75c004fbc0e036226be2a9540b340edd2754d0472",
+    "LICENSE-CODE.txt": "a7d00bfd54525bc694b6e32f64c7ebcf5e6b7ae3657be5cc12767bce74654a47",
+    "LICENSE-CONTENT.md": "a69def581ef99bea019586989dbda7e60d81aa4ba15b89ba143e223f0578055a",
+    "LICENSES.md": "75985af12119a2f0bf3810b8379146d2a2b97993fbc6a4e4586ade4a3401ba18",
+    "PROVENANCE.md": "9e24dccdd75c8992b63ad05bfb38edc6059cd0db033b11c95e6444eeb24c30e1",
+    "editorial/provenance.json": "fd69a7ab93b09d11693f1e9124f7e3766a33e252885fb95c8682de9e368b77d8",
+    "editorial/fonts.json": "f0072891e3a32863bc88489b8e37da571ef5eece40a397c14bd84ddb8ba2acfb",
+    "editorial/fonts-static.json": "c98c79a67f44fd58bd607b775822195b7cc65e0246363b2aee4abbea01f63d76",
+    "replication/SBOM.cdx.json": "eaaa6bfdc2f19018b49a7e7c594667e32a450f27f030dd067d91dc4866a2251f",
+    "replication/package-lock.json": "a49e63b177cbbcc6269d033fec07b04253221b674d4065aa585b8f288a671e72",
+    "libro-cobria/package-lock.json": "b71a78a1b9f4208dfda6e917465c5f7cc656db82ae6ee7b4b0204b8a42244169",
+    "sitio/package-lock.json": "c9669ab7de9674f0c2321427a1f980c3147c6b49192b1fd4e64dc340841d0fd8",
+    "referencias.bib": "5a4715403883bd6e94835d02e72309bbd3ba27e17005af2b9a5450aa02235d51",
+    "editorial/ep7/selection.json": "49fe7157c8f05772704d72590a083595114bc893b9febc34f55ae770b433e24d",
+    "editorial/ep7/link-check.json": "ce0e2e6b7457a37ab472853206ff3c54476ef809d9f2c63cca3ba89b2152166b"
+  }
+}

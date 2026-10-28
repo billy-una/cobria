@@ -1,0 +1,5 @@
+const observacion = {
+  id: 'obs-taller-001', ambito: 'reserva-sur', especie: 'colibri',
+  cantidad: 3, revision: 1, observadaEn: '2026-10-19T12:00:00Z'
+};
+console.log(`${observacion.id}: ${observacion.cantidad} en ${observacion.ambito}`);

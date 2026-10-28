@@ -1,0 +1,1390 @@
+{
+  "schemaVersion": "1.0.0",
+  "version": "1.0.0",
+  "scope": "Trazabilidad editorial; no certificación de comprensión o conformidad",
+  "sources": [
+    "editorial/curriculum.json",
+    "editorial/ep3/areas.json",
+    "editorial/ep4/recorrido.json"
+  ],
+  "sourcesSha256": {
+    "curriculum": "251eeff77ea0dc1536e4f922bb89d6c4193d0e04a3a4b1ab2c0444db21049ab4",
+    "areas": "63fa9f08170ab5df5bfb16a9aa3064148a0b3d28a61010c1a691154a30a7a61c",
+    "project": "217fbf85d8f3ec42b2069328d9c5ca89950303de6661b220e53a60a5db721b0f"
+  },
+  "modules": [
+    {
+      "key": "inicio",
+      "title": "Primeros pasos",
+      "bookPart": "01",
+      "route": "/comenzar",
+      "caseRoute": "/comenzar#caso-desarrollado",
+      "caseTitle": "Preparar una entrega pequeña que puedas explicar",
+      "caseSource": null,
+      "caseCommand": null,
+      "exampleKind": "artefacto-de-diseño",
+      "checkpoint": "B01",
+      "lessons": [
+        {
+          "title": "De una idea a una conducta observable",
+          "route": "/aprender/inicio/1",
+          "sharedContentSha256": "f83b523144ceb5ab81bcac35e08bb10ecdb2e1452f1448237e498b6eb2554d91",
+          "execution": {
+            "cwd": ".",
+            "binary": "node",
+            "argv": [
+              "--test",
+              "--test-reporter=tap",
+              "--test-name-pattern=^registra un documento canónico válido$",
+              "replication/examples/ecosistema-app/test/app.test.mjs"
+            ],
+            "command": "node --test --test-reporter=tap --test-name-pattern='^registra un documento canónico válido$' replication/examples/ecosistema-app/test/app.test.mjs",
+            "kind": "prueba-local",
+            "expected": "Se registra una observación válida, con identidad y revisión 1. La salida termina con pass 1 y fail 0.",
+            "minimumPassed": 1,
+            "prerequisites": [
+              "Node.js 22.13 o superior.",
+              "Terminal en la raíz de COBRIA. No hace falta instalar dependencias para esta aplicación."
+            ],
+            "tests": [
+              "replication/examples/ecosistema-app/test/app.test.mjs"
+            ],
+            "troubleshooting": [
+              "fail distinto de cero indica un fallo: lea el primer mensaje, no solamente la última línea.",
+              "pass 0 no demuestra la conducta: revise el nombre exacto de la prueba y la ruta.",
+              "No cambie la regla para obtener verde; compare la entrada con el contrato."
+            ]
+          }
+        },
+        {
+          "title": "El recorrido vertical más pequeño",
+          "route": "/aprender/inicio/2",
+          "sharedContentSha256": "2d3ff54530e1f5d021c61632b0b242fed330599bc9b95c14ec9d7633cf35c659",
+          "execution": {
+            "cwd": ".",
+            "binary": "node",
+            "argv": [
+              "--test",
+              "--test-reporter=tap",
+              "--test-name-pattern=^el controlador traduce protocolo sin conocer infraestructura$",
+              "replication/examples/ecosistema-app/test/app.test.mjs"
+            ],
+            "command": "node --test --test-reporter=tap --test-name-pattern='^el controlador traduce protocolo sin conocer infraestructura$' replication/examples/ecosistema-app/test/app.test.mjs",
+            "kind": "prueba-local",
+            "expected": "La entrada llega al caso de uso y vuelve como resultado 201. La salida termina con pass 1 y fail 0.",
+            "minimumPassed": 1,
+            "prerequisites": [
+              "Node.js 22.13 o superior.",
+              "Terminal en la raíz de COBRIA. No hace falta instalar dependencias para esta aplicación."
+            ],
+            "tests": [
+              "replication/examples/ecosistema-app/test/app.test.mjs"
+            ],
+            "troubleshooting": [
+              "fail distinto de cero indica un fallo: lea el primer mensaje, no solamente la última línea.",
+              "pass 0 no demuestra la conducta: revise el nombre exacto de la prueba y la ruta.",
+              "No cambie la regla para obtener verde; compare la entrada con el contrato."
+            ]
+          }
+        },
+        {
+          "title": "Elegir una primera entrega pequeña",
+          "route": "/aprender/inicio/3",
+          "sharedContentSha256": "084762dde1f37141dcd9057f13fd6aa740aac85506724c42719f959ae4aeaa75",
+          "execution": {
+            "cwd": ".",
+            "binary": "node",
+            "argv": [
+              "--test",
+              "--test-reporter=tap",
+              "--test-name-pattern=^repetir la misma operación devuelve el mismo resultado sin duplicar$",
+              "replication/examples/ecosistema-app/test/app.test.mjs"
+            ],
+            "command": "node --test --test-reporter=tap --test-name-pattern='^repetir la misma operación devuelve el mismo resultado sin duplicar$' replication/examples/ecosistema-app/test/app.test.mjs",
+            "kind": "prueba-local",
+            "expected": "Repetir la operación no crea una segunda observación. La salida termina con pass 1 y fail 0.",
+            "minimumPassed": 1,
+            "prerequisites": [
+              "Node.js 22.13 o superior.",
+              "Terminal en la raíz de COBRIA. No hace falta instalar dependencias para esta aplicación."
+            ],
+            "tests": [
+              "replication/examples/ecosistema-app/test/app.test.mjs"
+            ],
+            "troubleshooting": [
+              "fail distinto de cero indica un fallo: lea el primer mensaje, no solamente la última línea.",
+              "pass 0 no demuestra la conducta: revise el nombre exacto de la prueba y la ruta.",
+              "No cambie la regla para obtener verde; compare la entrada con el contrato."
+            ]
+          }
+        },
+        {
+          "title": "Preparar un entorno que otra persona pueda repetir",
+          "route": "/aprender/inicio/4",
+          "sharedContentSha256": "336c91f11f68541f7fd41073266548122a2ad87f65c1529f02b9c3e8d029213b",
+          "execution": {
+            "cwd": ".",
+            "binary": "npm",
+            "argv": [
+              "--prefix",
+              "replication/examples/ecosistema-app",
+              "start"
+            ],
+            "command": "npm --prefix replication/examples/ecosistema-app start",
+            "kind": "demostracion-local",
+            "expected": "Observación registrada: obs-001 (revisión 1)\nRepetición segura: 1 observación\nCantidad cero: OBS_QUANTITY_INVALID\nOtra reserva: ACCESS_DENIED\nResumen: colibri = 3",
+            "prerequisites": [
+              "Node.js 22.13 o superior y npm disponibles.",
+              "Terminal en la raíz de COBRIA, donde existen README.md y replication/."
+            ],
+            "tests": [
+              "replication/examples/ecosistema-app/test/primer-recorrido.test.mjs"
+            ],
+            "troubleshooting": [
+              "Si no se encuentra npm, compruebe la instalación de Node.js y vuelva a abrir la terminal.",
+              "Si no se encuentra package.json, abra la raíz de COBRIA; no ejecute estos comandos desde una lección o un archivo.",
+              "La demostración no abre una web ni guarda datos en disco."
+            ]
+          }
+        },
+        {
+          "title": "Leer un fallo sin adivinar",
+          "route": "/aprender/inicio/5",
+          "sharedContentSha256": "d5beb9677cd15adc2496a669722555879f11a36330cc870ca4fd7d5db58b8a18",
+          "execution": {
+            "cwd": ".",
+            "binary": "node",
+            "argv": [
+              "--test",
+              "--test-reporter=tap",
+              "--test-name-pattern=^el problema HTTP conserva traceId sin exponer detalles internos$",
+              "replication/examples/ecosistema-app/test/app.test.mjs"
+            ],
+            "command": "node --test --test-reporter=tap --test-name-pattern='^el problema HTTP conserva traceId sin exponer detalles internos$' replication/examples/ecosistema-app/test/app.test.mjs",
+            "kind": "prueba-local",
+            "expected": "Cantidad cero se rechaza; el resultado no expone una traza interna. La salida termina con pass 1 y fail 0.",
+            "minimumPassed": 1,
+            "prerequisites": [
+              "Node.js 22.13 o superior.",
+              "Terminal en la raíz de COBRIA. No hace falta instalar dependencias para esta aplicación."
+            ],
+            "tests": [
+              "replication/examples/ecosistema-app/test/app.test.mjs"
+            ],
+            "troubleshooting": [
+              "fail distinto de cero indica un fallo: lea el primer mensaje, no solamente la última línea.",
+              "pass 0 no demuestra la conducta: revise el nombre exacto de la prueba y la ruta.",
+              "No cambie la regla para obtener verde; compare la entrada con el contrato."
+            ]
+          }
+        }
+      ],
+      "projectRoute": "/comenzar/proyecto-integral"
+    },
+    {
+      "key": "fundamentos",
+      "title": "Fundamentos de software",
+      "bookPart": "02",
+      "route": "/fundamentos",
+      "caseRoute": "/fundamentos#caso-desarrollado",
+      "caseTitle": "Proteger un dato antes de organizar el sistema",
+      "caseSource": "replication/examples/ecosistema-app/taller-areas/casos.mjs",
+      "caseCommand": "node replication/examples/ecosistema-app/taller-areas/ejecutar.mjs fundamentos",
+      "exampleKind": "ejecutable-local",
+      "checkpoint": "B02",
+      "lessons": [
+        {
+          "title": "Dato, objeto y regla",
+          "route": "/aprender/fundamentos/1",
+          "sharedContentSha256": "5f875790ba91d8e58124df0a493638669de50c3094cf35cb16990a025b5b2788",
+          "execution": {
+            "cwd": ".",
+            "binary": "node",
+            "argv": [
+              "--test",
+              "--test-reporter=tap",
+              "--test-name-pattern=^el problema HTTP conserva traceId sin exponer detalles internos$",
+              "replication/examples/ecosistema-app/test/app.test.mjs"
+            ],
+            "command": "node --test --test-reporter=tap --test-name-pattern='^el problema HTTP conserva traceId sin exponer detalles internos$' replication/examples/ecosistema-app/test/app.test.mjs",
+            "kind": "prueba-local",
+            "expected": "La cantidad debe ser un entero positivo; cero se rechaza. La salida termina con pass 1 y fail 0.",
+            "minimumPassed": 1,
+            "prerequisites": [
+              "Node.js 22.13 o superior.",
+              "Terminal en la raíz de COBRIA. No hace falta instalar dependencias para esta aplicación."
+            ],
+            "tests": [
+              "replication/examples/ecosistema-app/test/app.test.mjs"
+            ],
+            "troubleshooting": [
+              "fail distinto de cero indica un fallo: lea el primer mensaje, no solamente la última línea.",
+              "pass 0 no demuestra la conducta: revise el nombre exacto de la prueba y la ruta.",
+              "No cambie la regla para obtener verde; compare la entrada con el contrato."
+            ]
+          }
+        },
+        {
+          "title": "Contrato y evidencia",
+          "route": "/aprender/fundamentos/2",
+          "sharedContentSha256": "8f9767a26c92d54a2511cc50d0ae58431ef9e1ea6ca5a549454cf656fbe81965",
+          "execution": {
+            "cwd": ".",
+            "binary": "node",
+            "argv": [
+              "--test",
+              "--test-reporter=tap",
+              "--test-name-pattern=^rechaza el acceso a otro ámbito antes de tocar el repositorio$",
+              "replication/examples/ecosistema-app/test/app.test.mjs"
+            ],
+            "command": "node --test --test-reporter=tap --test-name-pattern='^rechaza el acceso a otro ámbito antes de tocar el repositorio$' replication/examples/ecosistema-app/test/app.test.mjs",
+            "kind": "prueba-local",
+            "expected": "Un ámbito ajeno no produce escrituras. La salida termina con pass 1 y fail 0.",
+            "minimumPassed": 1,
+            "prerequisites": [
+              "Node.js 22.13 o superior.",
+              "Terminal en la raíz de COBRIA. No hace falta instalar dependencias para esta aplicación."
+            ],
+            "tests": [
+              "replication/examples/ecosistema-app/test/app.test.mjs"
+            ],
+            "troubleshooting": [
+              "fail distinto de cero indica un fallo: lea el primer mensaje, no solamente la última línea.",
+              "pass 0 no demuestra la conducta: revise el nombre exacto de la prueba y la ruta.",
+              "No cambie la regla para obtener verde; compare la entrada con el contrato."
+            ]
+          }
+        },
+        {
+          "title": "Identidad, valor y referencia",
+          "route": "/aprender/fundamentos/3",
+          "sharedContentSha256": "576507727cba30e11a8aa184249ee1ae88159a9a0e249a77223a0a31013beb8a",
+          "execution": {
+            "cwd": ".",
+            "binary": "node",
+            "argv": [
+              "--test",
+              "--test-reporter=tap",
+              "--test-name-pattern=^rechaza revisiones obsoletas$",
+              "replication/examples/ecosistema-app/test/app.test.mjs"
+            ],
+            "command": "node --test --test-reporter=tap --test-name-pattern='^rechaza revisiones obsoletas$' replication/examples/ecosistema-app/test/app.test.mjs",
+            "kind": "prueba-local",
+            "expected": "La revisión no puede retroceder. La salida termina con pass 1 y fail 0.",
+            "minimumPassed": 1,
+            "prerequisites": [
+              "Node.js 22.13 o superior.",
+              "Terminal en la raíz de COBRIA. No hace falta instalar dependencias para esta aplicación."
+            ],
+            "tests": [
+              "replication/examples/ecosistema-app/test/app.test.mjs"
+            ],
+            "troubleshooting": [
+              "fail distinto de cero indica un fallo: lea el primer mensaje, no solamente la última línea.",
+              "pass 0 no demuestra la conducta: revise el nombre exacto de la prueba y la ruta.",
+              "No cambie la regla para obtener verde; compare la entrada con el contrato."
+            ]
+          }
+        },
+        {
+          "title": "Invariantes antes que formularios",
+          "route": "/aprender/fundamentos/4",
+          "sharedContentSha256": "b76b6410b7187b8e6c3528698127827bf6df55f0195181c5eaac119852c6b770",
+          "execution": {
+            "cwd": ".",
+            "binary": "node",
+            "argv": [
+              "--test",
+              "--test-reporter=tap",
+              "--test-name-pattern=^el problema HTTP conserva traceId sin exponer detalles internos$",
+              "replication/examples/ecosistema-app/test/app.test.mjs"
+            ],
+            "command": "node --test --test-reporter=tap --test-name-pattern='^el problema HTTP conserva traceId sin exponer detalles internos$' replication/examples/ecosistema-app/test/app.test.mjs",
+            "kind": "prueba-local",
+            "expected": "La misma regla de cantidad llega como error estable al controlador. La salida termina con pass 1 y fail 0.",
+            "minimumPassed": 1,
+            "prerequisites": [
+              "Node.js 22.13 o superior.",
+              "Terminal en la raíz de COBRIA. No hace falta instalar dependencias para esta aplicación."
+            ],
+            "tests": [
+              "replication/examples/ecosistema-app/test/app.test.mjs"
+            ],
+            "troubleshooting": [
+              "fail distinto de cero indica un fallo: lea el primer mensaje, no solamente la última línea.",
+              "pass 0 no demuestra la conducta: revise el nombre exacto de la prueba y la ruta.",
+              "No cambie la regla para obtener verde; compare la entrada con el contrato."
+            ]
+          }
+        },
+        {
+          "title": "Comandos, consultas y eventos",
+          "route": "/aprender/fundamentos/5",
+          "sharedContentSha256": "9aad46d47d9f1b2f10ba61d26bc82ff93760dc94bc1eb230a3bcac1ce5bc043c",
+          "execution": {
+            "cwd": ".",
+            "binary": "node",
+            "argv": [
+              "--test",
+              "--test-reporter=tap",
+              "--test-name-pattern=^pagina observaciones con cursor opaco y orden estable$",
+              "replication/examples/ecosistema-app/test/app.test.mjs"
+            ],
+            "command": "node --test --test-reporter=tap --test-name-pattern='^pagina observaciones con cursor opaco y orden estable$' replication/examples/ecosistema-app/test/app.test.mjs",
+            "kind": "prueba-local",
+            "expected": "La consulta pagina sin modificar la observación. La salida termina con pass 1 y fail 0.",
+            "minimumPassed": 1,
+            "prerequisites": [
+              "Node.js 22.13 o superior.",
+              "Terminal en la raíz de COBRIA. No hace falta instalar dependencias para esta aplicación."
+            ],
+            "tests": [
+              "replication/examples/ecosistema-app/test/app.test.mjs"
+            ],
+            "troubleshooting": [
+              "fail distinto de cero indica un fallo: lea el primer mensaje, no solamente la última línea.",
+              "pass 0 no demuestra la conducta: revise el nombre exacto de la prueba y la ruta.",
+              "No cambie la regla para obtener verde; compare la entrada con el contrato."
+            ]
+          }
+        }
+      ],
+      "projectRoute": "/comenzar/proyecto-integral"
+    },
+    {
+      "key": "arquitectura",
+      "title": "Arquitectura de software",
+      "bookPart": "03",
+      "route": "/arquitectura",
+      "caseRoute": "/arquitectura#caso-desarrollado",
+      "caseTitle": "Elegir fronteras antes de repartir servidores",
+      "caseSource": "replication/examples/ecosistema-app/taller-areas/casos.mjs",
+      "caseCommand": "node replication/examples/ecosistema-app/taller-areas/ejecutar.mjs arquitectura",
+      "exampleKind": "ejecutable-local",
+      "checkpoint": "B03",
+      "lessons": [
+        {
+          "title": "Fronteras que protegen cambios",
+          "route": "/aprender/arquitectura/1",
+          "sharedContentSha256": "0ad898d52b7dff77ffe86e65187c7d22b136f2b90cea7bef42484e581c007c2f",
+          "execution": {
+            "cwd": ".",
+            "binary": "node",
+            "argv": [
+              "--test",
+              "--test-reporter=tap",
+              "--test-name-pattern=^el recorrido real autoriza antes de consultar y guardar$",
+              "replication/examples/ecosistema-app/test/capas-c3.test.mjs"
+            ],
+            "command": "node --test --test-reporter=tap --test-name-pattern='^el recorrido real autoriza antes de consultar y guardar$' replication/examples/ecosistema-app/test/capas-c3.test.mjs",
+            "kind": "prueba-local",
+            "minimumPassed": 1,
+            "expected": "La secuencia observada coincide y la autorización antecede al acceso. La salida termina con pass 1 y fail 0.",
+            "prerequisites": [
+              "Node.js 22.13 o superior.",
+              "Terminal en la raíz de COBRIA; no requiere instalar paquetes ni conectar un motor."
+            ],
+            "tests": [
+              "replication/examples/ecosistema-app/test/capas-c3.test.mjs"
+            ],
+            "troubleshooting": [
+              "pass 0 no demuestra el caso: revise el nombre exacto de la prueba.",
+              "Si hay fail, lea el primer error y compárelo con el contrato y el mapa de responsabilidades; no oculte el rechazo."
+            ]
+          }
+        },
+        {
+          "title": "Decidir con alternativas y costo",
+          "route": "/aprender/arquitectura/2",
+          "sharedContentSha256": "bd7e3daa12547f16d3182ff4895e4571ca6c53b1e918eab02e96379394c4105b",
+          "execution": {
+            "cwd": ".",
+            "binary": "node",
+            "argv": [
+              "--test",
+              "--test-reporter=tap",
+              "--test-name-pattern=^dos repositorios locales cumplen el mismo recorrido de registro$",
+              "replication/examples/ecosistema-app/test/capas-c3.test.mjs"
+            ],
+            "command": "node --test --test-reporter=tap --test-name-pattern='^dos repositorios locales cumplen el mismo recorrido de registro$' replication/examples/ecosistema-app/test/capas-c3.test.mjs",
+            "kind": "prueba-local",
+            "minimumPassed": 1,
+            "expected": "Ambas variantes devuelven la misma entidad y una sola observación tras repetir. La salida termina con pass 1 y fail 0.",
+            "prerequisites": [
+              "Node.js 22.13 o superior.",
+              "Terminal en la raíz de COBRIA; no requiere instalar paquetes ni conectar un motor."
+            ],
+            "tests": [
+              "replication/examples/ecosistema-app/test/capas-c3.test.mjs"
+            ],
+            "troubleshooting": [
+              "pass 0 no demuestra el caso: revise el nombre exacto de la prueba.",
+              "Si hay fail, lea el primer error y compárelo con el contrato y el mapa de responsabilidades; no oculte el rechazo."
+            ]
+          }
+        },
+        {
+          "title": "Delimitar contextos y vocabularios",
+          "route": "/aprender/arquitectura/3",
+          "sharedContentSha256": "6657887b3e498f252bc271fb60332106023cd4a843e54d8ead7f92e8adb32483",
+          "execution": {
+            "cwd": ".",
+            "binary": "node",
+            "argv": [
+              "--test",
+              "--test-reporter=tap",
+              "--test-name-pattern=^el adaptador documental conserva ámbito y revisión al traducir$",
+              "replication/examples/ecosistema-app/test/capas-c3.test.mjs"
+            ],
+            "command": "node --test --test-reporter=tap --test-name-pattern='^el adaptador documental conserva ámbito y revisión al traducir$' replication/examples/ecosistema-app/test/capas-c3.test.mjs",
+            "kind": "prueba-local",
+            "minimumPassed": 1,
+            "expected": "El listado conserva cantidad 4 y revisión 2 solo en el ámbito solicitado. La salida termina con pass 1 y fail 0.",
+            "prerequisites": [
+              "Node.js 22.13 o superior.",
+              "Terminal en la raíz de COBRIA; no requiere instalar paquetes ni conectar un motor."
+            ],
+            "tests": [
+              "replication/examples/ecosistema-app/test/capas-c3.test.mjs"
+            ],
+            "troubleshooting": [
+              "pass 0 no demuestra el caso: revise el nombre exacto de la prueba.",
+              "Si hay fail, lea el primer error y compárelo con el contrato y el mapa de responsabilidades; no oculte el rechazo."
+            ]
+          }
+        },
+        {
+          "title": "Registrar una decisión arquitectónica",
+          "route": "/aprender/arquitectura/4",
+          "sharedContentSha256": "c0fcda4bfdf619fb2eb2ee27d4ea98d82491d30aedb088c98089c71f8c6bbb37",
+          "execution": {
+            "cwd": ".",
+            "binary": "node",
+            "argv": [
+              "--test",
+              "--test-reporter=tap",
+              "--test-name-pattern=^la composición permite sustituir el puerto y detecta una forma incompleta$",
+              "replication/examples/ecosistema-app/test/capas-c3.test.mjs"
+            ],
+            "command": "node --test --test-reporter=tap --test-name-pattern='^la composición permite sustituir el puerto y detecta una forma incompleta$' replication/examples/ecosistema-app/test/capas-c3.test.mjs",
+            "kind": "prueba-local",
+            "minimumPassed": 1,
+            "expected": "La composición conserva memoria por defecto, acepta sustitución y rechaza un puerto incompleto. La salida termina con pass 1 y fail 0.",
+            "prerequisites": [
+              "Node.js 22.13 o superior.",
+              "Terminal en la raíz de COBRIA; no requiere instalar paquetes ni conectar un motor."
+            ],
+            "tests": [
+              "replication/examples/ecosistema-app/test/capas-c3.test.mjs"
+            ],
+            "troubleshooting": [
+              "pass 0 no demuestra el caso: revise el nombre exacto de la prueba.",
+              "Si hay fail, lea el primer error y compárelo con el contrato y el mapa de responsabilidades; no oculte el rechazo."
+            ]
+          }
+        },
+        {
+          "title": "Comprobar arquitectura con funciones de aptitud",
+          "route": "/aprender/arquitectura/5",
+          "sharedContentSha256": "0db80fc4b035011f2b0f21c32dd840481e2b5aa3f4c740303fe21cb9ca4bc439",
+          "execution": {
+            "cwd": ".",
+            "binary": "node",
+            "argv": [
+              "--test",
+              "--test-reporter=tap",
+              "--test-name-pattern=^el inventario asigna responsabilidad a todos los archivos de la aplicación$",
+              "replication/examples/ecosistema-app/test/capas-c3.test.mjs"
+            ],
+            "command": "node --test --test-reporter=tap --test-name-pattern='^el inventario asigna responsabilidad a todos los archivos de la aplicación$' replication/examples/ecosistema-app/test/capas-c3.test.mjs",
+            "kind": "prueba-local",
+            "minimumPassed": 1,
+            "expected": "Todos los archivos de src tienen capa, responsabilidad, límite y prueba relacionada. La salida termina con pass 1 y fail 0.",
+            "prerequisites": [
+              "Node.js 22.13 o superior.",
+              "Terminal en la raíz de COBRIA; no requiere instalar paquetes ni conectar un motor."
+            ],
+            "tests": [
+              "replication/examples/ecosistema-app/test/capas-c3.test.mjs"
+            ],
+            "troubleshooting": [
+              "pass 0 no demuestra el caso: revise el nombre exacto de la prueba.",
+              "Si hay fail, lea el primer error y compárelo con el contrato y el mapa de responsabilidades; no oculte el rechazo."
+            ]
+          }
+        }
+      ],
+      "projectRoute": "/comenzar/proyecto-integral"
+    },
+    {
+      "key": "capas",
+      "title": "Capas, carpetas y responsabilidades",
+      "bookPart": "04",
+      "route": "/capas",
+      "caseRoute": "/capas#caso-desarrollado",
+      "caseTitle": "Seguir una solicitud y cambiar una sola responsabilidad",
+      "caseSource": "replication/examples/ecosistema-app/taller-areas/casos.mjs",
+      "caseCommand": "node replication/examples/ecosistema-app/taller-areas/ejecutar.mjs capas",
+      "exampleKind": "ejecutable-local",
+      "checkpoint": "B03",
+      "lessons": [
+        {
+          "title": "Una carpeta responde una pregunta",
+          "route": "/aprender/capas/1",
+          "sharedContentSha256": "d8032426bbac801a31f667c222314db26d64f5b5215ce9b4212901c6ad36c9ae",
+          "execution": {
+            "cwd": ".",
+            "binary": "node",
+            "argv": [
+              "--test",
+              "--test-reporter=tap",
+              "--test-name-pattern=^la entidad aplica su regla sin recibir un repositorio$",
+              "replication/examples/ecosistema-app/test/capas-c3.test.mjs"
+            ],
+            "command": "node --test --test-reporter=tap --test-name-pattern='^la entidad aplica su regla sin recibir un repositorio$' replication/examples/ecosistema-app/test/capas-c3.test.mjs",
+            "kind": "prueba-local",
+            "minimumPassed": 1,
+            "expected": "La entidad acepta tres individuos, rechaza cero y queda inmutable. La salida termina con pass 1 y fail 0.",
+            "prerequisites": [
+              "Node.js 22.13 o superior.",
+              "Terminal en la raíz de COBRIA; no requiere instalar paquetes ni conectar un motor."
+            ],
+            "tests": [
+              "replication/examples/ecosistema-app/test/capas-c3.test.mjs"
+            ],
+            "troubleshooting": [
+              "pass 0 no demuestra el caso: revise el nombre exacto de la prueba.",
+              "Si hay fail, lea el primer error y compárelo con el contrato y el mapa de responsabilidades; no oculte el rechazo."
+            ]
+          }
+        },
+        {
+          "title": "Quién puede importar a quién",
+          "route": "/aprender/capas/2",
+          "sharedContentSha256": "10ca516d0f9e708d943f64c380ee6059a08a6f9e4e9bc42867508ffe53509cea",
+          "execution": {
+            "cwd": ".",
+            "binary": "node",
+            "argv": [
+              "--test",
+              "--test-reporter=tap",
+              "--test-name-pattern=^el controlador rechaza otro ámbito sin llamar al repositorio$",
+              "replication/examples/ecosistema-app/test/capas-c3.test.mjs"
+            ],
+            "command": "node --test --test-reporter=tap --test-name-pattern='^el controlador rechaza otro ámbito sin llamar al repositorio$' replication/examples/ecosistema-app/test/capas-c3.test.mjs",
+            "kind": "prueba-local",
+            "minimumPassed": 1,
+            "expected": "Se devuelve 403 con código y traceId, sin llamadas al repositorio. La salida termina con pass 1 y fail 0.",
+            "prerequisites": [
+              "Node.js 22.13 o superior.",
+              "Terminal en la raíz de COBRIA; no requiere instalar paquetes ni conectar un motor."
+            ],
+            "tests": [
+              "replication/examples/ecosistema-app/test/capas-c3.test.mjs"
+            ],
+            "troubleshooting": [
+              "pass 0 no demuestra el caso: revise el nombre exacto de la prueba.",
+              "Si hay fail, lea el primer error y compárelo con el contrato y el mapa de responsabilidades; no oculte el rechazo."
+            ]
+          }
+        },
+        {
+          "title": "Puertos y adaptadores: Catalog, Indexer y Connector",
+          "route": "/aprender/capas/3",
+          "sharedContentSha256": "85f432df6a86b73b6c23c053d6388c3cea3586038ad2480be673e1b4c2d318aa",
+          "execution": {
+            "cwd": ".",
+            "binary": "node",
+            "argv": [
+              "--test",
+              "--test-reporter=tap",
+              "--test-name-pattern=^el puerto expresa las cuatro capacidades usadas por la aplicación$",
+              "replication/examples/ecosistema-app/test/capas-c3.test.mjs"
+            ],
+            "command": "node --test --test-reporter=tap --test-name-pattern='^el puerto expresa las cuatro capacidades usadas por la aplicación$' replication/examples/ecosistema-app/test/capas-c3.test.mjs",
+            "kind": "prueba-local",
+            "minimumPassed": 1,
+            "expected": "Ambas variantes implementan las cuatro capacidades documentadas. La salida termina con pass 1 y fail 0.",
+            "prerequisites": [
+              "Node.js 22.13 o superior.",
+              "Terminal en la raíz de COBRIA; no requiere instalar paquetes ni conectar un motor."
+            ],
+            "tests": [
+              "replication/examples/ecosistema-app/test/capas-c3.test.mjs"
+            ],
+            "troubleshooting": [
+              "pass 0 no demuestra el caso: revise el nombre exacto de la prueba.",
+              "Si hay fail, lea el primer error y compárelo con el contrato y el mapa de responsabilidades; no oculte el rechazo."
+            ]
+          }
+        },
+        {
+          "title": "Composición en una única frontera",
+          "route": "/aprender/capas/4",
+          "sharedContentSha256": "73f58cd514c1a4ea73edc7c1511c059c8023a2a01f4b16102cd23a17f294fba6",
+          "execution": {
+            "cwd": ".",
+            "binary": "node",
+            "argv": [
+              "--test",
+              "--test-reporter=tap",
+              "--test-name-pattern=^la demostración de capas muestra el rechazo sin otra escritura$",
+              "replication/examples/ecosistema-app/test/capas-c3.test.mjs"
+            ],
+            "command": "node --test --test-reporter=tap --test-name-pattern='^la demostración de capas muestra el rechazo sin otra escritura$' replication/examples/ecosistema-app/test/capas-c3.test.mjs",
+            "kind": "prueba-local",
+            "minimumPassed": 1,
+            "expected": "La demostración registra una observación y conserva un documento tras el rechazo. La salida termina con pass 1 y fail 0.",
+            "prerequisites": [
+              "Node.js 22.13 o superior.",
+              "Terminal en la raíz de COBRIA; no requiere instalar paquetes ni conectar un motor."
+            ],
+            "tests": [
+              "replication/examples/ecosistema-app/test/capas-c3.test.mjs"
+            ],
+            "troubleshooting": [
+              "pass 0 no demuestra el caso: revise el nombre exacto de la prueba.",
+              "Si hay fail, lea el primer error y compárelo con el contrato y el mapa de responsabilidades; no oculte el rechazo."
+            ]
+          }
+        },
+        {
+          "title": "Evitar el cajón de utilidades",
+          "route": "/aprender/capas/5",
+          "sharedContentSha256": "8c5f5cd71e4da1c501b62020d9d66d97cf82ee35160962e63463740635a0e3c0",
+          "execution": {
+            "cwd": ".",
+            "binary": "node",
+            "argv": [
+              "--test",
+              "--test-reporter=tap",
+              "--test-name-pattern=^una cantidad inválida no se guarda aunque la autorización sea válida$",
+              "replication/examples/ecosistema-app/test/capas-c3.test.mjs"
+            ],
+            "command": "node --test --test-reporter=tap --test-name-pattern='^una cantidad inválida no se guarda aunque la autorización sea válida$' replication/examples/ecosistema-app/test/capas-c3.test.mjs",
+            "kind": "prueba-local",
+            "minimumPassed": 1,
+            "expected": "La solicitud devuelve 400 con OBS_QUANTITY_INVALID y cero escrituras. La salida termina con pass 1 y fail 0.",
+            "prerequisites": [
+              "Node.js 22.13 o superior.",
+              "Terminal en la raíz de COBRIA; no requiere instalar paquetes ni conectar un motor."
+            ],
+            "tests": [
+              "replication/examples/ecosistema-app/test/capas-c3.test.mjs"
+            ],
+            "troubleshooting": [
+              "pass 0 no demuestra el caso: revise el nombre exacto de la prueba.",
+              "Si hay fail, lea el primer error y compárelo con el contrato y el mapa de responsabilidades; no oculte el rechazo."
+            ]
+          }
+        }
+      ],
+      "projectRoute": "/comenzar/proyecto-integral"
+    },
+    {
+      "key": "codigo",
+      "title": "Código, nombres y comentarios",
+      "bookPart": "05",
+      "route": "/codigo",
+      "caseRoute": "/codigo#caso-desarrollado",
+      "caseTitle": "Nombrar valores y conservar su significado",
+      "caseSource": "replication/examples/ecosistema-app/taller-areas/casos.mjs",
+      "caseCommand": "node replication/examples/ecosistema-app/taller-areas/ejecutar.mjs codigo",
+      "exampleKind": "ejecutable-local",
+      "checkpoint": "B02",
+      "lessons": [
+        {
+          "title": "Nombres que cuentan una historia",
+          "route": "/aprender/codigo/1",
+          "sharedContentSha256": "075d8943cebe3287ec28a27b739e5e0f74c791edbe79708489a2b784bde28f7c",
+          "execution": null
+        },
+        {
+          "title": "Comentarios que explican por qué",
+          "route": "/aprender/codigo/2",
+          "sharedContentSha256": "e366ec44080267dc6184ef9d1fff31afbba9c580bee345efc15097613c2c28e3",
+          "execution": null
+        },
+        {
+          "title": "Errores de dominio que permiten actuar",
+          "route": "/aprender/codigo/3",
+          "sharedContentSha256": "411b6c90d151ea0633431d1b180ad51aba0569988d747bef18d00e545f8283bd",
+          "execution": null
+        },
+        {
+          "title": "Funciones pequeñas alrededor de efectos visibles",
+          "route": "/aprender/codigo/4",
+          "sharedContentSha256": "3fc916709601f833a2ec928929328da555b6fc908105fde71243b097d466f8ac",
+          "execution": null
+        },
+        {
+          "title": "Formato automático y revisión humana",
+          "route": "/aprender/codigo/5",
+          "sharedContentSha256": "042522b152dc325bf582d8fbb4c86505a9436926ce073d29fdd42eb04bf79595",
+          "execution": null
+        }
+      ],
+      "projectRoute": "/comenzar/proyecto-integral"
+    },
+    {
+      "key": "datos",
+      "title": "Bases de datos y diccionario de datos",
+      "bookPart": "06",
+      "route": "/datos",
+      "caseRoute": "/datos#caso-desarrollado",
+      "caseTitle": "Diseñar el diccionario y evolucionar un documento",
+      "caseSource": "replication/examples/ecosistema-app/taller-areas/casos.mjs",
+      "caseCommand": "node replication/examples/ecosistema-app/taller-areas/ejecutar.mjs datos",
+      "exampleKind": "ejecutable-local",
+      "checkpoint": "B04-B05",
+      "lessons": [
+        {
+          "title": "Diccionario de datos desde cero",
+          "route": "/aprender/datos/1",
+          "sharedContentSha256": "33dd57d0a9eb326bad8bc213d8e13a86b2402a624cb9a1d18ce79a4b445683ff",
+          "execution": {
+            "cwd": ".",
+            "binary": "node",
+            "argv": [
+              "--test",
+              "--test-reporter=tap",
+              "--test-name-pattern=^diccionario C2 coincide con las claves y valores del Dater v1$",
+              "replication/examples/ecosistema-app/test/datos-c2.test.mjs"
+            ],
+            "command": "node --test --test-reporter=tap --test-name-pattern='^diccionario C2 coincide con las claves y valores del Dater v1$' replication/examples/ecosistema-app/test/datos-c2.test.mjs",
+            "kind": "prueba-local",
+            "minimumPassed": 1,
+            "expected": "Los siete campos físicos coinciden con el Dater v1. La salida termina con pass 1 y fail 0.",
+            "prerequisites": [
+              "Node.js 22.13 o superior.",
+              "Terminal en la raíz de COBRIA; no requiere instalar paquetes ni conectar un motor."
+            ],
+            "tests": [
+              "replication/examples/ecosistema-app/test/datos-c2.test.mjs"
+            ],
+            "troubleshooting": [
+              "pass 0 no demuestra el caso: revise el nombre exacto de la prueba.",
+              "Si hay fail, lea el primer error y compárelo con el diccionario; no cambie la regla para obtener verde."
+            ]
+          }
+        },
+        {
+          "title": "Incrustar, referenciar e indexar",
+          "route": "/aprender/datos/2",
+          "sharedContentSha256": "debf8e5653e53aad78aa9a5470e2611dd7ae92ba5aa4343ed9e6807f19255b86",
+          "execution": {
+            "cwd": ".",
+            "binary": "node",
+            "argv": [
+              "--test",
+              "--test-reporter=tap",
+              "--test-name-pattern=^consulta acotada excluye otra reserva y ordena resultados$",
+              "replication/examples/ecosistema-app/test/datos-c2.test.mjs"
+            ],
+            "command": "node --test --test-reporter=tap --test-name-pattern='^consulta acotada excluye otra reserva y ordena resultados$' replication/examples/ecosistema-app/test/datos-c2.test.mjs",
+            "kind": "prueba-local",
+            "minimumPassed": 1,
+            "expected": "La respuesta contiene solo obs-001 y obs-002 de reserva-sur. La salida termina con pass 1 y fail 0.",
+            "prerequisites": [
+              "Node.js 22.13 o superior.",
+              "Terminal en la raíz de COBRIA; no requiere instalar paquetes ni conectar un motor."
+            ],
+            "tests": [
+              "replication/examples/ecosistema-app/test/datos-c2.test.mjs"
+            ],
+            "troubleshooting": [
+              "pass 0 no demuestra el caso: revise el nombre exacto de la prueba.",
+              "Si hay fail, lea el primer error y compárelo con el diccionario; no cambie la regla para obtener verde."
+            ]
+          }
+        },
+        {
+          "title": "Diseñar agregados y separar nodos",
+          "route": "/aprender/datos/3",
+          "sharedContentSha256": "e88832abef27c03299d3bcd0eb5d6c7acea7192d3498b591e7d6f0cbcbc61545",
+          "execution": {
+            "cwd": ".",
+            "binary": "node",
+            "argv": [
+              "--test",
+              "--test-reporter=tap",
+              "--test-name-pattern=^nodos e índice candidato conservan identidad y filtro de ámbito$",
+              "replication/examples/ecosistema-app/test/datos-c2.test.mjs"
+            ],
+            "command": "node --test --test-reporter=tap --test-name-pattern='^nodos e índice candidato conservan identidad y filtro de ámbito$' replication/examples/ecosistema-app/test/datos-c2.test.mjs",
+            "kind": "prueba-local",
+            "minimumPassed": 1,
+            "expected": "La identidad es ambito e id y el índice candidato conserva el ámbito. La salida termina con pass 1 y fail 0.",
+            "prerequisites": [
+              "Node.js 22.13 o superior.",
+              "Terminal en la raíz de COBRIA; no requiere instalar paquetes ni conectar un motor."
+            ],
+            "tests": [
+              "replication/examples/ecosistema-app/test/datos-c2.test.mjs"
+            ],
+            "troubleshooting": [
+              "pass 0 no demuestra el caso: revise el nombre exacto de la prueba.",
+              "Si hay fail, lea el primer error y compárelo con el diccionario; no cambie la regla para obtener verde."
+            ]
+          }
+        },
+        {
+          "title": "Traducir claves físicas en el Dater",
+          "route": "/aprender/datos/4",
+          "sharedContentSha256": "5ecef7b9306d55765dddd2e744b972020dc63f0738817619f06346c8b449a24c",
+          "execution": {
+            "cwd": ".",
+            "binary": "node",
+            "argv": [
+              "--test",
+              "--test-reporter=tap",
+              "--test-name-pattern=^Dater conserva identidad, ámbito, cantidad y tiempo normalizado$",
+              "replication/examples/ecosistema-app/test/datos-c2.test.mjs"
+            ],
+            "command": "node --test --test-reporter=tap --test-name-pattern='^Dater conserva identidad, ámbito, cantidad y tiempo normalizado$' replication/examples/ecosistema-app/test/datos-c2.test.mjs",
+            "kind": "prueba-local",
+            "minimumPassed": 1,
+            "expected": "El recorrido de ida y vuelta conserva la entidad y normaliza a UTC. La salida termina con pass 1 y fail 0.",
+            "prerequisites": [
+              "Node.js 22.13 o superior.",
+              "Terminal en la raíz de COBRIA; no requiere instalar paquetes ni conectar un motor."
+            ],
+            "tests": [
+              "replication/examples/ecosistema-app/test/datos-c2.test.mjs"
+            ],
+            "troubleshooting": [
+              "pass 0 no demuestra el caso: revise el nombre exacto de la prueba.",
+              "Si hay fail, lea el primer error y compárelo con el diccionario; no cambie la regla para obtener verde."
+            ]
+          }
+        },
+        {
+          "title": "Migrar documentos sin detener el mundo",
+          "route": "/aprender/datos/5",
+          "sharedContentSha256": "ac6476ff0e43386e03ff6d428e6638ce4fdf1b31ea566ef9caa97f5559f8f603",
+          "execution": {
+            "cwd": ".",
+            "binary": "node",
+            "argv": [
+              "--test",
+              "--test-reporter=tap",
+              "--test-name-pattern=^migración repetida es idéntica y permite restaurar la copia v1$",
+              "replication/examples/ecosistema-app/test/datos-c2.test.mjs"
+            ],
+            "command": "node --test --test-reporter=tap --test-name-pattern='^migración repetida es idéntica y permite restaurar la copia v1$' replication/examples/ecosistema-app/test/datos-c2.test.mjs",
+            "kind": "prueba-local",
+            "minimumPassed": 1,
+            "expected": "Las dos migraciones son idénticas y la copia v1 sigue legible. La salida termina con pass 1 y fail 0.",
+            "prerequisites": [
+              "Node.js 22.13 o superior.",
+              "Terminal en la raíz de COBRIA; no requiere instalar paquetes ni conectar un motor."
+            ],
+            "tests": [
+              "replication/examples/ecosistema-app/test/datos-c2.test.mjs"
+            ],
+            "troubleshooting": [
+              "pass 0 no demuestra el caso: revise el nombre exacto de la prueba.",
+              "Si hay fail, lea el primer error y compárelo con el diccionario; no cambie la regla para obtener verde."
+            ]
+          }
+        }
+      ],
+      "projectRoute": "/comenzar/proyecto-integral"
+    },
+    {
+      "key": "core",
+      "title": "COBRIA Core",
+      "bookPart": "07",
+      "route": "/core",
+      "caseRoute": "/core#caso-desarrollado",
+      "caseTitle": "Reconstruir un resumen sin cambiar los hechos",
+      "caseSource": "replication/examples/ecosistema-app/taller-areas/casos.mjs",
+      "caseCommand": "node replication/examples/ecosistema-app/taller-areas/ejecutar.mjs core",
+      "exampleKind": "ejecutable-local",
+      "checkpoint": "B07-B09",
+      "lessons": [
+        {
+          "title": "Autoridad y ámbito",
+          "route": "/aprender/core/1",
+          "sharedContentSha256": "69edb09c8ba3a734f2933693a92388ef26360f1fc8a567b975b78debec2b60cd",
+          "execution": null
+        },
+        {
+          "title": "Reconstrucción y publicación segura",
+          "route": "/aprender/core/2",
+          "sharedContentSha256": "ca2fe3b073bfca9ed658b57653f1bd650c28c366dc64c686755770748d70609c",
+          "execution": null
+        },
+        {
+          "title": "Elegir nivel C1, C2 o C3",
+          "route": "/aprender/core/3",
+          "sharedContentSha256": "bf1af29b3b00cd91f1c5c0a0c035ce9627b3856f6aaf2e03db90ff5e0bfb0383",
+          "execution": null
+        },
+        {
+          "title": "Definir equivalencia útil",
+          "route": "/aprender/core/4",
+          "sharedContentSha256": "2fd04eaf671b6ec4ec2b45670601368ad733c0cadd039ab7cad29c4f1537718c",
+          "execution": null
+        },
+        {
+          "title": "Presupuestar y retirar derivados",
+          "route": "/aprender/core/5",
+          "sharedContentSha256": "9ba0f1dc1c7e97907a7cebcc88fec0d9081604d4ff7d24e619b5faf7e07c52e7",
+          "execution": null
+        }
+      ],
+      "projectRoute": "/comenzar/proyecto-integral"
+    },
+    {
+      "key": "patrones",
+      "title": "Patrones de diseño",
+      "bookPart": "08",
+      "route": "/patrones-diseno",
+      "caseRoute": "/patrones-diseno#caso-desarrollado",
+      "caseTitle": "Elegir y reconocer una solución recurrente",
+      "caseSource": "replication/examples/ecosistema-app/taller-areas/casos.mjs",
+      "caseCommand": "node replication/examples/ecosistema-app/taller-areas/ejecutar.mjs patrones",
+      "exampleKind": "ejecutable-local",
+      "checkpoint": "B07-B09",
+      "lessons": [
+        {
+          "title": "Cómo leer una ficha",
+          "route": "/aprender/patrones/1",
+          "sharedContentSha256": "2e860e628de4b066d42051bcf151f8f86a5ab06f62768247d47fedb635ad551f",
+          "execution": null
+        },
+        {
+          "title": "Combinar patrones sin crear una megasolución",
+          "route": "/aprender/patrones/2",
+          "sharedContentSha256": "b39389afa14e9c5677ffbd8526f2bc4759b81eab8b814bed0632ccbee63dd707",
+          "execution": null
+        },
+        {
+          "title": "Fuerzas y consecuencias antes que recetas",
+          "route": "/aprender/patrones/3",
+          "sharedContentSha256": "090339112d3e8f08bcb66bf7f13dce4ce2955970022a46ef3498de381f33ce9a",
+          "execution": null
+        },
+        {
+          "title": "Reconocer antipatrones por su fallo",
+          "route": "/aprender/patrones/4",
+          "sharedContentSha256": "3ab2bb04c97c3af2fdf518c050e76f3ae75c7300507e82cad3db5bc96e2bb1de",
+          "execution": null
+        },
+        {
+          "title": "Construir un lenguaje de patrones",
+          "route": "/aprender/patrones/5",
+          "sharedContentSha256": "bce6db5dd2468919b161ac3dc0bc8b66fdb22eb6ca04729332715f1195aedf04",
+          "execution": null
+        }
+      ],
+      "projectRoute": "/comenzar/proyecto-integral"
+    },
+    {
+      "key": "apiux",
+      "title": "API, experiencia e internacionalización",
+      "bookPart": "09",
+      "route": "/api-ux",
+      "caseRoute": "/api-ux#caso-desarrollado",
+      "caseTitle": "Conectar una respuesta verificable con el formulario",
+      "caseSource": "replication/examples/ecosistema-app/taller-areas/casos.mjs",
+      "caseCommand": "node replication/examples/ecosistema-app/taller-areas/ejecutar.mjs capas",
+      "exampleKind": "ejecutable-local",
+      "checkpoint": "B08",
+      "lessons": [
+        {
+          "title": "Una API expresa intención",
+          "route": "/aprender/apiux/1",
+          "sharedContentSha256": "fff637a21d15de2045c36a345209fd9bd453ea0281702c916ef4a95a66c4adae",
+          "execution": null
+        },
+        {
+          "title": "Estados visibles, idioma y accesibilidad",
+          "route": "/aprender/apiux/2",
+          "sharedContentSha256": "af958f7d53d1f8d3aef44d04dca9626aaa6c93ba5ed17aa02faf677ad3013dcc",
+          "execution": null
+        },
+        {
+          "title": "Paginar con cursores opacos",
+          "route": "/aprender/apiux/3",
+          "sharedContentSha256": "f4441f5b55a9bcf7aee3fda50323be6be77dda4e2d293a8e8daead9c6ea09955",
+          "execution": null
+        },
+        {
+          "title": "Diseñar acciones idempotentes",
+          "route": "/aprender/apiux/4",
+          "sharedContentSha256": "a536538453f0a34b34e0a41817ca4788a0a288d7f181c11b689ba0e356318aac",
+          "execution": null
+        },
+        {
+          "title": "Probar experiencia adaptable y accesible",
+          "route": "/aprender/apiux/5",
+          "sharedContentSha256": "70a2a5b07f8ee154259ea96928838afddd5016ced913e49be57675c59bf73497",
+          "execution": null
+        }
+      ],
+      "projectRoute": "/comenzar/proyecto-integral"
+    },
+    {
+      "key": "documentacion",
+      "title": "Documentación y comunicación",
+      "bookPart": "10",
+      "route": "/documentacion",
+      "caseRoute": "/documentacion#caso-desarrollado",
+      "caseTitle": "Escribir documentos que responden preguntas distintas",
+      "caseSource": null,
+      "caseCommand": null,
+      "exampleKind": "artefacto-de-diseño",
+      "checkpoint": "B01-B14",
+      "lessons": [
+        {
+          "title": "Cuatro documentos, cuatro necesidades",
+          "route": "/aprender/documentacion/1",
+          "sharedContentSha256": "fcfc3a92eb7aca4a25efa43004be5fa365fb50290da6d4e4afac72cef6befd66",
+          "execution": null
+        },
+        {
+          "title": "Documentación que no se desactualiza en silencio",
+          "route": "/aprender/documentacion/2",
+          "sharedContentSha256": "1ab5983f7f234328d143e67e184b8f8c7c9d20c537cca835ad2236142989295d",
+          "execution": null
+        },
+        {
+          "title": "Escribir un README que permita comenzar",
+          "route": "/aprender/documentacion/3",
+          "sharedContentSha256": "6a50c5079a2d036568a7e0a2dbe1c71fc694284698eb72adb88c35a4b794c75d",
+          "execution": null
+        },
+        {
+          "title": "Separar ADR, referencia y runbook",
+          "route": "/aprender/documentacion/4",
+          "sharedContentSha256": "d6ada9205fa7fc4b60d7a15f766a799a6238f60114fce8c52148fed0f80615ff",
+          "execution": null
+        },
+        {
+          "title": "Mantener trazabilidad entre texto y ejecución",
+          "route": "/aprender/documentacion/5",
+          "sharedContentSha256": "e5c1568b661913c18c10ba6449320a697a23cc591f1252b8bb44274c28a19931",
+          "execution": null
+        }
+      ],
+      "projectRoute": "/comenzar/proyecto-integral"
+    },
+    {
+      "key": "seguridad",
+      "title": "Seguridad y privacidad",
+      "bookPart": "11",
+      "route": "/seguridad",
+      "caseRoute": "/seguridad#caso-desarrollado",
+      "caseTitle": "Probar permisos antes y después del caso permitido",
+      "caseSource": "replication/examples/ecosistema-app/taller-areas/casos.mjs",
+      "caseCommand": "node replication/examples/ecosistema-app/taller-areas/ejecutar.mjs seguridad",
+      "exampleKind": "ejecutable-local",
+      "checkpoint": "B06",
+      "lessons": [
+        {
+          "title": "Amenazas desde el flujo",
+          "route": "/aprender/seguridad/1",
+          "sharedContentSha256": "d603bfde337485bb9d379c2db12d1acb17f752f60b2b212095f193a246eda098",
+          "execution": null
+        },
+        {
+          "title": "Secretos, suministro y respuesta",
+          "route": "/aprender/seguridad/2",
+          "sharedContentSha256": "3b52bb100311edb2241982b7fa06b10cc4cc363a40d8ba49daf69389d362652d",
+          "execution": null
+        },
+        {
+          "title": "Modelar amenazas desde el flujo",
+          "route": "/aprender/seguridad/3",
+          "sharedContentSha256": "03ec60f399cab6e1203b2931a78305fac90c8a665f14bc4903073fa7b6a82da3",
+          "execution": null
+        },
+        {
+          "title": "Autenticar actor y autorizar capacidad",
+          "route": "/aprender/seguridad/4",
+          "sharedContentSha256": "0f0c01513d634d945e90dcd673f6a3c6558391855f83406ca52665b2eb0c706c",
+          "execution": null
+        },
+        {
+          "title": "Proteger secretos y cadena de suministro",
+          "route": "/aprender/seguridad/5",
+          "sharedContentSha256": "60414cc987b82d4e0e2eea7fbcc5655b8fc0e83e1984c08f3beed7ce6a23c79c",
+          "execution": null
+        }
+      ],
+      "projectRoute": "/comenzar/proyecto-integral"
+    },
+    {
+      "key": "calidad",
+      "title": "Calidad, pruebas y rendimiento",
+      "bookPart": "12",
+      "route": "/calidad",
+      "caseRoute": "/calidad#caso-desarrollado",
+      "caseTitle": "Reproducir el defecto antes de optimizar",
+      "caseSource": "replication/examples/ecosistema-app/taller-areas/casos.mjs",
+      "caseCommand": "node replication/examples/ecosistema-app/taller-areas/ejecutar.mjs calidad",
+      "exampleKind": "ejecutable-local",
+      "checkpoint": "B12",
+      "lessons": [
+        {
+          "title": "Pruebas que cubren decisiones",
+          "route": "/aprender/calidad/1",
+          "sharedContentSha256": "fd13413ec0e264a2fd2b5fac834e35051e68654908a201a12c664abe3b7d6048",
+          "execution": null
+        },
+        {
+          "title": "Optimizar sin engañarse",
+          "route": "/aprender/calidad/2",
+          "sharedContentSha256": "59f10e46e8aca3405791310227bc64c59adb526274427e648b5e403b3676500e",
+          "execution": null
+        },
+        {
+          "title": "Del reporte al cierre verificable",
+          "route": "/aprender/calidad/3",
+          "sharedContentSha256": "1849dc9cf66a0a275081102de3e77e6bc8a02a43dc916ce789fa19dedb1920ab",
+          "execution": null
+        },
+        {
+          "title": "Probar propiedades y casos adversos",
+          "route": "/aprender/calidad/4",
+          "sharedContentSha256": "e79298ddc82665dcd557f617bfaa35f58300f18668222511963aab2cefd25e25",
+          "execution": null
+        },
+        {
+          "title": "Evaluar calidad con SQuaRE y medir sin engañarse",
+          "route": "/aprender/calidad/5",
+          "sharedContentSha256": "88ce4c59c9487f4ca0514aae523595dc5ca5401cc5c0c73c95152289feb8a252",
+          "execution": null
+        }
+      ],
+      "projectRoute": "/comenzar/proyecto-integral"
+    },
+    {
+      "key": "operaciones",
+      "title": "Nube, ambientes y operaciones",
+      "bookPart": "13",
+      "route": "/operaciones",
+      "caseRoute": "/operaciones#caso-desarrollado",
+      "caseTitle": "Recuperar datos y promover el mismo artefacto",
+      "caseSource": "replication/examples/ecosistema-app/taller-areas/casos.mjs",
+      "caseCommand": "node replication/examples/ecosistema-app/taller-areas/ejecutar.mjs operaciones",
+      "exampleKind": "ejecutable-local",
+      "checkpoint": "B13",
+      "lessons": [
+        {
+          "title": "Del desarrollo a producción",
+          "route": "/aprender/operaciones/1",
+          "sharedContentSha256": "cfba8d572151f7786505eb2790093225e27f18a7b4118edf3e6e7dd1cb9e23eb",
+          "execution": null
+        },
+        {
+          "title": "Funciones, colas y tareas idempotentes",
+          "route": "/aprender/operaciones/2",
+          "sharedContentSha256": "2c5ef3626a01bd468f5bced4f4df68f57ac12a89f8eaac718f6ef822a6bb3d9b",
+          "execution": null
+        },
+        {
+          "title": "Separar desarrollo, preview, staging y producción",
+          "route": "/aprender/operaciones/3",
+          "sharedContentSha256": "8ac476198a31f230ab702e8c887b34dc9e9334bd379defb08e8a1e37170cb5f8",
+          "execution": null
+        },
+        {
+          "title": "Offline con fronteras explícitas",
+          "route": "/aprender/operaciones/4",
+          "sharedContentSha256": "e438be274dac19d61a884b60d2d4d33828fbb528f511f6ab151585e46bec2f67",
+          "execution": null
+        },
+        {
+          "title": "Desplegar, observar y revertir",
+          "route": "/aprender/operaciones/5",
+          "sharedContentSha256": "f9d44955d325b48a12e9358326e8242ed079b4f26434c761c66a02f66576f829",
+          "execution": null
+        }
+      ],
+      "projectRoute": "/comenzar/proyecto-integral"
+    },
+    {
+      "key": "ia",
+      "title": "Analítica e inteligencia artificial",
+      "bookPart": "14",
+      "route": "/ia",
+      "caseRoute": "/ia#caso-desarrollado",
+      "caseTitle": "Responder con evidencia y abstenerse cuando falta",
+      "caseSource": "replication/examples/ecosistema-app/taller-areas/casos.mjs",
+      "caseCommand": "node replication/examples/ecosistema-app/taller-areas/ejecutar.mjs ia",
+      "exampleKind": "ejecutable-local",
+      "checkpoint": "B10-B11",
+      "lessons": [
+        {
+          "title": "Conjuntos reproducibles y sin fuga",
+          "route": "/aprender/ia/1",
+          "sharedContentSha256": "8ee95779efd0acc53c2f9befa7b89e8671e509016b63a3463048a710d11d56ae",
+          "execution": null
+        },
+        {
+          "title": "IA con procedencia y capacidad mínima",
+          "route": "/aprender/ia/2",
+          "sharedContentSha256": "8614a70af099d6f6c895f77f96de457b2ae5081aa27c5b7782ee773f85dfff84",
+          "execution": null
+        },
+        {
+          "title": "Evitar fuga temporal y por entidad",
+          "route": "/aprender/ia/3",
+          "sharedContentSha256": "ef87927a70bd460b7d1e4776329a7eb8f40fee5429101aa7b7881f75f5841502",
+          "execution": null
+        },
+        {
+          "title": "Construir RAG con recuperación autorizada",
+          "route": "/aprender/ia/4",
+          "sharedContentSha256": "828a158fc7ca63ac254e0dfb254e8b08eaa2e949274b3d50127c2686e85c0c21",
+          "execution": null
+        },
+        {
+          "title": "Gobernar herramientas y abstención",
+          "route": "/aprender/ia/5",
+          "sharedContentSha256": "ecc2013a4a483310fe591c83bacf3dea159b7ac1e01dc39a43e5446bdfe12ab9",
+          "execution": null
+        }
+      ],
+      "projectRoute": "/comenzar/proyecto-integral"
+    },
+    {
+      "key": "construir",
+      "title": "Aplicación completa",
+      "bookPart": "15",
+      "route": "/construir",
+      "caseRoute": "/construir#caso-desarrollado",
+      "caseTitle": "Integrar una aplicación sin ocultar pasos",
+      "caseSource": null,
+      "caseCommand": null,
+      "exampleKind": "artefacto-de-diseño",
+      "checkpoint": "B01-B14",
+      "lessons": [
+        {
+          "title": "Del caso de uso al adaptador",
+          "route": "/aprender/construir/1",
+          "sharedContentSha256": "808922dfa0de2d3bf96c826e6c03c3e901a23e3031831f6c336c285af5ffaea9",
+          "execution": null
+        },
+        {
+          "title": "Extender sin romper contratos",
+          "route": "/aprender/construir/2",
+          "sharedContentSha256": "227108c80a4ccc5e357844fd29c9a5cf304fc01463866c5d1e5095aea42acf55",
+          "execution": null
+        },
+        {
+          "title": "Ejecutar el proyecto conductor",
+          "route": "/aprender/construir/3",
+          "sharedContentSha256": "8f8e783f4a8cc980f194634943f7e6d135c6abd64b6f092f4ad7d88ce3921993",
+          "execution": null
+        },
+        {
+          "title": "Cambiar el adaptador sin cambiar el núcleo",
+          "route": "/aprender/construir/4",
+          "sharedContentSha256": "76e77db3f57482bba0fc9d21c4542b05e32a48c051f62075985312ce782c3610",
+          "execution": null
+        },
+        {
+          "title": "Cerrar una entrega demostrable",
+          "route": "/aprender/construir/5",
+          "sharedContentSha256": "34514ebc58274a73f497fd26ea0d3974bc3dbab2e566269a19a7ce7335ce9ff8",
+          "execution": null
+        }
+      ],
+      "projectRoute": "/comenzar/proyecto-integral"
+    },
+    {
+      "key": "toolkit",
+      "title": "Herramientas para personas e IA",
+      "bookPart": "16",
+      "route": "/herramientas",
+      "caseRoute": "/herramientas#caso-desarrollado",
+      "caseTitle": "Generar sin sobrescribir y auditar sin certificar",
+      "caseSource": null,
+      "caseCommand": null,
+      "exampleKind": "artefacto-de-diseño",
+      "checkpoint": "B14",
+      "lessons": [
+        {
+          "title": "Automatización conservadora",
+          "route": "/aprender/toolkit/1",
+          "sharedContentSha256": "834c0cdb9711d141c618f012ff26403ac69bda56b3b08c1c483e24773a525fcf",
+          "execution": null
+        },
+        {
+          "title": "Contexto seguro para agentes",
+          "route": "/aprender/toolkit/2",
+          "sharedContentSha256": "5724a4e269ec70f5ed8cf79845b654b111649aa79c0db0a46d7d532a9e686ea4",
+          "execution": null
+        },
+        {
+          "title": "Declarar el proyecto mediante un manifiesto",
+          "route": "/aprender/toolkit/3",
+          "sharedContentSha256": "ca6887f816cffdfe82e43099eaaf88b109feeacf929978299c7b818d48a370b4",
+          "execution": null
+        },
+        {
+          "title": "Generar sin sobrescribir decisiones humanas",
+          "route": "/aprender/toolkit/4",
+          "sharedContentSha256": "3e0c3bea8d39d0b2ec9e80e7d9d8654e3441ace5383365a57feef01442b430f9",
+          "execution": null
+        },
+        {
+          "title": "Preparar contexto seguro para una IA",
+          "route": "/aprender/toolkit/5",
+          "sharedContentSha256": "287f6f6c46992ce341a0783ca68b2eba43fa5c25e8691e76a345c0f5d360d9d0",
+          "execution": null
+        }
+      ],
+      "projectRoute": "/comenzar/proyecto-integral"
+    },
+    {
+      "key": "evidencia",
+      "title": "Evidencia, evolución y publicación",
+      "bookPart": "17",
+      "route": "/evidencia",
+      "caseRoute": "/evidencia#caso-desarrollado",
+      "caseTitle": "Conservar resultados sin exagerar su alcance",
+      "caseSource": "replication/examples/ecosistema-app/taller-areas/casos.mjs",
+      "caseCommand": "node replication/examples/ecosistema-app/taller-areas/ejecutar.mjs evidencia",
+      "exampleKind": "ejecutable-local",
+      "checkpoint": "B14",
+      "lessons": [
+        {
+          "title": "De una afirmación a su evidencia",
+          "route": "/aprender/evidencia/1",
+          "sharedContentSha256": "0a02b160d1b56a6d30c5cf41a0d26eb460c40860742d8e79a6123d943ddecef1",
+          "execution": null
+        },
+        {
+          "title": "Versionar, retirar y comunicar",
+          "route": "/aprender/evidencia/2",
+          "sharedContentSha256": "9d22bc09085b18bab92309085ba64eb89e13fedd8200fb629be1c3746485cd45",
+          "execution": null
+        },
+        {
+          "title": "Construir una matriz de trazabilidad integral",
+          "route": "/aprender/evidencia/3",
+          "sharedContentSha256": "d01625d79142376dacbc34e4b7074e438613612746cff8cd32fdc3315dd1e6bf",
+          "execution": null
+        },
+        {
+          "title": "Reproducir desde un checkout limpio",
+          "route": "/aprender/evidencia/4",
+          "sharedContentSha256": "a6df6d76d8a8d12e588923c4cc606c01019ab851228ff38a020f3f494fc69600",
+          "execution": null
+        },
+        {
+          "title": "Publicar con versión, límites y retiro",
+          "route": "/aprender/evidencia/5",
+          "sharedContentSha256": "0ac3529dbb0ad5a75b956537a7d6798b8b50445f14c8e3f13fa3cfd81e3bfda0",
+          "execution": null
+        }
+      ],
+      "projectRoute": "/comenzar/proyecto-integral"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "id": "especies-demostracion",
+  "purpose": "Clasificación pedagógica de grupos; no catálogo taxonómico científico",
+  "unknownPolicy": "rechazar sin sustituir silenciosamente",
+  "editions": [
+    {"version": "2026.1", "values": [{"code": "colibri", "label": "Colibrí"}, {"code": "rana", "label": "Rana"}]},
+    {"version": "2026.2", "values": [{"code": "colibri", "label": "Colibrí observado"}, {"code": "rana", "label": "Rana"}, {"code": "tucan", "label": "Tucán"}]}
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "protocol": "COBRIA-PC2-contratos-v1",
+  "frozenAt": "2026-10-19T00:12:04.160Z",
+  "sourceCommit": "0c89c1ee27923dfdf612d5d9bec0ed3bd8698c1d",
+  "workingTreeClean": false,
+  "scope": "congelamiento-local-sin-corridas-PC3",
+  "independentRegistration": false,
+  "files": {
+    "replication/protocol/pc2-contracts-v1.json": "3a898a445acdee250e58d3c09ce0ea544dd47bd335539ac4087943c529f7fca6",
+    "replication/protocol/PC2-CONTRATOS-V1.md": "35fed81ae44e786ddaf1a1840554db228de8d861fd09dedb3db1fbce30646f38",
+    "replication/src/pc2/contracts.mjs": "fa90660584a86836a2a2e93ace3b7efecb98086d9a445b27509f41ce1e2b1aeb",
+    "replication/tests/pc2-contracts.test.mjs": "1ae098a3af9b94cbef873be6f654284f2ff06b3399abdd4ea9da6e2932af966e",
+    "replication/tests/pc2-freeze.test.mjs": "5276bd8ccc4abae883a0fc1d3e13d812f162457461d4e0face9f0751af2a54b2",
+    "replication/scripts/freeze-pc2.mjs": "58283d0007f583588af4fe8bf980983f690c1e5dd4b754694f897ce12b9c4495",
+    "replication/package-lock.json": "a49e63b177cbbcc6269d033fec07b04253221b674d4065aa585b8f288a671e72",
+    "specification/COBRIA-CORE-1.0.md": "9db3b0fffdee83ddf6c7ec8ede7e8f5d675d1e152e0614cadecba884eae1c179"
+  }
+}

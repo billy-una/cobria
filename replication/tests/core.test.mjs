@@ -1,6 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { CanonicalEntity, EntityMapper, Metrics, MemoryConnector, EntityRepository, ProjectionStore, ProjectionManager, ScopedCache } from "../src/cobria.mjs";
+// Regresión del modelo histórico; no declara conformidad del núcleo vigente.
+import { CanonicalEntity, EntityMapper, Metrics, MemoryConnector, EntityRepository, ProjectionStore, ProjectionManager, ScopedCache } from "../historical/memory-model/cobria.mjs";
 
 test("mapper preserves semantic round-trip",()=>{ const e=new CanonicalEntity({id:"1",scope:"a",status:"active",value:7}); const m=new EntityMapper(); assert.deepEqual(m.toDomain(e.id,m.toRaw(e)),e); });
 test("repository requires and isolates scope",()=>{ const r=new EntityRepository(new MemoryConnector()); r.save(new CanonicalEntity({id:"same",scope:"a",value:1})); r.save(new CanonicalEntity({id:"same",scope:"b",value:2})); assert.equal(r.get("a","same").value,1); assert.equal(r.get("b","same").value,2); assert.throws(()=>r.get("","same")); });

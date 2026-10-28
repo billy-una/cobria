@@ -23,7 +23,7 @@ if run.returncode: errors.append(run.stdout+run.stderr)
 elif '# pass 9' not in run.stdout and 'pass 9' not in run.stdout: errors.append('no se observaron nueve pruebas aprobadas')
 roadmap=(ROOT/'manuales/11-estado-y-roadmap-integral.md').read_text(encoding='utf-8')
 if 'Fase 20 — Laboratorio COBRIA Engineering' not in roadmap: errors.append('roadmap sin fase 20')
-site=(ROOT/'sitio/app/manual.tsx').read_text(encoding='utf-8')
+site=(ROOT/'editorial/pedagogy.json').read_text(encoding='utf-8')
 if 'make verificar-fase-20' not in site: errors.append('sitio sin laboratorio ejecutable')
 if errors:
     print('Fase 20 inválida:'); print('\n'.join(f'- {e}' for e in errors)); sys.exit(1)

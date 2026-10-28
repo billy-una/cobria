@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "1.0.0",
+  "protocol": "COBRIA-R7-confirmatorio",
+  "frozenAt": "2026-09-23T00:25:00-06:00",
+  "core": "COBRIA Core 1.0",
+  "seed": 20260923,
+  "engines": ["mongodb", "couchdb", "opensearch"],
+  "sizes": [100, 1000, 5000],
+  "runsPerSize": 30,
+  "warmupRunsPerSize": 2,
+  "executionOrder": "aleatorio determinista dentro de cada motor",
+  "isolation": "colección, base o índice exclusivo por motor, tamaño y repetición",
+  "experiments": ["P1", "P2", "R1", "S1", "A1"],
+  "metrics": ["canonicalMs", "projectionMs", "rebuildMs", "writeAmplification", "bytesWritten", "wallMs", "cpuUserMicros", "cpuSystemMicros", "maxRssBytes", "storageBytes", "logicalBytes", "documentCount"],
+  "statistics": ["p50", "p95", "p99", "MAD", "IQR", "IC95 bootstrap de mediana", "diferencia pareada", "razón pareada", "dz", "permutación de signos", "Holm"],
+  "exclusions": ["motor-no-saludable", "interrupción-externa", "instrumentación-fallida", "corrida-incompleta"],
+  "limitations": ["un nodo por motor", "host local", "sin servicio administrado", "CPU y RSS pertenecen al proceso cliente", "el tamaño físico depende de compactación y formato del motor"],
+  "humanPending": ["réplica externa independiente", "estudio de transferencia", "doble cribado bibliográfico"]
+}

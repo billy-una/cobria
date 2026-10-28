@@ -1,5 +1,13 @@
 # COBRIA Cloud y Operations
 
+La [guía de normas por área](25-normas-y-evaluacion-de-calidad.md) incorpora
+ISO/IEC 20000-1:2018 como referencia de gestión del servicio. Su adopción requiere
+responsables y evidencia operacional real, no únicamente scripts de despliegue.
+
+La [metodología de corrección verificable](23-metodologia-de-correccion-verificable.md)
+conecta incidentes con staging, entrega de un artefacto por SHA, comprobación del ambiente
+y cierre documentado. Distinga siempre identidad del usuario e identidad de la Function.
+
 **Versión:** 1.0  
 **Estado:** guía estable; no afirma un despliegue productivo inexistente  
 **Fuentes verificables:** `specification/phase-8/` y `specification/phase-9/`

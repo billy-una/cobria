@@ -1,0 +1,86 @@
+{
+  "kind": "trazabilidad-generada-no-corrida-nueva",
+  "historicalR7": {
+    "observations": 270,
+    "engines": {
+      "mongodb": 90,
+      "couchdb": 90,
+      "opensearch": 90
+    },
+    "inputs": [
+      {
+        "path": "replication/results/core-r7-confirmatory/mongodb/raw.jsonl",
+        "sha256": "f513915bddffd207781fa9dc7ac1c4b2013ea1b5fd5b1884f07fe8bda867fbcc",
+        "observations": 90
+      },
+      {
+        "path": "replication/results/core-r7-confirmatory/couchdb/raw.jsonl",
+        "sha256": "be18a40594e477ad26b8678f76c105ef4b7e64af520b4d18cdcf95a1fd63351a",
+        "observations": 90
+      },
+      {
+        "path": "replication/results/core-r7-confirmatory/opensearch/raw.jsonl",
+        "sha256": "261146fc71360f2dd98dd3f66e27f010b27778f8a159ba8c8ef720272ea95197",
+        "observations": 90
+      }
+    ]
+  },
+  "pc3": {
+    "observations": null,
+    "status": "sin-dataset-admitido",
+    "meaning": "No ejecuta ni incorpora nuevas corridas; no deduce ausencia de archivos por sí solo"
+  },
+  "humanReviewVerified": false,
+  "rows": [
+    {
+      "family": "P1",
+      "requirement": "Lectura y proyección",
+      "implementation": "replication/src/pc2/contracts.mjs",
+      "test": "replication/tests/pc2-contracts.test.mjs",
+      "evidence": "contratos locales; ejecución con make verificar-pc2",
+      "remoteNewResults": "pendiente",
+      "threat": "Consultas locales y comparación histórica no acreditan planes nativos de los conectores PC3",
+      "products": "articulo-cobria.tex; partes/parte-r8-evidencia-confirmatoria.tex"
+    },
+    {
+      "family": "P2",
+      "requirement": "Idempotencia y recuperación",
+      "implementation": "replication/src/pc2/contracts.mjs",
+      "test": "replication/tests/pc2-contracts.test.mjs",
+      "evidence": "contratos locales; ejecución con make verificar-pc2",
+      "remoteNewResults": "pendiente",
+      "threat": "Dos escrituras recuperables no son una transacción atómica",
+      "products": "articulo-cobria.tex; partes/parte-r8-evidencia-confirmatoria.tex"
+    },
+    {
+      "family": "R1",
+      "requirement": "Publicación y reconstrucción",
+      "implementation": "replication/src/pc2/contracts.mjs",
+      "test": "replication/tests/pc2-contracts.test.mjs",
+      "evidence": "contratos locales; ejecución con make verificar-pc2",
+      "remoteNewResults": "pendiente",
+      "threat": "CAS de un agregado no implica atomicidad entre colecciones",
+      "products": "articulo-cobria.tex; partes/parte-r8-evidencia-confirmatoria.tex"
+    },
+    {
+      "family": "S1",
+      "requirement": "Autorización y ámbito",
+      "implementation": "replication/src/pc2/contracts.mjs",
+      "test": "replication/tests/pc2-contracts.test.mjs",
+      "evidence": "contratos locales; ejecución con make verificar-pc2",
+      "remoteNewResults": "pendiente",
+      "threat": "Rechazo instrumentado no prueba ausencia de canales laterales temporales",
+      "products": "articulo-cobria.tex; partes/parte-r8-evidencia-confirmatoria.tex"
+    },
+    {
+      "family": "A1",
+      "requirement": "Procedencia y abstención",
+      "implementation": "replication/src/pc2/contracts.mjs",
+      "test": "replication/tests/pc2-contracts.test.mjs",
+      "evidence": "contratos locales; ejecución con make verificar-pc2",
+      "remoteNewResults": "pendiente",
+      "threat": "Consumidor determinista; no evalúa un modelo generativo",
+      "products": "articulo-cobria.tex; partes/parte-r8-evidencia-confirmatoria.tex"
+    }
+  ]
+}

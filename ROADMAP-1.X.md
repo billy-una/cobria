@@ -1,6 +1,6 @@
 # Roadmap COBRIA 1.x
 
-Este roadmap comienza después de la candidata `ecosistema-1.0.0-rc1`. Prioriza uso real,
+Este roadmap comienza después de la candidata `ecosistema-1.0.0-rc2`. Prioriza uso real,
 evidencia y mantenibilidad; no promete fechas ni convierte propuestas en compromisos.
 
 ## Puerta hacia 1.0.0
@@ -34,4 +34,3 @@ También debe existir autorización humana explícita para etiquetar y publicar.
 
 Solo se propone una versión mayor cuando la evidencia exija cambios incompatibles. Core
 1.0 permanece congelado; los borradores 1.1 y 1.2 no sustituyen la norma vigente.
-

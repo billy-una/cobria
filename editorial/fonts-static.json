@@ -1,0 +1,64 @@
+{
+  "license": "OFL-1.1",
+  "generator": "fontTools 4.60.1",
+  "files": [
+    {
+      "file": "Inter-400.ttf",
+      "origin": "Inter-variable.ttf",
+      "axes": {
+        "opsz": 14,
+        "wght": 400
+      },
+      "bytes": 341396,
+      "sha256": "0b59f6b6fc9e8a9ad8032802d1797c4237d9288a3e7b7661517070627b577060"
+    },
+    {
+      "file": "Inter-600.ttf",
+      "origin": "Inter-variable.ttf",
+      "axes": {
+        "opsz": 14,
+        "wght": 600
+      },
+      "bytes": 342660,
+      "sha256": "dd5fd52722848f96b7d79ad9a407e4464a93c012416734ad8265082132a838b8"
+    },
+    {
+      "file": "Inter-700.ttf",
+      "origin": "Inter-variable.ttf",
+      "axes": {
+        "opsz": 14,
+        "wght": 700
+      },
+      "bytes": 343104,
+      "sha256": "1cdab460202df1e658f4e0cf8c90206289effd922716ad0ee68beac56cb6ec53"
+    },
+    {
+      "file": "Inter-900.ttf",
+      "origin": "Inter-variable.ttf",
+      "axes": {
+        "opsz": 14,
+        "wght": 900
+      },
+      "bytes": 343856,
+      "sha256": "797d0ae0cd89f15ade5a612526252e8945fb1f20d6fcdd4cf344867a9610233d"
+    },
+    {
+      "file": "RobotoMono-400.ttf",
+      "origin": "RobotoMono-variable.ttf",
+      "axes": {
+        "wght": 400
+      },
+      "bytes": 88120,
+      "sha256": "05950bb3fcaef7aad56ecf0802b37b83fab343e16ae6eeb83df5ca7b97e9a7f9"
+    },
+    {
+      "file": "RobotoMono-700.ttf",
+      "origin": "RobotoMono-variable.ttf",
+      "axes": {
+        "wght": 700
+      },
+      "bytes": 88260,
+      "sha256": "e670ae7f31a1fdd8df34dfda0ff001df959cb30319bcf368e8679e440c16e6e3"
+    }
+  ]
+}

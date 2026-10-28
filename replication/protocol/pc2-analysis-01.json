@@ -1,0 +1,21 @@
+{
+  "id": "COBRIA-PC2-analisis-01",
+  "baseProtocol": "COBRIA-PC2-contratos-v1",
+  "baseProtocolSha256": "3a898a445acdee250e58d3c09ce0ea544dd47bd335539ac4087943c529f7fca6",
+  "reason": "Precisar la prueba primaria antes de PC3 sin sobrescribir el congelamiento inicial",
+  "dataStatus": "sin corridas PC3; solo validación funcional sintética",
+  "primaryTest": "prueba exacta bilateral de signos sobre diferencias de medias por corrida pareada",
+  "nullHypothesis": "entre diferencias no nulas, probabilidad de signo positivo igual a 0.5",
+  "zeros": "omitir diferencias exactamente cero del recuento; informar su cantidad; todos cero produce p=1",
+  "pValue": "min(1, 2 * suma binomial(n, 0..min(positivos,negativos)) / 2^n)",
+  "primaryAssumptions": ["corridas independientes o interpretación restringida", "parejas comparables", "ausencia de selección posterior de intentos"],
+  "interpretation": "frecuencia del signo entre corridas; no prueba por sí sola beneficio en latencia media poblacional",
+  "multiplicity": "Holm sobre nueve valores p primarios, alpha=0.05",
+  "missingCell": "sin afirmación confirmatoria global hasta completar diseño; no completar p ausentes con ceros",
+  "secondaryTest": "permutación de signos de diferencias, 20000 remuestras; sensibilidad bajo simetría/intercambiabilidad, no rescata una primaria no concluyente",
+  "intervals": "bootstrap de parejas completas, 10000 remuestras, 95% puntual; diferencia media y mediana de razones",
+  "effectIfZeroVariance": "dz no definido se registra null con motivo; no se reemplaza por cero",
+  "invalidDenominator": "latencia canónica media no positiva impide razón; conservar incidente de instrumentación",
+  "noSymmetryClaim": true,
+  "independentRegistration": false
+}

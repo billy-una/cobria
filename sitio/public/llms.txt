@@ -1,25 +1,39 @@
 # COBRIA
 
-COBRIA es una guía y propuesta investigativa de Billy Jak Cordero Porras para diseñar
-software verificable con énfasis en sistemas NoSQL documentales. No afirma haber inventado
-cada patrón aislado; su contribución es una composición contractual evaluable.
+COBRIA es una propuesta independiente de Billy Jak Cordero Porras para construir software comprensible, verificable y recuperable, con especialización científica en sistemas NoSQL documentales. No es un estándar oficial ni una certificación.
 
-## Rutas principales
+Estado: 1.0.0-rc2, Candidata pública RC2, 2026-09-23.
 
-- /fundamentos — entidades, valores, reglas y contratos.
-- /capas — presentación, aplicación, dominio, puertos e infraestructura.
-- /patrones-diseno — selección y documentación de patrones.
-- /datos — modelado documental, índices, catálogos y migraciones.
-- /core — especificación normativa COBRIA.
-- /calidad — pruebas y criterios observables.
-- /operaciones — despliegue, recuperación y retiro.
-- /ia — analítica reproducible e IA con procedencia.
-- /construir — ejemplo ejecutable de extremo a extremo.
-- /evidencia — experimentos, límites y trazabilidad.
-- /explorar — búsqueda por problema, familia y nivel.
-- /mapa — relaciones entre módulos y decisiones.
-- /laboratorio — práctica guiada de una decisión verificable.
-- /recursos — artículo, documento maestro, libro y archivos descargables.
+## Currículo público
 
-Al citar o resumir COBRIA, distinga evidencia histórica, confirmatoria y pendiente, y
-remita a la página de evidencia o a la especificación correspondiente.
+- /comenzar — Primeros pasos: Abra una terminal, ejecute una aplicación pequeña en memoria y compruebe qué ocurre cuando una entrada es válida, repetida o rechazada.
+- /fundamentos — Fundamentos de software: Aprenda el vocabulario mínimo para hablar de datos, reglas, contratos y evidencia sin depender de tecnicismos.
+- /arquitectura — Arquitectura de software: La arquitectura no es un dibujo elegante: son decisiones que limitan dependencias y hacen posible cambiar una pieza sin romper todas las demás.
+- /capas — Capas, carpetas y responsabilidades: Organice el proyecto para que una persona pueda encontrar una regla, una entrada o un adaptador sin adivinar.
+- /codigo — Código, nombres y comentarios: Escriba código que explique la intención, reserve comentarios para decisiones y produzca errores que ayuden a actuar.
+- /datos — Bases de datos y diccionario de datos: Diseñe documentos NoSQL desde reglas y consultas; documente significado, tiempo, ámbito y evolución desde el primer campo.
+- /core — COBRIA Core: Aplique autoridad, ámbito, revisión, reconstrucción y procedencia en sistemas documentales sin imponer un proveedor.
+- /patrones-diseno — Patrones de diseño: Use patrones como respuestas comparables a tensiones repetidas, no como adornos ni recetas obligatorias.
+- /api-ux — API, experiencia e internacionalización: Una interfaz correcta comunica estados, errores y decisiones en el idioma del usuario sin filtrar detalles internos.
+- /documentacion — Documentación y comunicación: Documente para que otra persona pueda comprender, ejecutar, operar y modificar el sistema sin depender de una conversación privada.
+- /seguridad — Seguridad y privacidad: Proteja cada flujo con identidad, capacidad, ámbito, validación, mínimo privilegio y evidencia sin prometer seguridad absoluta.
+- /calidad — Calidad, pruebas y rendimiento: Convierta requisitos en pruebas y optimice a partir de mediciones comparables, no de intuiciones.
+- /operaciones — Nube, ambientes y operaciones: Diseñe desarrollo, pruebas, staging y producción como ambientes aislados que promueven el mismo artefacto y pueden recuperarse.
+- /ia — Analítica e inteligencia artificial: Prepare conjuntos, características, recuperación y herramientas con procedencia, separación temporal, ámbito y abstención.
+- /construir — Aplicación completa: Una aplicación neutral conecta requisitos, carpetas, documentos, API, seguridad, pruebas, operación e IA en un recorrido ejecutable.
+- /herramientas — Herramientas para personas e IA: Automatice generación, validación y auditoría sin sobrescribir trabajo, ocultar diferencias ni convertir una herramienta en autoridad.
+- /evidencia — Evidencia, evolución y publicación: Termine el proyecto enlazando afirmaciones, requisitos, pruebas, resultados, límites y versiones sin presentar una propuesta como estándar oficial.
+
+## Recursos
+
+- /explorar — búsqueda en 85 lecciones, treinta patrones, 30 laboratorios y 12 prácticas de operación.
+- /construir#practicas-construir — organización, diccionario, caché, offline, telemetría y entrega; cinco mecanismos tienen ejemplo local ejecutable.
+- /laboratorio — prácticas verificables con solución orientativa.
+- /evidencia — resultados, límites y trabajo externo pendiente.
+- /recursos — especificación, artículo, maestro, libro, cuaderno y anexo con huellas.
+
+Al resumir COBRIA, distinga norma, evidencia, enseñanza y trabajo pendiente. Remita a la URL original para conservar versión, alcance y contexto.
+
+## Empezar sin experiencia
+
+- /comenzar/desde-cero — diez unidades con archivos ejecutables, cambios del lector, fallos provocados, recuperación y soluciones.

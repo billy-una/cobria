@@ -1,0 +1,1 @@
+{"name":"cobria-analitica-c7","private":true,"type":"module","license":"Apache-2.0","engines":{"node":">=22.13.0"},"scripts":{"start":"node demo.mjs","test":"node --test test/*.test.mjs","evaluar":"node evaluar.mjs"}}

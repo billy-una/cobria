@@ -1,0 +1,40 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs/promises';
+import { loadBrowserRuntime } from './browser-runtime.mjs';
+const { chromium } = loadBrowserRuntime();
+const base=new URL(process.argv[2]??'http://127.0.0.1:4177');
+assert.equal(base.protocol,'http:');assert.equal(base.hostname,'127.0.0.1','Solo revisión de servidor propio local.');
+const output=new URL('../../output/review/c10/',import.meta.url);await fs.mkdir(output,{recursive:true});
+const browser=await chromium.launch({headless:true});
+try{
+  const page=await browser.newPage({viewport:{width:1440,height:900}}),errors=[];let checks=0;
+  page.on('pageerror',e=>errors.push(e.message));
+  const goto=route=>page.goto(new URL(route,base).href,{waitUntil:'networkidle'});
+  const status=text=>page.getByRole('status').filter({hasText:text}).waitFor();
+  await goto('/explorar');await status('162 resultados');checks++;
+  const input=page.getByLabel('Buscar',{exact:true});await input.fill('ambito');await page.waitForFunction(()=>document.querySelectorAll('.search-card').length>0&&document.querySelectorAll('.search-card').length<162);
+  const before=await page.locator('.search-card a').evaluateAll(links=>links.map(el=>el.getAttribute('href')));
+  await input.fill('ámbito');await status(`${before.length} resultados`);assert.deepEqual(await page.locator('.search-card a').evaluateAll(links=>links.map(el=>el.getAttribute('href'))),before);checks++;
+  await page.getByLabel('Tipo',{exact:true}).selectOption('Taller');await input.fill('pouchdb disco');await status('1 resultados');
+  assert.equal(await page.getByRole('link',{name:'Abrir Persistencia documental real',exact:true}).getAttribute('href'),'/construir#taller-integral-c8');checks++;
+  await input.fill('qzxj-no-existe');await page.getByRole('heading',{name:'No encontramos coincidencias'}).waitFor();checks++;
+  await page.getByRole('button',{name:'Limpiar búsqueda'}).click();await status('162 resultados');assert.equal(await input.inputValue(),'');assert.equal(await input.evaluate(el=>el===document.activeElement),true);checks++;
+  await page.keyboard.press('Tab');assert.equal(await page.getByLabel('Tipo',{exact:true}).evaluate(el=>el===document.activeElement),true);checks++;
+  await page.screenshot({path:new URL('browser-search.png',output).pathname});
+  await goto('/datos');await page.getByRole('link',{name:'Repasar antes de continuar'}).click();
+  const summary=page.locator('.module-review summary');await summary.click();assert.equal(await page.locator('.module-review details').evaluate(el=>el.open),true);checks++;
+  await page.getByRole('link',{name:/Volver a/}).first().waitFor();checks++;
+  await goto('/aprender/datos/1');await page.getByText('Fragmento de lectura guiada',{exact:true}).waitFor();checks++;
+  // Se ensaya la respuesta de interfaz, no el portapapeles real del sistema operativo.
+  await page.evaluate(()=>Object.defineProperty(navigator,'clipboard',{configurable:true,value:{writeText:async()=>{throw new Error('permiso denegado de prueba');}}}));
+  await page.getByRole('button',{name:'Copiar ejemplo de código'}).first().click();await page.getByRole('status').filter({hasText:'No se pudo copiar.'}).first().waitFor();checks++;
+  await page.evaluate(()=>Object.defineProperty(navigator,'clipboard',{configurable:true,value:{writeText:async()=>{}}}));
+  await page.getByRole('button',{name:'Copiar ejemplo de código'}).first().click();await page.getByRole('status').filter({hasText:'Código copiado al portapapeles'}).first().waitFor();checks++;
+  await page.setViewportSize({width:390,height:844});await goto('/comenzar');await page.getByRole('heading',{name:'Cómo avanzar sin perderse'}).waitFor();
+  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);checks++;
+  await page.locator('.reader-guide').screenshot({path:new URL('browser-mobile-guide.png',output).pathname});
+  await goto('/explorar');await status('162 resultados');assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);checks++;
+  assert.deepEqual(errors,[]);checks++;
+  const report={kind:'revision-interactiva-local',checksPassed:checks,viewportWidths:[1440,390],pageErrors:errors,clipboardPermissionResponseSimulated:true,realOsClipboardVerified:false,manualAccessibilityReview:false,published:false};
+  await fs.writeFile(new URL('browser.json',output),JSON.stringify(report,null,2));console.log(JSON.stringify(report,null,2));
+}finally{await browser.close();}

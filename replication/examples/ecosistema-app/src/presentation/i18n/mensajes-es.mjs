@@ -20,6 +20,14 @@ const mensajes = Object.freeze({
   ANALYTICS_CONFIG_INVALID: 'La configuración analítica no es válida.',
   ANALYTICS_CUTOFF_INVALID: 'El corte temporal no es válido.',
   ANALYTICS_ENTITY_LEAKAGE: 'La partición presenta fuga entre entidades.',
+  DATA_FIELDS_INVALID: 'Los campos de datos están incompletos o no pertenecen al formato declarado.',
+  DATA_SCOPE_REQUIRED: 'Indique el ámbito de la consulta.',
+  DATA_SPECIES_REQUIRED: 'Indique el código de especie de la consulta.',
+  DATA_LIMIT_INVALID: 'El límite debe ser un entero entre 1 y 100.',
+  CAT_VERSION_UNKNOWN: 'La edición del catálogo no está disponible.',
+  CAT_CODE_UNKNOWN: 'El código no pertenece a esa edición del catálogo.',
+  CAT_VERSION_REQUIRED: 'Indique la edición del catálogo antes de migrar.',
+  CAT_VERSION_CONFLICT: 'La edición difiere de la declarada; una migración no reclasifica el dato.',
 });
 
 export const traducirErrorEs = (codigo) => mensajes[codigo] ?? 'No fue posible completar la operación.';

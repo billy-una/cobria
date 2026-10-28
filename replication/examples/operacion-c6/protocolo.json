@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "kind": "microensayo-local-de-consulta-no-benchmark-arquitectonico",
+  "seed": 6018,
+  "documents": 5000,
+  "queriesPerPair": 100,
+  "warmupPairs": 5,
+  "measuredPairs": 30,
+  "variants": ["barrido", "indice-memoria"],
+  "order": "barajado por par con generador determinista; cada par comparte consultas",
+  "unit": "milisegundos por lote de 100 consultas",
+  "percentileMethod": "rango más próximo: ceil(p*n), con mínimo 1",
+  "limits": "Un proceso, un hilo y datos ficticios en memoria. Sin red ni disco de motor NoSQL. La construcción del índice se mide separadamente; no hay escrituras concurrentes, inferencia estadística, costos monetarios ni superioridad arquitectónica demostrada."
+}

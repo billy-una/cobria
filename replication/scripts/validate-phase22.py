@@ -5,6 +5,7 @@ from pathlib import Path
 import subprocess
 import tempfile
 import sys
+from frozen_project import frozen_project
 
 ROOT=Path(__file__).resolve().parents[2]
 BASE=ROOT/'specification/phase-22'
@@ -29,19 +30,21 @@ tests=subprocess.run(['node','--test','tests/phase22-engineering-manifest.test.m
 if tests.returncode: errors.append(tests.stdout+tests.stderr)
 elif '# pass 2' not in tests.stdout and 'pass 2' not in tests.stdout: errors.append('no se observaron dos pruebas de fase 22')
 
-if not POS.is_dir(): errors.append('checkout POSGUAPILES-1 no disponible')
-else:
+try:
+  with frozen_project(POS, manifest['project']['repository'], manifest['project']['expectedCommit']) as source:
     with tempfile.TemporaryDirectory() as directory:
         fresh=Path(directory)/'report.json'
-        run=subprocess.run(['node','replication/scripts/assess-engineering-manifest.mjs','--project',str(POS),'--manifest',str(BASE/'adoption-manifest.posguapiles.json'),'--output',str(fresh)],cwd=ROOT,capture_output=True,text=True)
+        run=subprocess.run(['node','replication/scripts/assess-engineering-manifest.mjs','--project',str(source),'--manifest',str(BASE/'adoption-manifest.posguapiles.json'),'--output',str(fresh)],cwd=ROOT,capture_output=True,text=True)
         if run.returncode: errors.append(run.stderr or run.stdout)
         else:
             regenerated=json.loads(fresh.read_text(encoding='utf-8'))
             if regenerated!=report: errors.append('el informe por manifiesto no es reproducible')
+except RuntimeError as error:
+  errors.append(str(error))
 
 roadmap=(ROOT/'manuales/11-estado-y-roadmap-integral.md').read_text(encoding='utf-8')
 if 'Fase 22 — Evaluación Engineering dirigida por manifiesto' not in roadmap: errors.append('roadmap sin fase 22')
-site=(ROOT/'sitio/app/manual.tsx').read_text(encoding='utf-8')
+site=(ROOT/'editorial/pedagogy.json').read_text(encoding='utf-8')
 book=(ROOT/'libro-cobria/build-book.mjs').read_text(encoding='utf-8')
 if 'Manifiesto de adopción' not in site: errors.append('sitio sin manifiesto de adopción')
 if 'Declarar para verificar' not in book: errors.append('libro sin fase 22')

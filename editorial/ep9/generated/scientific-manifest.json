@@ -1,0 +1,837 @@
+{
+  "date": "2026-10-25",
+  "pandoc": "pandoc 3.12.1",
+  "scope": "derivación técnica revisable; no certificación de accesibilidad ni validación por lector de pantalla",
+  "documents": [
+    {
+      "id": "articulo",
+      "html": "editorial/ep9/generated/articulo.html",
+      "sourceSha256": {
+        "articulo-cobria.tex": "9cb2ec84df3a6319b6e1bc3091a8ea5047d78389cb663fe4a885f53d08a3c61d",
+        "editorial/ep6/evidence-table.tex": "9acb40a6711eef99f9af4a6ccb71192acebb3aa41db37943b25f9500c937a6e3",
+        "editorial/ep6/synthesis.tex": "692e4624e1bd760a1066829ebb04242826691067d279d9971b980dca9286a44d",
+        "editorial/ep7/comparison.tex": "f67596c3b823b1d740b4dda9291c325d81839c7ae36e59463f512f39d04122b9",
+        "editorial/ep7/method.tex": "b77d30a8dd45c31e4734a8cf420614ade3de75873020f8f3c01775dae35caa64",
+        "editorial/ep8/scope.tex": "c4fa1a2d6d00242cfb169e131097d4a53df379db785d78de71f0de6dc9f0a480",
+        "editorial/generated/ecosistema-13-14/interpretacion.tex": "8047d1526642d2aa7d8538c4a4a0aeedf3f938efabe3f2434711bcfe1e13e4db",
+        "editorial/generated/evidence-r7.tex": "613c433665c62cae20246884279650e10e48f405eed209fe525d6a8f348bc939",
+        "editorial/generated/identity.tex": "a491018f6c1eef2755f75c5570f6cf3889ddce0fb1d8cec7ebf405ff9cb8cb0d",
+        "referencias.bib": "5a4715403883bd6e94835d02e72309bbd3ba27e17005af2b9a5450aa02235d51"
+      },
+      "htmlSha256": "f6cce713de1aa7d406f098868c86dc1bbdea90611640f79c179a332e7c00600a",
+      "diagrams": [
+        {
+          "id": "articulo-01",
+          "sourceSha256": "b3310440314acd1d07f0964040aea699541a645ea640d8339d2b09c70156e0a9",
+          "svg": "editorial/ep9/generated/figuras/articulo-01.svg",
+          "svgSha256": "1333b063a11eb1631ddb7d3087a4921478ffc136de4f744eaac7e006b297175c",
+          "nodes": {
+            "u": "Caso de uso",
+            "c": "Documento canónico",
+            "p": "Proyección reconstruible",
+            "d": "Producto de datos",
+            "m": "Metadatos, ámbito y versión"
+          },
+          "connections": [
+            [
+              "u",
+              "c",
+              true,
+              ""
+            ],
+            [
+              "c",
+              "p",
+              true,
+              ""
+            ],
+            [
+              "p",
+              "u",
+              true,
+              ""
+            ],
+            [
+              "p",
+              "d",
+              true,
+              ""
+            ],
+            [
+              "m",
+              "c",
+              true,
+              ""
+            ],
+            [
+              "m",
+              "p",
+              true,
+              ""
+            ],
+            [
+              "m",
+              "d",
+              true,
+              ""
+            ]
+          ],
+          "transcription": "nodos, conexiones, dirección y rótulos extraídos; posición y color no sustituyen significado"
+        }
+      ],
+      "warnings": ""
+    },
+    {
+      "id": "maestro",
+      "html": "editorial/ep9/generated/maestro.html",
+      "sourceSha256": {
+        "editorial/ep6/evidence-table.tex": "9acb40a6711eef99f9af4a6ccb71192acebb3aa41db37943b25f9500c937a6e3",
+        "editorial/ep6/synthesis.tex": "692e4624e1bd760a1066829ebb04242826691067d279d9971b980dca9286a44d",
+        "editorial/ep7/comparison.tex": "f67596c3b823b1d740b4dda9291c325d81839c7ae36e59463f512f39d04122b9",
+        "editorial/ep7/method.tex": "b77d30a8dd45c31e4734a8cf420614ade3de75873020f8f3c01775dae35caa64",
+        "editorial/ep8/scope.tex": "c4fa1a2d6d00242cfb169e131097d4a53df379db785d78de71f0de6dc9f0a480",
+        "editorial/generated/ecosistema-13-14/interpretacion.tex": "8047d1526642d2aa7d8538c4a4a0aeedf3f938efabe3f2434711bcfe1e13e4db",
+        "editorial/generated/evidence-r7.tex": "613c433665c62cae20246884279650e10e48f405eed209fe525d6a8f348bc939",
+        "editorial/generated/identity.tex": "a491018f6c1eef2755f75c5570f6cf3889ddce0fb1d8cec7ebf405ff9cb8cb0d",
+        "main.tex": "4af8640166d3ef665d03caa8d4957b44b604a9376594f870d180ce6e918e9ab0",
+        "partes/antecedente-evaluacion-embebida.tex": "fde5c7eb871966c11b460d31d659e7913e85f91f2cfacc46df8df7efee606ba1",
+        "partes/parte-i-fundamentos.tex": "a19658582f632ef5cb047ef1582a39360751a9246680470b3dec52167fdcb36c",
+        "partes/parte-ii-diseno-formalizacion.tex": "19f5b03bdf98fa7f4722db02c0555801a2684afcadee7d8ddd7e1dbdbe5e5940",
+        "partes/parte-iii-rendimiento-optimizacion.tex": "2dbdb35db3d6a233aa8177f73cf74c73042ce955e0b4fe3ebd481a9ee34efa36",
+        "partes/parte-iv-analitica-ia.tex": "c4b6624f478edd0cb47b97a595a5d7f6e9e3729d0e0bdf5f3044bf3b1f8e6639",
+        "partes/parte-r8-evidencia-confirmatoria.tex": "2f7d1d00c6d24325508ee77436a75bfa4042808e9b62a140610f58c238752c23",
+        "partes/parte-v-implementacion-casos.tex": "76f5eb19e156305d3e0a0dbb0ef81cc848880a8829edd684f4a027913a7510c9",
+        "partes/parte-vi-evaluacion-nosql.tex": "68a34f8e5ee8f429286191bbb047abe1609cd72ddc006961904f7ebdad69f34b",
+        "partes/parte-vii-sintesis-nosql.tex": "f9eb7b99dd7ff7d41bfb1c74008fdf2a10c408a5c82da4d3e94406b4cdf3b586",
+        "partes/parte-viii-anexos-reproducibilidad.tex": "22494bdaa23be7f33a832fed6f4508c8f02c114428e5711f028ad2108c8380b2",
+        "partes/parte-viii-manual-replica-nosql.tex": "d7a22fc7bcffafce852fec2df740ac4e449e187f3f179569c71666dc9e810d45",
+        "portada.tex": "439404da5c1a7e277ce48dee5555efd836219bfeec4676b137fad651eb6a895b",
+        "referencias.bib": "5a4715403883bd6e94835d02e72309bbd3ba27e17005af2b9a5450aa02235d51",
+        "replication/results/context-figures/contratos-ia.tex": "e0035c10add9bb5b5a6aa63c3ea28f92080895ca9a33ee66bab9595c91df48fd"
+      },
+      "htmlSha256": "41e2ad1568f15b054fd11d7bf295b29c21708906dc675f72407af96b84190dd6",
+      "diagrams": [
+        {
+          "id": "maestro-01",
+          "sourceSha256": "ba9154583fbe7f87c1566217b3a29976b7afe15c7a3450a493bbb3d06c71cb77",
+          "svg": "editorial/ep9/generated/figuras/maestro-01.svg",
+          "svgSha256": "8f1ca9052be06fa1c7aaaccc3d585f0eec4afdaa7940d5936568c4e65adea2fb",
+          "nodes": {
+            "ui": "Interfaces y consumidores",
+            "uc": "Casos de uso y autorización",
+            "svc": "Servicios, políticas y composición",
+            "repo": "Repositorios / Mapeadores de datos",
+            "canon": "Entidades canónicas",
+            "oper": "Proyecciones operacionales",
+            "anal": "Proyecciones analíticas y de IA"
+          },
+          "connections": [
+            [
+              "ui",
+              "uc",
+              true,
+              ""
+            ],
+            [
+              "uc",
+              "svc",
+              true,
+              ""
+            ],
+            [
+              "svc",
+              "repo",
+              true,
+              ""
+            ],
+            [
+              "repo",
+              "canon",
+              true,
+              ""
+            ],
+            [
+              "canon",
+              "oper",
+              true,
+              "deriva"
+            ],
+            [
+              "canon",
+              "anal",
+              true,
+              "deriva"
+            ],
+            [
+              "oper",
+              "canon",
+              true,
+              "verificación y reconstrucción"
+            ],
+            [
+              "anal",
+              "canon",
+              true,
+              "linaje y reconstrucción"
+            ]
+          ],
+          "transcription": "nodos, conexiones, dirección y rótulos extraídos; posición y color no sustituyen significado"
+        },
+        {
+          "id": "maestro-02",
+          "sourceSha256": "91d784addfbd3dcd21c8a1de1c778ac96d45163ac6472a3f869995201c1754bf",
+          "svg": "editorial/ep9/generated/figuras/maestro-02.svg",
+          "svgSha256": "24768e2d71ae99d4bc0c88ab3111c4acb44419c1c4176d51a6d1d1bc82735a18",
+          "nodes": {
+            "present": "Presentación, API y consumidores",
+            "use": "Casos de uso: intención, autorización e idempotencia",
+            "service": "Servicios de dominio y aplicación",
+            "repo": "Repositorios / Mapeadores de datos",
+            "canonical": "Entidades canónicas",
+            "storage": "Pasarela de almacenamiento y motor NoSQL",
+            "meta": "COBRIA Metadatos",
+            "proj": "Gestores de proyecciones",
+            "gov": "Auditoría y gobierno"
+          },
+          "connections": [
+            [
+              "present",
+              "use",
+              true,
+              ""
+            ],
+            [
+              "use",
+              "service",
+              true,
+              ""
+            ],
+            [
+              "service",
+              "repo",
+              true,
+              ""
+            ],
+            [
+              "repo",
+              "canonical",
+              true,
+              ""
+            ],
+            [
+              "canonical",
+              "storage",
+              true,
+              ""
+            ],
+            [
+              "meta",
+              "use",
+              false,
+              ""
+            ],
+            [
+              "meta",
+              "proj",
+              false,
+              ""
+            ],
+            [
+              "proj",
+              "canonical",
+              false,
+              ""
+            ],
+            [
+              "gov",
+              "canonical",
+              false,
+              ""
+            ]
+          ],
+          "transcription": "nodos, conexiones, dirección y rótulos extraídos; posición y color no sustituyen significado"
+        },
+        {
+          "id": "maestro-03",
+          "sourceSha256": "59fd7a66d52feb9c6af7886d114bed8d1fbd4d8b8eb06f9051d31ec3ced53795",
+          "svg": "editorial/ep9/generated/figuras/maestro-03.svg",
+          "svgSha256": "af7e0939bd075f7ae4735b07d150a1db860d259d96063133830a0d7c69d244c0",
+          "nodes": {
+            "e1": "Entidad canónica A",
+            "e2": "Entidad canónica B",
+            "idx": "Índice operacional",
+            "sum": "Resumen compuesto",
+            "data": "Conjunto de datos versionado"
+          },
+          "connections": [
+            [
+              "e1",
+              "idx",
+              true,
+              ""
+            ],
+            [
+              "e1",
+              "sum",
+              true,
+              ""
+            ],
+            [
+              "e2",
+              "sum",
+              true,
+              ""
+            ],
+            [
+              "sum",
+              "data",
+              true,
+              ""
+            ]
+          ],
+          "transcription": "nodos, conexiones, dirección y rótulos extraídos; posición y color no sustituyen significado"
+        },
+        {
+          "id": "maestro-04",
+          "sourceSha256": "b7727d9ace12f37d014cef17f4f9b7300426dc94926612b89e89f0147d787a07",
+          "svg": "editorial/ep9/generated/figuras/maestro-04.svg",
+          "svgSha256": "403d20b368fa7244422b8e8a7a3e9d6150f2aeeb74caa79cc337045ed5eafb7d",
+          "nodes": {
+            "observe": "Observar telemetría",
+            "analyze": "Analizar costo y carga",
+            "propose": "Proponer cambio",
+            "evaluate": "Evaluar en paralelo",
+            "approve": "Aprobar y versionar",
+            "verify": "Verificar resultado"
+          },
+          "connections": [
+            [
+              "observe",
+              "analyze",
+              true,
+              ""
+            ],
+            [
+              "analyze",
+              "propose",
+              true,
+              ""
+            ],
+            [
+              "propose",
+              "evaluate",
+              true,
+              ""
+            ],
+            [
+              "evaluate",
+              "approve",
+              true,
+              ""
+            ],
+            [
+              "approve",
+              "verify",
+              true,
+              ""
+            ],
+            [
+              "verify",
+              "observe",
+              true,
+              ""
+            ]
+          ],
+          "transcription": "nodos, conexiones, dirección y rótulos extraídos; posición y color no sustituyen significado"
+        },
+        {
+          "id": "maestro-05",
+          "sourceSha256": "517278b9b62bac0df5c69f5c44b809768370bb954951640bfef122aee1e07a3d",
+          "svg": "editorial/ep9/generated/figuras/maestro-05.svg",
+          "svgSha256": "ffafdcd96be64ac41ba425d0ee5dba5c3adb796e0eef5e3bb83e7f8f262eae60",
+          "nodes": {
+            "canonical": "Datos canónicos y eventos",
+            "builder": "Constructor de conjuntos de datos versionado",
+            "datosNodo": "Conjunto de datos / Conjunto de características",
+            "model": "Modelo y evaluación",
+            "prediction": "Predicción con evidencia",
+            "usecase": "Caso de uso autorizado"
+          },
+          "connections": [
+            [
+              "canonical",
+              "builder",
+              true,
+              ""
+            ],
+            [
+              "builder",
+              "datosNodo",
+              true,
+              ""
+            ],
+            [
+              "datosNodo",
+              "model",
+              true,
+              ""
+            ],
+            [
+              "model",
+              "prediction",
+              true,
+              ""
+            ],
+            [
+              "prediction",
+              "usecase",
+              true,
+              ""
+            ],
+            [
+              "usecase",
+              "canonical",
+              true,
+              "cambio validado"
+            ]
+          ],
+          "transcription": "nodos, conexiones, dirección y rótulos extraídos; posición y color no sustituyen significado"
+        },
+        {
+          "id": "maestro-06",
+          "sourceSha256": "ba56cc12d47c957bcaa470a2fe15ebd61010d6090b570984819dc871febcaf4a",
+          "svg": "editorial/ep9/generated/figuras/maestro-06.svg",
+          "svgSha256": "4f6f365194952bd82eec3c42c6e8376e13aa4e6f2954e177b186f30613382cde",
+          "nodes": {
+            "core": "Núcleo y eventos",
+            "datosNodo": "Constructor de conjuntos de datos",
+            "características": "Registro de características",
+            "models": "Registro de modelos",
+            "retrieval": "Pasarela de recuperación",
+            "usecase": "Caso de uso autorizado",
+            "policy": "Motor de políticas y Registro de evidencias"
+          },
+          "connections": [
+            [
+              "core",
+              "datosNodo",
+              true,
+              ""
+            ],
+            [
+              "datosNodo",
+              "características",
+              true,
+              ""
+            ],
+            [
+              "características",
+              "models",
+              true,
+              ""
+            ],
+            [
+              "models",
+              "retrieval",
+              true,
+              ""
+            ],
+            [
+              "retrieval",
+              "usecase",
+              true,
+              ""
+            ],
+            [
+              "policy",
+              "datosNodo",
+              true,
+              ""
+            ],
+            [
+              "policy",
+              "models",
+              true,
+              ""
+            ],
+            [
+              "policy",
+              "retrieval",
+              true,
+              ""
+            ]
+          ],
+          "transcription": "nodos, conexiones, dirección y rótulos extraídos; posición y color no sustituyen significado"
+        },
+        {
+          "id": "maestro-07",
+          "sourceSha256": "0295e4f17b26f534980363e0a6930dbb39c65dd64f69919f8b3c15eb961744a5",
+          "svg": "editorial/ep9/generated/figuras/maestro-07.svg",
+          "svgSha256": "2e5ad5054c7cd7c78cbe38717e1067c0c1f5d5865b1cfd9594c2e24c534be18b",
+          "nodes": {
+            "punto-1": "Precisión: 1.0",
+            "punto-2": "Exhaustividad: 1.0",
+            "punto-3": "F1: 1.0"
+          },
+          "connections": [],
+          "transcription": "nodos, conexiones, dirección y rótulos extraídos; posición y color no sustituyen significado"
+        },
+        {
+          "id": "maestro-08",
+          "sourceSha256": "8a8d64414af2101e13a4c99ac174cca30ba83d02dd88fc76fc29795a2d7cf598",
+          "svg": "editorial/ep9/generated/figuras/maestro-08.svg",
+          "svgSha256": "fa909e9ddb7817b235329d0a0a3389267c1bfd0199702f1e571b1dce19aab179",
+          "nodes": {
+            "asset": "Recurso y metadatos",
+            "extract": "Extractor versionado",
+            "chunks": "Fragmentos / descriptores",
+            "embed": "Modelo de embedding",
+            "index": "Índice semántico",
+            "retrieve": "Recuperación autorizada"
+          },
+          "connections": [
+            [
+              "asset",
+              "extract",
+              true,
+              ""
+            ],
+            [
+              "extract",
+              "chunks",
+              true,
+              ""
+            ],
+            [
+              "chunks",
+              "embed",
+              true,
+              ""
+            ],
+            [
+              "embed",
+              "index",
+              true,
+              ""
+            ],
+            [
+              "index",
+              "retrieve",
+              true,
+              ""
+            ]
+          ],
+          "transcription": "nodos, conexiones, dirección y rótulos extraídos; posición y color no sustituyen significado"
+        },
+        {
+          "id": "maestro-09",
+          "sourceSha256": "9051af56655d78da57c421661693698dd2dc728f0b72596a2ef121700bea2509",
+          "svg": "editorial/ep9/generated/figuras/maestro-09.svg",
+          "svgSha256": "8a9909ed381c2ecb94456c42de4f96c1de656ae1c1623b13444eaf692de9ab4e",
+          "nodes": {
+            "object": "Objeto de dominio",
+            "dater": "Dater",
+            "connector": "Conector NoSQL",
+            "base": "Ruta principal",
+            "indexes": "Índices por dimensión",
+            "cache": "Mapa e índices locales"
+          },
+          "connections": [
+            [
+              "object",
+              "dater",
+              true,
+              ""
+            ],
+            [
+              "dater",
+              "connector",
+              true,
+              ""
+            ],
+            [
+              "connector",
+              "base",
+              true,
+              ""
+            ],
+            [
+              "connector",
+              "indexes",
+              true,
+              ""
+            ],
+            [
+              "dater",
+              "cache",
+              true,
+              ""
+            ]
+          ],
+          "transcription": "nodos, conexiones, dirección y rótulos extraídos; posición y color no sustituyen significado"
+        },
+        {
+          "id": "maestro-10",
+          "sourceSha256": "0409aff0e96fecc486d2c6e5e277d27fa7cbcd645990c47238f47845cd783872",
+          "svg": "editorial/ep9/generated/figuras/maestro-10.svg",
+          "svgSha256": "12dbbc40cf725d06016da5134744a2d142cc9c0dbd511577d1d01271486e6a9a",
+          "nodes": {
+            "service": "Servicio / caso de uso",
+            "dater": "Dater base especializado",
+            "mapper": "Modelo y mapa de campos",
+            "connector": "Conector",
+            "store": "Almacenamiento multiinquilino",
+            "cache": "Caché con TTL"
+          },
+          "connections": [
+            [
+              "service",
+              "dater",
+              true,
+              ""
+            ],
+            [
+              "dater",
+              "mapper",
+              true,
+              ""
+            ],
+            [
+              "dater",
+              "connector",
+              true,
+              ""
+            ],
+            [
+              "connector",
+              "store",
+              true,
+              ""
+            ],
+            [
+              "dater",
+              "cache",
+              true,
+              ""
+            ]
+          ],
+          "transcription": "nodos, conexiones, dirección y rótulos extraídos; posición y color no sustituyen significado"
+        },
+        {
+          "id": "maestro-11",
+          "sourceSha256": "dd4066a1d9601f33aac64f91bb924886f049dc60e331e85bf908d627debd3d7f",
+          "svg": "editorial/ep9/generated/figuras/maestro-11.svg",
+          "svgSha256": "db4d688f3b4ec5e803b9f2edd47c3cc8e5109b3d48d456f7ebce0fcb6c022de8",
+          "nodes": {
+            "heredado": "Consumidor existente",
+            "facade": "Fachada compatible",
+            "usecase": "Nuevo caso de uso",
+            "repo": "Repositorio y Mapeador",
+            "canonical": "Canónico",
+            "projection": "Proyección versionada"
+          },
+          "connections": [
+            [
+              "heredado",
+              "facade",
+              true,
+              ""
+            ],
+            [
+              "facade",
+              "usecase",
+              true,
+              ""
+            ],
+            [
+              "usecase",
+              "repo",
+              true,
+              ""
+            ],
+            [
+              "repo",
+              "canonical",
+              true,
+              ""
+            ],
+            [
+              "canonical",
+              "projection",
+              true,
+              ""
+            ]
+          ],
+          "transcription": "nodos, conexiones, dirección y rótulos extraídos; posición y color no sustituyen significado"
+        }
+      ],
+      "warnings": ""
+    },
+    {
+      "id": "especificacion",
+      "html": "editorial/ep9/generated/especificacion.html",
+      "sourceSha256": {
+        "referencias.bib": "5a4715403883bd6e94835d02e72309bbd3ba27e17005af2b9a5450aa02235d51",
+        "specification/COBRIA-ECOSISTEMA-1.0.tex": "031a0ee459dd4b9e313427ed516224a1821870104eb8ea4ecefb101c98b7fd4b",
+        "specification/generated/requirements-1.0.tex": "e1ae1cee72b735100cdeb27aba9474a2117bd8401afce477741357b5cd8fed53",
+        "specification/generated/traceability-1.0.tex": "3fd6caa6b0d974fc3590cffe5101112cb85cb3023a1ae997c09421fc0f5d3a83"
+      },
+      "htmlSha256": "fc633034571fa92e9ef983b3544d9ab98a303dc7b849b03b069d85c6861261a7",
+      "diagrams": [
+        {
+          "id": "especificacion-01",
+          "sourceSha256": "84e43677c7a2ef08e9d42a9686d69bc793d6f46400cf5ffb7de825d493f2e143",
+          "svg": "editorial/ep9/generated/figuras/especificacion-01.svg",
+          "svgSha256": "785d1aa197af4e41e0fe12f962022145023e354315532a5fdd2a936e00d5ca92",
+          "nodes": {
+            "ausente": "AUSENTE",
+            "construyendo": "CONSTRUYENDO",
+            "candidata": "CANDIDATA",
+            "verificada": "VERIFICADA",
+            "publicada": "PUBLICADA",
+            "retirada": "RETIRADA",
+            "rechazada": "RECHAZADA",
+            "fallida": "FALLIDA"
+          },
+          "connections": [
+            [
+              "ausente",
+              "construyendo",
+              true,
+              ""
+            ],
+            [
+              "construyendo",
+              "candidata",
+              true,
+              ""
+            ],
+            [
+              "candidata",
+              "verificada",
+              true,
+              ""
+            ],
+            [
+              "verificada",
+              "publicada",
+              true,
+              ""
+            ],
+            [
+              "publicada",
+              "retirada",
+              true,
+              ""
+            ],
+            [
+              "candidata",
+              "rechazada",
+              true,
+              ""
+            ],
+            [
+              "construyendo",
+              "fallida",
+              true,
+              ""
+            ],
+            [
+              "fallida",
+              "construyendo",
+              true,
+              ""
+            ],
+            [
+              "rechazada",
+              "construyendo",
+              true,
+              ""
+            ]
+          ],
+          "transcription": "nodos, conexiones, dirección y rótulos extraídos; posición y color no sustituyen significado"
+        }
+      ],
+      "warnings": ""
+    },
+    {
+      "id": "ciega",
+      "html": "editorial/ep9/generated/ciega.html",
+      "sourceSha256": {
+        "articulo-cobria.tex": "9cb2ec84df3a6319b6e1bc3091a8ea5047d78389cb663fe4a885f53d08a3c61d",
+        "editorial/ep6/evidence-table.tex": "9acb40a6711eef99f9af4a6ccb71192acebb3aa41db37943b25f9500c937a6e3",
+        "editorial/ep6/synthesis.tex": "692e4624e1bd760a1066829ebb04242826691067d279d9971b980dca9286a44d",
+        "editorial/ep7/comparison.tex": "f67596c3b823b1d740b4dda9291c325d81839c7ae36e59463f512f39d04122b9",
+        "editorial/ep7/method.tex": "b77d30a8dd45c31e4734a8cf420614ade3de75873020f8f3c01775dae35caa64",
+        "editorial/ep8/scope.tex": "c4fa1a2d6d00242cfb169e131097d4a53df379db785d78de71f0de6dc9f0a480",
+        "editorial/generated/ecosistema-13-14/interpretacion.tex": "8047d1526642d2aa7d8538c4a4a0aeedf3f938efabe3f2434711bcfe1e13e4db",
+        "editorial/generated/evidence-r7.tex": "613c433665c62cae20246884279650e10e48f405eed209fe525d6a8f348bc939",
+        "editorial/generated/identity.tex": "a491018f6c1eef2755f75c5570f6cf3889ddce0fb1d8cec7ebf405ff9cb8cb0d",
+        "referencias.bib": "5a4715403883bd6e94835d02e72309bbd3ba27e17005af2b9a5450aa02235d51",
+        "review/blind-article.tex": "1b4692b19f8cbd43f2a527d173ce36f49aff1a883076782bdf28d597deb18509"
+      },
+      "htmlSha256": "606b9a43431903541a4662e3d562735789a71bf548bb33b76b5947424e813dfa",
+      "diagrams": [
+        {
+          "id": "ciega-01",
+          "sourceSha256": "b3310440314acd1d07f0964040aea699541a645ea640d8339d2b09c70156e0a9",
+          "svg": "editorial/ep9/generated/figuras/ciega-01.svg",
+          "svgSha256": "1333b063a11eb1631ddb7d3087a4921478ffc136de4f744eaac7e006b297175c",
+          "nodes": {
+            "u": "Caso de uso",
+            "c": "Documento canónico",
+            "p": "Proyección reconstruible",
+            "d": "Producto de datos",
+            "m": "Metadatos, ámbito y versión"
+          },
+          "connections": [
+            [
+              "u",
+              "c",
+              true,
+              ""
+            ],
+            [
+              "c",
+              "p",
+              true,
+              ""
+            ],
+            [
+              "p",
+              "u",
+              true,
+              ""
+            ],
+            [
+              "p",
+              "d",
+              true,
+              ""
+            ],
+            [
+              "m",
+              "c",
+              true,
+              ""
+            ],
+            [
+              "m",
+              "p",
+              true,
+              ""
+            ],
+            [
+              "m",
+              "d",
+              true,
+              ""
+            ]
+          ],
+          "transcription": "nodos, conexiones, dirección y rótulos extraídos; posición y color no sustituyen significado"
+        }
+      ],
+      "warnings": ""
+    }
+  ]
+}

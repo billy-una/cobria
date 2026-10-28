@@ -1,0 +1,93 @@
+{
+  "title": "De una observación a una aplicación recuperable",
+  "source": "replication/examples/integral-c8/recorrido-ep4.mjs",
+  "sourceSha256": "0e3fd85b7a8a55e866a3a27a8b9442e5efaf8ab884258344b8174caa650d7ca2",
+  "sections": [
+    {
+      "title": "Ejecutar desde una copia del repositorio",
+      "blocks": [
+        {
+          "kind": "text",
+          "text": "Requisitos: Node 22.13 o posterior, npm y espacio para dependencias y bases temporales.\nDesde la raíz:"
+        },
+        {
+          "kind": "code",
+          "text": "npm ci --prefix replication\nnode replication/examples/integral-c8/recorrido-ep4.mjs\nnode replication/examples/integral-c8/recorrido-ep4.mjs 4\nnode --test replication/tests/ep4-recorrido.test.mjs\nnpm test --prefix replication/examples/integral-c8"
+        },
+        {
+          "kind": "text",
+          "text": "La salida JSON indica el directorio temporal conservado para inspección, los siete\nhitos, cuatro rechazos, fuentes y huellas. Los puertos HTTP son locales y efímeros;\nse cierran incluso si falla una comprobación. El programa crea bases nuevas, no\nreutiliza ni sobrescribe una instalación del lector. Es código ejecutable JavaScript,\nno pseudocódigo ni una traducción equivalente a cuatro lenguajes."
+        }
+      ]
+    },
+    {
+      "title": "Hitos y responsabilidades",
+      "blocks": [
+        {
+          "kind": "table",
+          "text": "| Hito | Archivo responsable | Efecto comprobado |\n| --- | --- | --- |\n| Memoria | `ecosistema-app/src/composition.mjs` | El mismo documento pasa por dominio y caso de uso |\n| API y permisos | `integral-c8/composition.mjs`, `api-ux-c5/server.mjs` | Catálogo desconocido se rechaza; ámbito ajeno se deniega |\n| Escritura durable | `integral-c8/application/registrar-durable.mjs` | Valida dominio y catálogo antes del puerto atómico |\n| Motor y proyección | `integral-c8/infrastructure/repositorio-pouch.mjs` | Fuente, idempotencia y resumen se confirman juntos |\n| Traducción física | `ecosistema-app/src/infrastructure/data/observacion-dater.mjs` | Claves físicas no aparecen en el contrato público |\n| Analítica descriptiva | `integral-c8/recorrido-ep4.mjs` | Total local con identidad, ámbito, revisión y huella de fuente |\n| Recuperación | `analitica-c7/taller.mjs` | Cita con huella o abstención, sin autoridad de escritura |\n| Recuperación operativa | `integral-c8/recorrido-ep4.mjs` | Reapertura, reentrega, restauración y reconstrucción equivalentes |"
+        },
+        {
+          "kind": "text",
+          "text": "Las rutas de la tabla son relativas a `replication/examples/`. La composición une\nlas capas: no se introduce una dependencia del dominio hacia el SDK. El catálogo\nutilizado es `integral-c8/catalogo.json`, edición `aves-c8-v1`. La forma física sigue\nsiendo versión 1; una revisión del hecho no equivale a una edición del catálogo."
+        }
+      ]
+    },
+    {
+      "title": "Ejercicio y solución verificable",
+      "blocks": [
+        {
+          "kind": "text",
+          "text": "Registre tres colibríes y después ejecute otra copia del recorrido con cuatro.\nAntes de ejecutarla, prediga qué cambia: cantidad canónica, total del resumen,\ntotal analítico y huellas. Prediga también qué permanece: una observación, una\noperación, ámbito e identidad. Cada ejecución usa una base nueva: no simula una\nactualización sobre la anterior."
+        },
+        {
+          "kind": "text",
+          "text": "Solución: el parámetro cambia la entrada del mismo flujo; las pruebas verifican\ntotales 3 y 4. La reentrega con la misma clave conserva el estado; cambiar la\ncantidad reutilizando esa clave devuelve 409. Una nueva revisión de negocio necesita\nsu propia clave y revisión, no alterar la respuesta anterior. La cantidad cero,\nnegativa, fraccionaria o no numérica se rechaza antes de abrir el motor."
+        },
+        {
+          "kind": "text",
+          "text": "El recorrido también intenta una especie desconocida, un ámbito no autorizado y\nun respaldo manipulado. Compara el estado antes y después de los rechazos; un\nresultado verde sin estas comparaciones no bastaría para demostrar ausencia de efectos."
+        }
+      ]
+    },
+    {
+      "title": "Leer el código sin perder la procedencia",
+      "blocks": [
+        {
+          "kind": "text",
+          "text": "Extracto real del programa, no ejecutable por separado. servidor es la aplicación local abierta; ambito es reserva-sur; resumen proviene de la lectura autorizada anterior. Los imports y auxiliares están en el programa completo mostrado en la web."
+        },
+        {
+          "kind": "code",
+          "text": "const documentos = await servidor.repo.listar(ambito);\n    const analitica = { ambito, documentos: documentos.length,\n      cantidad: documentos.reduce((total, d) => total + d.cantidad, 0),\n      fuentes: documentos.map(d => ({ id: d.id, revision: d.revision, ambito: d.ambito })),\n      fuenteSha256: resumen.fuenteSha256, autoridadEscritura: false,\n      entrenamientoHabilitado: false };"
+        },
+        {
+          "kind": "text",
+          "text": "listar obtiene observaciones del mismo ámbito. reduce suma cantidades; map conserva la identidad y revisión de cada fuente. La huella enlaza el total con la proyección leída. autoridadEscritura y entrenamientoHabilitado son falsos: un total no recibe permiso para alterar hechos o entrenar un modelo."
+        },
+        {
+          "kind": "text",
+          "text": "Este bloque pertenece al recorrido local secuencial. No es una API analítica de producción ni garantiza una instantánea frente a otro escritor concurrente. Para exponerlo se necesita un caso de uso autorizado y una política explícita de coherencia de lectura."
+        }
+      ]
+    },
+    {
+      "title": "Límites de adopción",
+      "blocks": [
+        {
+          "kind": "text",
+          "text": "Las sesiones DEMO no autentican personas. La analítica aquí es descriptiva y no\nhabilita entrenamiento: el documento original no contiene consentimiento ni tiempo\nde conocimiento. No se inventan estos atributos para alimentar C7. Un conjunto de\nentrenamiento requiere el contrato explícito y los controles temporales de ese taller.\nLa recuperación es léxica, no razona sobre atributos ausentes como salud del animal."
+        },
+        {
+          "kind": "text",
+          "text": "Un agregado admite hasta 1000 documentos y 1000 operaciones, con límite de 2 MiB.\nCada lectura valida el agregado completo; no es un índice distribuido ni una promesa\nde escalabilidad. No hay transacción entre ámbitos, prueba de pérdida eléctrica,\nclúster, nube, Firebase Emulator, staging ni producción en este recorrido. Las copias\nno incluyen sesiones o auditoría operacional. Las huellas comprueban integridad,\nno firma ni autenticidad frente a un atacante que pueda reemplazar contenido y hash."
+        },
+        {
+          "kind": "text",
+          "text": "Código bajo Apache-2.0 según la licencia del repositorio; textos y datos se rigen\npor sus licencias específicas, no se relicencian mediante esta guía."
+        }
+      ]
+    }
+  ],
+  "code": "import assert from 'node:assert/strict';\nimport { mkdtemp } from 'node:fs/promises';\nimport { tmpdir } from 'node:os';\nimport path from 'node:path';\nimport { fileURLToPath } from 'node:url';\nimport { abrirIntegral, componer } from './composition.mjs';\nimport { RepositorioPouch } from './infrastructure/repositorio-pouch.mjs';\nimport { crearAplicacion } from '../ecosistema-app/src/composition.mjs';\n\n/** Un mismo hecho atraviesa memoria, HTTP y motor documental; solo datos sintéticos. */\nexport async function ejecutarRecorrido({ cantidad = 3 } = {}) {\n  assert.ok(Number.isSafeInteger(cantidad) && cantidad > 0, 'Cantidad positiva requerida');\n  const directorio = await mkdtemp(path.join(tmpdir(), 'cobria-ep4-'));\n  const ambito = 'reserva-sur';\n  const dato = { id: 'obs-ep4', ambito, especie: 'colibri', cantidad,\n    revision: 1, observadaEn: '2026-10-19T12:00:00.000Z' };\n  const contexto = { actorId: 'aprendiz-demo', finalidad: 'aprendizaje-ep4',\n    ambitos: [ambito], permisos: ['observaciones:leer', 'observaciones:escribir',\n      'observaciones:respaldar', 'observaciones:reconstruir'],\n    claveIdempotencia: 'operacion-ep4-01' };\n  const memoria = crearAplicacion();\n  const inicial = await memoria.registrarController.ejecutar({ cuerpo: dato, contexto });\n  assert.equal(inicial.estado, 201);\n  const token = 'sesion_demo_ep4_abcdefghijklmnop';\n  const sesiones = new Map([[token, { ...contexto, expiraEn: Date.now() + 600000 }]]);\n  const abrir = () => abrirIntegral({ directory: path.join(directorio, 'motor'), sesiones });\n  let servidor;\n  let restaurado;\n  try {\n    servidor = await abrir();\n    const headers = { authorization: `Bearer ${token}`, 'content-type': 'application/json',\n      'idempotency-key': contexto.claveIdempotencia };\n    const escribir = (entrada, clave = contexto.claveIdempotencia) => fetch(\n      `${servidor.url}/api/observaciones`, { method: 'POST',\n        headers: { ...headers, 'idempotency-key': clave }, body: JSON.stringify(entrada) });\n    const leer = async (ruta, parametros = `ambito=${ambito}`) => {\n      const respuesta = await fetch(`${servidor.url}/api/${ruta}?${parametros}`, { headers });\n      assert.equal(respuesta.status, 200);\n      return respuesta.json();\n    };\n    assert.equal((await escribir(dato)).status, 201);\n    const copia = await leer('respaldo');\n    // Las entradas inválidas no cambian ni fuente, ni operación, ni proyección.\n    assert.equal((await escribir({ ...dato, especie: 'desconocida' }, 'catalogo-ep4-01')).status, 400);\n    assert.equal((await escribir({ ...dato, ambito: 'reserva-norte' })).status, 403);\n    assert.equal((await escribir({ ...dato, cantidad: cantidad + 1 })).status, 409);\n    assert.deepEqual(await servidor.repo.exportar(ambito), copia);\n    const resumen = await leer('resumen');\n    assert.equal(resumen.conteos.colibri, cantidad);\n    const evidencia = await leer('evidencia', `ambito=${ambito}&consulta=colibri`);\n    assert.equal(evidencia.citas.length, 1);\n    assert.match(evidencia.citas[0].huella, /^[a-f0-9]{64}$/);\n    const abstencion = await leer('evidencia', `ambito=${ambito}&consulta=ballena`);\n    assert.equal(abstencion.estado, 'abstencion');\n    // Analítica descriptiva: no infiere consentimiento ni crea entrenamiento.\n    const documentos = await servidor.repo.listar(ambito);\n    const analitica = { ambito, documentos: documentos.length,\n      cantidad: documentos.reduce((total, d) => total + d.cantidad, 0),\n      fuentes: documentos.map(d => ({ id: d.id, revision: d.revision, ambito: d.ambito })),\n      fuenteSha256: resumen.fuenteSha256, autoridadEscritura: false,\n      entrenamientoHabilitado: false };\n    await servidor.cerrar(); servidor = undefined;\n    servidor = await abrir();\n    assert.equal((await escribir(dato)).status, 201);\n    assert.deepEqual(await servidor.repo.exportar(ambito), copia);\n    restaurado = new RepositorioPouch(path.join(directorio, 'restaurado'));\n    const corrupta = structuredClone(copia); corrupta.sha256 = '0'.repeat(64);\n    await assert.rejects(() => restaurado.importarNuevo(corrupta, ambito));\n    assert.equal((await restaurado.info()).documentosMotor, 0);\n    await restaurado.importarNuevo(copia, ambito);\n    const reconstruida = await componer({ repositorio: restaurado }).reconstruirResumen(ambito, contexto);\n    assert.deepEqual(reconstruida, resumen);\n    assert.deepEqual(await restaurado.exportar(ambito), copia);\n    return { fase: 'EP4', tipo: 'recorrido-funcional-local', directorio, cantidad,\n      hitos: ['memoria', 'http-catalogo-permisos', 'proyeccion', 'analitica-descriptiva',\n        'recuperacion-con-procedencia', 'reapertura-idempotente', 'restauracion-reconstruccion'],\n      rechazos: ['catalogo', 'ambito', 'clave-reutilizada', 'respaldo-manipulado'],\n      analitica, evidencia, abstencion, sha256: copia.sha256,\n      produccion: false, autenticacionReal: false, modeloGenerativo: false };\n  } finally {\n    if (servidor) await servidor.cerrar();\n    if (restaurado) await restaurado.cerrar();\n  }\n}\n\nif (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.argv[1])) {\n  console.log(JSON.stringify(await ejecutarRecorrido({ cantidad: Number(process.argv[2] ?? 3) }), null, 2));\n}\n"
+}

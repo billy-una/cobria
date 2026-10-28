@@ -2,6 +2,10 @@
 
 ## Extensión 1.1
 
+El núcleo vigente está en `src/core/cobria.mjs`. El modelo síncrono inicial se
+conserva en `historical/memory-model/` únicamente para regresión histórica; sus
+cinco pruebas siguen ejecutándose y no acreditan conformidad del núcleo actual.
+
 La implementación de referencia añade un núcleo independiente del proveedor,
 adaptadores por inyección para MongoDB y HTTP para CouchDB, requisitos trazables,
 modelo de amenazas y estadística bootstrap. Los adaptadores distribuidos son código

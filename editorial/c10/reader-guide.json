@@ -1,0 +1,39 @@
+{
+  "version":"0.1.0",
+  "title":"Cómo avanzar sin perderse",
+  "intro":"Empiece con una observación de la reserva, compruebe su regla y avance hacia datos, permisos y recuperación. No necesita ejecutar toda la infraestructura para entender una primera lección.",
+  "codeLabels":{"lectura-guiada":"Fragmento de lectura guiada","contrato-orientativo":"Contrato orientativo"},
+  "codeNote":"El fragmento explica una idea y puede depender de tipos o funciones del proyecto. Para ejecutar, use la práctica verificable o el taller indicado; no asuma que copiarlo aislado crea una aplicación.",
+  "tracks":[
+    {"title":"Estoy comenzando","keys":["inicio","fundamentos","arquitectura","capas","datos"],"result":"Registrar y rechazar una entrada con reglas comprensibles. Siga después la secuencia completa."},
+    {"title":"Necesito construir una aplicación","keys":["codigo","datos","apiux","seguridad","construir"],"result":"Conectar un formulario con autorización y persistencia real local. Consulte antes las bases si una palabra no resulta clara."},
+    {"title":"Quiero operarla y mantenerla","keys":["documentacion","calidad","operaciones","toolkit"],"result":"Conservar decisiones, probar fallos y ensayar recuperación antes de una entrega."},
+    {"title":"Trabajo con datos e IA","keys":["datos","core","patrones","ia","evidencia"],"result":"Distinguir fuentes, derivados, cortes temporales y respuestas con procedencia; no confundir un taller con evidencia externa."}
+  ],
+  "workshops":[
+    {"title":"Formulario y permisos","description":"HTTP, sesión DEMO, autorización y errores antes del repositorio.","route":"/api-ux#taller-api-c5","source":"editorial/c5/workshop.json","keywords":"formulario seguridad privacidad"},
+    {"title":"Calidad y recuperación local","description":"Reproducir un defecto, medir y ensayar respaldo y reversión.","route":"/calidad#taller-operacion-c6","source":"editorial/c6/workshop.json","keywords":"cache caché rendimiento operacion restaurar"},
+    {"title":"Analítica e IA con procedencia","description":"Cortes temporales, fuga, citas y abstención sin modelo entrenado.","route":"/ia#taller-analitica-c7","source":"editorial/c7/workshop.json","keywords":"ia inteligencia artificial rag"},
+    {"title":"Persistencia documental real","description":"Formulario, PouchDB en disco, idempotencia, copia y reconstrucción.","route":"/construir#taller-integral-c8","source":"editorial/c8/workshop.json","keywords":"pouchdb leveldb respaldo base datos"},
+    {"title":"Documentación y Toolkit","description":"Generar sin sobrescribir, simular sin escrituras y conservar decisiones.","route":"/herramientas#taller-documentacion-c9","source":"editorial/c9/workshop.json","keywords":"adr runbook herramientas comentarios"}
+  ],
+  "reviews":[
+    {"key":"inicio","question":"La misma brigada envía dos veces una observación. ¿Dos mensajes significan dos hechos?","answer":"No necesariamente. Defina identidad y repetición antes de sumar. Reproduzca la entrada y compruebe la regla; no cuente mensajes como hechos."},
+    {"key":"fundamentos","question":"¿La cantidad de aves es lo mismo que la identidad de la observación?","answer":"No. La identidad permite reconocer el hecho; la cantidad es un valor que debe cumplir sus reglas. Cambiar cantidad no crea automáticamente otra identidad."},
+    {"key":"arquitectura","question":"Una pantalla comienza a importar el SDK del motor y a decidir permisos. ¿Qué frontera revisaría?","answer":"Separe presentación, caso de uso y persistencia. La autorización no puede depender solo de ocultar controles; un puerto permite probar el caso sin importar el SDK."},
+    {"key":"capas","question":"¿Un puerto necesita un servidor propio?","answer":"No. Es un contrato de capacidad que puede implementarse dentro del mismo proceso. Separar responsabilidades no exige repartirlas en máquinas."},
+    {"key":"codigo","question":"La clase Reserva generada pasa una prueba. ¿Ya valida el catálogo?","answer":"No. El esqueleto solo tiene un contrato mínimo. Añada una regla real, una entrada permitida y otra rechazada; confirme que la prueba falla antes de corregir."},
+    {"key":"datos","question":"En el diccionario de observaciones, ¿puede copiar g de cualquier otro proyecto?","answer":"No. En el caso local g significa cantidad. Consulte el diccionario y su formato; la misma letra puede tener otro significado en otra referencia."},
+    {"key":"core","question":"¿Una proyección puede cambiar silenciosamente la cantidad canónica?","answer":"No debe convertirse en otra autoridad. Defina quién escribe el hecho y cómo comprobar o reconstruir el derivado. Una recomendación pedagógica no declara por sí sola conformidad Core."},
+    {"key":"patrones","question":"Un índice nativo ya resuelve la consulta. ¿Es obligatorio añadir una proyección?","answer":"No. Compare costo y necesidad antes de añadir otra copia. Un patrón se adopta por la tensión que resuelve, no para completar un catálogo."},
+    {"key":"apiux","question":"Una solicitud no tiene permiso. ¿Es suficiente mostrar un mensaje en la pantalla?","answer":"No. El servidor debe rechazar antes de acceder al dato sensible. Pruebe el permiso permitido y el denegado, también fuera de la interfaz."},
+    {"key":"documentacion","question":"¿Dónde guardaría las alternativas descartadas y dónde los pasos de restauración?","answer":"En un registro de decisión arquitectónica y en un procedimiento operativo, respectivamente. El primero explica por qué; el segundo permite actuar y verificar con permisos definidos."},
+    {"key":"seguridad","question":"Un lector puede consultar la reserva. ¿Eso le concede exportar todas sus operaciones?","answer":"No. C8 separa lectura y respaldo con capacidades distintas. Verifique ámbito y finalidad; no infiera permiso de exportación a partir de acceso de lectura."},
+    {"key":"calidad","question":"Treinta pares observados dan un p99. ¿Demuestran la cola real de producción?","answer":"No. En el microensayo C6 ese p99 es el máximo observado. Conserve las muestras, el protocolo y el tamaño; no extrapole una muestra pequeña a producción."},
+    {"key":"operaciones","question":"Un respaldo conserva hechos y proyección. ¿Ya recuperó todo el servicio?","answer":"No. Compruebe también operaciones, configuración, identidad y auditoría según el alcance. El taller C8 no respalda sesiones ni auditoría completa y no prueba caída eléctrica."},
+    {"key":"ia","question":"Una búsqueda devuelve colibrí al preguntar por un colibrí enfermo. ¿La cita sostiene la enfermedad?","answer":"No. Coincidencia léxica y evidencia de una condición son distintas. Conserve ese falso positivo y diseñe abstención y evaluación pertinente, sin atribuir comprensión al recuperador."},
+    {"key":"construir","question":"El cliente recibió 503 después de guardar. ¿Conviene sumar otra revisión inmediatamente?","answer":"No. Puede haberse confirmado la escritura. Conserve la misma operación, reintente con la misma clave y consulte el estado antes de crear un nuevo cambio."},
+    {"key":"toolkit","question":"¿generar --simular debería crear la carpeta para mostrar dónde escribiría?","answer":"No. El plan se calcula sin crear archivos ni directorios. Ante un conflicto conserve el trabajo existente; simular no debe ocultar un rechazo."},
+    {"key":"evidencia","question":"Todas las pruebas locales pasan. ¿Puede declarar transferencia independiente?","answer":"No. Ejecución local, comprensión de lectores y revisión externa son evidencias distintas. Mantenga pendientes las que requieran otras personas o equipos."}
+  ]
+}

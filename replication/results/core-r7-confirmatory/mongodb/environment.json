@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "1.0.0",
+  "engine": "mongodb",
+  "capturedAt": "2026-09-23T08:21:28.242Z",
+  "engineInfo": {
+    "version": "8.0.29",
+    "gitVersion": "559d67c651f7393e62757234a0b25cb7a8622148",
+    "allocator": "tcmalloc-google"
+  },
+  "container": {
+    "name": "cobria-mongodb-confirmatory",
+    "image": "mongo:8.0",
+    "imageId": "sha256:02a0cc7939f5ed38f30f9bc714ef5f682d49baf9350c54acf302ce833087fe8a",
+    "architecture": "amd64",
+    "os": "linux",
+    "repoDigests": [
+      "mongo@sha256:02a0cc7939f5ed38f30f9bc714ef5f682d49baf9350c54acf302ce833087fe8a"
+    ]
+  },
+  "runtime": {
+    "dockerContext": "colima",
+    "serverVersion": "29.5.2",
+    "architecture": "x86_64",
+    "operatingSystem": "Ubuntu 24.04.4 LTS",
+    "cpus": 4,
+    "totalMemoryBytes": 6207385600
+  },
+  "client": {
+    "node": "v24.2.0",
+    "platform": "darwin",
+    "architecture": "arm64"
+  }
+}

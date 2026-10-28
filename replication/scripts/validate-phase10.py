@@ -37,8 +37,9 @@ for name in ('CONTRATOS-API-E-INTEGRACION.md','UX-ESTADOS-Y-FORMULARIOS.md','ACC
 layout=(ROOT/'sitio/app/layout.tsx').read_text(encoding='utf-8')
 home=(ROOT/'sitio/app/page.tsx').read_text(encoding='utf-8')
 manual=(ROOT/'sitio/app/manual.tsx').read_text(encoding='utf-8')
+frame=(ROOT/'sitio/app/site-frame.tsx').read_text(encoding='utf-8')
 css=(ROOT/'sitio/app/globals.css').read_text(encoding='utf-8')
-checks={'idioma':'<html lang="es">' in layout,'salto':'skip-link' in layout and '#contenido' in layout,'main':'id="contenido"' in home and 'id="contenido"' in manual,'nav':'aria-label="Navegación principal"' in home and 'aria-label="Navegación principal"' in manual,'foco':':focus-visible' in css,'movimiento':'prefers-reduced-motion' in css,'movil':'display:flex!important' in css}
+checks={'idioma':'<html lang="es">' in layout,'salto':'skip-link' in layout and '#contenido' in layout,'main':'id="contenido"' in frame and 'id="contenido"' in manual,'nav':'aria-label="Navegación principal"' in frame and 'aria-label="Navegación principal"' in manual,'foco':':focus-visible' in css,'movimiento':'prefers-reduced-motion' in css,'movil':'display:flex!important' in css}
 for name,ok in checks.items():
     if not ok: errors.append(f'control UI ausente: {name}')
 tests=(ROOT/'replication/examples/ecosistema-app/test/app.test.mjs').read_text(encoding='utf-8')

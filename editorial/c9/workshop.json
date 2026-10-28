@@ -1,0 +1,18 @@
+{
+  "title": "Documentar y generar sin perder el control",
+  "intro": "La reserva necesita algo más que código: instrucciones para empezar, una referencia para consultar, una decisión que explique el costo y un procedimiento de recuperación que pueda ensayarse.",
+  "installCommand": "npm ci --prefix replication",
+  "command": "node replication/examples/documentacion-c9/recorrido.mjs",
+  "testCommand": "node --test replication/tests/c9-toolkit.test.mjs",
+  "steps": [
+    "Ejecute el recorrido desde la raíz. Primero simula y comprueba que no existe el destino; después inicia un proyecto nuevo en un directorio temporal.",
+    "Valide el manifiesto del proyecto y consulte su responsable. Genere una entidad y ejecute su prueba; repetir la generación debe conservar los mismos archivos.",
+    "Distinga el esqueleto de una solución: la prueba generada acepta una entrada, pero aún no conoce permisos, catálogo ni reglas de la reserva.",
+    "Consulte la decisión del agregado C8 y ensaye su recuperación en motores nuevos. Un comentario conserva el porqué; un registro de decisión conserva las alternativas."
+  ],
+  "checks": "El recorrido produce cuatro artefactos, prueba el código generado y conserva un informe local. Los quince tipos se prueban además en la suite C9, con argumentos inválidos, conflictos, destinos enlazados y simulación sin escrituras.",
+  "limits": "La validación documental comprueba estructura, no verdad ni completitud semántica. Los generadores no implementan automáticamente reglas de negocio. Las comprobaciones previas de rutas no eliminan carreras entre procesos: utilice un destino propio y sin escritores concurrentes. Los informes locales no certifican seguridad ni sustituyen revisión con lectores.",
+  "guide": "manuales/34-documentacion-y-herramientas-practicas.md",
+  "decision": "manuales/decisiones/ADR-C8-AGREGADO-LOCAL.md",
+  "runbook": "manuales/operacion/RECUPERACION-C8.md"
+}

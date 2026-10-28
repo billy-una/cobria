@@ -1,0 +1,488 @@
+{
+  "schemaVersion": "1.0.0",
+  "date": "2026-10-23",
+  "sourceSha256": {
+    "LICENSE": "c81ddbda0ed033a38e65ddb75c004fbc0e036226be2a9540b340edd2754d0472",
+    "LICENSE-CODE.txt": "a7d00bfd54525bc694b6e32f64c7ebcf5e6b7ae3657be5cc12767bce74654a47",
+    "LICENSE-CONTENT.md": "a69def581ef99bea019586989dbda7e60d81aa4ba15b89ba143e223f0578055a",
+    "LICENSES.md": "75985af12119a2f0bf3810b8379146d2a2b97993fbc6a4e4586ade4a3401ba18",
+    "PROVENANCE.md": "9e24dccdd75c8992b63ad05bfb38edc6059cd0db033b11c95e6444eeb24c30e1",
+    "editorial/provenance.json": "fd69a7ab93b09d11693f1e9124f7e3766a33e252885fb95c8682de9e368b77d8",
+    "editorial/fonts.json": "f0072891e3a32863bc88489b8e37da571ef5eece40a397c14bd84ddb8ba2acfb",
+    "editorial/fonts-static.json": "c98c79a67f44fd58bd607b775822195b7cc65e0246363b2aee4abbea01f63d76",
+    "replication/SBOM.cdx.json": "eaaa6bfdc2f19018b49a7e7c594667e32a450f27f030dd067d91dc4866a2251f",
+    "replication/package-lock.json": "a49e63b177cbbcc6269d033fec07b04253221b674d4065aa585b8f288a671e72",
+    "libro-cobria/package-lock.json": "b71a78a1b9f4208dfda6e917465c5f7cc656db82ae6ee7b4b0204b8a42244169",
+    "sitio/package-lock.json": "c9669ab7de9674f0c2321427a1f980c3147c6b49192b1fd4e64dc340841d0fd8",
+    "referencias.bib": "5a4715403883bd6e94835d02e72309bbd3ba27e17005af2b9a5450aa02235d51",
+    "editorial/ep7/selection.json": "49fe7157c8f05772704d72590a083595114bc893b9febc34f55ae770b433e24d",
+    "editorial/ep7/link-check.json": "ce0e2e6b7457a37ab472853206ff3c54476ef809d9f2c63cca3ba89b2152166b"
+  },
+  "assets": [
+    {
+      "path": "libro-cobria/assets/catalogo-versionado-v1.png",
+      "bytes": 3259873,
+      "sha256": "19aa387c2074db095227d43c57b803e145a8fadab775c2ec828d0dd023b864c9",
+      "source": null,
+      "method": "ai-assisted-original",
+      "license": "CC-BY-4.0",
+      "generationReceipt": "no-acreditado-por-este-inventario"
+    },
+    {
+      "path": "libro-cobria/assets/ecosistema-cobria-panoramico-v4.png",
+      "bytes": 3780863,
+      "sha256": "ddc2a1ca28fc35a1a79d358ba2fc1537da54481fd1fb8565b090636643e0b43c",
+      "source": null,
+      "method": "ai-assisted-original",
+      "license": "CC-BY-4.0",
+      "generationReceipt": "no-acreditado-por-este-inventario"
+    },
+    {
+      "path": "libro-cobria/assets/ecosistema-cobria-sin-felinos-v3.png",
+      "bytes": 3287056,
+      "sha256": "41f5e11e2cf460bef3db072f58bcd14c22064893defe85d72937584f11f9fe98",
+      "source": null,
+      "method": "ai-assisted-original",
+      "license": "CC-BY-4.0",
+      "generationReceipt": "no-acreditado-por-este-inventario"
+    },
+    {
+      "path": "libro-cobria/assets/familia-analitica-ia-v1.png",
+      "bytes": 3345943,
+      "sha256": "8663c98bad5e9245cdbfc577e8e9ededfca6242eba11c55c81013a5c1aa5845b",
+      "source": null,
+      "method": "ai-assisted-original",
+      "license": "CC-BY-4.0",
+      "generationReceipt": "no-acreditado-por-este-inventario"
+    },
+    {
+      "path": "libro-cobria/assets/familia-eventos-consistencia-v1.png",
+      "bytes": 3119672,
+      "sha256": "9bfe181177908af34429bab038251dfa1063d285052264d20cbe2a46063efcd6",
+      "source": null,
+      "method": "ai-assisted-original",
+      "license": "CC-BY-4.0",
+      "generationReceipt": "no-acreditado-por-este-inventario"
+    },
+    {
+      "path": "libro-cobria/assets/familia-gobernanza-retiro-v1.png",
+      "bytes": 3405774,
+      "sha256": "17f128f5760df57cc9405da8e7299e74fb45fa1bc045b45881c88a5f9576edff",
+      "source": null,
+      "method": "ai-assisted-original",
+      "license": "CC-BY-4.0",
+      "generationReceipt": "no-acreditado-por-este-inventario"
+    },
+    {
+      "path": "libro-cobria/assets/familia-modelado-validacion-v1.png",
+      "bytes": 3253840,
+      "sha256": "983559631511d2df2b58870142cdb0ce502a024c3d2e3bd14a0a5a839e8dc861",
+      "source": null,
+      "method": "ai-assisted-original",
+      "license": "CC-BY-4.0",
+      "generationReceipt": "no-acreditado-por-este-inventario"
+    },
+    {
+      "path": "libro-cobria/assets/linaje-ia-v1.png",
+      "bytes": 3529048,
+      "sha256": "0f1dd4f3a772984710d8cfdb1280e55be5a2a0c5cd382f33115eb56aa85332cf",
+      "source": null,
+      "method": "ai-assisted-original",
+      "license": "CC-BY-4.0",
+      "generationReceipt": "no-acreditado-por-este-inventario"
+    },
+    {
+      "path": "libro-cobria/assets/reconstruccion-total-v1.png",
+      "bytes": 3835333,
+      "sha256": "61a3495c13d886488278adc8921bed6b7b8ed1fce7b2267696ba98e0de745857",
+      "source": null,
+      "method": "ai-assisted-original",
+      "license": "CC-BY-4.0",
+      "generationReceipt": "no-acreditado-por-este-inventario"
+    },
+    {
+      "path": "libro-cobria/assets/repositorio-ambito-sin-felinos-v2.png",
+      "bytes": 3553211,
+      "sha256": "2a2ac42557e64ce4b61b0f10e371f42a63797e8cbfc965bd44e70cb471b367da",
+      "source": null,
+      "method": "ai-assisted-original",
+      "license": "CC-BY-4.0",
+      "generationReceipt": "no-acreditado-por-este-inventario"
+    },
+    {
+      "path": "libro-cobria/assets/taller-colaborativo-coto-brus-v1.png",
+      "bytes": 3241356,
+      "sha256": "6500161298a96726a0ccd7910f65a3ca3ad268c5e1fcd9318ff792edb4a83be4",
+      "source": null,
+      "method": "ai-assisted-original",
+      "license": "CC-BY-4.0",
+      "generationReceipt": "no-acreditado-por-este-inventario"
+    },
+    {
+      "path": "sitio/public/images/analitica-ia.png",
+      "bytes": 3345943,
+      "sha256": "8663c98bad5e9245cdbfc577e8e9ededfca6242eba11c55c81013a5c1aa5845b",
+      "source": "libro-cobria/assets/familia-analitica-ia-v1.png",
+      "method": "exact-copy",
+      "license": "CC-BY-4.0",
+      "generationReceipt": null
+    },
+    {
+      "path": "sitio/public/images/ecosistema-panoramico.png",
+      "bytes": 3780863,
+      "sha256": "ddc2a1ca28fc35a1a79d358ba2fc1537da54481fd1fb8565b090636643e0b43c",
+      "source": "libro-cobria/assets/ecosistema-cobria-panoramico-v4.png",
+      "method": "exact-copy",
+      "license": "CC-BY-4.0",
+      "generationReceipt": null
+    },
+    {
+      "path": "sitio/public/images/eventos.png",
+      "bytes": 3119672,
+      "sha256": "9bfe181177908af34429bab038251dfa1063d285052264d20cbe2a46063efcd6",
+      "source": "libro-cobria/assets/familia-eventos-consistencia-v1.png",
+      "method": "exact-copy",
+      "license": "CC-BY-4.0",
+      "generationReceipt": null
+    },
+    {
+      "path": "sitio/public/images/gobernanza.png",
+      "bytes": 3405774,
+      "sha256": "17f128f5760df57cc9405da8e7299e74fb45fa1bc045b45881c88a5f9576edff",
+      "source": "libro-cobria/assets/familia-gobernanza-retiro-v1.png",
+      "method": "exact-copy",
+      "license": "CC-BY-4.0",
+      "generationReceipt": null
+    },
+    {
+      "path": "sitio/public/images/modelado.png",
+      "bytes": 3253840,
+      "sha256": "983559631511d2df2b58870142cdb0ce502a024c3d2e3bd14a0a5a839e8dc861",
+      "source": "libro-cobria/assets/familia-modelado-validacion-v1.png",
+      "method": "exact-copy",
+      "license": "CC-BY-4.0",
+      "generationReceipt": null
+    },
+    {
+      "path": "sitio/public/images/reconstruccion.png",
+      "bytes": 3835333,
+      "sha256": "61a3495c13d886488278adc8921bed6b7b8ed1fce7b2267696ba98e0de745857",
+      "source": "libro-cobria/assets/reconstruccion-total-v1.png",
+      "method": "exact-copy",
+      "license": "CC-BY-4.0",
+      "generationReceipt": null
+    },
+    {
+      "path": "sitio/public/images/seguridad.png",
+      "bytes": 3553211,
+      "sha256": "2a2ac42557e64ce4b61b0f10e371f42a63797e8cbfc965bd44e70cb471b367da",
+      "source": "libro-cobria/assets/repositorio-ambito-sin-felinos-v2.png",
+      "method": "exact-copy",
+      "license": "CC-BY-4.0",
+      "generationReceipt": null
+    },
+    {
+      "path": "sitio/public/og.png",
+      "bytes": 2896337,
+      "sha256": "e4793be40956147aa27cceddb6eb6c2be52d481c33c3fbd4537c3a573f4b1b3e",
+      "source": null,
+      "method": "ai-assisted-original-and-authored-composition",
+      "license": "CC-BY-4.0",
+      "generationReceipt": "no-acreditado-por-este-inventario"
+    },
+    {
+      "path": "sitio/public/favicon.svg",
+      "bytes": 476,
+      "sha256": "67fe3115a887187dd722859cb8adc91154470334439e11a2a7828619cdff8f97",
+      "source": null,
+      "method": "authored-vector",
+      "license": "CC-BY-4.0",
+      "generationReceipt": null
+    },
+    {
+      "path": "archivo/artefactos/pdf/COBRIA-arquitectura-de-software-libro-ilustrado.pdf",
+      "bytes": 41847434,
+      "sha256": "caa5b5c936f4495c6ac683e4819ce48e1b249ec3b438a0395443bf900a55e870",
+      "source": null,
+      "method": "artefacto-historico",
+      "license": "segun-fuentes; no se relicencia el artefacto",
+      "generationReceipt": null
+    },
+    {
+      "path": "archivo/artefactos/pdf/COBRIA-articulo-nosql-ampliado.pdf",
+      "bytes": 167332,
+      "sha256": "7a6b6e725ecc59317f7ca8e310b79f6502ae9c346c7e98d44ed7556d73bf72a7",
+      "source": null,
+      "method": "artefacto-historico",
+      "license": "segun-fuentes; no se relicencia el artefacto",
+      "generationReceipt": null
+    },
+    {
+      "path": "archivo/artefactos/pdf/COBRIA-articulo-nosql-auditado.pdf",
+      "bytes": 167380,
+      "sha256": "0b9a66c8660086c63a12de211bc715f23495356096aecb0965426e48858cfde8",
+      "source": null,
+      "method": "artefacto-historico",
+      "license": "segun-fuentes; no se relicencia el artefacto",
+      "generationReceipt": null
+    },
+    {
+      "path": "archivo/artefactos/pdf/COBRIA-libro-completo-ilustrado-nosql.pdf",
+      "bytes": 22919246,
+      "sha256": "ee3d53e17c9925ee7a4f586eb84a0c711560d7dbdedadbb2d9abec45d52870e9",
+      "source": null,
+      "method": "artefacto-historico",
+      "license": "segun-fuentes; no se relicencia el artefacto",
+      "generationReceipt": null
+    },
+    {
+      "path": "archivo/artefactos/pdf/COBRIA-maestro-nosql-ampliado.pdf",
+      "bytes": 1013934,
+      "sha256": "2fea4fdcc3ada869b0b9a9dd473c30668fd26823ae38c6bae260e25820df522e",
+      "source": null,
+      "method": "artefacto-historico",
+      "license": "segun-fuentes; no se relicencia el artefacto",
+      "generationReceipt": null
+    },
+    {
+      "path": "archivo/artefactos/pdf/COBRIA-prelibro-visual-nosql.pdf",
+      "bytes": 41847538,
+      "sha256": "2a279d1013045e5dce36bff16a3fd0642085483b63391657c78564ad6495c52b",
+      "source": null,
+      "method": "artefacto-historico",
+      "license": "segun-fuentes; no se relicencia el artefacto",
+      "generationReceipt": null
+    },
+    {
+      "path": "archivo/artefactos/paquetes/COBRIA-Core-1.0-paquete-revision.zip",
+      "bytes": 159847,
+      "sha256": "3daef0995b4be3e3dd731dfbcfd24b8d790e2eb4b5e54857b162f631ae606e6d",
+      "source": null,
+      "method": "artefacto-historico",
+      "license": "segun-fuentes; no se relicencia el artefacto",
+      "generationReceipt": null
+    },
+    {
+      "path": "archivo/artefactos/paquetes/COBRIA-Core-1.1-paquete-revision.zip",
+      "bytes": 19040,
+      "sha256": "cde0ae2cffc0aeccb88f3f6fdf255990efd2f9a749941d614dc13e3685d8114b",
+      "source": null,
+      "method": "artefacto-historico",
+      "license": "segun-fuentes; no se relicencia el artefacto",
+      "generationReceipt": null
+    },
+    {
+      "path": "archivo/artefactos/paquetes/COBRIA-Core-1.1-SHA256.txt",
+      "bytes": 434,
+      "sha256": "c243ed16ffb8581f0d6d12177e7afd6360775c6cbb5c0d2ebcc939551a7ed82a",
+      "source": null,
+      "method": "artefacto-historico",
+      "license": "segun-fuentes; no se relicencia el artefacto",
+      "generationReceipt": null
+    },
+    {
+      "path": "archivo/artefactos/paquetes/COBRIA-replication-v2.0.0.zip",
+      "bytes": 147546,
+      "sha256": "754256a8b4b3dbc77c2444f86c36ff71f7830ab3af04d7743f65329ad88a56e1",
+      "source": null,
+      "method": "artefacto-historico",
+      "license": "segun-fuentes; no se relicencia el artefacto",
+      "generationReceipt": null
+    },
+    {
+      "path": "archivo/artefactos/revision-core10/COBRIA-articulo-nosql-ampliado.pdf",
+      "bytes": 155184,
+      "sha256": "ae31e4ba107f1bb90f1b823d3171065156ac154f2d4a407f8aa2567b27daf6ec",
+      "source": null,
+      "method": "artefacto-historico",
+      "license": "segun-fuentes; no se relicencia el artefacto",
+      "generationReceipt": null
+    },
+    {
+      "path": "sitio/public/archivo/COBRIA-documento-maestro-historico.pdf",
+      "bytes": 582550,
+      "sha256": "706632b57b1b4c42478cd08bbeebb8d1d43b22fd5013827675a85096b7ed9f41",
+      "source": null,
+      "method": "artefacto-historico",
+      "license": "segun-fuentes; no se relicencia el artefacto",
+      "generationReceipt": null
+    }
+  ],
+  "fonts": [
+    {
+      "path": "libro-cobria/fonts/Inter-variable.ttf",
+      "sha256": "29160a80ff49ddcab2c97711247e08b1fab27a484a329ce8b813d820dc559031",
+      "bytes": 876576,
+      "source": "https://raw.githubusercontent.com/google/fonts/47d54ca1ebb14fd864695f1d39dc734f39017c33/ofl/inter/Inter[opsz,wght].ttf",
+      "license": "OFL-1.1"
+    },
+    {
+      "path": "sitio/public/fonts/Inter-variable.ttf",
+      "sha256": "29160a80ff49ddcab2c97711247e08b1fab27a484a329ce8b813d820dc559031",
+      "bytes": 876576,
+      "source": "https://raw.githubusercontent.com/google/fonts/47d54ca1ebb14fd864695f1d39dc734f39017c33/ofl/inter/Inter[opsz,wght].ttf",
+      "license": "OFL-1.1"
+    },
+    {
+      "path": "libro-cobria/fonts/Inter-OFL.txt",
+      "sha256": "5b9321a4298cfeb6b34354164a1c3afc3db114569984c502b9b35d988fd58c57",
+      "bytes": 4377,
+      "source": "https://raw.githubusercontent.com/google/fonts/47d54ca1ebb14fd864695f1d39dc734f39017c33/ofl/inter/OFL.txt",
+      "license": "OFL-1.1"
+    },
+    {
+      "path": "sitio/public/fonts/Inter-OFL.txt",
+      "sha256": "5b9321a4298cfeb6b34354164a1c3afc3db114569984c502b9b35d988fd58c57",
+      "bytes": 4377,
+      "source": "https://raw.githubusercontent.com/google/fonts/47d54ca1ebb14fd864695f1d39dc734f39017c33/ofl/inter/OFL.txt",
+      "license": "OFL-1.1"
+    },
+    {
+      "path": "libro-cobria/fonts/RobotoMono-variable.ttf",
+      "sha256": "66a80e79d17e4c7cabd162e2916578a4cc08fd19eef6e2a643305eae9c567b2b",
+      "bytes": 183700,
+      "source": "https://raw.githubusercontent.com/google/fonts/47d54ca1ebb14fd864695f1d39dc734f39017c33/ofl/robotomono/RobotoMono[wght].ttf",
+      "license": "OFL-1.1"
+    },
+    {
+      "path": "sitio/public/fonts/RobotoMono-variable.ttf",
+      "sha256": "66a80e79d17e4c7cabd162e2916578a4cc08fd19eef6e2a643305eae9c567b2b",
+      "bytes": 183700,
+      "source": "https://raw.githubusercontent.com/google/fonts/47d54ca1ebb14fd864695f1d39dc734f39017c33/ofl/robotomono/RobotoMono[wght].ttf",
+      "license": "OFL-1.1"
+    },
+    {
+      "path": "libro-cobria/fonts/RobotoMono-OFL.txt",
+      "sha256": "50ab8dd54680d3473f649c9db86fece88434d097c7834475c1c72d2f8c429215",
+      "bytes": 4395,
+      "source": "https://raw.githubusercontent.com/google/fonts/47d54ca1ebb14fd864695f1d39dc734f39017c33/ofl/robotomono/OFL.txt",
+      "license": "OFL-1.1"
+    },
+    {
+      "path": "sitio/public/fonts/RobotoMono-OFL.txt",
+      "sha256": "50ab8dd54680d3473f649c9db86fece88434d097c7834475c1c72d2f8c429215",
+      "bytes": 4395,
+      "source": "https://raw.githubusercontent.com/google/fonts/47d54ca1ebb14fd864695f1d39dc734f39017c33/ofl/robotomono/OFL.txt",
+      "license": "OFL-1.1"
+    },
+    {
+      "path": "libro-cobria/fonts/Inter-400.ttf",
+      "sha256": "0b59f6b6fc9e8a9ad8032802d1797c4237d9288a3e7b7661517070627b577060",
+      "bytes": 341396,
+      "source": "Inter-variable.ttf",
+      "license": "OFL-1.1"
+    },
+    {
+      "path": "sitio/public/fonts/Inter-400.ttf",
+      "sha256": "0b59f6b6fc9e8a9ad8032802d1797c4237d9288a3e7b7661517070627b577060",
+      "bytes": 341396,
+      "source": "Inter-variable.ttf",
+      "license": "OFL-1.1"
+    },
+    {
+      "path": "libro-cobria/fonts/Inter-600.ttf",
+      "sha256": "dd5fd52722848f96b7d79ad9a407e4464a93c012416734ad8265082132a838b8",
+      "bytes": 342660,
+      "source": "Inter-variable.ttf",
+      "license": "OFL-1.1"
+    },
+    {
+      "path": "sitio/public/fonts/Inter-600.ttf",
+      "sha256": "dd5fd52722848f96b7d79ad9a407e4464a93c012416734ad8265082132a838b8",
+      "bytes": 342660,
+      "source": "Inter-variable.ttf",
+      "license": "OFL-1.1"
+    },
+    {
+      "path": "libro-cobria/fonts/Inter-700.ttf",
+      "sha256": "1cdab460202df1e658f4e0cf8c90206289effd922716ad0ee68beac56cb6ec53",
+      "bytes": 343104,
+      "source": "Inter-variable.ttf",
+      "license": "OFL-1.1"
+    },
+    {
+      "path": "sitio/public/fonts/Inter-700.ttf",
+      "sha256": "1cdab460202df1e658f4e0cf8c90206289effd922716ad0ee68beac56cb6ec53",
+      "bytes": 343104,
+      "source": "Inter-variable.ttf",
+      "license": "OFL-1.1"
+    },
+    {
+      "path": "libro-cobria/fonts/Inter-900.ttf",
+      "sha256": "797d0ae0cd89f15ade5a612526252e8945fb1f20d6fcdd4cf344867a9610233d",
+      "bytes": 343856,
+      "source": "Inter-variable.ttf",
+      "license": "OFL-1.1"
+    },
+    {
+      "path": "sitio/public/fonts/Inter-900.ttf",
+      "sha256": "797d0ae0cd89f15ade5a612526252e8945fb1f20d6fcdd4cf344867a9610233d",
+      "bytes": 343856,
+      "source": "Inter-variable.ttf",
+      "license": "OFL-1.1"
+    },
+    {
+      "path": "libro-cobria/fonts/RobotoMono-400.ttf",
+      "sha256": "05950bb3fcaef7aad56ecf0802b37b83fab343e16ae6eeb83df5ca7b97e9a7f9",
+      "bytes": 88120,
+      "source": "RobotoMono-variable.ttf",
+      "license": "OFL-1.1"
+    },
+    {
+      "path": "sitio/public/fonts/RobotoMono-400.ttf",
+      "sha256": "05950bb3fcaef7aad56ecf0802b37b83fab343e16ae6eeb83df5ca7b97e9a7f9",
+      "bytes": 88120,
+      "source": "RobotoMono-variable.ttf",
+      "license": "OFL-1.1"
+    },
+    {
+      "path": "libro-cobria/fonts/RobotoMono-700.ttf",
+      "sha256": "e670ae7f31a1fdd8df34dfda0ff001df959cb30319bcf368e8679e440c16e6e3",
+      "bytes": 88260,
+      "source": "RobotoMono-variable.ttf",
+      "license": "OFL-1.1"
+    },
+    {
+      "path": "sitio/public/fonts/RobotoMono-700.ttf",
+      "sha256": "e670ae7f31a1fdd8df34dfda0ff001df959cb30319bcf368e8679e440c16e6e3",
+      "bytes": 88260,
+      "source": "RobotoMono-variable.ttf",
+      "license": "OFL-1.1"
+    }
+  ],
+  "classes": {
+    "code": "Apache-2.0",
+    "content": "CC-BY-4.0",
+    "syntheticData": "CC-BY-4.0",
+    "thirdParty": "license-of-origin"
+  },
+  "referenceRepositories": [
+    {
+      "name": "POS Guápiles",
+      "url": "https://github.com/billy-una/posguapiles",
+      "commit": "ae8d63ce535ecff40059b49d8b8c9f050c353d96",
+      "rootLicense": "not-declared-at-frozen-commit",
+      "use": "read-only-observation-no-code-copied"
+    },
+    {
+      "name": "CRMHotel",
+      "url": "https://github.com/billy-una/CRMHOTEL",
+      "commit": "b7b0f8e83871df1220865931f53424d8dd39772c",
+      "rootLicense": "not-declared-at-frozen-commit",
+      "use": "read-only-observation-no-code-copied"
+    },
+    {
+      "name": "BSHandball",
+      "url": "https://github.com/billy-una/BSHandball",
+      "commit": "09c15acd14ab806abe436a8176ef3247c61a2df6",
+      "rootLicense": "not-declared-at-frozen-commit",
+      "use": "read-only-observation-no-code-copied"
+    }
+  ],
+  "limits": [
+    "Inventario técnico y declaración de procedencia, no peritaje legal ni garantía de exclusividad.",
+    "No se deducen herramienta, modelo, fecha o prompt originales de una imagen a partir de su hash.",
+    "Referencias de terceros se enlazan y parafrasean; sus textos, figuras y licencias no pasan a CC-BY-4.0 por ser citados.",
+    "Datos sintéticos y pruebas internas no son participantes ni revisión humana."
+  ]
+}

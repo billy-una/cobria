@@ -1,0 +1,10 @@
+{
+  "schemaVersion": "1.0.0",
+  "scope": "revision-local-de-candidata-no-publicacion",
+  "dependencyProjects": ["replication", "sitio", "libro-cobria", "replication/qa"],
+  "blockingSeverities": ["moderate", "high", "critical"],
+  "humanGates": ["revision-tecnica", "revision-editorial-y-claridad", "doble-cribado", "transferencia-con-consentimiento", "replica-externa", "privacidad-y-derechos", "autorizacion-publicacion"],
+  "requiredProductionEvidence": ["commit-final-limpio", "ci-remota-del-sha", "sitio-anonimo-y-descargas-exactas"],
+  "publicationAuthorized": false,
+  "stableTagCreationEnabled": false
+}

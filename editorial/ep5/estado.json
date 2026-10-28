@@ -1,0 +1,24 @@
+{
+  "phase": "EP5",
+  "date": "2026-10-23",
+  "status": "completada-local-candidata-educativa",
+  "published": false,
+  "coreChanged": false,
+  "independentReview": false,
+  "parity": "editorial/ep5/parity.json",
+  "budgets": "editorial/ep5/budgets.json",
+  "checks": {"specificTests": 12, "compatibilityTests": 2, "renderedHtmlTests": 32, "localBrowserChecks": 182},
+  "evidence": [
+    "output/review/ep5/verificacion-cierre.log",
+    "output/review/site-check/cobria-site-check-rwZd8A/VERIFICATION.json",
+    "output/review/ep5/local-1792784107689/RESULTADO.json",
+    "output/review/ep5/local-1792784107689/PRESUPUESTOS.json",
+    "output/review/ep5/SOURCE-CHECK.json"
+  ],
+  "limits": [
+    "Fuentes del árbol local, no clon Git limpio ni publicación.",
+    "Marcas personales locales, no evaluación del aprendizaje.",
+    "Presupuestos de tamaño locales, no tiempos ni Core Web Vitals en producción.",
+    "Faltan revisión con lectores y verificación del alojamiento tras publicación autorizada."
+  ]
+}

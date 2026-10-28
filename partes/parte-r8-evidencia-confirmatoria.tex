@@ -1,0 +1,65 @@
+\chapter{Resultados R7 y estado de la evidencia}
+
+\COBRIAAlcanceEPocho
+
+\section{Alcance histórico y evaluación posterior}
+
+\input{editorial/ep6/evidence-table.tex}
+
+\input{editorial/generated/ecosistema-13-14/interpretacion.tex}
+
+R7 conserva los resultados de su arnés original. La aprobación de sus controles no
+equivale a aprobar requisitos incorporados después ni demuestra comprensión por
+personas usuarias. PC2 congela contratos adicionales de persistencia, publicación,
+autorización previa al almacenamiento y abstención de un consumidor determinista.
+Sus pruebas locales no son una réplica confirmatoria de tres motores ni una evaluación
+de modelos generativos. PC3 permanece sin observaciones nuevas mientras no se ejecute
+el diseño congelado con conectores y motores verificados.
+
+La publicación mediante comparación e intercambio de un agregado no establece
+atomicidad entre documentos independientes. El filtrado por ámbito comprueba exclusión
+de contenido en las rutas ensayadas, no ausencia de canales laterales temporales.
+La revisión independiente, la réplica externa y el estudio de transferencia mantienen
+su identidad separada de las pruebas automáticas del autor.
+
+Este capítulo interpreta el conjunto histórico R7 sin mezclarlo con controles
+posteriores o mediciones preliminares. La fuente del análisis es
+\path{replication/results/core-r7-statistics/summary.json}; sus entradas son los
+eventos crudos cuyos SHA-256 se registran por motor. El alcance es interno: un nodo por
+motor y configuraciones declaradas. No es una certificación ni una comparación universal.
+
+\section{Diseño y conformidad}
+
+R7 reunió \COBRIARSevenObservations{} corridas internas, distribuidas en partes iguales
+entre MongoDB \COBRIARSevenMongoVersion, CouchDB \COBRIARSevenCouchVersion{} y
+OpenSearch \COBRIARSevenOpenSearchVersion. Cada motor se evaluó con tamaños 100, 1 000
+y 5 000, dos calentamientos y \COBRIARSevenRunsPerCell{} corridas válidas por celda en
+orden aleatorizado y reproducible. Las 90 corridas de cada motor aprobaron los
+indicadores P1, P2, R1, S1 y A1 del arnés histórico, no la totalidad de los controles PC2.
+
+\COBRIALimiteHistoricoRSeven
+
+\begin{table}[H]\centering\small
+\caption{Resultados pareados de lectura de R7.}
+\begin{tabular}{lrrrrr}\toprule
+Motor & $n$ & razón mediana & diferencia media (ms) & $d_z$ & $p$ de Holm\\\midrule
+\COBRIARSevenTableRows
+\bottomrule\end{tabular}
+\end{table}
+
+Una razón menor que uno favorece a la proyección. Ocho celdas fueron concluyentes y
+favorables después del ajuste de Holm. OpenSearch con $n=100$ tuvo diferencia media de
+0,020 ms, $d_z=0,002$ y $p_{Holm}=0,993$; por tanto se informa como no concluyente.
+
+\section{Alcance de la inferencia}
+
+Los resultados describen comprobaciones del arnés y costos en los entornos capturados.
+No demuestran conformidad normativa integral, superioridad universal, seguridad exhaustiva, productividad
+humana ni desempeño multinodo. La microcomparación de siete estrategias contiene
+\COBRIARSevenAlternatives{} observaciones, pero se ejecuta en un proceso Node.js y solo
+sirve como contraste algorítmico. Permanecen pendientes la réplica externa independiente,
+el estudio de transferencia y el doble cribado bibliográfico.
+
+\section{Análisis histórico y diseño posterior}
+
+\COBRIAAnalisisSeparado

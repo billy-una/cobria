@@ -1,0 +1,31 @@
+{
+  "phase": "C4",
+  "status": "verificada_localmente_validacion_con_lectores_pendiente",
+  "date": "2026-10-17",
+  "guide": "manuales/29-core-y-patrones-en-la-practica.md",
+  "decisionSource": "editorial/pattern-decisions.mjs",
+  "patternCount": 30,
+  "patternTestsPassed": 61,
+  "catalogTestsPassed": 4,
+  "replicationTestsPassed": 129,
+  "renderedSiteTestsPassed": 15,
+  "bookPages": 277,
+  "verification": "make verificar-c4",
+  "fullVerification": "make verificar-publicacion COBRIA_SITE_ISOLATED=1",
+  "fullVerificationLog": "output/review/c4/full-verification.log",
+  "isolatedSiteReport": "output/review/c4/site-verification.json",
+  "visualReview": {
+    "bookPages": [160, 198, 255],
+    "result": "sin cortes ni desbordamientos observados en las tres páginas muestreadas"
+  },
+  "published": false,
+  "coreChanged": false,
+  "rc2Changed": false,
+  "fullVerificationExitCode": 0,
+  "humanPending": "C13: comprensión, transferencia y revisión externas auténticas",
+  "limitations": [
+    "Ejemplos de mecanismos en memoria, no aplicación integrada ni garantía de motor.",
+    "No son certificación C1, C2 o C3.",
+    "Las alternativas y costos narrativos no son nuevos resultados experimentales."
+  ]
+}

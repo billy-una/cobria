@@ -1,0 +1,19 @@
+{
+  "version": "1.0.0",
+  "state": "preparado-no-ejecutado",
+  "scope": "PC9; sustituye cuotas sugeridas anteriores para esta ronda nueva",
+  "participantsCommitted": 0,
+  "sampling": "Conveniencia declarada; coordinador humano fija perfiles y tamaño antes de reclutar. No permite inferencia poblacional.",
+  "preregistration": {"coordinator": null, "sampleSize": null, "profiles": [], "timeBudgetMinutes": null, "approvedAt": null},
+  "tasks": [
+    {"id": "revision-tecnica", "deliverable": "Requisito ambiguo, ubicación, reproducción, severidad y alternativa; declarar conflictos."},
+    {"id": "revision-editorial", "deliverable": "Recorrer una lección y ejercicio sin ayuda; registrar errores, tiempo y puntos de abandono."},
+    {"id": "transferencia-c2", "deliverable": "Implementar C2 desde especificación, registrar dudas sin resolverlas con el autor, pruebas aprobadas y SHA propio."},
+    {"id": "replica-externa", "deliverable": "En otra computadora: ambiente, comando, códigos de salida, registros originales, artefactos y divergencias; nunca copiar resultados como réplica."},
+    {"id": "doble-cribado", "deliverable": "Dos decisiones independientes por referencia, motivo de exclusión y adjudicación documentada de desacuerdos."},
+    {"id": "accesibilidad", "deliverable": "Tareas de búsqueda, navegación y copia con teclado y tecnología de apoyo declarada; registrar barreras y alcance."}
+  ],
+  "metrics": ["tiempo-activo", "errores-de-interpretacion", "pruebas-aprobadas-sobre-total", "consultas-al-autor", "abandonos", "barreras", "divergencias-de-replica"],
+  "rules": ["Conservar fallos y abandonos; no excluir por resultado desfavorable.", "Toda asistencia se registra y separa de transferencia sin asistencia.", "Una revisión de IA no cuenta como revisión humana independiente.", "Las etiquetas declaradas no prueban identidad ni independencia; el coordinador conserva comprobantes privados.", "Resolver hallazgos bloqueantes con evidencia y nueva verificación del artefacto corregido."],
+  "privacy": {"publicNames": false, "consentRequiredBeforeTasks": true, "withdrawalProcedure": "Solicitar retiro al coordinador antes de anonimización irreversible; acordar fecha y límites antes de consentir.", "retention": "El coordinador fija plazo, custodio y ubicación privada antes del reclutamiento.", "publication": "Solo resultados anonimizados y expresamente autorizados; no incluir consentimiento, firma, correo ni teléfono."}
+}

@@ -1,0 +1,16 @@
+{
+  "name": "cobria-qa-web-local",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "engines": {
+    "node": ">=22.19.0"
+  },
+  "dependencies": {
+    "@axe-core/playwright": "4.14.0",
+    "lighthouse": "13.5.0"
+  },
+  "overrides": {
+    "fast-uri": "3.1.9"
+  }
+}

@@ -13,7 +13,7 @@ if sync.returncode: errors.append(sync.stderr.strip() or 'derivados editoriales 
 if canonical['ecosystem']['moduleCount'] != len(canonical['ecosystem']['modules']): errors.append('recuento de módulos inconsistente')
 claim = next((item for item in canonical['claims'] if item['id'] == 'CLAIM-ALT-630'), None)
 if not claim or claim['value'] != evidence['rawCount'] or claim['status'] != 'ejecutado': errors.append('CLAIM-ALT-630 no coincide con evidencia')
-expected_products = {'specification','article','master','book','workbook','technical-annex','site','toolkit','evidence'}
+expected_products = {'specification','article','master','curriculum','book','workbook','technical-annex','site','toolkit','evidence'}
 if {item['id'] for item in products['products']} != expected_products: errors.append('registro de productos incompleto')
 
 consumers = {

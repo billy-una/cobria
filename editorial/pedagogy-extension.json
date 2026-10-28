@@ -1,0 +1,1123 @@
+{
+  "version": "1.0.0",
+  "minimumLessonsPerModule": 5,
+  "moduleMeta": {
+    "inicio": {
+      "checkpoint": "B01",
+      "sources": [
+        "manuales/26-primer-proyecto-paso-a-paso.md",
+        "replication/examples/ecosistema-app/src/primer-recorrido.mjs"
+      ],
+      "estimatedMinutes": 90
+    },
+    "fundamentos": {
+      "checkpoint": "B02",
+      "sources": [
+        "manuales/01-fundamentos.md",
+        "replication/examples/ecosistema-app/src/domain/observacion.mjs"
+      ],
+      "estimatedMinutes": 120
+    },
+    "arquitectura": {
+      "checkpoint": "B03",
+      "sources": [
+        "specification/MAPA-ECOSISTEMA.md",
+        "manuales/11-estado-y-roadmap-integral.md",
+        "manuales/24-organizacion-y-operacion-del-proyecto.md"
+      ],
+      "estimatedMinutes": 150
+    },
+    "capas": {
+      "checkpoint": "B03",
+      "sources": [
+        "manuales/02-layers.md",
+        "replication/examples/ecosistema-app/src/composition.mjs",
+        "manuales/24-organizacion-y-operacion-del-proyecto.md"
+      ],
+      "estimatedMinutes": 150
+    },
+    "codigo": {
+      "checkpoint": "B02",
+      "sources": [
+        "specification/phase-6/COMENTARIOS-Y-DOCSTRINGS.md",
+        "replication/examples/ecosistema-app/src/domain/error-cobria.mjs"
+      ],
+      "estimatedMinutes": 140
+    },
+    "datos": {
+      "checkpoint": "B04-B05",
+      "sources": [
+        "manuales/04-bases-de-datos.md",
+        "specification/phase-3/data-dictionary.yaml",
+        "manuales/24-organizacion-y-operacion-del-proyecto.md"
+      ],
+      "estimatedMinutes": 210
+    },
+    "core": {
+      "checkpoint": "B07-B09",
+      "sources": [
+        "specification/COBRIA-CORE-1.0.md",
+        "replication/src/conformance.mjs"
+      ],
+      "estimatedMinutes": 210
+    },
+    "patrones": {
+      "checkpoint": "B07-B09",
+      "sources": [
+        "manuales/03-pattern-design.md",
+        "libro-cobria/practical-examples.json"
+      ],
+      "estimatedMinutes": 240
+    },
+    "apiux": {
+      "checkpoint": "B08",
+      "sources": [
+        "manuales/15-api-ux.md",
+        "replication/examples/ecosistema-app/src/presentation/problema-http.mjs"
+      ],
+      "estimatedMinutes": 180
+    },
+    "documentacion": {
+      "checkpoint": "B01-B14",
+      "sources": [
+        "manuales/README.md",
+        "editorial/DICCIONARIO-TERMINOLOGICO.md",
+        "manuales/24-organizacion-y-operacion-del-proyecto.md"
+      ],
+      "estimatedMinutes": 150
+    },
+    "seguridad": {
+      "checkpoint": "B06",
+      "sources": [
+        "manuales/16-security.md",
+        "specification/phase-7/security.json",
+        "manuales/24-organizacion-y-operacion-del-proyecto.md"
+      ],
+      "estimatedMinutes": 210
+    },
+    "calidad": {
+      "checkpoint": "B12",
+      "sources": [
+        "manuales/17-quality-performance.md",
+        "specification/phase-9/quality.json",
+        "manuales/23-metodologia-de-correccion-verificable.md",
+        "manuales/24-organizacion-y-operacion-del-proyecto.md"
+      ],
+      "estimatedMinutes": 240
+    },
+    "operaciones": {
+      "checkpoint": "B13",
+      "sources": [
+        "manuales/18-cloud-operations.md",
+        "specification/phase-8/environments.json",
+        "manuales/24-organizacion-y-operacion-del-proyecto.md"
+      ],
+      "estimatedMinutes": 210
+    },
+    "ia": {
+      "checkpoint": "B10-B11",
+      "sources": [
+        "manuales/19-analytics-ai.md",
+        "replication/examples/ecosistema-app/src/application/ai/recuperar-evidencia.mjs"
+      ],
+      "estimatedMinutes": 210
+    },
+    "construir": {
+      "checkpoint": "B01-B14",
+      "sources": [
+        "manuales/20-build-reference.md",
+        "replication/examples/ecosistema-app/GUIA-PASO-A-PASO.md",
+        "manuales/24-organizacion-y-operacion-del-proyecto.md"
+      ],
+      "estimatedMinutes": 300
+    },
+    "toolkit": {
+      "checkpoint": "B14",
+      "sources": [
+        "manuales/21-toolkit.md",
+        "replication/src/cli.mjs"
+      ],
+      "estimatedMinutes": 180
+    },
+    "evidencia": {
+      "checkpoint": "B14",
+      "sources": [
+        "manuales/22-evidence-transfer.md",
+        "MATRIZ-TRAZABILIDAD-RELEASE.md"
+      ],
+      "estimatedMinutes": 180
+    }
+  },
+  "extraLessons": {
+    "inicio": [
+      {
+        "title": "Elegir una primera entrega pequeña",
+        "situation": "Una lista de funciones crece antes de que exista una conducta comprobable.",
+        "simple": "Elija una acción que produzca valor completo y pueda terminarse en pocas horas.",
+        "steps": [
+          "Liste necesidades, no pantallas.",
+          "Ordene por valor y riesgo.",
+          "Seleccione una entrada y una salida.",
+          "Posponga todo lo demás."
+        ],
+        "example": "Registrar una observación y consultarla; mapas e IA quedan para hitos posteriores.",
+        "mistake": "Incluir autenticación, informes y nube en la primera tarea.",
+        "evidence": "La entrega cabe en una prueba de aceptación con un resultado visible.",
+        "code": "objetivo = registrarUnaObservacion\nfueraDeAlcance = [mapa, prediccion, informe]",
+        "execution": {
+          "cwd": ".",
+          "binary": "node",
+          "argv": [
+            "--test",
+            "--test-reporter=tap",
+            "--test-name-pattern=^repetir la misma operación devuelve el mismo resultado sin duplicar$",
+            "replication/examples/ecosistema-app/test/app.test.mjs"
+          ],
+          "command": "node --test --test-reporter=tap --test-name-pattern='^repetir la misma operación devuelve el mismo resultado sin duplicar$' replication/examples/ecosistema-app/test/app.test.mjs",
+          "kind": "prueba-local",
+          "expected": "Repetir la operación no crea una segunda observación. La salida termina con pass 1 y fail 0.",
+          "minimumPassed": 1,
+          "prerequisites": [
+            "Node.js 22.13 o superior.",
+            "Terminal en la raíz de COBRIA. No hace falta instalar dependencias para esta aplicación."
+          ],
+          "tests": [
+            "replication/examples/ecosistema-app/test/app.test.mjs"
+          ],
+          "troubleshooting": [
+            "fail distinto de cero indica un fallo: lea el primer mensaje, no solamente la última línea.",
+            "pass 0 no demuestra la conducta: revise el nombre exacto de la prueba y la ruta.",
+            "No cambie la regla para obtener verde; compare la entrada con el contrato."
+          ]
+        },
+        "codeKind": "lectura-guiada",
+        "guide": "manuales/26-primer-proyecto-paso-a-paso.md"
+      },
+      {
+        "title": "Preparar un entorno que otra persona pueda repetir",
+        "situation": "El programa funciona únicamente en la computadora de quien lo creó.",
+        "simple": "Declare versiones, comandos y datos de ejemplo antes de añadir dependencias.",
+        "steps": [
+          "Instale Node.js y abra de nuevo la terminal si node no existe.",
+          "Compruebe node --version y npm --version.",
+          "Abra la raíz de COBRIA: contiene README.md, manuales/ y replication/.",
+          "Ejecute npm --prefix replication/examples/ecosistema-app test.",
+          "Ejecute npm --prefix replication/examples/ecosistema-app start y compare los mensajes."
+        ],
+        "example": "La aplicación no tiene dependencias externas: no necesita npm install, una cuenta cloud ni una base de datos.",
+        "mistake": "Depender de variables privadas sin plantilla ni explicación.",
+        "evidence": "Una carpeta limpia instala, prueba y ejecuta sin conocimiento oral.",
+        "code": "node --version\nnpm --version\nnpm --prefix replication/examples/ecosistema-app test\nnpm --prefix replication/examples/ecosistema-app start",
+        "execution": {
+          "cwd": ".",
+          "binary": "npm",
+          "argv": [
+            "--prefix",
+            "replication/examples/ecosistema-app",
+            "start"
+          ],
+          "command": "npm --prefix replication/examples/ecosistema-app start",
+          "kind": "demostracion-local",
+          "expected": "Observación registrada: obs-001 (revisión 1)\nRepetición segura: 1 observación\nCantidad cero: OBS_QUANTITY_INVALID\nOtra reserva: ACCESS_DENIED\nResumen: colibri = 3",
+          "prerequisites": [
+            "Node.js 22.13 o superior y npm disponibles.",
+            "Terminal en la raíz de COBRIA, donde existen README.md y replication/."
+          ],
+          "tests": [
+            "replication/examples/ecosistema-app/test/primer-recorrido.test.mjs"
+          ],
+          "troubleshooting": [
+            "Si no se encuentra npm, compruebe la instalación de Node.js y vuelva a abrir la terminal.",
+            "Si no se encuentra package.json, abra la raíz de COBRIA; no ejecute estos comandos desde una lección o un archivo.",
+            "La demostración no abre una web ni guarda datos en disco."
+          ]
+        },
+        "codeKind": "lectura-guiada",
+        "guide": "manuales/26-primer-proyecto-paso-a-paso.md"
+      },
+      {
+        "title": "Leer un fallo sin adivinar",
+        "situation": "Un mensaje como ‘algo salió mal’ no permite corregir la entrada.",
+        "simple": "Un fallo útil identifica código, causa segura y siguiente acción.",
+        "steps": [
+          "Conserve un código estable.",
+          "Explique qué condición falló.",
+          "No revele secretos.",
+          "Pruebe el mensaje rechazado."
+        ],
+        "example": "AMBITO_REQUERIDO indica que falta el límite de la operación.",
+        "mistake": "Mostrar la traza interna completa a la persona usuaria.",
+        "evidence": "La prueba espera código y estado, no una frase frágil.",
+        "code": "{ codigo: 'AMBITO_REQUERIDO', estado: 400 }",
+        "execution": {
+          "cwd": ".",
+          "binary": "node",
+          "argv": [
+            "--test",
+            "--test-reporter=tap",
+            "--test-name-pattern=^el problema HTTP conserva traceId sin exponer detalles internos$",
+            "replication/examples/ecosistema-app/test/app.test.mjs"
+          ],
+          "command": "node --test --test-reporter=tap --test-name-pattern='^el problema HTTP conserva traceId sin exponer detalles internos$' replication/examples/ecosistema-app/test/app.test.mjs",
+          "kind": "prueba-local",
+          "expected": "Cantidad cero se rechaza; el resultado no expone una traza interna. La salida termina con pass 1 y fail 0.",
+          "minimumPassed": 1,
+          "prerequisites": [
+            "Node.js 22.13 o superior.",
+            "Terminal en la raíz de COBRIA. No hace falta instalar dependencias para esta aplicación."
+          ],
+          "tests": [
+            "replication/examples/ecosistema-app/test/app.test.mjs"
+          ],
+          "troubleshooting": [
+            "fail distinto de cero indica un fallo: lea el primer mensaje, no solamente la última línea.",
+            "pass 0 no demuestra la conducta: revise el nombre exacto de la prueba y la ruta.",
+            "No cambie la regla para obtener verde; compare la entrada con el contrato."
+          ]
+        },
+        "codeKind": "lectura-guiada",
+        "guide": "manuales/26-primer-proyecto-paso-a-paso.md"
+      }
+    ],
+    "fundamentos": [
+      {
+        "title": "Identidad, valor y referencia",
+        "situation": "Dos observaciones iguales en contenido pueden pertenecer a momentos y autores distintos.",
+        "simple": "La identidad responde cuál es; el valor describe cómo es; la referencia conecta sin copiar autoridad.",
+        "steps": [
+          "Defina identidad estable.",
+          "Separe atributos reemplazables.",
+          "Declare referencias por identidad.",
+          "Pruebe igualdad y cambio."
+        ],
+        "example": "obs-001 conserva identidad aunque se corrija la cantidad en revisión 2.",
+        "mistake": "Usar la posición de un arreglo como identidad permanente.",
+        "evidence": "Mover o renombrar documentos no rompe referencias.",
+        "code": "identidad = 'obs-001'\nrevision = 2",
+        "execution": {
+          "cwd": ".",
+          "binary": "node",
+          "argv": [
+            "--test",
+            "--test-reporter=tap",
+            "--test-name-pattern=^rechaza revisiones obsoletas$",
+            "replication/examples/ecosistema-app/test/app.test.mjs"
+          ],
+          "command": "node --test --test-reporter=tap --test-name-pattern='^rechaza revisiones obsoletas$' replication/examples/ecosistema-app/test/app.test.mjs",
+          "kind": "prueba-local",
+          "expected": "La revisión no puede retroceder. La salida termina con pass 1 y fail 0.",
+          "minimumPassed": 1,
+          "prerequisites": [
+            "Node.js 22.13 o superior.",
+            "Terminal en la raíz de COBRIA. No hace falta instalar dependencias para esta aplicación."
+          ],
+          "tests": [
+            "replication/examples/ecosistema-app/test/app.test.mjs"
+          ],
+          "troubleshooting": [
+            "fail distinto de cero indica un fallo: lea el primer mensaje, no solamente la última línea.",
+            "pass 0 no demuestra la conducta: revise el nombre exacto de la prueba y la ruta.",
+            "No cambie la regla para obtener verde; compare la entrada con el contrato."
+          ]
+        },
+        "codeKind": "lectura-guiada",
+        "guide": "manuales/26-primer-proyecto-paso-a-paso.md"
+      },
+      {
+        "title": "Invariantes antes que formularios",
+        "situation": "Una regla duplicada en web, móvil y tareas termina comportándose de tres maneras.",
+        "simple": "La regla que siempre debe cumplirse vive junto al modelo de dominio.",
+        "steps": [
+          "Escriba la regla en lenguaje natural.",
+          "Construya un caso válido.",
+          "Construya un caso límite.",
+          "Haga que todas las entradas llamen la misma regla."
+        ],
+        "example": "La cantidad observada es un entero positivo sin importar la interfaz.",
+        "mistake": "Validar solamente con atributos HTML.",
+        "evidence": "La misma prueba pasa desde HTTP, consola y tarea.",
+        "code": "if (!Number.isInteger(cantidad) || cantidad < 1) rechazar()",
+        "execution": {
+          "cwd": ".",
+          "binary": "node",
+          "argv": [
+            "--test",
+            "--test-reporter=tap",
+            "--test-name-pattern=^el problema HTTP conserva traceId sin exponer detalles internos$",
+            "replication/examples/ecosistema-app/test/app.test.mjs"
+          ],
+          "command": "node --test --test-reporter=tap --test-name-pattern='^el problema HTTP conserva traceId sin exponer detalles internos$' replication/examples/ecosistema-app/test/app.test.mjs",
+          "kind": "prueba-local",
+          "expected": "La misma regla de cantidad llega como error estable al controlador. La salida termina con pass 1 y fail 0.",
+          "minimumPassed": 1,
+          "prerequisites": [
+            "Node.js 22.13 o superior.",
+            "Terminal en la raíz de COBRIA. No hace falta instalar dependencias para esta aplicación."
+          ],
+          "tests": [
+            "replication/examples/ecosistema-app/test/app.test.mjs"
+          ],
+          "troubleshooting": [
+            "fail distinto de cero indica un fallo: lea el primer mensaje, no solamente la última línea.",
+            "pass 0 no demuestra la conducta: revise el nombre exacto de la prueba y la ruta.",
+            "No cambie la regla para obtener verde; compare la entrada con el contrato."
+          ]
+        },
+        "codeKind": "lectura-guiada",
+        "guide": "manuales/26-primer-proyecto-paso-a-paso.md"
+      },
+      {
+        "title": "Comandos, consultas y eventos",
+        "situation": "Una función llamada procesar mezcla cambios, lecturas y notificaciones.",
+        "simple": "El comando intenta cambiar; la consulta observa; el evento informa algo que ya ocurrió.",
+        "steps": [
+          "Nombre la intención.",
+          "Separe lectura y cambio.",
+          "Emita el evento después del hecho.",
+          "No use el evento como orden oculta."
+        ],
+        "example": "RegistrarObservacion cambia; ListarObservaciones consulta; ObservacionRegistrada informa.",
+        "mistake": "Hacer que una consulta modifique datos para ‘actualizar caché’ sin contrato.",
+        "evidence": "Cada operación declara efectos y puede probarse por separado.",
+        "code": "comando: registrar(entrada)\nconsulta: listar(filtro)\nevento: ObservacionRegistrada",
+        "execution": {
+          "cwd": ".",
+          "binary": "node",
+          "argv": [
+            "--test",
+            "--test-reporter=tap",
+            "--test-name-pattern=^pagina observaciones con cursor opaco y orden estable$",
+            "replication/examples/ecosistema-app/test/app.test.mjs"
+          ],
+          "command": "node --test --test-reporter=tap --test-name-pattern='^pagina observaciones con cursor opaco y orden estable$' replication/examples/ecosistema-app/test/app.test.mjs",
+          "kind": "prueba-local",
+          "expected": "La consulta pagina sin modificar la observación. La salida termina con pass 1 y fail 0.",
+          "minimumPassed": 1,
+          "prerequisites": [
+            "Node.js 22.13 o superior.",
+            "Terminal en la raíz de COBRIA. No hace falta instalar dependencias para esta aplicación."
+          ],
+          "tests": [
+            "replication/examples/ecosistema-app/test/app.test.mjs"
+          ],
+          "troubleshooting": [
+            "fail distinto de cero indica un fallo: lea el primer mensaje, no solamente la última línea.",
+            "pass 0 no demuestra la conducta: revise el nombre exacto de la prueba y la ruta.",
+            "No cambie la regla para obtener verde; compare la entrada con el contrato."
+          ]
+        },
+        "codeKind": "lectura-guiada",
+        "guide": "manuales/26-primer-proyecto-paso-a-paso.md"
+      }
+    ],
+    "arquitectura": [
+      {
+        "title": "Delimitar contextos y vocabularios",
+        "situation": "La palabra estado significa publicación en un módulo y condición biológica en otro.",
+        "simple": "Una frontera protege significado además de código.",
+        "steps": [
+          "Liste capacidades del negocio.",
+          "Agrupe reglas que cambian juntas.",
+          "Defina vocabulario por contexto.",
+          "Documente traducciones entre contextos."
+        ],
+        "example": "Observaciones y Catálogos se comunican mediante especieId y versión, no compartiendo clases.",
+        "mistake": "Crear un modelo universal con todos los significados.",
+        "evidence": "Cada término ambiguo posee dueño y traducción.",
+        "code": "Observaciones.especieId -> Catalogos.resolver(id, version)"
+      },
+      {
+        "title": "Registrar una decisión arquitectónica",
+        "situation": "Meses después nadie recuerda por qué se eligió una cola o una proyección.",
+        "simple": "Un ADR conserva contexto, alternativas, decisión y consecuencias.",
+        "steps": [
+          "Describa la presión observable.",
+          "Compare opciones.",
+          "Anote la decisión y su fecha.",
+          "Defina cuándo revisarla."
+        ],
+        "example": "ADR-004 elige índice compuesto antes que proyección por cumplir el objetivo de latencia.",
+        "mistake": "Escribir solo ‘se decidió usar MongoDB’.",
+        "evidence": "Otra persona puede reconstruir la razón y cuestionarla.",
+        "code": "estado: aceptada\nalternativas: [indice, proyeccion]\nrevision: 2026-12-01"
+      },
+      {
+        "title": "Comprobar arquitectura con funciones de aptitud",
+        "situation": "El diagrama promete capas, pero los imports reales atraviesan todas las fronteras.",
+        "simple": "Una regla arquitectónica importante debe poder fallar automáticamente.",
+        "steps": [
+          "Declare dependencia permitida.",
+          "Inspeccione imports.",
+          "Bloquee SDK en dominio.",
+          "Ejecute la prueba en integración continua."
+        ],
+        "example": "domain no puede importar infrastructure ni presentation.",
+        "mistake": "Confiar únicamente en revisión manual.",
+        "evidence": "Una importación prohibida rompe el gate con ruta y regla.",
+        "code": "prohibirImport('domain', ['infrastructure', 'presentation'])"
+      }
+    ],
+    "capas": [
+      {
+        "title": "Puertos y adaptadores: Catalog, Indexer y Connector",
+        "situation": "El caso de uso conoce el cliente de base de datos y tres servicios cambian la misma regla.",
+        "simple": "El puerto declara una capacidad. Catalog gobierna vocabulario y versión; Indexer construye lecturas derivadas; Connector encapsula red y SDK. Ninguno reemplaza la autoridad del caso de uso.",
+        "steps": [
+          "Declare guardar y obtenerPorId en el puerto del repositorio.",
+          "Separe Catalog de textos visuales y configuración mutable.",
+          "Haga que Indexer conserve fuente, ámbito y revisión.",
+          "Limite Connector al protocolo; pruebe dos adaptadores con el mismo contrato."
+        ],
+        "example": "En la reserva, Catalog valida especieCodigo, Indexer prepara el resumen y Connector accede al proveedor. La observación conserva la autoridad de dominio.",
+        "mistake": "Copiar el SDK completo al puerto o permitir que un índice cambie la cantidad observada.",
+        "evidence": "Los adaptadores superan el mismo contrato; el derivado no admite cambios de dominio y el caso ajeno se rechaza.",
+        "code": "RepositorioObservaciones: guardar, obtenerPorId\nCatalog: significado + version\nIndexer: derivar + verificar\nConnector: protocolo + fallosTecnicos"
+      },
+      {
+        "title": "Composición en una única frontera",
+        "situation": "Cada archivo crea sus dependencias y vuelve imposible sustituirlas en pruebas.",
+        "simple": "La raíz de composición construye adaptadores y los entrega a los casos de uso.",
+        "steps": [
+          "Cree configuración validada.",
+          "Construya infraestructura.",
+          "Inyecte puertos.",
+          "Exponga controladores."
+        ],
+        "example": "composition.mjs elige memoria, MongoDB o CouchDB sin modificar dominio.",
+        "mistake": "Usar un contenedor global accesible desde cualquier capa.",
+        "evidence": "La prueba cambia el adaptador con una sola decisión.",
+        "code": "repo = crearRepositorio(config.motor)\nregistrar = new RegistrarObservacion(repo)"
+      },
+      {
+        "title": "Evitar el cajón de utilidades",
+        "situation": "utils acumula autorización, fechas, conversión y reglas sin propietario.",
+        "simple": "Ubique cada función junto al concepto que protege o cree un módulo con contrato preciso.",
+        "steps": [
+          "Busque quién usa la función.",
+          "Nombre la responsabilidad.",
+          "Mueva la regla al dueño.",
+          "Elimine dependencias circulares."
+        ],
+        "example": "normalizarEspecie pertenece al catálogo; autorizarCapacidad pertenece a seguridad.",
+        "mistake": "Renombrar utils como common sin separar responsabilidades.",
+        "evidence": "Cada módulo tiene una razón principal de cambio.",
+        "code": "catalogo/normalizar-especie.mjs\nsecurity/autorizar-capacidad.mjs"
+      }
+    ],
+    "codigo": [
+      {
+        "title": "Errores de dominio que permiten actuar",
+        "situation": "Atrapar cualquier error y devolver 500 oculta rechazos esperados.",
+        "simple": "Los errores esperados poseen código estable y se traducen en la frontera.",
+        "steps": [
+          "Defina catálogo de errores.",
+          "Separe rechazo de fallo técnico.",
+          "Traduzca a protocolo.",
+          "Registre sin datos sensibles."
+        ],
+        "example": "REVISION_OBSOLETA se traduce a conflicto 409.",
+        "mistake": "Comparar mensajes de texto en pruebas.",
+        "evidence": "Código, estado y detalle seguro están cubiertos.",
+        "code": "throw new ErrorCobria('OBS_QUANTITY_INVALID', 'La cantidad debe ser positiva');\n// El controlador traduce el código a HTTP; la entidad no decide estados HTTP."
+      },
+      {
+        "title": "Funciones pequeñas alrededor de efectos visibles",
+        "situation": "Una función valida, persiste, llama red y formatea respuesta sin límites.",
+        "simple": "Separe cálculo puro de efectos y haga explícitas las dependencias.",
+        "steps": [
+          "Extraiga transformaciones puras.",
+          "Inyecte reloj y generador de identidad.",
+          "Agrupe el efecto en el caso de uso.",
+          "Pruebe fallo parcial."
+        ],
+        "example": "crearObservacion calcula; repositorio.guardar realiza el efecto.",
+        "mistake": "Dividir cada línea en una función sin significado.",
+        "evidence": "Las reglas se prueban sin red ni reloj real.",
+        "code": "doc = crearObservacion(entrada, reloj.ahora())\nawait repositorio.guardar(doc)"
+      },
+      {
+        "title": "Formato automático y revisión humana",
+        "situation": "Las discusiones de estilo consumen la revisión y esconden riesgos reales.",
+        "simple": "Automatice formato y lint; reserve la revisión para intención, seguridad y diseño.",
+        "steps": [
+          "Fije formateador.",
+          "Active lint estricto.",
+          "Ejecute antes de integrar.",
+          "Revise nombres y efectos manualmente."
+        ],
+        "example": "El gate corrige espacios, pero una persona cuestiona una ruta de escritura paralela.",
+        "mistake": "Tratar cero advertencias como prueba de buen diseño.",
+        "evidence": "El cambio pasa formato, lint, pruebas y lista de revisión.",
+        "code": "npm --prefix sitio run lint\nnpm --prefix replication/examples/ecosistema-app test\n// Lint no sustituye revisar nombres, comentarios y contratos."
+      }
+    ],
+    "datos": [
+      {
+        "title": "Diseñar agregados y separar nodos",
+        "situation": "Un documento crece sin límite porque todo dato relacionado se incrusta.",
+        "simple": "Un agregado protege cambios atómicos; un nodo independiente conserva su propio ciclo de vida.",
+        "steps": [
+          "Identifique reglas atómicas.",
+          "Estime cardinalidad.",
+          "Observe frecuencia de cambio.",
+          "Defina referencia y consistencia."
+        ],
+        "example": "La ubicación capturada se incrusta; la especie de catálogo se referencia por identidad y versión.",
+        "mistake": "Separar o incrustar únicamente por costumbre relacional.",
+        "evidence": "El límite soporta consultas, tamaño y concurrencia esperados.",
+        "code": "observacion.ubicacionCapturada\nobservacion.especie = { id, version }"
+      },
+      {
+        "title": "Traducir claves físicas en el Dater",
+        "situation": "Claves compactas como a, b y c llegan al dominio y vuelven ilegible el programa.",
+        "simple": "El adaptador conoce el formato físico; el resto trabaja con nombres de negocio.",
+        "steps": [
+          "Documente cada clave.",
+          "Implemente ida y vuelta.",
+          "Pruebe ausencia y valor nulo.",
+          "Versione el mapeo."
+        ],
+        "example": "a se traduce a identidad y b a ámbito solamente dentro de observacion-dater.",
+        "mistake": "Usar las claves compactas en servicios o controladores.",
+        "evidence": "Una prueba round-trip conserva significado y revisión.",
+        "code": "desdeFisico({a,b,c}) -> {identidad:a, ambito:b, revision:c}"
+      },
+      {
+        "title": "Migrar documentos sin detener el mundo",
+        "situation": "Cambiar un campo exige reescribir inmediatamente millones de documentos.",
+        "simple": "Lea varias versiones, escriba la nueva y migre de forma idempotente.",
+        "steps": [
+          "Añada versionEsquema.",
+          "Defina lectores compatibles.",
+          "Migre por lotes.",
+          "Cuente errores y conserve reversión."
+        ],
+        "example": "codigoEspecie de versión 1 se convierte en especieCodigo de versión 2.",
+        "mistake": "Inferir versión por presencia de campos ambiguos.",
+        "evidence": "Ejecutar la migración dos veces produce la misma huella.",
+        "code": "leer(segun versionEsquema)\nmigrar(v1,v2) // idempotente"
+      }
+    ],
+    "core": [
+      {
+        "title": "Elegir nivel C1, C2 o C3",
+        "situation": "Un equipo declara COBRIA completo aunque solo protege autoridad y ámbito.",
+        "simple": "La conformidad es acumulativa y se declara únicamente para requisitos probados.",
+        "steps": [
+          "Comience por C1.",
+          "Añada reconstrucción para C2.",
+          "Añada gobierno operacional para C3.",
+          "Publique límites y pruebas."
+        ],
+        "example": "Una colección sin derivados puede quedarse responsablemente en C1.",
+        "mistake": "Adoptar C3 por prestigio sin necesidad operacional.",
+        "evidence": "El informe enumera requisito, prueba, resultado y nivel alcanzado.",
+        "code": "cobria verificar --adaptador ./mi-adaptador"
+      },
+      {
+        "title": "Definir equivalencia útil",
+        "situation": "Dos proyecciones pueden diferir en orden o metadatos y representar la misma lectura.",
+        "simple": "La equivalencia compara aquello que el consumidor necesita, no bytes accidentales.",
+        "steps": [
+          "Declare campos observables.",
+          "Normalice orden permitido.",
+          "Compare conteos y huellas.",
+          "Pruebe una divergencia real."
+        ],
+        "example": "El resumen por especie compara pares especie-cantidad, no fecha interna de construcción.",
+        "mistake": "Declarar equivalencia solo porque coinciden los conteos totales.",
+        "evidence": "El verificador detecta ausencia, exceso y valor incorrecto.",
+        "code": "equivalente = normalizar(candidata) === normalizar(esperada)"
+      },
+      {
+        "title": "Presupuestar y retirar derivados",
+        "situation": "Cada nueva proyección queda para siempre aunque nadie la consulte.",
+        "simple": "Todo derivado declara beneficio, costo, responsable y condición de retiro.",
+        "steps": [
+          "Mida alternativa simple.",
+          "Estime escritura y almacenamiento.",
+          "Declare propietario.",
+          "Revise uso y retire seguro."
+        ],
+        "example": "Se elimina resumen-regional cuando el índice nativo cumple el objetivo y no quedan consumidores.",
+        "mistake": "Medir solo latencia de lectura.",
+        "evidence": "Existe una decisión de crear y un procedimiento probado de eliminar.",
+        "code": "adoptar = beneficioLectura > costoTotal && tieneRetiro"
+      }
+    ],
+    "patrones": [
+      {
+        "title": "Fuerzas y consecuencias antes que recetas",
+        "situation": "Dos equipos tienen el mismo problema pero diferentes requisitos de frescura y costo.",
+        "simple": "Un patrón explica tensiones; la implementación depende del contexto.",
+        "steps": [
+          "Liste fuerzas.",
+          "Marque cuáles compiten.",
+          "Compare consecuencias.",
+          "Decida y mida."
+        ],
+        "example": "Proyección mejora lectura pero añade atraso, escritura y recuperación.",
+        "mistake": "Copiar el diagrama sin registrar costos.",
+        "evidence": "La ficha incluye cuándo usar, cuándo no usar y métrica.",
+        "code": "fuerzas = [latencia, frescura, costo, complejidad]"
+      },
+      {
+        "title": "Reconocer antipatrones por su fallo",
+        "situation": "Una solución parece rápida hasta que ocurre duplicación, atraso o pérdida.",
+        "simple": "El antipatrón se documenta con el daño observable y una prueba que lo revela.",
+        "steps": [
+          "Nombre el atajo.",
+          "Describa el fallo.",
+          "Construya caso adverso.",
+          "Proponga reparación gradual."
+        ],
+        "example": "La proyección editable crea dos autoridades y una corrección irreconciliable.",
+        "mistake": "Llamar antipatrón a cualquier estilo distinto.",
+        "evidence": "El caso de fracaso puede reproducirse.",
+        "code": "editarDerivado() // prohibido: autoridad paralela"
+      },
+      {
+        "title": "Construir un lenguaje de patrones",
+        "situation": "Las fichas aisladas no muestran qué patrón prepara o limita a otro.",
+        "simple": "Conecte patrones mediante relaciones explícitas y conserve un patrón principal por decisión.",
+        "steps": [
+          "Elija problema inicial.",
+          "Identifique precondiciones.",
+          "Añada colaboradores.",
+          "Evite ciclos de responsabilidad."
+        ],
+        "example": "Objeto canónico prepara Reconstrucción; Publicación por versión reduce su riesgo.",
+        "mistake": "Convertir el catálogo entero en una arquitectura obligatoria.",
+        "evidence": "El mapa explica dependencia, alternativa y costo conjunto.",
+        "code": "canonico -> reconstruccion -> publicacionVersionada"
+      }
+    ],
+    "apiux": [
+      {
+        "title": "Paginar con cursores opacos",
+        "situation": "La página 8 cambia mientras llegan documentos y repite u omite resultados.",
+        "simple": "El cursor conserva la posición estable sin revelar claves físicas.",
+        "steps": [
+          "Fije orden total.",
+          "Codifique última posición.",
+          "Valide cursor.",
+          "Limite tamaño."
+        ],
+        "example": "fecha descendente e identidad resuelven empates.",
+        "mistake": "Aceptar tamaño ilimitado o cursor manipulable.",
+        "evidence": "Inserciones concurrentes no duplican elementos ya entregados.",
+        "code": "GET /observaciones?cursor=opaco&limite=25"
+      },
+      {
+        "title": "Diseñar acciones idempotentes",
+        "situation": "Un reintento móvil registra dos veces la misma observación.",
+        "simple": "La intención lleva una clave y repetir la misma entrada devuelve el mismo efecto.",
+        "steps": [
+          "Reciba Idempotency-Key.",
+          "Vincule clave a actor y entrada.",
+          "Devuelva resultado previo.",
+          "Rechace reutilización distinta."
+        ],
+        "example": "obs-001 repetida conserva identidad; otra cantidad con la misma clave devuelve conflicto.",
+        "mistake": "Deduplicar solamente por una ventana de segundos.",
+        "evidence": "Pruebas de repetición igual y reutilización diferente.",
+        "code": "Idempotency-Key: obs-001"
+      },
+      {
+        "title": "Probar experiencia adaptable y accesible",
+        "situation": "La interfaz funciona con ratón y pantalla grande, pero no con teclado ni móvil.",
+        "simple": "Accesibilidad y adaptación se verifican en cada estado, no al final.",
+        "steps": [
+          "Use HTML semántico.",
+          "Conserve foco visible.",
+          "Pruebe 320 px.",
+          "Revise lector y movimiento reducido."
+        ],
+        "example": "El error mueve foco al resumen y conserva detalle junto al campo.",
+        "mistake": "Usar aria para corregir controles no semánticos.",
+        "evidence": "Teclado, contraste, zoom y lector completan el recorrido.",
+        "code": "<button type='submit'>Registrar observación</button>"
+      }
+    ],
+    "documentacion": [
+      {
+        "title": "Escribir un README que permita comenzar",
+        "situation": "El repositorio explica la visión, pero no cómo instalar y comprobar el programa.",
+        "simple": "El README ofrece propósito, inicio rápido, estructura, pruebas y siguientes documentos.",
+        "steps": [
+          "Explique para quién es.",
+          "Añada comando mínimo.",
+          "Muestre resultado esperado.",
+          "Enlace decisiones y operación."
+        ],
+        "example": "La suite debe ejecutar sus casos actuales, con pass mayor que cero y fail 0; no se asume un conteo histórico fijo.",
+        "mistake": "Convertir README en toda la documentación.",
+        "evidence": "Una persona nueva ejecuta el ejemplo sin preguntar.",
+        "code": "## Inicio rápido\nDesde la raíz de COBRIA:\nnpm --prefix replication/examples/ecosistema-app test\nnpm --prefix replication/examples/ecosistema-app start"
+      },
+      {
+        "title": "Separar ADR, referencia y runbook",
+        "situation": "La emergencia obliga a leer una explicación histórica para encontrar un comando de recuperación.",
+        "simple": "Cada documento responde una necesidad distinta y enlaza a los demás.",
+        "steps": [
+          "ADR conserva decisión.",
+          "Referencia define contrato.",
+          "Runbook guía operación.",
+          "Tutorial enseña una primera vez."
+        ],
+        "example": "ADR explica por qué existe la proyección; runbook indica cómo reconstruirla.",
+        "mistake": "Copiar instrucciones iguales en cuatro archivos.",
+        "evidence": "Cada documento declara audiencia, autoridad y actualización.",
+        "code": "docs/{decisiones,referencia,operacion,tutoriales}/"
+      },
+      {
+        "title": "Mantener trazabilidad entre texto y ejecución",
+        "situation": "El libro afirma una prueba que cambió de nombre o dejó de existir.",
+        "simple": "Una afirmación importante enlaza fuente, código, prueba y resultado versionado.",
+        "steps": [
+          "Asigne identificador.",
+          "Declare fuente.",
+          "Compruebe ruta y prueba.",
+          "Falle si el enlace desaparece."
+        ],
+        "example": "B09 enlaza reconstrucción con archivo y nombre de prueba.",
+        "mistake": "Usar capturas como única evidencia.",
+        "evidence": "La matriz se valida desde un checkout limpio.",
+        "code": "afirmacion -> requisito -> codigo -> prueba -> resultado"
+      }
+    ],
+    "seguridad": [
+      {
+        "title": "Modelar amenazas desde el flujo",
+        "situation": "Una lista genérica de controles no muestra dónde puede cruzarse un ámbito.",
+        "simple": "Siga el dato desde la entrada hasta registros, colas, cachés y derivados.",
+        "steps": [
+          "Dibuje activos y fronteras.",
+          "Identifique actor y capacidad.",
+          "Enumere abuso y fallo.",
+          "Asocie control y prueba negativa."
+        ],
+        "example": "El filtro de ámbito ocurre antes de buscar candidatos semánticos.",
+        "mistake": "Limitar el modelo a ataques externos.",
+        "evidence": "Cada amenaza tiene propietario, control y prueba.",
+        "code": "amenaza: cruceAmbito\ncontrol: autorizarAntesDeRecuperar"
+      },
+      {
+        "title": "Autenticar actor y autorizar capacidad",
+        "situation": "Conocer la identidad no significa poder ejecutar una acción en cualquier reserva.",
+        "simple": "La frontera confiable deriva actor, capacidad, ámbito y finalidad.",
+        "steps": [
+          "Verifique identidad.",
+          "Resuelva capacidades.",
+          "Fije ámbito confiable.",
+          "Rechace antes del repositorio."
+        ],
+        "example": "observaciones:registrar en reserva-sur no autoriza leer reserva-norte.",
+        "mistake": "Aceptar ámbito enviado por el cuerpo sin contrastarlo.",
+        "evidence": "Casos ausente, manipulado y recurso ajeno fallan antes de leer.",
+        "code": "autorizar({actor, capacidad:'observaciones:registrar', ambito})"
+      },
+      {
+        "title": "Proteger secretos y cadena de suministro",
+        "situation": "Una dependencia o credencial comprometida evita todas las reglas del dominio.",
+        "simple": "Los secretos no viven en Git y cada dependencia tiene origen, versión y revisión.",
+        "steps": [
+          "Use gestor de secretos.",
+          "Fije lockfile.",
+          "Revise vulnerabilidades.",
+          "Genere inventario y plan de respuesta."
+        ],
+        "example": "Staging y producción usan identidades distintas y permisos mínimos.",
+        "mistake": "Guardar secretos codificados en base64.",
+        "evidence": "Escaneo, rotación ensayada y artefacto firmado o identificado.",
+        "code": "npm ci\nnpm audit --omit=dev"
+      }
+    ],
+    "calidad": [
+      {
+        "title": "Del reporte al cierre verificable",
+        "situation": "Un guardaparque ve datos de otra sede. Revise vista, permisos, caché, función y proyección.",
+        "simple": "Reproduzca, siga las capas, corrija la causa y conserve evidencia de seguridad y entrega.",
+        "steps": [
+          "Extraiga síntoma, ruta, rol, ámbito y expectativa; contraste defecto o protección válida.",
+          "Reproduzca con roles autorizados y sin permiso; inspeccione registros y datos.",
+          "Siga las capas y la autorización por la ruta de ejecución real.",
+          "Corrija la causa mínima; evite duplicar lógica, scans o listeners.",
+          "Alinee interfaz y seguridad; ocultar botones no bloquea operaciones.",
+          "Añada regresiones, ejecute gates y reteste staging por rol.",
+          "Entregue por SHA; registre verificación, riesgos y pendientes."
+        ],
+        "example": "La sede permitida funciona; la ajena se rechaza al invocar directamente el endpoint. Distinga acceso cliente con Rules y Function con autorización propia.",
+        "mistake": "Obedecer un reporte sin contrastarlo, ampliar permisos para ocultar un fallo o cerrar sin retest.",
+        "evidence": "El reporte enlaza causa, pruebas positivas y negativas, ambiente, SHA, registros, retest y riesgo residual.",
+        "code": "# Si el proyecto define este script:\nnpm run verify:all\ngit diff --check\n# COBRIA usa make verificar"
+      },
+      {
+        "title": "Probar propiedades y casos adversos",
+        "situation": "Tres ejemplos felices no exploran revisiones, cantidades y tiempos extraños.",
+        "simple": "Una propiedad genera entradas y busca contraejemplos dentro de límites declarados.",
+        "steps": [
+          "Defina invariante.",
+          "Genere entradas.",
+          "Reduzca el fallo.",
+          "Conserve semilla."
+        ],
+        "example": "Ninguna secuencia de revisiones puede hacer retroceder el estado visible.",
+        "mistake": "Usar aleatoriedad sin semilla ni límite.",
+        "evidence": "El contraejemplo mínimo queda reproducible.",
+        "code": "propiedad: revisionFinal >= revisionInicial"
+      },
+      {
+        "title": "Evaluar calidad con SQuaRE y medir sin engañarse",
+        "situation": "La reserva promete ser rápida, segura y fácil sin especificar qué se comprobará.",
+        "simple": "SQuaRE ayuda a elegir atributos; conviértalos en requisitos y medidas antes de probar. Citar ISO no certifica el producto.",
+        "steps": [
+          "Distinga producto (25010:2023), uso (25019:2023) y datos (25012:2008).",
+          "Fije responsable, contexto, medida, unidad y criterio antes de ejecutar.",
+          "Congele carga, calentamiento, orden, ambiente y datos.",
+          "Informe p50, p95, p99, dispersión e intervalos cuando procedan.",
+          "Conserve rechazos, evidencia pendiente y límites; no mezcle conformidad Core e ISO."
+        ],
+        "example": "CAL-002 propone p95 <=500 ms con carga declarada; CAL-003 exige cero cruces en los casos adversos definidos. Son criterios locales, no umbrales ISO.",
+        "mistake": "Promediar una fuga de ámbito con buena latencia o afirmar certificación por pasar npm test.",
+        "evidence": "Plan enlazado a requisito, SHA, configuración, datos crudos y decisión. Fuentes y correspondencia temática: manuales/25-normas-y-evaluacion-de-calidad.md y editorial/standards-map.json.",
+        "code": "// Plan ilustrativo; no resultado medido ni certificación\nconst evaluacion = {\n  id: 'CAL-002', responsable: 'equipo-calidad',\n  contexto: 'carga por congelar', medida: 'p95', unidad: 'ms',\n  criterio: '<=500', estado: 'pendiente', evidencia: []\n};"
+      }
+    ],
+    "operaciones": [
+      {
+        "title": "Separar desarrollo, preview, staging y producción",
+        "situation": "Una configuración se copia entre ambientes y lleva datos o permisos indebidos.",
+        "simple": "Cada ambiente tiene finalidad, datos, identidad y puerta de promoción explícitos.",
+        "steps": [
+          "Defina propósito.",
+          "Separe secretos.",
+          "Use datos sintéticos en staging.",
+          "Promueva el mismo artefacto."
+        ],
+        "example": "firebase-staging y firebase-production no comparten proyecto ni cuenta de servicio.",
+        "mistake": "Recompilar con cambios manuales para producción.",
+        "evidence": "Commit y digest coinciden a través de la promoción.",
+        "code": "commit -> artefacto -> preview -> staging -> produccion"
+      },
+      {
+        "title": "Offline con fronteras explícitas",
+        "situation": "Un lote mezcla un borrador local y una modificación sensible cuando no hay conexión.",
+        "simple": "Solo las capacidades aprobadas entran a una cola acotada; el resto necesita su autoridad online.",
+        "steps": [
+          "Clasifique borradores y operaciones sensibles.",
+          "Valide todas las rutas antes de encolar.",
+          "Acote capacidad, TTL e intentos.",
+          "Muestre vencidos y revalide permisos al sincronizar."
+        ],
+        "example": "La reserva guarda una nota de campo, pero rechaza el lote completo si incluye una asignación de inventario.",
+        "mistake": "Aceptar nodos desconocidos o reproducir fallos definitivos automáticamente.",
+        "evidence": "El ejemplo operacion-documental rechaza lote mixto, ruta ambigua y cola llena sin guardar parcialmente.",
+        "code": "npm test --prefix replication/examples/operacion-documental"
+      },
+      {
+        "title": "Desplegar, observar y revertir",
+        "situation": "La nueva versión compila, pero no existe forma rápida de detectar o revertir una degradación.",
+        "simple": "La entrega define humo, métricas, umbrales, rollback y responsable antes de publicar.",
+        "steps": [
+          "Construya artefacto inmutable.",
+          "Ejecute pruebas de humo.",
+          "Observe SLO y errores.",
+          "Revierte por digest si falla."
+        ],
+        "example": "La publicación conserva la versión anterior hasta superar verificación.",
+        "mistake": "Usar el despliegue siguiente como plan de rollback.",
+        "evidence": "Un ensayo documentado recupera servicio y datos dentro de RTO/RPO.",
+        "code": "publicar(candidata) soloSi humo && metricasDentroDeUmbral"
+      }
+    ],
+    "ia": [
+      {
+        "title": "Evitar fuga temporal y por entidad",
+        "situation": "El conjunto de prueba contiene información futura o registros del mismo sujeto usado al entrenar.",
+        "simple": "Particione antes de transformar y respete entidad, tiempo y ámbito.",
+        "steps": [
+          "Declare corte.",
+          "Agrupe por entidad.",
+          "Separe particiones.",
+          "Pruebe intersección vacía."
+        ],
+        "example": "Todas las observaciones de una reserva y periodo quedan en una sola partición.",
+        "mistake": "Barajar filas después de calcular características globales.",
+        "evidence": "El manifiesto demuestra cortes y cero intersecciones prohibidas.",
+        "code": "partirPor({entidad, tiempo, ambito}); exigir(interseccion===0)"
+      },
+      {
+        "title": "Construir RAG con recuperación autorizada",
+        "situation": "La búsqueda vectorial encuentra un fragmento de otro ámbito antes de filtrarlo.",
+        "simple": "Autorización limita candidatos antes de similitud y cada respuesta conserva citas.",
+        "steps": [
+          "Derive ámbito confiable.",
+          "Filtre candidatos.",
+          "Recupere evidencia.",
+          "Genere con citas y versión."
+        ],
+        "example": "La consulta de reserva-sur nunca considera vectores de reserva-norte.",
+        "mistake": "Filtrar después de obtener top-k global.",
+        "evidence": "Prueba adversarial demuestra cero candidatos cruzados.",
+        "code": "buscar(dentroDe(ambito, politica), consulta)"
+      },
+      {
+        "title": "Gobernar herramientas y abstención",
+        "situation": "Un agente ejecuta una acción de alto riesgo porque el texto parecía una orden.",
+        "simple": "Cada herramienta declara capacidad mínima, validación, confirmación y auditoría; sin evidencia se abstiene.",
+        "steps": [
+          "Defina esquema de entrada.",
+          "Asigne capacidad.",
+          "Exija confirmación de riesgo.",
+          "Registre resultado o abstención."
+        ],
+        "example": "El asistente puede consultar observaciones, pero no eliminarlas.",
+        "mistake": "Dar a una herramienta credenciales generales.",
+        "evidence": "Entradas manipuladas y evidencia insuficiente producen rechazo seguro.",
+        "code": "herramienta.ejecutar(input, {capacidad, ambito, finalidad})"
+      }
+    ],
+    "construir": [
+      {
+        "title": "Ejecutar el proyecto conductor",
+        "situation": "Los conceptos parecen separados porque nunca se observan trabajando juntos.",
+        "simple": "Ejecute la aplicación neutral y siga una solicitud desde la presentación hasta el documento.",
+        "steps": [
+          "Instale dependencias.",
+          "Ejecute todas las pruebas actuales y registre el conteo real.",
+          "Ejecute la demostración.",
+          "Siga obs-001 por las capas."
+        ],
+        "example": "Registrar, repetir, listar, retirar y reconstruir el resumen.",
+        "mistake": "Leer todo el código antes de ejecutar un comportamiento.",
+        "evidence": "La salida coincide con la guía y las pruebas quedan verdes.",
+        "code": "cd replication/examples/ecosistema-app\nnpm test\nnpm start"
+      },
+      {
+        "title": "Cambiar el adaptador sin cambiar el núcleo",
+        "situation": "El ejemplo en memoria funciona, pero no demuestra una frontera intercambiable.",
+        "simple": "Implemente el mismo puerto y ejecute la misma suite contra otro motor documental.",
+        "steps": [
+          "Revise el puerto.",
+          "Configure MongoDB o CouchDB.",
+          "Ejecute contrato.",
+          "Compare errores y límites."
+        ],
+        "example": "composition selecciona repositorio-mongodb sin modificar RegistrarObservacion.",
+        "mistake": "Añadir condicionales del proveedor dentro del caso de uso.",
+        "evidence": "La suite funcional pasa con ambos adaptadores.",
+        "code": "npm --prefix replication/examples/ecosistema-app test\n// La composición actual usa memoria; los contratos de MongoDB y CouchDB usan dobles."
+      },
+      {
+        "title": "Cerrar una entrega demostrable",
+        "situation": "El proyecto tiene código, pero carece de manual, seguridad y recuperación.",
+        "simple": "Terminado incluye ejecución, prueba, documentación, operación y límite conocido.",
+        "steps": [
+          "Complete los 14 hitos.",
+          "Ejecute gates.",
+          "Produzca manifiesto.",
+          "Revise con otra persona."
+        ],
+        "example": "HITOS.json conecta cada aprendizaje con archivo y prueba.",
+        "mistake": "Declarar terminado porque la pantalla principal funciona.",
+        "evidence": "Otra persona reproduce el recorrido desde un checkout limpio.",
+        "code": "make verificar\ngit status --short # debe quedar limpio"
+      }
+    ],
+    "toolkit": [
+      {
+        "title": "Declarar el proyecto mediante un manifiesto",
+        "situation": "Un auditor adivina carpetas y produce falsos positivos.",
+        "simple": "El proyecto declara productos, contratos, rutas y autoridad de forma legible por humanos y herramientas.",
+        "steps": [
+          "Identifique proyecto y versión.",
+          "Enumere contratos.",
+          "Enlace evidencia.",
+          "Valide esquema."
+        ],
+        "example": "El manifiesto Engineering apunta a archivos congelados y huellas.",
+        "mistake": "Incluir resultados manuales como hechos ejecutados.",
+        "evidence": "El validador explica cada ruta válida o ausente.",
+        "code": "node replication/src/cli.mjs validar --ruta specification/phase-11 --json"
+      },
+      {
+        "title": "Generar sin sobrescribir decisiones humanas",
+        "situation": "Un generador reemplaza un archivo modificado y borra trabajo.",
+        "simple": "La automatización muestra plan, detecta conflicto y produce cambios idempotentes.",
+        "steps": [
+          "Ejecute simulación.",
+          "Liste archivos.",
+          "Compare huellas.",
+          "Aplique solo cambios seguros."
+        ],
+        "example": "La segunda ejecución no modifica ningún archivo.",
+        "mistake": "Usar --force como comportamiento predeterminado.",
+        "evidence": "Simulación, diff y repetición quedan registradas.",
+        "code": "node replication/src/cli.mjs generar --tipo entidad --nombre Observacion --directorio ejemplo-generado --simular --json"
+      },
+      {
+        "title": "Preparar contexto seguro para una IA",
+        "situation": "Un agente recibe todo el repositorio, secretos y autoridad de escritura innecesaria.",
+        "simple": "Entregue objetivo, fuentes, límites, invariantes, pruebas y permisos mínimos.",
+        "steps": [
+          "Declare alcance.",
+          "Ordene autoridades.",
+          "Proteja rutas.",
+          "Exija gate y reporte."
+        ],
+        "example": "El agente puede editar el libro, pero no Core ni resultados.",
+        "mistake": "Confiar en un prompt sin controles ejecutables.",
+        "evidence": "El contexto y el diff muestran que no hubo mutaciones fuera de alcance.",
+        "code": "contexto = {objetivo, autoridad, rutas, invariantes, pruebas}"
+      }
+    ],
+    "evidencia": [
+      {
+        "title": "Construir una matriz de trazabilidad integral",
+        "situation": "Una conclusión no permite localizar el requisito o resultado que la sostiene.",
+        "simple": "Cada afirmación enlaza requisito, patrón, implementación, prueba, resultado, amenaza y producto.",
+        "steps": [
+          "Asigne identificador.",
+          "Enlace artefactos.",
+          "Compruebe existencia.",
+          "Declare vacíos."
+        ],
+        "example": "CLAIM-R7-270 apunta al resumen generado y a su límite interno.",
+        "mistake": "Marcar pendiente como incumplido o ejecutado.",
+        "evidence": "La matriz detecta enlaces rotos y estados incompatibles.",
+        "code": "Requisito -> Patron -> Codigo -> Prueba -> Resultado -> Amenaza"
+      },
+      {
+        "title": "Reproducir desde un checkout limpio",
+        "situation": "Los resultados dependen de archivos locales no incluidos en Git.",
+        "simple": "Una réplica comienza desde commit, versiones y comandos declarados.",
+        "steps": [
+          "Clone commit.",
+          "Instale de forma determinista.",
+          "Ejecute protocolo.",
+          "Compare manifiestos y huellas."
+        ],
+        "example": "Otra computadora ejecuta P1, P2, R1, S1 y A1 sin consultar al autor.",
+        "mistake": "Copiar manualmente archivos generados.",
+        "evidence": "Informe de réplica con ambiente, salida y divergencias.",
+        "code": "git clone ...\ngit checkout <commit>\nmake verificar"
+      },
+      {
+        "title": "Publicar con versión, límites y retiro",
+        "situation": "Una URL cambia silenciosamente y mezcla candidata con estable.",
+        "simple": "La publicación identifica versión, autoridad, huella, cambios y evidencia pendiente.",
+        "steps": [
+          "Congele fuentes.",
+          "Genere artefactos.",
+          "Verifique checkout limpio.",
+          "Publique candidato y conserve retiro."
+        ],
+        "example": "RC2 no se presenta como 1.0 estable ni como certificación.",
+        "mistake": "Cambiar PDF sin actualizar manifiesto y llms.txt.",
+        "evidence": "Git, descargas, sitio y metadatos anuncian el mismo estado.",
+        "code": "make verificar\nmake construir-rc2\nsha256sum output/pdf/*.pdf"
+      }
+    ]
+  }
+}

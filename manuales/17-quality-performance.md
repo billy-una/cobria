@@ -13,11 +13,21 @@ microbenchmark demuestra superioridad arquitectónica.
 
 ## Del requisito a la evidencia
 
+La [guía de normas y evaluación](25-normas-y-evaluacion-de-calidad.md) incorpora
+SQuaRE como orientación para definir atributos, requisitos, medidas y decisiones.
+Distingue calidad del producto, datos y calidad en uso; sus umbrales ilustrativos
+no son valores ISO ni una declaración de conformidad.
+
 Cada requisito enlaza riesgo, prueba, resultado, ambiente, commit y limitación. Los estados
 permitidos distinguen planeado, parcial, ejecutado localmente, ejecutado por perfil y
 validación externa. Una ausencia permanece pendiente; no se rellena con una afirmación.
 
 ## Pruebas según el cambio
+
+Para investigar y corregir incidentes, use la
+[metodología del reporte al cierre verificable](23-metodologia-de-correccion-verificable.md).
+Incluye reproducción multirrol, diagnóstico por capas, causa raíz, corrección modular,
+regresiones, staging, entrega por SHA y documentación revisada visualmente.
 
 | Cambio | Pruebas mínimas |
 |---|---|

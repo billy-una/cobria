@@ -20,7 +20,7 @@ si una requiere una lectura local y otra varias comunicaciones de red
 Sea $N$ el número de entidades canónicas dentro de un ámbito; $R$ el número de resultados
 de una consulta; $P$ el número de proyecciones asociadas con una entidad; $P_w\leq P$ el
 número de proyecciones afectadas por una escritura; $\Delta N$ el número de entidades
-modificadas desde un marca de corte; $B_c$ el tamaño medio de un canónico y $B_{p_i}$ el
+modificadas desde una marca de corte; $B_c$ el tamaño medio de un canónico y $B_{p_i}$ el
 tamaño medio de su contribución a la proyección $i$. Se utilizan además:
 
 \begin{table}[H]
@@ -42,7 +42,7 @@ $d$ & número de dependencias & $k$ & tamaño del lote \\
 \end{table}
 
 Estas variables se calculan por organización y también de manera agregada. El promedio global
-puede ocultar que un organización pequeño recibe peor servicio o que uno grande domina el
+puede ocultar que una organización pequeña recibe peor servicio o que una grande domina el
 consumo. Por ello, cada resultado debe conservar al menos identificador anonimizado de
 ámbito, tipo de operación, versión del contrato y configuración experimental.
 
@@ -333,6 +333,11 @@ gobierno.
 
 \chapter{Protocolo experimental de rendimiento}
 
+Este capítulo conserva un diseño exploratorio de cargas y modelos de costo; sus
+escalas y escenarios no describen corridas ya realizadas. El protocolo congelado de
+cada experimento y la distinción R7/PC2/PC3 se documentan en la parte de evaluación.
+Los escenarios siguientes no son los niveles normativos C1, C2 y C3 de Core.
+
 \section{Objetivo y comparaciones}
 
 El protocolo evaluará si COBRIA reduce el costo de lectura y mejora reconstrucción y
@@ -342,10 +347,10 @@ ejecutar el protocolo. Se compararán, como mínimo, estas configuraciones:
 \begin{enumerate}[leftmargin=*]
   \item \textbf{B0, acceso directo:} canónicos sin proyección específica;
   \item \textbf{B1, optimización nativa:} índices disponibles en el motor;
-  \item \textbf{C1, COBRIA síncrona:} canónico y proyecciones críticas en la operación;
-  \item \textbf{C2, COBRIA asíncrona:} canónico, cola de salida y proyecciones actualizadas por
+  \item \textbf{E-S, escenario síncrono:} canónico y proyecciones críticas en la operación;
+  \item \textbf{E-A, escenario asíncrono:} canónico, cola de salida y proyecciones actualizadas por
   procesos de trabajo;
-  \item \textbf{C3, COBRIA incremental:} C2 con registro de cambios y reconstrucción
+  \item \textbf{E-I, escenario incremental:} E-A con registro de cambios y reconstrucción
   incremental.
 \end{enumerate}
 
@@ -527,6 +532,7 @@ Almacenes de características \parencite{orr2021featurestores,li2023featurestore
 
 \begin{figure}[H]
 \centering
+\resizebox{\textwidth}{!}{%
 \begin{tikzpicture}[
   node distance=.95cm and 1.05cm,
   box/.style={draw,align=center,minimum width=2.45cm,minimum height=.9cm},
@@ -546,6 +552,7 @@ Almacenes de características \parencite{orr2021featurestores,li2023featurestore
 \draw[line] (prediction) -- (usecase);
 \draw[line,dashed] (usecase) -- node[left,font=\small]{cambio validado} (canonical);
 \end{tikzpicture}
+}
 \caption{Flujo gobernado desde datos canónicos hasta decisiones asistidas por IA.}
 \label{fig:flujo-ia}
 \end{figure}

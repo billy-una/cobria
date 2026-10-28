@@ -1,0 +1,96 @@
+{
+  "schemaVersion": "1.0.0",
+  "phase": "EP8",
+  "date": "2026-10-23",
+  "deliveryTarget": "candidata-educativa-y-preprint",
+  "basis": "editorial/ep0/alcance.json",
+  "disposition": "excluida-justificadamente-para-preprint-acotado",
+  "reason": "La entrega mantiene las afirmaciones limitadas a norma, pruebas locales y evidencia histórica R7. No se decide sostener superioridad del contrato, rendimiento distribuido ni calidad generativa que requieran investigación nueva.",
+  "newConfirmatoryObservations": 0,
+  "pc3Closed": false,
+  "stableGatesClosed": false,
+  "externalReplicationDone": false,
+  "preflight": {
+    "generatedAt": "2026-10-23T20:35:25.576Z",
+    "ready": false,
+    "checks": [
+      {
+        "check": "freeze-pc2.mjs",
+        "ok": true
+      },
+      {
+        "check": "check-pc2-analysis.mjs",
+        "ok": true
+      },
+      {
+        "check": "espacio",
+        "ok": false,
+        "freeGiB": 5.115867614746094,
+        "minimumGiB": 10
+      },
+      {
+        "check": "mongodb",
+        "ok": false,
+        "reason": "Motor local inaccesible; no se midió ni se modificó almacenamiento"
+      },
+      {
+        "check": "couchdb",
+        "ok": false,
+        "reason": "Motor local inaccesible; no se midió ni se modificó almacenamiento"
+      },
+      {
+        "check": "opensearch",
+        "ok": false,
+        "reason": "Motor local inaccesible; no se midió ni se modificó almacenamiento"
+      }
+    ]
+  },
+  "families": [
+    "P1",
+    "P2",
+    "R1",
+    "S1",
+    "A1"
+  ],
+  "reentry": [
+    "Decidir explícitamente ampliar las afirmaciones científicas y registrar el alcance antes de medir.",
+    "Completar conectores y ejecutor PC3: canónico indexado, resultado equivalente, actualización, recuperación y costo total.",
+    "Verificar versiones, al menos 10 GiB libres, consultas, índices, planes y presupuestos; no basta iniciar motores.",
+    "Conservar los dos congelamientos PC2; cualquier modificación requiere enmienda previa identificada.",
+    "Ejecutar piloto e instrumentación antes de las corridas previstas; conservar incidentes y negativos.",
+    "Validar integridad y elegibilidad del conjunto; generar análisis, intervalos, efectos y figuras desde crudos.",
+    "Reconciliar artículo y maestro con los nuevos resultados, sin reutilizar R7 como relleno.",
+    "Evaluar un modelo generativo solo con protocolo propio; mantener réplica externa y participantes separados."
+  ],
+  "status": "decision-de-alcance-completada; investigacion-nueva-no-ejecutada",
+  "sourceSha256": {
+    "editorial/ep0/alcance.json": "f330cdee5e85ed41e9372949362e82ba9ea245d55953d40fdf7fcd91279c2999",
+    "editorial/ep8/decision.json": "7f561f8a3034535b5da9222a8dfb6f28205083896749e3dd8e08c85b15796d57",
+    "editorial/ep8/preflight-2026-10-23.json": "b96ef297eb395f9b4e9acd70fdc3f49b423c14ad1c36cd73fa6e31c8ef8d1fcb"
+  },
+  "protectedSources": {
+    "replication/protocol/pc2-freeze-v1.json": "17fa51bd39287b17fc59602ba8235083bf5b5c6f4e15a8069e8cdbf3463e63b8",
+    "replication/protocol/pc2-contracts-v1.json": "3a898a445acdee250e58d3c09ce0ea544dd47bd335539ac4087943c529f7fca6",
+    "replication/protocol/PC2-CONTRATOS-V1.md": "35fed81ae44e786ddaf1a1840554db228de8d861fd09dedb3db1fbce30646f38",
+    "replication/src/pc2/contracts.mjs": "fa90660584a86836a2a2e93ace3b7efecb98086d9a445b27509f41ce1e2b1aeb",
+    "replication/tests/pc2-contracts.test.mjs": "1ae098a3af9b94cbef873be6f654284f2ff06b3399abdd4ea9da6e2932af966e",
+    "replication/tests/pc2-freeze.test.mjs": "5276bd8ccc4abae883a0fc1d3e13d812f162457461d4e0face9f0751af2a54b2",
+    "replication/scripts/freeze-pc2.mjs": "58283d0007f583588af4fe8bf980983f690c1e5dd4b754694f897ce12b9c4495",
+    "replication/package-lock.json": "a49e63b177cbbcc6269d033fec07b04253221b674d4065aa585b8f288a671e72",
+    "specification/COBRIA-CORE-1.0.md": "9db3b0fffdee83ddf6c7ec8ede7e8f5d675d1e152e0614cadecba884eae1c179",
+    "replication/protocol/pc2-analysis-freeze-01.json": "99224766fb70dc0625d696d1a23c6f85763f7a95aacd01d47206d0c47b5d771b",
+    "replication/protocol/pc2-analysis-01.json": "bdf1267ce74f21dedbe6e008682fe377b3cfb931e15215374895785105fd9c91",
+    "replication/src/pc2/sign-test.mjs": "10b2292a354d651a13748b49084ce73710dba17068abc5eea94213c4a4d62028",
+    "replication/scripts/check-pc2-analysis.mjs": "60e469741a4bdc1536713114165a1780a2bcc809e94de58dfb60a5d06fbb4887",
+    "replication/tests/pc2-analysis.test.mjs": "78950143452649cc804c9a3a6fb0d73f3eeceb7299458bbe5f47729b23559712",
+    "replication/protocol/r7-confirmatory.json": "85da60d1e275d6aed7abf63afcc981c7ae8deca6b6c310cd8a1d4d73fafd4b7c",
+    "replication/results/core-r7-statistics/summary.json": "c57c8a794f35a159e90df02190b75850d353f7b5efe2042cda8effad501a1e6f",
+    "replication/results/core-1.3-alternatives/raw.json": "d8f08c7f774eb342a67ef7dc58107645a8ed21804cf48856b19ea310c09003fd",
+    "replication/results/core-1.3-alternatives/summary.json": "fd88898424f07083e37666da01c0f80b09ba6ee7e830940a451accb178c09d71"
+  },
+  "limits": [
+    "No iniciar, instalar ni modificar motores; diagnóstico de lectura únicamente.",
+    "La exclusión es válida para esta entrega acotada, no para una versión estable ni para futuras afirmaciones ampliadas.",
+    "No se añaden filas, estadísticas o gráficos PC3; las pruebas sintéticas no son corridas de motores."
+  ]
+}

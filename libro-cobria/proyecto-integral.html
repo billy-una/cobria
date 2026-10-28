@@ -1,0 +1,282 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="author" content="Billy Jak Cordero Porras"><meta name="description" content="Proyecto conductor recuperable"><meta name="viewport" content="width=device-width, initial-scale=1"><title>De una observación a una aplicación recuperable</title><style>@font-face { font-family: Inter; src: url('./fonts/Inter-400.ttf') format('truetype'); font-weight: 400; font-display: block; }
+@font-face { font-family: Inter; src: url('./fonts/Inter-600.ttf') format('truetype'); font-weight: 600; font-display: block; }
+@font-face { font-family: Inter; src: url('./fonts/Inter-700.ttf') format('truetype'); font-weight: 700; font-display: block; }
+@font-face { font-family: Inter; src: url('./fonts/Inter-900.ttf') format('truetype'); font-weight: 900; font-display: block; }
+@font-face { font-family: 'COBRIA Mono'; src: url('./fonts/RobotoMono-400.ttf') format('truetype'); font-weight: 400; font-display: block; }
+@font-face { font-family: 'COBRIA Mono'; src: url('./fonts/RobotoMono-700.ttf') format('truetype'); font-weight: 700; font-display: block; }
+:root {
+  --bosque: #174a3a;
+  --musgo: #5f7a3d;
+  --jade: #2f8f71;
+  --guaria: #e6b84a;
+  --rana: #a84330;
+  --rio: #3d7ea6;
+  --marfil: #f6f0df;
+  --papel: #fffdf7;
+  --carbon: #24302c;
+}
+
+@page { size: letter; margin: 17mm 18mm 18mm; }
+@page :first { margin: 0; }
+* { box-sizing: border-box; }
+* { font-feature-settings: 'calt' 0, 'liga' 0 !important; }
+html { background: #d9d6cc; }
+body {
+  margin: 0 auto; color: var(--carbon); background: var(--papel);
+  font-family: Inter, Arial, sans-serif; font-size: 10.2pt;
+  line-height: 1.48; max-width: 216mm;
+}
+a { color: #1f6f59; text-decoration-thickness: 1px; text-underline-offset: 2px; }
+a:focus-visible { outline: 3px solid var(--guaria); outline-offset: 2px; }
+p { margin: 0 0 0.75rem; }
+h1, h2, h3, .sans { font-family: inherit; }
+.cover {
+  height: 279.4mm; position: relative; overflow: hidden; color: white;
+  page-break-after: always; background: var(--bosque);
+}
+.cover img { display: block; width: 100%; height: 100%; object-fit: cover; filter: saturate(.88) brightness(.68); }
+.cover::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg,rgba(23,74,58,.78) 0%,rgba(23,74,58,.1) 48%,rgba(20,36,31,.72) 100%); }
+.cover-title { position: absolute; z-index: 2; inset: 17mm 18mm auto; }
+.cover-title .kicker { color: var(--guaria); letter-spacing: .18em; font: 700 9pt/1.2 Inter,Arial,sans-serif; text-transform: uppercase; }
+.cover-title h1 { font-size: 46pt; line-height: .95; margin: 4mm 0 3mm; letter-spacing: -.035em; }
+.cover-title h2 { font-size: 17pt; line-height: 1.18; max-width: 155mm; font-weight: 600; margin: 0; }
+.cover-author { position: absolute; z-index: 2; left: 18mm; bottom: 15mm; font: 600 11pt/1.5 Inter,Arial,sans-serif; }
+.edition-chip { position: absolute; z-index: 3; right: 0; bottom: 0; min-width: 47mm; padding: 13mm 7mm 3mm 9mm; text-align: right; color: var(--guaria); background: var(--bosque); border-radius: 18mm 0 0 0; font: 700 7.5pt/1 Inter,Arial,sans-serif; letter-spacing: .08em; text-transform: uppercase; }
+.opening, .catalog-map, .pattern, .lab-page, .book-page, .closing { page-break-before: always; }
+@media print { .opening, .catalog-map, .pattern, .lab-page, .book-page, .closing { break-after: page; } }
+/* Alejar los diacríticos de la frontera evita que Chromium los pinte en la
+   página anterior. No aumenta la altura del bloque ni cambia su flujo. */
+@media print { .eyebrow:first-child { position: relative; top: .8mm; } }
+.opening h1, .catalog-map h1, .closing h1 { color: var(--bosque); font-size: 31pt; line-height: 1.05; margin: 3mm 0 7mm; }
+.eyebrow { color: var(--rana); font: 700 8.5pt/1.2 Inter,Arial,sans-serif; letter-spacing: .15em; text-transform: uppercase; }
+.lead { font-size: 15pt; line-height: 1.42; color: var(--bosque); }
+.note { border-left: 4px solid var(--guaria); background: #fbf3d8; padding: 4mm 5mm; margin: 5mm 0; }
+.nosql { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; margin-top: 5mm; }
+.nosql > div { border-radius: 4mm; padding: 5mm; background: #e9f1eb; }
+.nosql h3 { color: var(--bosque); margin: 0 0 2mm; font-size: 13pt; }
+.legend { display: grid; grid-template-columns: repeat(2,1fr); gap: 4mm; }
+.legend article { border-top: 5px solid var(--jade); background: #edf3ef; padding: 4mm; border-radius: 0 0 3mm 3mm; }
+.legend article:nth-child(2) { border-color: var(--rio); }
+.legend article:nth-child(3) { border-color: var(--guaria); }
+.legend article:nth-child(4) { border-color: var(--rana); }
+.legend h3 { font-size: 12pt; margin: 0 0 1mm; }
+.pattern { min-height: 240mm; }
+.pattern-head { display: grid; grid-template-columns: 17mm 1fr; gap: 5mm; align-items: center; border-bottom: 2px solid var(--bosque); padding-bottom: 4mm; }
+.pattern-number { width: 17mm; height: 17mm; border-radius: 50%; display: grid; place-items: center; color: white; background: var(--bosque); font: 800 15pt Inter,Arial,sans-serif; }
+.pattern h1 { color: var(--bosque); font-size: 28pt; line-height: 1; margin: 0; }
+.badges { margin: 3mm 0 5mm 22mm; font-family: Inter,Arial,sans-serif; font-size: 8pt; }
+.badge { display: inline-block; border: 1px solid var(--jade); color: var(--bosque); border-radius: 999px; padding: 1.2mm 3mm; margin-right: 2mm; background: #edf5f0; }
+.pattern-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm 6mm; }
+.block { break-inside: avoid; }
+.block h2 { font-size: 11.5pt; color: var(--bosque); margin: 0 0 1.5mm; }
+.block h2::before { content: ""; display: inline-block; width: 2.6mm; height: 2.6mm; border: 1.2mm solid var(--jade); border-radius: 50%; margin-right: 2.2mm; vertical-align: -.3mm; }
+.analogy { grid-column: 1 / -1; background: #eef4f7; border-radius: 4mm; padding: 4mm 5mm; border-left: 5px solid var(--rio); }
+.solution { grid-column: 1 / -1; background: #eef4ef; border-radius: 4mm; padding: 4mm 5mm; }
+.contract { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 8.4pt; line-height: 1.5; background: var(--carbon); color: #f7f3e7; padding: 3mm 4mm; border-radius: 2mm; }
+.story-illustration { grid-column: 1 / -1; display: grid; grid-template-columns: 3fr 2fr; min-height: 65mm; margin: 1mm 0 3mm; border-radius: 4mm; overflow: hidden; border: 1px solid #bac9bd; background: var(--marfil); }
+.story-illustration img { display: block; width: 100%; height: 65mm; object-fit: contain; object-position: center; background: #dfe9e2; }
+.story-illustration figcaption { display: flex; align-items: center; padding: 6mm; color: var(--bosque); background: #edf3ef; border-left: 4px solid var(--jade); font: 650 10pt/1.45 Inter,Arial,sans-serif; }
+.pattern.illustrated { font-size: 9.1pt; line-height: 1.28; }
+.illustrated .story-illustration { margin-bottom: 1mm; }
+.illustrated .story-illustration { min-height: 61mm; }
+.illustrated .story-illustration img { height: 61mm; object-fit: contain; object-position: center; }
+.illustrated .story-illustration figcaption { padding: 5mm; font-size: 8.6pt; }
+.illustrated .pattern-grid { gap: 2.2mm 5mm; }
+.illustrated .analogy, .illustrated .solution { padding: 2.4mm 4mm; }
+.illustrated .block h2 { margin-bottom: .8mm; font-size: 10.2pt; }
+.lab-page { min-height: 240mm; }
+.lab-page h1 { margin: 2mm 0 3mm; color: var(--bosque); font-size: 27pt; line-height: 1.05; }
+.lab-lead { margin-bottom: 5mm; color: var(--bosque); font-size: 13.5pt; }
+.lab-page h2 { margin: 0 0 1.8mm; color: var(--bosque); font-size: 11.5pt; }
+.lab-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; margin: 4mm 0; }
+.lab-grid > section { break-inside: avoid; padding: 4mm; border-top: 4px solid var(--guaria); background: #fbf8ed; border-radius: 0 0 3mm 3mm; }
+.field-card { margin: 4mm 0; padding: 4mm 5mm; border-left: 5px solid var(--rio); border-radius: 3mm; background: #eef4f7; }
+.field-card.relation { border-color: var(--jade); background: #edf4ef; }
+.lab-page pre { white-space: pre-wrap; margin: 2mm 0 4mm; padding: 4mm 5mm; color: #f7f3e7; background: var(--carbon); border-radius: 3mm; font: 9pt/1.45 ui-monospace,SFMono-Regular,Menlo,monospace; }
+.lab-page ul { margin: 0; padding-left: 5mm; }
+.lab-page li { margin-bottom: 1.2mm; }
+.lab-page details { margin: 5mm 0; padding: 4mm 5mm; border: 1px solid #b9c7be; border-radius: 3mm; background: #edf4ef; }
+.lab-page summary { color: var(--bosque); font-weight: 800; cursor: pointer; }
+.lab-page details p { margin: 3mm 0 0; }
+.closing .roadmap { border-collapse: collapse; width: 100%; }
+.closing th, .closing td { border-bottom: 1px solid #b9c7be; text-align: left; padding: 3mm; }
+.closing th { background: var(--bosque); color: white; font-family: Inter,Arial,sans-serif; }
+footer { margin-top: 8mm; padding-top: 3mm; border-top: 1px solid #b9c7be; color: #617069; font-size: 8pt; }
+.bibliographic-page { font-size: 9.4pt; }
+.bibliographic-page h1 { margin-bottom: 5mm; }
+.bibliographic-grid { display: grid; grid-template-columns: 42mm 1fr; gap: 2.2mm 5mm; margin: 5mm 0; }
+.bibliographic-grid dt { color: var(--bosque); font-weight: 800; }
+.bibliographic-grid dd { margin: 0; }
+.synopsis-box { margin: 5mm 0; padding: 6mm; border-left: 5px solid var(--jade); border-radius: 0 4mm 4mm 0; background: #edf4ef; }
+.author-profile { display: grid; grid-template-columns: 34mm 1fr; gap: 6mm; align-items: start; }
+.author-monogram { width: 30mm; height: 30mm; display: grid; place-items: center; border-radius: 50%; color: white; background: var(--bosque); font-size: 18pt; font-weight: 850; }
+.apa-reference { padding-left: 10mm; text-indent: -10mm; }
+.rights-box { margin-top: 6mm; padding: 5mm; border: 1px solid #b9c7be; border-radius: 3mm; background: #f7f4ea; }
+.book-page { min-height: 240mm; }
+.book-page h1 { color: var(--bosque); font-size: 29pt; line-height: 1.05; margin: 3mm 0 7mm; }
+.book-page h2 { color: var(--bosque); font-size: 13pt; margin: 5mm 0 2mm; }
+.operation-workshop h1, .analytics-workshop h1, .integral-workshop h1 { margin-bottom: 4mm; }
+.operation-workshop h2, .analytics-workshop h2, .integral-workshop h2 { margin-top: 3mm; }
+.operation-workshop p, .analytics-workshop p, .integral-workshop p { margin-bottom: 2mm; }
+.operation-workshop h1 { font-size: 27pt; }
+.operation-workshop pre { padding-block: 2.5mm; }
+.operation-workshop h2 { margin-top: 2mm; }
+.operation-workshop pre, .analytics-workshop pre, .integral-workshop pre { margin: 2mm 0; padding: 3mm 5mm; }
+.documentation-workshop h1 { margin-bottom: 4mm; }
+.documentation-workshop h2 { margin-top: 3mm; }
+.documentation-workshop p { margin-bottom: 2mm; }
+.documentation-workshop pre { margin: 2mm 0; padding: 3mm 5mm; }
+.book-page table { width: 100%; border-collapse: collapse; margin: 5mm 0; }
+.book-page th, .book-page td { padding: 3mm; border-bottom: 1px solid #bdc9c0; text-align: left; vertical-align: top; }
+.book-page th { color: white; background: var(--bosque); font-family: Inter,Arial,sans-serif; }
+.book-page pre { white-space: pre-wrap; padding: 4mm 5mm; color: #f7f3e7; background: var(--carbon); border-radius: 3mm; font: 9pt/1.45 ui-monospace,SFMono-Regular,Menlo,monospace; }
+.module-meta { display: grid; grid-template-columns: repeat(3,1fr); gap: 3mm; margin: 5mm 0; }
+.module-meta span { padding: 4mm; border-top: 4px solid var(--jade); background: #edf4ef; border-radius: 0 0 3mm 3mm; }
+.module-meta strong { display: block; color: var(--bosque); font-size: 12pt; }
+.module-sources,.lesson-path { margin-top: 5mm; color: #49685b; font-size: 8.5pt; overflow-wrap: anywhere; }
+.beginner-lesson { min-height: 0; }
+.beginner-lesson .lesson-columns { margin-top: 4mm; }
+.beginner-lesson .lesson-proof { margin-top: 4mm; }
+.beginner-practice pre { white-space: pre-wrap; overflow-wrap: anywhere; font-size: 9pt; }
+.beginner-practice h1 { font-size: 25pt; }
+.ep3-page h1 { font-size: 25pt; margin-bottom: 4mm; }
+.ep3-page h2 { margin-top: 3mm; }
+.ep3-page p { margin-bottom: 2.5mm; }
+.ep3-page pre { font-size: 8pt; margin: 2mm 0; padding: 3mm; overflow-wrap: anywhere; }
+.ep3-page .ep3-source { font-size: 8pt; overflow-wrap: anywhere; }
+.code-page h1 { margin-bottom: 3mm; }
+.code-lead { color: var(--bosque); font-size: 11.5pt; line-height: 1.35; }
+.book-story { margin: 0 0 3mm; padding: 3mm 4mm; border-left: 5px solid var(--jade); border-radius: 2mm; background: #edf4ef; }
+.book-story strong { color: var(--bosque); font: 750 10pt/1.2 Inter,Arial,sans-serif; }
+.book-story p { margin: 1mm 0; font-size: 8.7pt; line-height: 1.3; }
+.book-story small { color: #49685b; font: 650 7.5pt/1.25 Inter,Arial,sans-serif; }
+.code-grid { display: grid; grid-template-columns: 1fr; gap: 4mm; }
+.code-grid.single { grid-template-columns: 1fr; }
+.code-grid section { min-width: 0; break-inside: avoid; }
+.code-grid h2 { margin: 0; padding: 2.2mm 3mm; color: white; background: var(--bosque); border-radius: 3mm 3mm 0 0; font-size: 10pt; }
+.code-grid pre { overflow: visible; margin: 0; border-radius: 0 0 3mm 3mm; line-height: 1.28; white-space: pre-wrap; overflow-wrap: anywhere; }
+.code-grid.single pre { min-height: 48mm; font-size: 9pt; }
+.code-grid.multi pre { min-height: 0; font-size: 9pt; }
+.module-review { margin-top: 4mm; padding: 3mm; border-left: 3px solid var(--jade); background: #edf4ef; }
+.module-review h2 { margin-top: 0; }.module-review p { margin-bottom: 2mm; }
+.reader-guide-page .reader-tracks { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; }
+.reader-guide-page h2 { margin-top: 2mm; }.reader-guide-page li { margin-bottom: 1mm; }
+.source-links { margin: 2.5mm 0; font: 650 7.4pt/1.35 Inter,Arial,sans-serif; }
+.source-links a { display: inline-block; margin-right: 2mm; }
+.title-page { display: flex; flex-direction: column; justify-content: center; }
+.title-page h1 { font-size: 62pt; margin-bottom: 2mm; }
+.title-rule { width: 45mm; height: 3mm; margin: 12mm 0; background: var(--guaria); border-radius: 2mm; }
+.concept-grid, .family-map { display: grid; grid-template-columns: repeat(2,1fr); gap: 4mm; }
+.concept-grid article, .family-map article { padding: 4mm; border-top: 4px solid var(--jade); background: #edf4ef; border-radius: 0 0 3mm 3mm; }
+.concept-grid h2, .family-map h2 { margin-top: 0; }
+.family-map { grid-template-columns: repeat(3,1fr); }
+.family-map article { min-height: 43mm; }
+.family-map b { color: var(--rana); font-family: Inter,Arial,sans-serif; }
+.route-grid { display: grid; gap: 5mm; }
+.route-grid article { padding: 5mm 6mm; border-left: 6px solid var(--rio); background: #eef4f7; }
+.big-steps { counter-reset: route; list-style: none; padding: 0; }
+.big-steps li { padding: 4mm 4mm 4mm 16mm; margin: 3mm 0; position: relative; background: #f7f3e7; border-radius: 3mm; }
+.big-steps li::before { counter-increment: route; content: counter(route); position: absolute; left: 4mm; top: 3mm; width: 8mm; height: 8mm; color: white; background: var(--bosque); border-radius: 50%; display: grid; place-items: center; font: 700 8pt Inter,Arial,sans-serif; }
+.flow { display: flex; align-items: stretch; gap: 2mm; margin: 6mm 0; }
+.flow div { position: relative; flex: 1; min-height: 26mm; padding: 4mm 2mm; text-align: center; color: var(--bosque); background: #eaf2ed; border-radius: 3mm; font-family: Inter,Arial,sans-serif; }
+.flow div:not(:last-child)::after { content: "→"; position: absolute; right: -3.5mm; top: 8mm; color: var(--rana); font-size: 14pt; z-index: 2; }
+.flow b { display: block; margin-bottom: 2mm; color: var(--rana); }
+.flow span { font-size: 8.5pt; font-weight: 700; }
+.flow.compact { margin: 3mm 0 4mm; }
+.flow.compact div { min-height: 20mm; padding: 2.5mm 2mm; }
+.learning-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; }
+.learning-grid section { min-height: 47mm; padding: 4mm; border-top: 4px solid var(--jade); border-radius: 0 0 3mm 3mm; background: #edf4ef; }
+.learning-grid section.avoid { border-color: var(--rana); background: #faece8; }
+.learning-grid h2 { margin-top: 0; }
+.learning-page pre { margin: 2mm 0; font-size: 8.2pt; }
+.learning-page .connections { margin-top: 2mm; padding: 3mm; font-size: 8.8pt; line-height: 1.32; }
+.learning-page footer { margin-top: 0; padding-top: 2mm; }
+.family-opening { display: flex; flex-direction: column; }
+.family-opening h1 { font-size: 40pt; margin-bottom: 3mm; }
+.family-flow { display: flex; align-items: center; gap: 3mm; margin: 8mm 0; }
+.family-flow div { position: relative; flex: 1; min-height: 31mm; display: grid; align-content: center; justify-items: center; padding: 3mm; color: var(--bosque); border: 2px solid var(--jade); border-radius: 50% 50% 45% 45%; background: #edf4ef; text-align: center; }
+.family-flow div:not(:last-child)::after { content: "→"; position: absolute; right: -5mm; top: 9mm; color: var(--rana); font-size: 16pt; }
+.family-flow b { color: var(--rana); }
+.family-flow span { font: 750 8pt/1.2 Inter,Arial,sans-serif; }
+.family-summary { display: grid; grid-template-columns: 2fr 3fr; gap: 5mm; }
+.family-summary section { padding: 4mm 5mm; border-left: 5px solid var(--guaria); background: #fbf8ed; }
+.family-summary h2 { margin-top: 0; }
+.family-illustration { display: grid; grid-template-columns: 2fr 3fr; min-height: 67mm; margin: 7mm 0 0; overflow: hidden; border: 1px solid #bac9bd; border-radius: 4mm; background: #e4ece6; }
+.family-illustration img { width: 100%; height: 67mm; object-fit: contain; }
+.family-illustration figcaption { display: flex; align-items: center; margin: 0; padding: 6mm; color: var(--bosque); background: #edf3ef; font: 650 10pt/1.45 Inter,Arial,sans-serif; }
+.toc-page nav { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5mm 5mm; margin: 5mm 0; }
+.toc-page nav a { display: block; padding: 2mm 4mm; border-left: 4px solid var(--jade); border-radius: 0 2mm 2mm 0; background: #edf4ef; font-weight: 700; text-decoration: none; }
+.compact-routes { grid-template-columns: 1fr 1fr; gap: 3mm; }
+.compact-routes article { padding: 3.5mm 4mm; }
+.steps { padding-left: 7mm; }
+.steps li { margin: 2mm 0; padding-left: 2mm; }
+.decision-grid, .reference-grid, .question-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; }
+.decision-grid section { padding: 4mm 5mm; border-top: 5px solid var(--jade); background: #edf4ef; border-radius: 0 0 3mm 3mm; }
+.decision-grid .avoid { border-color: var(--rana); background: #faece8; }
+.connections { margin-top: 5mm; padding: 4mm; color: var(--bosque); background: #fbf3d8; border-radius: 3mm; }
+.reference-grid section { padding: 4mm; background: #f6f2e6; border-radius: 3mm; }
+.checklist { list-style: none; padding: 0; }
+.checklist li { margin: 2mm 0; }
+.checklist li::before { content: "□"; margin-right: 2mm; color: var(--jade); font-weight: 700; }
+.question-grid p { margin: 0; min-height: 24mm; padding: 4mm; border-left: 4px solid var(--guaria); background: #fbf8ed; }
+.case-cover { display: flex; flex-direction: column; justify-content: center; background: linear-gradient(145deg,#edf3e9,#fbf3d8); padding: 15mm; border-radius: 4mm; }
+.case-cover h1 { font-size: 40pt; }
+.term { margin: 7mm 0; padding: 5mm; border-left: 5px solid var(--jade); background: #edf4ef; }
+.term h2 { margin: 0 0 2mm; font-size: 20pt; }
+.term small { color: #65746c; font-family: Inter,Arial,sans-serif; }
+.rubric { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm; }
+.rubric div { display: flex; justify-content: space-between; padding: 4mm; background: #eef4ef; border-bottom: 2px solid var(--jade); }
+.rubric b { color: var(--rana); font-family: Inter,Arial,sans-serif; }
+.module-opening { display: block; min-height: 0; break-inside: avoid-page; }
+.module-opening h1 { font-size: 39pt; margin-bottom: 5mm; }
+/* Las lecturas EP7 comparten la apertura sin crear páginas vacías por el
+   último borde del repaso. Se ajusta espacio, no el tamaño del texto. */
+.module-opening .module-sources { margin-top: 2mm; margin-bottom: 2mm; }
+.module-opening .module-review { margin-top: 2mm; }
+.consultation-index { columns: 2; column-gap: 8mm; padding-left: 6mm; }
+.consultation-index li { margin-block: 2mm; break-inside: avoid; }
+.module-promise { margin: 3mm 0; padding: 3mm 5mm; border-top: 5px solid var(--jade); border-radius: 0 0 4mm 4mm; background: #edf4ef; }
+.module-promise h2 { margin-top: 0; }
+.module-promise ul { columns: 2; padding-left: 5mm; }
+.beginner-lesson h1 { font-size: 27pt; margin-bottom: 3mm; }
+.compact-lead { font-size: 12.5pt; }
+.lesson-situation { margin: 3mm 0; padding: 3mm 5mm; border-left: 5px solid var(--guaria); border-radius: 0 3mm 3mm 0; background: #fbf3d8; font-size: 11pt; line-height: 1.5; }
+.lesson-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; margin: 3mm 0; }
+.lesson-columns section { padding: 3mm 5mm; border: 1px solid #bdc9c0; border-radius: 3mm; background: #fffefa; }
+.lesson-columns h2 { margin-top: 0; }
+.lesson-columns ol { padding-left: 5mm; }
+.lesson-columns li { margin-bottom: 1.4mm; }
+.lesson-proof { display: grid; grid-template-columns: 48mm 1fr; gap: 4mm; margin-top: 4mm; padding: 4mm 5mm; border-left: 5px solid var(--jade); border-radius: 0 3mm 3mm 0; background: #edf4ef; }
+.lesson-proof strong { color: var(--bosque); }
+.beginner-lesson .lesson-proof { margin-top: 3mm; padding-block: 3mm; }
+.practice-page h1 { font-size: 25pt; line-height: 1.18; }
+.practice-page ol { padding-left: 6mm; }
+.practice-page li { margin-bottom: 2mm; }
+.practice-page pre { font-size: 9pt; line-height: 1.45; white-space: pre-wrap; overflow-wrap: anywhere; }
+.practice-reference { margin-top: 4mm; font-size: 8.5pt; overflow-wrap: anywhere; }
+.lesson-practice-page { font-size: 10pt; line-height: 1.4; }
+.lesson-practice-page h1 { font-size: 24pt; margin-bottom: 3mm; }
+.lesson-practice-page h2 { font-size: 12pt; margin: 3mm 0 1.5mm; }
+.lesson-practice-page p, .lesson-practice-page ul { margin-top: 1.5mm; margin-bottom: 2mm; }
+.lesson-practice-page li { margin-bottom: 1mm; }
+pre, code, .contract { font-family: 'COBRIA Mono', monospace !important; font-variant-ligatures: none; }
+@media screen and (max-width: 760px) {
+  .pattern-grid, .learning-grid, .family-summary, .family-illustration, .toc-page nav, .compact-routes, .code-grid, .lesson-columns, .lesson-proof { grid-template-columns: 1fr; }
+  .family-flow { flex-wrap: wrap; }
+  .family-flow div { min-width: 28%; }
+  .family-flow div::after { display: none; }
+}
+@media print { html { background: white; } body { max-width: none; } .pattern { break-after: page; } a { color: inherit; } }
+</style></head><body>
+<section class="cover"><img src="assets/ecosistema-cobria-panoramico-v4.png" alt="Ecosistema COBRIA ilustrado"><div class="cover-title"><div class="kicker">Edición ecosistema 1.0.0-rc2</div><h1>COBRIA</h1><h2>Proyecto conductor recuperable</h2></div><div class="cover-author">Billy Jak Cordero Porras<br>Coto Brus, Costa Rica · 2026</div><div class="edition-chip">Propuesta independiente · 1.0.0-rc2</div></section>
+<main id="contenido-principal"><section class="book-page ep3-page" id="proyecto-integral-1"><p class="eyebrow">Proyecto conductor · 1 de 5</p><h1>Ejecutar desde una copia del repositorio</h1><p>Requisitos: Node 22.13 o posterior, npm y espacio para dependencias y bases temporales. Desde la raíz:</p><pre><code>npm ci --prefix replication
+node replication/examples/integral-c8/recorrido-ep4.mjs
+node replication/examples/integral-c8/recorrido-ep4.mjs 4
+node --test replication/tests/ep4-recorrido.test.mjs
+npm test --prefix replication/examples/integral-c8</code></pre><p>La salida JSON indica el directorio temporal conservado para inspección, los siete hitos, cuatro rechazos, fuentes y huellas. Los puertos HTTP son locales y efímeros; se cierran incluso si falla una comprobación. El programa crea bases nuevas, no reutiliza ni sobrescribe una instalación del lector. Es código ejecutable JavaScript, no pseudocódigo ni una traducción equivalente a cuatro lenguajes.</p><p class="ep3-source">Fuente: editorial/ep4/ENTREGA.md. Código ejecutable: replication/examples/integral-c8/recorrido-ep4.mjs.</p></section><section class="book-page ep3-page" id="proyecto-integral-2"><p class="eyebrow">Proyecto conductor · 2 de 5</p><h1>Hitos y responsabilidades</h1><table><tr><th scope="col">Hito</th><th scope="col">Archivo responsable</th><th scope="col">Efecto comprobado</th></tr><tr><td>Memoria</td><td>ecosistema-app/src/composition.mjs</td><td>El mismo documento pasa por dominio y caso de uso</td></tr><tr><td>API y permisos</td><td>integral-c8/composition.mjs, api-ux-c5/server.mjs</td><td>Catálogo desconocido se rechaza; ámbito ajeno se deniega</td></tr><tr><td>Escritura durable</td><td>integral-c8/application/registrar-durable.mjs</td><td>Valida dominio y catálogo antes del puerto atómico</td></tr><tr><td>Motor y proyección</td><td>integral-c8/infrastructure/repositorio-pouch.mjs</td><td>Fuente, idempotencia y resumen se confirman juntos</td></tr><tr><td>Traducción física</td><td>ecosistema-app/src/infrastructure/data/observacion-dater.mjs</td><td>Claves físicas no aparecen en el contrato público</td></tr><tr><td>Analítica descriptiva</td><td>integral-c8/recorrido-ep4.mjs</td><td>Total local con identidad, ámbito, revisión y huella de fuente</td></tr><tr><td>Recuperación</td><td>analitica-c7/taller.mjs</td><td>Cita con huella o abstención, sin autoridad de escritura</td></tr><tr><td>Recuperación operativa</td><td>integral-c8/recorrido-ep4.mjs</td><td>Reapertura, reentrega, restauración y reconstrucción equivalentes</td></tr></table><p>Las rutas de la tabla son relativas a replication/examples/. La composición une las capas: no se introduce una dependencia del dominio hacia el SDK. El catálogo utilizado es integral-c8/catalogo.json, edición aves-c8-v1. La forma física sigue siendo versión 1; una revisión del hecho no equivale a una edición del catálogo.</p><p class="ep3-source">Fuente: editorial/ep4/ENTREGA.md. Código ejecutable: replication/examples/integral-c8/recorrido-ep4.mjs.</p></section><section class="book-page ep3-page" id="proyecto-integral-3"><p class="eyebrow">Proyecto conductor · 3 de 5</p><h1>Ejercicio y solución verificable</h1><p>Registre tres colibríes y después ejecute otra copia del recorrido con cuatro. Antes de ejecutarla, prediga qué cambia: cantidad canónica, total del resumen, total analítico y huellas. Prediga también qué permanece: una observación, una operación, ámbito e identidad. Cada ejecución usa una base nueva: no simula una actualización sobre la anterior.</p><p>Solución: el parámetro cambia la entrada del mismo flujo; las pruebas verifican totales 3 y 4. La reentrega con la misma clave conserva el estado; cambiar la cantidad reutilizando esa clave devuelve 409. Una nueva revisión de negocio necesita su propia clave y revisión, no alterar la respuesta anterior. La cantidad cero, negativa, fraccionaria o no numérica se rechaza antes de abrir el motor.</p><p>El recorrido también intenta una especie desconocida, un ámbito no autorizado y un respaldo manipulado. Compara el estado antes y después de los rechazos; un resultado verde sin estas comparaciones no bastaría para demostrar ausencia de efectos.</p><p class="ep3-source">Fuente: editorial/ep4/ENTREGA.md. Código ejecutable: replication/examples/integral-c8/recorrido-ep4.mjs.</p></section><section class="book-page ep3-page" id="proyecto-integral-4"><p class="eyebrow">Proyecto conductor · 4 de 5</p><h1>Leer el código sin perder la procedencia</h1><p>Extracto real del programa, no ejecutable por separado. servidor es la aplicación local abierta; ambito es reserva-sur; resumen proviene de la lectura autorizada anterior. Los imports y auxiliares están en el programa completo mostrado en la web.</p><pre><code>const documentos = await servidor.repo.listar(ambito);
+    const analitica = { ambito, documentos: documentos.length,
+      cantidad: documentos.reduce((total, d) =&gt; total + d.cantidad, 0),
+      fuentes: documentos.map(d =&gt; ({ id: d.id, revision: d.revision, ambito: d.ambito })),
+      fuenteSha256: resumen.fuenteSha256, autoridadEscritura: false,
+      entrenamientoHabilitado: false };</code></pre><p>listar obtiene observaciones del mismo ámbito. reduce suma cantidades; map conserva la identidad y revisión de cada fuente. La huella enlaza el total con la proyección leída. autoridadEscritura y entrenamientoHabilitado son falsos: un total no recibe permiso para alterar hechos o entrenar un modelo.</p><p>Este bloque pertenece al recorrido local secuencial. No es una API analítica de producción ni garantiza una instantánea frente a otro escritor concurrente. Para exponerlo se necesita un caso de uso autorizado y una política explícita de coherencia de lectura.</p><p class="ep3-source">Fuente: editorial/ep4/ENTREGA.md. Código ejecutable: replication/examples/integral-c8/recorrido-ep4.mjs.</p></section><section class="book-page ep3-page" id="proyecto-integral-5"><p class="eyebrow">Proyecto conductor · 5 de 5</p><h1>Límites de adopción</h1><p>Las sesiones DEMO no autentican personas. La analítica aquí es descriptiva y no habilita entrenamiento: el documento original no contiene consentimiento ni tiempo de conocimiento. No se inventan estos atributos para alimentar C7. Un conjunto de entrenamiento requiere el contrato explícito y los controles temporales de ese taller. La recuperación es léxica, no razona sobre atributos ausentes como salud del animal.</p><p>Un agregado admite hasta 1000 documentos y 1000 operaciones, con límite de 2 MiB. Cada lectura valida el agregado completo; no es un índice distribuido ni una promesa de escalabilidad. No hay transacción entre ámbitos, prueba de pérdida eléctrica, clúster, nube, Firebase Emulator, staging ni producción en este recorrido. Las copias no incluyen sesiones o auditoría operacional. Las huellas comprueban integridad, no firma ni autenticidad frente a un atacante que pueda reemplazar contenido y hash.</p><p>Código bajo Apache-2.0 según la licencia del repositorio; textos y datos se rigen por sus licencias específicas, no se relicencian mediante esta guía.</p><p class="ep3-source">Fuente: editorial/ep4/ENTREGA.md. Código ejecutable: replication/examples/integral-c8/recorrido-ep4.mjs.</p></section></main>
+</body></html>

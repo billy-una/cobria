@@ -1,15 +1,17 @@
 {
-  "version": "1.0.0",
+  "version": "1.0.0-rc2",
+  "status": "candidate-non-stable",
   "products": [
-    {"id": "specification", "authority": "normative", "source": "specification/", "build": "make construir-editorial", "output": "output/pdf/COBRIA-especificacion-ecosistema-1.0.pdf"},
+    {"id": "specification", "authority": "normative", "source": "specification/", "build": "make construir-especificacion", "output": "output/pdf/COBRIA-especificacion-ecosistema-1.0.pdf"},
     {"id": "article", "authority": "scientific-summary", "source": "articulo-cobria.tex", "build": "make construir-articulo", "output": "output/pdf/COBRIA-articulo-cientifico-actualizado.pdf"},
     {"id": "master", "authority": "scientific-development", "source": "main.tex", "build": "make construir-maestro", "output": "output/pdf/COBRIA-documento-maestro-ecosistema.pdf"},
-    {"id": "book", "authority": "pedagogical", "source": "libro-cobria/build-book.mjs", "build": "cd libro-cobria && node build-book.mjs", "output": "output/pdf/COBRIA-ecosistema-manual-completo.pdf"},
+    {"id": "curriculum", "authority": "pedagogical-source", "source": "editorial/pedagogy.json + editorial/pedagogy-extension.json + editorial/labs.json + editorial/engineering-practices.json", "build": "node editorial/build-curriculum.mjs", "output": "editorial/curriculum.json + editorial/content-map.json"},
+    {"id": "book", "authority": "pedagogical", "source": "editorial/curriculum.json + libro-cobria/build-book.mjs", "build": "cd libro-cobria && node build-book.mjs", "output": "output/pdf/COBRIA-ecosistema-manual-completo.pdf"},
     {"id": "workbook", "authority": "pedagogical-practice", "source": "libro-cobria/build-book.mjs", "build": "make construir-editorial", "output": "output/pdf/COBRIA-cuaderno-de-trabajo.pdf"},
     {"id": "technical-annex", "authority": "editorial-traceability", "source": "libro-cobria/build-book.mjs", "build": "make construir-editorial", "output": "output/pdf/COBRIA-anexo-tecnico.pdf"},
-    {"id": "site", "authority": "interactive-pedagogical", "source": "sitio/app/", "build": "cd sitio && npm test", "output": "sitio/dist/"},
+    {"id": "site", "authority": "interactive-pedagogical", "source": "editorial/curriculum.json + sitio/app/", "build": "cd sitio && npm test", "output": "sitio/dist/"},
     {"id": "toolkit", "authority": "verification-tooling", "source": "replication/src/", "build": "make verificar-replica", "output": "replication/"},
     {"id": "evidence", "authority": "empirical", "source": "replication/", "build": "make verificar-replica", "output": "replication/results/"}
   ],
-  "authorityFlow": ["specification", "implementation", "evidence", "article/master", "book/site"]
+  "authorityFlow": ["specification", "implementation", "evidence", "article/master", "curriculum", "book/site"]
 }

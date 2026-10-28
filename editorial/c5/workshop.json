@@ -1,0 +1,21 @@
+{
+  "title": "Del formulario al permiso comprobado",
+  "intro": "Una brigada registra colibríes en reserva-sur. El formulario recoge el hecho; el servidor obtiene actor y capacidades de una sesión DEMO temporal y autoriza el ámbito antes de acceder a los documentos.",
+  "command": "npm start --prefix replication/examples/api-ux-c5",
+  "testCommand": "npm test --prefix replication/examples/api-ux-c5",
+  "steps": [
+    "Abra la dirección 127.0.0.1 que muestra la terminal y copie la sesión DEMO en el campo indicado. Caduca en 30 minutos.",
+    "Consulte el ámbito vacío, registre una observación ficticia y vuelva a consultar. El resultado contiene un solo documento.",
+    "Cambie el ámbito a reserva-norte. La API responde 403 sin consultar el repositorio, aunque se envíe la petición sin usar el formulario.",
+    "Envíe cantidad cero directamente a la API: se rechaza sin guardar. Repetir la misma clave con otro contenido devuelve 409.",
+    "Cierre el proceso para descartar los documentos y sesiones. No introduzca datos personales ni ubicaciones sensibles."
+  ],
+  "controls": [
+    "Identidad y permisos proceden de sesiones inyectadas en el servidor; el cuerpo rechaza actor, permisos y finalidad.",
+    "JSON limitado a 4096 bytes, tipos explícitos, lista de campos, clave de idempotencia y errores estructurados sin detalles internos.",
+    "Host y origen locales comprobados; sin CORS, cookies ni almacenamiento del token en el navegador. Respuestas no-store y política de contenido restrictiva.",
+    "Campos etiquetados, validación nativa, foco visible, mensaje de estado y botones inactivos durante la petición; resultados insertados como texto."
+  ],
+  "limits": "HTTP real solo en loopback y persistencia en memoria. Las sesiones DEMO no sustituyen OIDC, MFA, TLS, revocación, límites de frecuencia ni un gestor de secretos. La paginación sigue ordenando documentos en memoria. La escritura y el registro de idempotencia son efectos separados: no se promete atomicidad concurrente. La revisión automática de interfaz no certifica accesibilidad ni comprensión humana.",
+  "guide": "manuales/30-api-ux-seguridad-y-privacidad.md"
+}

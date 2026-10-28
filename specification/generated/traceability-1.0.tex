@@ -1,0 +1,30 @@
+% Generado desde specification/requirements-1.0.json. No editar a mano.
+\begin{longtable}{>{\bfseries}p{.10\linewidth}p{.06\linewidth}p{.18\linewidth}p{.23\linewidth}p{.25\linewidth}}
+\toprule
+ID & Nivel & Responsable & Método & Evidencia principal \\
+\midrule
+\endfirsthead
+\toprule
+ID & Nivel & Responsable & Método & Evidencia principal \\
+\midrule
+\endhead
+AUT-001 & C1 & responsable de dominio & pruebas de frontera del repositorio y revisión arquitectónica & \path{replication/tests/core11.test.mjs} \\
+ID-001 & C1 & responsable de datos & casos positivos y negativos de identidad requerida & \path{replication/src/core/cobria.mjs} \\
+SCP-001 & C1 & responsable de seguridad y datos & S1 y mutante deliberado de fuga & \path{replication/tests/adversarial.test.mjs} \\
+REV-001 & C1 & responsable de persistencia & entrega fuera de orden y carrera local & \path{replication/tests/core11.test.mjs} \\
+WRT-001 & C1 & responsable de aplicación & auditoría de dependencias y prueba negativa de acceso directo & \path{specification/phase-5/REGLAS-DE-DEPENDENCIA.md} \\
+TRN-001 & C2 & responsable de proyección & reconstrucción con catálogo y cambio de esquema & \path{replication/src/core/cobria.mjs} \\
+IDM-001 & C2 & responsable de aplicación & entrega duplicada y colisión semántica & \path{replication/examples/ecosistema-app/test/app.test.mjs} \\
+EQV-001 & C2 & responsable de calidad de datos & R1 y mutante de candidata corrupta & \path{replication/tests/adversarial.test.mjs} \\
+REC-001 & C2 & responsable de proyección & R1 total e incremental & \path{replication/tests/core11.test.mjs} \\
+PUB-001 & C2 & responsable de publicación & fallo durante publicación, huella incorrecta y rollback & \path{replication/tests/core11.test.mjs} \\
+PRV-001 & C3 & custodio de datos & integridad del manifiesto A1 & \path{replication/tests/core11.test.mjs} \\
+FRS-001 & C3 & responsable de operación & evaluación de presupuesto con caso conforme y excedido & \path{specification/phase-15/budgets.json} \\
+OBS-001 & C3 & responsable de operación & escenarios de telemetría sanitizada y no bloqueante & \path{specification/phase-9/observability.json} \\
+OWN-001 & C3 & responsable de arquitectura & inspección de manifiesto y runbook & \path{specification/phase-11/architecture.yaml} \\
+RET-001 & C3 & responsable de proyección & retiro y reconstrucción posterior & \path{replication/examples/ecosistema-app/test/app.test.mjs} \\
+ANA-001 & C3 & responsable de analítica & A1, reconstrucción y fuga temporal & \path{replication/examples/ecosistema-app/test/app.test.mjs} \\
+AI-001 & C3 & responsable de IA y seguridad & recuperación cruzada, ausencia de evidencia y escritura prohibida & \path{replication/examples/ecosistema-app/test/app.test.mjs} \\
+SEC-001 & C3 & responsable de seguridad & S1, capacidades y contexto manipulado & \path{replication/examples/ecosistema-app/test/app.test.mjs} \\
+\bottomrule
+\end{longtable}

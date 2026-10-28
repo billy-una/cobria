@@ -1,0 +1,15 @@
+{
+  "levels": [
+    {"title": "Empiezo desde cero", "href": "/comenzar", "description": "Una observación, una regla y una prueba, sin instalar una nube."},
+    {"title": "Ya tengo un proyecto", "href": "/construir", "description": "Conecta capas, datos, permisos y recuperación con un ejemplo neutral."},
+    {"title": "Quiero evaluar la propuesta", "href": "/evidencia", "description": "Distingue pruebas locales, datos históricos y validación pendiente."}
+  ],
+  "problems": [
+    {"title": "No sé cómo organizar los archivos", "href": "/capas", "description": "Carpetas, dependencias y responsabilidades."},
+    {"title": "Necesito diseñar mis datos", "href": "/datos", "description": "Diccionario, nodos, catálogos y consultas."},
+    {"title": "Las lecturas son lentas", "href": "/calidad", "description": "Mide antes de añadir un índice o una proyección."},
+    {"title": "Me preocupan los permisos", "href": "/seguridad", "description": "Actor, capacidad, ámbito y pruebas negativas."},
+    {"title": "Quiero integrar IA", "href": "/ia", "description": "Procedencia, citas, abstención y límites de autoridad."},
+    {"title": "Necesito preparar una entrega", "href": "/operaciones", "description": "Ambientes, recuperación y despliegue verificable."}
+  ]
+}

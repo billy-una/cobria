@@ -47,19 +47,57 @@ que une fuente, transformación, ámbito, versión, equivalencia y reparación. 
 arquitectónica es una frontera coherente desde documentos hasta productos de IA. La
 práctica es un catálogo, listas de comprobación y protocolo reproducible.
 
-La contribución empírica conserva dos estratos. El primero contiene 180 corridas locales
-históricas sobre PouchDB y LokiJS. El segundo contiene 270 corridas distribuidas
-históricas sobre MongoDB 8.0, CouchDB 3.4 y OpenSearch 2.19.3. Todas superaron P1, P2,
-R1, S1 y A1 bajo sus oráculos originales y no registraron fugas de ámbito. Como una
-auditoría posterior fortaleció el arnés, estas cifras describen evidencia histórica y no
-certificación vigente. La repetición preliminar corregida completó casos pequeños en
-MongoDB y CouchDB; OpenSearch 3.2.0 quedó pendiente por incompatibilidad de plataforma.
+La contribución empírica conserva estratos separados. Las 180 corridas locales sobre
+PouchDB y LokiJS y el conjunto distribuido original permanecen como evidencia histórica.
+Las conclusiones vigentes se apoyan en R7: \COBRIARSevenObservations{} observaciones
+confirmatorias internas sobre MongoDB \COBRIARSevenMongoVersion, CouchDB
+\COBRIARSevenCouchVersion{} y OpenSearch \COBRIARSevenOpenSearchVersion. Las 90
+observaciones de cada motor aprobaron los indicadores P1, P2, R1, S1 y A1 del arnés
+histórico, no todos los controles posteriores. Ocho de nueve celdas
+favorecieron la lectura proyectada después del ajuste de Holm; OpenSearch con $n=100$
+fue no concluyente y se publica como tal.
 
-Falta repetir las celdas distribuidas completas con el arnés corregido; ejecutar
-OpenSearch 3.2.0 en ARM nativo o infraestructura compatible; realizar una réplica
-independiente; completar el doble cribado bibliográfico; y ejecutar el estudio humano de
-transferencia. P1, P2, R1, S1 y A1 forman el conjunto de criterios de conformidad, pero
-la certificación independiente permanece pendiente.
+Falta una réplica externa independiente, completar el doble cribado bibliográfico y
+ejecutar el estudio humano de transferencia. También falta evaluar topologías multinodo,
+servicios administrados y cargas concurrentes más cercanas a producción. P1, P2, R1,
+S1 y A1 identifican familias de pruebas. No se declara certificación ni conformidad
+integral de una implementación a partir de etiquetas compartidas.
+
+\chapter{Transferencia pedagógica y productos derivados}
+
+El resultado científico se transfiere sin mezclar autoridades. La especificación define
+qué debe cumplir una implementación; el artículo resume contribución y evidencia; este
+documento maestro conserva decisiones, método y límites; y el libro junto con el sitio
+traducen esas fuentes a una ruta de aprendizaje. Una analogía del libro no modifica un
+requisito, y una actividad educativa no se registra como resultado experimental.
+
+La ruta pública se genera desde un currículo estructurado de diecisiete partes, 85
+lecciones y 30 laboratorios. Cada parte declara propósito, resultados de aprendizaje,
+proyecto, entrega, punto de control y fuentes. Cada lección contiene una situación,
+explicación sencilla, procedimiento, ejemplo realista, error frecuente, contrato mínimo
+y evidencia observable. Cada laboratorio añade resultado esperado, solución comprobable
+y comando. El mapa de contenido enlaza módulos, lecciones, libro y rutas web para evitar
+dos versiones editoriales divergentes.
+
+El proyecto conductor recorre los productos documentales de una aplicación neutral de
+biodiversidad: requisitos, diccionario de datos, documentos NoSQL, capas, pruebas,
+seguridad, despliegue, procedencia e inteligencia artificial. Las fases internas de
+investigación y publicación se conservan en el anexo técnico, separadas del orden en que
+aprende el lector.
+
+Esta cobertura demuestra consistencia editorial y disponibilidad técnica, no eficacia
+pedagógica. La comprensión, el tiempo de ejecución, los errores y la autonomía requieren
+un estudio posterior con participantes reales, consentimiento y revisión independiente.
+
+\section{Calidad y referencias externas}
+
+El ecosistema vincula sus prácticas con referencias de calidad del producto y
+evaluación SQuaRE \parencite{iso25010_2023,iso25040_2024}. El antecedente de
+\textcite{roa2015iso25000} ayuda a contextualizar la familia, pero no reemplaza
+las ediciones posteriores. La guía de adopción conserva requisitos locales,
+contexto, medidas, criterios, evidencia y limitaciones. Esta correspondencia
+temática no demuestra cumplimiento de cláusulas ISO ni certificación, y no altera
+los invariantes congelados o los resultados experimentales de COBRIA Core.
 
 \chapter{Conclusión}
 
@@ -68,6 +106,4 @@ versión representa, qué copia puede perderse, cómo se reconstruye y cuánto c
 conservarla. Al extenderlas a conjuntos de datos, recuperación e inferencias, ofrece un
 puente entre ingeniería NoSQL, minería de datos e inteligencia artificial.
 
-La propuesta es suficientemente concreta para implementarse y refutarse. La réplica
-embebida apoya sus contratos nucleares, mientras la evaluación administrada y humana
-sigue abierta. Esa frontera define con honestidad qué se sabe y qué debe venir después.
+\COBRIAConclusionCientifica

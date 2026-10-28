@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "1.0.0",
+  "release": "1.0.0-rc2",
+  "status": "candidate-non-stable",
+  "proposalIndependent": true,
+  "licenses": {"code":"Apache-2.0","content":"CC-BY-4.0","syntheticData":"CC-BY-4.0","thirdParty":"license-of-origin"},
+  "visualAssets": [
+    {"path":"libro-cobria/assets/catalogo-versionado-v1.png","bytes":3259873,"sha256":"19aa387c2074db095227d43c57b803e145a8fadab775c2ec828d0dd023b864c9","dimensions":[1536,1024],"method":"ai-assisted-original","license":"CC-BY-4.0"},
+    {"path":"libro-cobria/assets/ecosistema-cobria-panoramico-v4.png","bytes":3780863,"sha256":"ddc2a1ca28fc35a1a79d358ba2fc1537da54481fd1fb8565b090636643e0b43c","dimensions":[1536,1024],"method":"ai-assisted-original","license":"CC-BY-4.0"},
+    {"path":"libro-cobria/assets/ecosistema-cobria-sin-felinos-v3.png","bytes":3287056,"sha256":"41f5e11e2cf460bef3db072f58bcd14c22064893defe85d72937584f11f9fe98","dimensions":[1024,1536],"method":"ai-assisted-original","license":"CC-BY-4.0"},
+    {"path":"libro-cobria/assets/familia-analitica-ia-v1.png","bytes":3345943,"sha256":"8663c98bad5e9245cdbfc577e8e9ededfca6242eba11c55c81013a5c1aa5845b","dimensions":[1672,941],"method":"ai-assisted-original","license":"CC-BY-4.0"},
+    {"path":"libro-cobria/assets/familia-eventos-consistencia-v1.png","bytes":3119672,"sha256":"9bfe181177908af34429bab038251dfa1063d285052264d20cbe2a46063efcd6","dimensions":[1672,941],"method":"ai-assisted-original","license":"CC-BY-4.0"},
+    {"path":"libro-cobria/assets/familia-gobernanza-retiro-v1.png","bytes":3405774,"sha256":"17f128f5760df57cc9405da8e7299e74fb45fa1bc045b45881c88a5f9576edff","dimensions":[1672,941],"method":"ai-assisted-original","license":"CC-BY-4.0"},
+    {"path":"libro-cobria/assets/familia-modelado-validacion-v1.png","bytes":3253840,"sha256":"983559631511d2df2b58870142cdb0ce502a024c3d2e3bd14a0a5a839e8dc861","dimensions":[1672,941],"method":"ai-assisted-original","license":"CC-BY-4.0"},
+    {"path":"libro-cobria/assets/linaje-ia-v1.png","bytes":3529048,"sha256":"0f1dd4f3a772984710d8cfdb1280e55be5a2a0c5cd382f33115eb56aa85332cf","dimensions":[1536,1024],"method":"ai-assisted-original","license":"CC-BY-4.0"},
+    {"path":"libro-cobria/assets/reconstruccion-total-v1.png","bytes":3835333,"sha256":"61a3495c13d886488278adc8921bed6b7b8ed1fce7b2267696ba98e0de745857","dimensions":[1536,1024],"method":"ai-assisted-original","license":"CC-BY-4.0"},
+    {"path":"libro-cobria/assets/repositorio-ambito-sin-felinos-v2.png","bytes":3553211,"sha256":"2a2ac42557e64ce4b61b0f10e371f42a63797e8cbfc965bd44e70cb471b367da","dimensions":[1536,1024],"method":"ai-assisted-original","license":"CC-BY-4.0"},
+    {"path":"libro-cobria/assets/taller-colaborativo-coto-brus-v1.png","bytes":3241356,"sha256":"6500161298a96726a0ccd7910f65a3ca3ad268c5e1fcd9318ff792edb4a83be4","dimensions":[1672,941],"method":"ai-assisted-original","license":"CC-BY-4.0"},
+    {"path":"sitio/public/images/analitica-ia.png","bytes":3345943,"sha256":"8663c98bad5e9245cdbfc577e8e9ededfca6242eba11c55c81013a5c1aa5845b","source":"libro-cobria/assets/familia-analitica-ia-v1.png","method":"exact-copy","license":"CC-BY-4.0"},
+    {"path":"sitio/public/images/ecosistema-panoramico.png","bytes":3780863,"sha256":"ddc2a1ca28fc35a1a79d358ba2fc1537da54481fd1fb8565b090636643e0b43c","source":"libro-cobria/assets/ecosistema-cobria-panoramico-v4.png","method":"exact-copy","license":"CC-BY-4.0"},
+    {"path":"sitio/public/images/eventos.png","bytes":3119672,"sha256":"9bfe181177908af34429bab038251dfa1063d285052264d20cbe2a46063efcd6","source":"libro-cobria/assets/familia-eventos-consistencia-v1.png","method":"exact-copy","license":"CC-BY-4.0"},
+    {"path":"sitio/public/images/gobernanza.png","bytes":3405774,"sha256":"17f128f5760df57cc9405da8e7299e74fb45fa1bc045b45881c88a5f9576edff","source":"libro-cobria/assets/familia-gobernanza-retiro-v1.png","method":"exact-copy","license":"CC-BY-4.0"},
+    {"path":"sitio/public/images/modelado.png","bytes":3253840,"sha256":"983559631511d2df2b58870142cdb0ce502a024c3d2e3bd14a0a5a839e8dc861","source":"libro-cobria/assets/familia-modelado-validacion-v1.png","method":"exact-copy","license":"CC-BY-4.0"},
+    {"path":"sitio/public/images/reconstruccion.png","bytes":3835333,"sha256":"61a3495c13d886488278adc8921bed6b7b8ed1fce7b2267696ba98e0de745857","source":"libro-cobria/assets/reconstruccion-total-v1.png","method":"exact-copy","license":"CC-BY-4.0"},
+    {"path":"sitio/public/images/seguridad.png","bytes":3553211,"sha256":"2a2ac42557e64ce4b61b0f10e371f42a63797e8cbfc965bd44e70cb471b367da","source":"libro-cobria/assets/repositorio-ambito-sin-felinos-v2.png","method":"exact-copy","license":"CC-BY-4.0"},
+    {"path":"sitio/public/og.png","bytes":2896337,"sha256":"e4793be40956147aa27cceddb6eb6c2be52d481c33c3fbd4537c3a573f4b1b3e","dimensions":[1731,909],"method":"ai-assisted-original-and-authored-composition","license":"CC-BY-4.0"},
+    {"path":"sitio/public/favicon.svg","bytes":476,"sha256":"67fe3115a887187dd722859cb8adc91154470334439e11a2a7828619cdff8f97","dimensions":[48,48],"method":"authored-vector","license":"CC-BY-4.0"}
+  ],
+  "historicalArtifacts": [
+    {"path":"archivo/artefactos/pdf/COBRIA-arquitectura-de-software-libro-ilustrado.pdf","bytes":41847434,"sha256":"caa5b5c936f4495c6ac683e4819ce48e1b249ec3b438a0395443bf900a55e870"},
+    {"path":"archivo/artefactos/pdf/COBRIA-articulo-nosql-ampliado.pdf","bytes":167332,"sha256":"7a6b6e725ecc59317f7ca8e310b79f6502ae9c346c7e98d44ed7556d73bf72a7"},
+    {"path":"archivo/artefactos/pdf/COBRIA-articulo-nosql-auditado.pdf","bytes":167380,"sha256":"0b9a66c8660086c63a12de211bc715f23495356096aecb0965426e48858cfde8"},
+    {"path":"archivo/artefactos/pdf/COBRIA-libro-completo-ilustrado-nosql.pdf","bytes":22919246,"sha256":"ee3d53e17c9925ee7a4f586eb84a0c711560d7dbdedadbb2d9abec45d52870e9"},
+    {"path":"archivo/artefactos/pdf/COBRIA-maestro-nosql-ampliado.pdf","bytes":1013934,"sha256":"2fea4fdcc3ada869b0b9a9dd473c30668fd26823ae38c6bae260e25820df522e"},
+    {"path":"archivo/artefactos/pdf/COBRIA-prelibro-visual-nosql.pdf","bytes":41847538,"sha256":"2a279d1013045e5dce36bff16a3fd0642085483b63391657c78564ad6495c52b"},
+    {"path":"archivo/artefactos/paquetes/COBRIA-Core-1.0-paquete-revision.zip","bytes":159847,"sha256":"3daef0995b4be3e3dd731dfbcfd24b8d790e2eb4b5e54857b162f631ae606e6d"},
+    {"path":"archivo/artefactos/paquetes/COBRIA-Core-1.1-paquete-revision.zip","bytes":19040,"sha256":"cde0ae2cffc0aeccb88f3f6fdf255990efd2f9a749941d614dc13e3685d8114b"},
+    {"path":"archivo/artefactos/paquetes/COBRIA-Core-1.1-SHA256.txt","bytes":434,"sha256":"c243ed16ffb8581f0d6d12177e7afd6360775c6cbb5c0d2ebcc939551a7ed82a"},
+    {"path":"archivo/artefactos/paquetes/COBRIA-replication-v2.0.0.zip","bytes":147546,"sha256":"754256a8b4b3dbc77c2444f86c36ff71f7830ab3af04d7743f65329ad88a56e1"},
+    {"path":"archivo/artefactos/revision-core10/COBRIA-articulo-nosql-ampliado.pdf","bytes":155184,"sha256":"ae31e4ba107f1bb90f1b823d3171065156ac154f2d4a407f8aa2567b27daf6ec"},
+    {"path":"sitio/public/archivo/COBRIA-documento-maestro-historico.pdf","bytes":582550,"sha256":"706632b57b1b4c42478cd08bbeebb8d1d43b22fd5013827675a85096b7ed9f41","publicArchive":true,"robots":"noindex-required"}
+  ],
+  "dataClasses": [
+    {"paths":["replication/fixtures","replication/results"],"origin":"synthetic-or-generated-by-declared-protocol","license":"CC-BY-4.0","personalData":false},
+    {"paths":["replication/historical/sql-controls"],"origin":"historical-harness-controls","license":"CC-BY-4.0","publicInference":"excluded"}
+  ],
+  "referenceRepositories": [
+    {"name":"POS Guápiles","url":"https://github.com/billy-una/posguapiles","commit":"ae8d63ce535ecff40059b49d8b8c9f050c353d96","rootLicense":"not-declared-at-frozen-commit","use":"read-only-observation-no-code-copied"},
+    {"name":"CRMHotel","url":"https://github.com/billy-una/CRMHOTEL","commit":"b7b0f8e83871df1220865931f53424d8dd39772c","rootLicense":"not-declared-at-frozen-commit","use":"read-only-observation-no-code-copied"},
+    {"name":"BSHandball","url":"https://github.com/billy-una/BSHandball","commit":"09c15acd14ab806abe436a8176ef3247c61a2df6","rootLicense":"not-declared-at-frozen-commit","use":"read-only-observation-no-code-copied"}
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "title": "El cuaderno que permanece",
+  "intro": "La brigada registra una observación desde un formulario. HTTP autoriza la solicitud, el caso de uso valida el catálogo y PouchDB conserva en disco el hecho, su operación idempotente y la proyección de conteos.",
+  "installCommand": "npm ci --prefix replication",
+  "command": "npm start --prefix replication/examples/integral-c8",
+  "testCommand": "npm test --prefix replication/examples/integral-c8",
+  "verifyCommand": "npm run verificar --prefix replication/examples/integral-c8",
+  "steps": [
+    "Copie la sesión DEMO temporal al formulario y registre colibri en reserva-sur. Use únicamente datos ficticios: permanecen en disco.",
+    "Consulte documentos, proyección y evidencia con procedencia. La recuperación es léxica y puede abstenerse; no hay un modelo entrenado.",
+    "Cierre y reabra usando --reanudar y la ruta absoluta impresa. La nueva sesión cambia, pero los documentos permanecen.",
+    "Ejecute la verificación: conserva una copia, reabre el motor, restaura en otro directorio y reconstruye la proyección con autorización."
+  ],
+  "checks": "Las pruebas usan PouchDB 9.0.0 con LevelDB real: concurrencia, rechazo por ámbito, conflicto, respuesta perdida, restauración y reapertura desde otro proceso. No se usa un doble de almacenamiento.",
+  "limits": "Demostración local, no producción. Un agregado por ámbito confirma conjuntamente hecho, operación y proyección; limita 1000 documentos, 1000 operaciones y 2 MiB. Concentra escrituras y valida lecturas en O(n). No prueba caída eléctrica, replicación, efectos externos exactamente una vez ni conformidad con la API normativa. Las sesiones DEMO y la auditoría no forman parte del respaldo.",
+  "guide": "manuales/33-aplicacion-integral-neutral.md"
+}

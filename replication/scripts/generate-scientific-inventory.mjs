@@ -18,7 +18,8 @@ const traceability = read('replication/traceability/traceability.json');
 
 const inventory = {
   schemaVersion: '1.0.0', proposalIndependent: true, officialCertification: false,
-  generatedAt: new Date().toISOString(),
+  generatedAt: null,
+  generation: 'deterministic-from-declared-sources',
   internalEvidence: [
     { id:'E-CONFORMANCE', status:'executed-local', observations:conformance.runs, source:'replication/results/nosql-core-1.0/summary.json', sha256:sha('replication/results/nosql-core-1.0/summary.json'), limit:'PouchDB y LokiJS locales; no producción.' },
     { id:'E-ALTERNATIVES', status:'executed-local', observations:alternatives.rawCount, source:'replication/results/core-1.3-alternatives/summary.json', sha256:sha('replication/results/core-1.3-alternatives/summary.json'), limit:alternatives.method },

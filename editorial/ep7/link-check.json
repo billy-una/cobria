@@ -1,0 +1,1579 @@
+{
+  "schemaVersion": "1.0.0",
+  "checkedAt": "2026-10-23T20:35:13.454Z",
+  "method": "GET público con límite; SHA de respuesta observada. HTTP no prueba exactitud ni lectura íntegra. Sin credenciales ni texto de terceros redistribuido.",
+  "records": [
+    {
+      "id": "apa2020manual",
+      "link": {
+        "requestedUrl": "https://apastyle.apa.org/products/publication-manual-7th-edition",
+        "finalUrl": "https://apastyle.apa.org/products/publication-manual-7th-edition",
+        "status": 200,
+        "ok": true,
+        "bytes": 212,
+        "sha256": "d02032286070b4dd9d8fbd985a7bdca8af8edf52b89ff177db3bfcb2c8a9c43d",
+        "metadata": null
+      },
+      "doi": null,
+      "checkedAt": "2026-10-23T20:32:53.178Z"
+    },
+    {
+      "id": "apacheCouchDocumentApi",
+      "link": {
+        "requestedUrl": "https://docs.couchdb.org/en/stable/api/document/common.html",
+        "finalUrl": "https://docs.couchdb.org/en/stable/api/document/common.html",
+        "status": 200,
+        "ok": true,
+        "bytes": 123257,
+        "sha256": "e4178fefd1d9c431370575049f91d30f919cacd6d2d1dab2138bc76ec04cee1a",
+        "metadata": null
+      },
+      "doi": null,
+      "checkedAt": "2026-10-23T20:32:53.178Z"
+    },
+    {
+      "id": "armbrust2021lakehouse",
+      "link": {
+        "requestedUrl": "https://www.cidrdb.org/cidr2021/papers/cidr2021_paper17.pdf",
+        "finalUrl": "https://www.cidrdb.org/cidr2021/papers/cidr2021_paper17.pdf",
+        "status": 200,
+        "ok": true,
+        "bytes": 724609,
+        "sha256": "a62426431b889c70ca1bcea4d0e46b41c33bc4d2009e14dd6e96333147bcc0f9",
+        "metadata": null
+      },
+      "doi": null,
+      "checkedAt": "2026-10-23T20:32:53.178Z"
+    },
+    {
+      "id": "aulbach2009flexibleschemas",
+      "link": {
+        "requestedUrl": "https://db.in.tum.de/research/publications/conferences/sigmod2009-mtd.pdf",
+        "finalUrl": "https://db.in.tum.de/research/publications/conferences/sigmod2009-mtd.pdf",
+        "status": 200,
+        "ok": true,
+        "bytes": 728376,
+        "sha256": "761589ea48d626cacec601f6ae6162d31d821817bded78f1ca1c8453e4ef68d4",
+        "metadata": null
+      },
+      "doi": {
+        "requestedUrl": "https://api.crossref.org/works/10.1145%2F1559845.1559941",
+        "finalUrl": "https://api.crossref.org/works/10.1145%2F1559845.1559941",
+        "status": 200,
+        "ok": true,
+        "bytes": 9772,
+        "sha256": "46d73256f3c1b9b4420a58a865a4916a4067ddfb930925b607d5484cfdf9035c",
+        "metadata": {
+          "title": [
+            "A comparison of flexible schemas for software as a service"
+          ],
+          "subtitle": [],
+          "author": [
+            {
+              "family": "Aulbach",
+              "given": "Stefan"
+            },
+            {
+              "family": "Jacobs",
+              "given": "Dean"
+            },
+            {
+              "family": "Kemper",
+              "given": "Alfons"
+            },
+            {
+              "family": "Seibold",
+              "given": "Michael"
+            }
+          ],
+          "published": {
+            "date-parts": [
+              [
+                2009,
+                6,
+                29
+              ]
+            ]
+          },
+          "page": "881-888",
+          "publisher": "ACM",
+          "container": [
+            "Proceedings of the 2009 ACM SIGMOD International Conference on Management of data"
+          ]
+        }
+      },
+      "checkedAt": "2026-10-23T20:32:53.178Z"
+    },
+    {
+      "id": "buneman2001provenance",
+      "link": {
+        "requestedUrl": "https://doi.org/10.1007/3-540-44503-X_20",
+        "finalUrl": "https://link.springer.com/chapter/10.1007/3-540-44503-X_20",
+        "status": 200,
+        "ok": true,
+        "bytes": 3038,
+        "sha256": "32ed63159c77e21ee19ca1b9aa3213ccf0218eb59539560b132a8e68ef0e18ea",
+        "metadata": null
+      },
+      "doi": {
+        "requestedUrl": "https://api.crossref.org/works/10.1007%2F3-540-44503-X_20",
+        "finalUrl": "https://api.crossref.org/works/10.1007%2F3-540-44503-X_20",
+        "status": 200,
+        "ok": true,
+        "bytes": 5546,
+        "sha256": "a76ce80429c307d21dbee44a71b3c58a52703504847c2a1a1309b552499f66a7",
+        "metadata": {
+          "title": [
+            "Why and Where: A Characterization of Data Provenance"
+          ],
+          "subtitle": [],
+          "author": [
+            {
+              "family": "Buneman",
+              "given": "Peter"
+            },
+            {
+              "family": "Khanna",
+              "given": "Sanjeev"
+            },
+            {
+              "family": "Wang-Chiew",
+              "given": "Tan"
+            }
+          ],
+          "published": {
+            "date-parts": [
+              [
+                2001
+              ]
+            ]
+          },
+          "page": "316-330",
+          "publisher": "Springer Berlin Heidelberg",
+          "container": [
+            "Lecture Notes in Computer Science",
+            "Database Theory — ICDT 2001"
+          ]
+        }
+      },
+      "checkedAt": "2026-10-23T20:32:53.178Z"
+    },
+    {
+      "id": "chang2006bigtable",
+      "link": {
+        "requestedUrl": "https://www.usenix.org/conference/osdi-06/bigtable-distributed-storage-system-structured-data",
+        "finalUrl": "https://www.usenix.org/conference/osdi-06/bigtable-distributed-storage-system-structured-data",
+        "status": 200,
+        "ok": true,
+        "bytes": 24007,
+        "sha256": "30fd2ffbd2b5c28ca2a27f7dc92c8ac429b765292a88a85423439924e63c680a",
+        "metadata": null
+      },
+      "doi": null,
+      "checkedAt": "2026-10-23T20:32:53.178Z"
+    },
+    {
+      "id": "cooper2010ycsb",
+      "link": {
+        "requestedUrl": "https://doi.org/10.1145/1807128.1807152",
+        "finalUrl": "https://dl.acm.org/doi/10.1145/1807128.1807152",
+        "status": 403,
+        "ok": false,
+        "bytes": 5663,
+        "sha256": "c6393b40ca8f24dbff9a906589981fbe8f498d3576560ca2a1c42de77985f5fd",
+        "metadata": null
+      },
+      "doi": {
+        "requestedUrl": "https://api.crossref.org/works/10.1145%2F1807128.1807152",
+        "finalUrl": "https://api.crossref.org/works/10.1145%2F1807128.1807152",
+        "status": 200,
+        "ok": true,
+        "bytes": 7754,
+        "sha256": "6715ec8f5f3bebe11070b97c9f0d4ca234fda0046cd2132b1d5767090652009f",
+        "metadata": {
+          "title": [
+            "Benchmarking cloud serving systems with YCSB"
+          ],
+          "subtitle": [],
+          "author": [
+            {
+              "family": "Cooper",
+              "given": "Brian F."
+            },
+            {
+              "family": "Silberstein",
+              "given": "Adam"
+            },
+            {
+              "family": "Tam",
+              "given": "Erwin"
+            },
+            {
+              "family": "Ramakrishnan",
+              "given": "Raghu"
+            },
+            {
+              "family": "Sears",
+              "given": "Russell"
+            }
+          ],
+          "published": {
+            "date-parts": [
+              [
+                2010,
+                6,
+                10
+              ]
+            ]
+          },
+          "page": "143-154",
+          "publisher": "ACM",
+          "container": [
+            "Proceedings of the 1st ACM symposium on Cloud computing"
+          ]
+        }
+      },
+      "checkedAt": "2026-10-23T20:32:53.178Z"
+    },
+    {
+      "id": "corbett2012spanner",
+      "link": {
+        "requestedUrl": "https://research.google/pubs/spanner-googles-globally-distributed-database-2/",
+        "finalUrl": "https://research.google/pubs/spanner-googles-globally-distributed-database-2/",
+        "status": 200,
+        "ok": true,
+        "bytes": 152453,
+        "sha256": "38bfd05dcd1e65e1c1cb07cc54f25ad19bd054667271f662a6ef1638bf7aec08",
+        "metadata": null
+      },
+      "doi": null,
+      "checkedAt": "2026-10-23T20:32:53.178Z"
+    },
+    {
+      "id": "cormen2022algorithms",
+      "link": {
+        "requestedUrl": "https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/",
+        "finalUrl": "https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/",
+        "status": 200,
+        "ok": true,
+        "bytes": 110699,
+        "sha256": "b95f4193b78ee479e91a7b57e6862a0646b5f30edd45544a5b190af05970026a",
+        "metadata": null
+      },
+      "doi": null,
+      "checkedAt": "2026-10-23T20:32:53.178Z"
+    },
+    {
+      "id": "decandia2007dynamo",
+      "link": {
+        "requestedUrl": "https://doi.org/10.1145/1294261.1294281",
+        "finalUrl": "https://dl.acm.org/doi/10.1145/1294261.1294281",
+        "status": 403,
+        "ok": false,
+        "bytes": 5663,
+        "sha256": "cc2ecbc7bfe9e2866a566a9a5d95e74287a19354ed3cd702c64bcdfa05565164",
+        "metadata": null
+      },
+      "doi": {
+        "requestedUrl": "https://api.crossref.org/works/10.1145%2F1294261.1294281",
+        "finalUrl": "https://api.crossref.org/works/10.1145%2F1294261.1294281",
+        "status": 200,
+        "ok": true,
+        "bytes": 7942,
+        "sha256": "1686a602875bd2a865fc9b8ff5e140d730944c652d2f9ee6e212f3a052f502a7",
+        "metadata": {
+          "title": [
+            "Dynamo"
+          ],
+          "subtitle": [
+            "amazon's highly available key-value store"
+          ],
+          "author": [
+            {
+              "family": "DeCandia",
+              "given": "Giuseppe"
+            },
+            {
+              "family": "Hastorun",
+              "given": "Deniz"
+            },
+            {
+              "family": "Jampani",
+              "given": "Madan"
+            },
+            {
+              "family": "Kakulapati",
+              "given": "Gunavardhan"
+            },
+            {
+              "family": "Lakshman",
+              "given": "Avinash"
+            },
+            {
+              "family": "Pilchin",
+              "given": "Alex"
+            },
+            {
+              "family": "Sivasubramanian",
+              "given": "Swaminathan"
+            },
+            {
+              "family": "Vosshall",
+              "given": "Peter"
+            },
+            {
+              "family": "Vogels",
+              "given": "Werner"
+            }
+          ],
+          "published": {
+            "date-parts": [
+              [
+                2007,
+                10,
+                14
+              ]
+            ]
+          },
+          "page": "205-220",
+          "publisher": "ACM",
+          "container": [
+            "Proceedings of twenty-first ACM SIGOPS symposium on Operating systems principles"
+          ]
+        }
+      },
+      "checkedAt": "2026-10-23T20:32:53.178Z"
+    },
+    {
+      "id": "evans2003ddd",
+      "link": {
+        "requestedUrl": "https://www.informit.com/store/domain-driven-design-tackling-complexity-in-the-heart-9780321125217",
+        "finalUrl": "https://www.informit.com/store/domain-driven-design-tackling-complexity-in-the-heart-9780321125217",
+        "status": 200,
+        "ok": true,
+        "bytes": 152823,
+        "sha256": "d2c899d45fdd34a8814cc4c1131b2eb935230255e0b0eea3eafa6812c53012f1",
+        "metadata": null
+      },
+      "doi": null,
+      "checkedAt": "2026-10-23T20:32:53.178Z"
+    },
+    {
+      "id": "fowler2002poeaa",
+      "link": {
+        "requestedUrl": "https://martinfowler.com/eaaCatalog/",
+        "finalUrl": "https://martinfowler.com/eaaCatalog/",
+        "status": 200,
+        "ok": true,
+        "bytes": 36935,
+        "sha256": "2662d41f57758f025e8a95c9707ac6d6b72beed7c0d8cd2eb3747f761e42eb6f",
+        "metadata": null
+      },
+      "doi": null,
+      "checkedAt": "2026-10-23T20:32:53.178Z"
+    },
+    {
+      "id": "fowler2005eventsourcing",
+      "link": {
+        "requestedUrl": "https://martinfowler.com/eaaDev/EventSourcing.html",
+        "finalUrl": "https://martinfowler.com/eaaDev/EventSourcing.html",
+        "status": 200,
+        "ok": true,
+        "bytes": 57156,
+        "sha256": "ff817ecc7b176c9456b8381687437e93f38bb8be6c6c3b4e4403b664818f8a02",
+        "metadata": null
+      },
+      "doi": null,
+      "checkedAt": "2026-10-23T20:32:53.178Z"
+    },
+    {
+      "id": "fowler2011cqrs",
+      "link": {
+        "requestedUrl": "https://martinfowler.com/bliki/CQRS.html",
+        "finalUrl": "https://martinfowler.com/bliki/CQRS.html",
+        "status": 200,
+        "ok": true,
+        "bytes": 21864,
+        "sha256": "11cf46ce308805e94e4b110016b09d004fbf8c47669a7041080f661c798b2f29",
+        "metadata": null
+      },
+      "doi": null,
+      "checkedAt": "2026-10-23T20:32:53.178Z"
+    },
+    {
+      "id": "gamma1994patterns",
+      "link": {
+        "requestedUrl": "https://www.pearson.com/en-us/subject-catalog/p/design-patterns-elements-of-reusable-object-oriented-software/P200000009480",
+        "finalUrl": "https://www.pearson.com/en-us/subject-catalog/p/design-patterns-elements-of-reusable-object-oriented-software/P200000009480",
+        "status": 200,
+        "ok": true,
+        "bytes": 723727,
+        "sha256": "b06e8b8fb14f5f5855996546bf182ba86e3e405bee78d4a1983f4f58e8b094cf",
+        "metadata": null
+      },
+      "doi": null,
+      "checkedAt": "2026-10-23T20:32:53.178Z"
+    },
+    {
+      "id": "gebru2021datasheets",
+      "link": {
+        "requestedUrl": "https://doi.org/10.1145/3458723",
+        "finalUrl": "https://dl.acm.org/doi/10.1145/3458723",
+        "status": 403,
+        "ok": false,
+        "bytes": 5596,
+        "sha256": "db3b5b22da25e1b3e5723d1aa6c1b0b4281682ffc359fbff940c9635ae6c39b7",
+        "metadata": null
+      },
+      "doi": {
+        "requestedUrl": "https://api.crossref.org/works/10.1145%2F3458723",
+        "finalUrl": "https://api.crossref.org/works/10.1145%2F3458723",
+        "status": 200,
+        "ok": true,
+        "bytes": 10786,
+        "sha256": "fc979f400cac9bf8283ed401582b1b731eeb630f7f905eb9501ca43910cf928f",
+        "metadata": {
+          "title": [
+            "Datasheets for datasets"
+          ],
+          "subtitle": [],
+          "author": [
+            {
+              "family": "Gebru",
+              "given": "Timnit"
+            },
+            {
+              "family": "Morgenstern",
+              "given": "Jamie"
+            },
+            {
+              "family": "Vecchione",
+              "given": "Briana"
+            },
+            {
+              "family": "Vaughan",
+              "given": "Jennifer Wortman"
+            },
+            {
+              "family": "Wallach",
+              "given": "Hanna"
+            },
+            {
+              "family": "III",
+              "given": "Hal Daumé"
+            },
+            {
+              "family": "Crawford",
+              "given": "Kate"
+            }
+          ],
+          "published": {
+            "date-parts": [
+              [
+                2021,
+                11,
+                19
+              ]
+            ]
+          },
+          "volume": "64",
+          "issue": "12",
+          "page": "86-92",
+          "publisher": "Association for Computing Machinery (ACM)",
+          "container": [
+            "Communications of the ACM"
+          ]
+        }
+      },
+      "checkedAt": "2026-10-23T20:32:53.178Z"
+    },
+    {
+      "id": "gupta1993incremental",
+      "checkedAt": "2026-10-23T20:35:13.454Z",
+      "link": {
+        "requestedUrl": "https://doi.org/10.1145/170035.170066",
+        "finalUrl": "https://dl.acm.org/doi/10.1145/170035.170066",
+        "status": 403,
+        "ok": false,
+        "bytes": 5636,
+        "sha256": "6b5a47a13bceb9e68f02be3f1523598fedd3532f4a3ed4f60a2235bcc73a0257",
+        "metadata": null
+      },
+      "doi": {
+        "requestedUrl": "https://api.crossref.org/works/10.1145%2F170035.170066",
+        "finalUrl": "https://api.crossref.org/works/10.1145%2F170035.170066",
+        "status": 200,
+        "ok": true,
+        "bytes": 11581,
+        "sha256": "8c222c9539935b2c4b5b45b440fc6ff0d30c83d0a84535525cc38365589e1001",
+        "metadata": {
+          "title": [
+            "Maintaining views incrementally"
+          ],
+          "subtitle": [],
+          "author": [
+            {
+              "family": "Gupta",
+              "given": "Ashish"
+            },
+            {
+              "family": "Mumick",
+              "given": "Inderpal Singh"
+            },
+            {
+              "family": "Subrahmanian",
+              "given": "V. S."
+            }
+          ],
+          "published": {
+            "date-parts": [
+              [
+                1993,
+                6
+              ]
+            ]
+          },
+          "page": "157-166",
+          "publisher": "ACM",
+          "container": [
+            "Proceedings of the 1993 ACM SIGMOD international conference on Management of data"
+          ]
+        }
+      },
+      "previousAttempts": [
+        {
+          "checkedAt": "2026-10-23T20:32:53.178Z",
+          "link": {
+            "requestedUrl": "https://doi.org/10.1145/170035.170066",
+            "finalUrl": "https://dl.acm.org/doi/10.1145/170035.170066",
+            "status": 403,
+            "ok": false,
+            "bytes": 5636,
+            "sha256": "782f640a662870208d3241e35c6f2c8cf58af89051005fa9d144bf19f76ce9f3",
+            "metadata": null
+          },
+          "doi": {
+            "requestedUrl": "https://api.crossref.org/works/10.1145%2F170035.170066",
+            "finalUrl": "https://api.crossref.org/works/10.1145%2F170035.170066",
+            "status": 429,
+            "ok": false,
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "metadata": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "gupta1995materialized",
+      "checkedAt": "2026-10-23T20:35:13.454Z",
+      "link": {
+        "requestedUrl": "https://sigmod.org/publications/dblp/db/journals/debu/GuptaM95.html",
+        "finalUrl": "https://sigmod.org/publications/dblp/db/journals/debu/GuptaM95.html",
+        "status": 200,
+        "ok": true,
+        "bytes": 48667,
+        "sha256": "2f8e766027c91451360aa10be7749be357fdcff4a1e269e9bde71051c181c8f5",
+        "metadata": null
+      },
+      "doi": null,
+      "previousAttempts": [
+        {
+          "checkedAt": "2026-10-23T20:32:53.178Z",
+          "link": {
+            "requestedUrl": "https://sites.computer.org/debull/95JUN-CD.pdf",
+            "ok": false,
+            "status": null,
+            "error": "fetch failed"
+          },
+          "doi": null
+        }
+      ]
+    },
+    {
+      "id": "helland2015immutability",
+      "link": {
+        "requestedUrl": "https://www.cidrdb.org/cidr2015/Papers/CIDR15_Paper16.pdf",
+        "finalUrl": "https://www.cidrdb.org/cidr2015/Papers/CIDR15_Paper16.pdf",
+        "status": 200,
+        "ok": true,
+        "bytes": 701837,
+        "sha256": "788cbbaf36ee76fa4fdde7e205715f9878d283ec16bf632af2721698e49ad643",
+        "metadata": null
+      },
+      "doi": null,
+      "checkedAt": "2026-10-23T20:32:53.178Z"
+    },
+    {
+      "id": "hevner2004designscience",
+      "checkedAt": "2026-10-23T20:35:13.454Z",
+      "link": {
+        "requestedUrl": "https://doi.org/10.2307/25148625",
+        "finalUrl": "https://misq.umn.edu/misq/article/28/1/75/261/Design-Science-in-Information-Systems-Research1",
+        "status": 403,
+        "ok": false,
+        "bytes": 5842,
+        "sha256": "a7eaab309605f7ce1d2a6db2b914342df08bb198ed025c76c1a3dc732bb7c04b",
+        "metadata": null
+      },
+      "doi": {
+        "requestedUrl": "https://api.crossref.org/works/10.2307%2F25148625",
+        "finalUrl": "https://api.crossref.org/works/10.2307%2F25148625",
+        "status": 200,
+        "ok": true,
+        "bytes": 33970,
+        "sha256": "4f51dbc63917b988ae85269d69917bb050e8e22051838598e60b8906d5a6ee24",
+        "metadata": {
+          "title": [
+            "Design Science in Information Systems Research1"
+          ],
+          "subtitle": [],
+          "author": [
+            {
+              "family": "Hevner",
+              "given": "Alan R."
+            },
+            {
+              "family": "March",
+              "given": "Salvatore T."
+            },
+            {
+              "family": "Park",
+              "given": "Jinsoo"
+            },
+            {
+              "family": "Ram",
+              "given": "Sudha"
+            }
+          ],
+          "published": {
+            "date-parts": [
+              [
+                2004,
+                3,
+                1
+              ]
+            ]
+          },
+          "volume": "28",
+          "issue": "1",
+          "page": "75-106",
+          "publisher": "MIS Quarterly",
+          "container": [
+            "MIS Quarterly"
+          ]
+        }
+      },
+      "previousAttempts": [
+        {
+          "checkedAt": "2026-10-23T20:32:53.178Z",
+          "link": {
+            "requestedUrl": "https://doi.org/10.2307/25148625",
+            "finalUrl": "https://misq.umn.edu/misq/article/28/1/75/261/Design-Science-in-Information-Systems-Research1",
+            "status": 403,
+            "ok": false,
+            "bytes": 5842,
+            "sha256": "4e580179b5df8c02658121b67a6c635df3d5807e9071e8142538dfc6023567c4",
+            "metadata": null
+          },
+          "doi": {
+            "requestedUrl": "https://api.crossref.org/works/10.2307%2F25148625",
+            "finalUrl": "https://api.crossref.org/works/10.2307%2F25148625",
+            "status": 429,
+            "ok": false,
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "metadata": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "iso25010_2023",
+      "link": {
+        "requestedUrl": "https://www.iso.org/standard/78176.html",
+        "finalUrl": "https://www.iso.org/standard/78176.html",
+        "status": 403,
+        "ok": false,
+        "bytes": 5618,
+        "sha256": "767122f3fc0bdda7ce1da6204d394e36098677106d5401cafd1b9291e4f11ee6",
+        "metadata": null
+      },
+      "doi": null,
+      "checkedAt": "2026-10-23T20:32:53.178Z"
+    },
+    {
+      "id": "iso25040_2024",
+      "link": {
+        "requestedUrl": "https://www.iso.org/standard/83467.html",
+        "finalUrl": "https://www.iso.org/standard/83467.html",
+        "status": 403,
+        "ok": false,
+        "bytes": 5618,
+        "sha256": "f7b9cf57160217d37675a632cd8ce16f62d4dabfbf4412bd43b506151ff487d6",
+        "metadata": null
+      },
+      "doi": null,
+      "checkedAt": "2026-10-23T20:32:53.178Z"
+    },
+    {
+      "id": "jain1991performance",
+      "link": {
+        "requestedUrl": "https://www.cse.wustl.edu/~jain/books/perfbook.htm",
+        "finalUrl": "https://www.cse.wustl.edu/~jain/books/perfbook.htm",
+        "status": 200,
+        "ok": true,
+        "bytes": 7605,
+        "sha256": "74baafd4bafd5704532b759d4abbe5c9fe5f940920be59c3280c8e17e666e4ab",
+        "metadata": null
+      },
+      "doi": null,
+      "checkedAt": "2026-10-23T20:32:53.178Z"
+    },
+    {
+      "id": "kapoor2023leakage",
+      "link": {
+        "requestedUrl": "https://www.sciencedirect.com/science/article/pii/S2666389923001599",
+        "finalUrl": "https://www.sciencedirect.com/science/article/pii/S2666389923001599",
+        "status": 403,
+        "ok": false,
+        "bytes": 832804,
+        "sha256": "71e85b38f9487f3a98fe1b8e6f7691adbdc7cc278348e2418cb1282e2f3a2719",
+        "metadata": null
+      },
+      "doi": {
+        "requestedUrl": "https://api.crossref.org/works/10.1016%2Fj.patter.2023.100804",
+        "finalUrl": "https://api.crossref.org/works/10.1016%2Fj.patter.2023.100804",
+        "status": 200,
+        "ok": true,
+        "bytes": 32087,
+        "sha256": "4bcb4be5269b0c034f9c5903274a81d087a8b7fdb7cc3a9af2924c226c687089",
+        "metadata": {
+          "title": [
+            "Leakage and the reproducibility crisis in machine-learning-based science"
+          ],
+          "subtitle": [],
+          "author": [
+            {
+              "family": "Kapoor",
+              "given": "Sayash"
+            },
+            {
+              "family": "Narayanan",
+              "given": "Arvind"
+            }
+          ],
+          "published": {
+            "date-parts": [
+              [
+                2023,
+                9
+              ]
+            ]
+          },
+          "volume": "4",
+          "issue": "9",
+          "page": "100804",
+          "publisher": "Elsevier BV",
+          "container": [
+            "Patterns"
+          ]
+        }
+      },
+      "checkedAt": "2026-10-23T20:32:53.178Z"
+    },
+    {
+      "id": "kleppmann2017data",
+      "link": {
+        "requestedUrl": "https://dataintensive.net/",
+        "finalUrl": "https://dataintensive.net/",
+        "status": 200,
+        "ok": true,
+        "bytes": 11814,
+        "sha256": "05ad9aff380d9ef3af073619e6eb40163252c41e8ce9fb7532d1c0523027695f",
+        "metadata": null
+      },
+      "doi": null,
+      "checkedAt": "2026-10-23T20:32:53.178Z"
+    },
+    {
+      "id": "lewis2020rag",
+      "link": {
+        "requestedUrl": "https://proceedings.neurips.cc/paper/2020/hash/6b493230205f780e1bc26945df7481e5-Abstract.html",
+        "finalUrl": "https://proceedings.neurips.cc/paper/2020/hash/6b493230205f780e1bc26945df7481e5-Abstract.html",
+        "status": 200,
+        "ok": true,
+        "bytes": 10881,
+        "sha256": "5a425ab1b904e69e8ec394bc5f3cf61cd84db96b72c6cfd2a6c1c139443a73e8",
+        "metadata": null
+      },
+      "doi": null,
+      "checkedAt": "2026-10-23T20:32:53.178Z"
+    },
+    {
+      "id": "li2023featurestore",
+      "link": {
+        "requestedUrl": "https://arxiv.org/abs/2305.20077v1",
+        "finalUrl": "https://arxiv.org/abs/2305.20077v1",
+        "status": 200,
+        "ok": true,
+        "bytes": 42294,
+        "sha256": "c6e07b7f35606ca670ea6fe65e6c9d2fcb1b22be348b952ba5272ce3a979a389",
+        "metadata": null
+      },
+      "doi": {
+        "requestedUrl": "https://api.datacite.org/dois/10.48550%2FarXiv.2305.20077",
+        "finalUrl": "https://api.datacite.org/dois/10.48550%2FarXiv.2305.20077",
+        "status": 200,
+        "ok": true,
+        "bytes": 12028,
+        "sha256": "c486f10a8b285b3e28ee78b765b24c8f1c5aec33f1a4c5561d6deb5ce824e7d6",
+        "metadata": {
+          "title": [
+            {
+              "title": "Managed Geo-Distributed Feature Store: Architecture and System Design"
+            }
+          ],
+          "creators": [
+            {
+              "name": "Li, Anya",
+              "nameType": "Personal",
+              "givenName": "Anya",
+              "familyName": "Li",
+              "affiliation": [
+                "Microsoft"
+              ],
+              "nameIdentifiers": []
+            },
+            {
+              "name": "Ranganathan, Bhala",
+              "nameType": "Personal",
+              "givenName": "Bhala",
+              "familyName": "Ranganathan",
+              "affiliation": [
+                "Microsoft"
+              ],
+              "nameIdentifiers": []
+            },
+            {
+              "name": "Pan, Feng",
+              "nameType": "Personal",
+              "givenName": "Feng",
+              "familyName": "Pan",
+              "affiliation": [
+                "Microsoft"
+              ],
+              "nameIdentifiers": []
+            },
+            {
+              "name": "Zhang, Mickey",
+              "nameType": "Personal",
+              "givenName": "Mickey",
+              "familyName": "Zhang",
+              "affiliation": [
+                "Microsoft"
+              ],
+              "nameIdentifiers": []
+            },
+            {
+              "name": "Xu, Qianjun",
+              "nameType": "Personal",
+              "givenName": "Qianjun",
+              "familyName": "Xu",
+              "affiliation": [
+                "Microsoft"
+              ],
+              "nameIdentifiers": []
+            },
+            {
+              "name": "Li, Runhan",
+              "nameType": "Personal",
+              "givenName": "Runhan",
+              "familyName": "Li",
+              "affiliation": [
+                "Microsoft"
+              ],
+              "nameIdentifiers": []
+            },
+            {
+              "name": "Raman, Sethu",
+              "nameType": "Personal",
+              "givenName": "Sethu",
+              "familyName": "Raman",
+              "affiliation": [
+                "Microsoft"
+              ],
+              "nameIdentifiers": []
+            },
+            {
+              "name": "Shah, Shail Paragbhai",
+              "nameType": "Personal",
+              "givenName": "Shail Paragbhai",
+              "familyName": "Shah",
+              "affiliation": [
+                "Microsoft"
+              ],
+              "nameIdentifiers": []
+            },
+            {
+              "name": "Tang, Vivienne",
+              "nameType": "Personal",
+              "givenName": "Vivienne",
+              "familyName": "Tang",
+              "affiliation": [
+                "Microsoft"
+              ],
+              "nameIdentifiers": []
+            }
+          ],
+          "publicationYear": 2023,
+          "publisher": "arXiv"
+        }
+      },
+      "checkedAt": "2026-10-23T20:32:53.178Z"
+    },
+    {
+      "id": "microsoft2025cqrs",
+      "link": {
+        "requestedUrl": "https://learn.microsoft.com/en-us/azure/architecture/patterns/cqrs",
+        "finalUrl": "https://learn.microsoft.com/en-us/azure/architecture/patterns/cqrs",
+        "status": 200,
+        "ok": true,
+        "bytes": 69684,
+        "sha256": "28fad30dbad257a458ee699717f147da7f27aff2a4ff1d555ed3c2f6e0fcefb7",
+        "metadata": null
+      },
+      "doi": null,
+      "checkedAt": "2026-10-23T20:32:53.178Z"
+    },
+    {
+      "id": "microsoft2025materialized",
+      "link": {
+        "requestedUrl": "https://learn.microsoft.com/en-us/azure/architecture/patterns/materialized-view",
+        "finalUrl": "https://learn.microsoft.com/en-us/azure/architecture/patterns/materialized-view",
+        "status": 200,
+        "ok": true,
+        "bytes": 66604,
+        "sha256": "c79256d72cff4dc2b129551326ae77d63eac146426b66650deafb84472f92edb",
+        "metadata": null
+      },
+      "doi": null,
+      "checkedAt": "2026-10-23T20:32:53.178Z"
+    },
+    {
+      "id": "mitchell2019modelcards",
+      "link": {
+        "requestedUrl": "https://doi.org/10.1145/3287560.3287596",
+        "finalUrl": "https://dl.acm.org/doi/10.1145/3287560.3287596",
+        "status": 403,
+        "ok": false,
+        "bytes": 5642,
+        "sha256": "98e4422bfab513218f8459fd63c4d72ab7a715e1fa08d68f67e27be03540b8a4",
+        "metadata": null
+      },
+      "doi": {
+        "requestedUrl": "https://api.crossref.org/works/10.1145%2F3287560.3287596",
+        "finalUrl": "https://api.crossref.org/works/10.1145%2F3287560.3287596",
+        "status": 200,
+        "ok": true,
+        "bytes": 22802,
+        "sha256": "9bc2e4f4f85f3365e621ad31c153598ccb56a7666a61583c58ddebb07380fbeb",
+        "metadata": {
+          "title": [
+            "Model Cards for Model Reporting"
+          ],
+          "subtitle": [],
+          "author": [
+            {
+              "family": "Mitchell",
+              "given": "Margaret"
+            },
+            {
+              "family": "Wu",
+              "given": "Simone"
+            },
+            {
+              "family": "Zaldivar",
+              "given": "Andrew"
+            },
+            {
+              "family": "Barnes",
+              "given": "Parker"
+            },
+            {
+              "family": "Vasserman",
+              "given": "Lucy"
+            },
+            {
+              "family": "Hutchinson",
+              "given": "Ben"
+            },
+            {
+              "family": "Spitzer",
+              "given": "Elena"
+            },
+            {
+              "family": "Raji",
+              "given": "Inioluwa Deborah"
+            },
+            {
+              "family": "Gebru",
+              "given": "Timnit"
+            }
+          ],
+          "published": {
+            "date-parts": [
+              [
+                2019,
+                1,
+                29
+              ]
+            ]
+          },
+          "page": "220-229",
+          "publisher": "ACM",
+          "container": [
+            "Proceedings of the Conference on Fairness, Accountability, and Transparency"
+          ]
+        }
+      },
+      "checkedAt": "2026-10-23T20:32:53.178Z"
+    },
+    {
+      "id": "mongodbAtomicity",
+      "link": {
+        "requestedUrl": "https://www.mongodb.com/docs/manual/core/write-operations-atomicity/",
+        "finalUrl": "https://www.mongodb.com/docs/manual/core/write-operations-atomicity/",
+        "status": 200,
+        "ok": true,
+        "bytes": 779170,
+        "sha256": "1d399e89847a890e36a86c3c47d9eb49ebf980e8d1bfc2bdf284f72288d180da",
+        "metadata": null
+      },
+      "doi": null,
+      "checkedAt": "2026-10-23T20:32:53.178Z"
+    },
+    {
+      "id": "mongodbTenancy",
+      "link": {
+        "requestedUrl": "https://www.mongodb.com/docs/atlas/build-multi-tenant-arch/",
+        "finalUrl": "https://www.mongodb.com/docs/atlas/build-multi-tenant-arch/",
+        "status": 200,
+        "ok": true,
+        "bytes": 801352,
+        "sha256": "e3c9fe87425e69a96aabda26605ff1c893e5bc2ee9d7700f5e3044beadd74784",
+        "metadata": null
+      },
+      "doi": null,
+      "checkedAt": "2026-10-23T20:32:53.178Z"
+    },
+    {
+      "id": "ni2014adaptiveschema",
+      "link": {
+        "requestedUrl": "https://dbgroup.cs.tsinghua.edu.cn/ligl/papers/tkde14-multitenant.pdf",
+        "finalUrl": "https://dbgroup.cs.tsinghua.edu.cn/ligl/papers/tkde14-multitenant.pdf",
+        "status": 200,
+        "ok": true,
+        "bytes": 582581,
+        "sha256": "9608be78853b2e94833503d2b7504c65222194d1ba76b32ef6a137258db8f7a8",
+        "metadata": null
+      },
+      "doi": {
+        "requestedUrl": "https://api.crossref.org/works/10.1109%2FTKDE.2013.94",
+        "finalUrl": "https://api.crossref.org/works/10.1109%2FTKDE.2013.94",
+        "status": 200,
+        "ok": true,
+        "bytes": 5895,
+        "sha256": "468234dbce176ed999ae6bd50a76269299bf1fda680be02ef810d716308a49b1",
+        "metadata": {
+          "title": [
+            "Adaptive Database Schema Design for Multi-Tenant Data Management"
+          ],
+          "subtitle": [],
+          "author": [
+            {
+              "family": "Ni",
+              "given": "Jiacai"
+            },
+            {
+              "family": "Li",
+              "given": "Guoliang"
+            },
+            {
+              "family": "Wang",
+              "given": "Lijun"
+            },
+            {
+              "family": "Feng",
+              "given": "Jianhua"
+            },
+            {
+              "family": "Zhang",
+              "given": "Jun"
+            },
+            {
+              "family": "Li",
+              "given": "Lei"
+            }
+          ],
+          "published": {
+            "date-parts": [
+              [
+                2014,
+                9
+              ]
+            ]
+          },
+          "volume": "26",
+          "issue": "9",
+          "page": "2079-2093",
+          "publisher": "Institute of Electrical and Electronics Engineers (IEEE)",
+          "container": [
+            "IEEE Transactions on Knowledge and Data Engineering"
+          ]
+        }
+      },
+      "checkedAt": "2026-10-23T20:32:53.178Z"
+    },
+    {
+      "id": "nist2023airmf",
+      "link": {
+        "requestedUrl": "https://doi.org/10.6028/NIST.AI.100-1",
+        "finalUrl": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf",
+        "status": 200,
+        "ok": true,
+        "bytes": 1946127,
+        "sha256": "7576edb531d9848825814ee88e28b1795d3a84b435b4b797d3670eafdc4a89f1",
+        "metadata": null
+      },
+      "doi": {
+        "requestedUrl": "https://api.crossref.org/works/10.6028%2FNIST.AI.100-1",
+        "finalUrl": "https://api.crossref.org/works/10.6028%2FNIST.AI.100-1",
+        "status": 200,
+        "ok": true,
+        "bytes": 3621,
+        "sha256": "daacb73bd5355158df518b8e7fb30bf0ef372a902951538b403336d51a2bb8b4",
+        "metadata": {
+          "title": [
+            "Artificial Intelligence Risk Management Framework (AI RMF 1.0)"
+          ],
+          "subtitle": [],
+          "author": [
+            {
+              "family": "Tabassi",
+              "given": "Elham"
+            }
+          ],
+          "published": {
+            "date-parts": [
+              [
+                2023,
+                1,
+                26
+              ]
+            ]
+          },
+          "publisher": "National Institute of Standards and Technology (U.S.)",
+          "container": []
+        }
+      },
+      "checkedAt": "2026-10-23T20:32:53.178Z"
+    },
+    {
+      "id": "nist2024genai",
+      "link": {
+        "requestedUrl": "https://doi.org/10.6028/NIST.AI.600-1",
+        "finalUrl": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf",
+        "status": 200,
+        "ok": true,
+        "bytes": 1174643,
+        "sha256": "6e73620ab6b64e90ef2c04bf0e0d6246185a2f4b1b13cab0df494496cff89b6a",
+        "metadata": null
+      },
+      "doi": {
+        "requestedUrl": "https://api.crossref.org/works/10.6028%2FNIST.AI.600-1",
+        "finalUrl": "https://api.crossref.org/works/10.6028%2FNIST.AI.600-1",
+        "status": 200,
+        "ok": true,
+        "bytes": 3353,
+        "sha256": "3fe0d6436a469bcaba351deb77607366036c78fcdfbff3a9e0f8ab7b9eb9f080",
+        "metadata": {
+          "title": [
+            "Artificial intelligence risk management framework :"
+          ],
+          "subtitle": [
+            "generative artificial intelligence profile"
+          ],
+          "author": [
+            {
+              "name": "National Institute of Standards and Technology (US)"
+            }
+          ],
+          "published": {
+            "date-parts": [
+              [
+                2024,
+                7,
+                26
+              ]
+            ]
+          },
+          "publisher": "National Institute of Standards and Technology (U.S.)",
+          "container": []
+        }
+      },
+      "checkedAt": "2026-10-23T20:32:53.178Z"
+    },
+    {
+      "id": "opensearch32Alias",
+      "link": {
+        "requestedUrl": "https://docs.opensearch.org/3.2/api-reference/index-apis/alias/",
+        "finalUrl": "https://docs.opensearch.org/3.2/api-reference/index-apis/alias/",
+        "status": 200,
+        "ok": true,
+        "bytes": 363260,
+        "sha256": "e022e04dcd96c0678f24da5c549bb85b31fbce08622df65ca45a1b522bfe968f",
+        "metadata": null
+      },
+      "doi": null,
+      "checkedAt": "2026-10-23T20:32:53.178Z"
+    },
+    {
+      "id": "orr2021featurestores",
+      "link": {
+        "requestedUrl": "https://arxiv.org/abs/2108.05053v1",
+        "finalUrl": "https://arxiv.org/abs/2108.05053v1",
+        "status": 200,
+        "ok": true,
+        "bytes": 42815,
+        "sha256": "dc5601186412cc31a70e05ffe7f8d4ed52934eccd0aa11bb0ca0b170987b98a0",
+        "metadata": null
+      },
+      "doi": {
+        "requestedUrl": "https://api.datacite.org/dois/10.48550%2FarXiv.2108.05053",
+        "finalUrl": "https://api.datacite.org/dois/10.48550%2FarXiv.2108.05053",
+        "status": 200,
+        "ok": true,
+        "bytes": 8579,
+        "sha256": "a05dd1db2f4e81371c314f2361d2836d0356cf0dc890af20a0a0701176cefd90",
+        "metadata": {
+          "title": [
+            {
+              "title": "Managing ML Pipelines: Feature Stores and the Coming Wave of Embedding Ecosystems"
+            }
+          ],
+          "creators": [
+            {
+              "name": "Orr, Laurel",
+              "nameType": "Personal",
+              "givenName": "Laurel",
+              "familyName": "Orr",
+              "affiliation": [],
+              "nameIdentifiers": []
+            },
+            {
+              "name": "Sanyal, Atindriyo",
+              "nameType": "Personal",
+              "givenName": "Atindriyo",
+              "familyName": "Sanyal",
+              "affiliation": [],
+              "nameIdentifiers": []
+            },
+            {
+              "name": "Ling, Xiao",
+              "nameType": "Personal",
+              "givenName": "Xiao",
+              "familyName": "Ling",
+              "affiliation": [],
+              "nameIdentifiers": []
+            },
+            {
+              "name": "Goel, Karan",
+              "nameType": "Personal",
+              "givenName": "Karan",
+              "familyName": "Goel",
+              "affiliation": [],
+              "nameIdentifiers": []
+            },
+            {
+              "name": "Leszczynski, Megan",
+              "nameType": "Personal",
+              "givenName": "Megan",
+              "familyName": "Leszczynski",
+              "affiliation": [],
+              "nameIdentifiers": []
+            }
+          ],
+          "publicationYear": 2021,
+          "publisher": "arXiv"
+        }
+      },
+      "checkedAt": "2026-10-23T20:32:53.178Z"
+    },
+    {
+      "id": "pavlo2017selfdriving",
+      "link": {
+        "requestedUrl": "https://www.cidrdb.org/cidr2017/papers/p42-pavlo-cidr17.pdf",
+        "finalUrl": "https://www.cidrdb.org/cidr2017/papers/p42-pavlo-cidr17.pdf",
+        "status": 200,
+        "ok": true,
+        "bytes": 697170,
+        "sha256": "a96b28763e73a7d1b0633a2195d16fc25fd8c67f9b9d5a96fc6b56642c90ee1f",
+        "metadata": null
+      },
+      "doi": null,
+      "checkedAt": "2026-10-23T20:32:53.178Z"
+    },
+    {
+      "id": "peffers2007dsrm",
+      "link": {
+        "requestedUrl": "https://doi.org/10.2753/MIS0742-1222240302",
+        "finalUrl": "https://www.tandfonline.com/doi/full/10.2753/MIS0742-1222240302",
+        "status": 403,
+        "ok": false,
+        "bytes": 5738,
+        "sha256": "a2ae02bddeffcc8c25bd3619dd9b34fb6c20971788d1ba86be480c964cd4b344",
+        "metadata": null
+      },
+      "doi": {
+        "requestedUrl": "https://api.crossref.org/works/10.2753%2FMIS0742-1222240302",
+        "finalUrl": "https://api.crossref.org/works/10.2753%2FMIS0742-1222240302",
+        "status": 200,
+        "ok": true,
+        "bytes": 2852,
+        "sha256": "e00ccabc5b5ba2565fb8a6637c2fa65e2679ff1599465ba9021f54bd7a5cc20d",
+        "metadata": {
+          "title": [
+            "A Design Science Research Methodology for Information Systems Research"
+          ],
+          "subtitle": [],
+          "author": [
+            {
+              "family": "Peffers",
+              "given": "Ken"
+            },
+            {
+              "family": "Tuunanen",
+              "given": "Tuure"
+            },
+            {
+              "family": "Rothenberger",
+              "given": "Marcus A."
+            },
+            {
+              "family": "Chatterjee",
+              "given": "Samir"
+            }
+          ],
+          "published": {
+            "date-parts": [
+              [
+                2007,
+                12
+              ]
+            ]
+          },
+          "volume": "24",
+          "issue": "3",
+          "page": "45-77",
+          "publisher": "Informa UK Limited",
+          "container": [
+            "Journal of Management Information Systems"
+          ]
+        }
+      },
+      "checkedAt": "2026-10-23T20:32:53.178Z"
+    },
+    {
+      "id": "rico2016multitarget",
+      "link": {
+        "requestedUrl": "https://doi.org/10.1080/17517575.2014.947636",
+        "finalUrl": "https://www.tandfonline.com/doi/full/10.1080/17517575.2014.947636",
+        "status": 403,
+        "ok": false,
+        "bytes": 5723,
+        "sha256": "f1aebbdc9139449b51fe46d5861671d4f9f9042ad0e0661a5297d48c7451e379",
+        "metadata": null
+      },
+      "doi": {
+        "requestedUrl": "https://api.crossref.org/works/10.1080%2F17517575.2014.947636",
+        "finalUrl": "https://api.crossref.org/works/10.1080%2F17517575.2014.947636",
+        "status": 200,
+        "ok": true,
+        "bytes": 8635,
+        "sha256": "7e2e5c0584df22b7cf1ec05ea3761295a3afa5cc5e9fd2b323a7a26e8899f6e0",
+        "metadata": {
+          "title": [
+            "Extending multi-tenant architectures: a database model for a multi-target support in SaaS applications"
+          ],
+          "subtitle": [],
+          "author": [
+            {
+              "family": "Rico",
+              "given": "Antonio"
+            },
+            {
+              "family": "Noguera",
+              "given": "Manuel"
+            },
+            {
+              "family": "Garrido",
+              "given": "José Luis"
+            },
+            {
+              "family": "Benghazi",
+              "given": "Kawtar"
+            },
+            {
+              "family": "Barjis",
+              "given": "Joseph"
+            }
+          ],
+          "published": {
+            "date-parts": [
+              [
+                2014,
+                9,
+                15
+              ]
+            ]
+          },
+          "volume": "10",
+          "issue": "4",
+          "page": "400-421",
+          "publisher": "Informa UK Limited",
+          "container": [
+            "Enterprise Information Systems"
+          ]
+        }
+      },
+      "checkedAt": "2026-10-23T20:32:53.178Z"
+    },
+    {
+      "id": "roa2015iso25000",
+      "link": {
+        "requestedUrl": "https://revistas.udistrital.edu.co/index.php/tia/article/view/8373",
+        "finalUrl": "https://revistas.udistrital.edu.co/index.php/tia/article/view/8373",
+        "status": 200,
+        "ok": true,
+        "bytes": 62114,
+        "sha256": "d32700fb0046a40bfb963f68ed7f9eab912625e877439665255239e5d7705ed5",
+        "metadata": null
+      },
+      "doi": null,
+      "checkedAt": "2026-10-23T20:32:53.178Z"
+    },
+    {
+      "id": "sadalage2012nosql",
+      "link": {
+        "requestedUrl": "https://www.informit.com/store/nosql-distilled-a-brief-guide-to-the-emerging-world-9780321826626",
+        "finalUrl": "https://www.informit.com/store/nosql-distilled-a-brief-guide-to-the-emerging-world-9780321826626",
+        "status": 200,
+        "ok": true,
+        "bytes": 126206,
+        "sha256": "fe84024a5b59f435a9bece598d90cd5ec9cd6072c2e2b13aedfe9feaf540cf4c",
+        "metadata": null
+      },
+      "doi": null,
+      "checkedAt": "2026-10-23T20:32:53.178Z"
+    },
+    {
+      "id": "scherzinger2013schema",
+      "link": {
+        "requestedUrl": "https://arxiv.org/abs/1308.0514v1",
+        "finalUrl": "https://arxiv.org/abs/1308.0514v1",
+        "status": 200,
+        "ok": true,
+        "bytes": 41990,
+        "sha256": "15cf44ca0146186f38a0baa3c95ef4a5166eb7e5a764947ae366394e4e23eee0",
+        "metadata": null
+      },
+      "doi": {
+        "requestedUrl": "https://api.datacite.org/dois/10.48550%2FarXiv.1308.0514",
+        "finalUrl": "https://api.datacite.org/dois/10.48550%2FarXiv.1308.0514",
+        "status": 200,
+        "ok": true,
+        "bytes": 8625,
+        "sha256": "e758024ffc88229e63e75304f0dbf0a836c8b1222c9c8c75b9769d6eb93a4585",
+        "metadata": {
+          "title": [
+            {
+              "title": "Managing Schema Evolution in NoSQL Data Stores"
+            }
+          ],
+          "creators": [
+            {
+              "name": "Scherzinger, Stefanie",
+              "nameType": "Personal",
+              "givenName": "Stefanie",
+              "familyName": "Scherzinger",
+              "affiliation": [],
+              "nameIdentifiers": []
+            },
+            {
+              "name": "Klettke, Meike",
+              "nameType": "Personal",
+              "givenName": "Meike",
+              "familyName": "Klettke",
+              "affiliation": [],
+              "nameIdentifiers": []
+            },
+            {
+              "name": "Störl, Uta",
+              "nameType": "Personal",
+              "givenName": "Uta",
+              "familyName": "Störl",
+              "affiliation": [],
+              "nameIdentifiers": []
+            }
+          ],
+          "publicationYear": 2013,
+          "publisher": "arXiv"
+        }
+      },
+      "checkedAt": "2026-10-23T20:32:53.178Z"
+    },
+    {
+      "id": "sculley2015debt",
+      "link": {
+        "requestedUrl": "https://papers.nips.cc/paper/5656-hidden-technical-debt-in-machine-learning-systems",
+        "finalUrl": "https://papers.nips.cc/paper_files/paper/2015/hash/86df7dcfd896fcaf2674f757a2463eba-Abstract.html",
+        "status": 200,
+        "ok": true,
+        "bytes": 9454,
+        "sha256": "a700f7e5413247f65b749306bcff9c10fcb71c4888d302030f48e345fce5cc9e",
+        "metadata": null
+      },
+      "doi": null,
+      "checkedAt": "2026-10-23T20:32:53.178Z"
+    },
+    {
+      "id": "vaswani2017attention",
+      "link": {
+        "requestedUrl": "https://papers.nips.cc/paper/7181-attention-is-all-you-need",
+        "finalUrl": "https://papers.nips.cc/paper_files/paper/2017/hash/3f5ee243547dee91fbd053c1c4a845aa-Abstract.html",
+        "status": 200,
+        "ok": true,
+        "bytes": 9309,
+        "sha256": "dc95eb2d83d2019425a4f4886eb47f467eb56fe1facc65d14cf6b7e3f7065312",
+        "metadata": null
+      },
+      "doi": null,
+      "checkedAt": "2026-10-23T20:32:53.178Z"
+    },
+    {
+      "id": "w3c2013prov",
+      "link": {
+        "requestedUrl": "https://www.w3.org/TR/2013/REC-prov-dm-20130430/",
+        "finalUrl": "https://www.w3.org/TR/2013/REC-prov-dm-20130430/",
+        "status": 200,
+        "ok": true,
+        "bytes": 271572,
+        "sha256": "5c925c21bc96c285b25017c3b90d82cf74251d07713b71fcb81ca60f873c9e88",
+        "metadata": null
+      },
+      "doi": null,
+      "checkedAt": "2026-10-23T20:32:53.178Z"
+    }
+  ]
+}

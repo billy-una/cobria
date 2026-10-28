@@ -21,7 +21,8 @@ def require(path, tokens):
 
 require(ROOT / "manuales/21-toolkit.md", ("publicar --simular", "mutations: 0", "HTML", "JSON", "sobrescribir"))
 require(ROOT / "manuales/22-evidence-transfer.md", ("630", "cero réplicas externas", "doble cribado", "Afirmación defendible"))
-require(ROOT / "sitio/app/manual.tsx", ("Herramientas para personas e IA", "Publicación solo simulada", "mutaciones"))
+from pedagogy_checks import require_modules
+require_modules(ROOT, {"toolkit": "/herramientas", "evidencia": "/evidencia"}, errors)
 
 inventory_path = ROOT / "replication/results/scientific-inventory/current.json"
 inventory = json.loads(inventory_path.read_text(encoding="utf-8"))

@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.0.0",
+  "kind": "automatic-local-verification-not-independent-review",
+  "verifiedOn": "2026-10-17",
+  "release": "ecosistema-1.0.0-rc2",
+  "candidateCommit": "cf59f07e40e75a22db409c499a7970a54f19ef20",
+  "archive": {
+    "path": "output/release/ecosistema-1.0.0-rc2-20261017-intento03/COBRIA-Ecosistema-1.0.0-rc2.zip",
+    "bytes": 258492983,
+    "sha256": "be7c9fa805710db222780358917d2322d5d67f8a39d826dee45328f2d3a655e7"
+  },
+  "manifestSha256": "389850a6270d7a4ee624ef2cce66d0c48c468784019acde7f97b7cd77c218194",
+  "comparisonSha256": "8deeddedfe6a68329d182969af18d968ac2d64d3752384cafd645b90540e7b66",
+  "builds": 2,
+  "decision": "pass",
+  "referenceInputs": {
+    "mode": "explicit-local-repositories",
+    "repositories": [
+      "POSGUAPILES-1",
+      "CRMHOTEL_NUEVO",
+      "BSHandball"
+    ],
+    "includedInArchive": false,
+    "publicStandaloneReproduction": false,
+    "note": "Las fases 21–25 requieren acceso a los repositorios y commits congelados en specification; no se omiten estas pruebas."
+  },
+  "published": false,
+  "remoteCiVerified": false,
+  "externalReplicationVerified": false,
+  "humanReviewVerifiedByThisReceipt": false,
+  "scope": "Atestación local; el ZIP no contiene modificaciones posteriores a candidateCommit."
+}

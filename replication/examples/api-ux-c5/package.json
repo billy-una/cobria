@@ -1,0 +1,8 @@
+{
+  "name": "cobria-taller-api-ux-c5",
+  "private": true,
+  "type": "module",
+  "license": "Apache-2.0",
+  "scripts": {"start": "node demo.mjs", "test": "node --test test/*.test.mjs"},
+  "engines": {"node": ">=22.13.0"}
+}

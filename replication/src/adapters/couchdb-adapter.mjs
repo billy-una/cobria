@@ -61,6 +61,8 @@ export class CouchDbAdapter {
     if (!data.rows.length) return;
     await this.request("/_bulk_docs", {method:"POST", body:JSON.stringify({docs:data.rows.map(row => ({_id:row.id,_rev:row.doc._rev,_deleted:true}))})});
   }
+  async storage() { const response=await this.request();const info=await response.json();return {storageBytes:info.disk_size??info.sizes?.file??0,logicalBytes:info.data_size??info.sizes?.active??0,documentCount:info.doc_count??0}; }
+  async destroy() { await this.fetch(this.base,{method:"DELETE",headers:this.headers()}); }
   snapshot() { return {...this.metrics}; }
   async close() {}
 }

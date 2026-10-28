@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "scope": "Navegación local de la candidata educativa, no Core Web Vitals en producción",
+  "routes": ["/", "/comenzar", "/explorar", "/mapa", "/aprender/inicio/1", "/comenzar/proyecto-integral"],
+  "htmlDecodedBytes": 1572864,
+  "htmlGzipBytes": 196608,
+  "loadedScriptDecodedBytes": 4194304,
+  "loadedScriptGzipBytes": 1048576,
+  "horizontalOverflowPixels": 0,
+  "externalRequestsAllowed": 0,
+  "limits": "Tamaños locales gzip calculados para comparar; no implican compresión real del alojamiento ni tiempos de red garantizados."
+}

@@ -1,0 +1,114 @@
+{
+  "phase": "EP9",
+  "date": "2026-10-25",
+  "status": "implementada-y-verificada-localmente-cierre-integral-pendiente",
+  "deliveryTarget": "candidata-educativa-y-preprint",
+  "published": false,
+  "coreChanged": false,
+  "stableRelease": false,
+  "pdfUaCertified": false,
+  "screenReaderTested": false,
+  "humanWordByWordProofread": false,
+  "pagesRendered": 782,
+  "pdfs": [
+    {
+      "id": "articulo",
+      "pdf": "output/pdf/COBRIA-articulo-cientifico-actualizado.pdf",
+      "sha256": "f76fda49f3c2a5ad3001456ebca8e0bd47071a749a7433c356196b73c041fa02",
+      "pageCount": 17,
+      "language": "es",
+      "tagged": false,
+      "emptyPages": [],
+      "outsidePaperPages": [],
+      "figuresWithoutAlt": 0
+    },
+    {
+      "id": "maestro",
+      "pdf": "output/pdf/COBRIA-documento-maestro-ecosistema.pdf",
+      "sha256": "04ccf8209d7d4a83f304ca9dda0c07def2f661a848f5552184a5b99f778d8e1b",
+      "pageCount": 205,
+      "language": "es",
+      "tagged": false,
+      "emptyPages": [],
+      "outsidePaperPages": [],
+      "figuresWithoutAlt": 0
+    },
+    {
+      "id": "ciega",
+      "pdf": "output/pdf/COBRIA-articulo-revision-ciega.pdf",
+      "sha256": "13eec85b7a273c6dce5a0b33fcc6875b71da45880c50616ea0bb7638ad9d068d",
+      "pageCount": 17,
+      "language": "",
+      "tagged": false,
+      "emptyPages": [],
+      "outsidePaperPages": [],
+      "figuresWithoutAlt": 0
+    },
+    {
+      "id": "especificacion",
+      "pdf": "output/pdf/COBRIA-especificacion-ecosistema-1.0.pdf",
+      "sha256": "2b7c8fe1971b9cf5be7f421a87bf1e59eb7baa173ca12e400945a51233afce7a",
+      "pageCount": 23,
+      "language": "es",
+      "tagged": false,
+      "emptyPages": [],
+      "outsidePaperPages": [],
+      "figuresWithoutAlt": 0
+    },
+    {
+      "id": "libro",
+      "pdf": "output/pdf/COBRIA-ecosistema-manual-completo.pdf",
+      "sha256": "e043f404441f4c13a5b83bc4e9b93ddff7c0718587bf7e04cc75bb9aedfcf0d0",
+      "pageCount": 469,
+      "language": "es",
+      "tagged": true,
+      "emptyPages": [],
+      "outsidePaperPages": [],
+      "figuresWithoutAlt": 0
+    },
+    {
+      "id": "cuaderno",
+      "pdf": "output/pdf/COBRIA-cuaderno-de-trabajo.pdf",
+      "sha256": "04b1ef8cae6bab809fd68205bcf43f80c6785ad3d018d3fe299b501d77808468",
+      "pageCount": 35,
+      "language": "es",
+      "tagged": true,
+      "emptyPages": [],
+      "outsidePaperPages": [],
+      "figuresWithoutAlt": 0
+    },
+    {
+      "id": "anexo",
+      "pdf": "output/pdf/COBRIA-anexo-tecnico.pdf",
+      "sha256": "76bce23a1b5b69d7d26a4694dfe9f0b9a3b42e9ce43097304e91b591e3db479d",
+      "pageCount": 16,
+      "language": "es",
+      "tagged": true,
+      "emptyPages": [],
+      "outsidePaperPages": [],
+      "figuresWithoutAlt": 0
+    }
+  ],
+  "htmlReaders": 6,
+  "browserFailures": 0,
+  "checks": {
+    "ep9UnitTests": 5,
+    "lessonParity": 85,
+    "pedagogicalOverflow": 0,
+    "fullVerification": "aprobada-local-make-verificar-COBRIA_SITE_ISOLATED=1",
+    "renderedSiteTests": 34
+  },
+  "pending": [
+    "Prueba con lector de pantalla y orden efectivo de lectura PDF.",
+    "Lectura humana minuciosa y comprensión; pronunciación de MathML.",
+    "Identificación por SHA, clones limpios y CI de EP10."
+  ],
+  "evidence": [
+    "editorial/ep9/inspeccion.json",
+    "output/review/ep9/final/PDF.json",
+    "output/review/ep9/browser/RESULTADO.json",
+    "output/review/ep9/book-geometry.log",
+    "output/review/ep9/paridad-cientifica.log",
+    "output/review/ep9/verificacion-final.log"
+  ]
+}

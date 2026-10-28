@@ -14,6 +14,10 @@ versión estable. Esta distinción aplica la regla de COBRIA que separa **prepar
 
 ## Verificación
 
+Para la candidata interna nueva use el [procedimiento de fases 17 y 18](editorial/ecosistema-17-18/ENTREGA.md),
+que liga revisión y decisión a huellas concretas. El validador histórico siguiente no
+acredita por sí solo el ZIP de fase 16 ni debe interpretarse como publicación observada.
+
 ```bash
 make verificar-cierre-18
 make verificar

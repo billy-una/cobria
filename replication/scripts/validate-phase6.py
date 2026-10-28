@@ -41,7 +41,7 @@ for item in catalog.get("errors", []):
         errors.append(f"estado de protocolo inválido: {item.get('code')}")
 
 source_text = "\n".join(path.read_text(encoding="utf-8") for path in APP.rglob("*.mjs"))
-used_codes = set(re.findall(r"new ErrorCobria\(['\"]([A-Z0-9_]+)['\"]", source_text))
+used_codes = set(re.findall(r"(?:new ErrorCobria|fallar)\(['\"]([A-Z0-9_]+)['\"]", source_text))
 unknown = used_codes - set(catalog_codes)
 if unknown:
     errors.append(f"códigos usados no catalogados: {sorted(unknown)}")
@@ -66,8 +66,8 @@ for source in APP.rglob("*.mjs"):
 
 if len(manifest.get("documentTypes", [])) != 5:
     errors.append("se esperaban cinco tipos documentales")
-if len(catalog_codes) != 21:
-    errors.append(f"se esperaban 21 códigos y se encontraron {len(catalog_codes)}")
+if catalog.get("version") != "1.1.0" or len(catalog_codes) != 29:
+    errors.append(f"el catálogo C2 1.1.0 requiere 29 códigos; se encontraron {len(catalog_codes)}")
 
 if errors:
     print("Fase 6 inválida:")

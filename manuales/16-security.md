@@ -1,5 +1,13 @@
 # COBRIA Security
 
+La [guía de normas por área](25-normas-y-evaluacion-de-calidad.md) relaciona este
+manual con ISO/IEC 27001:2022, 27701:2025 y NIST SSDF 1.1. Es orientación temática:
+no acredita sistemas de gestión, cumplimiento legal ni certificación del código.
+
+La [metodología de corrección verificable](23-metodologia-de-correccion-verificable.md)
+aplica estos controles al diagnóstico: matriz multirrol, pruebas negativas y concordancia
+entre interfaz, autorización de servidor, Rules y ámbito de los datos.
+
 **Versión:** 1.0  
 **Estado:** estable como guía; no constituye certificación ni asesoría jurídica  
 **Fuente verificable:** `specification/phase-7/`

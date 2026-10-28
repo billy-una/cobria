@@ -2,7 +2,8 @@
   "schemaVersion": "1.0.0",
   "proposalIndependent": true,
   "officialCertification": false,
-  "generatedAt": "2026-09-21T08:35:35.406Z",
+  "generatedAt": null,
+  "generation": "deterministic-from-declared-sources",
   "internalEvidence": [
     {
       "id": "E-CONFORMANCE",

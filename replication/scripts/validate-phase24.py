@@ -33,7 +33,7 @@ with tempfile.TemporaryDirectory() as directory:
       if any(row.get('decision') is not None for row in packet.get('contracts',[])): errors.append('el paquete simula decisiones humanas')
 tests=subprocess.run(['node','--test','tests/phase24-semantic-review.test.mjs'],cwd=ROOT/'replication',capture_output=True,text=True)
 if tests.returncode: errors.append(tests.stdout+tests.stderr)
-roadmap=(ROOT/'manuales/11-estado-y-roadmap-integral.md').read_text(); site=(ROOT/'sitio/app/manual.tsx').read_text(); book=(ROOT/'libro-cobria/build-book.mjs').read_text()
+roadmap=(ROOT/'manuales/11-estado-y-roadmap-integral.md').read_text(); site=(ROOT/'editorial/pedagogy.json').read_text(); book=(ROOT/'libro-cobria/build-book.mjs').read_text()
 if 'Fase 24 — Revisión semántica independiente' not in roadmap: errors.append('roadmap sin fase 24')
 if 'Revisión semántica preparada' not in site: errors.append('sitio sin fase 24')
 if 'La independencia no se simula' not in book: errors.append('libro sin fase 24')

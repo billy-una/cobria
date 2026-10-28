@@ -33,6 +33,10 @@
 \usepackage[backend=biber,style=apa,sorting=nyt,maxcitenames=2]{biblatex}
 \addbibresource{referencias.bib}
 \input{editorial/generated/identity.tex}
+\input{editorial/generated/evidence-r7.tex}
+\input{editorial/ep6/synthesis.tex}
+\input{editorial/ep7/method.tex}
+\input{editorial/ep8/scope.tex}
 
 \definecolor{cobriaBlue}{gray}{0}
 \definecolor{cobriaGreen}{gray}{0}
@@ -80,43 +84,28 @@ materializadas, separación de modelos de lectura y escritura o generación diri
 metadatos. La contribución buscada reside en su articulación explícita alrededor de
 entidades canónicas, proyecciones reconstruibles, aislamiento multiinquilino y preparación
 trazable para minería de datos e inteligencia artificial, así como en su evaluación
-mediante una implementación neutral y dos perfiles de caso anonimizados.
+mediante una implementación neutral y perfiles anonimizados con profundidad de
+observación declarada. \COBRIAPerfilesCientificos
 
-Los casos se describen de forma neutral como \emph{Sistema A} y \emph{Sistema B}. Los
+Los inventarios originales se describen como \emph{Sistema A} y \emph{Sistema B};
+el tercer perfil es una observación complementaria de alcance distinto. Los
 experimentos emplearon datos sintéticos o semirrealistas y configuraciones reproducibles.
 No se publicarán nombres comerciales, credenciales, datos personales ni detalles que
 permitan identificar organizaciones o personas.
 
 \chapter*{Resumen}
 \addcontentsline{toc}{chapter}{Resumen}
-Los sistemas NoSQL permiten construir aplicaciones flexibles y distribuidas, pero
-trasladan al diseño de la aplicación decisiones complejas sobre desnormalización,
-índices, consistencia, aislamiento entre organizaciones y evolución del esquema. Estas
-dificultades aumentan cuando los mismos datos deben alimentar consultas operacionales,
-procesamiento de eventos, minería de datos e inteligencia artificial. Este trabajo
-presenta \COBRIA{} (\emph{Capa Orientada a Bases Reconstruibles para Inteligencia
-Analítica}), una arquitectura dirigida por metadatos que distingue entidades
-canónicas de representaciones físicas y proyecciones derivadas. La propuesta organiza
-el acceso mediante repositorios, servicios y casos de uso; clasifica las proyecciones
-según sus requisitos de consistencia; y exige que todo dato derivado declare su origen,
-versión y mecanismo de reconstrucción. La investigación siguió ciencia del diseño y
-examinó la propuesta en tres aplicaciones documentales anonimizadas. La evaluación
-comprende inspección de contratos, pruebas NoSQL, reconstrucción de proyecciones,
-aislamiento por ámbito, evolución de esquemas y recuperación autorizada para analítica e
-inteligencia artificial. El repositorio conserva 270 corridas históricas distribuidas
-sobre MongoDB, CouchDB y OpenSearch, además de una repetición preliminar del arnés
-corregido en MongoDB y CouchDB. Las corridas históricas no se presentan como
-certificación vigente porque una auditoría posterior fortaleció el oráculo. Las
-mediciones SQL permanecen segregadas y no sostienen afirmaciones de rendimiento NoSQL.
-Permanecen pendientes la repetición distribuida confirmatoria, la evaluación humana de
-transferencia y la revisión independiente.
+\COBRIAResumenCientifico
 
 \noindent\textbf{Palabras clave:} NoSQL; datos canónicos; proyecciones reconstruibles;
 multiinquilinato; vistas materializadas; minería de datos; inteligencia artificial;
 arquitectura dirigida por metadatos.
 
+\clearpage
 \tableofcontents
+\clearpage
 \listoffigures
+\clearpage
 \listoftables
 
 \mainmatter
@@ -137,6 +126,7 @@ arquitectura dirigida por metadatos.
 
 \part{Evaluación experimental, análisis y validez}
 \input{partes/parte-vi-evaluacion-nosql}
+\input{partes/parte-r8-evidencia-confirmatoria}
 
 \part{Síntesis, adopción y conclusiones}
 \input{partes/parte-vii-sintesis-nosql}
@@ -144,8 +134,11 @@ arquitectura dirigida por metadatos.
 \part{Manual de réplica y operación NoSQL}
 \input{partes/parte-viii-manual-replica-nosql}
 
+\part{Antecedentes experimentales segregados}
+\input{partes/antecedente-evaluacion-embebida}
+
 \IfFileExists{partes/parte-viii-anexos-reproducibilidad.tex}{%
-  \part{Anexos técnicos y reproducibilidad}
+  \part{Archivo metodológico inicial}
   \input{partes/parte-viii-anexos-reproducibilidad}%
 }{%
   \part{Nota sobre anexos históricos}

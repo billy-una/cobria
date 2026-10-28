@@ -3,7 +3,7 @@ import path from "node:path";
 import os from "node:os";
 import { fileURLToPath } from "node:url";
 import { performance } from "node:perf_hooks";
-import { Metrics, MemoryConnector, EntityRepository, ProjectionStore, ProjectionManager, ScopedCache, timed, sha256 } from "../src/cobria.mjs";
+import { Metrics, MemoryConnector, EntityRepository, ProjectionStore, ProjectionManager, ScopedCache, timed, sha256 } from "../historical/memory-model/cobria.mjs";
 import { generate, rng } from "../src/generator.mjs";
 
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),"..");

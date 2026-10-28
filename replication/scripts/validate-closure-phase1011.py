@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Valida Analytics/AI y la aplicación guiada COBRIA Build."""
 import json
+import re
 from pathlib import Path
 import subprocess
 import sys
@@ -19,7 +20,8 @@ def require(path, tokens):
 require(ROOT / "manuales/19-analytics-ai.md", ("tiempo válido", "tiempo conocido", "RAG limitado", "abstención", "autoridad de escritura"))
 require(ROOT / "manuales/20-build-reference.md", ("Recorrido completo", "catorce", "HITOS.json", "proyectos originales"))
 require(APP / "GUIA-PASO-A-PASO.md", ("B01–B04", "B05–B09", "B10–B11", "B12–B14"))
-require(ROOT / "sitio/app/manual.tsx", ("Analítica e inteligencia artificial", "RAG autorizado", "Completar catorce hitos", "23 pruebas esperadas"))
+from pedagogy_checks import require_modules
+require_modules(ROOT, {"ia": "/ia", "construir": "/construir"}, errors)
 
 policy = json.loads((ROOT / "specification/analytics-ai/policy.json").read_text(encoding="utf-8"))
 if policy.get("authority") != "read-only-consumer" or "write-canonical" not in policy.get("forbidden", []):
@@ -47,9 +49,12 @@ for file, tokens in {
 }.items(): require(APP / file, tokens)
 
 tests = subprocess.run(["npm", "test"], cwd=APP, text=True, capture_output=True)
+declared_tests = sum(len(re.findall(r"^test\(", file.read_text(encoding="utf-8"), re.MULTILINE)) for file in (APP / "test").glob("*.test.mjs"))
+observed = re.search(r"(?:#|ℹ)\s*pass\s+(\d+)", tests.stdout)
 if tests.returncode: errors.append("pruebas Build fallaron:\n" + tests.stdout + tests.stderr)
-elif "# pass 23" not in tests.stdout and "pass 23" not in tests.stdout: errors.append("no se observaron 23 pruebas Build")
+elif declared_tests < 23 or not observed or int(observed.group(1)) != declared_tests:
+    errors.append(f"pruebas Build incompletas: declaradas {declared_tests}; no se observaron todas aprobadas")
 
 if errors:
     print("Cierre de fases 10–11 inválido:\n" + "\n".join(f"- {error}" for error in errors)); sys.exit(1)
-print("Cierre de fases 10–11 válido: política analítica/IA, 30 repeticiones históricas, 14 hitos Build y 23 pruebas ejecutables.")
+print(f"Cierre de fases 10–11 válido: política analítica/IA, 30 repeticiones históricas, 14 hitos Build y {declared_tests} pruebas ejecutables.")

@@ -1,12 +1,36 @@
 {
-  "specification": "COBRIA Core 1.0",
+  "schemaVersion": "1.0.0",
+  "specification": "COBRIA Ecosistema 1.0",
+  "specificationRelease": "1.0.0-rc1",
+  "normativeCore": "COBRIA Core 1.0",
   "frozenAt": "2026-08-24T00:00:00-06:00",
-  "scope": "NoSQL documental",
-  "levels": {
-    "C1": ["authority", "scope", "stableIdentity", "monotonicRevision", "writeBoundary"],
-    "C2": ["C1", "versionedTransform", "idempotency", "equivalence", "fullRebuild", "safePublication"],
-    "C3": ["C2", "provenance", "freshnessBudget", "observability", "owner", "retirement"]
+  "scope": "NoSQL documental con autoridad canónica y representaciones derivadas",
+  "requirementsRegistry": "specification/requirements-1.0.json",
+  "profiles": {
+    "C1": {
+      "name": "Fundamental",
+      "inherits": [],
+      "requirements": ["AUT-001", "ID-001", "SCP-001", "REV-001", "WRT-001"]
+    },
+    "C2": {
+      "name": "Reconstruible",
+      "inherits": ["C1"],
+      "requirements": ["TRN-001", "IDM-001", "EQV-001", "REC-001", "PUB-001"]
+    },
+    "C3": {
+      "name": "Gobernado",
+      "inherits": ["C1", "C2"],
+      "requirements": ["PRV-001", "FRS-001", "OBS-001", "OWN-001", "RET-001", "ANA-001", "AI-001", "SEC-001"]
+    }
   },
   "requiredExperiments": ["P1", "P2", "R1", "S1", "A1"],
-  "excludedEngines": ["SQLite", "PostgreSQL"]
+  "allowedResults": ["conforme", "no-conforme", "no-evaluado"],
+  "rules": [
+    "Cada nivel hereda todas las obligaciones de sus perfiles anteriores.",
+    "No evaluado impide declarar conformidad.",
+    "Una prueba local no se presenta como validación distribuida o externa.",
+    "Una declaración identifica versión, commit, ambiente, configuración y evidencia.",
+    "Conformidad no significa certificación oficial."
+  ],
+  "excludedFromConfirmatoryNoSQLInference": ["SQLite", "PostgreSQL"]
 }

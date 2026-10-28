@@ -1,0 +1,11 @@
+{
+  "name": "cobria-patterns-r4",
+  "version": "1.0.0-rc2",
+  "private": true,
+  "license": "Apache-2.0",
+  "type": "module",
+  "scripts": {
+    "build": "../../node_modules/.bin/tsc -p tsconfig.json",
+    "test": "npm run build && node --test dist/test/*.test.js"
+  }
+}

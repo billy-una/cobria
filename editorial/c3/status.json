@@ -1,0 +1,40 @@
+{
+  "phase": "C3",
+  "date": "2026-10-17",
+  "status": "verificada_localmente_validacion_con_lectores_pendiente",
+  "guide": "manuales/28-arquitectura-y-capas-paso-a-paso.md",
+  "map": "replication/examples/ecosistema-app/data/arquitectura.json",
+  "lessonSource": "editorial/architecture-lessons.json",
+  "executionLessons": 10,
+  "applicationTestsAdded": 10,
+  "staticAndEditorialTests": 7,
+  "verification": "make verificar-c3",
+  "fullVerification": "make verificar-publicacion COBRIA_SITE_ISOLATED=1",
+  "fullVerificationExitCode": 0,
+  "freshCopyReport": "output/review/c3/cobria-c3-clean-KFj6GK.json",
+  "applicationTestsPassed": 44,
+  "sourceFilesMappedAndAudited": 27,
+  "renderedSiteTestsPassed": 14,
+  "bookPages": 277,
+  "workbookPages": 35,
+  "visualReview": {"bookPages": [33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54], "workbookPages": [7,8,9,10], "result": "sin cortes observados en las páginas modificadas; soluciones C3 visibles en la impresión y verificadas por extracción del PDF"},
+  "scope": [
+    "La composición acepta un repositorio explícito y conserva memoria como valor predeterminado.",
+    "Un segundo adaptador local traduce mediante Dater v1; no es otro motor NoSQL evaluado.",
+    "El mismo caso demuestra autorización antes del acceso, regla del hecho y rechazo sin escritura.",
+    "Mapa completo de responsabilidad, límite y prueba relacionada; no acredita por sí solo toda la semántica de cada archivo.",
+    "Análisis sintáctico de imports y ciclos bajo política existente de fase 5; fixtures virtuales no se ejecutan.",
+    "Libro y web local comparten diez contratos de ejecución y el mapa del mismo caso.",
+    "El exportador abre respuestas plegables solo para imprimir; se verifica que las cuatro soluciones C3 estén presentes en el PDF del cuaderno."
+  ],
+  "frozenCoreChanged": false,
+  "originalRc2ArchiveChanged": false,
+  "published": false,
+  "remoteEngineValidated": false,
+  "readerComprehensionValidated": false,
+  "remaining": [
+    "C5 y C8: interfaz, autenticación y API reales; el controlador local no abre HTTP ni autentica personas.",
+    "C6 y C8: persistencia, concurrencia y garantías atómicas reales; los efectos del registro siguen separados.",
+    "C13: tareas y comprensión de lectores reales, revisión semántica independiente y transferencia."
+  ]
+}

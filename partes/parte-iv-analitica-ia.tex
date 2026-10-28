@@ -1,5 +1,10 @@
 \chapter{Extensión analítica de COBRIA}
 
+Los contratos y flujos de este bloque son extensiones de diseño. La evidencia
+ejecutable disponible utiliza productos sintéticos y consumidores deterministas;
+no entrena ni evalúa aquí modelos generativos, predictivos o multimodales. Una
+especificación de esas capacidades no acredita su calidad o seguridad en producción.
+
 La analítica y la inteligencia artificial suelen incorporarse después de que un sistema
 operacional ha acumulado datos. En ese momento aparecen exportaciones manuales,
 significados incompatibles, atributos sin procedencia y modelos difíciles de reproducir.
@@ -59,8 +64,8 @@ Agentes & Herramientas tipadas & Capacidades mínimas, aprobación y auditoría.
 \section{Componentes de la extensión}
 
 La extensión de inteligencia se compone de un Constructor de conjuntos de datos, un Registro de características, un
-Almacén de artefactos, un Registro de modelos, un Pasarela de recuperación, un Motor de políticas y un Evidencia
-Registro. Estos componentes se apoyan en Núcleo, Metadatos, Proyecciones y Gobierno; no
+Almacén de artefactos, un Registro de modelos, una Pasarela de recuperación, un Motor de políticas y un Registro
+de evidencias. Estos componentes se apoyan en Núcleo, Metadatos, Proyecciones y Gobierno; no
 acceden a rutas físicas mediante convenciones privadas.
 
 \begin{figure}[H]
@@ -77,15 +82,15 @@ acceden a rutas físicas mediante convenciones privadas.
 \node[derived,below=of características] (models) {Registro de\\modelos};
 \node[derived,left=of models] (retrieval) {Pasarela de\\recuperación};
 \node[box,left=of retrieval] (usecase) {Caso de uso\\autorizado};
-\node[box,below=of datosNodo] (policy) {Motor de políticas y Registro de evidencias};
+\node[box,below=1.1cm of retrieval] (policy) {Motor de políticas y\\Registro de evidencias};
 \draw[line] (core) -- (datosNodo);
 \draw[line] (datosNodo) -- (características);
 \draw[line] (características) -- (models);
 \draw[line] (models) -- (retrieval);
 \draw[line] (retrieval) -- (usecase);
-\draw[line,dashed] (policy) -- (datosNodo);
-\draw[line,dashed] (policy) -- (models);
-\draw[line,dashed] (policy) -- (retrieval);
+\draw[line,dashed] (policy.west) -- ++(-4cm,0) |- ([yshift=.4cm]core.north) -| (datosNodo.north);
+\draw[line,dashed] (policy.east) -| (models.south);
+\draw[line,dashed] (policy.north) -- (retrieval.south);
 \end{tikzpicture}
 \caption{Componentes de la extensión analítica e inteligente de COBRIA.}
 \label{fig:extension-inteligencia}
@@ -163,8 +168,10 @@ sin referencia estable no constituye linaje suficiente.
 Para una predicción $y$, la consulta de procedencia debe poder recorrer:
 
 \begin{equation}
-y\rightarrow \text{modelo}\rightarrow \text{Conjunto de características}\rightarrow
-\text{conjunto de datos}\rightarrow \text{fuente canónica o evento}.
+\begin{aligned}
+y&\rightarrow \text{modelo}\rightarrow \text{conjunto de características}\\
+ &\rightarrow \text{conjunto de datos}\rightarrow \text{fuente canónica o evento}.
+\end{aligned}
 \end{equation}
 
 El grafo no almacena necesariamente los datos completos. Puede conservar resúmenes criptográficos,
@@ -264,7 +271,7 @@ no participan en la construcción de características del mismo corte.
 
 Los eventos se clasifican como a tiempo, tardíos pero aceptables, o fuera de la ventana
 de corrección. La política declara cuánto se espera, cuándo se recalcula una proyección
-y cuándo se publica una corrección. Un marca de corte no significa que nunca aparecerá otro
+y cuándo se publica una corrección. Una marca de corte no significa que nunca aparecerá otro
 evento; expresa una decisión operacional sobre completitud suficiente.
 
 \section{Minería descriptiva y descubrimiento}

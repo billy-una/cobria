@@ -27,16 +27,36 @@ atestaciones humanas permanecen fuera de su autoridad.
 
 ## Seguridad de generación
 
+Tutorial completo: [Documentación y herramientas prácticas](34-documentacion-y-herramientas-practicas.md).
+Responsable: Billy Jak Cordero Porras. Estado: referencia local; revisar al cambiar la CLI.
+La validación es estructural y parcial: comprueba la forma de las referencias, no su
+resolución completa ni el significado de los registros. Los descriptores generados
+no usan la misma envoltura que los manifiestos de proyecto/fase 11.
+
+`generar --simular` valida y calcula las cuatro rutas sin crear archivos ni directorios.
+Devuelve `status: simulated` y `mutations: 0`. Los conflictos siguen rechazándose sin
+escritura. En otros comandos, salvo `publicar`, `--simular` se rechaza en lugar de ignorarse.
+
 Antes de escribir se valida tipo, nombre y destino. La misma entrada produce los mismos
 bytes. Un archivo idéntico se conserva; uno divergente detiene toda la operación. Los
 nombres que escapan rutas o inyectan código se rechazan. Cada generación incluye caso
 negativo y cuatro artefactos relacionados.
+
+Los quince tipos generan un esqueleto genérico, no implementaciones completas de
+entidades, ADR o runbooks. La prueba mínima no acredita autorización ni dominio.
+El identificador generado debe empezar con una letra latina. Se rechazan enlaces en
+el destino y opciones duplicadas o sin valor. Las comprobaciones no aíslan el sistema
+de archivos frente a escritores concurrentes; trabaje en una carpeta propia.
 
 ## Informes duales
 
 La salida humana está en español y la salida JSON usa códigos estables. `informar` produce
 ambos archivos y declara que el análisis es local. Un hallazgo automático no se convierte
 en defecto confirmado, ranking o certificación.
+
+`informar` y `verificar` rechazan una salida que ya contiene sus informes. Elija una
+carpeta nueva. Una interrupción puede dejar artefactos parciales: no hay una transacción
+de varios archivos ni borrado automático de trabajo. Inspeccione antes de repetir.
 
 ## Modo de simulación
 

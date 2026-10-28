@@ -1,3 +1,42 @@
+@online{fowler2011cqrs,
+  author = {Fowler, Martin},
+  title = {CQRS},
+  date = {2011-07-14},
+  url = {https://martinfowler.com/bliki/CQRS.html},
+  urldate = {2026-10-19}
+}
+
+@online{apacheCouchDocumentApi,
+  author = {{Apache Software Foundation}},
+  title = {Apache CouchDB Document API},
+  url = {https://docs.couchdb.org/en/stable/api/document/common.html},
+  urldate = {2026-10-19},
+  note = {Documentación viva consultada para delimitación conceptual, no sustituto de la versión experimental fijada}
+}
+
+@article{roa2015iso25000,
+  author = {Roa Molina, Paola and Morales, Claribel and Gutiérrez, Patricia},
+  title = {Norma ISO/IEC 25000},
+  journaltitle = {Tecnología, Investigación y Academia},
+  volume = {3}, number = {2}, pages = {26--32}, year = {2015},
+  url = {https://revistas.udistrital.edu.co/index.php/tia/article/view/8373},
+  urldate = {2026-10-23},
+  note = {Artículo introductorio, no norma. Se conserva la autoría y paginación del PDF original; la ficha web difiere: Paola Andrea Roa, páginas 27--33}
+}
+
+@online{iso25010_2023,
+  author = {{ISO/IEC}}, year = {2023},
+  title = {ISO/IEC 25010:2023: modelo de calidad del producto},
+  url = {https://www.iso.org/standard/78176.html}, urldate = {2026-10-16},
+  note = {Ficha oficial consultada; título descriptivo en español}
+}
+@online{iso25040_2024,
+  author = {{ISO/IEC}}, year = {2024},
+  title = {ISO/IEC 25040:2024: marco de evaluación de calidad},
+  url = {https://www.iso.org/standard/83467.html}, urldate = {2026-10-16},
+  note = {Ficha oficial consultada; título descriptivo en español}
+}
+
 @inproceedings{chang2006bigtable,
   author    = {Chang, Fay and Dean, Jeffrey and Ghemawat, Sanjay and Hsieh, Wilson C. and Wallach, Deborah A. and Burrows, Mike and Chandra, Tushar and Fikes, Andrew and Gruber, Robert E.},
   title     = {Bigtable: A Distributed Storage System for Structured Data},
@@ -33,7 +72,9 @@
   year    = {1995},
   volume  = {18},
   number  = {2},
-  pages   = {3--18}
+  pages   = {3--18},
+  url     = {https://sigmod.org/publications/dblp/db/journals/debu/GuptaM95.html},
+  note    = {Identidad comprobada en ficha bibliográfica alojada por ACM SIGMOD; texto íntegro no recuperado en EP7}
 }
 
 @article{hevner2004designscience,
@@ -43,7 +84,7 @@
   year    = {2004},
   volume  = {28},
   number  = {1},
-  pages   = {75--105},
+  pages   = {75--106},
   doi     = {10.2307/25148625}
 }
 
@@ -59,28 +100,29 @@
 }
 
 @inproceedings{aulbach2009flexibleschemas,
-  author    = {Aulbach, Stefan and Grust, Torsten and Jacobs, Dean and Kemper, Alfons and Rittinger, Jan},
+  author    = {Aulbach, Stefan and Jacobs, Dean and Kemper, Alfons and Seibold, Michael},
   title     = {A Comparison of Flexible Schemas for Software as a Service},
   booktitle = {Proceedings of the 2009 ACM SIGMOD International Conference on Management of Data},
   year      = {2009},
   pages     = {881--888},
-  doi       = {10.1145/1559845.1559937}
+  doi       = {10.1145/1559845.1559941}
 }
 
-@article{yaish2014adaptiveschema,
-  author  = {Yaish, Hatem and Goyal, Manish and Feuerlicht, George},
+@article{ni2014adaptiveschema,
+  author  = {Ni, Jiacai and Li, Guoliang and Wang, Lijun and Feng, Jianhua and Zhang, Jun and Li, Lei},
   title   = {Adaptive Database Schema Design for Multi-Tenant Data Management},
   journal = {IEEE Transactions on Knowledge and Data Engineering},
   year    = {2014},
   volume  = {26},
   number  = {9},
   pages   = {2079--2093},
-  doi     = {10.1109/TKDE.2013.42}
+  doi     = {10.1109/TKDE.2013.94},
+  url     = {https://dbgroup.cs.tsinghua.edu.cn/ligl/papers/tkde14-multitenant.pdf}
 }
 
 @article{rico2016multitarget,
   author  = {Rico, Antonio and Noguera, Manuel and Garrido, Jos\'{e} Luis and Benghazi, Kawtar and Barjis, Joseph},
-  title   = {Extending Multi-Tenant Architectures: A Database Model for Multi-Target Support in SaaS Applications},
+  title   = {Extending Multi-Tenant Architectures: A Database Model for a Multi-Target Support in SaaS Applications},
   journal = {Enterprise Information Systems},
   year    = {2016},
   volume  = {10},
@@ -96,16 +138,20 @@
   eprint       = {2108.05053},
   archiveprefix= {arXiv},
   primaryclass = {cs.LG},
+  note         = {Versión arXiv consultada; no se infiere arbitraje de su alojamiento},
+  url          = {https://arxiv.org/abs/2108.05053v1},
   doi          = {10.48550/arXiv.2108.05053}
 }
 
 @misc{li2023featurestore,
-  author       = {Li, Ang and others},
+  author       = {Li, Anya and Ranganathan, Bhala and Pan, Feng and Zhang, Mickey and Xu, Qianjun and Li, Runhan and Raman, Sethu and Shah, Shail Paragbhai and Tang, Vivienne},
   title        = {Managed Geo-Distributed Feature Store: Architecture and System Design},
   year         = {2023},
   eprint       = {2305.20077},
   archiveprefix= {arXiv},
-  primaryclass = {cs.DC},
+  primaryclass = {cs.LG},
+  note         = {Prepublicación arXiv, versión 1},
+  url          = {https://arxiv.org/abs/2305.20077v1},
   doi          = {10.48550/arXiv.2305.20077}
 }
 
@@ -163,6 +209,7 @@
   publisher = {MIT Press},
   address   = {Cambridge, MA},
   isbn      = {9780262046305}
+  ,url      = {https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/}
 }
 
 @inproceedings{cooper2010ycsb,
@@ -181,6 +228,7 @@
   publisher = {Wiley},
   address   = {New York},
   isbn      = {9780471503361}
+  ,url      = {https://www.cse.wustl.edu/~jain/books/perfbook.htm}
 }
 
 @inproceedings{lewis2020rag,
@@ -260,10 +308,13 @@
   url       = {https://www.cidrdb.org/cidr2021/papers/cidr2021_paper17.pdf}
 }
 
-@article{scherzinger2013schema,
+@misc{scherzinger2013schema,
   author  = {Scherzinger, Stefanie and Klettke, Meike and St{\"o}rl, Uta},
   title   = {Managing Schema Evolution in NoSQL Data Stores},
-  journal = {arXiv preprint arXiv:1308.0514},
+  eprint = {1308.0514},
+  archiveprefix = {arXiv},
+  note = {Versión arXiv consultada; no se presenta como artículo de revista},
+  url = {https://arxiv.org/abs/1308.0514v1},
   year    = {2013},
   doi     = {10.48550/arXiv.1308.0514}
 }
@@ -283,4 +334,70 @@
   date    = {2005-12-12},
   url     = {https://martinfowler.com/eaaDev/EventSourcing.html},
   urldate = {2026-08-23}
+}
+
+@online{w3c2013prov,
+  author = {{World Wide Web Consortium}},
+  editor = {Moreau, Luc and Missier, Paolo},
+  title = {PROV-DM: The PROV Data Model},
+  date = {2013-04-30},
+  url = {https://www.w3.org/TR/2013/REC-prov-dm-20130430/},
+  urldate = {2026-10-23},
+  note = {Recomendación W3C; no certifica conformidad de COBRIA}
+}
+@article{kapoor2023leakage,
+  author = {Kapoor, Sayash and Narayanan, Arvind},
+  title = {Leakage and the Reproducibility Crisis in Machine-Learning-Based Science},
+  journaltitle = {Patterns}, year = {2023}, volume = {4}, number = {9},
+  eid = {100804}, doi = {10.1016/j.patter.2023.100804},
+  url = {https://www.sciencedirect.com/science/article/pii/S2666389923001599}
+}
+@inproceedings{helland2015immutability,
+  author = {Helland, Pat}, title = {Immutability Changes Everything}, year = {2015},
+  booktitle = {7th Biennial Conference on Innovative Data Systems Research},
+  url = {https://www.cidrdb.org/cidr2015/Papers/CIDR15_Paper16.pdf}
+}
+@online{mongodbAtomicity,
+  author = {{MongoDB}}, title = {Atomicity and Transactions},
+  url = {https://www.mongodb.com/docs/manual/core/write-operations-atomicity/},
+  urldate = {2026-10-23}, note = {Documentación viva; no sustituye pruebas de una versión fijada}
+}
+@online{mongodbTenancy,
+  author = {{MongoDB}}, title = {Build a Multi-Tenant Architecture},
+  url = {https://www.mongodb.com/docs/atlas/build-multi-tenant-arch/},
+  urldate = {2026-10-23}, note = {Documentación de Atlas; no acredita aislamiento de una aplicación}
+}
+@online{opensearch32Alias,
+  author = {{OpenSearch Project}}, title = {Alias API},
+  url = {https://docs.opensearch.org/3.2/api-reference/index-apis/alias/},
+  urldate = {2026-10-23}, note = {Documentación 3.2 histórica; operación atómica no implica CAS de revisión ni validación de candidata}
+}
+@book{gamma1994patterns,
+  author = {Gamma, Erich and Helm, Richard and Johnson, Ralph and Vlissides, John},
+  title = {Design Patterns: Elements of Reusable Object-Oriented Software},
+  year = {1994}, publisher = {Addison-Wesley},
+  url = {https://www.pearson.com/en-us/subject-catalog/p/design-patterns-elements-of-reusable-object-oriented-software/P200000009480}
+}
+@book{evans2003ddd,
+  author = {Evans, Eric}, title = {Domain-Driven Design: Tackling Complexity in the Heart of Software},
+  year = {2003}, publisher = {Addison-Wesley},
+  url = {https://www.informit.com/store/domain-driven-design-tackling-complexity-in-the-heart-9780321125217}
+}
+@book{kleppmann2017data,
+  author = {Kleppmann, Martin}, title = {Designing Data-Intensive Applications: The Big Ideas Behind Reliable, Scalable, and Maintainable Systems},
+  year = {2017}, edition = {1}, publisher = {O'Reilly Media},
+  url = {https://dataintensive.net/}, note = {Se cita la primera edición de 2017, no una edición posterior}
+}
+@book{sadalage2012nosql,
+  author = {Sadalage, Pramod J. and Fowler, Martin},
+  title = {NoSQL Distilled: A Brief Guide to the Emerging World of Polyglot Persistence},
+  year = {2012}, publisher = {Addison-Wesley},
+  url = {https://www.informit.com/store/nosql-distilled-a-brief-guide-to-the-emerging-world-9780321826626},
+  note = {Fecha de publicación 2012; el aviso de copyright editorial es 2013}
+}
+@book{apa2020manual,
+  author = {{American Psychological Association}},
+  title = {Publication Manual of the American Psychological Association},
+  year = {2020}, edition = {7}, publisher = {American Psychological Association},
+  url = {https://apastyle.apa.org/products/publication-manual-7th-edition}
 }
