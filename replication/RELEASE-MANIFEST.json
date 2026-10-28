@@ -2850,8 +2850,8 @@
     },
     {
       "path": "tests/test_ep10_candidate.py",
-      "bytes": 2368,
-      "sha256": "297e180df3b2e007ca4aee5682bb3865eb8cad4c75ec505aa0dd1c7b016101db"
+      "bytes": 3413,
+      "sha256": "8b5c25d8c67d65756cd01fe44f4802b51a0cd5979459f806130d524765762377"
     },
     {
       "path": "tests/test_ep1_web_pdf.py",

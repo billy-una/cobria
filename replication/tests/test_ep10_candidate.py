@@ -3,6 +3,8 @@ import importlib.util
 from pathlib import Path
 import tempfile
 import unittest
+import zipfile
+from unittest.mock import patch
 from pypdf import PdfWriter
 
 ROOT=Path(__file__).resolve().parents[2]
@@ -10,6 +12,20 @@ spec=importlib.util.spec_from_file_location('ep10',ROOT/'editorial/ep10/candidat
 ep10=importlib.util.module_from_spec(spec);spec.loader.exec_module(ep10)
 
 class Candidate(unittest.TestCase):
+    def test_document_package_contains_complete_code_license(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root=Path(folder);clone=root/'clone';output=root/'output'
+            (clone/'sitio/public/lecturas').mkdir(parents=True);output.mkdir()
+            for name in ['LICENSE','LICENSES.md','LICENSE-CODE.txt','LICENSE-CONTENT.md','PROVENANCE.md','NOTICE']:
+                (clone/name).write_text('Aviso completo: '+name)
+            (clone/'sitio/public/lecturas/libro.html').write_text('<html lang="es">Lectura</html>')
+            (output/'SBOM.cdx.json').write_text('{}')
+            with patch.object(ep10,'ROOT',root):
+                result=ep10.document_package(clone,output,{'snapshotCommit':'1'*40},[])
+            with zipfile.ZipFile(root/result['path']) as archive:
+                self.assertEqual(archive.read('LICENSE-CODE.txt'),(clone/'LICENSE-CODE.txt').read_bytes())
+                self.assertIn(b'LICENSE-CODE.txt',archive.read('MANIFEST.json'))
+
     def test_secret_patterns_do_not_match_documentation_placeholders(self):
         self.assertIsNone(ep10.SECRET.search(b'ghp_EJEMPLO'))
         self.assertIsNotNone(ep10.SECRET.search(b'ghp_'+b'A'*36))

@@ -112,7 +112,7 @@ def document_package(clone,output,report,products):
         if product['id']!='ciega':members['pdf/'+Path(product['pdf']).name]=clone/product['pdf']
     for file in (clone/'sitio/public/lecturas').rglob('*'):
         if file.is_file():members['lecturas/'+file.relative_to(clone/'sitio/public/lecturas').as_posix()]=file
-    for name in ['LICENSE','LICENSES.md','LICENSE-CONTENT.md','PROVENANCE.md','NOTICE']:
+    for name in ['LICENSE','LICENSES.md','LICENSE-CODE.txt','LICENSE-CONTENT.md','PROVENANCE.md','NOTICE']:
         members[name]=clone/name
     members['SBOM.cdx.json']=output/'SBOM.cdx.json'
     notes=("# COBRIA: documentos de candidata local\n\nPropuesta independiente, no estable ni certificada. "
